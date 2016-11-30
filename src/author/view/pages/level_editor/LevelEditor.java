@@ -31,7 +31,7 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 		myPane.setCenter(buildLevelWindow());
 		myPane.setRight(buildEntityWindow());
 		myPane.setLeft(buildLevelSelectionWindow());
-		myPane.setBottom(buildLevelProgressionWindow());
+		//myPane.setBottom(buildLevelProgressionWindow());
 	}
 
 	private Pane buildLevelWindow() {

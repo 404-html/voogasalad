@@ -52,8 +52,8 @@ public class Game extends GameObject {
 	}
 
 	public void addNewLevel(Level aLevel) {
-		myLevels.add(aLevel);
 		this.currentLevel = aLevel;
+		myLevels.add(aLevel);
 		this.notifyListeners();
 	}
 
