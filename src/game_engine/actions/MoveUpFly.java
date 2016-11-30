@@ -3,9 +3,9 @@ package game_engine.actions;
 import game_data.Location;
 import game_data.Sprite;
 
-public class MoveUp extends Move {
+public class MoveUpFly extends Move {
 
-	public MoveUp(Sprite aSprite, double aVelocity) {
+	public MoveUpFly(Sprite aSprite, double aVelocity) {
 		super(aSprite, aVelocity);
 	}
 /*	@Override

@@ -17,7 +17,7 @@ import game_data.sprites.WinningObject;
 import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
-import game_engine.actions.MoveUp;
+import game_engine.actions.MoveUpJump;
 import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
 import game_engine.actions.StopUpMovement;
@@ -103,7 +103,7 @@ public class UpdateStates {
 		//System.out.println(myLevel.getMainPlayer()==null);
 		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUp(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));		
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));		
 	}
 	private void generateDefaultKeyReleasedMap(){
 		myKeyReleasedMap.put(KeyCode.RIGHT, new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
