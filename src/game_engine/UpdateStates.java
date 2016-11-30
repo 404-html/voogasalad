@@ -18,6 +18,9 @@ import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUp;
+import game_engine.actions.StopLeftMovement;
+import game_engine.actions.StopRightMovement;
+import game_engine.actions.StopUpMovement;
 import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -47,25 +50,31 @@ public class UpdateStates {
 	private List<Sprite> mySpriteList;
 	private double timeElapsed;
 	private KeyCode myKey;
-	private Map<KeyCode, Action> myKeyMap;
-	private Set<KeyCode> myKeys;
+	private Map<KeyCode, Action> myKeyPressedMap;
+	private Set<KeyCode> myKeysPressed;
+	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
+	private Map<KeyCode, Action> myKeyReleasedMap;
 
-	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeys, Map<Sprite, ImageView> mySpriteImages) {
+	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased, Map<Sprite, ImageView> mySpriteImages) {
 		this.myLevel = aLevel;
 		this.mySpriteList = myLevel.getMySpriteList();
 		this.timeElapsed = timeElapsed;
-		this.myKeys = myKeys;
+		this.myKeysPressed = myKeysPressed;
+		this.myKeysReleased=myKeysReleased;
 		this.mySpriteImages=mySpriteImages;
 		//how do I make an ImageView
 		//hardcode
 		//ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
 		//this.mySpriteImages.put(mySpriteList.get(1), view);
 		//end hardcode
-		this.myKeyMap = new HashMap<KeyCode, Action>();
-		generateDefaultKeyMap();
+		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
+		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
+		generateDefaultKeyPressedMap();
+		generateDefaultKeyReleasedMap();
 		executeCharacteristics();
 		runKeyCalls();
+		runKeyReleased();
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();
@@ -89,19 +98,31 @@ public class UpdateStates {
 	}
 
 	//keys will only control the main player rn
-	private void generateDefaultKeyMap() {
+	private void generateDefaultKeyPressedMap() {
 		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
 		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyMap.put(KeyCode.UP, new MoveUp(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));		
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP, new MoveUp(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));		
+	}
+	private void generateDefaultKeyReleasedMap(){
+		myKeyReleasedMap.put(KeyCode.RIGHT, new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyReleasedMap.put(KeyCode.LEFT, new StopLeftMovement(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		//myKeyReleasedMap.put(KeyCode.UP, new StopUpMovement(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
 	}
 
 
 	private void runKeyCalls() {
-		for(KeyCode myKey: myKeys){
-			if(myKeyMap.containsKey(myKey)){
-				myKeyMap.get(myKey).act();
+		for(KeyCode myKey: myKeysPressed){
+			if(myKeyPressedMap.containsKey(myKey)){
+				myKeyPressedMap.get(myKey).act();
+			}
+		}	
+	}
+	private void runKeyReleased(){
+		for(KeyCode myKey: myKeysReleased){
+			if(myKeyReleasedMap.containsKey(myKey)){
+				myKeyReleasedMap.get(myKey).act();
 			}
 		}	
 	}
@@ -171,6 +192,7 @@ public class UpdateStates {
 	}
 
 	private void updateSpritePosition(Sprite sprite){
+
 		//System.out.println("player x is "+sprite.getMyLocation().getXLocation());
 		//System.out.println("player y is "+sprite.getMyLocation().getYLocation());
 		
@@ -189,15 +211,16 @@ public class UpdateStates {
 		//System.out.println("heading is " + sprite.getMyLocation().getMyHeading());
 		//get initial x velocity component and acceleration
 		//System.out.println("heading is " + Math.sin(myCurrentLocation.getMyHeading()));
-		
-		double xVelocity = sprite.getMyVelocity()*Math.cos(myCurrentLocation.getMyHeading());
-		double newXVelocity = xVelocity + spritePhysics.getHorizontalGravity()*timeElapsed;
+		//double xVelocity = sprite.getMyXVelocity();
+		//double yVelocity = sprite.getMyYVelocity();
+		//double xVelocity = sprite.getMyVelocity()*Math.cos(myCurrentLocation.getMyHeading());
+		double newXVelocity = sprite.getMyXVelocity() + spritePhysics.getHorizontalGravity()*timeElapsed;
 		
 		//get initial y velocity component and acceleration
-		double yVelocity = sprite.getMyVelocity()*Math.sin(myCurrentLocation.getMyHeading());
-		double newYVelocity = yVelocity + spritePhysics.getVerticalGravity()*timeElapsed;	
+		//double yVelocity = sprite.getMyVelocity()*Math.sin(myCurrentLocation.getMyHeading());
+		double newYVelocity = sprite.getMyYVelocity() + spritePhysics.getVerticalGravity()*timeElapsed;	
 		
-		double newVelocity = Math.sqrt(Math.pow(newXVelocity, 2) + Math.pow(newYVelocity, 2));
+		//double newVelocity = Math.sqrt(Math.pow(newXVelocity, 2) + Math.pow(newYVelocity, 2));
 		//double newHeading = Math.atan(newYVelocity/newXVelocity);
 		
 		//System.out.println("x velocity is " + newXVelocity);
@@ -214,7 +237,8 @@ public class UpdateStates {
 //		Location myNewLocation = new Location(myXLocation, myYLocation, Math.asin(newXVelocity/newYVelocity));
 		Location myNewLocation = new Location(myXLocation, myYLocation, myCurrentLocation.getMyHeading());
 		//Location myNewLocation = new Location(myXLocation, myYLocation, newHeading);
-		sprite.setMyVelocity(newVelocity);
+		sprite.setMyXVelocity(newXVelocity);
+		sprite.setMyYVelocity(newYVelocity);
 		sprite.setMyLocation(myNewLocation);
 	}
 	

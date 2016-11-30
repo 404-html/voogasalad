@@ -37,11 +37,15 @@ public class GamePlayController {
 	private AnimationLoop myAnimationLoop;
 	private Map<Sprite, ImageView> mySprites;
 	private Set<KeyCode> myKeySet;
+	private Set<KeyCode> myKeysPressed;
+	private Set<KeyCode> myKeysReleased;
 	private BackgroundDisplayFactory myBackground; 
 	
 	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
 		myKeySet = new HashSet<KeyCode>();
+		myKeysPressed= new HashSet<KeyCode>();
+		myKeysReleased = new HashSet<KeyCode>();
 		myStack = new StackPane();
 		mySprites = new HashMap<Sprite, ImageView>();
 		myBackground = new BackgroundDisplayFactory();
@@ -72,8 +76,11 @@ public class GamePlayController {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
 			deleteSprites();
-			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeySet, mySprites);;
+			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySprites);;
 			updateSprites();
+			//the below line makes sure the keys released aren't stored in the set after they're released
+			myKeysReleased=new HashSet<KeyCode>();
+			myKeysPressed=new HashSet<KeyCode>();
 		});
 	}
 
@@ -130,6 +137,9 @@ public class GamePlayController {
 	}
 	
 	private void handleKeyPress(KeyCode aKey) {
+		if(!myKeySet.contains(aKey)){
+			myKeysPressed.add(aKey);
+		}
         myKeySet.add(aKey);
         System.out.println("new");
         for (KeyCode key : myKeySet) {
@@ -139,6 +149,7 @@ public class GamePlayController {
 	
 	private void handleKeyRelease(KeyCode key) {
 		//System.out.println(myKeySet);
+		myKeysReleased.add(key);
 		myKeySet.remove(key);
 	}
 }
