@@ -13,8 +13,8 @@ public class ButtonFactory {
 		
 	}
 	
-	public LevelButton createButton(String name, EventHandler<ActionEvent> event) {
-		return new LevelButton(name, event);
+	public FunctionalButton createButton(String name, EventHandler<ActionEvent> event) {
+		return new FunctionalButton(name, event);
 	}
 
 }

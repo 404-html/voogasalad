@@ -129,7 +129,7 @@ public class ApplicationController {
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
-				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame.getAbsolutePath());
+				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame);
 				gamePlay.displayGame();
 			}
 		}, ButtonDisplay.TEXT);

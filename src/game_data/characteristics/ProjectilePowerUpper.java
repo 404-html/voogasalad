@@ -3,6 +3,8 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import javafx.geometry.Side;
 
@@ -10,8 +12,11 @@ import javafx.geometry.Side;
  * @author austingartside
  *
  */
+
+@CharacteristicAnnotation(name = "Projectile Power Up")
 public class ProjectilePowerUpper extends PowerUpper implements Characteristic{
 	
+	@ParameterAnnotation(parameters = {"Sprite"})
 	public ProjectilePowerUpper(Sprite aSprite){
 		super(aSprite);
 	}

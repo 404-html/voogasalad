@@ -11,7 +11,7 @@ public class MoveLeft extends Move {
 	@Override
 	public Location changeCoordinates(){
 		myNewLocation.setLocation(myOldLocation.getXLocation()-myVelocity, myOldLocation.getYLocation());
-		myNewLocation.setMyHeading(180);
+		//myNewLocation.setMyHeading(180);
 		return myNewLocation;
 	}
 }

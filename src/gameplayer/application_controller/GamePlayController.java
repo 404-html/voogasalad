@@ -1,5 +1,6 @@
 package gameplayer.application_controller;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,6 +11,7 @@ import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.front_end.application_scene.AnimationScene;
+import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.heads_up_display.HeadsUpDisplay;
 import javafx.scene.Scene;
@@ -31,13 +33,15 @@ public class GamePlayController {
 	private AnimationLoop myAnimationLoop;
 	private Map<Sprite, ImageView> mySprites;
 	private Set<KeyCode> myKeySet;
+	private BackgroundDisplayFactory myBackground; 
 	
-	public GamePlayController(Stage aStage, String aFilePath) {
+	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
 		myKeySet = new HashSet<KeyCode>();
 		myStack = new StackPane();
 		mySprites = new HashMap<Sprite, ImageView>();
-		initializeEngine(aFilePath, 0);
+		initializeEngine(aFile, 0);
+		myBackground = new BackgroundDisplayFactory();
 		initializeAnimation();
 		initializeScene();
 	}
@@ -48,8 +52,8 @@ public class GamePlayController {
 		resetStage();
 	}
 
-	private void initializeEngine(String aFilePath, int level) {
-		myGameEngine = new GameEngine(aFilePath, level);
+	private void initializeEngine(File aFile, int level) {
+		myGameEngine = new GameEngine(aFile, level);
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame();
 	}
@@ -64,6 +68,7 @@ public class GamePlayController {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
 			//This is what gets called every update cycle
+			deleteSprites();
 			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeySet, mySprites);;
 			updateSprites();
 		});
@@ -74,19 +79,29 @@ public class GamePlayController {
 		myStack.getChildren().add(myGamePlay.init());
 		myHeadsUpDisplay = new HeadsUpDisplay(myScene, myStage.getWidth(), myStage.getHeight());
 		myStack.getChildren().add(myHeadsUpDisplay.init());
-		setBackground(myGameController.getMyBackgroundImageFilePath(), myGameController.getMyWidth(), myGameController.getMyHeight());
+		setBackground(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
 		updateSprites();
+	}
+	
+	private void setBackground(String aBackgroundImageFilePath, double aWidth, double aHeight) {
+		//System.out.println(aBackgroundImageFilePath);
+		myGamePlay.setBackground(myBackground.buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight));
+		//myGamePlay.setBackground(aBackgroundImageFilePath, (int) aWidth, (int) aHeight);
+	}
+
+	private void deleteSprites() {
+		//mySprites = new HashMap<Sprite, ImageView>();
+		myGamePlay.clear();
 	}
 	
 	private void updateSprites() {
 		for(Sprite sprite : myGameController.getMySpriteList()) {
 			addSpriteToScene(sprite);
 		}
+		//addSpriteToScene(new Player(new Location(227, 369, 0), 50, 50, "poop", "author/images/MarioSMBW.png"));
 	}
 	
-	private void setBackground(String aFilePath, int aWidth, int aHeight) {
-		myGamePlay.setBackground(aFilePath, aWidth, aHeight);
-	}
+
 	
 	private void addSpriteToScene(Sprite aSprite) {
 		mySprites.put(aSprite, myGamePlay.addSpriteToScene(aSprite));

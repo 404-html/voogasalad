@@ -5,4 +5,4 @@
  * @author Cleveland Thompson V (ct168)
  *
  */
-package author.model.sprite_builder;
+package game_data.characteristics.characteristic_annotations;

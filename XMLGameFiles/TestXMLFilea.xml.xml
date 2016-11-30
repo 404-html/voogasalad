@@ -1,0 +1,20 @@
+<game__data.Game>
+  <invalidationListeners class="set">
+    <null/>
+  </invalidationListeners>
+  <name>Mario</name>
+  <myLevels>
+    <game__data.Level>
+      <invalidationListeners class="set"/>
+      <name>TestLevel</name>
+      <width>500</width>
+      <height>500</height>
+      <backgroundImageFilePath>path/spriteImage.jpg</backgroundImageFilePath>
+      <mySprites/>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets/>
+  <myXMLSaver/>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

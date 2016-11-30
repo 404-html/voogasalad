@@ -11,7 +11,7 @@ public class FileLoader {
 
 	public enum FileType{
 		ALL(""),
-		PNG("*.jpg"),
+		PNG("*.png"),
 		GIF("*.gif"),
 		JPG("*.jpg"),
 		JPEG("*.jpeg"),
@@ -38,7 +38,7 @@ public class FileLoader {
 	public FileLoader() {
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle(TITLE);
-		myFileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+		myFileChooser.setInitialDirectory(new File("./"));
 	}
 
 	public FileLoader(FileType... aFileTypes) {

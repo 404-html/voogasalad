@@ -8,11 +8,11 @@ import javafx.scene.control.Button;
  * @author Jordan Frazier
  *
  */
-public class LevelButton {
+public class FunctionalButton {
 
 	private Button myButton;
 
-	public LevelButton(String name, EventHandler<ActionEvent> e) {
+	public FunctionalButton(String name, EventHandler<ActionEvent> e) {
 		myButton = new Button(name);
 		myButton.setOnAction(e);
 	}

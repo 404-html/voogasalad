@@ -1,6 +1,8 @@
 package author.model.game_observables.draggable_sprite;
 
 import game_data.Sprite;
+import javafx.scene.image.Image;
+
 /**
  * 
  * @author Jordan Frazier
@@ -8,12 +10,9 @@ import game_data.Sprite;
  */
 public class ConcreteDraggableSprite extends DraggableSprite {
 
-	public ConcreteDraggableSprite(Sprite sprite) {
-		super(sprite);
+	public ConcreteDraggableSprite(Sprite aSprite) {
+		super(aSprite);
 	}
 	
-	public ConcreteDraggableSprite(Sprite sprite, boolean removable) {
-		super(sprite, removable);
-	}
-
+	
 }

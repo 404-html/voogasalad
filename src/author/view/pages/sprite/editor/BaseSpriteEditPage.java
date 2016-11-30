@@ -1,7 +1,7 @@
 package author.view.pages.sprite.editor;
 
-import java.io.File;
-
+import author.view.pages.characteristics.SpriteCharacteristicEditor;
+import author.view.util.TabPaneFacade;
 import author.view.util.ToolBarBuilder;
 import author.view.util.authoring_buttons.ButtonFactory;
 import game_data.Location;
@@ -23,38 +23,64 @@ public abstract class BaseSpriteEditPage {
 	
 	private Sprite mySprite;
 	private BaseSpriteEditBox mySpriteEditBox;
+	private SpriteCharacteristicEditor myCharacteristicEditor;
+	private TabPaneFacade myTabPaneFacade;
 	
 	public BaseSpriteEditPage(){
 		myPane = new VBox();
+		myCharacteristicEditor = new SpriteCharacteristicEditor();
+		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
-		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), mySpriteEditBox.getPane());
+		
+		myTabPaneFacade.addTab("Base", mySpriteEditBox.getPane());
+		myTabPaneFacade.addTab("Characteristics", this.myCharacteristicEditor.getNode());
+		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
 		Button buildButton = new ButtonFactory().createButton("save", e -> buildSprite()).getButton();
-		myToolBarBuilder.addBurst(new Label(getName()));
+		myToolBarBuilder.addBurst(new Label(getSpriteType()));
 		myToolBarBuilder.addBurst(buildButton);
 
+		
 	}
 
 	public BaseSpriteEditPage(Sprite aSprite){
 		this();
 		mySprite = aSprite;
 		mySpriteEditBox.setLocation(aSprite.getMyLocation());
-		mySpriteEditBox.setImageFile(new File(aSprite.getMyImagePath()));
+		mySpriteEditBox.setImageFile(aSprite.getMyImagePath());
+		mySpriteEditBox.setName(aSprite.getName());
+		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
 	}
 	
 	public abstract Sprite buildSprite();
 	
-	public abstract String getName();
+	public abstract String getSpriteType();
 
 	public Pane getPane(){
 		return myPane;
+	}
+	
+	protected final String getSpriteName(){
+		return mySpriteEditBox.getName();
+	}
+	
+	protected final void setSpriteName(String aSpriteName){
+		mySpriteEditBox.setName(aSpriteName);
+	}
+	
+	protected final int getWidth(){
+		return mySpriteEditBox.getWidth();
+	}
+	
+	protected final int getHeight(){
+		return mySpriteEditBox.getWidth();
 	}
 	
 	protected final boolean hasSprite(){
 		return mySprite == null;
 	}
 
-	protected final File getImageFile(){
+	protected final String getImageFile(){
 		return mySpriteEditBox.getImageFile();
 	}
 	

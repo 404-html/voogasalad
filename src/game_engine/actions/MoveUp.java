@@ -10,7 +10,7 @@ public class MoveUp extends Move {
 	}
 	@Override
 	public Location changeCoordinates(){
-		myNewLocation.setLocation(myOldLocation.getXLocation(), myOldLocation.getYLocation()+myVelocity);
+		myNewLocation.setLocation(myOldLocation.getXLocation(), myOldLocation.getYLocation()-myVelocity);
 		return myNewLocation;
 	}
 

@@ -8,20 +8,23 @@ import javafx.stage.Stage;
 
 public class SpriteEditWindow {
 
-	BaseSpriteEditPage mySpriteEditPage;
+	private BaseSpriteEditPage mySpriteEditPage;
 	
-	public SpriteEditWindow() {
-		mySpriteEditPage = new PlayerSpriteEditPage();
+	
+	
+	private SpriteEditWindow() {
+		// Does Nothing
 	}
 	
 	public SpriteEditWindow(Sprite aSprite){
+		this();
 		mySpriteEditPage = new PlayerSpriteEditPage(aSprite);
 	}
 
 	public void openWindow(){
 		Stage stage = new Stage();
-		stage.setTitle(mySpriteEditPage.getName());
-		stage.setScene(new Scene(mySpriteEditPage.getPane()));
+		stage.setTitle(mySpriteEditPage.getSpriteType());
+		stage.setScene(new Scene(this.mySpriteEditPage.getPane()));
 		stage.setResizable(false);
 		stage.show();
 	}
