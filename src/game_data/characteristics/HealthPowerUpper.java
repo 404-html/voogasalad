@@ -1,5 +1,5 @@
 package game_data.characteristics;
-
+import game_engine.actions.*;
 import java.util.Map;
 
 import game_data.Sprite;
@@ -15,6 +15,7 @@ import javafx.geometry.Side;
 public class HealthPowerUpper extends PowerUpper implements Characteristic{
 
 	private int myHealthToGain;
+	private Action myAction;
 	
 	@ParameterAnnotation(parameters = {"Health Gained", "Sprite"})
 	public HealthPowerUpper(int healthToGain, Sprite aSprite){

@@ -6,10 +6,10 @@ public class Pace implements Action {
 	private int direction;
 	private Sprite mySprite;
 	private boolean myShouldChangeDirection;
-	public Pace(Sprite aSprite, boolean aChangeDirection) {
+	public Pace(Sprite aSprite, boolean aShouldChangeDirection) {
 		mySprite=aSprite;
 		direction=1;
-		myShouldChangeDirection=aChangeDirection;
+		myShouldChangeDirection=aShouldChangeDirection;
 	}
 
 	@Override

@@ -9,14 +9,14 @@ public class EngineReceiverController {
 	private List<KeyCode> myKeys;
 	private String XMLRoute;
 	
-	public EngineReceiverController(IEnginePlayerControllerInterface myInterface) {
-		myKeys = myInterface.getKeysBeingPressed();
+	public EngineReceiverController(IEngineReceiverControllerInterface myInterface) {
+//		myKeys = myInterface.getKeysBeingPressed();
 		XMLRoute = myInterface.getXMLRoute();
 	}
 	
-	public List<KeyCode> getKeys(){
-		return myKeys;
-	}
+//	public List<KeyCode> getKeys(){
+//		return myKeys;
+//	}
 	
 	//xml translator to deserialize cast the object to what we extect
 	public String getXMLRoute(){

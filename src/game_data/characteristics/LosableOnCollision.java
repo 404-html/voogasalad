@@ -9,9 +9,15 @@ import javafx.geometry.Side;
 @CharacteristicAnnotation(name = "Losable On Collision")
 public class LosableOnCollision extends Losable implements Characteristic{
 
+	private Sprite mySprite;
+	
+	public LosableOnCollision(Sprite aSprite){
+		mySprite = aSprite;
+	}
+	
 	@Override
 	public Characteristic copy() {
-		return new LosableOnCollision();
+		return new LosableOnCollision(mySprite.clone());
 	}
 
 	@Override

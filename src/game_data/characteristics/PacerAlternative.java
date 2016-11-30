@@ -5,9 +5,14 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_engine.actions.Pace;
 import javafx.geometry.Side;
 
-@CharacteristicAnnotation(name = "Pacer Alternative")
+/**
+ * @author austingartside
+ * alternative version of pacer where user does not to include bounds, but rather how far it can travel
+ */
+ @CharacteristicAnnotation(name = "Pacer Alternative")
 public class PacerAlternative implements Characteristic{
 
 	private static final String VERTICAL = "VERTICAL";
@@ -22,20 +27,28 @@ public class PacerAlternative implements Characteristic{
 	@ParameterAnnotation(parameters = {"Type", "Distance", "Sprite"})
 	public PacerAlternative(String type, double distance, Sprite associatedSprite){
 		myType = type;
-		distance = myDistance;
+		myDistance = distance;
 		mySprite = associatedSprite;
 		originalXPosition = associatedSprite.getMyLocation().getXLocation();
 		originalYPosition = associatedSprite.getMyLocation().getYLocation();
 	}
 	
-	private boolean directionToChange(){
+	public PacerAlternative(Sprite associatedSprite){
+		myType = "";
+		myDistance = 0;
+		mySprite = associatedSprite;
+		originalXPosition = associatedSprite.getMyLocation().getXLocation();
+		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+	}
+	
+	private boolean changeDirection(boolean collision){
 		if(myType.equals(VERTICAL)){
 			return atYBound();
 		}
 		if(myType.equals(HORIZONTAL)){
 			return atXBound();
 		}
-		return false;
+		return collision;
 	}
 	
 	private boolean atYBound(){
@@ -55,11 +68,8 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		//TODO: make and execute action
-		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			//myAction = new ProjectilePowerUp();
-			//myAction.act();
-		}
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
+		pace.act();
 	}
 
 }

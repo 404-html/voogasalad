@@ -28,14 +28,19 @@ public class Level extends GameObject{
 	private Player myPlayerSprite;
 	Set<Sprite> mySprites;
 	Map<KeyCode, KeyCommand> myKeyCommands;
+	private boolean isLevelLost;
+	private boolean isLevelWon;
 	
 	public Level(String aName, int width, int height, String backgroundImageFilePath){
 		setName(aName);
 		this.width = width;
 		this.height = height;
+		isLevelLost=false;
+		isLevelWon=false;
 		this.backgroundImageFilePath = backgroundImageFilePath;
 		mySprites = new HashSet<Sprite>();
 		myKeyCommands = new HashMap<KeyCode, KeyCommand>();
+		
 	}
 	
 	public Player getMainPlayer(){
@@ -44,6 +49,7 @@ public class Level extends GameObject{
 	
 	public void setPlayerSprite(Player aPlayer){
 		myPlayerSprite = aPlayer;
+		notifyListeners();
 	}
 	
 	public int getWidth() {
@@ -98,6 +104,18 @@ public class Level extends GameObject{
 
 	public List<Sprite> getMySpriteList() {
 		return new ArrayList<>(mySprites);
+	}
+	public void setLevelLost(boolean lost){
+		isLevelLost=lost;
+	}
+	public void setLevelWon(boolean won){
+		isLevelWon=won;
+	}
+	public boolean isLevelLost(){
+		return isLevelLost;
+	}
+	public boolean isLevelWon(){
+		return isLevelWon;
 	}
 
 }

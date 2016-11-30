@@ -1,0 +1,149 @@
+/*
+    Document   : control Style
+*/
+
+
+#pane {
+    -fx-background-image: url("hawaiian_shirt_background3.png");
+    -fx-background-repeat: repeat;
+    -fx-background-width: 100%;
+    -fx-background-height: 100%;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+}
+
+.body {
+  width: 100%;
+}
+
+.button {
+    -fx-background-color: #FFC3E1;
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 15 30 15 30;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424242;
+}
+
+.text-field {
+    -fx-background-color: #EE8EBE , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+.text-field:focused {
+    -fx-background-color: #EE8EBE , #EE8EBE , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+
+
+#user-profile-button {
+    -fx-background-image: url('blank_profile_page.jpeg');
+    -fx-background-size: 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-background-color: #EE8EBE;
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 15 30 15 30;
+}
+
+#message-box {
+    -fx-background-color: linear-gradient(to bottom, #CDCDCD 40%, #BABABA 40%);
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 8 8 15 8;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424242;
+}
+
+
+.combo-box-base {
+    -fx-background-color: #BABABA;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 8 4 8 4;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424242;
+}
+
+
+.combo-box-popup .list-view .list-cell
+{
+    -fx-padding: 4 0 4 5;
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: #BABABA;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: #BABABA;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+.slider .thumb{
+    -fx-background-color: #BABABA;
+    -fx-border-radius: 10;
+    -fx-border-color: #BABABA;
+}
+
+.slider .track{
+    -fx-background-color: #9E9E9E;
+}
+
+.buttontext {
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 20px;
+    -fx-text-fill: #424242;
+}
+
+#label-header {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-family: "Helvetica";
+}
+
+.label {
+    -fx-text-fill: #FFC3E1;
+    -fx-font-size: 30px;
+    -fx-font-family: "Helvetica";
+}
+
+.chart-title {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 12px;
+  -fx-font-family: "Helvetica";
+}
+
+.axis-label {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 10px;
+  -fx-font-family: "Helvetica";
+}

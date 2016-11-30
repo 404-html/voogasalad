@@ -14,7 +14,8 @@ import game_data.*;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import javafx.geometry.Side;
-
+//are we going to need a separate launcher class that reacts to key commands?
+//big question is how are we going to handle launching projectiles when it's not on a uniform time
 @CharacteristicAnnotation(name = "Launcher")
 public class Launcher implements Characteristic{
 	

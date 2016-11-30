@@ -82,6 +82,7 @@ public abstract class Sprite extends GameObject {
 
 	public void addCharacteristic(Characteristic aCharacteristic) {
 		myCharacteristics.add(aCharacteristic);
+		notifyListeners();
 	}
 	
 	public Set<State> getStates(){
@@ -90,6 +91,7 @@ public abstract class Sprite extends GameObject {
 	
 	public void addState(State aState){
 		myStates.add(aState);
+		notifyListeners();
 	}
 	
 	public Location getMyLocation() {
