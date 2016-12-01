@@ -192,6 +192,7 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 		this.currentContainer.setBackground(new Background(backIm));
 	}
 
+	@SuppressWarnings("deprecation")
 	private Sprite findSprite(String nodeId) {
 		for (Sprite s : myController.getModel().getGame().getPresets()) {
 			if (nodeId.equals(s.getId())) {
