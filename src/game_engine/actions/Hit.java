@@ -38,7 +38,7 @@ public class Hit implements Action {
 			myPlayerSprite.setMyXVelocity(0);
 		}
 		if(mySide==Side.TOP || mySide==Side.BOTTOM){
-			System.out.println("top");
+//			System.out.println("top");
 			myPlayerSprite.setMyYVelocity(0);
 		}
 /*		if(mySide==Side.BOTTOM){

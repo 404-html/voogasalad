@@ -11,6 +11,7 @@ import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
+import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.front_end.application_scene.AnimationScene;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
@@ -39,7 +40,7 @@ public class GamePlayController {
 	private GUIGenerator myGUIGenerator;
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
-	private BackgroundDisplayFactory myBackground; 
+	private KeyCodeHandler myKeyHandler;
 	
 	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
@@ -51,6 +52,7 @@ public class GamePlayController {
 		mySprites = new HashMap<Sprite, ImageView>();
 		myGameEngine = new GameEngine(aFile, 0);
 		myGameFile = aFile;
+		myKeyHandler = new KeyCodeHandler();
 	}
 	
 	public void displayGame() {
@@ -77,18 +79,18 @@ public class GamePlayController {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
 			deleteSprites();
-			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySprites);;
+			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySprites);
 			updateSprites();
 			//the below line makes sure the keys released aren't stored in the set after they're released
 			myKeysReleased = new HashSet<KeyCode>();
 			myKeysPressed = new HashSet<KeyCode>();
+			myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
 			myGamePlay.moveScreen(myKeySet);
 		});
 	}
 
 	private void initializeGameScene() {
-		myGamePlay = new AnimationScene(myScene, myStage.getWidth(), myStage.getHeight());
-		//System.out.println(myGamePlay);
+		myGamePlay = new AnimationScene(myScene, myKeyHandler, myStage.getWidth(), myStage.getHeight());
 		myStack.getChildren().add(myGamePlay.init());
 		myHeadsUpDisplay = new HeadsUpDisplay(myScene, myStage.getWidth(), myStage.getHeight());
 		myStack.getChildren().add(myHeadsUpDisplay.init());

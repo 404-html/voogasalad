@@ -1,23 +1,25 @@
 package gameplayer.back_end.keycode_handler;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javafx.scene.input.KeyCode;
 
 public class KeyCodeHandler {
 	
-	private Map<KeyCode, Double> myKeyCodeMap;
+	private double myMovement;
 	
 	public KeyCodeHandler() {
-		myKeyCodeMap = new HashMap<KeyCode, Double>();
-		myKeyCodeMap.put(KeyCode.RIGHT, -3.3);
-		myKeyCodeMap.put(KeyCode.LEFT, 3.3);
+		//myKeyCodeMap.put(KeyCode.RIGHT, -3.3);
+		//myKeyCodeMap.put(KeyCode.LEFT, 3.3);
+	}
+	
+	public void setMovement(double aXVelocity) {
+		System.out.println("velocity: " + aXVelocity + "\n");
+		double answer = aXVelocity * .033;
+		myMovement = answer;
 	}
 	
 	public double getMovement(KeyCode aKey) {
-		if (myKeyCodeMap.containsKey(aKey)) return myKeyCodeMap.get(aKey);
-		return 0;
+		System.out.println("key: " + aKey);
+		return -myMovement;
 	}
 
 }

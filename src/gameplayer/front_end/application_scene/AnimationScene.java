@@ -1,4 +1,5 @@
 package gameplayer.front_end.application_scene;
+import java.util.List;
 import java.util.Set;
 
 import game_data.Sprite;
@@ -23,9 +24,9 @@ public class AnimationScene {
 	private KeyCodeHandler myKeyCodeHandler;
 	//private String myBackgroundFilePath;
 	
-	public AnimationScene(Scene aScene, double aWidth, double aHeight) {
+	public AnimationScene(Scene aScene, KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
 		myGamePlayCanvas = new Pane();
-		myKeyCodeHandler = new KeyCodeHandler();
+		myKeyCodeHandler = aKeyHandler;
 	}
 	/**
 	 * Add the correct nodes to the scene
