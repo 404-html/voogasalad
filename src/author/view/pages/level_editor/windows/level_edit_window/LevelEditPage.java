@@ -3,8 +3,8 @@
  */
 package author.view.pages.level_editor.windows.level_edit_window;
 
-import author.view.util.ToolBarBuilder;
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.facades.ToolBarBuilder;
 import game_data.Level;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;

@@ -3,11 +3,15 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import javafx.geometry.Side;
 
+@CharacteristicAnnotation(name = "Controllable")
 public class Controllable implements Characteristic {
 
-	public Controllable() {
+	@ParameterAnnotation(parameters="Sprite")
+	public Controllable(Sprite aSprite) {
 		// TODO Auto-generated constructor stub
 	}
 
