@@ -16,5 +16,4 @@ public class FunctionalLabel {
 	public Label getLabel() {
 		return label;
 	}
-
 }

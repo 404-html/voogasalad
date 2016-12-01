@@ -7,13 +7,12 @@ import game_data.characteristics.Bouncer;
 import game_data.sprites.Character;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
+import game_data.states.Health;
+import game_data.states.Physics;
+import game_data.states.State;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import states.Health;
-import states.Physics;
-import states.State;
 public class EnginePlayerController implements IEnginePlayerControllerInterface {
 	private Level myLevel;
 	private int myWidth, myHeight;
@@ -154,9 +153,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	public List<Boolean> getMySpriteIsAliveList() {
 		return mySpriteIsAliveList;
 	} 
-	public boolean isLost(){
-		return myLevel.isLevelLost();
-	}
 	public Game getMyGame(){
 		return myGame;
 	}

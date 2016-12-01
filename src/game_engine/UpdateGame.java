@@ -10,11 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class UpdateGame {
+	
 	public void update(Game aGame, double timeElapsed, Set<KeyCode> myKeys, Map<Sprite, ImageView> mySpriteImages){
 		UpdateStates myLevelState = new UpdateStates(aGame.getCurrentLevel(), timeElapsed, myKeys, mySpriteImages);
-		if(aGame.getCurrentLevel().isLevelWon()) {
-			aGame.goToNextLevel();
-		}
+		// TODO Update level?
 	}
 
 }

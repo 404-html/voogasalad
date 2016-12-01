@@ -76,9 +76,8 @@ public class AuthorView {
 				this.authorController.getModel().getGame().addNewLevel(createdLevel);
 			}
 		}).getItem());
-
+		
 		menuSave.getItems().add(new MenuFactory().createItem(("Save Game"), e -> {
-			// Save game
 			authorController.getModel().saveGame("Saved");// TODO: prompt user for name
 		}).getItem());
 

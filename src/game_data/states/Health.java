@@ -1,4 +1,4 @@
-package states;
+package game_data.states;
 
 public class Health implements State{
 

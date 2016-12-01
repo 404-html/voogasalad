@@ -1,0 +1,52 @@
+<game__data.Game>
+  <name>Mario</name>
+  <myLevels>
+    <game__data.Level>
+      <name>Level1</name>
+      <width>700</width>
+      <height>550</height>
+      <backgroundImageFilePath>XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Player>
+          <name>No Name</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>226.0</myXLocation>
+            <myYLocation>369.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/MarioSMBW.png</myImagePath>
+          <myVelocity>0.0</myVelocity>
+          <myCollisionHandler/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+      </mySprites>
+      <myKeyCommands/>
+      <isLevelLost>false</isLevelLost>
+      <isLevelWon>false</isLevelWon>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Player>
+      <name>No Name</name>
+      <myLocation>
+        <myHeading>0.0</myHeading>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mario.png</myImagePath>
+      <myVelocity>0.0</myVelocity>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/myCollisionHandler"/>
+      <myCharacteristics/>
+      <id>ConcreteDraggableSprite1480386505583</id>
+      <myStates/>
+    </game__data.sprites.Player>
+  </spritePresets>
+  <myXMLSaver/>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

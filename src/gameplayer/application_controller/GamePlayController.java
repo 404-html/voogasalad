@@ -37,10 +37,15 @@ public class GamePlayController {
 	private Map<Sprite, ImageView> mySprites;
 	private Set<KeyCode> myKeySet;
 	private GUIGenerator myGUIGenerator;
+	private Set<KeyCode> myKeysPressed;
+	private Set<KeyCode> myKeysReleased;
+	private BackgroundDisplayFactory myBackground; 
 	
 	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
 		myKeySet = new HashSet<KeyCode>();
+		myKeysPressed= new HashSet<KeyCode>();
+		myKeysReleased = new HashSet<KeyCode>();
 		myStack = new StackPane();
 		myGUIGenerator = new GUIGenerator();
 		mySprites = new HashMap<Sprite, ImageView>();
@@ -67,7 +72,19 @@ public class GamePlayController {
 		myScene.setOnKeyPressed(e -> handleKeyPress(e.getCode()));
 		myScene.setOnKeyReleased(e -> handleKeyRelease(e.getCode()));
 	}
-	
+
+	private void initializeAnimation() {
+		myAnimationLoop = new AnimationLoop();
+		myAnimationLoop.init( elapsedTime -> {
+			deleteSprites();
+			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySprites);;
+			updateSprites();
+			//the below line makes sure the keys released aren't stored in the set after they're released
+			myKeysReleased = new HashSet<KeyCode>();
+			myKeysPressed = new HashSet<KeyCode>();
+		});
+	}
+
 	private void initializeGameScene() {
 		myGamePlay = new AnimationScene(myScene, myStage.getWidth(), myStage.getHeight());
 		//System.out.println(myGamePlay);
@@ -76,16 +93,6 @@ public class GamePlayController {
 		myStack.getChildren().add(myHeadsUpDisplay.init());
 		setBackground(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
 		updateSprites();
-	}
-
-	private void initializeAnimation() {
-		myAnimationLoop = new AnimationLoop();
-		myAnimationLoop.init( elapsedTime -> {
-			deleteSprites();
-			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeySet, mySprites);
-			myGamePlay.moveScreen(myKeySet);
-			updateSprites();
-		});
 	}
 	
 	private void setBackground(String aBackgroundImageFilePath, double aWidth, double aHeight) {
@@ -133,10 +140,15 @@ public class GamePlayController {
 	}
 	
 	private void handleKeyPress(KeyCode aKey) {
+		if(!myKeySet.contains(aKey)){
+			myKeysPressed.add(aKey);
+		}
         myKeySet.add(aKey);
 	}
 	
 	private void handleKeyRelease(KeyCode key) {
+		//System.out.println(myKeySet);
+		myKeysReleased.add(key);
 		myKeySet.remove(key);
 	}
 	

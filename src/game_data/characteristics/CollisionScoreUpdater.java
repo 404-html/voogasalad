@@ -8,7 +8,7 @@ import javafx.geometry.Side;
 /**
  * @author austingartside
  *
- * might have two different types for this, one type that just disappearw when you hit it
+ * might have two different types for this, one type that just disappears when you hit it
  * other could be a thing that changes appearance and shoots something out to indicate score change (like blocks with coin
  * in Mario)
  */

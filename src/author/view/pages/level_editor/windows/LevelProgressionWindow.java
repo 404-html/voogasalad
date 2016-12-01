@@ -65,10 +65,10 @@ public class LevelProgressionWindow extends AbstractLevelEditorWindow {
 	 * initListener(author.controller.IAuthorController, game_data.Level)
 	 */
 	@Override
-	protected void initListener(IAuthorController authorController) {
-		authorController.getModel().getGame().addListener((game) -> {
+	protected void initListener() {
+		getController().getModel().getGame().addListener((game) -> {
 			this.container.getChildren().clear();
-			authorController.getModel().getGame().getLevels().forEach((level) -> {
+			getController().getModel().getGame().getLevels().forEach((level) -> {
 				if (level.getBackgroundImageFilePath() != null) {
 					ImageView imageView = getImageView(level.getBackgroundImageFilePath(),
 							progressionScroller.prefViewportWidthProperty(),

@@ -1,14 +1,10 @@
 /*
  * Authors: Alex + Austin
  * 
- * if toAct() is true run the following:
- * isBroken()
- * 
  */
 
 package game_data.characteristics;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import game_data.Sprite;
@@ -43,25 +39,19 @@ public class Breakable implements Characteristic{
 		myDurability = durability;
 	}
 	
-	private boolean breakable() {
-		return breakableNorth || breakableSouth || breakableEast || breakableWest;
-	}
-	
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 			if(breaksAtDirection(myCollisionMap.get(collidedSprite))){
-				myAction = new Break(mySprite, collidedSprite);
-				myAction.act();
+				if(isBroken()) {
+					myAction = new Break(mySprite, collidedSprite);
+					myAction.act();
+				}
 			}
 		}
 	}
 	
-	public boolean isBroken(Side aDirection){
-		
-		if( ! breaksAtDirection(aDirection))
-			return false;
-		
+	private boolean isBroken() {
 		myDurability--;
 		return myDurability<=0;
 	}
