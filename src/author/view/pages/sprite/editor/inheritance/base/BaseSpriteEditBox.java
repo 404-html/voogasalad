@@ -147,6 +147,7 @@ public class BaseSpriteEditBox {
 		
 		myImageView = new ImageView();
 		Button imageButton = new Button();
+		imageButton.minWidthProperty().bind(myPane.widthProperty());
 		imageButton.setText("Select Image:");
 		imageButton.setContentDisplay(ContentDisplay.TOP);
 		imageButton.setGraphic(myImageView);

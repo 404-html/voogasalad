@@ -13,9 +13,4 @@ public class EnemySpriteEditPage extends CharacterSpriteEditPage {
 		return "enemy";
 	}
 
-	@Override
-	public Sprite editSprite() {
-		return null;
-	}
-
 }

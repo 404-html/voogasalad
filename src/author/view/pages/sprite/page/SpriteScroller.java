@@ -48,7 +48,9 @@ public class SpriteScroller {
 	public void giveSprite(Sprite aSprite){
 		if(!mySprites.contains(aSprite)){
 			mySprites.add(aSprite);
-			myColumn.getChildren().add(new SpriteViewBox(aSprite).getNode());
+			SpriteViewBox svb = new SpriteViewBox(aSprite);
+			svb.getPane().minWidthProperty().bind(myColumn.maxWidthProperty());
+			myColumn.getChildren().add(svb.getPane());
 		}
 	}
 	

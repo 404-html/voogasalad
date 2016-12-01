@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
  * @author George Bernard
  */
 public abstract class BaseSpriteEditPage {
-	
+
 	public enum SpriteType{
 		ENEMY,
 		PLAYER,
@@ -36,55 +36,58 @@ public abstract class BaseSpriteEditPage {
 		PROJECTILE,
 		TERRAIN,
 		NOT_A_SPRITE;
-		
+
 		public static SpriteType discern(Sprite aSprite) {
-			
+
 			if(aSprite instanceof Enemy) return ENEMY;
 			if(aSprite instanceof Player) return PLAYER;
 			if(aSprite instanceof Item) return ITEM;
 			if(aSprite instanceof Projectile) return PROJECTILE;
 			if(aSprite instanceof Terrain) return TERRAIN;
 			else return NOT_A_SPRITE;
-			
+
 		}
-		
+
 	}
-	
+
 	private Pane myPane;
 	private ToolBarBuilder myToolBarBuilder;
-	
+
 	private Sprite mySprite;
 	private BaseSpriteEditBox mySpriteEditBox;
 	private SpriteCharacteristicEditor myCharacteristicEditor;
 	private TabPaneFacade myTabPaneFacade;
-	
+
 	public BaseSpriteEditPage(Sprite aSprite){
 		mySprite = aSprite;
-		
+
 		myPane = new VBox();
 		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite, getSpriteType());
 		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
-		
+
 		myTabPaneFacade.addTab("Base", mySpriteEditBox.getPane());
 		myTabPaneFacade.addTab("Characteristics", this.myCharacteristicEditor.getNode());
 		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
+
 		Button buildButton = new ButtonFactory().createButton(
-				"Save", 
-				e -> {editSprite(); myCharacteristicEditor.addCharacteristics(); }
-				).getButton();
+				"Save", e -> {
+					editSprite();
+					myCharacteristicEditor.addCharacteristics(); 
+				}).getButton();
+
 		myToolBarBuilder.addBurst(new Label(getSpriteType()));
 		myToolBarBuilder.addBurst(buildButton);
-		
+
 		mySpriteEditBox.setLocation(aSprite.getMyLocation());
 		mySpriteEditBox.setImageFile(aSprite.getMyImagePath());
 		mySpriteEditBox.setName(aSprite.getName());
 		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
 	}
-	
+
 	public static BaseSpriteEditPage build( Sprite aSprite){
-		
+
 		switch (SpriteType.discern(aSprite)) {
 		case PLAYER:	 return new PlayerSpriteEditPage(aSprite);
 		case ENEMY:		 return new EnemySpriteEditPage(aSprite);
@@ -94,40 +97,40 @@ public abstract class BaseSpriteEditPage {
 		default: return null;
 		}
 	}
-	
+
 	public abstract String getSpriteType();
 
 	public Sprite editSprite(){
-		
+
 		getSprite().setMyLocation(getLocation());
-		getSprite().setMyImagePath(getImageFile().toString());
+		getSprite().setMyImagePath(getImageFile());
 		getSprite().setMyWidth(getWidth());
 		getSprite().setMyHeight(getHeight());
 		getSprite().setName(getSpriteName());
 
 		return getSprite();
 	}
-	
+
 	public Pane getPane(){
 		return myPane;
 	}
-	
+
 	protected final String getSpriteName(){
 		return mySpriteEditBox.getName();
 	}
-	
+
 	protected final void setSpriteName(String aSpriteName){
 		mySpriteEditBox.setName(aSpriteName);
 	}
-	
+
 	protected final int getWidth(){
 		return mySpriteEditBox.getWidth();
 	}
-	
+
 	protected final int getHeight(){
 		return mySpriteEditBox.getHeight();
 	}
-	
+
 	protected final boolean hasSprite(){
 		return mySprite == null;
 	}
@@ -135,11 +138,11 @@ public abstract class BaseSpriteEditPage {
 	protected final String getImageFile(){
 		return mySpriteEditBox.getImageFile();
 	}
-	
+
 	protected final Location getLocation(){
 		return mySpriteEditBox.getLocation();
 	}
-	
+
 	protected ToolBarBuilder getToolBarBuilder(){
 		return myToolBarBuilder;
 	}
