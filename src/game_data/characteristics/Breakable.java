@@ -8,10 +8,13 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import javafx.geometry.Side;
 
+@CharacteristicAnnotation(name = "Breakable")
 public class Breakable implements Characteristic{
 
 	private boolean breakableNorth;
@@ -22,7 +25,7 @@ public class Breakable implements Characteristic{
 	private Action myAction;
 	private Sprite mySprite;
 	
-	
+	@ParameterAnnotation(parameters = {"North Side", "South Side", "East Side", "West Side", "Durability", "Sprite"})
 	public Breakable(boolean north, boolean south, boolean east, boolean west, int durability, Sprite aSprite){
 		breakableNorth = north;
 		breakableSouth = south;

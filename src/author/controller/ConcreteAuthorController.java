@@ -33,4 +33,12 @@ public class ConcreteAuthorController implements IAuthorController, IAuthorContr
 		return this.authorModel;
 	}
 
+	/* (non-Javadoc)
+	 * @see author.controller.IAuthorController#reinitializeView()
+	 */
+	@Override
+	public void reinitializeView() {
+		this.authorView.reinitializeView();
+	}
+
 }

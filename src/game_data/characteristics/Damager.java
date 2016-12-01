@@ -3,6 +3,8 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import game_engine.actions.Damage;
@@ -12,11 +14,14 @@ import javafx.geometry.Side;
  * @author austingartside
  *
  */
+
+@CharacteristicAnnotation(name = "Damager")
 public class Damager implements Characteristic{
 	
 	private int myDamageToGive;
 	private Sprite mySprite;
 	
+	@ParameterAnnotation(parameters = {"Amount of Damage", "Sprite"})
 	public Damager(int damageToGive, Sprite aSprite){
 		myDamageToGive = damageToGive;
 		mySprite = aSprite;

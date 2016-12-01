@@ -1,5 +1,6 @@
 package game_data.sprites;
 
+import author.images.EmptyImage;
 import game_data.Location;
 import game_data.Sprite;
 
@@ -12,7 +13,7 @@ abstract interface SpriteBuilder{
 	 * @param aFilePath
 	 * @return new instance of sprite
 	 */
-	Sprite buildSprite(Location aLocation, String aImagePath);
+	Sprite buildSprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath);
 }
 
 /**
@@ -21,22 +22,24 @@ abstract interface SpriteBuilder{
  * @author George Bernard
  */
 public enum SpriteFactory implements SpriteBuilder {
-	//PLAYER(		(loc, path) -> { return new Player(loc, path);}),
-	ENEMY(		(loc, path) -> { return null;} ),
-	TERRAIN(	(loc, path) -> { return null;} ),
-	ITEM(		(loc, path) -> { return null;} ),
-	PROJECTILE(	(loc, path) -> { return null;} );
+	PLAYER( (loc, width, height, name, path) -> { return new Player(loc, width, height, name, path );}),
+	ENEMY( (loc, width, height, name, path) -> { return new Enemy(loc, width, height, name, path );} ),
+	TERRAIN( (loc, width, height, name, path) -> { return new Terrain(loc, width, height, name, path) ;} ),
+	ITEM( (loc, width, height, name, path) -> { return new Item(loc, width, height, name, path );} ),
+	PROJECTILE(	(loc, width, height, name, path) -> { return new Projectile(loc, width, height, name, path );} );
 	
 	private SpriteBuilder myBuilder;	
 	private SpriteFactory(SpriteBuilder SpriteMaker){
 		myBuilder = SpriteMaker;
 	}
 	
-	@Override
-	public Sprite buildSprite(Location aLocation, String aFilePath) {
-		return myBuilder.buildSprite(aLocation, aFilePath);
+	public Sprite buildEmpty(){
+		return buildSprite(new Location(0,0,0), 0, 0, "No Name", EmptyImage.INSTANCE.getFile().toString());
 	}
 	
-	
-	
+	@Override
+	public Sprite buildSprite(Location aLocation, int aWidth, int aHeight, String aName, String aFilePath) {
+		return myBuilder.buildSprite(aLocation, aHeight, aHeight, aName, aFilePath);
+	}
+		
 }

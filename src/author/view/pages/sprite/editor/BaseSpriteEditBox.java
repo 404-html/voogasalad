@@ -4,8 +4,8 @@ import java.io.File;
 
 import author.view.util.FileLoader;
 import author.view.util.FileLoader.FileType;
+import author.view.util.NumberFieldBox;
 import game_data.Location;
-import javafx.beans.value.ChangeListener;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -22,107 +22,115 @@ public class BaseSpriteEditBox {
 
 	private Pane myPane;
 	private FileLoader myFileLoader;
-	private TextField myXPositionField;
-	private TextField myYPositionField;
-	private TextField myHeadingField;
+	private NumberFieldBox myXPositionField;
+	private NumberFieldBox myYPositionField;
+	private NumberFieldBox myHeadingField;
+	private TextField myNameField;
+	private NumberFieldBox myWidthField;
+	private NumberFieldBox myHeightField;
 	private ImageView myImageView;
-	private File myFile;
+	private String myImagePath;
 	
 	private static final double CHAR_SIZE = 100;
 	
 	public BaseSpriteEditBox() {
 		myPane = new VBox();
 		myFileLoader = new FileLoader(FileType.PNG, FileType.GIF,FileType.JPG, FileType.JPEG);
-		myPane.getChildren().addAll(makeLocationFields(), makeImageSelect());	
+		myPane.getChildren().addAll(
+				makeNameField(), 
+				makeLocationFields(),
+				makeSizeFields(), 
+				makeImageSelect()
+				);	
 	}
 
 	public final Pane getPane(){
 		return myPane;
 	}
 
+	public final String getName(){
+		return myNameField.getText();
+	}
+	
+	public final void setName(String aName){
+		myNameField.setText(aName);		
+	}
+	
+	public final void setSize(int aWidth, int aHeight){
+		myWidthField.setValue(aWidth);
+		myHeightField.setValue(aHeight);
+	}
+	
+	public final int getWidth(){
+		return myWidthField.getInteger();
+	}
+	
+	public final int getHeight(){
+		return myHeightField.getInteger();
+	}
+	
 	public final Location getLocation(){
-		Double x, y, h;
-		
-		try {
-			x = Double.parseDouble(myXPositionField.getText());
-		} catch (Exception e) {
-			x = 0.0;
-		}
-		
-		try {
-			y = Double.parseDouble(myYPositionField.getText());
-		} catch (Exception e) {
-			y = 0.0;
-		}
-		
-		try {
-			h = Double.parseDouble(myHeadingField.getText());
-		} catch (Exception e){
-			h = 0.0;
-		}
-		
-		return new Location(x, y, h);
+		return new Location(
+				myXPositionField.getDouble(),
+				myYPositionField.getDouble(),
+				myHeadingField.getDouble()
+				);
 
 	}
 
 	protected final void setLocation(Location aLocation){
-		myXPositionField.setText(Double.toString(aLocation.getXLocation()));
-		myYPositionField.setText(Double.toString(aLocation.getYLocation()));
-		myHeadingField.setText(Double.toString(aLocation.getMyHeading()));
+		myXPositionField.setValue(aLocation.getXLocation());
+		myYPositionField.setValue(aLocation.getYLocation());
+		myHeadingField.setValue(aLocation.getMyHeading());
 	}
 	
-	protected final File getImageFile(){
-		return myFile;
+	protected final String getImageFile(){
+		return myImagePath;
 	}
 	
-	protected final void setImageFile(File aFile){
-		myFile = aFile;
-		myImageView.setImage(new Image(myFile.toURI().toString()));
-	}
-	
-	/**
-	 * Standing on the shoulders of Evan Knowles and limc here
-	 * http://stackoverflow.com/questions/7555564/what-is-the-recommended-way-to-make-a-numeric-textfield-in-javafx
-	 * http://stackoverflow.com/questions/5011855/matching-decimals-in-strings-using-matcher
-	 * 
-	 * @param aTextField
-	 * @return
-	 */
-	protected final ChangeListener<? super String> makeOnlyNumberProperty(TextField aTextField){
-		return (obs, ov, nv) -> { 
-			if(!nv.matches("\\d+(\\.\\d+)")){
-				aTextField.setText(nv.replaceAll("[^\\d+(\\.\\d+)]", ""));
-			}
-		}; 
-
+	protected final void setImageFile(String aImagePath){
+		myImagePath = aImagePath;
+		myImageView.setImage(new Image( myImagePath ));
 	}
 
+	private Node makeNameField(){
+		Pane nameBox = new VBox();
+		
+		myNameField = new TextField();
+		nameBox.getChildren().addAll(new Label("Name: "), myNameField);
+		HBox.setHgrow(myNameField, Priority.ALWAYS);
+		
+		return nameBox;
+	}
+	
+	private Node makeSizeFields(){
+		Pane sizeBox = new VBox();
+		
+		myWidthField = new NumberFieldBox("Width: ");
+		myHeightField = new NumberFieldBox("Height: ");
+		
+		sizeBox.getChildren().addAll(
+				new Label("Size: "), 
+				myWidthField.getPane(),
+				myHeightField.getPane()
+				);		
+		
+		return sizeBox;
+	}
+	
 	private Node makeLocationFields(){
 		Pane locationBox = new VBox();
 
-		Pane xBox = new HBox();
-		myXPositionField = new TextField();
-		xBox.getChildren().addAll(new Label("X: "), myXPositionField);
+		myXPositionField = new NumberFieldBox("X: ");
+		myYPositionField = new NumberFieldBox("Y: ");
 		
-		Pane yBox = new HBox();
-		myYPositionField = new TextField();
-		yBox.getChildren().addAll(new Label("Y: "), myYPositionField);
-		
-		myHeadingField = new TextField();
-		Pane hBox = new HBox();
-		hBox.getChildren().addAll(new Label("Angle:"), myHeadingField);
-		
-		HBox.setHgrow(myXPositionField, Priority.ALWAYS);
-		HBox.setHgrow(myYPositionField, Priority.ALWAYS);
-		HBox.setHgrow(myHeadingField, Priority.ALWAYS);
+		myHeadingField = new NumberFieldBox("Angle: ");
 
-		
 		Pane coordinateBox = new VBox();
-		coordinateBox.getChildren().addAll(xBox, yBox, hBox);
-			
-		myXPositionField.textProperty().addListener( makeOnlyNumberProperty(myXPositionField) );
-		myYPositionField.textProperty().addListener( makeOnlyNumberProperty(myYPositionField) );
-		myHeadingField.textProperty().addListener( makeOnlyNumberProperty(myHeadingField) );
+		coordinateBox.getChildren().addAll(
+				myXPositionField.getPane(),
+				myYPositionField.getPane(),
+				myHeadingField.getPane());
 		
 		locationBox.getChildren().addAll(
 				new Label("Location: "),
@@ -148,9 +156,10 @@ public class BaseSpriteEditBox {
 		imageSelectBox.getChildren().addAll(imageButton, myImageView);
 		
 		imageButton.setOnMouseClicked(e -> {
-			myFile = myFileLoader.loadImage();
-			if(myFile != null){
-				myImageView.setImage(new Image(myFile.toURI().toString()));
+			File file = myFileLoader.loadImage();
+			if(file != null){
+				myImagePath = file.toURI().toString();
+				myImageView.setImage(new Image(myImagePath));
 			}
 		});
 		

@@ -1,5 +1,7 @@
 package game_engine;
 
+import java.io.File;
+
 import game_data.Game;
 import util.XMLTranslator;
 
@@ -8,21 +10,20 @@ public class GameEngine {
 	private EnginePlayerController myEnginePlayerController;
 
 	// public GameEngine(IEngineReceiverControllerInterface myInterface) {
-	public GameEngine(String filePath) {
-		makeGameFromXML(filePath);
+	public GameEngine(File aFile) {
+		makeGameFromXML(aFile);
 		myEnginePlayerController = new EnginePlayerController(myGame);
 	}
 
-	public GameEngine(String filePath, int levelNumber) {
-		makeGameFromXML(filePath);
+	public GameEngine(File aFile, int levelNumber) {
+		makeGameFromXML(aFile);
 		myGame.setCurrentLevel(levelNumber);
 		myEnginePlayerController = new EnginePlayerController(myGame);
 	}
 
-	private void makeGameFromXML(String filePath) {
-		String myXML = filePath;
+	private void makeGameFromXML(File aFile) {
 		XMLTranslator myTranslator = new XMLTranslator();
-		myGame = (Game) myTranslator.deserialize(myXML);
+		myGame = (Game) myTranslator.loadFromFile(aFile);
 	}
 
 	public EnginePlayerController getMyEnginePlayerController() {

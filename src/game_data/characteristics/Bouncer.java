@@ -1,24 +1,26 @@
 package game_data.characteristics;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import game_data.Sprite;
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
-import game_engine.actions.Break;
 import javafx.geometry.Side;
 
 /**
  * @author Alex & James
  *
  */
+
+@CharacteristicAnnotation(name = "Bouncer")
 public class Bouncer implements Characteristic{
-	
 	private double myBounceSpeed;
 	private Sprite mySprite;
 	private Action myAction;
 	
+	@ParameterAnnotation(parameters = {"Bounce Speed", "Sprite"})
 	public Bouncer(double bounceSpeed, Sprite mySprite){
 		myBounceSpeed = bounceSpeed;
 	}

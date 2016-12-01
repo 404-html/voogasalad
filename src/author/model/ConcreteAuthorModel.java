@@ -1,7 +1,6 @@
 package author.model;
 
 import author.controller.IAuthorController;
-import javafx.beans.InvalidationListener;
 
 /**
  * 

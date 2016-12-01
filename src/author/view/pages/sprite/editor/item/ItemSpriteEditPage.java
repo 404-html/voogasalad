@@ -10,7 +10,7 @@ public class ItemSpriteEditPage extends BaseSpriteEditPage {
 	}
 	
 	@Override
-	public String getName() {
+	public String getSpriteType() {
 		return "Item Editor";
 	}
 

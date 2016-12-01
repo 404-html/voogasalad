@@ -1,28 +1,40 @@
 <game__data.Game>
+  <invalidationListeners class="set">
+    <null/>
+  </invalidationListeners>
+  <name>NewTesterBlah</name>
   <myLevels>
     <game__data.Level>
+      <invalidationListeners class="set">
+        <null/>
+      </invalidationListeners>
+      <name>TestLevel</name>
       <width>500</width>
-      <height>8000</height>
-      <backgroundImageFilePath>path/backgroundImage.jpg</backgroundImageFilePath>
+      <height>500</height>
+      <backgroundImageFilePath>author/images/duke.gif</backgroundImageFilePath>
       <mySprites>
         <game__data.sprites.Player>
+          <invalidationListeners class="set"/>
+          <name>Mario</name>
           <myLocation>
             <myHeading>0.0</myHeading>
             <myXLocation>0.0</myXLocation>
             <myYLocation>0.0</myYLocation>
           </myLocation>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myName>Addison</myName>
-          <myImagePath>path/spriteImage.jpg</myImagePath>
+          <myWidth>20</myWidth>
+          <myHeight>20</myHeight>
+          <myImagePath>author/images/MarioSMBW.png</myImagePath>
           <myVelocity>0.0</myVelocity>
           <myCollisionHandler/>
           <myCharacteristics/>
+          <id></id>
           <myStates/>
         </game__data.sprites.Player>
       </mySprites>
       <myKeyCommands/>
     </game__data.Level>
   </myLevels>
+  <spritePresets/>
   <myXMLSaver/>
+  <currentLevel reference="../myLevels/game__data.Level"/>
 </game__data.Game>
