@@ -11,12 +11,16 @@ public class ButtonFactory {
 		IButton buttonClass = null;
 		if (aDisplayType.equals(ButtonDisplay.CSS)) {
 			buttonClass = new CSSButton();
-		} else if (aDisplayType.equals(ButtonDisplay.TEXT)) {
+		}
+		else if (aDisplayType.equals(ButtonDisplay.FACEBOOK)) {
+			buttonClass = new FacebookButton();
+		}
+		else if (aDisplayType.equals(ButtonDisplay.TEXT)) {
 			buttonClass = new TextButton();
 		} else if (aDisplayType.equals(ButtonDisplay.IMAGE)) {
 			buttonClass = new ImageButton();
 		}
 		return buttonClass.createButton(aMessage, aXPos, aYPos, aHandler);
 	}
-
+	
 }

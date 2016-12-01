@@ -11,6 +11,8 @@ public class SceneFactory {
 			return new GameChoiceScene(aWidth, aHeight);
 		} else if (aIdentifier.equals(SceneIdentifier.USERPROFILE)) {
 			return new UserProfileScene(aWidth, aHeight);
+		} else if (aIdentifier.equals(SceneIdentifier.HIGHSCORE)) {
+			return new HighScoreScene(aWidth, aHeight);
 		}
 		return null;
 	}

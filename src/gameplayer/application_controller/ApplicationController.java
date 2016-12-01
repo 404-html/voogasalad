@@ -4,14 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
+import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.application_scene.IDisplay;
-import gameplayer.front_end.application_scene.LoginScene;
 import gameplayer.front_end.application_scene.MainMenuScene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
+import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import gameplayer.front_end.popup.PopUpController;
 import javafx.stage.Stage;
@@ -32,54 +34,28 @@ public class ApplicationController {
 	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
 	private ResourceBundle myButtonLabels; 
+	private GUIGenerator myGUIGenerator;
+	private FacebookInformation myFacebookInformation;
 	
 	public ApplicationController (Stage aStage) {
 		myStage = aStage;
 		mySceneBuilder = new SceneFactory();
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
+		myGUIGenerator = new GUIGenerator();
+		myFacebookInformation = new FacebookInformation();
 	}
 	
 	public void startScene() throws FileNotFoundException {
-		IDisplay login = mySceneBuilder.create(SceneIdentifier.LOGIN, SCENE_SIZE, SCENE_SIZE);
-		resetStage(login);
-		setLoginButtonHandlers((LoginScene) login);
-	}
-
-	public void displayLogin() {
-		LoginScene login = (LoginScene) mySceneBuilder.create(SceneIdentifier.LOGIN, myStage.getWidth(), myStage.getHeight());
-		resetStage(login);
-		setLoginButtonHandlers((LoginScene) login);
+		IDisplay mainMenu = mySceneBuilder.create(SceneIdentifier.MAINMENU, SCENE_SIZE, SCENE_SIZE);
+		resetStage(mainMenu);
+		setMainMenuButtonHandlers((MainMenuScene) mainMenu);
 	}
 
 	public void displayMainMenu() {
 		MainMenuScene mainMenu = (MainMenuScene) mySceneBuilder.create(SceneIdentifier.MAINMENU, myStage.getWidth(), myStage.getHeight());
 		resetStage(mainMenu);
 		setMainMenuButtonHandlers(mainMenu);
-	}
-	
-	private void setLoginButtonHandlers(LoginScene login) {
-		login.addButton(myButtonLabels.getString("Enter"), e -> {
-			try {
-				myInformationController.userSignIn(login.getUserName(), login.getPassword());
-				displayMainMenu();
-			} catch (Exception x) {
-				showError(x);
-			}
-		}, ButtonDisplay.TEXT);
-		login.addButton(myButtonLabels.getString("SignUp"), e -> {
-			try {
-				myInformationController.userSignUp(login.getUserName(), login.getPassword());
-				displayMainMenu();
-			} catch (Exception x) {
-				showError(x);
-			}
-		}, ButtonDisplay.TEXT);
-	}
-
-	private void showError(Exception x) {
-		ErrorAlert error = new ErrorAlert();
-		error.show(x);
 	}
 
 	private void setMainMenuButtonHandlers(IDisplay mainMenu) {
@@ -89,21 +65,33 @@ public class ApplicationController {
 		mainMenu.addButton(myButtonLabels.getString("Author"), e -> {
 			//TODO: implement authoring environment
 		}, ButtonDisplay.TEXT);
+		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
+			myFacebookInformation.authenticatePlayer();
+		}, ButtonDisplay.FACEBOOK);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void createNavigationButtons(IDisplay aMenu) {
-		aMenu.addNavigationButton(myButtonLabels.getString("Profile"), e -> {
-			displayUserProfile();
-		}, ButtonDisplay.CSS);
-		aMenu.addNavigationButton(myButtonLabels.getString("MainMenu"), e -> {
+		String[] names = {"MAIN MENU", "PROFILE"};
+		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
+		aMenu.addNavigationMenu(image, names, e -> {
 			displayMainMenu();
-		}, ButtonDisplay.TEXT);
-		aMenu.addNavigationButton(myButtonLabels.getString("SignOut"), e -> {
-			displayLogin();
-		}, ButtonDisplay.TEXT);
+		}, e -> {
+			displayUserScene();
+		});
 	}
 	
-	private void displayUserProfile() {
+	public void displayHighScoreScene() {
+		IDisplay highScore = mySceneBuilder.create(SceneIdentifier.HIGHSCORE, myStage.getWidth(), myStage.getHeight());
+		resetStage(highScore);
+		setHighScoreHandlers(highScore);
+	}
+	
+	private void setHighScoreHandlers(IDisplay highScoreScene) {
+		highScoreScene.addNode(myGUIGenerator.createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
+	}
+
+	private void displayUserScene() {
 		IDisplay userProfile = mySceneBuilder.create(SceneIdentifier.USERPROFILE, myStage.getWidth(), myStage.getHeight());
 		resetStage(userProfile);
 		setUserProfileButtonHandlers(userProfile);
@@ -123,8 +111,7 @@ public class ApplicationController {
 
 	private void setGameChoiceButtonHandlers(IDisplay gameChoice) {
 		gameChoice.addButton(myButtonLabels.getString("ChooseGame"), e -> {
-//			GamePlayController gamePlay = new GamePlayController(myStage);
-//			gamePlay.displayGame();
+			//TODO
 		}, ButtonDisplay.TEXT);
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);

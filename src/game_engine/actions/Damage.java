@@ -1,8 +1,7 @@
 package game_engine.actions;
 
 import game_data.Sprite;
-
-import states.*;
+import game_data.states.*;
 
 
 public class Damage implements Action {

@@ -5,13 +5,28 @@
 
 #pane {
     -fx-background-image: url("hawaiian_shirt_background3.png");
+    -fx-background-size: 100%;   
     -fx-background-repeat: repeat;
     -fx-background-width: 100%;
     -fx-background-height: 100%;
     -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 
+.menu-bar { 
+    -fx-opacity: .6;
+}
+
+
+.menu .label { 
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+}
+.menu:showing .label { 
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+}
+
+ 
 .body {
   width: 100%;
 }
@@ -52,14 +67,27 @@
     -fx-padding: 15 30 15 30;
 }
 
-#message-box {
-    -fx-background-color: linear-gradient(to bottom, #CDCDCD 40%, #BABABA 40%);
+#facebook-button {
+    -fx-background-color: #3b5998;
     -fx-background-insets: 0,2;
     -fx-background-radius: 9,8,5,4;
-    -fx-padding: 8 8 15 8;
-    -fx-font-family: "Helvetica";
+    -fx-font-weight: bold;
+}
+
+#facebook-label {
+    -fx-font-family: Lucida;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 16px;
+}
+
+#facebook-button:hover {
+    -fx-background-color: #2F4779;
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-font-weight: bold;
+    -fx-font-family: Lucida;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 13px;
-    -fx-text-fill: #424242;
 }
 
 
@@ -124,15 +152,10 @@
     -fx-text-fill: #424242;
 }
 
-#label-header {
-    -fx-text-fill: #FFFFFF;
-    -fx-font-size: 30px;
-    -fx-font-family: "Helvetica";
-}
-
 .label {
     -fx-text-fill: #FFC3E1;
-    -fx-font-size: 30px;
+    -fx-font-size: 50px;
+    -font-weight: bold; 
     -fx-font-family: "Helvetica";
 }
 
