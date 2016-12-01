@@ -9,6 +9,7 @@ public class Break implements Action {
 	private Sprite myBrokenSprite;
 	private Sprite myPlayerSprite;
 	private Level myLevel;
+	
 	public Break(Sprite aBrokenSprite, Sprite aPlayerSprite) {
 		myBrokenSprite=aBrokenSprite;
 		myPlayerSprite=aPlayerSprite;
