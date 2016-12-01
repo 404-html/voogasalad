@@ -38,14 +38,6 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow {
 		super(authorController);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			container.getChildren().add(node);
-		}
-	}
-
 	@Override
 	protected void createToolBar() {
 		ToolBarBuilder tbb = new ToolBarBuilder();
