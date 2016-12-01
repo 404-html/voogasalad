@@ -60,6 +60,7 @@ public abstract class AuthorModel implements IAuthorModel{
 		this.activeGame = (Game) gameLoader.deserialize(aFile);
 		this.authorController.reinitializeView();
 		this.activeGame.setName(this.activeGame.getName());
+		//this.activeGame.getCurrentLevel().setName(this.activeGame.getCurrentLevel().getName());
 	}
 	
 	@Override
