@@ -1,7 +1,6 @@
 package author.view.pages.sprite;
 
 import author.view.pages.sprite.editor.inheritance.base.BaseSpriteEditPage;
-import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPage;
 import game_data.Sprite;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -9,8 +8,6 @@ import javafx.stage.Stage;
 public class SpriteEditWindow {
 
 	private BaseSpriteEditPage mySpriteEditPage;
-	
-	
 	
 	private SpriteEditWindow() {
 		// Does Nothing

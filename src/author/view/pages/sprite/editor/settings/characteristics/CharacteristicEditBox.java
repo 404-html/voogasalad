@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.sun.scenario.Settings;
-
 import author.view.pages.sprite.editor.settings.SettingsEditBox;
 import author.view.pages.sprite.editor.settings.characteristics.CharacteristicFactory.AcceptedParameterTypes;
 import author.view.util.input_fields.BooleanSelector;
@@ -13,8 +11,6 @@ import author.view.util.input_fields.NumberFieldBox;
 import author.view.util.input_fields.TextFieldBox;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 class CharacteristicEditBox extends SettingsEditBox {
 

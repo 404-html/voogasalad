@@ -5,16 +5,11 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import author.view.util.file_helpers.PropertySelector;
-
-import java.util.ResourceBundle;
-
 import game_data.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
