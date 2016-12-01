@@ -2,8 +2,9 @@ package game_data;
 
 import java.util.HashSet;
 import java.util.Set;
-import states.State;
+
 import game_data.characteristics.Characteristic;
+import game_data.states.State;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -94,6 +95,11 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 	
+	public void removeCharacteristic(Characteristic aCharacteristic){
+		if (myCharacteristics.contains(aCharacteristic))
+			myCharacteristics.remove(aCharacteristic);
+	}
+	
 	public Set<State> getStates(){
 		return myStates;
 	}
@@ -101,6 +107,11 @@ public abstract class Sprite extends GameObject {
 	public void addState(State aState){
 		myStates.add(aState);
 		notifyListeners();
+	}
+	
+	public void removeState(State aState){
+		if (myStates.contains(aState))
+			myStates.remove(aState);
 	}
 	
 	public Location getMyLocation() {
@@ -161,13 +172,11 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 
-	@Deprecated
 	public void setId(String id) {
 		this.id = id;
 		notifyListeners();
 	}
 	
-	@Deprecated
 	public String getId() {
 		return id;
 	}

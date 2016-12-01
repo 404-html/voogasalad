@@ -14,6 +14,10 @@ import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.sprites.WinningObject;
+import game_data.states.Health;
+import game_data.states.LevelWon;
+import game_data.states.Physics;
+import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
@@ -24,10 +28,6 @@ import game_engine.actions.StopUpMovement;
 import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import states.Health;
-import states.LevelWon;
-import states.Physics;
-import states.State;
 
 /**
  * TODO make sure that player doesnt run into walls or thigns 
@@ -76,26 +76,26 @@ public class UpdateStates {
 		runKeyReleased();
 		executeCharacteristics();
 		updateSpritePositions();
-		checkForWin();
-		checkForLoss();
+//		checkForWin();
+//		checkForLoss();
 	}
 
-	private void checkForLoss() {
-		for(State s: myLevel.getMainPlayer().getStates()){
-			if(s instanceof Health){
-				myLevel.setLevelLost(!((Health)s).isAlive());
-			}
-		}
-	}
-
-	private void checkForWin() {
-		for(State s: myLevel.getMainPlayer().getStates()){
-			if(s instanceof LevelWon){
-				myLevel.setLevelWon(((LevelWon)s).isHasWon());
-			}
-		}
-		
-	}
+//	private void checkForLoss() {
+//		for(State s: myLevel.getMainPlayer().getStates()){
+//			if(s instanceof Health){
+//				myLevel.setLevelLost(!((Health)s).isAlive());
+//			}
+//		}
+//	}
+//
+//	private void checkForWin() {
+//		for(State s: myLevel.getMainPlayer().getStates()){
+//			if(s instanceof LevelWon){
+//				myLevel.setLevelWon(((LevelWon)s).isHasWon());
+//			}
+//		}
+//		
+//	}
 
 	//keys will only control the main player rn
 	private void generateDefaultKeyPressedMap() {
