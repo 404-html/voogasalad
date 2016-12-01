@@ -1,17 +1,21 @@
-/* 
+/*
     Document   : control Style
 */
 
 
 #pane {
     -fx-background-image: url("hawaiian_shirt_background3.png");
-    -fx-background-repeat: repeat;   
+    -fx-background-repeat: repeat;
     -fx-background-width: 100%;
     -fx-background-height: 100%;
     -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
- 
+
+.body {
+  width: 100%;
+}
+
 .button {
     -fx-background-color: #FFC3E1;
     -fx-background-insets: 0,2;
@@ -70,26 +74,26 @@
 }
 
 
-.combo-box-popup .list-view .list-cell 
+.combo-box-popup .list-view .list-cell
 {
     -fx-padding: 4 0 4 5;
     -fx-background-color: white;
 }
 
-.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover 
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
 {
     -fx-background: -fx-accent;
     -fx-background-color: #BABABA;
     -fx-text-fill: -fx-selection-bar-text;
 }
 
-.combo-box-popup .list-view .list-cell:filled:hover 
+.combo-box-popup .list-view .list-cell:filled:hover
 {
     -fx-background-color: white;
     -fx-text-fill: -fx-text-inner-color;
 }
 
-.combo-box-popup .list-view .list-cell:filled:hover 
+.combo-box-popup .list-view .list-cell:filled:hover
 {
     -fx-background-color: #BABABA;
     -fx-text-fill: -fx-text-inner-color;
@@ -137,14 +141,9 @@
   -fx-font-size: 12px;
   -fx-font-family: "Helvetica";
 }
- 
+
 .axis-label {
   -fx-text-fill: #FFFFFF;
   -fx-font-size: 10px;
   -fx-font-family: "Helvetica";
 }
-
-
-
-
-

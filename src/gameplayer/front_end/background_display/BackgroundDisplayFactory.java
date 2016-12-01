@@ -12,6 +12,7 @@ import javafx.scene.layout.BackgroundSize;
 public class BackgroundDisplayFactory {
 	
 	public Background buildBackgroundDisplay(String aFileName, double aWidth, double aHeight)  {//throws FileNotFoundException {
+		System.out.println(new File(aFileName).toURI().toString());
 		Image image = new Image(new File(aFileName).toURI().toString(), 
 				aWidth, 
 				aHeight, 
@@ -21,7 +22,7 @@ public class BackgroundDisplayFactory {
 				BackgroundRepeat.NO_REPEAT, 
 				BackgroundRepeat.NO_REPEAT, 
 				BackgroundPosition.DEFAULT, 
-				new BackgroundSize(aWidth, aHeight, false, false, false, false));
+				new BackgroundSize(100, 100, true, true, true, true));
 		return new Background(backgroundImage);
 	}
 }

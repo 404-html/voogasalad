@@ -56,6 +56,10 @@ public class AnimationScene {
 		myGamePlayCanvas.getChildren().clear();
 	}
 	
+	public void setBackground(Background aBackground) {
+		myGamePlayCanvas.setBackground(aBackground);
+	}
+	
 	public void setBackground(String aFilePath, int aWidth, int aHeight){
 		Background backgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aFilePath, aWidth, aHeight);
 		myGamePlayCanvas.setBackground(backgroundDisplay);
