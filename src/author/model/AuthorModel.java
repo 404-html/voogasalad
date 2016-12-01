@@ -8,6 +8,8 @@ import java.io.File;
 
 import util.XMLTranslator;
 import author.controller.IAuthorController;
+import author.view.util.edit_window.GameEditWindowFactory;
+import author.view.util.edit_window.IGameObjectEditWindowExternal;
 import game_data.Game;
 import game_data.Level;
 import game_data.Sprite;
@@ -44,13 +46,19 @@ public abstract class AuthorModel implements IAuthorModel{
 	
 	@Override
 	public void newGame(){
-		this.activeGame = new Game("Mario");
+		IGameObjectEditWindowExternal<Game> gameObjectEditWindowExternal = new GameEditWindowFactory().create();
+		Game newGame = gameObjectEditWindowExternal.getResult();
+		if (newGame != null){
+			this.activeGame = newGame;
+			this.authorController.reinitializeView();
+			this.activeGame.setName(this.activeGame.getName());
+		}
 	}
 	
 	@Override
 	public Game getGame(){
 		if (activeGame == null)
-			newGame();
+			return new Game("Game1");
 		return this.activeGame;
 	}
 	
