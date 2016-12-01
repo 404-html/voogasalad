@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import game_data.Game;
 import game_data.Sprite;
 import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
@@ -20,6 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import util.XMLTranslator;
 
 public class GamePlayController {
 	
@@ -32,6 +35,7 @@ public class GamePlayController {
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
 	private AnimationLoop myAnimationLoop;
+	private File myGameFile;
 	private Map<Sprite, ImageView> mySprites;
 	private Set<KeyCode> myKeySet;
 	private GUIGenerator myGUIGenerator;
@@ -42,10 +46,8 @@ public class GamePlayController {
 		myStack = new StackPane();
 		myGUIGenerator = new GUIGenerator();
 		mySprites = new HashMap<Sprite, ImageView>();
-		initializeEngine();
+		myGameFile = aFile;
 		myGameEngine = new GameEngine(aFile, 0);
-		initializeAnimation();
-		initializeScene();
 	}
 	
 	public void displayGame() {
@@ -70,6 +72,7 @@ public class GamePlayController {
 
 	private void initializeGameScene() {
 		myGamePlay = new AnimationScene(myScene, myStage.getWidth(), myStage.getHeight());
+		myGamePlay.addButton(e -> save());
 		//System.out.println(myGamePlay);
 		myStack.getChildren().add(myGamePlay.init());
 		myHeadsUpDisplay = new HeadsUpDisplay(myScene, myStage.getWidth(), myStage.getHeight());
@@ -115,11 +118,14 @@ public class GamePlayController {
 			ApplicationController appControl = new ApplicationController(myStage);
 			appControl.displayMainMenu();
 		});
-		String[] namesForGamePlay = {"Restart", "Change to Red"};
+		String[] namesForGamePlay = {"Restart", "Change to Red", "Save"};
 		myHeadsUpDisplay.addMenu("GAME PLAY", namesForGamePlay, e -> {
-			displayGame();
+			GamePlayController newGame = new GamePlayController(myStage, myGameFile);
+			newGame.displayGame();
 		}, e -> {
 			myGamePlay.makeRed();
+		}, e -> {
+			save();
 		});
 	}
 	
@@ -127,6 +133,12 @@ public class GamePlayController {
 		myStage.close();
 		myStage.setScene(myScene);
 		myStage.show();
+	}
+	
+	private void save() {
+		Game currentGame = myGameController.getMyGame();
+		XMLTranslator mySaver = new XMLTranslator();
+		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
 	
 	private void handleKeyPress(KeyCode aKey) {
