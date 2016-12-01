@@ -26,8 +26,8 @@ public class LevelWindowScrollerFactory {
 	
 	public ScrollPane create(){
 		this.levelScroller = new ScrollPane();
-		this.levelScroller.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		this.levelScroller.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+		this.levelScroller.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		this.levelScroller.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 
 		//this.levelScroller.prefViewportWidthProperty().bind(this.levelEditorWindowInternal.getWindow().widthProperty());
 		//this.levelScroller.prefViewportHeightProperty().bind(this.levelEditorWindowInternal.getWindow().heightProperty());
