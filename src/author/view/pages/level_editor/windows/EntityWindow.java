@@ -5,7 +5,7 @@ import java.util.Set;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteDraggableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
-import author.view.util.ToolBarBuilder;
+import author.view.util.facades.ToolBarBuilder;
 import game_data.Sprite;
 import javafx.geometry.Insets;
 import javafx.scene.Node;

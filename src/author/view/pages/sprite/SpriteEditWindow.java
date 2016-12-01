@@ -1,7 +1,7 @@
 package author.view.pages.sprite;
 
-import author.view.pages.sprite.editor.BaseSpriteEditPage;
-import author.view.pages.sprite.editor.character.PlayerSpriteEditPage;
+import author.view.pages.sprite.editor.inheritance.base.BaseSpriteEditPage;
+import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPage;
 import game_data.Sprite;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

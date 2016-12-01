@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import author.controller.IAuthorController;
-import author.view.util.ToolBarBuilder;
 import author.view.util.authoring_buttons.FunctionalLabel;
 import author.view.util.authoring_buttons.LabelFactory;
+import author.view.util.facades.ToolBarBuilder;
 import game_data.Level;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
