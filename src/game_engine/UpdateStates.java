@@ -72,9 +72,9 @@ public class UpdateStates {
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyPressedMap();
 		generateDefaultKeyReleasedMap();
-		executeCharacteristics();
 		runKeyCalls();
 		runKeyReleased();
+		executeCharacteristics();
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();

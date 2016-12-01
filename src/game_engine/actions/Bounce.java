@@ -24,6 +24,9 @@ public class Bounce implements Action {
 	@Override
 	public void act() {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 464381ae3a3a37a6a7890fd7dd4b4c2cde66bc83
 	
 		myPlayerSprite.setMyVelocity( getNewVelocity() );		
 		myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
@@ -40,12 +43,15 @@ public class Bounce implements Action {
 		
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
 			return 180 - oldHeading;
+<<<<<<< HEAD
 =======
 		//System.out.println("poop");
 		//myPlayerSprite.setMyVelocity((myPlayerSprite.getMyVelocity()) + myBounceSpeed);
 		//myPlayerSprite.getMyLocation().setMyHeading(myPlayerSprite.getMyLocation().getMyHeading()+Math.PI);
 		myPlayerSprite.setMyYVelocity(0);
 >>>>>>> a21ba578045e2d967a8654259a322cef7a204506
+=======
+>>>>>>> 464381ae3a3a37a6a7890fd7dd4b4c2cde66bc83
 		}
 		return 360 - oldHeading;
 		
@@ -53,5 +59,4 @@ public class Bounce implements Action {
 	
 	
 }
-
 
