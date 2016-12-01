@@ -2,8 +2,9 @@ package game_data;
 
 import java.util.HashSet;
 import java.util.Set;
-import states.State;
+
 import game_data.characteristics.Characteristic;
+import game_data.states.State;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -85,7 +86,7 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 	
-	public void removeCharacteristics(Characteristic aCharacteristic){
+	public void removeCharacteristic(Characteristic aCharacteristic){
 		if (myCharacteristics.contains(aCharacteristic))
 			myCharacteristics.remove(aCharacteristic);
 	}
