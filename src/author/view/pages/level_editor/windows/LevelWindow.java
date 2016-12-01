@@ -82,7 +82,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 		super.getWindow().getChildren().add(tbb.getToolBar());
 	}
 
-
 	private void newBackgroundImage() {
 		File file = new FileLoader(FileType.GIF, FileType.JPEG, FileType.PNG, FileType.JPG).loadImage();
 
@@ -115,10 +114,24 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 
 	private void updateLevel(Level aLevel) {
+		System.out.println("UpdateLevel");
+		if (!this.levelPanes.containsKey(aLevel)){
+			
+			Pane newLevelPane = this.levelWindowPaneFactory.create();
+			this.levelPanes.put(aLevel, newLevelPane);
+			this.levelPane = newLevelPane;
+			this.levelScroller.setContent(this.levelPane);
+			
+			this.levelScroller.boundsInLocalProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
+			this.horizontalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
+			this.verticalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
+			
+			aLevel.addListener((level) -> {
+				updatePane(aLevel);
+			});
+		}
 		updatePane(aLevel);
-		aLevel.addListener((level) -> {
-			updatePane(aLevel);
-		});
+		
 	}
 	
 	private void updateLevelSize(Pane aLevelPane, Level aLevel){
@@ -164,7 +177,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	private void styleSpriteImageView(Sprite sprite, DraggableSprite draggableSprite) {
 		draggableSprite.getImageView().setLayoutX(sprite.getMyLocation().getXLocation());
 		draggableSprite.getImageView().setLayoutY(sprite.getMyLocation().getYLocation());
-		draggableSprite.getImageView().setRotate(sprite.getMyLocation().getMyHeading());
 		draggableSprite.getImageView().setFitWidth(sprite.getMyWidth());
 		draggableSprite.getImageView().setFitHeight(sprite.getMyHeight());
 	}
