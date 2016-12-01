@@ -10,9 +10,9 @@ import javafx.geometry.Side;
 @CharacteristicAnnotation(name = "Vertical Bounded Pacer")
 public class VerticalBoundedPacer extends BoundedPacer implements Characteristic{
 
-	@ParameterAnnotation(parameters = {"Speed", "Lower Bound", "Upper Bound"})
-	public VerticalBoundedPacer(int speed, double lowerBound, double upperBound) {
-		super(speed, lowerBound, upperBound);
+	@ParameterAnnotation(parameters = {"Speed", "Lower Bound", "Upper Bound", "Sprite"})
+	public VerticalBoundedPacer(int speed, double lowerBound, double upperBound, Sprite aSprite) {
+		super(speed, lowerBound, upperBound, aSprite);
 	}
 
 	@Override
@@ -23,7 +23,11 @@ public class VerticalBoundedPacer extends BoundedPacer implements Characteristic
 	
 	@Override
 	public Characteristic copy() {
-		return new VerticalBoundedPacer(this.getSpeed(), this.getLowerBound(), this.getUpperBound());
+		return new VerticalBoundedPacer(
+				this.getSpeed(), 
+				this.getLowerBound(), 
+				this.getUpperBound(),
+				this.getSprite());
 	}
 	
 	@Override

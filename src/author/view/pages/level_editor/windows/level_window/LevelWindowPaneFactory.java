@@ -21,12 +21,13 @@ import javafx.scene.layout.Pane;
  *
  */
 public class LevelWindowPaneFactory {
-	private ILevelEditorWindowInternal levelEditorWindowInternal;
+	@SuppressWarnings("unused")
+	private ILevelEditorWindowInternal myLevelEditorWindowInternal;
 	private Pane levelPane;
 	private IAuthorController authorController;
 	
 	public LevelWindowPaneFactory(ILevelEditorWindowInternal levelEditorWindowInternal, IAuthorController authorController) {
-		this.levelEditorWindowInternal = levelEditorWindowInternal;
+		this.myLevelEditorWindowInternal = levelEditorWindowInternal;
 		this.authorController = authorController;
 	}
 	
@@ -96,7 +97,6 @@ public class LevelWindowPaneFactory {
 	}
 	
 	
-	@SuppressWarnings("deprecation")
 	private Sprite findSprite(String nodeId) {
 		for (Sprite s : this.authorController.getModel().getGame().getPresets()) {
 			if (nodeId.equals(s.getId())) {

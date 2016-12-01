@@ -2,7 +2,6 @@ package author.view.pages.level_editor;
 
 
 import author.controller.IAuthorController;
-import author.view.pages.level_editor.windows.AbstractLevelEditorWindow;
 import author.view.pages.level_editor.windows.LevelWindowFactory;
 import author.view.pages.level_editor.windows.level_edit_window.ILevelEditWindowExternal;
 import author.view.pages.level_editor.windows.level_edit_window.ILevelEditorWindowExternal;

@@ -11,8 +11,8 @@ import javafx.geometry.Side;
 public class HorizontalBoundedPacer extends BoundedPacer implements Characteristic{
 
 	@ParameterAnnotation(parameters = {"Speed", "Lower Bound", "Upper Bound"})
-	public HorizontalBoundedPacer(int speed, double lowerBound, double upperBound) {
-		super(speed, lowerBound, upperBound);
+	public HorizontalBoundedPacer(int speed, double lowerBound, double upperBound, Sprite aSprite) {
+		super(speed, lowerBound, upperBound, aSprite);
 	}
 
 	@Override
@@ -23,7 +23,11 @@ public class HorizontalBoundedPacer extends BoundedPacer implements Characterist
 	
 	@Override
 	public Characteristic copy() {
-		return new HorizontalBoundedPacer(this.getSpeed(), this.getLowerBound(), this.getUpperBound());
+		return new HorizontalBoundedPacer(
+				this.getSpeed(), 
+				this.getLowerBound(), 
+				this.getUpperBound(), 
+				this.getSprite());
 	}
 
 	@Override

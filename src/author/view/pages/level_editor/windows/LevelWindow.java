@@ -10,10 +10,10 @@ import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
-import author.view.util.FileLoader;
-import author.view.util.FileLoader.FileType;
-import author.view.util.ToolBarBuilder;
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.facades.ToolBarBuilder;
+import author.view.util.file_helpers.FileLoader;
+import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
@@ -55,8 +55,11 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 		this.levelScroller = new LevelWindowScrollerFactory((ILevelEditorWindowInternal) this).create();
 		this.levelScroller.setContent(this.levelPane);
 		this.getWindow().getChildren().add(this.levelScroller);
+<<<<<<< HEAD
 		//this.levelScroller.prefWidthProperty().bind(this.getWindow().widthProperty());
 		//this.levelScroller.prefHeightProperty().bind(this.getWindow().heightProperty());
+=======
+>>>>>>> ec000dd4adefeabc8ccbbfa2187342210a7ec767
 		this.levelScroller.prefViewportWidthProperty().bind(this.getWindow().widthProperty());
 		this.levelScroller.prefViewportHeightProperty().bind(this.getWindow().heightProperty());
 		System.out.println("WIN: " + this.getWindow().getWidth());
@@ -125,6 +128,10 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 			this.levelPane = newLevelPane;
 			this.levelPanes.put(aLevel, this.levelPane);
 			this.levelScroller.setContent(this.levelPane);
+<<<<<<< HEAD
+=======
+			
+>>>>>>> ec000dd4adefeabc8ccbbfa2187342210a7ec767
 			this.getWindow().widthProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.levelScroller.boundsInLocalProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
@@ -142,9 +149,16 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 	
 	private void updateLevelSize(Pane aLevelPane, Level aLevel){
+<<<<<<< HEAD
 		System.out.println("Win2: " + this.getWindow().getWidth());
 		aLevel.setWidth((int) this.levelScroller.getViewportBounds().getWidth() * this.horizontalPanes.get());
 		aLevel.setHeight((int) this.levelScroller.getViewportBounds().getHeight() * this.verticalPanes.get());
+=======
+		if (this.levelScroller.getWidth() != 0.0){
+			aLevel.setWidth((int) this.levelScroller.getViewportBounds().getWidth() * this.horizontalPanes.get());
+			aLevel.setHeight((int) this.levelScroller.getViewportBounds().getHeight() * this.verticalPanes.get());
+		}
+>>>>>>> ec000dd4adefeabc8ccbbfa2187342210a7ec767
 		updatePaneSize(aLevelPane, aLevel);
 	}
 	
