@@ -72,7 +72,6 @@ public abstract class DraggableSprite {
 
 		myImageView.setOnDragDetected((MouseEvent event) -> {
 			mySprite.setId(this.getClass().getSimpleName() + System.currentTimeMillis());
-			System.out.println("fuck");
 			Dragboard db = myImageView.startDragAndDrop(TransferMode.MOVE);
 			ClipboardContent content = new ClipboardContent();
 			// Store the node ID in order to know what is dragged.
