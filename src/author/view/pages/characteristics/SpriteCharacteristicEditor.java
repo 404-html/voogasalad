@@ -3,6 +3,7 @@ package author.view.pages.characteristics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 
 import game_data.Sprite;
 import javafx.beans.property.BooleanProperty;
@@ -17,13 +18,16 @@ import javafx.scene.layout.Pane;
 
 public class SpriteCharacteristicEditor {
 
+	private static final String RESOURCE_PATH = "./data/";
+	
 	private Pane myPane;
 	private Accordion myAccordion;
 	private List<CharacteristicEditBox> myCharacteristicEditBoxList;
 	private CharacteristicSelector myCharacteristicSelector;
+	private ResourceBundle myCharacteristicResources;
 	private Sprite mySprite;
 	
-	public SpriteCharacteristicEditor(Sprite aSprite) {
+	public SpriteCharacteristicEditor(Sprite aSprite, String aSpriteType) {
 		mySprite = aSprite;
 		myPane = new HBox(5);
 		myAccordion = new Accordion();
