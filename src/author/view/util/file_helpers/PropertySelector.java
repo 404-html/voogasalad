@@ -1,6 +1,5 @@
 package author.view.util.file_helpers;
 
-import java.io.File;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;

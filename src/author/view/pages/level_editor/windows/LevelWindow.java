@@ -8,6 +8,8 @@ import java.util.Set;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
+import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
+import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.facades.ToolBarBuilder;
 import author.view.util.file_helpers.FileLoader;
@@ -17,17 +19,9 @@ import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -43,31 +37,31 @@ import javafx.scene.layout.Pane;
  * @see EntityWindow
  * @see ../LevelEditor
  */
-public class LevelWindow extends AbstractLevelEditorWindow {
+public class LevelWindow extends AbstractLevelEditorWindow{
 
-	private ScrollPane myLevelScroller;
-	private Pane currentContainer;
-	private IAuthorController myController;
+	private ScrollPane levelScroller;
+	private Pane levelPane;
+	private IAuthorController authorController;
 	
 	private IntegerProperty horizontalPanes = new SimpleIntegerProperty(1);
 	private IntegerProperty verticalPanes = new SimpleIntegerProperty(1);
 	private Map<Level, Pane> levelPanes = new HashMap<>();
 	
-//	private static final int DEFAULT_LEVEL_WIDTH = 700;
-//	private static final int DEFAULT_LEVEL_HEIGHT = 550;
+	private LevelWindowPaneFactory levelWindowPaneFactory;
+	private LevelWindowScrollerFactory levelWindowScrollerFactory;
+	
 
 	public LevelWindow(IAuthorController authorController) {
 		super(authorController);
-		myController = authorController;
-		createLevelScroller();
+		this.authorController = authorController;
+		this.levelWindowPaneFactory = new LevelWindowPaneFactory((ILevelEditorWindowInternal) this , this.authorController);
+		this.levelWindowScrollerFactory = new LevelWindowScrollerFactory((ILevelEditorWindowInternal) this);
+		initScrollPane();
 	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			currentContainer.getChildren().add(node);
-		}
+	
+	private void initScrollPane(){
+		this.levelScroller = levelWindowScrollerFactory.create();
+		this.getWindow().getChildren().add(levelScroller);
 	}
 
 	@Override
@@ -78,109 +72,21 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 		tbb.addBurst(new ButtonFactory().createButton("Set Background", e -> {
 			newBackgroundImage();
 		}).getButton(), new ButtonFactory().createButton("Set Theme", e -> {
-			// TODO: Jordan(vooga) - Add functionality to changing theme
-			System.out.println("Change theme here");
+			//TODO: Set Theme Here
 		}).getButton(), new ButtonFactory().createButton("Extend Right", e -> {
-			//currentContainer.setPrefWidth(myLevelScroller.getPrefViewportWidth() * horizontalPanes.get());
 			horizontalPanes.set(horizontalPanes.get() + 1);
 		}).getButton(), new ButtonFactory().createButton("Extend Down", e -> {
-			//currentContainer.setPrefHeight(myLevelScroller.getPrefViewportHeight() * verticalPanes.get());
 			verticalPanes.set(verticalPanes.get() + 1);
 		}).getButton());
 
 		super.getWindow().getChildren().add(tbb.getToolBar());
 	}
 
-	private void createLevelScroller() {
-		myLevelScroller = new ScrollPane();
-		
-
-		myLevelScroller.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-		myLevelScroller.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
-
-		myLevelScroller.prefViewportWidthProperty().bind(this.getWindow().widthProperty());
-		myLevelScroller.prefViewportHeightProperty().bind(this.getWindow().heightProperty());
-
-		
-		this.currentContainer = createLevelPane();
-		myLevelScroller.setContent(currentContainer);
-		acceptDraggableSprites();
-
-		super.getWindow().getChildren().add(myLevelScroller);
-	}
-	
-	private Pane createLevelPane(){
-		Pane levelPane = new Pane();
-		levelPane.setOnDragEntered(e -> {
-			System.out.println("Drag entered level editor pane");
-		});
-		return levelPane;
-	}
-	
-	
-
-	private void acceptDraggableSprites() {
-
-		currentContainer.setOnDragDropped((DragEvent event) -> {
-			System.out.println("Drag Dropped");
-			if (checkGameHasLevel()) {
-				System.out.println("New Sprite on Screen");
-				Dragboard db = event.getDragboard();
-				boolean success = false;
-				if (db.hasString()) {
-					Sprite sprite = findSprite(db.getString());
-
-					Sprite clone = sprite.clone();
-					clone.getMyLocation().setLocation(event.getX(), event.getY());
-					this.myController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
-					DraggableSprite newSprite;
-					try {
-						newSprite = new ConcreteMovableSprite(clone);
-					} catch (NullPointerException e) {
-						System.out.println(e.getMessage());
-						e.printStackTrace();
-						throw new NullPointerException();
-					}
-
-					ImageView image = newSprite.getImageView();
-					if (image != null) {
-						image.setLayoutX(event.getX());
-						image.setLayoutY(event.getY());
-						success = true;
-					}
-					
-				}
-				db.clear();
-				event.setDropCompleted(success);
-				event.consume();
-			}
-		});
-
-		currentContainer.setOnDragOver((DragEvent event) -> {
-			if (event.getDragboard().hasString()) {
-				event.acceptTransferModes(TransferMode.MOVE);
-			}
-			event.consume();
-		});
-	}
-
-	private boolean checkGameHasLevel() {
-		if (this.myController.getModel().getGame().getCurrentLevel() == null) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("No Level");
-			alert.setHeaderText("No Level created yet.");
-			alert.setContentText("Select New -> New Level to create a new Level before dragging sprites");
-			alert.showAndWait();
-			return false;
-		}
-		return true;
-	}
-
 	private void newBackgroundImage() {
 		File file = new FileLoader(FileType.GIF, FileType.JPEG, FileType.PNG, FileType.JPG).loadImage();
 
 		if (file != null)
-			this.myController.getModel().getGame().getCurrentLevel()
+			this.authorController.getModel().getGame().getCurrentLevel()
 					.setBackgroundImageFilePath(file.toURI().toString());
 	}
 
@@ -189,16 +95,7 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 		BackgroundImage backIm = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.DEFAULT,
 				new BackgroundSize(100, 100, true, true, true, true));
-		this.currentContainer.setBackground(new Background(backIm));
-	}
-
-	private Sprite findSprite(String nodeId) {
-		for (Sprite s : myController.getModel().getGame().getPresets()) {
-			if (nodeId.equals(s.getId())) {
-				return s;
-			}
-		}
-		return null;
+		this.levelPane.setBackground(new Background(backIm));
 	}
 
 	/*
@@ -217,23 +114,16 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 	}
 
 	private void updateLevel(Level aLevel) {
-		updatePane(aLevel);
-		aLevel.addListener((level) -> {
-			updatePane(aLevel);
-		});
-	}
-
-	private void updatePane(Level aLevel) {
-		System.out.println("update pane");
 		if (!this.levelPanes.containsKey(aLevel)){
 			
-			Pane newLevelPane = createLevelPane();
+			Pane newLevelPane = this.levelWindowPaneFactory.create();
 			this.levelPanes.put(aLevel, newLevelPane);
+			this.levelPane = newLevelPane;
+			this.levelScroller.setContent(this.levelPane);
 			
-			this.myLevelScroller.boundsInLocalProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
+			this.levelScroller.boundsInLocalProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
-			
 			
 			aLevel.addListener((level) -> {
 				updatePane(aLevel);
@@ -241,13 +131,11 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 		}
 		updatePane(aLevel);
 		
-		
 	}
 	
 	private void updateLevelSize(Pane aLevelPane, Level aLevel){
-		System.out.println("UpdateLevelSize");
-		aLevel.setWidth((int) this.myLevelScroller.getViewportBounds().getWidth() * this.horizontalPanes.get());
-		aLevel.setHeight((int) this.myLevelScroller.getViewportBounds().getHeight() * this.verticalPanes.get());
+		aLevel.setWidth((int) this.levelScroller.getViewportBounds().getWidth() * this.horizontalPanes.get());
+		aLevel.setHeight((int) this.levelScroller.getViewportBounds().getHeight() * this.verticalPanes.get());
 		updatePaneSize(aLevelPane, aLevel);
 	}
 	
@@ -257,12 +145,7 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 	}
 
 	private void updatePane(Level aLevel) {
-		System.out.println("UpdatePane");
-		
-		this.currentContainer = this.levelPanes.get(aLevel);
-		this.myLevelScroller.setContent(this.currentContainer);
-		
-		acceptDraggableSprites();
+		this.levelPane = this.levelPanes.get(aLevel);
 		
 		if (aLevel.getBackgroundImageFilePath() != null)
 			setBackgroundImage(aLevel.getBackgroundImageFilePath());	
@@ -274,13 +157,15 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 			DraggableSprite draggableSprite = new ConcreteMovableSprite(sprite);
 			this.addDraggableSprite(draggableSprite);
 			styleSpriteImageView(sprite, draggableSprite);
-			currentContainer.getChildren().add(draggableSprite.getImageView());
+			this.levelPane.getChildren().add(draggableSprite.getImageView());
 		});
 	}
 	
 	private void initPresetListener(Sprite instanceSprite, Sprite spritePreset){
 		InvalidationListener invalidationListener = (sprite) -> {
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
+			instanceSprite.setMyWidth(spritePreset.getMyWidth());
+			instanceSprite.setMyHeight(spritePreset.getMyHeight());
 		};
 		spritePreset.addListener(invalidationListener);
 	}
@@ -288,7 +173,6 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 	private void styleSpriteImageView(Sprite sprite, DraggableSprite draggableSprite) {
 		draggableSprite.getImageView().setLayoutX(sprite.getMyLocation().getXLocation());
 		draggableSprite.getImageView().setLayoutY(sprite.getMyLocation().getYLocation());
-		draggableSprite.getImageView().setRotate(sprite.getMyLocation().getMyHeading());
 		draggableSprite.getImageView().setFitWidth(sprite.getMyWidth());
 		draggableSprite.getImageView().setFitHeight(sprite.getMyHeight());
 	}
