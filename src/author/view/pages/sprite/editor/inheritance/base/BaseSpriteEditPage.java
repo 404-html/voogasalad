@@ -125,7 +125,7 @@ public abstract class BaseSpriteEditPage {
 	}
 	
 	protected final int getHeight(){
-		return mySpriteEditBox.getWidth();
+		return mySpriteEditBox.getHeight();
 	}
 	
 	protected final boolean hasSprite(){
