@@ -59,7 +59,6 @@ public abstract class DraggableSprite {
 			if(e.getButton().equals(MouseButton.PRIMARY)){
 	            if(e.getClickCount() == 2){
 	            	// TODO: George(vooga) - Open up the preferences editor
-	                System.out.println("Double clicked");
 	            }
 	        }
 		});

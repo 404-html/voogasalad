@@ -36,7 +36,7 @@ public class LevelWindowPaneFactory {
 		acceptDraggableSprites();
 		
 		this.levelPane.setOnDragEntered(e -> {
-			System.out.println("Drag entered level editor pane");
+			//TODO: Set on drag entered
 		});
 		return this.levelPane;
 	}
@@ -44,9 +44,7 @@ public class LevelWindowPaneFactory {
 	private void acceptDraggableSprites() {
 
 		levelPane.setOnDragDropped((DragEvent event) -> {
-			System.out.println("Drag Dropped");
 			if (checkGameHasLevel()) {
-				System.out.println("New Sprite on Screen");
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
