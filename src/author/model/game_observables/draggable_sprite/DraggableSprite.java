@@ -32,7 +32,7 @@ public abstract class DraggableSprite {
 		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
 		myImageView.setFitHeight(DRAG_IMAGE_WIDTH);
 		myImageView.setFitWidth(DRAG_IMAGE_HEIGHT);
-		initListener(aSprite);
+		setListener(aSprite);
 		makeDraggable();
 		openPreferences();
 	}
@@ -41,12 +41,16 @@ public abstract class DraggableSprite {
 		this.mySprite.removeListener(this.invalidationListener);
 	}
 	
+	private void setListener(Sprite aSprite){
+		this.invalidationListener = initListener(aSprite);
+		aSprite.addListener(this.invalidationListener);
+	}
 	
-	private void initListener(Sprite aSprite){
-		this.invalidationListener = (sprite) -> {
+	protected InvalidationListener initListener(Sprite aSprite){
+		InvalidationListener invalidationListener = (sprite) -> {
 			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
 		};
-		aSprite.addListener(this.invalidationListener);
+		return invalidationListener;
 	}
 	
 

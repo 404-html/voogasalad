@@ -274,6 +274,8 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 	private void initPresetListener(Sprite instanceSprite, Sprite spritePreset){
 		InvalidationListener invalidationListener = (sprite) -> {
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
+			instanceSprite.setMyWidth(spritePreset.getMyWidth());
+			instanceSprite.setMyHeight(spritePreset.getMyHeight());
 		};
 		spritePreset.addListener(invalidationListener);
 	}
