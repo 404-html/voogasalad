@@ -37,13 +37,13 @@ public class Hit implements Action {
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
 			myPlayerSprite.setMyXVelocity(0);
 		}
-		if(mySide==Side.TOP){
+		if(mySide==Side.TOP || mySide==Side.BOTTOM){
 			System.out.println("top");
 			myPlayerSprite.setMyYVelocity(0);
 		}
-		if(mySide==Side.BOTTOM){
+/*		if(mySide==Side.BOTTOM){
 			myPlayerSprite.setMyYVelocity(-myPlayerSprite.getMyYVelocity());
-		}
+		}*/
 	}
 	private void setNewAcceleration(){
 		SpritePhysics mySpritePhysics = null;
@@ -55,7 +55,7 @@ public class Hit implements Action {
 		if(mySide == Side.LEFT || mySide==Side.RIGHT){
 			myPlayerSprite.setMyXAcceleration(-mySpritePhysics.getHorizontalGravity());
 		}
-		if(mySide==Side.TOP){
+		if(mySide==Side.TOP || mySide==Side.BOTTOM){
 			myPlayerSprite.setMyYAcceleration(-mySpritePhysics.getVerticalGravity());
 		}
 		
