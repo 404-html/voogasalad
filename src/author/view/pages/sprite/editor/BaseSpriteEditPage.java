@@ -1,11 +1,21 @@
 package author.view.pages.sprite.editor;
 
 import author.view.pages.characteristics.SpriteCharacteristicEditor;
+import author.view.pages.sprite.editor.character.EnemySpriteEditPage;
+import author.view.pages.sprite.editor.character.PlayerSpriteEditPage;
+import author.view.pages.sprite.editor.item.ItemSpriteEditPage;
+import author.view.pages.sprite.editor.projectile.ProjectileSpriteEditPage;
+import author.view.pages.sprite.editor.terrain.TerrainSpriteEditPage;
 import author.view.util.TabPaneFacade;
 import author.view.util.ToolBarBuilder;
 import author.view.util.authoring_buttons.ButtonFactory;
 import game_data.Location;
 import game_data.Sprite;
+import game_data.sprites.Enemy;
+import game_data.sprites.Item;
+import game_data.sprites.Player;
+import game_data.sprites.Projectile;
+import game_data.sprites.Terrain;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -18,6 +28,28 @@ import javafx.scene.layout.VBox;
  * @author George Bernard
  */
 public abstract class BaseSpriteEditPage {
+	
+	public enum SpriteType{
+		ENEMY,
+		PLAYER,
+		ITEM,
+		PROJECTILE,
+		TERRAIN,
+		NOT_A_SPRITE;
+		
+		public static SpriteType discern(Sprite aSprite) {
+			
+			if(aSprite instanceof Enemy) return ENEMY;
+			if(aSprite instanceof Player) return PLAYER;
+			if(aSprite instanceof Item) return ITEM;
+			if(aSprite instanceof Projectile) return PROJECTILE;
+			if(aSprite instanceof Terrain) return TERRAIN;
+			else return NOT_A_SPRITE;
+			
+		}
+		
+	}
+	
 	private Pane myPane;
 	private ToolBarBuilder myToolBarBuilder;
 	
@@ -51,10 +83,31 @@ public abstract class BaseSpriteEditPage {
 		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
 	}
 	
-	public abstract Sprite editSprite();
+	public static BaseSpriteEditPage build( Sprite aSprite){
+		
+		switch (SpriteType.discern(aSprite)) {
+		case PLAYER:	 return new PlayerSpriteEditPage(aSprite);
+		case ENEMY:		 return new EnemySpriteEditPage(aSprite);
+		case TERRAIN:	 return new TerrainSpriteEditPage(aSprite);
+		case ITEM: 		 return new ItemSpriteEditPage(aSprite);
+		case PROJECTILE: return new ProjectileSpriteEditPage(aSprite);
+		default: return null;
+		}
+	}
 	
 	public abstract String getSpriteType();
 
+	public Sprite editSprite(){
+		
+		getSprite().setMyLocation(getLocation());
+		getSprite().setMyImagePath(getImageFile().toString());
+		getSprite().setMyWidth(getWidth());
+		getSprite().setMyHeight(getHeight());
+		getSprite().setName(getSpriteName());
+
+		return getSprite();
+	}
+	
 	public Pane getPane(){
 		return myPane;
 	}

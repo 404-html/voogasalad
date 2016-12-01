@@ -11,7 +11,7 @@ public class ProjectileSpriteEditPage extends BaseSpriteEditPage {
 
 	@Override
 	public String getSpriteType() {
-		return "Projectile";
+		return "projectile";
 	}
 
 	@Override

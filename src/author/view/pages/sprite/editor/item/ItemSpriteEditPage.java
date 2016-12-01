@@ -11,7 +11,7 @@ public class ItemSpriteEditPage extends BaseSpriteEditPage {
 	
 	@Override
 	public String getSpriteType() {
-		return "Item";
+		return "item";
 	}
 
 	@Override

@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import author.view.util.FolderListor;
 import javafx.beans.property.BooleanProperty;
@@ -19,15 +21,17 @@ public class CharacteristicSelector {
 	private ResourceBundle myCharacteristicResources;
 
 	
-	private static final String RESOURCE_PATH = "data.sprite.";
+	private static final String RESOURCE_PATH = "sprite.";
 	
 	public CharacteristicSelector(String aSpriteType) {
 		myPane = new VBox();
 		myCharacteristicSelectedMap = new TreeMap<String, BooleanProperty>();
 		
-		myCharacteristicResources = PropertyResourceBundle.getBundle( RESOURCE_PATH + "player");
+		myCharacteristicResources = PropertyResourceBundle.getBundle( RESOURCE_PATH + aSpriteType);
 		
-		for(String s : myCharacteristicResources.keySet() ) {
+		Set<String> keySet = new TreeSet<>(myCharacteristicResources.keySet());
+		
+		for(String s : keySet ) {
 			CheckBox check = new CheckBox(s);
 			check.setAllowIndeterminate(false);
 			

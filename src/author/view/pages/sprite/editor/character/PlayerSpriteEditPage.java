@@ -13,16 +13,4 @@ public class PlayerSpriteEditPage extends CharacterSpriteEditPage {
 		return "player";
 	}
 
-	@Override
-	public Sprite editSprite() {
-		
-		getSprite().setMyLocation(super.getLocation());
-		getSprite().setMyImagePath(super.getImageFile().toString());
-		getSprite().setMyWidth(super.getWidth());
-		getSprite().setMyHeight(super.getHeight());
-		getSprite().setName(super.getSpriteName());
-
-		return getSprite();
-	}
-
 }

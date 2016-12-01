@@ -18,7 +18,7 @@ public class SpriteEditWindow {
 	
 	public SpriteEditWindow(Sprite aSprite){
 		this();
-		mySpriteEditPage = new PlayerSpriteEditPage(aSprite);
+		mySpriteEditPage = BaseSpriteEditPage.build(aSprite);
 	}
 
 	public void openWindow(){

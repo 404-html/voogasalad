@@ -10,7 +10,7 @@ public class EnemySpriteEditPage extends CharacterSpriteEditPage {
 	
 	@Override
 	public String getSpriteType() {
-		return "Enemy";
+		return "enemy";
 	}
 
 	@Override
