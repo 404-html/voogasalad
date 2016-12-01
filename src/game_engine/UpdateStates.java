@@ -17,6 +17,7 @@ import game_data.sprites.WinningObject;
 import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
+import game_engine.actions.MoveUpFly;
 import game_engine.actions.MoveUpJump;
 import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
@@ -72,9 +73,10 @@ public class UpdateStates {
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyPressedMap();
 		generateDefaultKeyReleasedMap();
+		executeCharacteristics();
+
 		runKeyCalls();
 		runKeyReleased();
-		executeCharacteristics();
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();
@@ -103,7 +105,8 @@ public class UpdateStates {
 		//System.out.println(myLevel.getMainPlayer()==null);
 		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));		
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpFly(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));	
+		//, mySpriteList, mySpriteImages)
 	}
 	private void generateDefaultKeyReleasedMap(){
 		myKeyReleasedMap.put(KeyCode.RIGHT, new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
@@ -214,11 +217,11 @@ public class UpdateStates {
 		//double xVelocity = sprite.getMyXVelocity();
 		//double yVelocity = sprite.getMyYVelocity();
 		//double xVelocity = sprite.getMyVelocity()*Math.cos(myCurrentLocation.getMyHeading());
-		double newXVelocity = sprite.getMyXVelocity() + spritePhysics.getHorizontalGravity()*timeElapsed;
+		double newXVelocity = sprite.getMyXVelocity() + (spritePhysics.getHorizontalGravity() + sprite.getMyXAcceleration())*timeElapsed;
 		
 		//get initial y velocity component and acceleration
 		//double yVelocity = sprite.getMyVelocity()*Math.sin(myCurrentLocation.getMyHeading());
-		double newYVelocity = sprite.getMyYVelocity() + spritePhysics.getVerticalGravity()*timeElapsed;	
+		double newYVelocity = sprite.getMyYVelocity() + (spritePhysics.getVerticalGravity() + sprite.getMyYAcceleration())*timeElapsed;	
 		
 		//double newVelocity = Math.sqrt(Math.pow(newXVelocity, 2) + Math.pow(newYVelocity, 2));
 		//double newHeading = Math.atan(newYVelocity/newXVelocity);
@@ -240,6 +243,8 @@ public class UpdateStates {
 		sprite.setMyXVelocity(newXVelocity);
 		sprite.setMyYVelocity(newYVelocity);
 		sprite.setMyLocation(myNewLocation);
+		sprite.setMyXAcceleration(0);
+		sprite.setMyYAcceleration(0);
 	}
 	
 }

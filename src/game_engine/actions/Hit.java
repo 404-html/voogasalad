@@ -1,7 +1,10 @@
 package game_engine.actions;
 
 import javafx.geometry.Side;
+import states.Physics;
+import states.State;
 import game_data.Sprite;
+import game_engine.SpritePhysics;
 
 /**
  * @author Alex
@@ -26,7 +29,7 @@ public class Hit implements Action {
 		//get new Velocity –– gets horizontal or vertical components to zero
 
 		setNewVelocity();
-
+		setNewAcceleration();
 	}
 	
 	private void setNewVelocity() {
@@ -34,11 +37,29 @@ public class Hit implements Action {
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
 			myPlayerSprite.setMyXVelocity(0);
 		}
-		if(mySide==Side.TOP || mySide == Side.BOTTOM){
+		if(mySide==Side.TOP){
+			System.out.println("top");
 			myPlayerSprite.setMyYVelocity(0);
 		}
+		if(mySide==Side.BOTTOM){
+			myPlayerSprite.setMyYVelocity(-myPlayerSprite.getMyYVelocity());
+		}
 	}
-	
+	private void setNewAcceleration(){
+		SpritePhysics mySpritePhysics = null;
+		for(State s: myPlayerSprite.getStates()){
+			if(s instanceof Physics){
+				mySpritePhysics = ((Physics) s).getPhysics();
+			}
+		}
+		if(mySide == Side.LEFT || mySide==Side.RIGHT){
+			myPlayerSprite.setMyXAcceleration(-mySpritePhysics.getHorizontalGravity());
+		}
+		if(mySide==Side.TOP){
+			myPlayerSprite.setMyYAcceleration(-mySpritePhysics.getVerticalGravity());
+		}
+		
+	}
 /*	private double getNewHeading(double oldHeading, double oldVelocity) {
 		
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {

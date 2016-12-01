@@ -4,9 +4,11 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
+import game_data.characteristics.Impassable;
 import game_data.sprites.Character;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
+import game_engine.actions.Hit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.addNewSprite(new Terrain(new Location(826, 400, 90), 100, 100, "block" + 15, "author/images/duvall_scary.png"));
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(!(s instanceof Player)){
-				s.addCharacteristic(new Bouncer(20, s));
+				s.addCharacteristic(new Impassable(s));
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}
