@@ -67,26 +67,26 @@ public class UpdateStates {
 		executeCharacteristics();
 		runKeyCalls();
 		updateSpritePositions();
-		checkForWin();
-		checkForLoss();
+//		checkForWin();
+//		checkForLoss();
 	}
 
-	private void checkForLoss() {
-		for(State s: myLevel.getMainPlayer().getStates()){
-			if(s instanceof Health){
-				myLevel.setLevelLost(!((Health)s).isAlive());
-			}
-		}
-	}
-
-	private void checkForWin() {
-		for(State s: myLevel.getMainPlayer().getStates()){
-			if(s instanceof LevelWon){
-				myLevel.setLevelWon(((LevelWon)s).isHasWon());
-			}
-		}
-		
-	}
+//	private void checkForLoss() {
+//		for(State s: myLevel.getMainPlayer().getStates()){
+//			if(s instanceof Health){
+//				myLevel.setLevelLost(!((Health)s).isAlive());
+//			}
+//		}
+//	}
+//
+//	private void checkForWin() {
+//		for(State s: myLevel.getMainPlayer().getStates()){
+//			if(s instanceof LevelWon){
+//				myLevel.setLevelWon(((LevelWon)s).isHasWon());
+//			}
+//		}
+//		
+//	}
 
 	//keys will only control the main player rn
 	private void generateDefaultKeyMap() {

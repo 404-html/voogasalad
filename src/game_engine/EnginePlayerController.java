@@ -154,9 +154,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	public List<Boolean> getMySpriteIsAliveList() {
 		return mySpriteIsAliveList;
 	} 
-	public boolean isLost(){
-		return myLevel.isLevelLost();
-	}
 	public Game getMyGame(){
 		return myGame;
 	}
