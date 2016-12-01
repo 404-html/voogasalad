@@ -18,7 +18,7 @@ public class Bounce implements Action {
 		//System.out.println("poop");
 		//myPlayerSprite.setMyVelocity((myPlayerSprite.getMyVelocity()) + myBounceSpeed);
 		//myPlayerSprite.getMyLocation().setMyHeading(myPlayerSprite.getMyLocation().getMyHeading()+Math.PI);
-		myPlayerSprite.setMyVelocity(0);
+		myPlayerSprite.setMyYVelocity(0);
 		}
 
 	}
