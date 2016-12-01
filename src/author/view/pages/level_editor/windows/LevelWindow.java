@@ -124,7 +124,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 			this.levelPanes.put(aLevel, this.levelPane);
 			this.levelScroller.setContent(this.levelPane);
 			
-			this.getWindow().widthProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.levelScroller.boundsInLocalProperty().addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(newLevelPane, aLevel));
@@ -133,9 +132,9 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 				updatePane(aLevel);
 			});
 		}
-		updateLevelSize(this.levelPanes.get(aLevel), aLevel);
-		System.out.println(aLevel.getHeight());
-		System.out.println(aLevel.getWidth());
+		
+		this.levelPane = this.levelPanes.get(aLevel);
+		this.levelScroller.setContent(this.levelPane);
 		updatePane(aLevel);
 		
 	}
@@ -154,7 +153,10 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 
 	private void updatePane(Level aLevel) {
-		this.levelPane = this.levelPanes.get(aLevel);
+		
+		
+		if (aLevel.getBackgroundImageFilePath() != null)
+			setBackgroundImage(aLevel.getBackgroundImageFilePath());	
 		System.out.println("update pane");
 		
 		Set<Sprite> levelSprites = this.getNewSprites(this.getDraggableSprites(), aLevel.getMySpriteList());
@@ -167,8 +169,7 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 			this.levelPane.getChildren().add(draggableSprite.getImageView());
 		});
 		
-		if (aLevel.getBackgroundImageFilePath() != null)
-			setBackgroundImage(aLevel.getBackgroundImageFilePath());	
+		
 		
 	}
 	
