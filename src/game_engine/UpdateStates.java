@@ -103,7 +103,7 @@ public class UpdateStates {
 	private void generateDefaultKeyPressedMap() {
 		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
 		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
 	}

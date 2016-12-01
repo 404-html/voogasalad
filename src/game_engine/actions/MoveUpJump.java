@@ -26,7 +26,7 @@ public class MoveUpJump extends Move {
 	public void setVelocity(){
 		ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
 		Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
-		if(!myCollisionMap.isEmpty()){
+		if(myCollisionMap.containsValue(Side.TOP)){
 			mySprite.setMyYVelocity(-myVelocity);
 		}
 	}
