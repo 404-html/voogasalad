@@ -14,6 +14,7 @@ public class Main extends Application {
 		aStage.setTitle("VOOGASalad");
 		
 		Scene scene = authorControllerExternal.getScene();
+		aStage.setMaximized(true);
 		aStage.setResizable(true);
 		aStage.setScene(scene);
 		aStage.show();
