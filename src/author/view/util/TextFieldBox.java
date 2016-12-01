@@ -32,7 +32,7 @@ public class TextFieldBox {
 		return myPane;
 	}
 	
-	protected final TextField getTextField(){
+	public final TextField getTextField(){
 		return myTextField;
 	}
 	

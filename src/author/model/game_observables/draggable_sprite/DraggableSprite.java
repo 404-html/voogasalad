@@ -1,5 +1,6 @@
 package author.model.game_observables.draggable_sprite;
 
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
@@ -54,7 +55,7 @@ public abstract class DraggableSprite {
 		myImageView.setOnMouseClicked(e -> {
 			if(e.getButton().equals(MouseButton.PRIMARY)){
 	            if(e.getClickCount() == 2){
-	            	// TODO: George(vooga) - Open up the preferences editor
+	            	new SpriteEditWindow(mySprite).openWindow();
 	                System.out.println("Double clicked");
 	            }
 	        }
@@ -68,6 +69,7 @@ public abstract class DraggableSprite {
 
 		myImageView.setOnDragDetected((MouseEvent event) -> {
 			mySprite.setId(this.getClass().getSimpleName() + System.currentTimeMillis());
+			System.out.println("fuck");
 			Dragboard db = myImageView.startDragAndDrop(TransferMode.MOVE);
 			ClipboardContent content = new ClipboardContent();
 			// Store the node ID in order to know what is dragged.

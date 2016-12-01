@@ -123,6 +123,8 @@ public class BaseSpriteEditBox {
 
 		myXPositionField = new NumberFieldBox("X: ");
 		myYPositionField = new NumberFieldBox("Y: ");
+		myXPositionField.getTextField().setEditable(false);
+		myYPositionField.getTextField().setEditable(false);
 		
 		myHeadingField = new NumberFieldBox("Angle: ");
 
