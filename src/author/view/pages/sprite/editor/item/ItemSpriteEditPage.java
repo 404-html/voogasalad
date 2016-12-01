@@ -11,11 +11,11 @@ public class ItemSpriteEditPage extends BaseSpriteEditPage {
 	
 	@Override
 	public String getSpriteType() {
-		return "Item Editor";
+		return "Item";
 	}
 
 	@Override
-	public Sprite buildSprite() {
+	public Sprite editSprite() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -26,17 +26,11 @@ public abstract class BaseSpriteEditPage {
 	private SpriteCharacteristicEditor myCharacteristicEditor;
 	private TabPaneFacade myTabPaneFacade;
 	
-	public BaseSpriteEditPage(){
-		
-
-		
-	}
-
 	public BaseSpriteEditPage(Sprite aSprite){
 		mySprite = aSprite;
 		
 		myPane = new VBox();
-		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite);
+		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite, getSpriteType());
 		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
@@ -46,7 +40,7 @@ public abstract class BaseSpriteEditPage {
 		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
 		Button buildButton = new ButtonFactory().createButton(
 				"Save", 
-				e -> {buildSprite(); myCharacteristicEditor.addCharacteristics(); }
+				e -> {editSprite(); myCharacteristicEditor.addCharacteristics(); }
 				).getButton();
 		myToolBarBuilder.addBurst(new Label(getSpriteType()));
 		myToolBarBuilder.addBurst(buildButton);
@@ -57,7 +51,7 @@ public abstract class BaseSpriteEditPage {
 		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
 	}
 	
-	public abstract Sprite buildSprite();
+	public abstract Sprite editSprite();
 	
 	public abstract String getSpriteType();
 

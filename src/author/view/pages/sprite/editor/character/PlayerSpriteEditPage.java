@@ -10,11 +10,11 @@ public class PlayerSpriteEditPage extends CharacterSpriteEditPage {
 
 	@Override
 	public String getSpriteType() {
-		return "Player Editor";
+		return "player";
 	}
 
 	@Override
-	public Sprite buildSprite() {
+	public Sprite editSprite() {
 		
 		getSprite().setMyLocation(super.getLocation());
 		getSprite().setMyImagePath(super.getImageFile().toString());

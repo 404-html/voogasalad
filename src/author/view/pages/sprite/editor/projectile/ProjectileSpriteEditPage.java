@@ -11,11 +11,11 @@ public class ProjectileSpriteEditPage extends BaseSpriteEditPage {
 
 	@Override
 	public String getSpriteType() {
-		return "Projectile Editor";
+		return "Projectile";
 	}
 
 	@Override
-	public Sprite buildSprite() {
+	public Sprite editSprite() {
 		// TODO Auto-generated method stub
 		return null;
 	}

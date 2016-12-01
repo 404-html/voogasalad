@@ -18,21 +18,20 @@ import javafx.scene.layout.Pane;
 
 public class SpriteCharacteristicEditor {
 
-	private static final String RESOURCE_PATH = "./data/";
 	
 	private Pane myPane;
 	private Accordion myAccordion;
 	private List<CharacteristicEditBox> myCharacteristicEditBoxList;
 	private CharacteristicSelector myCharacteristicSelector;
-	private ResourceBundle myCharacteristicResources;
 	private Sprite mySprite;
 	
 	public SpriteCharacteristicEditor(Sprite aSprite, String aSpriteType) {
 		mySprite = aSprite;
+		
 		myPane = new HBox(5);
 		myAccordion = new Accordion();
 		myCharacteristicEditBoxList = new ArrayList<>();
-		myCharacteristicSelector = new CharacteristicSelector();
+		myCharacteristicSelector = new CharacteristicSelector(aSpriteType);
 		
 		myPane.getChildren().add(myCharacteristicSelector.getPane());
 		

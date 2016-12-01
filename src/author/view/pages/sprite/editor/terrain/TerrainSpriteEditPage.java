@@ -11,11 +11,11 @@ public class TerrainSpriteEditPage extends BaseSpriteEditPage {
 
 	@Override
 	public String getSpriteType() {
-		return "Terrain Editor";
+		return "Terrain";
 	}
 
 	@Override
-	public Sprite buildSprite() {
+	public Sprite editSprite() {
 		// TODO Auto-generated method stub
 		return null;
 	}
