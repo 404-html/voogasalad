@@ -1,8 +1,11 @@
 package author.view.pages.level_editor;
 
+
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.AbstractLevelEditorWindow;
 import author.view.pages.level_editor.windows.LevelWindowFactory;
+import author.view.pages.level_editor.windows.level_edit_window.ILevelEditWindowExternal;
+import author.view.pages.level_editor.windows.level_edit_window.LevelEditWindowFactory;
 import game_data.Level;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -13,7 +16,7 @@ import javafx.scene.layout.Pane;
  * @author George Bernard
  * @author Jordan Frazier
  */
-public class LevelEditor {
+class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 	private BorderPane myPane;
 
 	private AbstractLevelEditorWindow myLevelWindow;
@@ -21,34 +24,33 @@ public class LevelEditor {
 	private AbstractLevelEditorWindow mySelectionWindow;
 	private AbstractLevelEditorWindow myProgressionWindow;
 	private IAuthorController authorController;
-	private Level level;
 
-	public LevelEditor(IAuthorController authorController) {
+	LevelEditor(IAuthorController authorController) {
 		this.authorController = authorController;
 		myPane = new BorderPane();
 		myPane.setCenter(buildLevelWindow());
 		myPane.setRight(buildEntityWindow());
 		myPane.setLeft(buildLevelSelectionWindow());
-		myPane.setBottom(buildLevelProgressionWindow());
+		//myPane.setBottom(buildLevelProgressionWindow());
 	}
 
 	private Pane buildLevelWindow() {
-		myLevelWindow = new LevelWindowFactory().create("LevelWindow", this.authorController);
+		myLevelWindow = new LevelWindowFactory().createInstance("LevelWindow", this.authorController);
 		return myLevelWindow.getWindow();
 	}
 
 	private Pane buildEntityWindow() {
-		myEntityWindow = new LevelWindowFactory().create("EntityWindow", this.authorController);
+		myEntityWindow = new LevelWindowFactory().createInstance("EntityWindow", this.authorController);
 		return myEntityWindow.getWindow();
 	}
 
 	private Pane buildLevelProgressionWindow() {
-		myProgressionWindow = new LevelWindowFactory().create("LevelProgressionWindow", this.authorController);
+		myProgressionWindow = new LevelWindowFactory().createInstance("LevelProgressionWindow", this.authorController);
 		return myProgressionWindow.getWindow();
 	}
 
 	private Pane buildLevelSelectionWindow() {
-		mySelectionWindow = new LevelWindowFactory().create("LevelSelectionWindow", this.authorController);
+		mySelectionWindow = new LevelWindowFactory().createInstance("LevelSelectionWindow", this.authorController);
 		return mySelectionWindow.getWindow();
 	}
 
@@ -70,6 +72,12 @@ public class LevelEditor {
 
 	public AbstractLevelEditorWindow getMyProgressionWindow() {
 		return myProgressionWindow;
+	}
+	
+	public Level createLevel(){
+		ILevelEditWindowExternal levelEditWindow = new LevelEditWindowFactory().create();
+		Level createdLevel = levelEditWindow.getLevel();
+		return createdLevel;
 	}
 
 	@Override

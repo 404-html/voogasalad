@@ -10,7 +10,7 @@ public class TerrainSpriteEditPage extends BaseSpriteEditPage {
 	}
 
 	@Override
-	public String getName() {
+	public String getSpriteType() {
 		return "Terrain Editor";
 	}
 

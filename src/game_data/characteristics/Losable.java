@@ -1,4 +1,7 @@
 package game_data.characteristics;
+
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+
 /**
  * @author austingartside
  * potentially there will be some common "lose" action that will activate for all characteristics of this type

@@ -1,6 +1,5 @@
 package author.view.pages.sprite;
 
-import java.io.File;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -32,20 +31,18 @@ public class SpriteViewBox implements InvalidationListener {
 
 	public SpriteViewBox(Sprite aSprite){
 		this();
+		aSprite.addListener(this);
 		
 		myName.setText(NAME_TEXT + aSprite.getName());
-		
-		ImageView imageView = new ImageView( new Image(new File(aSprite.getMyImagePath()).toURI().toString()));
+		Image spriteImage = new Image( aSprite.getMyImagePath() );
+		ImageView imageView = new ImageView( spriteImage );
 		imageView.setFitWidth(100);
 		imageView.setFitHeight(100);
 		myImageButton.setGraphic( imageView );
 		myImageButton.setOnMouseClicked( e -> {
 			SpriteEditWindow sew = new SpriteEditWindow(aSprite);
 			sew.openWindow();
-		});
-		
-		aSprite.addListener(this);
-				
+		});				
 	}
 	
 	public Node getNode(){
@@ -57,11 +54,11 @@ public class SpriteViewBox implements InvalidationListener {
 		if(observable instanceof Sprite){
 			Sprite s = (Sprite) observable;
 			myName.setText(NAME_TEXT + s.getName());
-			ImageView iv = new ImageView (new Image(new File(s.getMyImagePath()).toURI().toString()));
+			ImageView iv = new ImageView (new Image(s.getMyImagePath()));
 			iv.setFitWidth(100);
 			iv.setFitHeight(100);
 			myImageButton.setGraphic(iv );
 		}
 	}
 	
-	}
+}

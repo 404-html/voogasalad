@@ -23,6 +23,7 @@ public class XMLTranslator {
 	 */
 	public String serialize(Object o){
 		XStream mySerializer = new XStream(new DomDriver());
+		mySerializer.autodetectAnnotations(true);;
 		return mySerializer.toXML(o);
 	}
 
@@ -59,6 +60,7 @@ public class XMLTranslator {
 	 */
 	public Object deserialize(File aFile){
 		XStream mySerializer = new XStream(new DomDriver());
+		mySerializer.autodetectAnnotations(true);
 		return mySerializer.fromXML(aFile);
 	}
 	
@@ -68,6 +70,7 @@ public class XMLTranslator {
 	 */
 	public Object deserialize(String aXMLString){
 		XStream mySerializer = new XStream(new DomDriver());
+		mySerializer.autodetectAnnotations(true);
 		return mySerializer.fromXML(aXMLString);
 	}
 

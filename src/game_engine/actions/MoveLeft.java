@@ -8,10 +8,13 @@ public class MoveLeft extends Move {
 	public MoveLeft(Sprite aSprite, double aVelocity) {
 		super(aSprite, aVelocity);
 	}
-	@Override
+/*	@Override
 	public Location changeCoordinates(){
 		myNewLocation.setLocation(myOldLocation.getXLocation()-myVelocity, myOldLocation.getYLocation());
-		myNewLocation.setMyHeading(180);
+		//myNewLocation.setMyHeading(180);
 		return myNewLocation;
+	}*/
+	public void setVelocity(){
+		mySprite.setMyXVelocity(-myVelocity);
 	}
 }

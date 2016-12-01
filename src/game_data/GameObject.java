@@ -6,6 +6,8 @@ package game_data;
 import java.util.Collection;
 import java.util.HashSet;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
@@ -14,7 +16,10 @@ import javafx.beans.Observable;
  *
  */
 abstract class GameObject implements Observable{
+	
+	@XStreamOmitField
 	private Collection<InvalidationListener> invalidationListeners = new HashSet<>();
+	
 	private String name;
 
 	/* (non-Javadoc)
@@ -22,6 +27,9 @@ abstract class GameObject implements Observable{
 	 */
 	@Override
 	public void addListener(InvalidationListener listener) {
+		if (this.invalidationListeners == null){
+			this.invalidationListeners = new HashSet<>();
+		}
 		this.invalidationListeners.add(listener);
 	}
 
@@ -30,11 +38,21 @@ abstract class GameObject implements Observable{
 	 */
 	@Override
 	public void removeListener(InvalidationListener listener) {
+		if (this.invalidationListeners == null){
+			this.invalidationListeners = new HashSet<>();
+		}
 		this.invalidationListeners.remove(listener);
 	}
 	
 	protected void notifyListeners(){
-		this.invalidationListeners.forEach((listener) -> listener.invalidated(this));
+		if (this.invalidationListeners == null){
+			this.invalidationListeners = new HashSet<>();
+		}
+		this.invalidationListeners.forEach((listener) -> {
+			if (listener!=null){
+				listener.invalidated(this);
+			}
+		});
 	}
 	
 	public String getName(){

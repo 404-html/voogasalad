@@ -14,10 +14,12 @@ import game_data.characteristics.Characteristic;
 public abstract class Sprite extends GameObject {
 
 	private Location myLocation;
+	private Sprite preset;
 	private int myWidth;
 	private int myHeight;
 	private String myImagePath;
-	private double myVelocity;
+	private double myXVelocity;
+	private double myYVelocity;
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
 	private String id = "";
@@ -30,7 +32,8 @@ public abstract class Sprite extends GameObject {
 		myHeight = aHeight;
 		setName(aName);
 		myImagePath = aImagePath;
-		myVelocity = 0;
+		myXVelocity = 0;
+		myYVelocity = 0;
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
@@ -38,13 +41,15 @@ public abstract class Sprite extends GameObject {
 	
 	//for copying sprites
 	public Sprite(Sprite aSprite){
+		preset = aSprite;
 		myLocation = new Location(aSprite.getMyLocation().getXLocation(),
 				aSprite.getMyLocation().getYLocation(), aSprite.getMyLocation().getMyHeading());
 		myWidth = aSprite.getMyWidth();
 		myHeight = aSprite.getMyHeight();
 		setName(aSprite.getName());
 		myImagePath = aSprite.getMyImagePath();
-		myVelocity = aSprite.getMyVelocity();
+		myXVelocity = aSprite.getMyXVelocity();
+		myYVelocity = aSprite.getMyYVelocity();
 		myCollisionHandler = aSprite.getMyCollisionHandler(); //to change: would need to have the same collision handler but we don't know what that is yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
@@ -100,11 +105,18 @@ public abstract class Sprite extends GameObject {
 		this.myLocation = myLocation;
 		notifyListeners();
 	}
-	public double getMyVelocity() {
-		return myVelocity;
+	public double getMyXVelocity() {
+		return myXVelocity;
 	}
-	public void setMyVelocity(double myVelocity) {
-		this.myVelocity = myVelocity;
+	public double getMyYVelocity() {
+		return myYVelocity;
+	}
+	public void setMyXVelocity(double myVelocity) {
+		this.myXVelocity = myVelocity;
+		notifyListeners();
+	}
+	public void setMyYVelocity(double myVelocity){
+		this.myYVelocity = myVelocity;
 		notifyListeners();
 	}
 
@@ -153,6 +165,10 @@ public abstract class Sprite extends GameObject {
 	public void setMyHeight(int myHeight) {
 		this.myHeight = myHeight;
 		notifyListeners();
+	}
+	
+	public Sprite getPreset(){
+		return this.preset;
 	}
 
 }
