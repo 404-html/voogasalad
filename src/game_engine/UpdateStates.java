@@ -1,5 +1,6 @@
 package game_engine;
 
+import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashMap;
@@ -56,31 +57,36 @@ public class UpdateStates {
 		this.timeElapsed = timeElapsed;
 		this.myKeys = myKeys;
 		this.mySpriteImages=mySpriteImages;
+		//how do I make an ImageView
+		//hardcode
+		//ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
+		//this.mySpriteImages.put(mySpriteList.get(1), view);
+		//end hardcode
 		this.myKeyMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyMap();
 		executeCharacteristics();
 		runKeyCalls();
 		updateSpritePositions();
-		checkForWin();
-		checkForLoss();
+//		checkForWin();
+//		checkForLoss();
 	}
 
-	private void checkForLoss() {
-		for(State s: myLevel.getMainPlayer().getStates()){
-			if(s instanceof Health){
-				myLevel.setLevelLost(!((Health)s).isAlive());
-			}
-		}
-	}
-
-	private void checkForWin() {
-		for(State s: myLevel.getMainPlayer().getStates()){
-			if(s instanceof LevelWon){
-				myLevel.setLevelWon(((LevelWon)s).isHasWon());
-			}
-		}
-		
-	}
+//	private void checkForLoss() {
+//		for(State s: myLevel.getMainPlayer().getStates()){
+//			if(s instanceof Health){
+//				myLevel.setLevelLost(!((Health)s).isAlive());
+//			}
+//		}
+//	}
+//
+//	private void checkForWin() {
+//		for(State s: myLevel.getMainPlayer().getStates()){
+//			if(s instanceof LevelWon){
+//				myLevel.setLevelWon(((LevelWon)s).isHasWon());
+//			}
+//		}
+//		
+//	}
 
 	//keys will only control the main player rn
 	private void generateDefaultKeyMap() {
@@ -102,10 +108,12 @@ public class UpdateStates {
 
 	private void executeCharacteristics() {
 		for(Sprite mySprite:mySpriteList){
-			
+			//System.out.println("sprite list length " + mySpriteList.size());
+			//System.out.println("sprite image list length " + mySpriteImages.size());
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
+			//System.out.println(myCollisionMap.size());
 			for(Characteristic myCharacteristic:characteristics){	
 				myCharacteristic.execute(myCollisionMap);
 			}
@@ -163,24 +171,25 @@ public class UpdateStates {
 	}
 
 	private void updateSpritePosition(Sprite sprite){
-		System.out.println("player x is "+sprite.getMyLocation().getXLocation());
-		System.out.println("player y is "+sprite.getMyLocation().getYLocation());
+		//System.out.println("player x is "+sprite.getMyLocation().getXLocation());
+		//System.out.println("player y is "+sprite.getMyLocation().getYLocation());
 		
 		SpritePhysics spritePhysics = null;
+		//System.out.println(sprite.getStates().size());
 		for(State s: sprite.getStates()){
 			if(s instanceof Physics){
 				spritePhysics = ((Physics) s).getPhysics();
 			}
 		}
-		
+		//System.out.println(spritePhysics == null);
 		Location myCurrentLocation = sprite.getMyLocation();
 		double curXLoc = myCurrentLocation.getXLocation();
 		double curYLoc = myCurrentLocation.getYLocation();
 		
 		//System.out.println("heading is " + sprite.getMyLocation().getMyHeading());
 		//get initial x velocity component and acceleration
-		System.out.println("heading is " + Math.sin(myCurrentLocation.getMyHeading()));
-
+		//System.out.println("heading is " + Math.sin(myCurrentLocation.getMyHeading()));
+		
 		double xVelocity = sprite.getMyVelocity()*Math.cos(myCurrentLocation.getMyHeading());
 		double newXVelocity = xVelocity + spritePhysics.getHorizontalGravity()*timeElapsed;
 		
@@ -191,8 +200,8 @@ public class UpdateStates {
 		double newVelocity = Math.sqrt(Math.pow(newXVelocity, 2) + Math.pow(newYVelocity, 2));
 		//double newHeading = Math.atan(newYVelocity/newXVelocity);
 		
-		System.out.println("x velocity is " + newXVelocity);
-		System.out.println("y velocity is " + newYVelocity);
+		//System.out.println("x velocity is " + newXVelocity);
+		//System.out.println("y velocity is " + newYVelocity);
 		
 //		System.out.println("vertical gravity is " + spritePhysics.getVerticalGravity());
 //		System.out.println("horizontal gravity is " + spritePhysics.getHorizontalGravity());
