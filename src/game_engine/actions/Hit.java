@@ -22,32 +22,24 @@ public class Hit implements Action {
 	@Override
 	public void act() {
 		
-		double oldHeading = myPlayerSprite.getMyLocation().getMyHeading();
-		double oldVelocity = myPlayerSprite.getMyVelocity();
 		
 		//get new Velocity –– gets horizontal or vertical components to zero
-		double newVelocity = getNewVelocity(oldHeading, oldVelocity);
-		
-		//based on the side its hitting and oldHeading
-		double newHeading = getNewHeading(oldHeading, oldVelocity);
-		
-		myPlayerSprite.getMyLocation().setMyHeading(newHeading);
-		myPlayerSprite.setMyVelocity(newVelocity);
+
+		setNewVelocity();
 
 	}
 	
-	private double getNewVelocity(double oldHeading, double oldVelocity) {
-		
-		double oldHeadingRadians = oldHeading*Math.PI/180; //change to radians for trig –– so happy I caught this
-		
+	private void setNewVelocity() {
+				
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
-			return Math.abs( Math.sin(oldHeadingRadians) * oldVelocity );
+			myPlayerSprite.setMyXVelocity(0);
 		}
-		return Math.abs( Math.cos(oldHeadingRadians) * oldVelocity );
-		
+		if(mySide==Side.TOP || mySide == Side.BOTTOM){
+			myPlayerSprite.setMyYVelocity(0);
+		}
 	}
 	
-	private double getNewHeading(double oldHeading, double oldVelocity) {
+/*	private double getNewHeading(double oldHeading, double oldVelocity) {
 		
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
 			
@@ -63,6 +55,8 @@ public class Hit implements Action {
 		}
 		return 180;
 
-	}
+	}*/
+	
+	
 		
 }
