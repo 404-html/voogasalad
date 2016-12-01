@@ -7,15 +7,15 @@ import javafx.scene.input.KeyCode;
 
 public class KeyCodeHandler {
 	
-	private Map<KeyCode, Integer> myKeyCodeMap;
+	private Map<KeyCode, Double> myKeyCodeMap;
 	
 	public KeyCodeHandler() {
-		myKeyCodeMap = new HashMap<KeyCode, Integer>();
-		myKeyCodeMap.put(KeyCode.RIGHT, -10);
-		myKeyCodeMap.put(KeyCode.LEFT, 10);
+		myKeyCodeMap = new HashMap<KeyCode, Double>();
+		myKeyCodeMap.put(KeyCode.RIGHT, -3.3);
+		myKeyCodeMap.put(KeyCode.LEFT, 3.3);
 	}
 	
-	public int getMovement(KeyCode aKey) {
+	public double getMovement(KeyCode aKey) {
 		if (myKeyCodeMap.containsKey(aKey)) return myKeyCodeMap.get(aKey);
 		return 0;
 	}

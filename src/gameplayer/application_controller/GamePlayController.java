@@ -82,6 +82,7 @@ public class GamePlayController {
 			//the below line makes sure the keys released aren't stored in the set after they're released
 			myKeysReleased = new HashSet<KeyCode>();
 			myKeysPressed = new HashSet<KeyCode>();
+			myGamePlay.moveScreen(myKeySet);
 		});
 	}
 
