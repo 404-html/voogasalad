@@ -18,6 +18,7 @@ public class Rotatable implements Characteristic{
 	private double mySpeed;
 	private Sprite mySprite;
 	
+	@ParameterAnnotation(parameters={"Speed","Sprite"})
 	public Rotatable(double speed, Sprite aSprite){
 		mySpeed = speed;
 		mySprite = aSprite;

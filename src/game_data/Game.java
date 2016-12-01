@@ -6,9 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 import util.XMLTranslator;
 
 /**
@@ -20,17 +17,19 @@ import util.XMLTranslator;
  *
  */
 public class Game extends GameObject {
+	
+	/*
+	 * description
+	 * icon
+	 */
 
 	List<Level> myLevels;
 	Set<Sprite> spritePresets = new HashSet<>();
-	XMLTranslator myXMLSaver;
 	Level currentLevel;
 
 	public Game(String aName) {
 		setName(aName);
 		myLevels = new ArrayList<Level>();
-		myXMLSaver = new XMLTranslator();
-//		currentLevel = myLevels.get(0);
 	}
 
 	/**
@@ -44,7 +43,7 @@ public class Game extends GameObject {
 		java.io.FileWriter fw;
 		try {
 			fw = new java.io.FileWriter(filePath + fileName + ".xml");
-			fw.write(((new XMLSaver()).serialize(this)));
+			fw.write(((new XMLTranslator()).serialize(this)));
 			fw.close();
 		} catch (IOException e) {
 			System.out.println("Trouble printing XML to file");
@@ -81,22 +80,24 @@ public class Game extends GameObject {
 
 	public void setCurrentLevel(int levelNumber) {
 		currentLevel = myLevels.get(levelNumber);
-
+		this.notifyListeners();
 	}
 
 	public Level getCurrentLevel() {
 		return currentLevel;
 	}
 
-	public Level goToNextLevel() {
-		int current = myLevels.indexOf(currentLevel);
-		if (current < myLevels.size()) {
-			currentLevel = myLevels.get(current + 1);
-		} else {
-			// may or may not need to change this code
-			currentLevel = myLevels.get(0);
-		}
-		return currentLevel;
+	public void removeLevel(Level aLevel){
+		if(myLevels.contains(aLevel))
+			myLevels.remove(aLevel);
+		this.notifyListeners();
 	}
+	
+	public void removeLevel(int levelNumber){
+		if(myLevels.size() > levelNumber)
+			myLevels.remove(levelNumber);
+		this.notifyListeners();
+	}
+
 
 }

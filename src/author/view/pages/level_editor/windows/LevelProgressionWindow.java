@@ -1,8 +1,7 @@
 package author.view.pages.level_editor.windows;
 
 import author.controller.IAuthorController;
-import author.view.util.ToolBarBuilder;
-import javafx.scene.Node;
+import author.view.util.facades.ToolBarBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
