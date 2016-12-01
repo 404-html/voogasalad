@@ -5,6 +5,7 @@ import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.AbstractLevelEditorWindow;
 import author.view.pages.level_editor.windows.LevelWindowFactory;
 import author.view.pages.level_editor.windows.level_edit_window.ILevelEditWindowExternal;
+import author.view.pages.level_editor.windows.level_edit_window.ILevelEditorWindowExternal;
 import author.view.pages.level_editor.windows.level_edit_window.LevelEditWindowFactory;
 import game_data.Level;
 import javafx.scene.layout.BorderPane;
@@ -19,10 +20,10 @@ import javafx.scene.layout.Pane;
 class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 	private BorderPane myPane;
 
-	private AbstractLevelEditorWindow myLevelWindow;
-	private AbstractLevelEditorWindow myEntityWindow;
-	private AbstractLevelEditorWindow mySelectionWindow;
-	private AbstractLevelEditorWindow myProgressionWindow;
+	private ILevelEditorWindowExternal myLevelWindow;
+	private ILevelEditorWindowExternal myEntityWindow;
+	private ILevelEditorWindowExternal mySelectionWindow;
+	private ILevelEditorWindowExternal myProgressionWindow;
 	private IAuthorController authorController;
 
 	LevelEditor(IAuthorController authorController) {
@@ -58,19 +59,19 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 		return myPane;
 	}
 
-	public AbstractLevelEditorWindow getMyLevelWindow() {
+	public ILevelEditorWindowExternal getMyLevelWindow() {
 		return myLevelWindow;
 	}
 
-	public AbstractLevelEditorWindow getMyEntityWindow() {
+	public ILevelEditorWindowExternal getMyEntityWindow() {
 		return myEntityWindow;
 	}
 
-	public AbstractLevelEditorWindow getMySelectionWindow() {
+	public ILevelEditorWindowExternal getMySelectionWindow() {
 		return mySelectionWindow;
 	}
 
-	public AbstractLevelEditorWindow getMyProgressionWindow() {
+	public ILevelEditorWindowExternal getMyProgressionWindow() {
 		return myProgressionWindow;
 	}
 	
