@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import com.sun.org.apache.xml.internal.security.Init;
-
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
