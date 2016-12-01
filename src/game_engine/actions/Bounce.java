@@ -24,14 +24,14 @@ public class Bounce implements Action {
 	@Override
 	public void act() {
 	
-		myPlayerSprite.setMyVelocity( getNewVelocity() );		
+		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
 		myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
 
 	}
 	
-	private double getNewVelocity() {
+/*	private double getNewVelocity() {
 		return myPlayerSprite.getMyVelocity() + myBounceSpeed;
-	}
+	}*/
 	
 	private double getNewHeading() {
 		
