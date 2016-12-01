@@ -60,7 +60,6 @@ public abstract class DraggableSprite {
 			if(e.getButton().equals(MouseButton.PRIMARY)){
 	            if(e.getClickCount() == 2){
 	            	new SpriteEditWindow(mySprite).openWindow();
-	                System.out.println("Double clicked");
 	            }
 	        }
 		});

@@ -72,7 +72,7 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 		tbb.addBurst(new ButtonFactory().createButton("Set Background", e -> {
 			newBackgroundImage();
 		}).getButton(), new ButtonFactory().createButton("Set Theme", e -> {
-			System.out.println("Change theme here");
+			//TODO: Set Theme Here
 		}).getButton(), new ButtonFactory().createButton("Extend Right", e -> {
 			horizontalPanes.set(horizontalPanes.get() + 1);
 		}).getButton(), new ButtonFactory().createButton("Extend Down", e -> {
@@ -114,7 +114,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 
 	private void updateLevel(Level aLevel) {
-		System.out.println("UpdateLevel");
 		if (!this.levelPanes.containsKey(aLevel)){
 			
 			Pane newLevelPane = this.levelWindowPaneFactory.create();
@@ -135,7 +134,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 	
 	private void updateLevelSize(Pane aLevelPane, Level aLevel){
-		System.out.println("UpdateLevelSize");
 		aLevel.setWidth((int) this.levelScroller.getViewportBounds().getWidth() * this.horizontalPanes.get());
 		aLevel.setHeight((int) this.levelScroller.getViewportBounds().getHeight() * this.verticalPanes.get());
 		updatePaneSize(aLevelPane, aLevel);
@@ -147,8 +145,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 
 	private void updatePane(Level aLevel) {
-		System.out.println("UpdatePane");
-		
 		this.levelPane = this.levelPanes.get(aLevel);
 		
 		if (aLevel.getBackgroundImageFilePath() != null)
