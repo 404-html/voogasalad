@@ -69,7 +69,7 @@ public class AuthorView {
 		menuBar.getMenus().addAll(menuNew, menuSave, menuLoad);
 
 		menuNew.getItems().addAll(new MenuFactory().createItem("New Game", e -> {
-			// TODO: Jordan(vooga) - create new game
+			this.authorController.getModel().newGame();
 		}).getItem(), new MenuFactory().createItem("New Level", e -> {
 			Level createdLevel = this.myLevelEditor.createLevel();
 			if (createdLevel != null){
