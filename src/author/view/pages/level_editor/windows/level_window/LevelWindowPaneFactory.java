@@ -50,20 +50,13 @@ public class LevelWindowPaneFactory {
 				boolean success = false;
 				if (db.hasString()) {
 					Sprite sprite = findSprite(db.getString());
-
 					Sprite clone = sprite.clone();
-//					clone.getMyLocation().setLocation(event.getX(), event.getY());
-					this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
-					
+					clone.getMyLocation().setLocation(event.getX(), event.getY());
+					this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);		
 				}
 				event.setDropCompleted(success);
 				event.consume();
 			}
-		});
-		
-		this.levelPane.setOnMouseDragReleased(e -> {
-			System.out.println("fucking shit");
-			
 		});
 		
 		this.levelPane.setOnDragOver((DragEvent event) -> {

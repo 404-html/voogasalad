@@ -68,7 +68,7 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 			this.container.getChildren().clear();
 			getController().getModel().getGame().getPresets().forEach((sprite) -> {
 				DraggableSprite dragSprite = new ConcreteDraggableSprite(sprite);
-				this.container.getChildren().add(dragSprite.getImageView());
+				this.container.getChildren().add(dragSprite.getDraggableItem());
 			});
 		});
 	}

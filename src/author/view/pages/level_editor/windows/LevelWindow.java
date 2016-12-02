@@ -10,7 +10,6 @@ import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
-import author.view.util.DragResizeMod;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.facades.ToolBarBuilder;
 import author.view.util.file_helpers.FileLoader;
@@ -29,8 +28,9 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.HLineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 
 /**
  * This window is the actual level editor, where sprites will be placed from the
@@ -157,12 +157,14 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 			initPresetListener(sprite, sprite.getPreset());
 			DraggableSprite draggableSprite = new ConcreteMovableSprite(sprite);
 			this.addDraggableSprite(draggableSprite);
-			styleSpriteImageView(sprite, draggableSprite);
-//			DragResizeMod.makeResizable(draggableSprite.getImageView(), null);
-			this.levelPane.getChildren().add(draggableSprite.getImageView());
+			styleSprite(sprite, draggableSprite);
+			// DragResizeMod.makeResizable(draggableSprite.getImageView(),
+			// null);
+			this.levelPane.getChildren().addAll(draggableSprite.getDraggableItem());
 		});
 
 	}
+	
 
 	private void initPresetListener(Sprite instanceSprite, Sprite spritePreset) {
 		InvalidationListener invalidationListener = (sprite) -> {
@@ -176,12 +178,14 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 		spritePreset.addListener(invalidationListener);
 	}
 
-	private void styleSpriteImageView(Sprite sprite, DraggableSprite draggableSprite) {
-		draggableSprite.getImageView().setLayoutX(sprite.getMyLocation().getXLocation());
-		draggableSprite.getImageView().setLayoutY(sprite.getMyLocation().getYLocation());
+	private void styleSprite(Sprite sprite, DraggableSprite draggableSprite) {
+		draggableSprite.getDraggableItem().setLayoutX(sprite.getMyLocation().getXLocation());
+		draggableSprite.getDraggableItem().setLayoutY(sprite.getMyLocation().getYLocation());
+		draggableSprite.getDraggableItem().setRotate(sprite.getMyLocation().getMyHeading());
+		draggableSprite.getDraggableItem().setPrefWidth(sprite.getMyWidth());
+		draggableSprite.getDraggableItem().setPrefHeight(sprite.getMyHeight());
+		draggableSprite.getImageView().fitWidthProperty().bind(draggableSprite.getDraggableItem().prefWidthProperty());
+		draggableSprite.getImageView().fitHeightProperty().bind(draggableSprite.getDraggableItem().prefHeightProperty());
 		draggableSprite.getImageView().setRotate(sprite.getMyLocation().getMyHeading());
-		draggableSprite.getImageView().setFitWidth(sprite.getMyWidth());
-		draggableSprite.getImageView().setFitHeight(sprite.getMyHeight());
 	}
-
 }

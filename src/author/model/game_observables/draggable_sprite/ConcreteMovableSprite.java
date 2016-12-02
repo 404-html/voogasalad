@@ -2,7 +2,10 @@ package author.model.game_observables.draggable_sprite;
 
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class ConcreteMovableSprite extends DraggableSprite {
@@ -20,32 +23,44 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	@Override
 	protected void makeDraggable() {
 
-		super.getImageView().setOnMouseDragOver(event -> {
-			super.getImageView();
+		super.getDraggableItem().setOnMouseDragOver(event -> {
+			super.getDraggableItem();
 			// Set boundaries to visible
 			Line line = new Line(super.getImageView().getLayoutX(), super.getImageView().getLayoutY(),
 					super.getImageView().getLayoutX() + super.getImageView().getFitWidth(),
 					super.getImageView().getLayoutY() + super.getImageView().getFitHeight());
-			
+
 		});
 
-		super.getImageView().setOnMousePressed(event -> {
-			mouseX = event.getSceneX();
-			mouseY = event.getSceneY();
-		});
+		onMousePressed();
 
-		super.getImageView().setOnMouseDragged(event -> {
+		onMouseDragged();
+
+		onMouseReleased();
+	}
+
+	private void onMouseReleased() {
+		super.getDraggableItem().setOnMouseReleased(e -> {
+			super.getSprite().getMyLocation().setLocation(super.getDraggableItem().getLayoutX(),
+					super.getDraggableItem().getLayoutY());
+		});
+	}
+
+	private void onMouseDragged() {
+		super.getDraggableItem().setOnMouseDragged(event -> {
 			double deltaX = event.getSceneX() - mouseX;
 			double deltaY = event.getSceneY() - mouseY;
-			super.getImageView().relocate(super.getImageView().getLayoutX() + deltaX,
-					super.getImageView().getLayoutY() + deltaY);
+			super.getDraggableItem().relocate(super.getDraggableItem().getLayoutX() + deltaX,
+					super.getDraggableItem().getLayoutY() + deltaY);
 			mouseX = event.getSceneX();
 			mouseY = event.getSceneY();
 		});
-		
-		super.getImageView().setOnMouseReleased(e -> {
-			super.getSprite().getMyLocation().setLocation(super.getImageView().getLayoutX(),
-					super.getImageView().getLayoutY());
+	}
+
+	private void onMousePressed() {
+		super.getDraggableItem().setOnMousePressed(event -> {
+			mouseX = event.getSceneX();
+			mouseY = event.getSceneY();
 		});
 	}
 
@@ -53,8 +68,8 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	protected InvalidationListener initListener(Sprite aSprite) {
 		InvalidationListener invalidationListener = (sprite) -> {
 			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
-			this.getImageView().setFitWidth(aSprite.getMyWidth());
-			this.getImageView().setFitHeight(aSprite.getMyHeight());
+			this.getDraggableItem().setPrefWidth(aSprite.getMyWidth());
+			this.getDraggableItem().setPrefHeight(aSprite.getMyHeight());
 		};
 		return invalidationListener;
 	}

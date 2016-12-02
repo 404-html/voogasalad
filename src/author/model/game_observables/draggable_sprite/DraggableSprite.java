@@ -1,28 +1,16 @@
 package author.model.game_observables.draggable_sprite;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 /**
@@ -33,6 +21,7 @@ import javafx.scene.text.Text;
  */
 public abstract class DraggableSprite {
 
+	private HBox draggableItem;
 	private ImageView myImageView;
 	private Sprite mySprite;
 	private InvalidationListener invalidationListener;
@@ -44,12 +33,17 @@ public abstract class DraggableSprite {
 
 	public DraggableSprite(Sprite aSprite) {
 		mySprite = aSprite;
+		draggableItem = new HBox();
 		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
 		myImageView.setFitHeight(DRAG_IMAGE_WIDTH);
 		myImageView.setFitWidth(DRAG_IMAGE_HEIGHT);
+		draggableItem.getChildren().add(myImageView);
+		draggableItem.setPrefHeight(DRAG_IMAGE_HEIGHT);
+		draggableItem.setPrefWidth(DRAG_IMAGE_WIDTH);
 		setListener(aSprite);
 		makeDraggable();
 		openPreferences();
+		setOnMouseHover();
 	}
 
 	public void removeListener() {
@@ -69,7 +63,7 @@ public abstract class DraggableSprite {
 	}
 
 	private void openPreferences() {
-		myImageView.setOnMouseClicked(e -> {
+		draggableItem.setOnMouseClicked(e -> {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
 					new SpriteEditWindow(mySprite).openWindow();
@@ -78,22 +72,23 @@ public abstract class DraggableSprite {
 		});
 	}
 
-	/**
-	 * https://docs.oracle.com/javase/8/javafx/events-tutorial/paper-doll.htm#CBHHBAJI
-	 */
-	protected void makeDraggable() {
-
-		myImageView.setOnDragDetected((MouseEvent event) -> {
-			mySprite.setId(this.getClass().getSimpleName() + System.currentTimeMillis());
-			Dragboard db = myImageView.startDragAndDrop(TransferMode.MOVE);
-			ClipboardContent content = new ClipboardContent();
-			// Store the node ID in order to know what is dragged.
-			content.putString(mySprite.getId());
-			db.setContent(content);
-            db.setDragView(new Text(mySprite.getName()).snapshot(null, null), event.getX(), event.getY());
-//			db.setDragView(new Image(mySprite.getMyImagePath(), DRAG_IMAGE_WIDTH, DRAG_IMAGE_HEIGHT, false, false));
-			event.consume();
+	protected abstract void makeDraggable();
+	
+	private void setOnMouseHover() {
+		draggableItem.setOnMouseEntered(e -> {
+			 String style_inner = "-fx-border-color: red;"
+		              + "-fx-border-width: 1;"
+		              + "-fx-border-style: dotted;";
+		      draggableItem.setStyle(style_inner);
 		});
+		draggableItem.setOnMouseExited(e -> {
+			 String style_inner = "";
+		      draggableItem.setStyle(style_inner);
+		});
+	}
+	
+	public HBox getDraggableItem() {
+		return draggableItem;
 	}
 
 	public Sprite getSprite() {
