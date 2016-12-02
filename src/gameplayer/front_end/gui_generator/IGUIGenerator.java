@@ -27,10 +27,6 @@ public interface IGUIGenerator {
 		
 	public Label createLabel(String aText, int aXPos, int aYPos);
 
-	public void setBackground(Pane aValue, String aFilepath);
-		
-	public void setBackground(Pane aValue, Paint aFill);
-
 	public Menu createMenu(String aTitle, String[] aString, EventHandler<ActionEvent>[] aHandler);
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);

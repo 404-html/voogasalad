@@ -4,13 +4,13 @@ import java.io.File;
 
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -61,10 +61,11 @@ public class GUIGenerator implements IGUIGenerator {
 		//avalue.setBackground(new Background(createBackgroundImage(afilepath)));
 	}
 	
-	public void setBackground(Pane avalue, Paint fill){
-		avalue.setBackground(new Background(new BackgroundFill(fill, CornerRadii.EMPTY, Insets.EMPTY)));
+	public ComboBox<Node> createComboBox() {
+		ComboBox<Node> box = new ComboBox<Node>();
+		//box.add
+		return null;
 	}
-
 
 	@Override
 	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler,

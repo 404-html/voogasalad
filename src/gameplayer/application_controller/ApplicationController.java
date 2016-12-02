@@ -110,9 +110,7 @@ public class ApplicationController {
 	}
 
 	private void setGameChoiceButtonHandlers(IDisplay gameChoice) {
-		gameChoice.addButton(myButtonLabels.getString("ChooseGame"), e -> {
-			//TODO
-		}, ButtonDisplay.TEXT);
+		gameChoice.addNode(myGUIGenerator.createComboBox());
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
