@@ -35,6 +35,7 @@ public class Hit implements Action {
 	private void setNewVelocity() {
 				
 		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
+			System.out.println("hitting this");
 			myPlayerSprite.setMyXVelocity(0);
 		}
 		if(mySide==Side.TOP || mySide==Side.BOTTOM){
