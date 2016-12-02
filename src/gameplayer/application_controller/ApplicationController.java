@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
@@ -13,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
-import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import gameplayer.front_end.popup.PopUpController;
@@ -26,16 +24,13 @@ import javafx.stage.Stage;
  *
  */
 
-public class ApplicationController {
+public class ApplicationController extends AbstractController {
 	
-	public static final int SCENE_SIZE = 1000;
 	private static final String FILE = "gameplayerlabels.";
 	private static final String BUTTONLABEL = "ButtonLabels"; 
-	private Stage myStage;
 	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
 	private ResourceBundle myButtonLabels;
-	private GUIGenerator myGUIGenerator;
 	private FacebookInformation myFacebookInformation;
 	
 	public ApplicationController (Stage aStage) {
@@ -43,7 +38,6 @@ public class ApplicationController {
 		mySceneBuilder = new SceneFactory();
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
-		myGUIGenerator = new GUIGenerator();
 		myFacebookInformation = new FacebookInformation();
 	}
 	
@@ -130,11 +124,5 @@ public class ApplicationController {
 			}
 			popup.show();
 		}, ButtonDisplay.TEXT);
-	}
-	
-	private void resetStage(IDisplay aScene){
-		myStage.close();
-		myStage.setScene(aScene.init());
-		myStage.show();
 	}
 }

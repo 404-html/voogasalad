@@ -11,16 +11,14 @@ import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
-import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 import util.XMLTranslator;
 
-public class GamePlayController {
+public class GamePlayController extends AbstractController {
 	
-	private Stage myStage;
 	private GamePlayScene myScene;
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
@@ -28,12 +26,10 @@ public class GamePlayController {
 	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
 	private Map<Sprite, ImageView> mySprites;
-	private GUIGenerator myGUIGenerator;
 	private KeyCodeHandler myKeyHandler;
 	
 	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
-		myGUIGenerator = new GUIGenerator();
 		mySprites = new HashMap<Sprite, ImageView>();
 		myGameFile = aFile;
 		myGameEngine = new GameEngine(aFile, 0);
@@ -48,7 +44,7 @@ public class GamePlayController {
 		initializeGameScene();
 		initializeAnimation();
 		setMenu();
-		resetStage();
+		resetStage(myScene);
 	}
 
 	private void initializeEngine() {
@@ -113,12 +109,6 @@ public class GamePlayController {
 		}, e -> {
 			save();
 		});
-	}
-	
-	private void resetStage() {
-		myStage.close();
-		myStage.setScene(myScene.init());
-		myStage.show();
 	}
 	
 	private void save() {
