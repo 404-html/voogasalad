@@ -1,5 +1,7 @@
 package gameplayer.front_end.application_scene;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import game_data.Sprite;
@@ -24,7 +26,7 @@ public class AnimationScene {
 	private KeyCodeHandler myKeyCodeHandler;
 	//private String myBackgroundFilePath;
 	
-	public AnimationScene(Scene aScene, KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
+	public AnimationScene(KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
 		myGamePlayCanvas = new Pane();
 		myKeyCodeHandler = aKeyHandler;
 	}
@@ -40,16 +42,6 @@ public class AnimationScene {
 		myGamePlayCanvas.setStyle("-fx-background-color: red;");
 	}
 	
-	public ImageView addSpriteToScene(Sprite aSprite){
-		ImageView image = new ImageView(aSprite.getMyImagePath());
-		image.setFitWidth(aSprite.getMyWidth());
-		image.setFitHeight(aSprite.getMyHeight());
-		image.setX(aSprite.getMyLocation().getXLocation());
-		image.setY(aSprite.getMyLocation().getYLocation());
-		myGamePlayCanvas.getChildren().add(image);
-		return image;
-	}
-	
 	public void clear() {
 		myGamePlayCanvas.getChildren().clear();
 	}
@@ -58,10 +50,11 @@ public class AnimationScene {
 		myGamePlayCanvas.setBackground(aBackground);
 	}
 	
-	public void moveScreen(Set<KeyCode> myKeySet) {
-		for (KeyCode key : myKeySet) {
-			myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + myKeyCodeHandler.getMovement(key));
-		}
+	public void moveScreen() {
+		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + myKeyCodeHandler.getMovement());
+	}
+	public void addImageToView(ImageView aImage) {
+		myGamePlayCanvas.getChildren().add(aImage);
 	}
 	
 }

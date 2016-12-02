@@ -11,7 +11,7 @@ public class PlayerInformationController {
 	
 	private IViewableUserInformation myUserInformation; 
 	private IViewableGameDisplayInformation myGameDisplayInformation;
-	private IViewableHighScore myHighScores; 
+	private HighScore myHighScores; 
 	
 	public PlayerInformationController() {
 		myUserInformation = new UserInformationController();

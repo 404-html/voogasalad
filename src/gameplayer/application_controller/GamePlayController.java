@@ -12,65 +12,58 @@ import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
-import gameplayer.front_end.application_scene.AnimationScene;
+import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.gui_generator.GUIGenerator;
-import gameplayer.front_end.background_display.BackgroundDisplayFactory;
-import gameplayer.front_end.heads_up_display.HeadsUpDisplay;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GamePlayController {
 	
 	private Stage myStage;
-	private AnimationScene myGamePlay;
-	private HeadsUpDisplay myHeadsUpDisplay;
-	private StackPane myStack;
 	private Scene myScene;
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
 	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
-	private Map<Sprite, ImageView> mySprites;
-	private Set<KeyCode> myKeySet;
 	private GUIGenerator myGUIGenerator;
+	private Set<KeyCode> myKeySet;
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private KeyCodeHandler myKeyHandler;
+	private GamePlayScene myGamePlayScene;
+	private Map<Sprite, ImageView> mySpriteMap;
 	
 	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed= new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
-		myStack = new StackPane();
 		myGUIGenerator = new GUIGenerator();
-		mySprites = new HashMap<Sprite, ImageView>();
+		mySpriteMap = new HashMap<Sprite, ImageView>(); 
 		myGameEngine = new GameEngine(aFile, 0);
 		myGameFile = aFile;
 		myKeyHandler = new KeyCodeHandler();
+		myKeysReleased = new HashSet<KeyCode>();
+		myKeysPressed = new HashSet<KeyCode>();
+		myGameController = myGameEngine.getMyEnginePlayerController();
+		myGameUpdater = new UpdateGame();
+		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
 	}
 	
 	public void displayGame() {
-		initializeEngine();
 		initializeScene();
-		initializeGameScene();
+		updateSprites();
 		initializeAnimation();
 		setMenu();
 		resetStage();
 	}
 
-	private void initializeEngine() {
-		myGameController = myGameEngine.getMyEnginePlayerController();
-		myGameUpdater = new UpdateGame();
-	}
-
 	private void initializeScene() {
-		myScene = new Scene(myStack, myStage.getWidth(), myStage.getHeight());
+		myScene = new Scene(myGamePlayScene.getRoot(), myStage.getWidth(), myStage.getHeight());
 		myScene.setOnKeyPressed(e -> handleKeyPress(e.getCode()));
 		myScene.setOnKeyReleased(e -> handleKeyRelease(e.getCode()));
 	}
@@ -78,61 +71,58 @@ public class GamePlayController {
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
-			deleteSprites();
-			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySprites);
+			myGamePlayScene.clearSprites();
+			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 			updateSprites();
 			//the below line makes sure the keys released aren't stored in the set after they're released
-			myKeysReleased = new HashSet<KeyCode>();
-			myKeysPressed = new HashSet<KeyCode>();
+			clearKeys();
 			myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
-			myGamePlay.moveScreen(myKeySet);
+			myGamePlayScene.moveScreen();
 		});
 	}
 
-	private void initializeGameScene() {
-		myGamePlay = new AnimationScene(myScene, myKeyHandler, myStage.getWidth(), myStage.getHeight());
-		myStack.getChildren().add(myGamePlay.init());
-		myHeadsUpDisplay = new HeadsUpDisplay(myScene, myStage.getWidth(), myStage.getHeight());
-		myStack.getChildren().add(myHeadsUpDisplay.init());
-		setBackground(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
-		updateSprites();
-	}
-	
-	private void setBackground(String aBackgroundImageFilePath, double aWidth, double aHeight) {
-		Background backgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
-		myStack.setBackground(backgroundDisplay);
-	}
-
-	private void deleteSprites() {
-		myGamePlay.clear();
+	private void clearKeys() {
+		myKeysReleased.clear();
+		myKeysPressed.clear();
 	}
 	
 	private void updateSprites() {
-		for(Sprite sprite : myGameController.getMySpriteList()) {
-			addSpriteToScene(sprite);
+		for (Sprite sprite : myGameController.getMySpriteList()) {
+			getUpdatedSpriteMap(sprite);
 		}
 	}
 	
-	private void addSpriteToScene(Sprite aSprite) {
-		mySprites.put(aSprite, myGamePlay.addSpriteToScene(aSprite));
+	private void getUpdatedSpriteMap(Sprite aSprite) {
+		if (mySpriteMap.containsKey(aSprite)) {
+			mySpriteMap.get(aSprite).setX(aSprite.getMyLocation().getXLocation());
+			mySpriteMap.get(aSprite).setY(aSprite.getMyLocation().getYLocation());
+		} else {
+			ImageView image = new ImageView(aSprite.getMyImagePath());
+			image.setFitWidth(aSprite.getMyWidth());
+			image.setFitHeight(aSprite.getMyHeight());
+			image.setX(aSprite.getMyLocation().getXLocation());
+			image.setY(aSprite.getMyLocation().getYLocation());
+			mySpriteMap.put(aSprite, image);
+		}
+		myGamePlayScene.addImageToView(mySpriteMap.get(aSprite));
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void setMenu() {
 		String[] names = {"Main Menu"};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
-		myHeadsUpDisplay.addMenu(image, names, e -> {
+		myGamePlayScene.getHeadsUpDisplay().addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			ApplicationController appControl = new ApplicationController(myStage);
 			appControl.displayMainMenu();
 		});
 		String[] namesForGamePlay = {"Restart", "Change to Red"};
-		myHeadsUpDisplay.addMenu("GAME PLAY", namesForGamePlay, e -> {
+		myGamePlayScene.getHeadsUpDisplay().addMenu("GAME PLAY", namesForGamePlay, e -> {
 			myAnimationLoop.stop();
 			GamePlayController gameControl = new GamePlayController(myStage, myGameFile);
 			gameControl.displayGame();
 		}, e -> {
-			myGamePlay.makeRed();
+			myGamePlayScene.changeBackground(Color.RED);
 		});
 	}
 	
@@ -150,7 +140,6 @@ public class GamePlayController {
 	}
 	
 	private void handleKeyRelease(KeyCode key) {
-		//System.out.println(myKeySet);
 		myKeysReleased.add(key);
 		myKeySet.remove(key);
 	}
