@@ -3,15 +3,11 @@ package author.model.game_observables.draggable_sprite;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 
 /**
  * This abstract class is the framework for making a sprite draggable
@@ -84,11 +80,17 @@ public abstract class DraggableSprite {
 		              + "-fx-border-width: 1;"
 		              + "-fx-border-style: dotted;";
 		      draggableItem.setStyle(style_inner);
+		      displayNameOnHover();
 		});
 		draggableItem.setOnMouseExited(e -> {
 			 String style_inner = "";
 		      draggableItem.setStyle(style_inner);
 		});
+	}
+
+	private void displayNameOnHover() {
+		Tooltip tip = new Tooltip(mySprite.getName());
+		Tooltip.install(draggableItem, tip);
 	}
 	
 	public HBox getDraggableItem() {
