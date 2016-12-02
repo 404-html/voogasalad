@@ -50,15 +50,32 @@ public class LevelWindowPaneFactory {
 				boolean success = false;
 				if (db.hasString()) {
 					Sprite sprite = findSprite(db.getString());
+
 					Sprite clone = sprite.clone();
 					clone.getMyLocation().setLocation(event.getX(), event.getY());
-					this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);		
+					this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
+					DraggableSprite newSprite;
+					try {
+						newSprite = new ConcreteMovableSprite(clone);
+					} catch (NullPointerException e) {
+						System.out.println(e.getMessage());
+						e.printStackTrace();
+						throw new NullPointerException();
+					}
+
+					ImageView image = newSprite.getImageView();
+					if (image != null) {
+						image.setLayoutX(event.getX());
+						image.setLayoutY(event.getY());
+						success = true;
+					}
+					
 				}
 				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
-		
+
 		this.levelPane.setOnDragOver((DragEvent event) -> {
 			if (event.getDragboard().hasString()) {
 				event.acceptTransferModes(TransferMode.MOVE);

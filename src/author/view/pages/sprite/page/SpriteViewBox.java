@@ -24,7 +24,7 @@ public class SpriteViewBox implements InvalidationListener {
 		myPane = new VBox();
 		myImageButton = new Button(IMG_TEXT);
 		myImageButton.setContentDisplay(ContentDisplay.BOTTOM);
-		myPane.getChildren().addAll(myImageButton);
+		myPane.getChildren().addAll(myImageButton);		
 	}
 
 	public SpriteViewBox(Sprite aSprite){
@@ -40,13 +40,7 @@ public class SpriteViewBox implements InvalidationListener {
 		myImageButton.setOnMouseClicked( e -> {
 			SpriteEditWindow sew = new SpriteEditWindow(aSprite);
 			sew.openWindow();
-		});	
-		stylePane();
-	}
-	
-	private void stylePane() {
-		myPane.setPrefHeight(150);
-		myPane.setPrefWidth(150);
+		});				
 	}
 	
 	public Pane getPane(){

@@ -3,11 +3,13 @@ package author.model.game_observables.draggable_sprite;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
-import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 
 /**
  * This abstract class is the framework for making a sprite draggable
@@ -17,7 +19,6 @@ import javafx.scene.layout.HBox;
  */
 public abstract class DraggableSprite {
 
-	private HBox draggableItem;
 	private ImageView myImageView;
 	private Sprite mySprite;
 	private InvalidationListener invalidationListener;
@@ -29,72 +30,56 @@ public abstract class DraggableSprite {
 
 	public DraggableSprite(Sprite aSprite) {
 		mySprite = aSprite;
-		draggableItem = new HBox();
 		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
-		addImageToContainer();
+		myImageView.setFitHeight(DRAG_IMAGE_WIDTH);
+		myImageView.setFitWidth(DRAG_IMAGE_HEIGHT);
 		setListener(aSprite);
 		makeDraggable();
 		openPreferences();
-		setOnMouseHover();
 	}
-
-	private void addImageToContainer() {
-		draggableItem.getChildren().add(myImageView);
-		draggableItem.setPrefHeight(DRAG_IMAGE_HEIGHT);
-		draggableItem.setPrefWidth(DRAG_IMAGE_WIDTH);
-		myImageView.fitHeightProperty().bind(draggableItem.prefHeightProperty());
-		myImageView.fitWidthProperty().bind(draggableItem.prefWidthProperty());
-	}
-
-	public void removeListener() {
+	
+	public void removeListener(){
 		this.mySprite.removeListener(this.invalidationListener);
 	}
-
-	private void setListener(Sprite aSprite) {
+	
+	private void setListener(Sprite aSprite){
 		this.invalidationListener = initListener(aSprite);
 		aSprite.addListener(this.invalidationListener);
 	}
-
-	protected InvalidationListener initListener(Sprite aSprite) {
+	
+	protected InvalidationListener initListener(Sprite aSprite){
 		InvalidationListener invalidationListener = (sprite) -> {
 			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
 		};
 		return invalidationListener;
 	}
+	
 
 	private void openPreferences() {
-		draggableItem.setOnMouseClicked(e -> {
-			if (e.getButton().equals(MouseButton.PRIMARY)) {
-				if (e.getClickCount() == 2) {
-					new SpriteEditWindow(mySprite).openWindow();
-				}
-			}
+		myImageView.setOnMouseClicked(e -> {
+			if(e.getButton().equals(MouseButton.PRIMARY)){
+	            if(e.getClickCount() == 2){
+	            	new SpriteEditWindow(mySprite).openWindow();
+	            }
+	        }
 		});
 	}
 
-	protected abstract void makeDraggable();
-	
-	private void setOnMouseHover() {
-		draggableItem.setOnMouseEntered(e -> {
-			 String style_inner = "-fx-border-color: red;"
-		              + "-fx-border-width: 1;"
-		              + "-fx-border-style: dotted;";
-		      draggableItem.setStyle(style_inner);
-		      displayNameOnHover();
-		});
-		draggableItem.setOnMouseExited(e -> {
-			 String style_inner = "";
-		      draggableItem.setStyle(style_inner);
-		});
-	}
+	/**
+	 * https://docs.oracle.com/javase/8/javafx/events-tutorial/paper-doll.htm#CBHHBAJI
+	 */
+	protected void makeDraggable() {
 
-	private void displayNameOnHover() {
-		Tooltip tip = new Tooltip(mySprite.getName());
-		Tooltip.install(draggableItem, tip);
-	}
-	
-	public HBox getDraggableItem() {
-		return draggableItem;
+		myImageView.setOnDragDetected((MouseEvent event) -> {
+			mySprite.setId(this.getClass().getSimpleName() + System.currentTimeMillis());
+			Dragboard db = myImageView.startDragAndDrop(TransferMode.MOVE);
+			ClipboardContent content = new ClipboardContent();
+			// Store the node ID in order to know what is dragged.
+			content.putString(mySprite.getId());
+			db.setContent(content);
+			db.setDragView(new Image(mySprite.getMyImagePath(), DRAG_IMAGE_WIDTH, DRAG_IMAGE_HEIGHT, false, false));
+			event.consume();
+		});
 	}
 
 	public Sprite getSprite() {
@@ -104,7 +89,7 @@ public abstract class DraggableSprite {
 	public ImageView getImageView() {
 		return myImageView;
 	}
-
+	
 	public void setImageView(ImageView imageView) {
 		this.myImageView = imageView;
 		makeDraggable();
