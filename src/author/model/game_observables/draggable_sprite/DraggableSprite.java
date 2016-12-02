@@ -1,15 +1,29 @@
 package author.model.game_observables.draggable_sprite;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.FileImageOutputStream;
+
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.text.Text;
 
 /**
  * This abstract class is the framework for making a sprite draggable
@@ -37,31 +51,30 @@ public abstract class DraggableSprite {
 		makeDraggable();
 		openPreferences();
 	}
-	
-	public void removeListener(){
+
+	public void removeListener() {
 		this.mySprite.removeListener(this.invalidationListener);
 	}
-	
-	private void setListener(Sprite aSprite){
+
+	private void setListener(Sprite aSprite) {
 		this.invalidationListener = initListener(aSprite);
 		aSprite.addListener(this.invalidationListener);
 	}
-	
-	protected InvalidationListener initListener(Sprite aSprite){
+
+	protected InvalidationListener initListener(Sprite aSprite) {
 		InvalidationListener invalidationListener = (sprite) -> {
 			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
 		};
 		return invalidationListener;
 	}
-	
 
 	private void openPreferences() {
 		myImageView.setOnMouseClicked(e -> {
-			if(e.getButton().equals(MouseButton.PRIMARY)){
-	            if(e.getClickCount() == 2){
-	            	new SpriteEditWindow(mySprite).openWindow();
-	            }
-	        }
+			if (e.getButton().equals(MouseButton.PRIMARY)) {
+				if (e.getClickCount() == 2) {
+					new SpriteEditWindow(mySprite).openWindow();
+				}
+			}
 		});
 	}
 
@@ -77,7 +90,8 @@ public abstract class DraggableSprite {
 			// Store the node ID in order to know what is dragged.
 			content.putString(mySprite.getId());
 			db.setContent(content);
-			db.setDragView(new Image(mySprite.getMyImagePath(), DRAG_IMAGE_WIDTH, DRAG_IMAGE_HEIGHT, false, false));
+            db.setDragView(new Text(mySprite.getName()).snapshot(null, null), event.getX(), event.getY());
+//			db.setDragView(new Image(mySprite.getMyImagePath(), DRAG_IMAGE_WIDTH, DRAG_IMAGE_HEIGHT, false, false));
 			event.consume();
 		});
 	}
@@ -89,7 +103,7 @@ public abstract class DraggableSprite {
 	public ImageView getImageView() {
 		return myImageView;
 	}
-	
+
 	public void setImageView(ImageView imageView) {
 		this.myImageView = imageView;
 		makeDraggable();
