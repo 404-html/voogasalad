@@ -1,8 +1,7 @@
 package author.view.pages.sprite.page;
 
-import java.util.Arrays;
-
 import author.controller.IAuthorController;
+import author.view.util.facades.TabPaneFacade;
 import game_data.Sprite;
 import game_data.sprites.Enemy;
 import game_data.sprites.Item;
@@ -12,14 +11,11 @@ import game_data.sprites.SpriteFactory;
 import game_data.sprites.Terrain;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 public class SpritesPage implements InvalidationListener {
 	
-	private Pane myPane;
+	private TabPaneFacade myPane;
 	private SpriteScroller myPlayerScroller;
 	private SpriteScroller myEnemyScroller;
 	private SpriteScroller myTerrainScroller;
@@ -32,24 +28,25 @@ public class SpritesPage implements InvalidationListener {
 		myController = aController;
 		myController.getModel().getGame().addListener(this);
 		
-		myPane = new HBox();
+		createSpriteTabs();
+		addTabsToFacade();
+	}
+
+	private void createSpriteTabs() {
 		myPlayerScroller = new SpriteScroller(SpriteFactory.PLAYER, myController);
 		myEnemyScroller = new SpriteScroller(SpriteFactory.ENEMY, myController);
 		myTerrainScroller = new SpriteScroller(SpriteFactory.TERRAIN, myController);
 		myItemScroller = new SpriteScroller(SpriteFactory.ITEM, myController);
 		myProjectileScroller = new SpriteScroller(SpriteFactory.PROJECTILE, myController);
-		
-		SpriteScroller[] scrollers = new SpriteScroller[]{
-				myPlayerScroller,
-				myEnemyScroller,
-				myTerrainScroller,
-				myItemScroller,
-				myProjectileScroller};
-		
-		Arrays.asList(scrollers).forEach(s -> {
-			myPane.getChildren().add(s.getNode());
-			HBox.setHgrow(s.getNode(), Priority.ALWAYS);
-		});
+	}
+
+	private void addTabsToFacade() {
+		myPane = new TabPaneFacade();
+		myPane.addTab(SpriteFactory.PLAYER.name(), myPlayerScroller.getNode());
+		myPane.addTab(SpriteFactory.ENEMY.name(), myEnemyScroller.getNode());
+		myPane.addTab(SpriteFactory.TERRAIN.name(), myTerrainScroller.getNode());
+		myPane.addTab(SpriteFactory.ITEM.name(), myItemScroller.getNode());
+		myPane.addTab(SpriteFactory.PROJECTILE.name(), myProjectileScroller.getNode());
 	}
 	
 	@Override
@@ -68,7 +65,7 @@ public class SpritesPage implements InvalidationListener {
 	}
 	
 	public Region getRegion(){
-		return myPane;
+		return myPane.getTabPane();
 	}
 	
 	@Override
