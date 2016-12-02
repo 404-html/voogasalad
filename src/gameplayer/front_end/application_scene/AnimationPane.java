@@ -3,10 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import game_data.Sprite;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
-import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -20,13 +17,14 @@ import javafx.scene.layout.Pane;
  *
  */
 
-public class AnimationScene {
+
+public class AnimationPane {
 	
 	private Pane myGamePlayCanvas;
 	private KeyCodeHandler myKeyCodeHandler;
 	//private String myBackgroundFilePath;
 	
-	public AnimationScene(KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
+	public AnimationPane(KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
 		myGamePlayCanvas = new Pane();
 		myKeyCodeHandler = aKeyHandler;
 	}
@@ -58,3 +56,4 @@ public class AnimationScene {
 	}
 	
 }
+
