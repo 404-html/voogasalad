@@ -1,8 +1,7 @@
 package author.view.pages.level_editor.windows;
 
 import author.controller.IAuthorController;
-import author.view.util.ToolBarBuilder;
-import javafx.scene.Node;
+import author.view.util.facades.ToolBarBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -25,14 +24,6 @@ public class LevelProgressionWindow extends AbstractLevelEditorWindow {
 
 	public LevelProgressionWindow(IAuthorController authorController) {
 		super(authorController);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			container.getChildren().add(node);
-		}
 	}
 
 	@Override

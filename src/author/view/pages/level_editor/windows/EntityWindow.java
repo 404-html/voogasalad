@@ -1,14 +1,10 @@
 package author.view.pages.level_editor.windows;
 
-import java.util.Set;
-
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteDraggableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
-import author.view.util.ToolBarBuilder;
-import game_data.Sprite;
+import author.view.util.facades.ToolBarBuilder;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -33,14 +29,6 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 		super(authorController);
 		super.getWindow().getChildren().add(createScroller());
 		styleContainer();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			container.getChildren().add(node);
-		}
 	}
 
 	@Override

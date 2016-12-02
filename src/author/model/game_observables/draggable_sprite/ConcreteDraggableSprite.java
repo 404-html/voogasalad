@@ -1,7 +1,6 @@
 package author.model.game_observables.draggable_sprite;
 
 import game_data.Sprite;
-import javafx.scene.image.Image;
 
 /**
  * 

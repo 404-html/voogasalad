@@ -10,9 +10,9 @@ public abstract class BoundedPacer extends Pacer{
 	private double myLowerBound;
 	private double myUpperBound;
 	
-	@ParameterAnnotation(parameters = {"Speed", "Lower Bound", "Upper Bound"})
-	public BoundedPacer(int speed, double lowerBound, double upperBound) {
-		super(speed);
+	@ParameterAnnotation(parameters = {"Speed", "Lower Bound", "Upper Bound", "Sprite"})
+	public BoundedPacer(int speed, double lowerBound, double upperBound, Sprite aSprite) {
+		super(speed, aSprite);
 		myLowerBound = lowerBound;
 		myUpperBound = upperBound;
 	}

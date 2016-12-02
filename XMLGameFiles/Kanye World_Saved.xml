@@ -1,0 +1,50 @@
+<game__data.Game>
+  <name>Kanye World</name>
+  <myLevels>
+    <game__data.Level>
+      <name>Yeezy1</name>
+      <width>1279</width>
+      <height>847</height>
+      <backgroundImageFilePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Player>
+          <name>Ye</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>556.5</myXLocation>
+            <myYLocation>516.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player">
+            <name>Ye</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>50</myWidth>
+            <myHeight>50</myHeight>
+            <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/angry_goomba.png</myImagePath>
+            <myVelocity>0.0</myVelocity>
+            <myCollisionHandler/>
+            <myCharacteristics/>
+            <id>ConcreteDraggableSprite1480579668980</id>
+            <myStates/>
+          </preset>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/angry_goomba.png</myImagePath>
+          <myVelocity>0.0</myVelocity>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+      </mySprites>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+  </spritePresets>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>
