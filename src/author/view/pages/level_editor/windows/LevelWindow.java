@@ -16,6 +16,7 @@ import author.view.util.facades.ToolBarBuilder;
 import author.view.util.file_helpers.FileLoader;
 import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
+import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
@@ -170,6 +171,7 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
 			instanceSprite.setMyWidth(spritePreset.getMyWidth());
 			instanceSprite.setMyHeight(spritePreset.getMyHeight());
+//			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation(), spritePreset.getMyLocation().getMyHeading()));
 			spritePreset.getCharacteristics()
 					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
 			;

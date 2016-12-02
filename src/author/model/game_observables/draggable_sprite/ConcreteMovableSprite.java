@@ -18,14 +18,9 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	private void styleSprite() {
 		getDraggableItem().setLayoutX(getSprite().getMyLocation().getXLocation());
 		getDraggableItem().setLayoutY(getSprite().getMyLocation().getYLocation());
-		getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
 		getDraggableItem().setPrefWidth(getSprite().getMyWidth());
 		getDraggableItem().setPrefHeight(getSprite().getMyHeight());
-		// draggableSprite.getImageView().fitWidthProperty().bind(draggableSprite.getDraggableItem().prefWidthProperty());
-		// draggableSprite.getImageView().fitHeightProperty().bind(draggableSprite.getDraggableItem().prefHeightProperty());
-//		getImageView().setFitHeight(getDraggableItem().getPrefHeight());
-//		getImageView().setFitWidth(getDraggableItem().getPrefWidth());
-		getImageView().setRotate(getSprite().getMyLocation().getMyHeading());
+		getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
 	}
 
 	/**
