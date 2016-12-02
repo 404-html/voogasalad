@@ -24,6 +24,7 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 	private FlowPane container = new FlowPane();
 	
 	private static final int PADDING = 5;
+	private static final int SPRITE_SIZE = 40;
 
 	public EntityWindow(IAuthorController authorController) {
 		super(authorController);
@@ -68,6 +69,8 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 			this.container.getChildren().clear();
 			getController().getModel().getGame().getPresets().forEach((sprite) -> {
 				DraggableSprite dragSprite = new ConcreteDraggableSprite(sprite);
+				dragSprite.getDraggableItem().setPrefHeight(SPRITE_SIZE);
+				dragSprite.getDraggableItem().setPrefWidth(SPRITE_SIZE);
 				this.container.getChildren().add(dragSprite.getDraggableItem());
 			});
 		});

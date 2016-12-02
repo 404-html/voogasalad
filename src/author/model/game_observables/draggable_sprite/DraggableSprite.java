@@ -35,15 +35,19 @@ public abstract class DraggableSprite {
 		mySprite = aSprite;
 		draggableItem = new HBox();
 		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
-		myImageView.setFitHeight(DRAG_IMAGE_WIDTH);
-		myImageView.setFitWidth(DRAG_IMAGE_HEIGHT);
-		draggableItem.getChildren().add(myImageView);
-		draggableItem.setPrefHeight(DRAG_IMAGE_HEIGHT);
-		draggableItem.setPrefWidth(DRAG_IMAGE_WIDTH);
+		addImageToContainer();
 		setListener(aSprite);
 		makeDraggable();
 		openPreferences();
 		setOnMouseHover();
+	}
+
+	private void addImageToContainer() {
+		draggableItem.getChildren().add(myImageView);
+		draggableItem.setPrefHeight(DRAG_IMAGE_HEIGHT);
+		draggableItem.setPrefWidth(DRAG_IMAGE_WIDTH);
+		myImageView.fitHeightProperty().bind(draggableItem.prefHeightProperty());
+		myImageView.fitWidthProperty().bind(draggableItem.prefWidthProperty());
 	}
 
 	public void removeListener() {

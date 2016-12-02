@@ -2,10 +2,7 @@ package author.model.game_observables.draggable_sprite;
 
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class ConcreteMovableSprite extends DraggableSprite {
@@ -15,6 +12,20 @@ public class ConcreteMovableSprite extends DraggableSprite {
 
 	public ConcreteMovableSprite(Sprite aSprite) {
 		super(aSprite);
+		styleSprite();
+	}
+
+	private void styleSprite() {
+		getDraggableItem().setLayoutX(getSprite().getMyLocation().getXLocation());
+		getDraggableItem().setLayoutY(getSprite().getMyLocation().getYLocation());
+		getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
+		getDraggableItem().setPrefWidth(getSprite().getMyWidth());
+		getDraggableItem().setPrefHeight(getSprite().getMyHeight());
+		// draggableSprite.getImageView().fitWidthProperty().bind(draggableSprite.getDraggableItem().prefWidthProperty());
+		// draggableSprite.getImageView().fitHeightProperty().bind(draggableSprite.getDraggableItem().prefHeightProperty());
+//		getImageView().setFitHeight(getDraggableItem().getPrefHeight());
+//		getImageView().setFitWidth(getDraggableItem().getPrefWidth());
+		getImageView().setRotate(getSprite().getMyLocation().getMyHeading());
 	}
 
 	/**
