@@ -106,7 +106,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
-		//gameChoice.addNode(myGUIGenerator.createComboBox());
+		gameChoice.addNode(myGUIGenerator.createComboBox());
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
