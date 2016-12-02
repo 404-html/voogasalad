@@ -38,7 +38,7 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 	}
 	
 	@Override
-	public void addNavigationMenu(ImageView aImage, String[] aStringArray, EventHandler<ActionEvent> ... aHandler) {
+	public void addNavigationMenu(ImageView aImage, String[] aStringArray, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
 		myNavigation.getMenus().add(myGUIGenerator.createMenu(aImage, aStringArray, aHandler));
 	}
 	

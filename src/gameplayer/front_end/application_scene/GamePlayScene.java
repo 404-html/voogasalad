@@ -11,7 +11,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
+public class GamePlayScene extends AbstractPlayerScene {
 
 	private StackPane myStack;
 	private AnimationPane myGamePlay;
@@ -32,12 +32,6 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 		return myScene;
 	}
 
-	private void initializeScene() {
-		myStack.getChildren().add(myGamePlay.init());
-		myStack.getChildren().add(myHeadsUpDisplay.init());
-		myStack.setBackground(myBackgroundDisplay);
-	}
-
 	public void moveScreen() {
 		myGamePlay.moveScreen();
 	}
@@ -50,32 +44,28 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 		myGamePlay.addImageToView(aImage);
 	}
 
-	public HeadsUpDisplay getHeadsUpDisplay() {
-		return myHeadsUpDisplay;
-	}
-
 	public void changeBackground(Color red) {
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(red, myStack.getWidth(), myStack.getHeight());
 		myStack.setBackground(myBackgroundDisplay);
 	}
 
-	public void addMenu(String string, String[] names, EventHandler<ActionEvent>... eventHandler) {
+	public void addMenu(String string, String[] names, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... eventHandler) {
 		myHeadsUpDisplay.addMenu(string, names, eventHandler);
 	}
 	
-	public void addMenu(ImageView aImage, String[] names, EventHandler<ActionEvent>... eventHandler) {
+	public void addMenu(ImageView aImage, String[] names, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... eventHandler) {
 		myHeadsUpDisplay.addMenu(aImage, names, eventHandler);
 	}
 
-	public void setOnKeyPressed(KeyPressable a) {
-		myScene.setOnKeyPressed(e -> a.handleKeyInput(e.getCode()));
+	public void setKeyHandlers(KeyPressable aPressHandler, KeyPressable aReleaseHandler) {
+		myScene.setOnKeyPressed(e -> aPressHandler.handleKeyInput(e.getCode()));
+		myScene.setOnKeyReleased(e -> aReleaseHandler.handleKeyInput(e.getCode()));
+	}
+	
+	private void initializeScene() {
+		myStack.getChildren().add(myGamePlay.init());
+		myStack.getChildren().add(myHeadsUpDisplay.init());
+		myStack.setBackground(myBackgroundDisplay);
 	}
 
-	public void setOnKeyReleased(KeyPressable a) {
-		myScene.setOnKeyReleased(e -> a.handleKeyInput(e.getCode()));
-	}
-
-	public void setBackground(Background backgroundDisplay) {
-		myStack.setBackground(backgroundDisplay);
-	}
 }
