@@ -93,17 +93,17 @@ public class GamePlayController {
 	}
 	
 	private void getUpdatedSpriteMap(Sprite aSprite) {
+		ImageView image;
 		if (mySpriteMap.containsKey(aSprite)) {
-			mySpriteMap.get(aSprite).setX(aSprite.getMyLocation().getXLocation());
-			mySpriteMap.get(aSprite).setY(aSprite.getMyLocation().getYLocation());
+			image = mySpriteMap.get(aSprite);
 		} else {
-			ImageView image = new ImageView(aSprite.getMyImagePath());
-			image.setFitWidth(aSprite.getMyWidth());
-			image.setFitHeight(aSprite.getMyHeight());
-			image.setX(aSprite.getMyLocation().getXLocation());
-			image.setY(aSprite.getMyLocation().getYLocation());
+			image = new ImageView(aSprite.getMyImagePath());
 			mySpriteMap.put(aSprite, image);
 		}
+		image.setFitWidth(aSprite.getMyWidth());
+		image.setFitHeight(aSprite.getMyHeight());
+		image.setX(aSprite.getMyLocation().getXLocation());
+		image.setY(aSprite.getMyLocation().getYLocation());
 		myGamePlayScene.addImageToView(mySpriteMap.get(aSprite));
 	}
 	

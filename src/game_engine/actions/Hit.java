@@ -40,7 +40,7 @@ public class Hit implements Action {
 				myPlayerSprite.setMyXVelocity(0);
 			}
 		}
-		if(mySide==Side.RIGHT){
+		if(mySide==Side.RIGHT) {
 			if(myPlayerSprite.getMyXVelocity()<0){
 				myPlayerSprite.setMyXVelocity(0);
 			}
