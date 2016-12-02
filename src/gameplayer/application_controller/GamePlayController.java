@@ -27,11 +27,11 @@ public class GamePlayController extends AbstractController {
 	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
 	private KeyCodeHandler myKeyHandler;
+	private GamePlayScene myGamePlayScene;
 	private Set<KeyCode> myKeySet;
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
-	private GamePlayScene myGamePlayScene;
 	
 	public GamePlayController(Stage aStage, File aFile) {
 		myStage = aStage;
@@ -65,8 +65,7 @@ public class GamePlayController extends AbstractController {
 
 	private void initializeScene() {
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
-		myGamePlayScene.setOnKeyPressed(e -> handleKeyPress(e));
-		myGamePlayScene.setOnKeyReleased(e -> handleKeyRelease(e));
+		myGamePlayScene.setKeyHandlers(e -> handleKeyPress(e), e -> handleKeyRelease(e));
 	}
 
 	private void initializeAnimation() {
@@ -90,9 +89,9 @@ public class GamePlayController extends AbstractController {
 		updateSprites();
 	}
 
-	private void deleteSprites() {
-		myGamePlayScene.clearSprites();
-	}
+//	private void deleteSprites() {
+//		myGamePlayScene.clearSprites();
+//	}
 	
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMySpriteList()) {
@@ -128,13 +127,13 @@ public class GamePlayController extends AbstractController {
 	private void setMenu() {
 		String[] names = {"Main Menu"};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
-		myGamePlayScene.getHeadsUpDisplay().addMenu(image, names, e -> {
+		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			ApplicationController appControl = new ApplicationController(myStage);
 			appControl.displayMainMenu();
 		});
 		String[] namesForGamePlay = {"Restart", "Change to Red", "Save"};
-		myGamePlayScene.getHeadsUpDisplay().addMenu("GAME PLAY", namesForGamePlay, e -> {
+		myGamePlayScene.addMenu("GAME PLAY", namesForGamePlay, e -> {
 			myAnimationLoop.stop();
 			GamePlayController gameControl = new GamePlayController(myStage, myGameFile);
 			gameControl.displayGame();

@@ -25,11 +25,11 @@ public class HeadsUpDisplay {
 		myRoot = new BorderPane();
 	}
 	
-	public void addMenu(String aTitle, String[] aText, EventHandler<ActionEvent>... aHandler) {
+	public void addMenu(String aTitle, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aTitle, aText, aHandler));
 	}
 	
-	public void addMenu(ImageView aImage, String[] aText, EventHandler<ActionEvent> ... aHandler) {
+	public void addMenu(ImageView aImage, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
 
