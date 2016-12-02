@@ -38,11 +38,12 @@ public class Damager implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
+		
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			
-			Action myAction = new Damage(getDamage(), collidedSprite);
+			Action myAction = new Damage(myDamageToGive, collidedSprite);
 			myAction.act();
 		}
+		
 	}
 
 }

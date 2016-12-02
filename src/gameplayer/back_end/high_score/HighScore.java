@@ -2,34 +2,32 @@ package gameplayer.back_end.high_score;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
 
 
-public class HighScore implements Serializable {
+public class HighScore implements Serializable, IViewableHighScore {
 	
-	private String myCurrentUser;
-	private Map<String, String> myHighScoresPerGame;
+	private Map<String, Double> myHighScoresPerGame;
 	
-	public HighScore(String aUserName) {
-		myCurrentUser = aUserName;
+	public HighScore() {
+		myHighScoresPerGame = new HashMap<String, Double>();
 		//HighScore information = (HighScore) aSerializer.fromXML("");
 		//init(information.map);
 	}
 	
-	private void init(Map<String, String> aUserHighScores) {
-		myHighScoresPerGame = aUserHighScores;
-	}
+	//private void init(Map<String, Double> aUserHighScores) {
+		//myHighScoresPerGame = aUserHighScores;
+	//}
 	
 	public double getHighScore(String aUserName) {
-		//return Double.parseDouble(myHighScoreData.getString(aUserName));
-		return 0;
+		return myHighScoresPerGame.get(aUserName);
 	}
 	
 	public Collection<String> getUserNamesWithHighScores() {
-		//return myHighScoreData.keySet();
-		return null;
+		return myHighScoresPerGame.keySet();
 	}
 
 }

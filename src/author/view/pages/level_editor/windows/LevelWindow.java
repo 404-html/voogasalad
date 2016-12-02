@@ -57,9 +57,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 		this.getWindow().getChildren().add(this.levelScroller);
 		this.levelScroller.prefViewportWidthProperty().bind(this.getWindow().widthProperty());
 		this.levelScroller.prefViewportHeightProperty().bind(this.getWindow().heightProperty());
-		System.out.println("WIN: " + this.getWindow().getWidth());
-		
-		System.out.println("Scroller Height and Width: " + this.levelScroller.getWidth() + "  " + this.levelScroller.getHeight());
 	}
 	
 	
@@ -91,7 +88,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 
 	private void setBackgroundImage(String filePath) {
-		System.out.println("Set BackGround Image");
 		Image image = new Image(filePath);
 		BackgroundImage backIm = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.DEFAULT,
@@ -152,12 +148,8 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 	}
 
 	private void updatePane(Level aLevel) {
-		
-		
 		if (aLevel.getBackgroundImageFilePath() != null)
 			setBackgroundImage(aLevel.getBackgroundImageFilePath());	
-		System.out.println("update pane");
-		
 		Set<Sprite> levelSprites = this.getNewSprites(this.getDraggableSprites(), aLevel.getMySpriteList());
 		
 		levelSprites.forEach((sprite) -> {
@@ -168,8 +160,6 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 			this.levelPane.getChildren().add(draggableSprite.getImageView());
 		});
 		
-		
-		
 	}
 	
 	private void initPresetListener(Sprite instanceSprite, Sprite spritePreset){
@@ -177,6 +167,7 @@ public class LevelWindow extends AbstractLevelEditorWindow{
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
 			instanceSprite.setMyWidth(spritePreset.getMyWidth());
 			instanceSprite.setMyHeight(spritePreset.getMyHeight());
+			spritePreset.getCharacteristics().forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));;
 		};
 		spritePreset.addListener(invalidationListener);
 	}

@@ -7,5 +7,5 @@ import javafx.scene.input.MouseEvent;
 public interface IButton {
 	
 	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler);
-
+	
 }

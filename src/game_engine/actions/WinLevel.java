@@ -1,8 +1,8 @@
 package game_engine.actions;
 
 import game_data.Sprite;
-import states.LevelWon;
-import states.State;
+import game_data.states.LevelWon;
+import game_data.states.State;
 
 public class WinLevel implements Action {
 	private Sprite mySprite;
