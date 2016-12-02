@@ -39,4 +39,8 @@ public class SpritePhysics {
 	public double getHorizontalGravity(){
 		return horizontalGravity;
 	}
+	
+	public SpritePhysics copy(){
+		return new SpritePhysics(verticalGravity);
+	}
 }
