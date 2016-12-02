@@ -34,13 +34,28 @@ public class Hit implements Action {
 	
 	private void setNewVelocity() {
 				
-		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
-			System.out.println("hitting this");
-			myPlayerSprite.setMyXVelocity(0);
+		if(mySide == Side.LEFT) {
+			//System.out.println("hitting this");
+			if(myPlayerSprite.getMyXVelocity()<0){
+				myPlayerSprite.setMyXVelocity(0);
+			}
 		}
-		if(mySide==Side.TOP || mySide==Side.BOTTOM){
+		if(mySide==Side.RIGHT){
+			if(myPlayerSprite.getMyXVelocity()>0){
+				myPlayerSprite.setMyXVelocity(0);
+			}
+		}
+		if(mySide==Side.TOP){
 			//System.out.println("top");
-			myPlayerSprite.setMyYVelocity(0);
+			if(myPlayerSprite.getMyYVelocity()<0){
+				System.out.println("this should be a thing");
+				myPlayerSprite.setMyYVelocity(0);
+			}
+		}
+		if(mySide==Side.BOTTOM){
+			if(myPlayerSprite.getMyYVelocity()>0){
+				myPlayerSprite.setMyYVelocity(0);
+			}
 		}
 /*		if(mySide==Side.BOTTOM){
 			myPlayerSprite.setMyYVelocity(-myPlayerSprite.getMyYVelocity());
@@ -57,6 +72,7 @@ public class Hit implements Action {
 			myPlayerSprite.setMyXAcceleration(-mySpritePhysics.getHorizontalGravity());
 		}
 		if(mySide==Side.TOP || mySide==Side.BOTTOM){
+			//System.out.println("this should also be a thing");
 			myPlayerSprite.setMyYAcceleration(-mySpritePhysics.getVerticalGravity());
 		}
 		
