@@ -58,7 +58,7 @@ public class GamePlayController extends AbstractController {
 
 	private void initializeGameScene() {
 		setBackground(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
-		updateSprites();
+		initializeSpriteMap();
 	}
 
 	private void initializeAnimation() {
@@ -83,14 +83,30 @@ public class GamePlayController extends AbstractController {
 		myScene.clear();
 	}
 	
-	private void updateSprites() {
+	private void initializeSpriteMap(){
 		for(Sprite sprite : myGameController.getMySpriteList()) {
-			addSpriteToScene(sprite);
+			if(!mySprites.containsKey(sprite)){
+				mySprites.put(sprite, createImageFromSprite(sprite));
+			}
 		}
 	}
 	
-	private void addSpriteToScene(Sprite aSprite) {
-		mySprites.put(aSprite, myScene.addSpriteToScene(aSprite));
+	private void updateSprites() {
+		for(Sprite sprite : myGameController.getMySpriteList()) {
+			if(!mySprites.containsKey(sprite)){
+				mySprites.put(sprite, createImageFromSprite(sprite));
+			}
+			myScene.addSpriteToScene(mySprites.get(sprite));
+		}
+	}
+	
+	private ImageView createImageFromSprite(Sprite aSprite){
+		ImageView image = new ImageView(aSprite.getMyImagePath());
+		image.setFitHeight(aSprite.getMyHeight());
+		image.setFitWidth(aSprite.getMyWidth());
+		image.setTranslateX(aSprite.getMyLocation().getXLocation());
+		image.setTranslateY(aSprite.getMyLocation().getYLocation());
+		return image;
 	}
 	
 	@SuppressWarnings("unchecked")

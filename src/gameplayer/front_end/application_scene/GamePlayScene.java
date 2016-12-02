@@ -2,7 +2,6 @@ package gameplayer.front_end.application_scene;
 
 import java.util.HashSet;
 import java.util.Set;
-import game_data.Sprite;
 import gameplayer.front_end.heads_up_display.HeadsUpDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +20,7 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Set<KeyCode> myKeySet;
+	
 	public GamePlayScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
 		initializeScene(aWidth, aHeight);
@@ -35,8 +35,8 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 		myStack.setBackground(aBackground);
 	}
 	
-	public ImageView addSpriteToScene(Sprite aSprite){
-		return myAnimation.addSpriteToScene(aSprite);
+	public void addSpriteToScene(ImageView aSprite){
+		myAnimation.addSpriteToScene(aSprite);
 	}
 	
 	public void clear(){
@@ -78,18 +78,9 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 		myKeysReleased.add(aKey);
 		myKeySet.remove(aKey);
 	}
-	
-	public Set<KeyCode> getKeysPressedSet(){
-		return myKeysPressed;
-	}
-	
-	public Set<KeyCode> getKeysReleasedSet(){
-		return myKeysReleased;
-	}
 
 	public void clearSets() {
-		// TODO Auto-generated method stub
-		myKeysPressed = new HashSet<KeyCode>();
-		myKeysReleased = new HashSet<KeyCode>();
+		myKeysPressed.clear();;
+		myKeysReleased.clear();;
 	}
 }

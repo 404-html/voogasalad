@@ -1,6 +1,5 @@
 package gameplayer.front_end.application_scene;
 import java.util.Set;
-import game_data.Sprite;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
@@ -37,14 +36,8 @@ public class AnimationPane {
 		myGamePlayCanvas.setStyle("-fx-background-color: red;");
 	}
 	
-	public ImageView addSpriteToScene(Sprite aSprite){
-		ImageView image = new ImageView(aSprite.getMyImagePath());
-		image.setFitWidth(aSprite.getMyWidth());
-		image.setFitHeight(aSprite.getMyHeight());
-		image.setX(aSprite.getMyLocation().getXLocation());
-		image.setY(aSprite.getMyLocation().getYLocation());
-		myGamePlayCanvas.getChildren().add(image);
-		return image;
+	public void addSpriteToScene(ImageView aSprite){
+		myGamePlayCanvas.getChildren().add(aSprite);
 	}
 	
 	public void clear() {
