@@ -52,11 +52,6 @@ public class GUIGenerator implements IGUIGenerator {
 		return newLabel;
 	}
 	
-	//private BackgroundImage createBackgroundImage(String afilepath){
-		//return new BackgroundImage(new Image(afilepath, false, true), BackgroundRepeat.REPEAT, 
-			//BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-	//}
-	
 	public void setBackground(Pane avalue, String afilepath){
 		//avalue.setBackground(new Background(createBackgroundImage(afilepath)));
 	}
@@ -85,6 +80,7 @@ public class GUIGenerator implements IGUIGenerator {
 		return menu;
 	}
 	
+	@Override
 	public Menu createMenu(String aTitle, String[] aString, EventHandler<ActionEvent>...aHandler) {
 		Menu menu = new Menu(aTitle); 
 		for (int i = 0; i < aHandler.length; i++) {

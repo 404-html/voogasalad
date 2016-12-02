@@ -2,9 +2,7 @@ package game_engine;
 
 import java.util.Map;
 import java.util.Set;
-
 import game_data.Game;
-import game_data.Level;
 import game_data.Sprite;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;

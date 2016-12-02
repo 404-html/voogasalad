@@ -4,15 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.application_scene.IDisplay;
+import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
-import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import gameplayer.front_end.popup.PopUpController;
@@ -25,16 +24,13 @@ import javafx.stage.Stage;
  *
  */
 
-public class ApplicationController {
+public class ApplicationController extends AbstractController {
 	
-	public static final int SCENE_SIZE = 1000;
 	private static final String FILE = "gameplayerlabels.";
 	private static final String BUTTONLABEL = "ButtonLabels"; 
-	private Stage myStage;
 	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
-	private ResourceBundle myButtonLabels; 
-	private GUIGenerator myGUIGenerator;
+	private ResourceBundle myButtonLabels;
 	private FacebookInformation myFacebookInformation;
 	
 	public ApplicationController (Stage aStage) {
@@ -42,7 +38,6 @@ public class ApplicationController {
 		mySceneBuilder = new SceneFactory();
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
-		myGUIGenerator = new GUIGenerator();
 		myFacebookInformation = new FacebookInformation();
 	}
 	
@@ -58,7 +53,7 @@ public class ApplicationController {
 		setMainMenuButtonHandlers(mainMenu);
 	}
 
-	private void setMainMenuButtonHandlers(IDisplay mainMenu) {
+	private void setMainMenuButtonHandlers(INavigationDisplay mainMenu) {
 		mainMenu.addButton(myButtonLabels.getString("Play"), e -> {
 			displayGameChoice();
 		}, ButtonDisplay.TEXT);
@@ -71,7 +66,7 @@ public class ApplicationController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void createNavigationButtons(IDisplay aMenu) {
+	private void createNavigationButtons(INavigationDisplay aMenu) {
 		String[] names = {"MAIN MENU", "PROFILE"};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
@@ -84,20 +79,20 @@ public class ApplicationController {
 	public void displayHighScoreScene() {
 		IDisplay highScore = mySceneBuilder.create(SceneIdentifier.HIGHSCORE, myStage.getWidth(), myStage.getHeight());
 		resetStage(highScore);
-		setHighScoreHandlers(highScore);
+		setHighScoreHandlers((INavigationDisplay) highScore);
 	}
 	
-	private void setHighScoreHandlers(IDisplay highScoreScene) {
+	private void setHighScoreHandlers(INavigationDisplay highScoreScene) {
 		highScoreScene.addNode(myGUIGenerator.createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
 	}
 
 	private void displayUserScene() {
 		IDisplay userProfile = mySceneBuilder.create(SceneIdentifier.USERPROFILE, myStage.getWidth(), myStage.getHeight());
 		resetStage(userProfile);
-		setUserProfileButtonHandlers(userProfile);
+		setUserProfileButtonHandlers((INavigationDisplay) userProfile);
 	}
 	
-	private void setUserProfileButtonHandlers(IDisplay userProfile) {
+	private void setUserProfileButtonHandlers(INavigationDisplay userProfile) {
 		userProfile.addButton("HI!", e -> {
 			//do nothing
 		}, ButtonDisplay.TEXT);
@@ -106,11 +101,12 @@ public class ApplicationController {
 	private void displayGameChoice(){
 		IDisplay gameChoice = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
 		resetStage(gameChoice);
-		setGameChoiceButtonHandlers(gameChoice);
+		createNavigationButtons((INavigationDisplay) gameChoice);
+		setGameChoiceButtonHandlers((INavigationDisplay) gameChoice);
 	}
 
-	private void setGameChoiceButtonHandlers(IDisplay gameChoice) {
-		gameChoice.addNode(myGUIGenerator.createComboBox());
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
+		//gameChoice.addNode(myGUIGenerator.createComboBox());
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
@@ -118,7 +114,7 @@ public class ApplicationController {
 				gamePlay.displayGame();
 			}
 		}, ButtonDisplay.TEXT);
-		gameChoice.addButton(myButtonLabels.getString("Options"), a -> {
+		gameChoice.addButton(myButtonLabels.getString("Options"), e -> {
 			PopUpController popup = new PopUpController();
 			PlayerOptionsPopUp options = new PlayerOptionsPopUp();
 			for(HBox box : options.addOptions()){
@@ -126,12 +122,5 @@ public class ApplicationController {
 			}
 			popup.show();
 		}, ButtonDisplay.TEXT);
-	}
-	
-	private void resetStage(IDisplay aScene){
-		myStage.close();
-		myStage.setScene(aScene.init());
-		myStage.show();
-		createNavigationButtons(aScene);
 	}
 }

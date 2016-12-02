@@ -1,7 +1,5 @@
 package gameplayer.back_end.keycode_handler;
 
-import javafx.scene.input.KeyCode;
-
 public class KeyCodeHandler {
 	
 	private double myMovement;
@@ -21,5 +19,4 @@ public class KeyCodeHandler {
 		//System.out.println("key: " + aKey);
 		return -myMovement;
 	}
-
 }
