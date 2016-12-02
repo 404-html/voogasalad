@@ -76,22 +76,18 @@ public class GamePlayController extends AbstractController {
 		});
 	}
 
-	private void updateScene() {
-		//the below line makes sure the keys released aren't stored in the set after they're released
-		clearKeys();
-		myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
-		myGamePlayScene.moveScreen();
-	}
-
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		updateSprites();
 	}
 
-//	private void deleteSprites() {
-//		myGamePlayScene.clearSprites();
-//	}
+	private void updateScene() {
+		//the below line makes sure the keys released aren't stored in the set after they're released
+		clearKeys();
+		myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
+		myGamePlayScene.moveScreen();
+	}
 	
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMySpriteList()) {
