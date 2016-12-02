@@ -11,10 +11,6 @@ import javafx.scene.layout.Pane;
  * 
  * @author George Bernard
  */
-/**
- * @author George Bernard
- *
- */
 public class BooleanSelector {
 
 	private BooleanProperty myBool;
