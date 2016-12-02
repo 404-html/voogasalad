@@ -48,7 +48,7 @@ public abstract class Sprite extends GameObject {
 	public Sprite(Sprite aSprite){
 		preset = aSprite;
 		myLocation = new Location(aSprite.getMyLocation().getXLocation(),
-				aSprite.getMyLocation().getYLocation(), aSprite.getMyLocation().getMyHeading());
+				aSprite.getMyLocation().getYLocation());
 		myWidth = aSprite.getMyWidth();
 		myHeight = aSprite.getMyHeight();
 		setName(aSprite.getName());

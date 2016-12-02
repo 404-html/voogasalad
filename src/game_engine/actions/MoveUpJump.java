@@ -13,10 +13,12 @@ import javafx.scene.image.ImageView;
 public class MoveUpJump extends Move {
 	private List<Sprite>mySpriteList;
 	private Map<Sprite, ImageView>mySpriteImages;
-	public MoveUpJump(Sprite aSprite, double aVelocity, List<Sprite> aSpriteList, Map<Sprite, ImageView>aSpriteImages) {
+	private double myTimeElapsed;
+	public MoveUpJump(Sprite aSprite, double aVelocity, List<Sprite> aSpriteList, Map<Sprite, ImageView>aSpriteImages, double timeElapsed) {
 		super(aSprite, aVelocity);
 		mySpriteList=aSpriteList;
 		mySpriteImages=aSpriteImages;
+		myTimeElapsed=timeElapsed;
 	}
 /*	@Override
 	public Location changeCoordinates(){
