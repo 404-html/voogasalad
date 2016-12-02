@@ -1,20 +1,13 @@
 <game__data.Game>
-  <invalidationListeners class="set">
-    <null/>
-  </invalidationListeners>
   <name>NewTesterBlah</name>
   <myLevels>
     <game__data.Level>
-      <invalidationListeners class="set">
-        <null/>
-      </invalidationListeners>
       <name>TestLevel</name>
       <width>500</width>
       <height>500</height>
       <backgroundImageFilePath>author/images/duke.gif</backgroundImageFilePath>
       <mySprites>
         <game__data.sprites.Player>
-          <invalidationListeners class="set"/>
           <name>Mario</name>
           <myLocation>
             <myHeading>0.0</myHeading>
@@ -32,6 +25,8 @@
         </game__data.sprites.Player>
       </mySprites>
       <myKeyCommands/>
+      <isLevelLost>false</isLevelLost>
+      <isLevelWon>false</isLevelWon>
     </game__data.Level>
   </myLevels>
   <spritePresets/>

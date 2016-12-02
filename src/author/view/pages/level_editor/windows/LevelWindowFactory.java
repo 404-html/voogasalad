@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import author.controller.IAuthorController;
+import author.view.pages.level_editor.windows.level_edit_window.ILevelEditorWindowExternal;
 import javafx.application.Platform;
 
 /**
@@ -35,7 +36,7 @@ public class LevelWindowFactory {
 
 	}
 
-	public AbstractLevelEditorWindow createInstance(String name, IAuthorController authorController) {
+	public ILevelEditorWindowExternal createInstance(String name, IAuthorController authorController) {
 		Class<?> c = null;
 		Constructor<?> constructor = null;
 		try {

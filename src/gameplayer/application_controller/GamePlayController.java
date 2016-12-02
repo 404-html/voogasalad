@@ -25,8 +25,8 @@ public class GamePlayController {
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
-	private AnimationLoop myAnimationLoop;
 	private File myGameFile;
+	private AnimationLoop myAnimationLoop;
 	private Map<Sprite, ImageView> mySprites;
 	private GUIGenerator myGUIGenerator;
 	private KeyCodeHandler myKeyHandler;
@@ -38,6 +38,8 @@ public class GamePlayController {
 		myGameFile = aFile;
 		myGameEngine = new GameEngine(aFile, 0);
 		mySprites = new HashMap<Sprite, ImageView>();
+		myGameFile = aFile;
+		myKeyHandler = new KeyCodeHandler();
 	}
 	
 	public void displayGame() {
@@ -67,12 +69,12 @@ public class GamePlayController {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
 			deleteSprites();
-//			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myScene.getKeysPressedSet(), myScene.getKeysReleasedSet(), mySprites);
+			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myScene.getKeysPressedSet(), myScene.getKeysReleasedSet(), mySprites);
 			updateSprites();
 			//the below line makes sure the keys released aren't stored in the set after they're released
 			myScene.clearSets();
-//			myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
-			myScene.moveScreen(myScene.getKeySet());
+			myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
+			myScene.moveScreen();
 		});
 	}
 	
@@ -105,6 +107,7 @@ public class GamePlayController {
 		});
 		String[] namesForGamePlay = {"Restart", "Save"};
 		myScene.addMenu("GAME PLAY", namesForGamePlay, e -> {
+			myAnimationLoop.stop();
 			GamePlayController newGame = new GamePlayController(myStage, myGameFile);
 			newGame.displayGame();
 		}, e -> {

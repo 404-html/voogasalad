@@ -1,9 +1,6 @@
 /*
  * Author: Alex
  * 
- * if toAct() is true run the following:
- * getLaunched()
- * 
  */
 
 package game_data.characteristics;

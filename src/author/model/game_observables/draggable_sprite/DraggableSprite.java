@@ -1,5 +1,6 @@
 package author.model.game_observables.draggable_sprite;
 
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
@@ -32,7 +33,7 @@ public abstract class DraggableSprite {
 		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
 		myImageView.setFitHeight(DRAG_IMAGE_WIDTH);
 		myImageView.setFitWidth(DRAG_IMAGE_HEIGHT);
-		initListener(aSprite);
+		setListener(aSprite);
 		makeDraggable();
 		openPreferences();
 	}
@@ -41,12 +42,16 @@ public abstract class DraggableSprite {
 		this.mySprite.removeListener(this.invalidationListener);
 	}
 	
+	private void setListener(Sprite aSprite){
+		this.invalidationListener = initListener(aSprite);
+		aSprite.addListener(this.invalidationListener);
+	}
 	
-	private void initListener(Sprite aSprite){
-		this.invalidationListener = (sprite) -> {
+	protected InvalidationListener initListener(Sprite aSprite){
+		InvalidationListener invalidationListener = (sprite) -> {
 			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
 		};
-		aSprite.addListener(this.invalidationListener);
+		return invalidationListener;
 	}
 	
 
@@ -54,8 +59,7 @@ public abstract class DraggableSprite {
 		myImageView.setOnMouseClicked(e -> {
 			if(e.getButton().equals(MouseButton.PRIMARY)){
 	            if(e.getClickCount() == 2){
-	            	// TODO: George(vooga) - Open up the preferences editor
-	                System.out.println("Double clicked");
+	            	new SpriteEditWindow(mySprite).openWindow();
 	            }
 	        }
 		});

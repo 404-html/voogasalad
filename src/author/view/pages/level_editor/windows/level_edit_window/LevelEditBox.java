@@ -6,9 +6,9 @@ package author.view.pages.level_editor.windows.level_edit_window;
 
 import java.io.File;
 
-import author.view.util.FileLoader;
-import author.view.util.FileLoader.FileType;
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.file_helpers.FileLoader;
+import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;

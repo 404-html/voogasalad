@@ -43,8 +43,8 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 		myAnimation.clear();
 	}
 	
-	public void moveScreen(Set<KeyCode> aKeySet){
-		myAnimation.moveScreen(aKeySet);
+	public void moveScreen(){
+		myAnimation.moveScreen(myKeySet);
 	}
 	
 	public void addMenu(ImageView aImage, String[] aText, EventHandler<ActionEvent>... aHandler) {
@@ -72,17 +72,11 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 	private void handleKeyPress(KeyCode aKey) {
 		myKeysPressed.add(aKey);
 		myKeySet.add(aKey);
-		setChanged();
-		notifyObservers();
-		clearChanged();
 	}
 	
 	private void handleKeyRelease(KeyCode aKey) {
 		myKeysReleased.add(aKey);
 		myKeySet.remove(aKey);
-		setChanged();
-		notifyObservers();
-		clearChanged();
 	}
 	
 	public Set<KeyCode> getKeysPressedSet(){
@@ -91,10 +85,6 @@ public class GamePlayScene extends AbstractPlayerScene implements IDisplay {
 	
 	public Set<KeyCode> getKeysReleasedSet(){
 		return myKeysReleased;
-	}
-	
-	public Set<KeyCode> getKeySet(){
-		return myKeySet;
 	}
 
 	public void clearSets() {

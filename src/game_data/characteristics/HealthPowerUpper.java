@@ -1,10 +1,13 @@
 package game_data.characteristics;
 import game_engine.actions.*;
+
 import java.util.Map;
 
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.sprites.Player;
+import game_engine.actions.Damage;
 import javafx.geometry.Side;
 
 /**
@@ -35,10 +38,12 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			//TODO need to make action
-			//Action myAction = new Damage(mySprite, collidedSprite);
-			//myAction.act();
-		}		
-	}
+			if (collidedSprite instanceof Player){
+				myAction = new Damage(-getHealthToGain(), collidedSprite);
+				myAction.act();
+			}		
+		}
 
+	}
+	
 }

@@ -10,9 +10,9 @@ import javafx.geometry.Side;
 @CharacteristicAnnotation(name = "Collision Pacer")
 public class CollisionPacer extends Pacer implements Characteristic{
 
-	@ParameterAnnotation(parameters = {"Speed"})
-	public CollisionPacer(int speed) {
-		super(speed);
+	@ParameterAnnotation(parameters = {"Speed", "Sprite"})
+	public CollisionPacer(int speed, Sprite aSprite) {
+		super(speed, aSprite);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class CollisionPacer extends Pacer implements Characteristic{
 	
 	@Override
 	public Characteristic copy() {
-		return new CollisionPacer(this.getSpeed());
+		return new CollisionPacer(this.getSpeed(), this.getSprite());
 	}
 
 	@Override

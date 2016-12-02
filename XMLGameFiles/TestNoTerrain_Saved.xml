@@ -1,0 +1,119 @@
+<game__data.Game>
+  <name>TestNoTerrain</name>
+  <myLevels>
+    <game__data.Level>
+      <name>one</name>
+      <width>1026</width>
+      <height>615</height>
+      <backgroundImageFilePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mari-background-2.gif</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Enemy>
+          <name>Goomba</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>719.0</myXLocation>
+            <myYLocation>236.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Enemy">
+            <name>Goomba</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/angry_goomba.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.HorizontalBoundedPacer>
+                <mySpeed>100</mySpeed>
+                <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+                <myLowerBound>10.0</myLowerBound>
+                <myUpperBound>20.0</myUpperBound>
+              </game__data.characteristics.HorizontalBoundedPacer>
+            </myCharacteristics>
+            <id>ConcreteDraggableSprite1480599944537</id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/angry_goomba.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.HorizontalBoundedPacer>
+              <mySpeed>100</mySpeed>
+              <mySprite class="game_data.sprites.Enemy" reference="../../../preset"/>
+              <myLowerBound>10.0</myLowerBound>
+              <myUpperBound>20.0</myUpperBound>
+            </game__data.characteristics.HorizontalBoundedPacer>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Player>
+          <name>No Name</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>400.0</myXLocation>
+            <myYLocation>124.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player">
+            <name>No Name</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mario.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Damager>
+                <myDamageToGive>100</myDamageToGive>
+                <mySprite class="game_data.sprites.Player" reference="../../.."/>
+              </game__data.characteristics.Damager>
+            </myCharacteristics>
+            <id>ConcreteDraggableSprite1480599940775</id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mario.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Damager>
+              <myDamageToGive>100</myDamageToGive>
+              <mySprite class="game_data.sprites.Player" reference="../../../preset"/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+      </mySprites>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Enemy reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy/preset"/>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+  </spritePresets>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

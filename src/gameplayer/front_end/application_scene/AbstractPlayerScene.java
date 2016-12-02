@@ -1,6 +1,5 @@
 package gameplayer.front_end.application_scene;
 
-import java.util.Observable;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
 import javafx.scene.Scene;
@@ -12,7 +11,7 @@ import javafx.scene.Scene;
  *
  */
 
-public abstract class AbstractPlayerScene extends Observable implements IDisplay {
+public abstract class AbstractPlayerScene implements IDisplay {
 	
 	protected Scene myScene;
 	protected IGUIGenerator myGUIGenerator;
