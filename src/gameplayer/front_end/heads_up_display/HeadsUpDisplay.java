@@ -2,7 +2,6 @@ package gameplayer.front_end.heads_up_display;
 
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
-import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -10,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -24,7 +22,6 @@ public class HeadsUpDisplay {
 	private BorderPane myRoot;
 	
 	public HeadsUpDisplay(Scene aScene, double aWidth, double aHeight) {
-		//super(aWidth, aHeight);
 		myGUIGenerator = new GUIGenerator();
 		myRoot = new BorderPane();
 	}

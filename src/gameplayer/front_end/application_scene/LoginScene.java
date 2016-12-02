@@ -1,14 +1,11 @@
 package gameplayer.front_end.application_scene;
 
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,7 +16,7 @@ import javafx.scene.layout.VBox;
  * @author tedmarchildon, hannah
  *
  */
-public class LoginScene extends AbstractPlayerScene {
+public class LoginScene extends AbstractNavigationPlayerScene {
 
 	private VBox myOptions;
 	private HBox myLoginOptions;
@@ -65,8 +62,8 @@ public class LoginScene extends AbstractPlayerScene {
 		return myPassword.getText();
 	}
 
-	@Override
-	public void addNavigationMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>... aHandler) {
-		// do nothing
-	}
+//	@Override
+//	public void addNavigationMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>... aHandler) {
+//		// do nothing
+//	}
 }

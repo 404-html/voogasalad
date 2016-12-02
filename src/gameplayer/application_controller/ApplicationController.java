@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.application_scene.IDisplay;
+import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -33,7 +34,7 @@ public class ApplicationController {
 	private Stage myStage;
 	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
-	private ResourceBundle myButtonLabels; 
+	private ResourceBundle myButtonLabels;
 	private GUIGenerator myGUIGenerator;
 	private FacebookInformation myFacebookInformation;
 	
@@ -58,7 +59,7 @@ public class ApplicationController {
 		setMainMenuButtonHandlers(mainMenu);
 	}
 
-	private void setMainMenuButtonHandlers(IDisplay mainMenu) {
+	private void setMainMenuButtonHandlers(INavigationDisplay mainMenu) {
 		mainMenu.addButton(myButtonLabels.getString("Play"), e -> {
 			displayGameChoice();
 		}, ButtonDisplay.TEXT);
@@ -71,7 +72,7 @@ public class ApplicationController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void createNavigationButtons(IDisplay aMenu) {
+	private void createNavigationButtons(INavigationDisplay aMenu) {
 		String[] names = {"MAIN MENU", "PROFILE"};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
@@ -84,20 +85,20 @@ public class ApplicationController {
 	public void displayHighScoreScene() {
 		IDisplay highScore = mySceneBuilder.create(SceneIdentifier.HIGHSCORE, myStage.getWidth(), myStage.getHeight());
 		resetStage(highScore);
-		setHighScoreHandlers(highScore);
+		setHighScoreHandlers((INavigationDisplay) highScore);
 	}
 	
-	private void setHighScoreHandlers(IDisplay highScoreScene) {
+	private void setHighScoreHandlers(INavigationDisplay highScoreScene) {
 		highScoreScene.addNode(myGUIGenerator.createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
 	}
 
 	private void displayUserScene() {
 		IDisplay userProfile = mySceneBuilder.create(SceneIdentifier.USERPROFILE, myStage.getWidth(), myStage.getHeight());
 		resetStage(userProfile);
-		setUserProfileButtonHandlers(userProfile);
+		setUserProfileButtonHandlers((INavigationDisplay) userProfile);
 	}
 	
-	private void setUserProfileButtonHandlers(IDisplay userProfile) {
+	private void setUserProfileButtonHandlers(INavigationDisplay userProfile) {
 		userProfile.addButton("HI!", e -> {
 			//do nothing
 		}, ButtonDisplay.TEXT);
@@ -106,10 +107,11 @@ public class ApplicationController {
 	private void displayGameChoice(){
 		IDisplay gameChoice = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
 		resetStage(gameChoice);
-		setGameChoiceButtonHandlers(gameChoice);
+		createNavigationButtons((INavigationDisplay) gameChoice);
+		setGameChoiceButtonHandlers((INavigationDisplay) gameChoice);
 	}
 
-	private void setGameChoiceButtonHandlers(IDisplay gameChoice) {
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
 		gameChoice.addButton(myButtonLabels.getString("ChooseGame"), e -> {
 			//TODO
 		}, ButtonDisplay.TEXT);
@@ -134,6 +136,5 @@ public class ApplicationController {
 		myStage.close();
 		myStage.setScene(aScene.init());
 		myStage.show();
-		createNavigationButtons(aScene);
 	}
 }

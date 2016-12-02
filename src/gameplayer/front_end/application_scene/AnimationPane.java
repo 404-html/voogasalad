@@ -2,13 +2,9 @@ package gameplayer.front_end.application_scene;
 import java.util.Set;
 import game_data.Sprite;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
@@ -19,27 +15,22 @@ import javafx.scene.layout.Pane;
  *
  */
 
-public class AnimationScene {
+public class AnimationPane {
 	
 	private Pane myGamePlayCanvas;
 	private KeyCodeHandler myKeyCodeHandler;
 	
-	public AnimationScene(Scene aScene, double aWidth, double aHeight) {
+	public AnimationPane(Scene aScene, double aWidth, double aHeight) {
 		myGamePlayCanvas = new Pane();
 		myKeyCodeHandler = new KeyCodeHandler();
 	}
+	
 	/**
 	 * Add the correct nodes to the scene
 	 */
 	
 	public Pane init() {
 		return myGamePlayCanvas;
-	}
-	
-	public void addButton(EventHandler<? super MouseEvent> handler){
-		Button b = new Button("Save");
-		b.setOnMouseClicked(handler);
-		myGamePlayCanvas.getChildren().add(b);
 	}
 	
 	public void makeRed() {
@@ -69,5 +60,4 @@ public class AnimationScene {
 			myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + myKeyCodeHandler.getMovement(key));
 		}
 	}
-	
 }

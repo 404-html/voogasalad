@@ -1,10 +1,7 @@
 package gameplayer.front_end.application_scene;
 
-import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -20,7 +17,7 @@ public class GameChoiceScene extends AbstractNavigationPlayerScene {
 	}
 
 	@Override
-	public Scene init(){
+	public Scene init() {
 		myRoot.setCenter(addNodes());
 		return myScene;
 	}
@@ -31,6 +28,5 @@ public class GameChoiceScene extends AbstractNavigationPlayerScene {
 		//myOptions.bin
 		return myOptions;
 	}
-
 
 }
