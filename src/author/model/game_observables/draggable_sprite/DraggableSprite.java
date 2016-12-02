@@ -1,6 +1,8 @@
 package author.model.game_observables.draggable_sprite;
 
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
+import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -19,6 +21,7 @@ public abstract class DraggableSprite {
 
 	private ImageView myImageView;
 	private Sprite mySprite;
+	private InvalidationListener invalidationListener;
 
 	// These define the size of the ghost image that follows the mouse when
 	// dragging
@@ -30,25 +33,35 @@ public abstract class DraggableSprite {
 		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
 		myImageView.setFitHeight(DRAG_IMAGE_WIDTH);
 		myImageView.setFitWidth(DRAG_IMAGE_HEIGHT);
-		initListener(aSprite);
+		setListener(aSprite);
 		makeDraggable();
 		openPreferences();
 	}
+	
+	public void removeListener(){
+		this.mySprite.removeListener(this.invalidationListener);
+	}
+	
+	private void setListener(Sprite aSprite){
+		this.invalidationListener = initListener(aSprite);
+		aSprite.addListener(this.invalidationListener);
+	}
+	
+	protected InvalidationListener initListener(Sprite aSprite){
+		InvalidationListener invalidationListener = (sprite) -> {
+			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
+		};
+		return invalidationListener;
+	}
+	
 
 	private void openPreferences() {
 		myImageView.setOnMouseClicked(e -> {
 			if(e.getButton().equals(MouseButton.PRIMARY)){
 	            if(e.getClickCount() == 2){
-	            	// TODO: George(vooga) - Open up the preferences editor
-	                System.out.println("Double clicked");
+	            	new SpriteEditWindow(mySprite).openWindow();
 	            }
 	        }
-		});
-	}
-	
-	private void initListener(Sprite aSprite){
-		aSprite.addListener((sprite) -> {
-			this.myImageView.setImage(new Image(aSprite.getMyImagePath()));
 		});
 	}
 

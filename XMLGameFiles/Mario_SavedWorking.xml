@@ -1,0 +1,51 @@
+<game__data.Game>
+  <name>Mario</name>
+  <myLevels>
+    <game__data.Level>
+      <name>Level1</name>
+      <width>1279</width>
+      <height>847</height>
+      <backgroundImageFilePath>XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Player>
+          <name>Mario</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>389.5</myXLocation>
+            <myYLocation>300</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/MarioSMBW.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myCollisionHandler/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+      </mySprites>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Player>
+      <name>No Name</name>
+      <myLocation>
+        <myHeading>0.0</myHeading>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>XMLGameFiles/mario.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/myCollisionHandler"/>
+      <myCharacteristics/>
+      <id>ConcreteDraggableSprite1480386505583</id>
+      <myStates/>
+    </game__data.sprites.Player>
+  </spritePresets>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

@@ -3,9 +3,8 @@ package author.view.pages.level_editor.windows;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteDraggableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
-import author.view.util.ToolBarBuilder;
+import author.view.util.facades.ToolBarBuilder;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -30,14 +29,6 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 		super(authorController);
 		super.getWindow().getChildren().add(createScroller());
 		styleContainer();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			container.getChildren().add(node);
-		}
 	}
 
 	@Override
@@ -72,10 +63,10 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 	 * initListener(author.controller.IAuthorController, game_data.Level)
 	 */
 	@Override
-	protected void initListener(IAuthorController authorController) {
-		authorController.getModel().getGame().addListener((game) -> {
+	protected void initListener() {
+		getController().getModel().getGame().addListener((game) -> {
 			this.container.getChildren().clear();
-			authorController.getModel().getGame().getPresets().forEach((sprite) -> {
+			getController().getModel().getGame().getPresets().forEach((sprite) -> {
 				DraggableSprite dragSprite = new ConcreteDraggableSprite(sprite);
 				this.container.getChildren().add(dragSprite.getImageView());
 			});

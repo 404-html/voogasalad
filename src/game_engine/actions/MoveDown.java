@@ -8,10 +8,14 @@ public class MoveDown extends Move {
 	public MoveDown(Sprite aSprite, double aVelocity) {
 		super(aSprite, aVelocity);
 	}
-	@Override
+/*	@Override
 	public Location changeCoordinates(){
 		myNewLocation.setLocation(myOldLocation.getXLocation(), myOldLocation.getYLocation()+myVelocity);
 		return myNewLocation;
+	}*/
+	@Override
+	public void setVelocity(){
+		mySprite.setMyYVelocity(myVelocity);
 	}
 
 }

@@ -6,9 +6,7 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import gameplayer.back_end.facebook.FacebookInformation;
-import gameplayer.front_end.animated_display.AnimatedDisplay;
 import gameplayer.front_end.application_scene.IDisplay;
-import gameplayer.front_end.application_scene.LoginScene;
 import gameplayer.front_end.application_scene.MainMenuScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -16,7 +14,6 @@ import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import gameplayer.front_end.popup.PopUpController;
 import javafx.stage.Stage;
@@ -55,45 +52,13 @@ public class ApplicationController {
 		setMainMenuButtonHandlers((MainMenuScene) mainMenu);
 	}
 
-	//public void displayLogin() {
-		//LoginScene login = (LoginScene) mySceneBuilder.create(SceneIdentifier.LOGIN, myStage.getWidth(), myStage.getHeight());
-		//resetStage(login);
-		//setLoginButtonHandlers((LoginScene) login);
-	//}
-
 	public void displayMainMenu() {
 		MainMenuScene mainMenu = (MainMenuScene) mySceneBuilder.create(SceneIdentifier.MAINMENU, myStage.getWidth(), myStage.getHeight());
 		resetStage(mainMenu);
 		setMainMenuButtonHandlers(mainMenu);
 	}
-	
-	/*private void setLoginButtonHandlers(LoginScene login) {
-		login.addButton(myButtonLabels.getString("Enter"), e -> {
-			try {
-				myInformationController.userSignIn(login.getUserName(), login.getPassword());
-				displayMainMenu();
-			} catch (Exception x) {
-				showError(x);
-			}
-		}, ButtonDisplay.TEXT);
-		login.addButton(myButtonLabels.getString("SignUp"), e -> {
-			try {
-				myInformationController.userSignUp(login.getUserName(), login.getPassword());
-				displayMainMenu();
-			} catch (Exception x) {
-				showError(x);
-			}
-		}, ButtonDisplay.TEXT);
-	}*/
-
-	private void showError(Exception x) {
-		ErrorAlert error = new ErrorAlert();
-		error.show(x);
-	}
 
 	private void setMainMenuButtonHandlers(IDisplay mainMenu) {
-		//AnimatedTitleDisplay title = new AnimatedTitleDisplay();
-		//mainMenu.addNode(title.buildAnimatedTitleDisplay());
 		mainMenu.addButton(myButtonLabels.getString("Play"), e -> {
 			displayGameChoice();
 		}, ButtonDisplay.TEXT);
@@ -105,6 +70,7 @@ public class ApplicationController {
 		}, ButtonDisplay.FACEBOOK);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void createNavigationButtons(IDisplay aMenu) {
 		String[] names = {"MAIN MENU", "PROFILE"};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
@@ -113,14 +79,6 @@ public class ApplicationController {
 		}, e -> {
 			displayUserScene();
 		});
-			//displayUserScene();
-		//});
-		//aMenu.addNavigationMenu(myButtonLabels.getString("MainMenu"), e -> {
-			//displayMainMenu();
-		//});
-		//aMenu.addNavigationButton(myButtonLabels.getString("SignOut"), e -> {
-			//displayLogin();
-		//}, ButtonDisplay.TEXT);
 	}
 	
 	public void displayHighScoreScene() {
@@ -153,8 +111,7 @@ public class ApplicationController {
 
 	private void setGameChoiceButtonHandlers(IDisplay gameChoice) {
 		gameChoice.addButton(myButtonLabels.getString("ChooseGame"), e -> {
-//			GamePlayController gamePlay = new GamePlayController(myStage);
-//			gamePlay.displayGame();
+			//TODO
 		}, ButtonDisplay.TEXT);
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);

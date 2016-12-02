@@ -2,8 +2,9 @@ package game_data;
 
 import java.util.HashSet;
 import java.util.Set;
-import states.State;
+
 import game_data.characteristics.Characteristic;
+import game_data.states.State;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -14,10 +15,14 @@ import game_data.characteristics.Characteristic;
 public abstract class Sprite extends GameObject {
 
 	private Location myLocation;
+	private Sprite preset;
 	private int myWidth;
 	private int myHeight;
 	private String myImagePath;
-	private double myVelocity;
+	private double myXVelocity;
+	private double myYVelocity;
+	private double myXAcceleration;
+	private double myYAcceleration;
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
 	private String id = "";
@@ -30,7 +35,10 @@ public abstract class Sprite extends GameObject {
 		myHeight = aHeight;
 		setName(aName);
 		myImagePath = aImagePath;
-		myVelocity = 0;
+		myXVelocity = 0;
+		myYVelocity = 0;
+		myXAcceleration = 0;
+		myYAcceleration = 0;
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
@@ -38,13 +46,17 @@ public abstract class Sprite extends GameObject {
 	
 	//for copying sprites
 	public Sprite(Sprite aSprite){
+		preset = aSprite;
 		myLocation = new Location(aSprite.getMyLocation().getXLocation(),
 				aSprite.getMyLocation().getYLocation(), aSprite.getMyLocation().getMyHeading());
 		myWidth = aSprite.getMyWidth();
 		myHeight = aSprite.getMyHeight();
 		setName(aSprite.getName());
 		myImagePath = aSprite.getMyImagePath();
-		myVelocity = aSprite.getMyVelocity();
+		myXVelocity = aSprite.getMyXVelocity();
+		myYVelocity = aSprite.getMyYVelocity();
+		myXAcceleration = aSprite.getMyXAcceleration();
+		myYAcceleration = aSprite.getMyYAcceleration();
 		myCollisionHandler = aSprite.getMyCollisionHandler(); //to change: would need to have the same collision handler but we don't know what that is yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
@@ -83,6 +95,11 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 	
+	public void removeCharacteristic(Characteristic aCharacteristic){
+		if (myCharacteristics.contains(aCharacteristic))
+			myCharacteristics.remove(aCharacteristic);
+	}
+	
 	public Set<State> getStates(){
 		return myStates;
 	}
@@ -90,6 +107,11 @@ public abstract class Sprite extends GameObject {
 	public void addState(State aState){
 		myStates.add(aState);
 		notifyListeners();
+	}
+	
+	public void removeState(State aState){
+		if (myStates.contains(aState))
+			myStates.remove(aState);
 	}
 	
 	public Location getMyLocation() {
@@ -100,13 +122,37 @@ public abstract class Sprite extends GameObject {
 		this.myLocation = myLocation;
 		notifyListeners();
 	}
-	public double getMyVelocity() {
-		return myVelocity;
+	public double getMyXVelocity() {
+		return myXVelocity;
 	}
-	public void setMyVelocity(double myVelocity) {
-		this.myVelocity = myVelocity;
+	public double getMyYVelocity() {
+		return myYVelocity;
+	}
+	public void setMyXVelocity(double myVelocity) {
+		this.myXVelocity = myVelocity;
 		notifyListeners();
 	}
+	public void setMyYVelocity(double myVelocity){
+		this.myYVelocity = myVelocity;
+		notifyListeners();
+	}
+	
+	public double getMyXAcceleration() {
+		return myXAcceleration;
+	}
+
+	public void setMyXAcceleration(double myXAcceleration) {
+		this.myXAcceleration = myXAcceleration;
+	}
+
+	public double getMyYAcceleration() {
+		return myYAcceleration;
+	}
+
+	public void setMyYAcceleration(double myYAcceleration) {
+		this.myYAcceleration = myYAcceleration;
+	}
+
 
 	public String getMyImagePath() {
 		return myImagePath;
@@ -126,13 +172,11 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 
-	@Deprecated
 	public void setId(String id) {
 		this.id = id;
 		notifyListeners();
 	}
 	
-	@Deprecated
 	public String getId() {
 		return id;
 	}
@@ -153,6 +197,10 @@ public abstract class Sprite extends GameObject {
 	public void setMyHeight(int myHeight) {
 		this.myHeight = myHeight;
 		notifyListeners();
+	}
+	
+	public Sprite getPreset(){
+		return this.preset;
 	}
 
 }

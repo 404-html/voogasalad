@@ -4,16 +4,17 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
+import game_data.characteristics.Impassable;
 import game_data.sprites.Character;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
+import game_data.states.Health;
+import game_data.states.Physics;
+import game_data.states.State;
+import game_engine.actions.Hit;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import states.Health;
-import states.Physics;
-import states.State;
 public class EnginePlayerController implements IEnginePlayerControllerInterface {
 	private Level myLevel;
 	private int myWidth, myHeight;
@@ -49,8 +50,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 		myLevel.getMainPlayer().getMyLocation().setMyHeading(-1*270*Math.PI/180);
 		int j = 1;
-		for(int i = 226; i<1226; i+=100){
-			myLevel.addNewSprite(new Terrain(new Location(i, 500, 90), 100, 100, "block" + j, "author/images/duvall_scary.png"));
+		//for(int i = 226; i<1226; i+=100){
+			myLevel.addNewSprite(new Terrain(new Location(226, 500, 90), 1000, 100, "block" + j, "author/images/betterblock.png"));
 			//myLevel.getMySpriteList().get(j).addCharacteristic(new Bouncer(20, myLevel.getMySpriteList().get(j)));
 			//System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
 			//myLevel.getMySpriteList().get(j).addState(new Physics(new SpritePhysics(0.0)));
@@ -58,11 +59,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			//System.out.println(j);
 			//System.out.println(myLevel.getMySpriteList().size());
 			j++;
-		}
-		myLevel.addNewSprite(new Terrain(new Location(826, 400, 90), 100, 100, "block" + 15, "author/images/duvall_scary.png"));
+		//}
+			myLevel.addNewSprite(new Terrain(new Location(726, 400, 90), 100, 100, "block2", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(826, 300, 90), 100, 100, "block3", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(926, 200, 90), 100, 100, "block4", "author/images/betterblock.png"));
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(!(s instanceof Player)){
-				s.addCharacteristic(new Bouncer(20, s));
+				s.addCharacteristic(new Impassable(s));
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}
@@ -154,9 +157,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	public List<Boolean> getMySpriteIsAliveList() {
 		return mySpriteIsAliveList;
 	} 
-	public boolean isLost(){
-		return myLevel.isLevelLost();
-	}
 	public Game getMyGame(){
 		return myGame;
 	}

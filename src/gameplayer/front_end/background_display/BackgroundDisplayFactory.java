@@ -3,7 +3,6 @@ package gameplayer.front_end.background_display;
 import java.io.File;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
@@ -21,11 +20,10 @@ public class BackgroundDisplayFactory {
 				aHeight, 
 				true, 
 				true);
-		//System.out.println(new File(aFileName).toURI().getPath());
 		BackgroundImage backgroundImage = new BackgroundImage(image, 
 				BackgroundRepeat.NO_REPEAT, 
 				BackgroundRepeat.NO_REPEAT, 
-				BackgroundPosition.DEFAULT, 
+				BackgroundPosition.DEFAULT,
 				new BackgroundSize(100, 100, true, true, true, true));
 		return new Background(backgroundImage);
 	}

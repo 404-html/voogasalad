@@ -1,6 +1,8 @@
 package author.model.game_observables.draggable_sprite;
 
 import game_data.Sprite;
+import javafx.beans.InvalidationListener;
+import javafx.scene.image.Image;
 
 public class ConcreteMovableSprite extends DraggableSprite {
 
@@ -10,6 +12,8 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	public ConcreteMovableSprite(Sprite aSprite) {
 		super(aSprite);
 	}
+	
+	
 
 	/**
 	 * http://stackoverflow.com/questions/27080039/proper-way-to-move-a-javafx8-node-around
@@ -30,6 +34,16 @@ public class ConcreteMovableSprite extends DraggableSprite {
 			mouseY = event.getSceneY();
 			super.getSprite().getMyLocation().setLocation(super.getImageView().getLayoutX(), super.getImageView().getLayoutY());
 		});
+	}
+	
+	@Override
+	protected InvalidationListener initListener(Sprite aSprite){
+		InvalidationListener invalidationListener = (sprite) -> {
+			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
+			this.getImageView().setFitWidth(aSprite.getMyWidth());
+			this.getImageView().setFitHeight(aSprite.getMyHeight());
+		};
+		return invalidationListener;
 	}
 
 }

@@ -1,8 +1,7 @@
 package author.view.pages.level_editor.windows;
 
 import author.controller.IAuthorController;
-import author.view.util.ToolBarBuilder;
-import javafx.scene.Node;
+import author.view.util.facades.ToolBarBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -25,14 +24,6 @@ public class LevelProgressionWindow extends AbstractLevelEditorWindow {
 
 	public LevelProgressionWindow(IAuthorController authorController) {
 		super(authorController);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			container.getChildren().add(node);
-		}
 	}
 
 	@Override
@@ -65,10 +56,10 @@ public class LevelProgressionWindow extends AbstractLevelEditorWindow {
 	 * initListener(author.controller.IAuthorController, game_data.Level)
 	 */
 	@Override
-	protected void initListener(IAuthorController authorController) {
-		authorController.getModel().getGame().addListener((game) -> {
+	protected void initListener() {
+		getController().getModel().getGame().addListener((game) -> {
 			this.container.getChildren().clear();
-			authorController.getModel().getGame().getLevels().forEach((level) -> {
+			getController().getModel().getGame().getLevels().forEach((level) -> {
 				if (level.getBackgroundImageFilePath() != null) {
 					ImageView imageView = getImageView(level.getBackgroundImageFilePath(),
 							progressionScroller.prefViewportWidthProperty(),

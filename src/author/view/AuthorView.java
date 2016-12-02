@@ -6,10 +6,10 @@ import author.controller.IAuthorController;
 import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.pages.level_editor.LevelEditorFactory;
 import author.view.pages.menu.MenuFactory;
-import author.view.pages.sprite.SpritesPage;
-import author.view.util.FileLoader;
-import author.view.util.TabPaneFacade;
-import author.view.util.FileLoader.FileType;
+import author.view.pages.sprite.page.SpritesPage;
+import author.view.util.facades.TabPaneFacade;
+import author.view.util.file_helpers.FileLoader;
+import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import javafx.geometry.Side;
 import javafx.scene.Node;
@@ -69,16 +69,15 @@ public class AuthorView {
 		menuBar.getMenus().addAll(menuNew, menuSave, menuLoad);
 
 		menuNew.getItems().addAll(new MenuFactory().createItem("New Game", e -> {
-			// TODO: Jordan(vooga) - create new game
+			this.authorController.getModel().newGame();
 		}).getItem(), new MenuFactory().createItem("New Level", e -> {
 			Level createdLevel = this.myLevelEditor.createLevel();
 			if (createdLevel != null){
 				this.authorController.getModel().getGame().addNewLevel(createdLevel);
 			}
 		}).getItem());
-
+		
 		menuSave.getItems().add(new MenuFactory().createItem(("Save Game"), e -> {
-			// Save game
 			authorController.getModel().saveGame("Saved");// TODO: prompt user for name
 		}).getItem());
 

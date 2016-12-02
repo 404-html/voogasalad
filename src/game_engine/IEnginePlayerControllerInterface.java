@@ -32,6 +32,4 @@ public interface IEnginePlayerControllerInterface {
 
 	public List<Boolean> getMySpriteIsAliveList();
 
-	public boolean isLost();
-
 }

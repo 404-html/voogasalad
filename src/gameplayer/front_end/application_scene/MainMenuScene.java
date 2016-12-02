@@ -47,7 +47,7 @@ public class MainMenuScene extends AbstractNavigationPlayerScene {
 		myOptions.setLayoutX(0);
 		myOptions.setLayoutY(0);
 		myOptions.getChildren().add(myAnimation.makeFadeTransition(myGUIGenerator.createImage("data/gui/praying-for-the-six.png", myWidth / 10)));
-		myOptions.getChildren().add(myGUIGenerator.createImage("data/gui/it_works.png", myWidth / 5));
+		//myOptions.getChildren().add(myGUIGenerator.createImage("data/gui/it_works.png", myWidth / 5));
 		myOptions.setAlignment(Pos.CENTER);
 		return myOptions;
 	}
