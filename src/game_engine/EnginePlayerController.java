@@ -11,6 +11,7 @@ import game_data.sprites.Terrain;
 import game_data.states.Health;
 import game_data.states.Physics;
 import game_data.states.State;
+import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
 
 import java.util.ArrayList;
@@ -50,8 +51,9 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 		myLevel.getMainPlayer().getMyLocation().setMyHeading(-1*270*Math.PI/180);
 		int j = 1;
-		//for(int i = 226; i<1226; i+=100){
-			myLevel.addNewSprite(new Terrain(new Location(226, 500, 90), 1000, 100, "block" + j, "author/images/betterblock.png"));
+		//for(int i = 226; i<10260; i+=1000){
+		for(int i = 226; i<1226; i+=100){
+			myLevel.addNewSprite(new Terrain(new Location(i, 500, 90), 100, 100, "block" + j, "author/images/betterblock.png"));
 			//myLevel.getMySpriteList().get(j).addCharacteristic(new Bouncer(20, myLevel.getMySpriteList().get(j)));
 			//System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
 			//myLevel.getMySpriteList().get(j).addState(new Physics(new SpritePhysics(0.0)));
@@ -59,13 +61,18 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			//System.out.println(j);
 			//System.out.println(myLevel.getMySpriteList().size());
 			j++;
-		//}
-			myLevel.addNewSprite(new Terrain(new Location(726, 400, 90), 100, 100, "block2", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(826, 300, 90), 100, 100, "block3", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(926, 200, 90), 100, 100, "block4", "author/images/betterblock.png"));
+		}
+		myLevel.addNewSprite(new Terrain(new Location(726, 400, 90), 100, 100, "block20", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(826, 300, 90), 100, 100, "block21", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(926, 200, 90), 100, 100, "block23", "author/images/betterblock.png"));
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(!(s instanceof Player)){
+//				if(s.getName().equals("block1")){
+//					s.addCharacteristic(new Bouncer(100, s));
+//				}
+				//else{
 				s.addCharacteristic(new Impassable(s));
+				//}
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}

@@ -68,10 +68,10 @@ public class Hit implements Action {
 				mySpritePhysics = ((Physics) s).getPhysics();
 			}
 		}
-		if(mySide == Side.LEFT || mySide==Side.RIGHT){
+		if((mySide == Side.LEFT && mySpritePhysics.getHorizontalGravity()>0)||(mySide == Side.RIGHT && mySpritePhysics.getHorizontalGravity()<0)){
 			myPlayerSprite.setMyXAcceleration(-mySpritePhysics.getHorizontalGravity());
 		}
-		if(mySide==Side.TOP){
+		else if((mySide==Side.TOP && mySpritePhysics.getVerticalGravity()>0)||(mySide==Side.BOTTOM && mySpritePhysics.getVerticalGravity()<0)){
 			//System.out.println("this should also be a thing");
 			myPlayerSprite.setMyYAcceleration(-mySpritePhysics.getVerticalGravity());
 		}
