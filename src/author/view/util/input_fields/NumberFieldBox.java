@@ -2,18 +2,31 @@ package author.view.util.input_fields;
 
 import javafx.beans.value.ChangeListener;
 
+/**
+ * Helpful wrapper for TextField with Label. Only accepts Numerical inputs
+ * 
+ * @author George Bernard
+ */
 public class NumberFieldBox extends TextFieldBox {
 
 	public NumberFieldBox() {
 		super();
 		getTextField().textProperty().addListener(makeOnlyNumberProperty());
+		setValue(0);
 	}
 
 	public NumberFieldBox(String aText) {
 		super(aText);
 		getTextField().textProperty().addListener(makeOnlyNumberProperty());
+		getTextField().setText( aText );
+		getTextField().setText( getTextField().getText().equals("") ? "0" : aText );
 	}
 	
+	/**
+	 * Returns int parsed from textfield. If not an integer, returns zero
+	 * 
+	 * @return parsed int
+	 */
 	public int getInteger(){
 		Integer x;
 		
@@ -26,6 +39,11 @@ public class NumberFieldBox extends TextFieldBox {
 		return x;
 	}
 	
+	/**
+	 * Returns double parsed from textfield. If not a double, returns 0
+	 * 
+	 * @return parsed Double
+	 */
 	public double getDouble(){
 		Double x;
 		
@@ -38,6 +56,11 @@ public class NumberFieldBox extends TextFieldBox {
 		return x;
 	}
 	
+	/**
+	 * Sets the value of the number inside of the textfield
+	 * 
+	 * @param aNumber
+	 */
 	public void setValue(Number aNumber){
 		getTextField().setText(aNumber.toString());
 	}
