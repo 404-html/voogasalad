@@ -8,6 +8,8 @@ import java.util.Map;
 
 import game_data.Location;
 import game_data.Sprite;
+import game_data.states.Solid;
+import game_data.states.State;
 import game_engine.ListOfCollidingSprites;
 import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
@@ -38,7 +40,9 @@ public class MoveRight extends Move {
 
 		} 
 		//System.out.println(myCollisionMap.values());
-		if(!myCollisionMap.containsValue(Side.LEFT)){
+		boolean solid = checkSpriteSolidity();
+		
+		if(!myCollisionMap.containsValue(Side.LEFT)||!solid){
 			mySprite.setMyXVelocity(myVelocity);
 		}
 		else{
@@ -49,5 +53,13 @@ public class MoveRight extends Move {
 		//mySprite.setMyXVelocity(myVelocity);
 		//System.out.println("changing right velocity");
 	}
+private boolean checkSpriteSolidity() {
+	boolean solid = false;
+	for(State myState:mySprite.getStates()){
+		if(myState instanceof Solid){ solid = true;
+		}
+	}
+	return solid;
+}
 
 }

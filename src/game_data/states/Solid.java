@@ -4,8 +4,8 @@ public class Solid implements State{
 
 	private boolean isSolid;
 	
-	public Solid(boolean isSolid){
-		this.isSolid = isSolid;
+	public Solid(){
+		this.isSolid = true;
 	}
 	
 	public boolean isSolid(){
@@ -14,7 +14,7 @@ public class Solid implements State{
 	
 	@Override
 	public State copy() {
-		return new Solid(isSolid);
+		return new Solid();
 	}
 
 	@Override
