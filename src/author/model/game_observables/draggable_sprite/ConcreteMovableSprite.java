@@ -76,6 +76,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
 			this.getDraggableItem().setPrefWidth(aSprite.getMyWidth());
 			this.getDraggableItem().setPrefHeight(aSprite.getMyHeight());
+			this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
 		};
 		return invalidationListener;
 	}

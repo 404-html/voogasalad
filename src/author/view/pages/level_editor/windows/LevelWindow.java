@@ -171,7 +171,7 @@ public class LevelWindow extends AbstractLevelEditorWindow {
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
 			instanceSprite.setMyWidth(spritePreset.getMyWidth());
 			instanceSprite.setMyHeight(spritePreset.getMyHeight());
-//			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation(), spritePreset.getMyLocation().getMyHeading()));
+			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation(), spritePreset.getMyLocation().getMyHeading()));
 			spritePreset.getCharacteristics()
 					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
 			;
