@@ -13,6 +13,7 @@ import javafx.scene.shape.Shape;
 
 public class ListOfCollidingSprites {
 	
+	private static double SHIFT_CONSTANT = .01;
 	private Sprite targetSprite;
 	private List<Sprite> spriteList;
 	private Map<Sprite, Side> collisionSprites;
@@ -78,12 +79,33 @@ public class ListOfCollidingSprites {
 		double bottomDistance = Math.abs(block.getY()+block.getHeight()-middleY);
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
-		/*if(mySprite instanceof Player){
-			printSide(min);
-		}*/
+		if(mySprite instanceof Player){
+			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
+			//printSide(min);
+		}
 		return pickSide(min);
 	}
 
+	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
+			double topDistance, double bottomDistance){
+		if(min == 0){
+			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
+					aSprite.getMyLocation().getYLocation());
+		}
+		if(min == 1){
+			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
+					aSprite.getMyLocation().getYLocation());
+		}
+		if(min == 2){
+			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
+					aSprite.getMyLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
+		}
+		//if(min == 3){
+		//	aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
+		//			aSprite.getMyLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
+		//}
+	}
+	
 	private Side pickSide(int min) {
 		if(min == 0){
 			return Side.LEFT;
@@ -100,7 +122,7 @@ public class ListOfCollidingSprites {
 		return null;
 	}
 	
-	/*private void printSide(int min){
+	private void printSide(int min){
 		if(min == 0){
 			System.out.println("left");
 		}
@@ -113,6 +135,5 @@ public class ListOfCollidingSprites {
 		if(min == 3){
 			System.out.println("bottom");
 		}
-	}*/
-
+	}
 }
