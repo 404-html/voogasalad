@@ -13,6 +13,7 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.sprites.Player;
 import game_data.sprites.WinningObject;
 import game_data.states.Health;
 import game_data.states.LevelWon;
@@ -73,10 +74,11 @@ public class UpdateStates {
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyPressedMap();
 		generateDefaultKeyReleasedMap();
-		executeCharacteristics();
-
 		runKeyCalls();
 		runKeyReleased();
+		executeCharacteristics();
+
+
 		updateSpritePositions();
 //		checkForWin();
 //		checkForLoss();
@@ -105,7 +107,7 @@ public class UpdateStates {
 		//System.out.println(myLevel.getMainPlayer()==null);
 		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages, timeElapsed));
 	}
 	private void generateDefaultKeyReleasedMap(){
 		myKeyReleasedMap.put(KeyCode.RIGHT, new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
@@ -133,6 +135,7 @@ public class UpdateStates {
 		for(Sprite mySprite:mySpriteList){
 			//System.out.println("sprite list length " + mySpriteList.size());
 			//System.out.println("sprite image list length " + mySpriteImages.size());
+			//ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages, timeElapsed);
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
@@ -189,61 +192,11 @@ public class UpdateStates {
 
 	private void updateSpritePositions() {
 		for(Sprite sprite:mySpriteList){
-			updateSpritePosition(sprite);
+			UpdateLocation updateLocation = new UpdateLocation(sprite, timeElapsed);
+			updateLocation.updateSpriteParameters();
+			if(sprite instanceof Player){
+				//System.out.println(sprite.getMyLocation().getXLocation());
+			}
 		}	
 	}
-
-	private void updateSpritePosition(Sprite sprite){
-
-		//System.out.println("player x is "+sprite.getMyLocation().getXLocation());
-		//System.out.println("player y is "+sprite.getMyLocation().getYLocation());
-		
-		SpritePhysics spritePhysics = null;
-		//System.out.println(sprite.getStates().size());
-		for(State s: sprite.getStates()){
-			if(s instanceof Physics){
-				spritePhysics = ((Physics) s).getPhysics();
-			}
-		}
-		//System.out.println(spritePhysics == null);
-		Location myCurrentLocation = sprite.getMyLocation();
-		double curXLoc = myCurrentLocation.getXLocation();
-		double curYLoc = myCurrentLocation.getYLocation();
-		
-		//System.out.println("heading is " + sprite.getMyLocation().getMyHeading());
-		//get initial x velocity component and acceleration
-		//System.out.println("heading is " + Math.sin(myCurrentLocation.getMyHeading()));
-		//double xVelocity = sprite.getMyXVelocity();
-		//double yVelocity = sprite.getMyYVelocity();
-		//double xVelocity = sprite.getMyVelocity()*Math.cos(myCurrentLocation.getMyHeading());
-		double newXVelocity = sprite.getMyXVelocity() + (spritePhysics.getHorizontalGravity() + sprite.getMyXAcceleration())*timeElapsed;
-		
-		//get initial y velocity component and acceleration
-		//double yVelocity = sprite.getMyVelocity()*Math.sin(myCurrentLocation.getMyHeading());
-		double newYVelocity = sprite.getMyYVelocity() + (spritePhysics.getVerticalGravity() + sprite.getMyYAcceleration())*timeElapsed;	
-		
-		//double newVelocity = Math.sqrt(Math.pow(newXVelocity, 2) + Math.pow(newYVelocity, 2));
-		//double newHeading = Math.atan(newYVelocity/newXVelocity);
-		
-		//System.out.println("x velocity is " + newXVelocity);
-		//System.out.println("y velocity is " + newYVelocity);
-		
-//		System.out.println("vertical gravity is " + spritePhysics.getVerticalGravity());
-//		System.out.println("horizontal gravity is " + spritePhysics.getHorizontalGravity());
-		
-		// calculate the new x and y locations
-		double myXLocation = curXLoc + newXVelocity*timeElapsed;
-		double myYLocation = curYLoc + newYVelocity*timeElapsed;
-		
-		// update the location of the sprite
-//		Location myNewLocation = new Location(myXLocation, myYLocation, Math.asin(newXVelocity/newYVelocity));
-		Location myNewLocation = new Location(myXLocation, myYLocation, myCurrentLocation.getMyHeading());
-		//Location myNewLocation = new Location(myXLocation, myYLocation, newHeading);
-		sprite.setMyXVelocity(newXVelocity);
-		sprite.setMyYVelocity(newYVelocity);
-		sprite.setMyLocation(myNewLocation);
-		sprite.setMyXAcceleration(0);
-		sprite.setMyYAcceleration(0);
-	}
-	
 }

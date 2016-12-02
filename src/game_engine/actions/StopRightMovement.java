@@ -10,10 +10,11 @@ public class StopRightMovement extends StopMovement {
 
 	@Override
 	public void act() {
-		mySprite.setMyXVelocity(0);
+		if(mySprite.getMyXVelocity()>0){
+			mySprite.setMyXVelocity(mySprite.getMyXVelocity()-myVelocity);
+		}
+		//System.out.println("stopping right movement");
 		//mySprite.setMyXVelocity(mySprite.getMyXVelocity()-myVelocity);
-		System.out.print("velocity should be 0");
-		System.out.println(mySprite.getMyXVelocity());
 	}
 
 }

@@ -23,7 +23,7 @@ public class HeadsUpDisplay {
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
 	
-	public HeadsUpDisplay(Scene aScene, double aWidth, double aHeight) {
+	public HeadsUpDisplay(double aWidth, double aHeight) {
 		//super(aWidth, aHeight);
 		myGUIGenerator = new GUIGenerator();
 		myRoot = new BorderPane();

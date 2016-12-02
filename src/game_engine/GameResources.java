@@ -4,7 +4,7 @@ package game_engine;
 public enum GameResources {
     GAME_TITLE("GAME TITLE HERE"),
     
-    DEFAULT_VERTICAL_GRAVITY(400),
+    DEFAULT_VERTICAL_GRAVITY(1300),
     DEFAULT_HORIZONTAL_GRAVITY(0.0),
     
     //Default accelerations
@@ -20,9 +20,9 @@ public enum GameResources {
 	DEFAULT_UP_VELOCITY(10.0),
 	
 	//Default speeds for keys
-	MOVE_RIGHT_SPEED(100.0),
-	MOVE_LEFT_SPEED(100.0),
-	JUMP_SPEED(300);
+	MOVE_RIGHT_SPEED(500),
+	MOVE_LEFT_SPEED(500),
+	JUMP_SPEED(900);
 	//MOVE_RIGHT_SPEED(30.0),
 	//MOVE_LEFT_SPEED(30.0),
 	//JUMP_SPEED(100.0);

@@ -29,29 +29,10 @@ public class MoveRight extends Move {
 		//return myNewLocation;
 	}*/
 	public void setVelocity(){
-		ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
-		Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
-		//Collection<Side> values =  myCollisionMap.values();
-		for (Sprite name: myCollisionMap.keySet()){
 
-            String value = myCollisionMap.get(name).toString();  
-            System.out.println(" " + value);  
-
-
-		} 
-		//System.out.println(myCollisionMap.values());
-		boolean solid = checkSpriteSolidity();
-		
-		if(!myCollisionMap.containsValue(Side.LEFT)||!solid){
-			mySprite.setMyXVelocity(myVelocity);
-		}
-		else{
-			System.out.println("hitting the left side");
-			StopRightMovement stop=new StopRightMovement(mySprite, 0);
-			stop.act();
-		}
 		//mySprite.setMyXVelocity(myVelocity);
 		//System.out.println("changing right velocity");
+		mySprite.setMyXVelocity(myVelocity);
 	}
 private boolean checkSpriteSolidity() {
 	boolean solid = false;

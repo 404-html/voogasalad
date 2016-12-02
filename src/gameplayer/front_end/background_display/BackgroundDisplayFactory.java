@@ -33,6 +33,5 @@ public class BackgroundDisplayFactory {
 		BackgroundFill fill = new BackgroundFill(color, null, null);
 		return new Background(fill);
 	}
-	
-	
+
 }

@@ -11,6 +11,7 @@ import game_data.sprites.Terrain;
 import game_data.states.Health;
 import game_data.states.Physics;
 import game_data.states.State;
+import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
 
 import java.util.ArrayList;
@@ -48,10 +49,10 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		//temporary to see if moving the player works, hardcoded
 		myLevel.setPlayerSprite((Player)myLevel.getMySpriteList().get(0));
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
-		myLevel.getMainPlayer().getMyLocation().setMyHeading(-1*270*Math.PI/180);
 		int j = 1;
-		for(int i = 226; i<1226; i+=100){
-			myLevel.addNewSprite(new Terrain(new Location(i, 500, 90), 100, 100, "block" + j, "author/images/duvall_scary.png"));
+		//for(int i = 226; i<10260; i+=1000){
+		for(int i = 226; i<13226; i+=100){
+			myLevel.addNewSprite(new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
 			//myLevel.getMySpriteList().get(j).addCharacteristic(new Bouncer(20, myLevel.getMySpriteList().get(j)));
 			//System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
 			//myLevel.getMySpriteList().get(j).addState(new Physics(new SpritePhysics(0.0)));
@@ -60,10 +61,17 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			//System.out.println(myLevel.getMySpriteList().size());
 			j++;
 		}
-		myLevel.addNewSprite(new Terrain(new Location(826, 400, 90), 100, 100, "block" + 15, "author/images/duvall_scary.png"));
+		myLevel.addNewSprite(new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(926, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(!(s instanceof Player)){
+//				if(s.getName().equals("block1")){
+//					s.addCharacteristic(new Bouncer(100, s));
+//				}
+				//else{
 				s.addCharacteristic(new Impassable(s));
+				//}
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}
@@ -105,7 +113,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //			mySpriteYCoordinateList.set(i, location.getYLocation());
 			mySpriteYCoordinateList.add(location.getYLocation());
 //			mySpriteHeadingList.set(i, location.getMyHeading());
-			mySpriteHeadingList.add(location.getMyHeading());
 			if(sprite instanceof Character){
 				for(State myState:((Character) sprite).getStates()){
 					if(myState instanceof Health){
