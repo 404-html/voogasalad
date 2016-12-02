@@ -4,13 +4,11 @@ import java.io.File;
 
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -52,11 +50,6 @@ public class GUIGenerator implements IGUIGenerator {
 		return newLabel;
 	}
 	
-	//private BackgroundImage createBackgroundImage(String afilepath){
-		//return new BackgroundImage(new Image(afilepath, false, true), BackgroundRepeat.REPEAT, 
-			//BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-	//}
-	
 	public void setBackground(Pane avalue, String afilepath){
 		//avalue.setBackground(new Background(createBackgroundImage(afilepath)));
 	}
@@ -84,6 +77,7 @@ public class GUIGenerator implements IGUIGenerator {
 		return menu;
 	}
 	
+	@Override
 	public Menu createMenu(String aTitle, String[] aString, EventHandler<ActionEvent>...aHandler) {
 		Menu menu = new Menu(aTitle); 
 		for (int i = 0; i < aHandler.length; i++) {

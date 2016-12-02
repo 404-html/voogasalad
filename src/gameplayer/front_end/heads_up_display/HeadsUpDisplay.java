@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -21,7 +20,7 @@ public class HeadsUpDisplay {
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
 	
-	public HeadsUpDisplay(Scene aScene, double aWidth, double aHeight) {
+	public HeadsUpDisplay(double aWidth, double aHeight) {
 		myGUIGenerator = new GUIGenerator();
 		myRoot = new BorderPane();
 	}
@@ -30,7 +29,7 @@ public class HeadsUpDisplay {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aTitle, aText, aHandler));
 	}
 	
-	public void addMenu(ImageView aImage, String[] aText, EventHandler<ActionEvent> ...aHandler) {
+	public void addMenu(ImageView aImage, String[] aText, EventHandler<ActionEvent> ... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
 
@@ -69,5 +68,4 @@ public class HeadsUpDisplay {
 		myRoot.setBackground(Background.EMPTY);
 		return myRoot;
 	}
-
 }

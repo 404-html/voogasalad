@@ -4,14 +4,13 @@ import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import javafx.stage.Stage;
 
-public class AbstractController {
+public abstract class AbstractController {
 
 	public static final int SCENE_SIZE = 1000;
 	protected Stage myStage;
-	protected GUIGenerator myGUIGenerator;
+	protected GUIGenerator myGUIGenerator = new GUIGenerator();
 	
 	public AbstractController(){
-		myGUIGenerator = new GUIGenerator();
 	}
 	
 	protected void resetStage(IDisplay aScene){

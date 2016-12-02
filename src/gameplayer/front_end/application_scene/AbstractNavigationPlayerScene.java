@@ -1,7 +1,6 @@
 package gameplayer.front_end.application_scene;
 
 import java.io.File;
-
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,26 +20,14 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 	protected VBox myOptions;
 	
 	public AbstractNavigationPlayerScene(double aWidth, double aHeight) {
-		super(aWidth, aHeight);
 		initializeRoot();
 		initializeScene(aWidth, aHeight);
 		addNavigation();
 	}
 	
-	private void initializeRoot(){
-		myRoot = new BorderPane();
-		myRoot.setId("pane");
-	}
-	
-	private void initializeScene(double aWidth, double aHeight){
-		myScene = new Scene(myRoot, aWidth, aHeight);
-		File file = new File(STYLESHEET);
-	    myScene.getStylesheets().add(file.toURI().toString());
-	}
-	
 	@Override
-	public void addButton(String text, EventHandler<? super MouseEvent> handler, ButtonDisplay aButtonDisplayType) {
-		myOptions.getChildren().add(myGUIGenerator.createButton(text, 0, 0, handler, aButtonDisplayType));
+	public void addButton(String aLabel, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aType) {
+		myOptions.getChildren().add(myGUIGenerator.createButton(aLabel, 0, 0, aHandler, aType));
 	}
 	
 	@Override
@@ -55,9 +42,19 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 		myNavigation.getMenus().add(myGUIGenerator.createMenu(aImage, aStringArray, aHandler));
 	}
 	
+	private void initializeRoot(){
+		myRoot = new BorderPane();
+		myRoot.setId("pane");
+	}
+	
+	private void initializeScene(double aWidth, double aHeight){
+		myScene = new Scene(myRoot, aWidth, aHeight);
+		File file = new File(STYLESHEET);
+	    myScene.getStylesheets().add(file.toURI().toString());
+	}
+	
 	private void addNavigation() {
 		myNavigation = new MenuBar();
-		//myNavigation.setAlignment(Pos.CENTER_LEFT);
 		myRoot.setTop(myNavigation);
 	}
 }

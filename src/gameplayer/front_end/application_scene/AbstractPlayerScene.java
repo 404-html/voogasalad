@@ -16,7 +16,7 @@ public abstract class AbstractPlayerScene implements IDisplay {
 	protected Scene myScene;
 	protected IGUIGenerator myGUIGenerator;
 	
-	public AbstractPlayerScene(double aWidth, double aHeight) {
+	public AbstractPlayerScene() {
 	    myGUIGenerator = new GUIGenerator();
 	}
 }
