@@ -5,12 +5,15 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PropertyResourceBundle;
+import author.controller.AuthorControllerFactory;
+import author.controller.IAuthorControllerExternal;
 import game_data.Game;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -30,7 +33,6 @@ import javafx.stage.Stage;
 
 public class ApplicationController extends AbstractController {
 	
-	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
 	private FacebookInformation myFacebookInformation;
 	private StoredGames myStoredGames;
@@ -61,7 +63,12 @@ public class ApplicationController extends AbstractController {
 			displayGameChoice();
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton(myButtonLabels.getString("Author"), e -> {
-			//TODO: implement authoring environment
+			IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
+			myStage.setTitle("VOOGASalad");
+			Scene scene = authorControllerExternal.getScene();
+			myStage.setWidth(scene.getWidth());
+			myStage.setHeight(scene.getHeight());
+			myStage.setScene(scene);
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
 			myFacebookInformation.authenticatePlayer();

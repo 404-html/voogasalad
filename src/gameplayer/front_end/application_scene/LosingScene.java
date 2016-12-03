@@ -1,5 +1,4 @@
 package gameplayer.front_end.application_scene;
-
 import javafx.scene.Scene;
 
 public class LosingScene extends AbstractNavigationPlayerScene implements INavigationDisplay {
@@ -13,5 +12,4 @@ public class LosingScene extends AbstractNavigationPlayerScene implements INavig
 	public Scene init() {
 		return myScene;
 	}
-
 }

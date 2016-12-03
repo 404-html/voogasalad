@@ -4,6 +4,7 @@ import java.io.File;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
@@ -65,5 +66,7 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 	private void addNavigation() {
 		myNavigation = new MenuBar();
 		myRoot.setTop(myNavigation);
+		myOptions.setAlignment(Pos.CENTER);
+		myRoot.setCenter(myOptions);
 	}
 }

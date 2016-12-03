@@ -14,9 +14,8 @@ import javafx.scene.layout.VBox;
  */
 public class MainMenuScene extends AbstractNavigationPlayerScene {
 	
-	//private GUIGenerator myCreator;
 	private AnimatedDisplay myAnimation;
-	private Pane myPane; 
+	private Pane myPane;
 	private double myWidth;
 	private GUIGenerator myGUIGenerator; 
 

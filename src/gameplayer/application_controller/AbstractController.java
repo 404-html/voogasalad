@@ -2,12 +2,14 @@ package gameplayer.application_controller;
 
 import java.util.ResourceBundle;
 import gameplayer.front_end.application_scene.IDisplay;
+import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
 import javafx.stage.Stage;
 
 public abstract class AbstractController {
 
+	protected SceneFactory mySceneBuilder;
 	protected static final String FILE = "gameplayerlabels.";
 	protected static final String BUTTONLABEL = "ButtonLabels"; 
 	protected static final int SCENE_SIZE = 1000;

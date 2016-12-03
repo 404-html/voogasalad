@@ -14,7 +14,10 @@ import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
+import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
+import gameplayer.front_end.application_scene.SceneFactory;
+import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -43,6 +46,7 @@ public class GamePlayController extends AbstractController {
 		mySpriteMap = new HashMap<Sprite, ImageView>();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myApplicationController = aAppController;
+		mySceneBuilder = new SceneFactory();
 		initializeKeySets(); 
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
@@ -134,13 +138,23 @@ public class GamePlayController extends AbstractController {
 			myAnimationLoop.stop();
 			myApplicationController.displayMainMenu();
 		});
-		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
+		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "lose", "win"};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
 			save();
+		}, e -> {
+			myAnimationLoop.stop();
+			IDisplay ls = mySceneBuilder.create(SceneIdentifier.LOSE, myStage.getWidth(), myStage.getHeight());
+			setLosingSceneHandlers((INavigationDisplay) ls);
+			resetStage(ls);
+		}, e -> {
+			myAnimationLoop.stop();
+			IDisplay ls = mySceneBuilder.create(SceneIdentifier.WIN, myStage.getWidth(), myStage.getHeight());
+			setWinningSceneHandlers((INavigationDisplay) ls);
+			resetStage(ls);
 		});
 	}
 
@@ -171,7 +185,7 @@ public class GamePlayController extends AbstractController {
 		return myGameController.getMyGame();
 	}
 	
-	private void setWinningSceneHandlers(INavigationDisplay winScene){
+	private void setWinningSceneHandlers(INavigationDisplay winScene) {
 		winScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
 		winScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
 			myApplicationController.displayMainMenu();
@@ -184,7 +198,7 @@ public class GamePlayController extends AbstractController {
 		}, ButtonDisplay.TEXT);
 	}
 	
-	private void setLosingSceneHandlers(INavigationDisplay loseScene){
+	private void setLosingSceneHandlers(INavigationDisplay loseScene) {
 		loseScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
 		loseScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
 			myApplicationController.displayMainMenu();
