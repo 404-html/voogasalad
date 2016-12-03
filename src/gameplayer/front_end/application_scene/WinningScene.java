@@ -13,5 +13,9 @@ public class WinningScene extends AbstractNavigationPlayerScene implements INavi
 	public Scene init() {
 		return myScene;
 	}
+	
+	private void addButtons(){
+		
+	}
 
 }

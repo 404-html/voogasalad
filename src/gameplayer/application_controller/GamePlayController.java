@@ -14,6 +14,8 @@ import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
+import gameplayer.front_end.application_scene.INavigationDisplay;
+import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -130,19 +132,22 @@ public class GamePlayController extends AbstractController {
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
-			//ApplicationController appControl = new ApplicationController(myStage);
 			myApplicationController.displayMainMenu();
 		});
 		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
-			myAnimationLoop.stop();
-			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
-			gameControl.displayGame();
+			handleRestart();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
 			save();
 		});
+	}
+
+	private void handleRestart() {
+		myAnimationLoop.stop();
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
+		gameControl.displayGame();
 	}
 	
 	private void save() {
@@ -164,5 +169,31 @@ public class GamePlayController extends AbstractController {
 
 	public Game getGame() {
 		return myGameController.getMyGame();
+	}
+	
+	private void setWinningSceneHandlers(INavigationDisplay winScene){
+		winScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
+		winScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
+			myApplicationController.displayMainMenu();
+		}, ButtonDisplay.TEXT);
+		winScene.addButton(myButtonLabels.getString("PlayAgain"), e -> {
+			handleRestart();
+		}, ButtonDisplay.TEXT);
+		winScene.addButton(myButtonLabels.getString("HighScores"), e -> {
+			myApplicationController.displayHighScoreScene();
+		}, ButtonDisplay.TEXT);
+	}
+	
+	private void setLosingSceneHandlers(INavigationDisplay loseScene){
+		loseScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
+		loseScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
+			myApplicationController.displayMainMenu();
+		}, ButtonDisplay.TEXT);
+		loseScene.addButton(myButtonLabels.getString("PlayAgain"), e -> {
+			handleRestart();
+		}, ButtonDisplay.TEXT);
+		loseScene.addButton(myButtonLabels.getString("HighScores"), e -> {
+			myApplicationController.displayHighScoreScene();
+		}, ButtonDisplay.TEXT);
 	}
 }

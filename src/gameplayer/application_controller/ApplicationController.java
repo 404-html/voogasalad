@@ -137,6 +137,4 @@ public class ApplicationController extends AbstractController {
 		}
 		return aList;
 	}
-	
-	
 }
