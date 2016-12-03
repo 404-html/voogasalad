@@ -29,21 +29,21 @@ public class LoginScene extends AbstractNavigationPlayerScene {
 	
 	@Override
 	public void addButton(String text, EventHandler<? super MouseEvent> handler, ButtonDisplay aButtonType){
-		myLoginOptions.getChildren().add(myGUIGenerator.createButton(text, 0, 0, handler, aButtonType));
+		myLoginOptions.getChildren().add(getGUIGenerator().createButton(text, 0, 0, handler, aButtonType));
 	}
 
 	@Override
 	public Scene init() {
-		myRoot.setCenter(addNodes());
+		getRoot().setCenter(addNodes());
 		return myScene;
 	}
 	
 	private VBox addNodes() {
 		myOptions = new VBox(BOX_INSETS);
 		myLoginOptions = new HBox(BOX_INSETS);
-		myUserName = myGUIGenerator.createTextField("Enter Username", 0, 0, 500);
-		myPassword = myGUIGenerator.createTextField("Enter Password", 0, 0, 500);
-		Label title = myGUIGenerator.createLabel("V00GASALAD", 0, 0);
+		myUserName = getGUIGenerator().createTextField("Enter Username", 0, 0, 500);
+		myPassword = getGUIGenerator().createTextField("Enter Password", 0, 0, 500);
+		Label title = getGUIGenerator().createLabel("V00GASALAD", 0, 0);
 		myOptions.getChildren().add(title);
 		myOptions.getChildren().add(myUserName);
 		myOptions.getChildren().add(myPassword);

@@ -18,15 +18,14 @@ public class GameChoiceScene extends AbstractNavigationPlayerScene {
 
 	@Override
 	public Scene init() {
-		myRoot.setCenter(addNodes());
+		getRoot().setCenter(addNodes());
 		return myScene;
 	}
 
 	private VBox addNodes() {
-		myOptions = new VBox(BOX_INSETS);
-		myOptions.setAlignment(Pos.CENTER);
+		getOptions().setAlignment(Pos.CENTER);
 		//myOptions.bin
-		return myOptions;
+		return getOptions();
 	}
 
 }

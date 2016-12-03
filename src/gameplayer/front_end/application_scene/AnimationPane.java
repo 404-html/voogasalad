@@ -19,9 +19,6 @@ public class AnimationPane {
 	public AnimationPane() {
 		myGamePlayCanvas = new Pane();
 	}
-	/**
-	 * Add the correct nodes to the scene
-	 */
 	
 	public Pane init() {
 		return myGamePlayCanvas;

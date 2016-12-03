@@ -14,9 +14,13 @@ import javafx.scene.Scene;
 public abstract class AbstractPlayerScene implements IDisplay {
 	
 	protected Scene myScene;
-	protected IGUIGenerator myGUIGenerator;
+	private IGUIGenerator myGUIGenerator;
 	
 	public AbstractPlayerScene() {
 	    myGUIGenerator = new GUIGenerator();
+	}
+	
+	protected IGUIGenerator getGUIGenerator(){
+		return myGUIGenerator;
 	}
 }

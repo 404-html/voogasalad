@@ -124,7 +124,7 @@ public class GamePlayController extends AbstractController {
 	@SuppressWarnings("unchecked")
 	private void setMenu() {
 		String[] names = {myButtonLabels.getString("MainMenu")};
-		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
+		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			ApplicationController appControl = new ApplicationController(myStage);

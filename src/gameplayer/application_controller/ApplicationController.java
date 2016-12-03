@@ -64,7 +64,7 @@ public class ApplicationController extends AbstractController {
 	@SuppressWarnings("unchecked")
 	private void createNavigationButtons(INavigationDisplay aMenu) {
 		String[] names = {myButtonLabels.getString("MainMenu"), myButtonLabels.getString("Profile")};
-		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
+		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
 			displayMainMenu();
 		}, e -> {
@@ -79,7 +79,7 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	private void setHighScoreHandlers(INavigationDisplay highScoreScene) {
-		highScoreScene.addNode(myGUIGenerator.createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
+		highScoreScene.addNode(getGUIGenerator().createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
 	}
 
 	private void displayUserScene() {
