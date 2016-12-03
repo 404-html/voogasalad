@@ -50,6 +50,8 @@ public abstract class SpriteSettingsEditor {
 		scroll.setContent(myAccordion);
 		
 		myPane.getChildren().add(scroll);
+		
+		myPane.getChildren().add(makeViewColumn(aSprite).getPane());
 
 	}
 
@@ -66,6 +68,8 @@ public abstract class SpriteSettingsEditor {
 	protected abstract String getDirectoryPath();
 	
 	protected abstract SpriteSettingsEditBox makeEditBox(Sprite aSprite, String aName);
+	
+	protected abstract SettingsViewColumn makeViewColumn(Sprite aSprite);
 	
 	protected final List<SpriteSettingsEditBox> getEditBoxList(){
 		return myEditBoxList;

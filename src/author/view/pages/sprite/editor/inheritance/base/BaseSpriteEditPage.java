@@ -80,6 +80,7 @@ public abstract class BaseSpriteEditPage {
 				"Save", e -> {
 					editSprite();
 					myCharacteristicEditor.addSettings();
+					myStateEditor.addSettings();
 				}).getButton();
 
 		myToolBarBuilder.addBurst(new Label(getSpriteType()));

@@ -16,14 +16,12 @@ public class StateEditBox extends SpriteSettingsEditBox {
 	}
 	
 	@Override
-	protected SettingsFactory buildSettingFactory() {
-		return new StatesFactory(getName(), getSprite());
+	protected SettingsFactory<?> buildSettingFactory() {
+		return new StatesFactory<State>(getName(), getSprite());
 	}
 
 	@Override
 	public void addSpriteSetting() {
 		getSprite().addState(makeState());		
 	}
-
-
 }

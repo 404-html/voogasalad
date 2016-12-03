@@ -7,7 +7,6 @@ public class Health implements State{
 	private int myHealth;
 	private boolean isAlive;
 	
-	
 	@ParameterAnnotation(parameters={"Health"})
 	public Health(int health){
 		myHealth = health;

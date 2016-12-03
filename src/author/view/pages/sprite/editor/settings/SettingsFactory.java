@@ -80,17 +80,21 @@ public abstract class SettingsFactory<T> {
 	} 
 	
 	public T getSettingInstance(Map<String, Object> aTextToValueMap) {
-		Object[] parameters = new Object[aTextToValueMap.size()];
+		
+		int constructorSize = (aTextToValueMap.size() < myParameterTextToTypeMap.size()) ?
+				aTextToValueMap.size() : myParameterTextToTypeMap.size();
+		
+		Object[] parameters = new Object[constructorSize];
 		
 		String[] keys = new String[myParameterTextToTypeMap.size()];
 		myParameterTextToTypeMap.keySet().toArray(keys);
 		
-		for(int i = 0; i < parameters.length ; i++){
+		System.out.println(aTextToValueMap + " | " + myParameterTextToTypeMap);
+		
+		for(int i = 0; i < parameters.length  && i < keys.length ; i++){
 			 parameters[i] = aTextToValueMap.get(keys[i]);
 		}
-		
-		parameters[parameters.length] = mySprite;
-		
+					
 		try {
 			return (T) myConstructor.newInstance(parameters);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
