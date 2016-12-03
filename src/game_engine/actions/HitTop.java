@@ -46,8 +46,10 @@ public class HitTop implements Action {
 	}
 	
 	private boolean pastPlatform(){
-		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myNonPlayerSprite
-				.getMyLocation().getYLocation()+collisionBuffer && myPlayerSprite.getMyYVelocity()>0;		
+//		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myNonPlayerSprite
+//				.getMyLocation().getYLocation()+collisionBuffer && myPlayerSprite.getMyYVelocity()>0;
+		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<myNonPlayerSprite
+				.getMyLocation().getYLocation()+(myNonPlayerSprite.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
 	}
 
 	private void setNewAcceleration(){

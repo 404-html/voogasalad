@@ -105,13 +105,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				}
 				// }
 				if(s.getName().equals("blockmoving")){
-					s.addCharacteristic(new BouncerTop(500, s));
-					//s.addCharacteristic(new TransparentBottomImpassable(s));
+					//s.addCharacteristic(new BouncerTop(500, s));
+					s.addCharacteristic(new TransparentBottomImpassable(s));
 					//s.addCharacteristic(new StickyTopVertical(s));
 				}
 				else if(s.getName().equals("blockmoving2")) {
-					s.addCharacteristic(new BouncerTop(500, s));
-					//s.addCharacteristic(new TransparentBottomImpassable(s));
+					//s.addCharacteristic(new BouncerTop(500, s));
+					s.addCharacteristic(new TransparentBottomImpassable(s));
 					//s.addCharacteristic(new StickyTopHorizontal(s));
 				}
 				else if(!s.getName().equals("flag")){
@@ -129,7 +129,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				s.addState(new Physics(new SpritePhysics()));
 			}
 			if(s.getName().equals("blockmoving")){
-				s.addCharacteristic(new PacerAlternative("VERTICAL", 500, s));
+				s.addCharacteristic(new PacerAlternative("VERTICAL", 200, s));
 				s.setMyYVelocity(-200);
 			}
 			if(s.getName().equals("blockmoving2")){

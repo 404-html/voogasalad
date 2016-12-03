@@ -152,7 +152,6 @@ public abstract class Sprite extends GameObject {
 	public void setMyYVelocity(double myVelocity) {
 		if (Math.abs(myVelocity) > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
 			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
-			System.out.println("poop");
 		}
 		else{
 			this.myYVelocity = myVelocity;
