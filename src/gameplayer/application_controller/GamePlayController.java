@@ -81,7 +81,7 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		clearKeys();
-		myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
+		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
 		myGamePlayScene.moveScreen();
 	}
 
