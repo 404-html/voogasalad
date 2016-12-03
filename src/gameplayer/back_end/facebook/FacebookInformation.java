@@ -51,7 +51,7 @@ public class FacebookInformation {
 			}
 			
 		}
-		//System.out.println("hi");
+		System.out.println(myUser);
 		driver.quit();
 		return;
 	}

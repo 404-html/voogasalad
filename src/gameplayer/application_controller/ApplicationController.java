@@ -2,13 +2,18 @@ package gameplayer.application_controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PropertyResourceBundle;
+import game_data.Game;
 import gameplayer.back_end.facebook.FacebookInformation;
+import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
@@ -28,6 +33,7 @@ public class ApplicationController extends AbstractController {
 	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
 	private FacebookInformation myFacebookInformation;
+	private StoredGames myStoredGames;
 	
 	public ApplicationController (Stage aStage) {
 		myStage = aStage;
@@ -35,6 +41,7 @@ public class ApplicationController extends AbstractController {
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myFacebookInformation = new FacebookInformation();
+		myStoredGames = new StoredGames();
 	}
 	
 	public void startScene() throws FileNotFoundException {
@@ -102,17 +109,16 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
-		gameChoice.addButton(myButtonLabels.getString("ChooseGame"), e -> {
-			//TODO
-		}, ButtonDisplay.TEXT);
+		gameChoice.addNode(getGUIGenerator().createComboBox(getDisplayOfGames()));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
-				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame);
+				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame, this);
 				gamePlay.displayGame();
+				myStoredGames.addGame(gamePlay.getGame());
 			}
 		}, ButtonDisplay.TEXT);
-		gameChoice.addButton(myButtonLabels.getString("Options"), a -> {
+		gameChoice.addButton(myButtonLabels.getString("Options"), e -> {
 			PopUpController popup = new PopUpController();
 			PlayerOptionsPopUp options = new PlayerOptionsPopUp();
 			for(HBox box : options.addOptions()){
@@ -121,4 +127,16 @@ public class ApplicationController extends AbstractController {
 			popup.show();
 		}, ButtonDisplay.TEXT);
 	}
+
+	private List<Pane> getDisplayOfGames() {
+		List<Pane> aList = new ArrayList<Pane>();
+		for (Game game : myStoredGames.getGames()) {
+			HBox box = new HBox();
+			box.getChildren().add(getGUIGenerator().createLabel(game.getName(), 0, 0));
+			aList.add(box);
+		}
+		return aList;
+	}
+	
+	
 }

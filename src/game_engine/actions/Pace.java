@@ -16,7 +16,6 @@ public class Pace implements Action {
 	public void act() {
 		if(myShouldChangeDirection==true){
 			direction=direction*(-1);
-			mySprite.getMyLocation().setMyHeading(mySprite.getMyLocation().getMyHeading()+(180*direction));
 		}
 		
 		MoveWithHeading moveWithHeading = new MoveWithHeading(mySprite, mySprite.getMyXVelocity());

@@ -1,13 +1,17 @@
 package gameplayer.front_end.gui_generator;
 
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public interface IGUIGenerator {
 	
@@ -26,6 +30,8 @@ public interface IGUIGenerator {
 	public Menu createMenu(String aTitle, String[] aString, EventHandler<ActionEvent>[] aHandler);
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
+	
+	public ComboBox createComboBox(List<Pane> aList);
 
 	
 }

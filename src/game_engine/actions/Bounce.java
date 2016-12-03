@@ -23,24 +23,16 @@ public class Bounce implements Action {
 
 	@Override
 	public void act() {
-	
-		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
-		myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
-
-	}
-	
-/*	private double getNewVelocity() {
-		return myPlayerSprite.getMyVelocity() + myBounceSpeed;
-	}*/
-	
-	private double getNewHeading() {
-		
-		double oldHeading = myPlayerSprite.getMyLocation().getMyHeading();
-		
-		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
-			return 180 - oldHeading;
+		System.out.println("init y vel" + myPlayerSprite.getMyYVelocity());
+		if(mySide==Side.BOTTOM || mySide==Side.TOP){
+			myPlayerSprite.setMyYVelocity(-(myPlayerSprite.getMyYVelocity()+myBounceSpeed));
+		}			
+		if(mySide==Side.LEFT || mySide==Side.RIGHT){
+			myPlayerSprite.setMyXVelocity(-(myPlayerSprite.getMyXVelocity()+myBounceSpeed));
 		}
-		return 360 - oldHeading;
+		System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
+		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
+		//myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
 		
 	}
 	

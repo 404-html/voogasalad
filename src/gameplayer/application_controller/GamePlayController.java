@@ -12,7 +12,7 @@ import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
-import gameplayer.back_end.keycode_handler.KeyCodeHandler;
+import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,18 +27,20 @@ public class GamePlayController extends AbstractController {
 	private GameEngine myGameEngine;
 	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
-	private KeyCodeHandler myKeyHandler;
+	private MovementHandler myKeyHandler;
 	private GamePlayScene myGamePlayScene;
 	private Set<KeyCode> myKeySet;
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
+	private ApplicationController myApplicationController;
 	
-	public GamePlayController(Stage aStage, File aFile) {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
 		myStage = aStage;
 		myGameFile = aFile;
 		mySpriteMap = new HashMap<Sprite, ImageView>();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
+		myApplicationController = aAppController;
 		initializeKeySets(); 
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
@@ -54,7 +56,7 @@ public class GamePlayController extends AbstractController {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed= new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
-		myKeyHandler = new KeyCodeHandler();
+		myKeyHandler = new MovementHandler();
 	}
 	
 	public void displayGame() {
@@ -78,17 +80,18 @@ public class GamePlayController extends AbstractController {
 		});
 	}
 
+	private void updateScene() {
+		//the below line makes sure the keys released aren't stored in the set after they're released
+		clearKeys();
+		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
+		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyYVelocity());
+		myGamePlayScene.moveScreen(myKeyHandler);
+	}
+
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		updateSprites();
-	}
-
-	private void updateScene() {
-		//the below line makes sure the keys released aren't stored in the set after they're released
-		clearKeys();
-		myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
-		myGamePlayScene.moveScreen(myKeyHandler);
 	}
 	
 	private void updateSprites() {
@@ -118,7 +121,7 @@ public class GamePlayController extends AbstractController {
 
 	private void clearKeys() {
 		myKeysReleased.clear();
-		myKeysPressed.clear();
+		//myKeysPressed.clear();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -127,13 +130,13 @@ public class GamePlayController extends AbstractController {
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
-			ApplicationController appControl = new ApplicationController(myStage);
-			appControl.displayMainMenu();
+			//ApplicationController appControl = new ApplicationController(myStage);
+			myApplicationController.displayMainMenu();
 		});
 		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			myAnimationLoop.stop();
-			GamePlayController gameControl = new GamePlayController(myStage, myGameFile);
+			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
 			gameControl.displayGame();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
@@ -155,6 +158,11 @@ public class GamePlayController extends AbstractController {
 	
 	private void handleKeyRelease(KeyCode key) {
 		myKeysReleased.add(key);
+		myKeysPressed.remove(key);
 		myKeySet.remove(key);
+	}
+
+	public Game getGame() {
+		return myGameController.getMyGame();
 	}
 }

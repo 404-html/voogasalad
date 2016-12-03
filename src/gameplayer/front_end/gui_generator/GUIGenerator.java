@@ -1,17 +1,21 @@
 package gameplayer.front_end.gui_generator;
 
 import java.io.File;
+import java.util.List;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
+import javafx.scene.layout.Pane;
 
 public class GUIGenerator implements IGUIGenerator {
 	
@@ -22,7 +26,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public TextField createTextField(String aplaceholder, int x, int y, int width){
+	public TextField createTextField(String aplaceholder, int x, int y, int width) {
 		TextField newTextField = new TextField(aplaceholder);
 		newTextField.setTranslateX(x);
 		newTextField.setTranslateY(y);
@@ -31,7 +35,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public Label createLabel(String atext, int x, int y){
+	public Label createLabel(String atext, int x, int y) {
 		Label newLabel = new Label(atext);
 		newLabel.setTranslateX(x);
 		newLabel.setTranslateY(y);
@@ -44,6 +48,20 @@ public class GUIGenerator implements IGUIGenerator {
 		image.setPreserveRatio(true);
 		image.setFitWidth(aWidth);
 		return image;
+	}
+	
+	public ComboBox<Pane> createComboBox(List<Pane> aListOfPanes) {
+		ComboBox<Pane> box = new ComboBox<Pane>();
+		ObservableList<Pane> items = FXCollections.observableArrayList(aListOfPanes);
+		box.setItems(items);
+		//box.selectionModelProperty().addListener(new ChangeListener<Pane> () {
+		//	@Override
+			//public void changed(ObservableValue<? extends Pane> observable, Pane oldValue, Pane newValue) {
+				// TODO Auto-generated method stub
+				
+			//}
+        //});
+		return box;
 	}
 
 	@Override
@@ -74,5 +92,4 @@ public class GUIGenerator implements IGUIGenerator {
 		}
 		return menu;
 	}
-
 }

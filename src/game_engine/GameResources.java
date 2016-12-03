@@ -20,12 +20,16 @@ public enum GameResources {
 	DEFAULT_UP_VELOCITY(10.0),
 	
 	//Default speeds for keys
-	MOVE_RIGHT_SPEED(150.0),
-	MOVE_LEFT_SPEED(150.0),
-	JUMP_SPEED(500);
+	MOVE_RIGHT_SPEED(300),
+	MOVE_LEFT_SPEED(300),
+	JUMP_SPEED(400), 
 	//MOVE_RIGHT_SPEED(30.0),
 	//MOVE_LEFT_SPEED(30.0),
 	//JUMP_SPEED(100.0);
+	
+	//terminal 
+	TERMINAL_X_VELOCITY(600),
+	TERMINAL_Y_VELOCITY(600);
 
     private double resourceDouble;
     private String resourceString;

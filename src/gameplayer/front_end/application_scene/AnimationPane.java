@@ -1,6 +1,6 @@
 package gameplayer.front_end.application_scene;
 
-import gameplayer.back_end.keycode_handler.KeyCodeHandler;
+import gameplayer.back_end.keycode_handler.MovementHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
@@ -36,8 +36,8 @@ public class AnimationPane {
 		myGamePlayCanvas.setBackground(aBackground);
 	}
 	
-	public void moveScreen(KeyCodeHandler aHandler) {
-		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + aHandler.getMovement());
+	public void moveScreen(MovementHandler aHandler) {
+		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + aHandler.getXMovement());
 	}
 	
 	public void addImageToView(ImageView aImage) {
