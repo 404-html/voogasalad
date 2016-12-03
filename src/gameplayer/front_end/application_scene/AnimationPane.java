@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import gameplayer.back_end.keycode_handler.KeyCodeHandler;
+import gameplayer.back_end.keycode_handler.MovementHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -21,10 +21,10 @@ import javafx.scene.layout.Pane;
 public class AnimationPane {
 	
 	private Pane myGamePlayCanvas;
-	private KeyCodeHandler myKeyCodeHandler;
+	private MovementHandler myKeyCodeHandler;
 	//private String myBackgroundFilePath;
 	
-	public AnimationPane(KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
+	public AnimationPane(MovementHandler aKeyHandler, double aWidth, double aHeight) {
 		myGamePlayCanvas = new Pane();
 		myKeyCodeHandler = aKeyHandler;
 	}

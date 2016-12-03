@@ -11,7 +11,7 @@ import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
-import gameplayer.back_end.keycode_handler.KeyCodeHandler;
+import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -26,7 +26,7 @@ public class GamePlayController extends AbstractController {
 	private GameEngine myGameEngine;
 	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
-	private KeyCodeHandler myKeyHandler;
+	private MovementHandler myKeyHandler;
 	private GamePlayScene myGamePlayScene;
 	private Set<KeyCode> myKeySet;
 	private Set<KeyCode> myKeysPressed;
@@ -54,7 +54,7 @@ public class GamePlayController extends AbstractController {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed= new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
-		myKeyHandler = new KeyCodeHandler();
+		myKeyHandler = new MovementHandler();
 	}
 	
 	public void displayGame() {
