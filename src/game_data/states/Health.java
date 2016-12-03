@@ -1,10 +1,14 @@
 package game_data.states;
 
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+
 public class Health implements State{
 
 	private int myHealth;
 	private boolean isAlive;
 	
+	
+	@ParameterAnnotation(parameters={"Health"})
 	public Health(int health){
 		myHealth = health;
 		isAlive = true;
