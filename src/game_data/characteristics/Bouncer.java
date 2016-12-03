@@ -3,7 +3,7 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
@@ -14,7 +14,7 @@ import javafx.geometry.Side;
  *
  */
 
-@CharacteristicAnnotation(name = "Bouncer")
+@NameAnnotation(name = "Bouncer")
 public class Bouncer implements Characteristic{
 	private double myBounceSpeed;
 	private Sprite mySprite;

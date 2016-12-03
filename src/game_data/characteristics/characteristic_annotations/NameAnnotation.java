@@ -15,6 +15,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 
-public @interface CharacteristicAnnotation {
+public @interface NameAnnotation {
 	public String name();
 }

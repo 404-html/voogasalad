@@ -3,11 +3,11 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import javafx.geometry.Side;
 
-@CharacteristicAnnotation(name = "Losable By Time")
+@NameAnnotation(name = "Losable By Time")
 public class LosableByTime extends Losable implements Characteristic{
 
 	private double myTime;
