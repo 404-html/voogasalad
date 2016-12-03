@@ -65,6 +65,12 @@ public class UpdateStates {
 		this.myKeysPressed = myKeysPressed;
 		this.myKeysReleased=myKeysReleased;
 		this.mySpriteImages=mySpriteImages;
+		
+		for(State myState:aLevel.getMainPlayer().getStates()){
+			if(myState instanceof Health ){
+				System.out.println("Health of sprite" + ((Health)myState).getMyHealth());
+			}
+		}
 		//how do I make an ImageView
 		//hardcode
 		//ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());

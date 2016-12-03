@@ -148,13 +148,9 @@ public class ListOfCollidingSprites {
 	
 	private Side pickSide(int min, Sprite mySprite) {
 		if(min == 0){
-			System.out.println("y cor sprite "+mySprite.getMyLocation().getYLocation());
-
 			return Side.LEFT;
 		}
 		if(min == 1){
-			System.out.println("y cor sprite "+mySprite.getMyLocation().getYLocation());
-
 			return Side.RIGHT;
 
 		}
