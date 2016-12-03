@@ -13,6 +13,7 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.sprites.WinningObject;
 import game_data.states.Health;
@@ -66,11 +67,11 @@ public class UpdateStates {
 		this.myKeysReleased=myKeysReleased;
 		this.mySpriteImages=mySpriteImages;
 		
-		for(State myState:aLevel.getMainPlayer().getStates()){
-			if(myState instanceof Health ){
-				System.out.println("Health of sprite" + ((Health)myState).getMyHealth());
-			}
-		}
+//		for(State myState:aLevel.getMainPlayer().getStates()){
+//			if(myState instanceof Health ){
+//				System.out.println("Health of sprite" + ((Health)myState).getMyHealth());
+//			}
+//		}
 		//how do I make an ImageView
 		//hardcode
 		//ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
@@ -87,16 +88,18 @@ public class UpdateStates {
 
 		updateSpritePositions();
 //		checkForWin();
-//		checkForLoss();
+		checkForLoss();
 	}
 
-//	private void checkForLoss() {
-//		for(State s: myLevel.getMainPlayer().getStates()){
-//			if(s instanceof Health){
-//				myLevel.setLevelLost(!((Health)s).isAlive());
-//			}
-//		}
-//	}
+	private void checkForLoss() {
+		for(State s: myLevel.getMainPlayer().getStates()){
+			if(s instanceof Health){
+				if(!(((Health) s).isAlive()) || myLevel.getMainPlayer().getMyLocation().getYLocation()>myLevel.getHeight()){
+					myLevel.setLevelLost();
+				}
+			}
+		}
+	}
 //
 //	private void checkForWin() {
 //		for(State s: myLevel.getMainPlayer().getStates()){
@@ -200,8 +203,9 @@ public class UpdateStates {
 		for(Sprite sprite:mySpriteList){
 			UpdateLocation updateLocation = new UpdateLocation(sprite, timeElapsed);
 			updateLocation.updateSpriteParameters();
-			if(sprite instanceof Player){
-				//System.out.println(sprite.getMyLocation().getXLocation());
+			if(sprite instanceof Enemy){
+				//System.out.println("x is " + sprite.getMyLocation().getXLocation());
+				//System.out.println("y is " + sprite.getMyLocation().getYLocation());
 			}
 		}	
 	}

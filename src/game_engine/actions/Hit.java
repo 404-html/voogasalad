@@ -39,12 +39,12 @@ public class Hit implements Action {
 			if(myPlayerSprite.getMyXVelocity()>0){
 				
 				myPlayerSprite.setMyXVelocity(0);
-				System.out.println("hittin left side of block");
+				//System.out.println("hittin left side of block");
 			}
 		}
 		if(mySide==Side.RIGHT) {
 			if(myPlayerSprite.getMyXVelocity()<0){
-				System.out.println("hittin right side of block");
+				//System.out.println("hittin right side of block");
 				myPlayerSprite.setMyXVelocity(0);
 			}
 		}

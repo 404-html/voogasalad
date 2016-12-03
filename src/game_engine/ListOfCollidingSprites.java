@@ -7,6 +7,7 @@ import java.util.Map;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.sprites.Player;
+import game_data.sprites.Terrain;
 import game_data.states.Physics;
 import game_data.states.State;
 import javafx.geometry.Side;
@@ -118,7 +119,8 @@ public class ListOfCollidingSprites {
 		double bottomDistance = Math.abs(block.getY()+block.getHeight()-middleY);
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
-		if(mySprite instanceof Player){
+		//if(!(mySprite instanceof Terrain)){
+		if(mySprite instanceof Player && targetSprite instanceof Terrain){
 		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);

@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
  */
 public class Level extends GameObject{
 	
+	private boolean didLose, didWin;
 	private int width, height;
 	private String backgroundImageFilePath;
 	private Player myPlayerSprite;
@@ -27,6 +28,8 @@ public class Level extends GameObject{
 	
 	public Level(String aName, int width, int height, String backgroundImageFilePath){
 		setName(aName);
+		didLose = false;
+		didWin = false;
 		this.width = width;
 		this.height = height;
 		this.backgroundImageFilePath = backgroundImageFilePath;
@@ -94,5 +97,21 @@ public class Level extends GameObject{
 
 	public List<Sprite> getMySpriteList() {
 		return new ArrayList<>(mySprites);
+	}
+	
+	public void setLevelLost(){
+		didLose = true;
+	}
+	
+	public boolean lostLevel(){
+		return didLose;
+	}
+	
+	public void setLevelWon(){
+		didLose = true;
+	}
+	
+	public boolean wonLevel(){
+		return didWin;
 	}
 }
