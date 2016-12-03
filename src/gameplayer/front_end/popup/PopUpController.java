@@ -1,7 +1,6 @@
 package gameplayer.front_end.popup;
 
 import java.io.File;
-
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,7 +15,7 @@ public class PopUpController implements IPopUpDisplay {
 	private Stage myStage;
 	private VBox myOptions;
 	
-	public PopUpController(){
+	public PopUpController() {
 		myStage = new Stage();
 		myOptions = new VBox(40);
 		myOptions.setAlignment(Pos.CENTER);
@@ -26,11 +25,11 @@ public class PopUpController implements IPopUpDisplay {
 		myStage.setScene(stageScene);
 	}
 	
-	public void addOption(Node node){
+	public void addOption(Node node) {
 		myOptions.getChildren().add(node);
 	}
 	
-	public void show(){
+	public void show() {
 		myStage.show();
 	}
 }
