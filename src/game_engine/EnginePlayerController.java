@@ -105,13 +105,14 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				}
 				// }
 				if(s.getName().equals("blockmoving")){
-					//ss.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new StickyTopVertical(s));
+					s.addCharacteristic(new BouncerTop(500, s));
+					//s.addCharacteristic(new TransparentBottomImpassable(s));
+					//s.addCharacteristic(new StickyTopVertical(s));
 				}
 				else if(s.getName().equals("blockmoving2")) {
-					s.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new StickyTopHorizontal(s));
+					s.addCharacteristic(new BouncerTop(500, s));
+					//s.addCharacteristic(new TransparentBottomImpassable(s));
+					//s.addCharacteristic(new StickyTopHorizontal(s));
 				}
 				else if(!s.getName().equals("flag")){
 					s.addCharacteristic(new Impassable(s));
