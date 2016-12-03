@@ -127,29 +127,33 @@ public class ListOfCollidingSprites {
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
 		//if(!(mySprite instanceof Terrain)){
-		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent(mySprite)){
+		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent()){
 		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
-		if(mySprite instanceof Player && isTransparent(mySprite) && pastPlatform(mySprite)){
+		if(mySprite instanceof Player && isTransparent() && pastPlatform(mySprite)){
 			if(min == 2){
-				//System.out.println("ppop");
+				//System.out.println("fuck this shit");
 				shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
-				System.out.println("player y is " + mySprite.getMyLocation().getYLocation()+mySprite.getMyHeight());
-				System.out.println("block y is " + targetSprite.getMyLocation().getYLocation());
+				//System.out.println("player y is " + mySprite.getMyLocation().getYLocation()+mySprite.getMyHeight());
+				//System.out.println("block y is " + targetSprite.getMyLocation().getYLocation());
 				
 			}
 		}
+//		if(mySprite instanceof Player && isTransparent()){
+//			printSide(min);
+//		}
 		return pickSide(min, mySprite);
 	}
 	
 	private boolean pastPlatform(Sprite myPlayerSprite){
-		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>targetSprite
-				.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.2) && myPlayerSprite.getMyYVelocity()>0;		
+		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<targetSprite
+						.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
+		//return myPlayerSprite.getMyYVelocity()>0;
 	}
 	
-	private boolean isTransparent(Sprite playerSprite){
+	private boolean isTransparent(){
 		for(Characteristic c: targetSprite.getCharacteristics()){
 			if(c instanceof TransparentBottomImpassable || c instanceof BouncerTop){// && pastPlatform(playerSprite)){
 				return true;
