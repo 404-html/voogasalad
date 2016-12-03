@@ -1,6 +1,7 @@
 package game_data.states;
 
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableVariable;
 
 public class Health implements State{
 
@@ -11,6 +12,11 @@ public class Health implements State{
 	public Health(int health){
 		myHealth = health;
 		isAlive = true;
+	}
+	
+	@ViewableVariable(type=int.class, description="Health")
+	public int getHealth() {
+		return myHealth;
 	}
 	
 	public boolean isAlive(){
