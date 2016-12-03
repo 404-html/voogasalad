@@ -5,10 +5,12 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
+import game_data.characteristics.BouncerTop;
 import game_data.characteristics.Damager;
 import game_data.characteristics.Impassable;
 import game_data.characteristics.PacerAlternative;
-import game_data.characteristics.TransparentBottom;
+import game_data.characteristics.StickyTop;
+import game_data.characteristics.TransparentBottomImpassable;
 import game_data.characteristics.Winnable;
 import game_data.sprites.Character;
 import game_data.sprites.Enemy;
@@ -100,7 +102,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				}
 				// }
 				if(s.getName().equals("blockmoving") || s.getName().equals("blockmoving2")){
-					s.addCharacteristic(new TransparentBottom(s));
+					//ss.addCharacteristic(new TransparentBottomImpassable(s));
+					s.addCharacteristic(new BouncerTop(50, s));
 				}
 				else if(!s.getName().equals("flag")){
 					s.addCharacteristic(new Impassable(s));

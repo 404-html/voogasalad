@@ -6,8 +6,9 @@ import java.util.Map;
 
 import game_data.Location;
 import game_data.Sprite;
+import game_data.characteristics.BouncerTop;
 import game_data.characteristics.Characteristic;
-import game_data.characteristics.TransparentBottom;
+import game_data.characteristics.TransparentBottomImpassable;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Physics;
@@ -131,9 +132,13 @@ public class ListOfCollidingSprites {
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
-		if(isTransparent(mySprite) && pastPlatform(mySprite)){
+		if(mySprite instanceof Player && isTransparent(mySprite) && pastPlatform(mySprite)){
 			if(min == 2){
+				//System.out.println("ppop");
 				shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
+				System.out.println("player y is " + mySprite.getMyLocation().getYLocation()+mySprite.getMyHeight());
+				System.out.println("block y is " + targetSprite.getMyLocation().getYLocation());
+				
 			}
 		}
 		return pickSide(min, mySprite);
@@ -146,7 +151,7 @@ public class ListOfCollidingSprites {
 	
 	private boolean isTransparent(Sprite playerSprite){
 		for(Characteristic c: targetSprite.getCharacteristics()){
-			if(c instanceof TransparentBottom){// && pastPlatform(playerSprite)){
+			if(c instanceof TransparentBottomImpassable || c instanceof BouncerTop){// && pastPlatform(playerSprite)){
 				return true;
 			}
 		}
