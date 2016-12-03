@@ -12,12 +12,25 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Loads a properties file and creates both a checkbox list for each key, but also gives you 
+ * the booleanproperty of each checkbox to determine if activated.
+ * 
+ * @see CheckBox
+ * @see BooleanProperty
+ * @author George Bernard
+ */
 public class PropertySelector {
 	
 	private Map<String, BooleanProperty> mySelectedMap;
 	private Pane myPane;
 	private ResourceBundle myResources;
 	
+	/**
+	 * Must specify file paths
+	 * 
+	 * @param aFilePath
+	 */
 	public PropertySelector(String aFilePath) {
 		myPane = new VBox();
 		mySelectedMap = new TreeMap<String, BooleanProperty>();
@@ -35,10 +48,17 @@ public class PropertySelector {
 		}
 	}
 	
+	/**
+	 * @return CheckBox List Pane
+	 */
 	public Pane getPane(){
 		return myPane;
 	}
 	
+	
+	/**
+	 * @return Map of properties key to boolean selected property
+	 */
 	public Map<String, BooleanProperty> getCharacteristicSelectedMap(){
 		return mySelectedMap;
 	}
