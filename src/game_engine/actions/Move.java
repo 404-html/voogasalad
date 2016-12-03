@@ -18,8 +18,7 @@ public abstract class Move implements Action {
 		mySprite=aSprite;
 		myVelocity=aVelocity;
 		myOldLocation=mySprite.getMyLocation();
-		double heading = myOldLocation.getMyHeading();
-		myNewLocation = new Location(0, 0, heading);
+		myNewLocation = new Location(0, 0);
 	}
 
 	@Override

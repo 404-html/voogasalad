@@ -15,32 +15,26 @@ import javafx.scene.input.KeyCode;
  * active on that Level as well as a background image and
  * Level specific KeyCommands
  * 
-<<<<<<< HEAD
- * @author Addison, Cleveland Thompson
-=======
- * @author Addison and Austin
->>>>>>> staging
+ * @author Addison, Cleveland Thompson, Austin
  */
 public class Level extends GameObject{
 	
+	private boolean didLose, didWin;
 	private int width, height;
 	private String backgroundImageFilePath;
 	private Player myPlayerSprite;
 	Set<Sprite> mySprites;
 	Map<KeyCode, KeyCommand> myKeyCommands;
-	private boolean isLevelLost;
-	private boolean isLevelWon;
 	
 	public Level(String aName, int width, int height, String backgroundImageFilePath){
 		setName(aName);
+		didLose = false;
+		didWin = false;
 		this.width = width;
 		this.height = height;
-		isLevelLost=false;
-		isLevelWon=false;
 		this.backgroundImageFilePath = backgroundImageFilePath;
 		mySprites = new HashSet<Sprite>();
 		myKeyCommands = new HashMap<KeyCode, KeyCommand>();
-		
 	}
 	
 	public Player getMainPlayer(){
@@ -93,7 +87,6 @@ public class Level extends GameObject{
 		myKeyCommands.remove(aKeyCode);
 		this.notifyListeners();
 	}
-	//Big Question: how do you know what is "currently selected"
 	
 	public void removeSprite(Sprite aSprite){
 		if(mySprites.contains(aSprite)){
@@ -105,17 +98,20 @@ public class Level extends GameObject{
 	public List<Sprite> getMySpriteList() {
 		return new ArrayList<>(mySprites);
 	}
-	public void setLevelLost(boolean lost){
-		isLevelLost=lost;
+	
+	public void setLevelLost(){
+		didLose = true;
 	}
-	public void setLevelWon(boolean won){
-		isLevelWon=won;
+	
+	public boolean lostLevel(){
+		return didLose;
 	}
-	public boolean isLevelLost(){
-		return isLevelLost;
+	
+	public void setLevelWon(){
+		didWin = true;
 	}
-	public boolean isLevelWon(){
-		return isLevelWon;
+	
+	public boolean wonLevel(){
+		return didWin;
 	}
-
 }

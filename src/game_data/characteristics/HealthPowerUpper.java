@@ -6,6 +6,11 @@ import java.util.Map;
 import game_data.Sprite;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+>>>>>>> 51b30df9f8e041f06f7ccb31dca3c6c7205450ae
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
 =======

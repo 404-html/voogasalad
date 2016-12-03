@@ -16,10 +16,12 @@ import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 public abstract class Pacer {
 	
 	private int mySpeed;
+	private Sprite mySprite;
 	
-	@ParameterAnnotation(parameters = {"Speed"})
-	public Pacer(int speed) {
+	@ParameterAnnotation(parameters = {"Speed", "Sprite"})
+	public Pacer(int speed, Sprite aSprite) {
 		mySpeed = speed;
+		mySprite = aSprite;
 	}
 	
 	public boolean toAct() {
@@ -28,6 +30,10 @@ public abstract class Pacer {
 	
 	public int getSpeed() {
 		return mySpeed;
+	}
+	
+	protected final Sprite getSprite(){
+		return mySprite;
 	}
 	
 	public abstract boolean toChangeDirection(Sprite aSprite);

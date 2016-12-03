@@ -2,8 +2,10 @@ package game_data;
 
 import java.util.HashSet;
 import java.util.Set;
-import states.State;
+
 import game_data.characteristics.Characteristic;
+import game_data.states.State;
+import game_engine.GameResources;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -25,10 +27,10 @@ public abstract class Sprite extends GameObject {
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
 	private String id = "";
-	
+
 	private Set<State> myStates;
-	
-	public Sprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath){
+
+	public Sprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
 		myLocation = aLocation;
 		myWidth = aWidth;
 		myHeight = aHeight;
@@ -42,12 +44,11 @@ public abstract class Sprite extends GameObject {
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
 	}
-	
-	//for copying sprites
-	public Sprite(Sprite aSprite){
+
+	// for copying sprites
+	public Sprite(Sprite aSprite) {
 		preset = aSprite;
-		myLocation = new Location(aSprite.getMyLocation().getXLocation(),
-				aSprite.getMyLocation().getYLocation(), aSprite.getMyLocation().getMyHeading());
+		myLocation = new Location(aSprite.getMyLocation().getXLocation(), aSprite.getMyLocation().getYLocation());
 		myWidth = aSprite.getMyWidth();
 		myHeight = aSprite.getMyHeight();
 		setName(aSprite.getName());
@@ -56,7 +57,14 @@ public abstract class Sprite extends GameObject {
 		myYVelocity = aSprite.getMyYVelocity();
 		myXAcceleration = aSprite.getMyXAcceleration();
 		myYAcceleration = aSprite.getMyYAcceleration();
-		myCollisionHandler = aSprite.getMyCollisionHandler(); //to change: would need to have the same collision handler but we don't know what that is yet
+		myCollisionHandler = aSprite.getMyCollisionHandler(); // to change:
+																// would need to
+																// have the same
+																// collision
+																// handler but
+																// we don't know
+																// what that is
+																// yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
 	}
@@ -65,27 +73,28 @@ public abstract class Sprite extends GameObject {
 	 * should return a clone using the new Sprite(this) constructor
 	 */
 	public abstract Sprite clone();
-	private Set<Characteristic> copyCharacteristics(Set<Characteristic> aCharacteristicSet){
+
+	private Set<Characteristic> copyCharacteristics(Set<Characteristic> aCharacteristicSet) {
 		if (aCharacteristicSet == null)
 			return null;
 		Set<Characteristic> characteristicCopies = new HashSet<Characteristic>();
-		for(Characteristic c: aCharacteristicSet){
+		for (Characteristic c : aCharacteristicSet) {
 			characteristicCopies.add(c.copy());
 		}
 		return characteristicCopies;
 	}
-	
-	private Set<State> copyStates(Set<State> aStateSet){
+
+	private Set<State> copyStates(Set<State> aStateSet) {
 		if (aStateSet == null)
 			return null;
 		Set<State> stateCopies = new HashSet<State>();
-		for(State c: aStateSet){
+		for (State c : aStateSet) {
 			stateCopies.add(c.copy());
 		}
-		return stateCopies;	
+		return stateCopies;
 	}
-	
-	public Set<Characteristic> getCharacteristics(){
+
+	public Set<Characteristic> getCharacteristics() {
 		return myCharacteristics;
 	}
 
@@ -93,16 +102,26 @@ public abstract class Sprite extends GameObject {
 		myCharacteristics.add(aCharacteristic);
 		notifyListeners();
 	}
-	
-	public Set<State> getStates(){
+
+	public void removeCharacteristic(Characteristic aCharacteristic) {
+		if (myCharacteristics.contains(aCharacteristic))
+			myCharacteristics.remove(aCharacteristic);
+	}
+
+	public Set<State> getStates() {
 		return myStates;
 	}
-	
-	public void addState(State aState){
+
+	public void addState(State aState) {
 		myStates.add(aState);
 		notifyListeners();
 	}
-	
+
+	public void removeState(State aState) {
+		if (myStates.contains(aState))
+			myStates.remove(aState);
+	}
+
 	public Location getMyLocation() {
 		return myLocation;
 	}
@@ -111,21 +130,35 @@ public abstract class Sprite extends GameObject {
 		this.myLocation = myLocation;
 		notifyListeners();
 	}
+
 	public double getMyXVelocity() {
 		return myXVelocity;
 	}
+
 	public double getMyYVelocity() {
 		return myYVelocity;
 	}
+
 	public void setMyXVelocity(double myVelocity) {
-		this.myXVelocity = myVelocity;
+		if (myXVelocity > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
+			this.myXVelocity = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		}
+		else{
+			this.myXVelocity = myVelocity;
+		}
 		notifyListeners();
 	}
-	public void setMyYVelocity(double myVelocity){
-		this.myYVelocity = myVelocity;
+
+	public void setMyYVelocity(double myVelocity) {
+		if (myYVelocity > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
+			this.myYVelocity = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+		}
+		else{
+			this.myYVelocity = myVelocity;
+		}
 		notifyListeners();
 	}
-	
+
 	public double getMyXAcceleration() {
 		return myXAcceleration;
 	}
@@ -141,7 +174,6 @@ public abstract class Sprite extends GameObject {
 	public void setMyYAcceleration(double myYAcceleration) {
 		this.myYAcceleration = myYAcceleration;
 	}
-
 
 	public String getMyImagePath() {
 		return myImagePath;
@@ -161,13 +193,11 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 
-	@Deprecated
 	public void setId(String id) {
 		this.id = id;
 		notifyListeners();
 	}
-	
-	@Deprecated
+
 	public String getId() {
 		return id;
 	}
@@ -189,8 +219,8 @@ public abstract class Sprite extends GameObject {
 		this.myHeight = myHeight;
 		notifyListeners();
 	}
-	
-	public Sprite getPreset(){
+
+	public Sprite getPreset() {
 		return this.preset;
 	}
 

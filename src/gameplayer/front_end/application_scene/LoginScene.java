@@ -4,6 +4,7 @@ import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -15,7 +16,7 @@ import javafx.scene.layout.VBox;
  * @author tedmarchildon, hannah
  *
  */
-public class LoginScene extends AbstractPlayerScene {
+public class LoginScene extends AbstractNavigationPlayerScene {
 
 	private VBox myOptions;
 	private HBox myLoginOptions;
@@ -42,11 +43,14 @@ public class LoginScene extends AbstractPlayerScene {
 		myLoginOptions = new HBox(BOX_INSETS);
 		myUserName = myGUIGenerator.createTextField("Enter Username", 0, 0, 500);
 		myPassword = myGUIGenerator.createTextField("Enter Password", 0, 0, 500);
+		Label title = myGUIGenerator.createLabel("V00GASALAD", 0, 0);
+		myOptions.getChildren().add(title);
 		myOptions.getChildren().add(myUserName);
 		myOptions.getChildren().add(myPassword);
 		myLoginOptions.setAlignment(Pos.CENTER);
 		myOptions.getChildren().add(myLoginOptions);
 		myOptions.setAlignment(Pos.CENTER);
+		myOptions.getAlignment();
 		return myOptions;
 	}
 	
@@ -58,8 +62,8 @@ public class LoginScene extends AbstractPlayerScene {
 		return myPassword.getText();
 	}
 
-	@Override
-	public void addNavigationButton(String aText, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aType) {
-		// do nothing
-	}
+//	@Override
+//	public void addNavigationMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>... aHandler) {
+//		// do nothing
+//	}
 }

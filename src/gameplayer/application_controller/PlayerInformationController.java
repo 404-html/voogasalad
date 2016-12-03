@@ -1,5 +1,7 @@
 package gameplayer.application_controller;
 
+import gameplayer.back_end.high_score.HighScore;
+import gameplayer.back_end.high_score.IViewableHighScore;
 import gameplayer.back_end.user_information.IViewableUserInformation;
 import gameplayer.back_end.user_information.UserInformationController;
 import gameplayer.front_end.game_display_information.GameDisplayInformation;
@@ -9,10 +11,12 @@ public class PlayerInformationController {
 	
 	private IViewableUserInformation myUserInformation; 
 	private IViewableGameDisplayInformation myGameDisplayInformation;
+	private HighScore myHighScores; 
 	
 	public PlayerInformationController() {
 		myUserInformation = new UserInformationController();
 		myGameDisplayInformation = new GameDisplayInformation();
+		myHighScores = new HighScore();
 	}
 	
 	public void userSignIn(String aUsername, String aPassword) throws Exception{
@@ -30,4 +34,9 @@ public class PlayerInformationController {
 			throw e;
 		}
 	}
+	
+	public double getHighScoresForUser(String aUserName) {
+		return myHighScores.getHighScore(aUserName);
+	}
+	
 }

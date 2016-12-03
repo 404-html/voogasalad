@@ -25,6 +25,7 @@ public class Bounce implements Action {
 	public void act() {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 464381ae3a3a37a6a7890fd7dd4b4c2cde66bc83
 	
@@ -52,8 +53,18 @@ public class Bounce implements Action {
 >>>>>>> a21ba578045e2d967a8654259a322cef7a204506
 =======
 >>>>>>> 464381ae3a3a37a6a7890fd7dd4b4c2cde66bc83
+=======
+		//System.out.println("init y vel" + myPlayerSprite.getMyYVelocity());
+		if(mySide==Side.BOTTOM || mySide==Side.TOP){
+			myPlayerSprite.setMyYVelocity(-(myPlayerSprite.getMyYVelocity()+myBounceSpeed));
+		}			
+		if(mySide==Side.LEFT || mySide==Side.RIGHT){
+			myPlayerSprite.setMyXVelocity(-(myPlayerSprite.getMyXVelocity()+myBounceSpeed));
+>>>>>>> 51b30df9f8e041f06f7ccb31dca3c6c7205450ae
 		}
-		return 360 - oldHeading;
+		//System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
+		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
+		//myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
 		
 	}
 	

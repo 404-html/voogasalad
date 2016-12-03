@@ -2,12 +2,12 @@ package gameplayer.front_end.heads_up_display;
 
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
-import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.MenuBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,23 +16,26 @@ import javafx.scene.layout.VBox;
 
 public class HeadsUpDisplay {
 	
-	private HBox myTopMenu; 
+	private MenuBar myTopMenu; 
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
 	
-	public HeadsUpDisplay(Scene aScene, double aWidth, double aHeight) {
-		//super(aWidth, aHeight);
+	public HeadsUpDisplay(double aWidth, double aHeight) {
 		myGUIGenerator = new GUIGenerator();
 		myRoot = new BorderPane();
 	}
 	
-	public void addButton(String aText, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aButtonDisplayType) {
-		myTopMenu.getChildren().add(myGUIGenerator.createButton(aText, 0, 0, aHandler, aButtonDisplayType));
+	public void addMenu(String aTitle, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... aHandler) {
+		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aTitle, aText, aHandler));
+	}
+	
+	public void addMenu(ImageView aImage, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
+		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
 
 	private Node createTop() {
-		myTopMenu = new HBox(8);
-		myTopMenu.setAlignment(Pos.CENTER);
+		myTopMenu = new MenuBar();
+		//myTopMenu.setAlignment(Pos.CENTER);
 		return myTopMenu;
 	}
 	
@@ -65,5 +68,4 @@ public class HeadsUpDisplay {
 		myRoot.setBackground(Background.EMPTY);
 		return myRoot;
 	}
-
 }

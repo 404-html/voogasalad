@@ -17,7 +17,7 @@ public class GameChoiceScene extends AbstractNavigationPlayerScene {
 	}
 
 	@Override
-	public Scene init(){
+	public Scene init() {
 		myRoot.setCenter(addNodes());
 		return myScene;
 	}

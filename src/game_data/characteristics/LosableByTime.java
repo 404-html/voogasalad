@@ -13,8 +13,9 @@ public class LosableByTime extends Losable implements Characteristic{
 	private double myTime;
 	private Sprite mySprite;
 	
-	@ParameterAnnotation(parameters = {"Time"})
+	@ParameterAnnotation(parameters = {"Time", "Sprite"})
 	public LosableByTime(double time, Sprite aSprite){
+		super(aSprite);
 		myTime = time;
 		mySprite = aSprite;
 	}

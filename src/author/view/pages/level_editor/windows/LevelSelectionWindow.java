@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import author.controller.IAuthorController;
-import author.view.util.ToolBarBuilder;
 import author.view.util.authoring_buttons.FunctionalLabel;
 import author.view.util.authoring_buttons.LabelFactory;
+import author.view.util.facades.ToolBarBuilder;
 import game_data.Level;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -36,14 +35,6 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow {
 
 	public LevelSelectionWindow(IAuthorController authorController) {
 		super(authorController);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T extends Node> void addChildren(T... child) {
-		for (T node : child) {
-			container.getChildren().add(node);
-		}
 	}
 
 	@Override

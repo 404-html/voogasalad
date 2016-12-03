@@ -6,9 +6,9 @@ import javafx.scene.input.MouseEvent;
 
 public class CSSButton extends AbstractButton {
 	
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler) {
-		Button button = super.createButton("", aXPos, aYPos, aHandler);
-		button.setId(aMessage);
+	public Button createButton(String aMessage, String aCSS, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler) {
+		Button button = super.createButton(aMessage, aXPos, aYPos, aHandler);
+		button.setId(aCSS);
 		return button;
 	}
 
