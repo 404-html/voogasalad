@@ -1,6 +1,7 @@
 package gameplayer.application_controller;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -69,7 +70,7 @@ public class GamePlayController extends AbstractController {
 	public void displayGame() {
 		initializeScene();
 		setMenu();
-		resetSprites(0);
+		updateSprites();
 		initializeAnimation();
 		resetStage(myGamePlayScene);
 	}
@@ -96,12 +97,17 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void resetSprites(double elapsedTime) {
-		myGamePlayScene.clearSprites();
 		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
+		myGamePlayScene.clearSprites();
 		updateSprites();
 	}
 	
 	private void updateSprites() {
+		// A sprite has been removed
+		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
+			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
+			mySpriteMap.keySet().retainAll(s);
+		}
 		for (Sprite sprite : myGameController.getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
