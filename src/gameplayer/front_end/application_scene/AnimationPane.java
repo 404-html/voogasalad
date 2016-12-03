@@ -12,16 +12,12 @@ import javafx.scene.layout.Pane;
  *
  */
 
-
 public class AnimationPane {
 	
 	private Pane myGamePlayCanvas;
-	private KeyCodeHandler myKeyCodeHandler;
-	//private String myBackgroundFilePath;
 	
-	public AnimationPane(KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
+	public AnimationPane() {
 		myGamePlayCanvas = new Pane();
-		myKeyCodeHandler = aKeyHandler;
 	}
 	/**
 	 * Add the correct nodes to the scene
@@ -43,9 +39,10 @@ public class AnimationPane {
 		myGamePlayCanvas.setBackground(aBackground);
 	}
 	
-	public void moveScreen() {
-		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + myKeyCodeHandler.getMovement());
+	public void moveScreen(KeyCodeHandler aHandler) {
+		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + aHandler.getMovement());
 	}
+	
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}

@@ -59,9 +59,9 @@ public class GamePlayController extends AbstractController {
 	
 	public void displayGame() {
 		initializeScene();
+		setMenu();
 		updateSprites();
 		initializeAnimation();
-		setMenu();
 		resetStage(myGamePlayScene);
 	}
 
@@ -88,7 +88,7 @@ public class GamePlayController extends AbstractController {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		clearKeys();
 		myKeyHandler.setMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
-		myGamePlayScene.moveScreen();
+		myGamePlayScene.moveScreen(myKeyHandler);
 	}
 	
 	private void updateSprites() {

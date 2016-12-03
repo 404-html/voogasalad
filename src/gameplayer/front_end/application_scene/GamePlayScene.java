@@ -21,7 +21,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 	public GamePlayScene(KeyCodeHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight) {
 		myStack = new StackPane();
 		myScene = new Scene(myStack, aWidth, aHeight);
-		myGamePlay = new AnimationPane(aKeyHandler, aWidth, aHeight);
+		myGamePlay = new AnimationPane();
 		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight);
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
 		initializeScene();
@@ -32,8 +32,8 @@ public class GamePlayScene extends AbstractPlayerScene {
 		return myScene;
 	}
 
-	public void moveScreen() {
-		myGamePlay.moveScreen();
+	public void moveScreen(KeyCodeHandler aHandler) {
+		myGamePlay.moveScreen(aHandler);
 	}
 
 	public void clearSprites() {

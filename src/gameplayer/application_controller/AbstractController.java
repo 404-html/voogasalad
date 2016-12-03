@@ -10,12 +10,13 @@ public abstract class AbstractController {
 
 	protected static final String FILE = "gameplayerlabels.";
 	protected static final String BUTTONLABEL = "ButtonLabels"; 
-	public static final int SCENE_SIZE = 1000;
+	protected static final int SCENE_SIZE = 1000;
 	protected Stage myStage;
 	protected GUIGenerator myGUIGenerator = new GUIGenerator();
 	protected ResourceBundle myButtonLabels;
 	
-	public AbstractController(){
+	public AbstractController() {
+		
 	}
 	
 	protected void resetStage(IDisplay aScene){
