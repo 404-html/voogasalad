@@ -11,10 +11,8 @@ public class SceneFactory {
 			return new UserProfileScene(aWidth, aHeight);
 		} else if (aIdentifier.equals(SceneIdentifier.HIGHSCORE)) {
 			return new HighScoreScene(aWidth, aHeight);
-		} else if (aIdentifier.equals(SceneIdentifier.LOSE)) {
-			return new LosingScene(aWidth, aHeight);
-		} else if (aIdentifier.equals(SceneIdentifier.WIN)){
-			return new WinningScene(aWidth, aHeight);
+		} else if (aIdentifier.equals(SceneIdentifier.RESULT)) {
+			return new ResultScene(aWidth, aHeight);
 		}
 		return null;
 	}

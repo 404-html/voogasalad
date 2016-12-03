@@ -50,6 +50,7 @@ public class GamePlayController extends AbstractController {
 		initializeKeySets(); 
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
+		updateSprites();
 	}
 
 	private void initializeEngineComponents(File aFile) {
@@ -68,7 +69,7 @@ public class GamePlayController extends AbstractController {
 	public void displayGame() {
 		initializeScene();
 		setMenu();
-		updateSprites();
+		resetSprites(0);
 		initializeAnimation();
 		resetStage(myGamePlayScene);
 	}
@@ -147,12 +148,12 @@ public class GamePlayController extends AbstractController {
 			save();
 		}, e -> {
 			myAnimationLoop.stop();
-			IDisplay ls = mySceneBuilder.create(SceneIdentifier.LOSE, myStage.getWidth(), myStage.getHeight());
+			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
 			setLosingSceneHandlers((INavigationDisplay) ls);
 			resetStage(ls);
 		}, e -> {
 			myAnimationLoop.stop();
-			IDisplay ls = mySceneBuilder.create(SceneIdentifier.WIN, myStage.getWidth(), myStage.getHeight());
+			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
 			setWinningSceneHandlers((INavigationDisplay) ls);
 			resetStage(ls);
 		});
@@ -187,19 +188,15 @@ public class GamePlayController extends AbstractController {
 	
 	private void setWinningSceneHandlers(INavigationDisplay winScene) {
 		winScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
-		winScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
-			myApplicationController.displayMainMenu();
-		}, ButtonDisplay.TEXT);
-		winScene.addButton(myButtonLabels.getString("PlayAgain"), e -> {
-			handleRestart();
-		}, ButtonDisplay.TEXT);
-		winScene.addButton(myButtonLabels.getString("HighScores"), e -> {
-			myApplicationController.displayHighScoreScene();
-		}, ButtonDisplay.TEXT);
+		setResultSceneHandlers(winScene);
 	}
 	
 	private void setLosingSceneHandlers(INavigationDisplay loseScene) {
 		loseScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
+		setResultSceneHandlers(loseScene);
+	}
+
+	private void setResultSceneHandlers(INavigationDisplay loseScene) {
 		loseScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
 			myApplicationController.displayMainMenu();
 		}, ButtonDisplay.TEXT);
