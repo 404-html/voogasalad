@@ -8,11 +8,14 @@ import game_data.characteristics.Bouncer;
 import game_data.characteristics.Damager;
 import game_data.characteristics.Impassable;
 import game_data.characteristics.PacerAlternative;
+import game_data.characteristics.Winnable;
 import game_data.sprites.Character;
 import game_data.sprites.Enemy;
+import game_data.sprites.Item;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Health;
+import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.actions.Bounce;
@@ -56,6 +59,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.setPlayerSprite((Player) myLevel.getMySpriteList().get(0));
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 		myLevel.getMainPlayer().addState(new Health(1));
+		myLevel.getMainPlayer().addState(new LevelWon());
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
@@ -78,6 +82,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.addNewSprite(new Terrain(new Location(1350, 250), 200, 20, "blockmoving2", "author/images/betterblock.png"));
 		
 		myLevel.addNewSprite(new Enemy(new Location(1226, 401), 100, 100, "goomba1", "author/images/angry_goomba.png"));
+		myLevel.addNewSprite(new Item(new Location(2000, 400), 50, 200, "flag", "author/images/victory_flag.png"));
 		for (Sprite s : myLevel.getMySpriteList()) {
 			if (!(s instanceof Player || s instanceof Enemy)) {
 				// if(s.getName().equals("block1")){
@@ -89,7 +94,12 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //					s.addCharacteristic(new Damager(25, s));
 //				}
 				// }
-				s.addCharacteristic(new Impassable(s));
+				if(!s.getName().equals("flag")){
+					s.addCharacteristic(new Impassable(s));
+				}
+				if(s.getName().equals("flag")){
+					s.addCharacteristic(new Winnable(s));
+				}
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 			if(s instanceof Enemy){

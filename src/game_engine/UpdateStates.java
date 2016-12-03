@@ -66,17 +66,6 @@ public class UpdateStates {
 		this.myKeysPressed = myKeysPressed;
 		this.myKeysReleased=myKeysReleased;
 		this.mySpriteImages=mySpriteImages;
-		
-//		for(State myState:aLevel.getMainPlayer().getStates()){
-//			if(myState instanceof Health ){
-//				System.out.println("Health of sprite" + ((Health)myState).getMyHealth());
-//			}
-//		}
-		//how do I make an ImageView
-		//hardcode
-		//ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
-		//this.mySpriteImages.put(mySpriteList.get(1), view);
-		//end hardcode
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyPressedMap();
@@ -85,9 +74,8 @@ public class UpdateStates {
 		runKeyReleased();
 		executeCharacteristics();
 
-
 		updateSpritePositions();
-//		checkForWin();
+		checkForWin();
 		checkForLoss();
 	}
 
@@ -101,14 +89,16 @@ public class UpdateStates {
 		}
 	}
 //
-//	private void checkForWin() {
-//		for(State s: myLevel.getMainPlayer().getStates()){
-//			if(s instanceof LevelWon){
-//				myLevel.setLevelWon(((LevelWon)s).isHasWon());
-//			}
-//		}
-//		
-//	}
+	private void checkForWin() {
+		for(State s: myLevel.getMainPlayer().getStates()){
+			if(s instanceof LevelWon){
+				if(((LevelWon) s).isHasWon()){
+					myLevel.setLevelWon();
+				}
+			}
+		}
+		System.out.println(myLevel.wonLevel());
+	}
 
 	//keys will only control the main player rn
 	private void generateDefaultKeyPressedMap() {
