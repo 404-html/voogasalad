@@ -91,8 +91,8 @@ public class ListOfCollidingSprites {
 
 	private int getMaxEdge(double leftDistance, double rightDistance, double topDistance, double bottomDistance) {
 		Map<Integer, Double> thing = new HashMap<Integer, Double>();
-		thing.put(0, leftDistance);
-		thing.put(1, rightDistance);
+		thing.put(0, leftDistance+0.05*targetSprite.getMyWidth());
+		thing.put(1, rightDistance+0.05*targetSprite.getMyWidth());
 		thing.put(2, topDistance);
 		thing.put(3, bottomDistance);
 		int min = 0;
@@ -119,10 +119,11 @@ public class ListOfCollidingSprites {
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
 		if(mySprite instanceof Player){
+		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
-		return pickSide(min);
+		return pickSide(min, mySprite);
 	}
 
 	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
@@ -145,12 +146,17 @@ public class ListOfCollidingSprites {
 		//}
 	}
 	
-	private Side pickSide(int min) {
+	private Side pickSide(int min, Sprite mySprite) {
 		if(min == 0){
+			System.out.println("y cor sprite "+mySprite.getMyLocation().getYLocation());
+
 			return Side.LEFT;
 		}
 		if(min == 1){
+			System.out.println("y cor sprite "+mySprite.getMyLocation().getYLocation());
+
 			return Side.RIGHT;
+
 		}
 		if(min == 2){
 			return Side.TOP;

@@ -29,7 +29,6 @@ public class MoveRight extends Move {
 		//return myNewLocation;
 	}*/
 	public void setVelocity(){
-
 		//mySprite.setMyXVelocity(myVelocity);
 		//System.out.println("changing right velocity");
 		mySprite.setMyXVelocity(myVelocity);
