@@ -50,6 +50,7 @@ public class AnimationPane {
 	
 	public void moveScreen() {
 		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + myKeyCodeHandler.getXMovement());
+		myGamePlayCanvas.setTranslateY(myGamePlayCanvas.getTranslateY() + myKeyCodeHandler.getYMovement());
 	}
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
