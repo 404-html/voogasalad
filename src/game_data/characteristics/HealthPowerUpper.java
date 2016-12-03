@@ -4,10 +4,23 @@ import game_engine.actions.*;
 import java.util.Map;
 
 import game_data.Sprite;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+>>>>>>> 51b30df9f8e041f06f7ccb31dca3c6c7205450ae
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
+=======
+import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+>>>>>>> a21ba578045e2d967a8654259a322cef7a204506
+=======
+import game_data.sprites.Player;
+import game_engine.actions.Damage;
+>>>>>>> 464381ae3a3a37a6a7890fd7dd4b4c2cde66bc83
 import javafx.geometry.Side;
 
 /**
@@ -38,6 +51,7 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
+
 			if (collidedSprite instanceof Player){
 				myAction = new Damage(-getHealthToGain(), collidedSprite);
 				myAction.act();
@@ -45,5 +59,7 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 		}
 
 	}
-	
-}
+
+
+	}
+

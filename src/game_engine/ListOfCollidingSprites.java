@@ -6,7 +6,11 @@ import java.util.Map;
 
 import game_data.Location;
 import game_data.Sprite;
+import game_data.characteristics.BouncerTop;
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.TransparentBottomImpassable;
 import game_data.sprites.Player;
+import game_data.sprites.Terrain;
 import game_data.states.Physics;
 import game_data.states.State;
 import javafx.geometry.Side;
@@ -14,6 +18,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * @author Austin Gartside, Lucia
+ *
+ */
 public class ListOfCollidingSprites {
 	
 	private static double SHIFT_CONSTANT = .005;
@@ -118,12 +126,36 @@ public class ListOfCollidingSprites {
 		double bottomDistance = Math.abs(block.getY()+block.getHeight()-middleY);
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
-		if(mySprite instanceof Player){
+		//if(!(mySprite instanceof Terrain)){
+		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent(mySprite)){
 		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
+		if(mySprite instanceof Player && isTransparent(mySprite) && pastPlatform(mySprite)){
+			if(min == 2){
+				//System.out.println("ppop");
+				shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
+				System.out.println("player y is " + mySprite.getMyLocation().getYLocation()+mySprite.getMyHeight());
+				System.out.println("block y is " + targetSprite.getMyLocation().getYLocation());
+				
+			}
+		}
 		return pickSide(min, mySprite);
+	}
+	
+	private boolean pastPlatform(Sprite myPlayerSprite){
+		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>targetSprite
+				.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.2) && myPlayerSprite.getMyYVelocity()>0;		
+	}
+	
+	private boolean isTransparent(Sprite playerSprite){
+		for(Characteristic c: targetSprite.getCharacteristics()){
+			if(c instanceof TransparentBottomImpassable || c instanceof BouncerTop){// && pastPlatform(playerSprite)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
