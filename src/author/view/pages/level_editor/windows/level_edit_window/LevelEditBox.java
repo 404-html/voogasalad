@@ -6,6 +6,7 @@ package author.view.pages.level_editor.windows.level_edit_window;
 
 import java.io.File;
 
+import util.RelativePathFinder;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.file_helpers.FileLoader;
 import author.view.util.file_helpers.FileLoader.FileType;
@@ -82,8 +83,10 @@ class LevelEditBox {
 				FileType.PNG,
 				FileType.JPG ).loadImage();
 		
-		if (file !=null)
-			this.backgroundPath = file.toURI().toString();
+		if (file !=null){
+			RelativePathFinder pf = new RelativePathFinder();
+			this.backgroundPath = pf.getPath(file);
+		}
 	}
 	
 	private HBox createHBox(Node...nodes){

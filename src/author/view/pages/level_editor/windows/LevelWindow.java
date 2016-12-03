@@ -1,5 +1,6 @@
 package author.view.pages.level_editor.windows;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -158,7 +159,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 	
 	private void setBackgroundImage(String filePath) {
-		Image image = new Image(filePath);
+		Image image = new Image((new File(filePath)).toURI().toString());
 		BackgroundImage backIm = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 				BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, true, true, true, true));
 		this.levelPane.setBackground(new Background(backIm));

@@ -1,5 +1,6 @@
 package author.model.game_observables.draggable_sprite;
 
+import java.io.File;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
@@ -30,7 +31,7 @@ public abstract class DraggableSprite {
 	public DraggableSprite(Sprite aSprite) {
 		mySprite = aSprite;
 		draggableItem = new HBox();
-		myImageView = new ImageView(new Image(aSprite.getMyImagePath()));
+		myImageView = new ImageView(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
 		addImageToContainer();
 		setListener(aSprite);
 		makeDraggable();
@@ -57,7 +58,7 @@ public abstract class DraggableSprite {
 
 	protected InvalidationListener initListener(Sprite aSprite) {
 		InvalidationListener invalidationListener = (sprite) -> {
-			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
+			this.getImageView().setImage(new Image( (new File(aSprite.getMyImagePath()).toURI().toString())));
 		};
 		return invalidationListener;
 	}

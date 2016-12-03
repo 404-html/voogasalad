@@ -1,5 +1,7 @@
 package author.view.pages.sprite.page;
 
+import java.io.File;
+
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
@@ -31,7 +33,7 @@ public class SpriteViewBox implements InvalidationListener {
 		this();
 		aSprite.addListener(this);
 		myImageButton.setText(IMG_TEXT + aSprite.getName());
-		Image spriteImage = new Image( aSprite.getMyImagePath() );
+		Image spriteImage = new Image(new File(aSprite.getMyImagePath()).toURI().toString() );
 		ImageView imageView = new ImageView( spriteImage );
 		imageView.setFitWidth(100);
 		imageView.setFitHeight(100);
@@ -58,7 +60,7 @@ public class SpriteViewBox implements InvalidationListener {
 		if(observable instanceof Sprite){
 			Sprite s = (Sprite) observable;
 			myImageButton.setText(IMG_TEXT + s.getName());
-			ImageView iv = new ImageView (new Image(s.getMyImagePath()));
+			ImageView iv = new ImageView (new Image((new File(s.getMyImagePath())).toURI().toString()));
 			iv.setFitWidth(100);
 			iv.setFitHeight(100);
 			myImageButton.setGraphic(iv );

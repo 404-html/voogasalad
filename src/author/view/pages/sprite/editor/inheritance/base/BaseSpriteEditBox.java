@@ -1,7 +1,7 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import java.io.File;
-
+import util.RelativePathFinder;
 import author.view.util.file_helpers.FileLoader;
 import author.view.util.file_helpers.FileLoader.FileType;
 import author.view.util.input_fields.NumberFieldBox;
@@ -89,7 +89,7 @@ public class BaseSpriteEditBox {
 	}
 	
 	protected final void setImageFile(String aImagePath){
-		myImagePath = aImagePath;
+		myImagePath = (new File(aImagePath)).toURI().toString();
 		myImageView.setImage(new Image( myImagePath ));
 	}
 
@@ -161,8 +161,9 @@ public class BaseSpriteEditBox {
 		imageButton.setOnMouseClicked(e -> {
 			File file = myFileLoader.loadImage();
 			if(file != null){
-				myImagePath = file.toURI().toString();
-				myImageView.setImage(new Image(myImagePath));
+				RelativePathFinder pf = new RelativePathFinder();
+				myImagePath = pf.getPath(file);
+				myImageView.setImage(new Image(file.toURI().toString()));
 			}
 		});
 		
