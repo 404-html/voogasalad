@@ -10,7 +10,6 @@ public class AnimationLoop {
     private static final int MILLISECOND_DELAY = 1000/FRAMES_PER_SECOND;
     private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private Timeline myAnimation;
-	private double myElapsedTime = 0;
 	
 	public AnimationLoop() {
 		myAnimation = new Timeline();
@@ -23,11 +22,7 @@ public class AnimationLoop {
 		myAnimation.play();
 	}
 	
-	public double getTimeElapsed(){
-		return myElapsedTime;
-	}
-	
-	public void stop(){
+	public void stop() {
 		myAnimation.stop();
 	}
 }
