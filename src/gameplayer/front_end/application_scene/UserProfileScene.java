@@ -19,17 +19,15 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 
 	@Override
 	public Scene init(){
-		myRoot.setCenter(addNodes());
+		getRoot().setCenter(addNodes());
 		System.out.println(myScene);
 		return myScene;
 	}
 
 	private VBox addNodes() {
-		myOptions = new VBox(BOX_INSETS);
-		myOptions.getChildren().add(myGUIGenerator.createLabel(myUserInformation.getUserName(), 0, 0));
-		myOptions.setAlignment(Pos.CENTER);
+		getOptions().getChildren().add(myGUIGenerator.createLabel(myUserInformation.getUserName(), 0, 0));
+		getOptions().setAlignment(Pos.CENTER);
 		//myOptions.bin
-		return myOptions;
+		return getOptions();
 	}
-
 }
