@@ -17,6 +17,8 @@ import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
@@ -126,21 +128,27 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			ConcreteMovableSprite draggableSprite = new ConcreteMovableSprite(sprite, sprite.getPreset());
 			this.addMovableSprite(draggableSprite);
 //			DragResizeMod.makeResizable(draggableSprite.getDraggableItem(), null);
-			HBox draggableItem = draggableSprite.getDraggableItem();
-			draggableItem.setOnMouseClicked((mouseEvent) -> {
-				System.out.println("Clicked");
-				if (((MouseEvent) mouseEvent).getButton() == MouseButton.SECONDARY){
-					System.out.println("Right Click");
-				}
-			});
-			this.levelPane.getChildren().addAll(draggableItem);
+			addRightClickListener(draggableSprite);
+			this.levelPane.getChildren().addAll(draggableSprite.getDraggableItem());
+		});
+	}
+	
+	private void addRightClickListener(DraggableSprite draggableSprite){
+		EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
+		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
+			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY){
+				this.getController().getModel().getGame().getCurrentLevel().removeSprite(draggableSprite.getSprite());
+			}
+			else{
+				currentHandler.handle(event);
+			}
 		});
 	}
 	
 	private void removeSprites(Set<Sprite> removedSprites){
 		removedSprites.forEach((removedSprite) -> {
 			this.getMovableSprites().forEach((movableSprite) -> {
-				if (movableSprite.getSprite().equals(removedSprites)){
+				if (movableSprite.getSprite() == removedSprite){
 					movableSprite.removeListener();
 					movableSprite.removePresetListener();
 					this.levelPane.getChildren().remove(movableSprite.getDraggableItem());
