@@ -59,7 +59,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
-		for (int i = 226; i < 13226; i += 100) {
+		for (int i = 226; i < 13226; i += 105) {
 			myLevel.addNewSprite(
 					new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
@@ -90,13 +90,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //					s.addCharacteristic(new SpeedPowerUpper(5, 5000, s));
 				}
 				// }
-				else {
+				//else {
 					s.addCharacteristic(new Impassable(s));
 				}
 				s.addState(new Health(10));
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
-		}
+		
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
 		// myLevel.getMySpriteList().get(1).getStates().size());
 		// System.out.println(myLevel.getMySpriteList().get(2).getName() + " " +

@@ -1,15 +1,7 @@
 package gameplayer.front_end.application_scene;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import game_data.Sprite;
-import gameplayer.back_end.keycode_handler.KeyCodeHandler;
-import gameplayer.front_end.background_display.BackgroundDisplayFactory;
-import javafx.scene.Scene;
+import gameplayer.back_end.keycode_handler.MovementHandler;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 
@@ -20,19 +12,13 @@ import javafx.scene.layout.Pane;
  *
  */
 
-public class AnimationScene {
+public class AnimationPane {
 	
 	private Pane myGamePlayCanvas;
-	private KeyCodeHandler myKeyCodeHandler;
-	//private String myBackgroundFilePath;
 	
-	public AnimationScene(KeyCodeHandler aKeyHandler, double aWidth, double aHeight) {
+	public AnimationPane() {
 		myGamePlayCanvas = new Pane();
-		myKeyCodeHandler = aKeyHandler;
 	}
-	/**
-	 * Add the correct nodes to the scene
-	 */
 	
 	public Pane init() {
 		return myGamePlayCanvas;
@@ -50,11 +36,13 @@ public class AnimationScene {
 		myGamePlayCanvas.setBackground(aBackground);
 	}
 	
-	public void moveScreen() {
-		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + myKeyCodeHandler.getMovement());
+	public void moveScreen(MovementHandler aHandler) {
+		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + aHandler.getXMovement());
 	}
+	
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}
 	
 }
+
