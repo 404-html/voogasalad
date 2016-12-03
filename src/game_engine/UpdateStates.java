@@ -43,7 +43,7 @@ import javafx.scene.input.KeyCode;
  * Losses should actually probably be integrated within characteristics so we dont check for collision repeatedly.
  * Do we have to deal with if the sprite hits a block at multiple sides?
  * 
- * @author LuciaMartos
+ * @author LuciaMartos, Austin Gartside
  *
  */
 

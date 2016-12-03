@@ -6,6 +6,8 @@ import java.util.Map;
 
 import game_data.Location;
 import game_data.Sprite;
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.TransparentBottom;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Physics;
@@ -15,6 +17,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * @author Austin Gartside, Lucia
+ *
+ */
 public class ListOfCollidingSprites {
 	
 	private static double SHIFT_CONSTANT = .005;
@@ -120,12 +126,21 @@ public class ListOfCollidingSprites {
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
 		//if(!(mySprite instanceof Terrain)){
-		if(mySprite instanceof Player && targetSprite instanceof Terrain){
+		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent(targetSprite)){
 		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
 		return pickSide(min, mySprite);
+	}
+	
+	private boolean isTransparent(Sprite aSprite){
+		for(Characteristic c: aSprite.getCharacteristics()){
+			if(c instanceof TransparentBottom){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
