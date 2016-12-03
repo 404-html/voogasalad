@@ -32,11 +32,13 @@ public class GamePlayController extends AbstractController {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
+	private ApplicationController myApplicationController;
 	
-	public GamePlayController(Stage aStage, File aFile) {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
 		myStage = aStage;
 		myGameFile = aFile;
 		mySpriteMap = new HashMap<Sprite, ImageView>();
+		myApplicationController = aAppController;
 		initializeKeySets(); 
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
@@ -120,7 +122,7 @@ public class GamePlayController extends AbstractController {
 
 	private void clearKeys() {
 		myKeysReleased.clear();
-		myKeysPressed.clear();
+		//myKeysPressed.clear();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -129,13 +131,13 @@ public class GamePlayController extends AbstractController {
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
-			ApplicationController appControl = new ApplicationController(myStage);
-			appControl.displayMainMenu();
+			//ApplicationController appControl = new ApplicationController(myStage);
+			myApplicationController.displayMainMenu();
 		});
 		String[] namesForGamePlay = {"Restart", "Change to Red", "Save"};
 		myGamePlayScene.addMenu("GAME PLAY", namesForGamePlay, e -> {
 			myAnimationLoop.stop();
-			GamePlayController gameControl = new GamePlayController(myStage, myGameFile);
+			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
 			gameControl.displayGame();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
@@ -157,6 +159,11 @@ public class GamePlayController extends AbstractController {
 	
 	private void handleKeyRelease(KeyCode key) {
 		myKeysReleased.add(key);
+		myKeysPressed.remove(key);
 		myKeySet.remove(key);
+	}
+
+	public Game getGame() {
+		return myGameController.getMyGame();
 	}
 }

@@ -1,12 +1,13 @@
 package gameplayer.front_end.gui_generator;
 
 import java.io.File;
+import java.util.List;
 
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -15,11 +16,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Paint;
 
 public class GUIGenerator implements IGUIGenerator {
 	
@@ -56,10 +53,18 @@ public class GUIGenerator implements IGUIGenerator {
 		//avalue.setBackground(new Background(createBackgroundImage(afilepath)));
 	}
 	
-	public ComboBox<Node> createComboBox() {
-		ComboBox<Node> box = new ComboBox<Node>();
-		//box.add
-		return null;
+	public ComboBox<Pane> createComboBox(List<Pane> aListOfPanes) {
+		ComboBox<Pane> box = new ComboBox<Pane>();
+		ObservableList<Pane> items = FXCollections.observableArrayList(aListOfPanes);
+		box.setItems(items);
+		//box.selectionModelProperty().addListener(new ChangeListener<Pane> () {
+		//	@Override
+			//public void changed(ObservableValue<? extends Pane> observable, Pane oldValue, Pane newValue) {
+				// TODO Auto-generated method stub
+				
+			//}
+        //});
+		return box;
 	}
 
 	@Override
