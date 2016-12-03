@@ -95,8 +95,8 @@ public abstract class SettingsFactory<T> {
 			return (T) myConstructor.newInstance(parameters);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			System.out.println("For now this does nothing [Characteristic Factory]");
-			System.out.print(Arrays.asList(parameters));
+			//System.out.println("For now this does nothing [Characteristic Factory]");
+			//System.out.print(Arrays.asList(parameters));
 			e.printStackTrace();
 			return null;
 		}
