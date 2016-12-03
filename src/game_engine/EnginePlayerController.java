@@ -103,7 +103,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				// }
 				if(s.getName().equals("blockmoving") || s.getName().equals("blockmoving2")){
 					//ss.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new BouncerTop(50, s));
+					s.addCharacteristic(new TransparentBottomImpassable(s));
+					s.addCharacteristic(new StickyTop(s));
 				}
 				else if(!s.getName().equals("flag")){
 					s.addCharacteristic(new Impassable(s));

@@ -24,9 +24,9 @@ public class Stick implements Action{
 			}
 		}
 		if(spritePhysics!=null){
-			myCollidedSprite.setMyYAcceleration(spritePhysics.getVerticalGravity());
+			//myCollidedSprite.setMyYAcceleration(spritePhysics.getVerticalGravity());
 			myCollidedSprite.setMyYVelocity(mySprite.getMyYVelocity());
-			myCollidedSprite.setMyXAcceleration(spritePhysics.getHorizontalGravity());
+			//myCollidedSprite.setMyXAcceleration(spritePhysics.getHorizontalGravity());
 			myCollidedSprite.setMyXVelocity(mySprite.getMyXVelocity());
 		}
 		//myCollidedSprite.setMyYAcceleration();
