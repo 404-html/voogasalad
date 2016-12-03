@@ -89,6 +89,7 @@ public class UpdateStates {
 		runKeyReleased();
 		executeCharacteristics();
 		cleanGame();
+		System.out.println("size " + aLevel.getMySpriteList().size());
 
 		updateSpritePositions();
 		// checkForWin();
@@ -101,6 +102,7 @@ public class UpdateStates {
 			for (State state : mySprite.getStates()) {
 				if (state instanceof Health) {
 					if(!((Health) state).isAlive()){
+						System.out.println(mySprite.getName() + "is dead");
 						removeSprites.add(mySprite);
 					}
 				}
@@ -108,8 +110,14 @@ public class UpdateStates {
 		}
 		System.out.println(removeSprites.size());
 		for(Sprite mySprite : removeSprites){
-//			System.out.println("LUCIA");
-			mySpriteList.remove(mySprite);
+//			System.out.println(mySprite.getName());
+			//System.out.println("init size" + myLevel.getMySpriteList().size());
+			myLevel.removeSprite(mySprite);
+			mySpriteImages.remove(mySprite);
+			//System.out.println("end size" + myLevel.getMySpriteList().size());
+			//mySpriteList.remove(mySprite);
+//			System.out.println(mySpriteList.contains(mySprite));
+//			myLevel.getMySpriteList().remove(mySprite);
 		}
 	}
 
