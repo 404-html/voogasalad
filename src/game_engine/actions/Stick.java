@@ -9,27 +9,28 @@ public class Stick implements Action{
 
 	private Sprite myCollidedSprite;
 	private Sprite mySprite;
+	private boolean horizontal;
 	
-	public Stick(Sprite collidedSprite, Sprite origSprite){
+	public Stick(Sprite collidedSprite, Sprite origSprite, boolean hori){
 		myCollidedSprite = collidedSprite;
 		mySprite = origSprite;
+		horizontal = hori;
 	}
 	
 	@Override
 	public void act() {
-		SpritePhysics spritePhysics = null;
-		for(State s: mySprite.getStates()){
-			if(s instanceof Physics){
-				spritePhysics = ((Physics) s).getPhysics();
-			}
+		
+		double xLoc, yLoc;
+		
+		if(horizontal) {
+			xLoc = myCollidedSprite.getMyLocation().getXLocation() + mySprite.getMyXVelocity()/60;
+			yLoc = myCollidedSprite.getMyLocation().getYLocation() - 4.9;
+		} else {
+			xLoc = myCollidedSprite.getMyLocation().getXLocation();
+			yLoc = myCollidedSprite.getMyLocation().getYLocation() + mySprite.getMyYVelocity()/60 - 4.9;
 		}
-		if(spritePhysics!=null){
-			//myCollidedSprite.setMyYAcceleration(spritePhysics.getVerticalGravity());
-			myCollidedSprite.setMyYVelocity(mySprite.getMyYVelocity());
-			//myCollidedSprite.setMyXAcceleration(spritePhysics.getHorizontalGravity());
-			myCollidedSprite.setMyXVelocity(mySprite.getMyXVelocity());
-		}
-		//myCollidedSprite.setMyYAcceleration();
+		myCollidedSprite.getMyLocation().setLocation(xLoc, yLoc);
+		
 	}
 
 }

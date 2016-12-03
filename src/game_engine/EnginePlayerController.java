@@ -10,6 +10,8 @@ import game_data.characteristics.Damager;
 import game_data.characteristics.Impassable;
 import game_data.characteristics.PacerAlternative;
 import game_data.characteristics.StickyTop;
+import game_data.characteristics.StickyTopHorizontal;
+import game_data.characteristics.StickyTopVertical;
 import game_data.characteristics.TransparentBottomImpassable;
 import game_data.characteristics.Winnable;
 import game_data.sprites.Character;
@@ -102,10 +104,14 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //					s.addCharacteristic(new Damager(25, s));
 //				}
 				// }
-				if(s.getName().equals("blockmoving") || s.getName().equals("blockmoving2")){
-					s.addCharacteristic(new BouncerTop(500, s));
-					//s.addCharacteristic(new TransparentBottomImpassable(s));
-					//s.addCharacteristic(new StickyTop(s));
+				if(s.getName().equals("blockmoving")){
+					//ss.addCharacteristic(new TransparentBottomImpassable(s));
+					s.addCharacteristic(new TransparentBottomImpassable(s));
+					s.addCharacteristic(new StickyTopVertical(s));
+				}
+				else if(s.getName().equals("blockmoving2")) {
+					s.addCharacteristic(new TransparentBottomImpassable(s));
+					s.addCharacteristic(new StickyTopHorizontal(s));
 				}
 				else if(!s.getName().equals("flag")){
 					s.addCharacteristic(new Impassable(s));
