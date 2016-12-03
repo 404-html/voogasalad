@@ -28,7 +28,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 	}
 	
 	@Override
-	public Scene init(){
+	public Scene init() {
 		return myScene;
 	}
 
@@ -67,5 +67,4 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myStack.getChildren().add(myHeadsUpDisplay.init());
 		myStack.setBackground(myBackgroundDisplay);
 	}
-
 }
