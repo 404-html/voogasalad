@@ -131,14 +131,13 @@ public class GamePlayController extends AbstractController {
 		//myKeysPressed.clear();
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void setMenu() {
-		String[] names = {myButtonLabels.getString("MainMenu")};
-		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
-		myGamePlayScene.addMenu(image, names, e -> {
-			myAnimationLoop.stop();
-			myApplicationController.displayMainMenu();
-		});
+		setMainMenu();
+		setDropDownMenu();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void setDropDownMenu() {
 		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "lose", "win"};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
@@ -156,6 +155,16 @@ public class GamePlayController extends AbstractController {
 			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
 			setWinningSceneHandlers((INavigationDisplay) ls);
 			resetStage(ls);
+		});
+	}
+
+	@SuppressWarnings("unchecked")
+	private void setMainMenu() {
+		String[] names = {myButtonLabels.getString("MainMenu")};
+		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
+		myGamePlayScene.addMenu(image, names, e -> {
+			myAnimationLoop.stop();
+			myApplicationController.displayMainMenu();
 		});
 	}
 
