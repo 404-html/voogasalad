@@ -71,6 +71,7 @@ public class GamePlayController {
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
+
 			myGamePlayScene.clearSprites();
 			myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 			updateSprites();
@@ -93,18 +94,26 @@ public class GamePlayController {
 	}
 	
 	private void getUpdatedSpriteMap(Sprite aSprite) {
+		ImageView image;
+		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()){
+			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
+			mySpriteMap.keySet().retainAll(s);
+		}
 		if (mySpriteMap.containsKey(aSprite)) {
-			mySpriteMap.get(aSprite).setX(aSprite.getMyLocation().getXLocation());
-			mySpriteMap.get(aSprite).setY(aSprite.getMyLocation().getYLocation());
+			image = mySpriteMap.get(aSprite);
 		} else {
-			ImageView image = new ImageView(aSprite.getMyImagePath());
-			image.setFitWidth(aSprite.getMyWidth());
-			image.setFitHeight(aSprite.getMyHeight());
-			image.setX(aSprite.getMyLocation().getXLocation());
-			image.setY(aSprite.getMyLocation().getYLocation());
+			image = new ImageView(aSprite.getMyImagePath());
 			mySpriteMap.put(aSprite, image);
 		}
-		myGamePlayScene.addImageToView(mySpriteMap.get(aSprite));
+		setImageProperties(aSprite, image);
+		myGamePlayScene.addImageToView(image);
+	}
+
+	private void setImageProperties(Sprite aSprite, ImageView image) {
+		image.setFitWidth(aSprite.getMyWidth());
+		image.setFitHeight(aSprite.getMyHeight());
+		image.setX(aSprite.getMyLocation().getXLocation());
+		image.setY(aSprite.getMyLocation().getYLocation());
 	}
 	
 	@SuppressWarnings("unchecked")

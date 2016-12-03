@@ -8,6 +8,7 @@ import game_data.characteristics.Bouncer;
 import game_data.characteristics.Breakable;
 import game_data.characteristics.Damager;
 import game_data.characteristics.Impassable;
+import game_data.characteristics.SpeedPowerUpper;
 import game_data.sprites.Character;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
@@ -86,6 +87,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				// s.addCharacteristic(new Impassable(s));
 				if (s.getName().equals("block5000")) {
 					s.addCharacteristic(new Breakable(true, true,true, true, 1, s));
+//					s.addCharacteristic(new SpeedPowerUpper(5, 5000, s));
 				}
 				// }
 				else {
