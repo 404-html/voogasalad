@@ -18,6 +18,7 @@ public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 	
 	public SpriteSettingsEditBox(Sprite aSprite, String aName) {
 		super(aName);
+		mySprite = aSprite;
 		myFactory = buildSettingFactory();
 		buildSelectors();
 	}
@@ -69,7 +70,7 @@ public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 		return mySprite;
 	}
 		
-	protected final SettingsFactory getSettingFactory(){
+	protected final SettingsFactory<?> getSettingFactory(){
 		return myFactory;
 	}
 	

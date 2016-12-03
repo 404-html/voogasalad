@@ -1,5 +1,6 @@
 package author.view.pages.sprite.editor.settings.states;
 
+import author.view.pages.sprite.editor.settings.SettingsViewColumn;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
 import game_data.Sprite;
@@ -22,4 +23,9 @@ public class SpriteStatesEditor extends SpriteSettingsEditor {
 		return new StateEditBox(aSprite, aName);
 	}
 
+	@Override
+	protected SettingsViewColumn makeViewColumn(Sprite aSprite) {
+		return new StatesViewColumn(aSprite);
+	}
+	
 }

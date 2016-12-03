@@ -20,8 +20,6 @@ public class Score implements State{
 		return myScore;
 	}
 	
-
-
 	@Override
 	public void updateState(int pointsUp) {
 		myScore+=pointsUp;
