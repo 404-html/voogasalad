@@ -1,5 +1,7 @@
 package author.view.pages.sprite.page;
 
+import java.io.File;
+
 import game_data.Sprite;
 import javafx.geometry.Orientation;
 import javafx.scene.Node;
@@ -49,7 +51,7 @@ class SpriteQuickView {
 	
 	SpriteQuickView(Sprite aSprite) {
 		this();
-		myImageView.setImage( new Image(aSprite.getMyImagePath()) );
+		myImageView.setImage( new Image((new File(aSprite.getMyImagePath()).toURI().toString())) );
 		myTypeLabel.setText(aSprite.getClass().getSimpleName());
 		myNameLabel.setText(aSprite.getName());
 		mySizeLabel.setText(aSprite.getMyWidth() + " x " + aSprite.getMyHeight());

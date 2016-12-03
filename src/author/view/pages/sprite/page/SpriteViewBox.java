@@ -1,5 +1,7 @@
 package author.view.pages.sprite.page;
 
+import java.io.File;
+
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
@@ -23,7 +25,6 @@ public class SpriteViewBox implements InvalidationListener {
 	public SpriteViewBox(Sprite aSprite){
 		this();
 		aSprite.addListener(this);
-		
 		myImageButton.setGraphic( new SpriteQuickView(aSprite).getNode() );
 		myImageButton.minWidthProperty().bind(myPane.minWidthProperty());
 		

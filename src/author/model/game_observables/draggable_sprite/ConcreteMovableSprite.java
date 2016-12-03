@@ -1,5 +1,6 @@
 package author.model.game_observables.draggable_sprite;
 
+import java.io.File;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
@@ -95,7 +96,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	@Override
 	protected InvalidationListener initListener(Sprite aSprite) {
 		InvalidationListener invalidationListener = (sprite) -> {
-			this.getImageView().setImage(new Image(aSprite.getMyImagePath()));
+			this.getImageView().setImage(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
 			this.getDraggableItem().setPrefWidth(aSprite.getMyWidth());
 			this.getDraggableItem().setPrefHeight(aSprite.getMyHeight());
 			this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
