@@ -1,12 +1,7 @@
 package gameplayer.front_end.application_scene;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 

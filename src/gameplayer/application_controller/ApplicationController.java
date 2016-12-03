@@ -3,7 +3,6 @@ package gameplayer.application_controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
@@ -26,11 +25,8 @@ import javafx.stage.Stage;
 
 public class ApplicationController extends AbstractController {
 	
-	private static final String FILE = "gameplayerlabels.";
-	private static final String BUTTONLABEL = "ButtonLabels"; 
 	private SceneFactory mySceneBuilder;
 	private PlayerInformationController myInformationController;
-	private ResourceBundle myButtonLabels;
 	private FacebookInformation myFacebookInformation;
 	
 	public ApplicationController (Stage aStage) {
@@ -67,7 +63,7 @@ public class ApplicationController extends AbstractController {
 	
 	@SuppressWarnings("unchecked")
 	private void createNavigationButtons(INavigationDisplay aMenu) {
-		String[] names = {"MAIN MENU", "PROFILE"};
+		String[] names = {myButtonLabels.getString("MainMenu"), myButtonLabels.getString("Profile")};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
 			displayMainMenu();
@@ -93,7 +89,7 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	private void setUserProfileButtonHandlers(INavigationDisplay userProfile) {
-		userProfile.addButton("HI!", e -> {
+		userProfile.addButton(myButtonLabels.getString("Hi"), e -> {
 			//do nothing
 		}, ButtonDisplay.TEXT);
 	}

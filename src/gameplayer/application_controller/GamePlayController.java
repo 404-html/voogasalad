@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.PropertyResourceBundle;
 import java.util.Set;
 import game_data.Game;
 import game_data.Sprite;
@@ -37,6 +38,7 @@ public class GamePlayController extends AbstractController {
 		myStage = aStage;
 		myGameFile = aFile;
 		mySpriteMap = new HashMap<Sprite, ImageView>();
+		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		initializeKeySets(); 
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
@@ -121,15 +123,15 @@ public class GamePlayController extends AbstractController {
 	
 	@SuppressWarnings("unchecked")
 	private void setMenu() {
-		String[] names = {"Main Menu"};
+		String[] names = {myButtonLabels.getString("MainMenu")};
 		ImageView image = myGUIGenerator.createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			ApplicationController appControl = new ApplicationController(myStage);
 			appControl.displayMainMenu();
 		});
-		String[] namesForGamePlay = {"Restart", "Change to Red", "Save"};
-		myGamePlayScene.addMenu("GAME PLAY", namesForGamePlay, e -> {
+		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
+		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			myAnimationLoop.stop();
 			GamePlayController gameControl = new GamePlayController(myStage, myGameFile);
 			gameControl.displayGame();
