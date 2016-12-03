@@ -1,7 +1,6 @@
 package gameplayer.front_end.gui_generator;
 
 import java.io.File;
-
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
