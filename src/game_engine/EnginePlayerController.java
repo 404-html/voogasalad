@@ -5,6 +5,7 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
+import game_data.characteristics.Breakable;
 import game_data.characteristics.Damager;
 import game_data.characteristics.Impassable;
 import game_data.sprites.Character;
@@ -84,12 +85,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				// else{
 				// s.addCharacteristic(new Impassable(s));
 				if (s.getName().equals("block5000")) {
-					s.addCharacteristic(new Damager(25, s));
+					s.addCharacteristic(new Breakable(true, true,true, true, 1, s));
 				}
 				// }
 				else {
 					s.addCharacteristic(new Impassable(s));
 				}
+				s.addState(new Health(10));
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}
