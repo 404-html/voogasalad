@@ -18,6 +18,11 @@ public class FolderListor {
 
 	private List<String> myFileNameList;
 
+	/**
+	 * Must specify path to file
+	 * 
+	 * @param aFilePath
+	 */
 	public FolderListor(String aFilePath) {
 		File folder = new File(aFilePath);	
 		
@@ -31,10 +36,18 @@ public class FolderListor {
 			.collect(Collectors.toList());
 	}
 
+	/**
+	 * @return all filenames within file
+	 */
 	public List<String> getFileNames() {
 		return myFileNameList;
 	}
 	
+	
+	/**
+	 * @param Extension to filter by
+	 * @return filterd files
+	 */
 	public List<String> getFilesWithExtension(String aExtension) {
 		Function<String, String> extensionRemover = (s) -> s.substring(0, s.lastIndexOf("."));
 		

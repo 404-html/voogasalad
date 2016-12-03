@@ -1,5 +1,6 @@
 package author.model.game_observables.draggable_sprite;
 
+import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
@@ -9,10 +10,18 @@ public class ConcreteMovableSprite extends DraggableSprite {
 
 	private double mouseX;
 	private double mouseY;
+	private Sprite spritePreset;
+	private InvalidationListener presetInvalidationListener;
 
-	public ConcreteMovableSprite(Sprite aSprite) {
-		super(aSprite);
+	public ConcreteMovableSprite(Sprite aSpriteInstance, Sprite aSpritePreset) {
+		super(aSpriteInstance);
+		this.spritePreset = aSpritePreset;
+		this.presetInvalidationListener = initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
+	}
+	
+	public void removePresetListener(){
+		this.spritePreset.removeListener(presetInvalidationListener);
 	}
 
 	private void styleSprite() {
@@ -43,6 +52,19 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		onMouseDragged();
 
 		onMouseReleased();
+	}
+
+	private InvalidationListener initPresetListener(Sprite instanceSprite, Sprite spritePreset) {
+		InvalidationListener invalidationListener = (sprite) -> {
+			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
+			instanceSprite.setMyWidth(spritePreset.getMyWidth());
+			instanceSprite.setMyHeight(spritePreset.getMyHeight());
+			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation(), spritePreset.getMyLocation().getMyHeading()));
+			spritePreset.getCharacteristics()
+					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
+		};
+		spritePreset.addListener(invalidationListener);
+		return invalidationListener;
 	}
 
 	private void onMouseReleased() {

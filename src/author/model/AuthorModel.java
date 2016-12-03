@@ -58,7 +58,7 @@ public abstract class AuthorModel implements IAuthorModel{
 	@Override
 	public Game getGame(){
 		if (activeGame == null)
-			return new Game("Game1");
+			this.activeGame = new Game("Game1");
 		return this.activeGame;
 	}
 	
@@ -68,7 +68,6 @@ public abstract class AuthorModel implements IAuthorModel{
 		this.activeGame = (Game) gameLoader.deserialize(aFile);
 		this.authorController.reinitializeView();
 		this.activeGame.setName(this.activeGame.getName());
-		//this.activeGame.getCurrentLevel().setName(this.activeGame.getCurrentLevel().getName());
 	}
 	
 	@Override
