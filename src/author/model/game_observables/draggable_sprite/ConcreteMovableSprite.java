@@ -1,10 +1,13 @@
 package author.model.game_observables.draggable_sprite;
 
 import java.io.File;
+
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Line;
 
 public class ConcreteMovableSprite extends DraggableSprite {
@@ -53,6 +56,18 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		onMouseDragged();
 
 		onMouseReleased();
+	}
+	
+	@Override
+	protected void openPreferences() {
+		this.getDraggableItem().setOnMouseClicked(e -> {
+			if (e.getButton().equals(MouseButton.PRIMARY)) {
+				if (e.getClickCount() == 2) {
+					removePresetListener();
+					new SpriteEditWindow(this.getSprite()).openWindow();
+				}
+			}
+		});
 	}
 
 	private InvalidationListener initPresetListener(Sprite instanceSprite, Sprite spritePreset) {
