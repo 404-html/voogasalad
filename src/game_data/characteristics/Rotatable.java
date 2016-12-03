@@ -5,6 +5,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableVariable;
 import javafx.geometry.Side;
 
 /**
@@ -18,12 +19,13 @@ public class Rotatable implements Characteristic{
 	private double mySpeed;
 	private Sprite mySprite;
 	
-	@ParameterAnnotation(parameters={"Speed","Sprite"})
+	@ParameterAnnotation(parameters={"Rotate Speed","Sprite"})
 	public Rotatable(double speed, Sprite aSprite){
 		mySpeed = speed;
 		mySprite = aSprite;
 	}
 	
+	@ViewableVariable(description="Rotate Speed", type=double.class)
 	public double getSpeed(){
 		return mySpeed;
 	}

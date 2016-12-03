@@ -3,6 +3,7 @@ package game_data.characteristics;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableVariable;
 
 @NameAnnotation(name = "Bounded Pacer")
 public abstract class BoundedPacer extends Pacer{
@@ -17,10 +18,11 @@ public abstract class BoundedPacer extends Pacer{
 		myUpperBound = upperBound;
 	}
 	
+	@ViewableVariable(description="Lower Bound", type=double.class)
 	public double getLowerBound(){
 		return myLowerBound;
 	}
-	
+	@ViewableVariable(description="Upper Bound", type=double.class)
 	public double getUpperBound(){
 		return myUpperBound;
 	}
