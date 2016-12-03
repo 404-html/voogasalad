@@ -22,7 +22,7 @@ public enum GameResources {
 	//Default speeds for keys
 	MOVE_RIGHT_SPEED(300),
 	MOVE_LEFT_SPEED(300),
-	JUMP_SPEED(500), 
+	JUMP_SPEED(600), 
 	//MOVE_RIGHT_SPEED(30.0),
 	//MOVE_LEFT_SPEED(30.0),
 	//JUMP_SPEED(100.0);

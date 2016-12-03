@@ -126,17 +126,27 @@ public class ListOfCollidingSprites {
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
 		//if(!(mySprite instanceof Terrain)){
-		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent(targetSprite)){
+		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent(mySprite)){
 		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
+		if(isTransparent(mySprite) && pastPlatform(mySprite)){
+			if(min == 2){
+				shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
+			}
+		}
 		return pickSide(min, mySprite);
 	}
 	
-	private boolean isTransparent(Sprite aSprite){
-		for(Characteristic c: aSprite.getCharacteristics()){
-			if(c instanceof TransparentBottom){
+	private boolean pastPlatform(Sprite myPlayerSprite){
+		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>targetSprite
+				.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.2) && myPlayerSprite.getMyYVelocity()>0;		
+	}
+	
+	private boolean isTransparent(Sprite playerSprite){
+		for(Characteristic c: targetSprite.getCharacteristics()){
+			if(c instanceof TransparentBottom){// && pastPlatform(playerSprite)){
 				return true;
 			}
 		}
