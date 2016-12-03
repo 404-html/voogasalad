@@ -1,11 +1,8 @@
-package author.view.pages.sprite.editor.settings;
+package author.view.util.input_fields;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import author.view.util.input_fields.BooleanSelector;
-import author.view.util.input_fields.NumberFieldBox;
-import author.view.util.input_fields.TextFieldBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -73,4 +70,5 @@ public class SettingsEditBox {
 	public String getName(){
 		return myName;
 	}
+
 }

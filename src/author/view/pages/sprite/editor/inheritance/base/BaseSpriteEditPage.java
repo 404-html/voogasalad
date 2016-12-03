@@ -5,7 +5,9 @@ import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPag
 import author.view.pages.sprite.editor.inheritance.item.ItemSpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.projectile.ProjectileSpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.terrain.TerrainSpriteEditPage;
+import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
 import author.view.pages.sprite.editor.settings.characteristics.SpriteCharacteristicEditor;
+import author.view.pages.sprite.editor.settings.states.SpriteStatesEditor;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.facades.TabPaneFacade;
 import author.view.util.facades.ToolBarBuilder;
@@ -55,26 +57,29 @@ public abstract class BaseSpriteEditPage {
 
 	private Sprite mySprite;
 	private BaseSpriteEditBox mySpriteEditBox;
-	private SpriteCharacteristicEditor myCharacteristicEditor;
+	private SpriteSettingsEditor myCharacteristicEditor;
+	private SpriteSettingsEditor myStateEditor;
 	private TabPaneFacade myTabPaneFacade;
 
 	public BaseSpriteEditPage(Sprite aSprite){
 		mySprite = aSprite;
 
 		myPane = new VBox();
-		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite, getSpriteType());
+		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite);
+		myStateEditor = new SpriteStatesEditor(mySprite);
 		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
 
-		myTabPaneFacade.addTab("Base", mySpriteEditBox.getPane());
-		myTabPaneFacade.addTab("Characteristics", this.myCharacteristicEditor.getNode());
+		myTabPaneFacade.addTab(mySpriteEditBox.getClass().getSimpleName(), mySpriteEditBox.getPane());
+		myTabPaneFacade.addTab(myCharacteristicEditor.getClass().getSimpleName(), myCharacteristicEditor.getPane());
+		myTabPaneFacade.addTab(myStateEditor.getClass().getSimpleName(), myStateEditor.getPane());
 		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
 
 		Button buildButton = new ButtonFactory().createButton(
 				"Save", e -> {
 					editSprite();
-					myCharacteristicEditor.addCharacteristics(); 
+					myCharacteristicEditor.addSettings();
 				}).getButton();
 
 		myToolBarBuilder.addBurst(new Label(getSpriteType()));

@@ -59,7 +59,7 @@ public class PropertySelector {
 	/**
 	 * @return Map of properties key to boolean selected property
 	 */
-	public Map<String, BooleanProperty> getCharacteristicSelectedMap(){
+	public Map<String, BooleanProperty> getSelectedMap(){
 		return mySelectedMap;
 	}
 }
