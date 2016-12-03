@@ -85,8 +85,9 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.addNewSprite(new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(926, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(1126, 300), 200, 40, "blockmoving", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(1350, 250), 200, 40, "blockmoving2", "author/images/betterblock.png"));
+		
+		myLevel.addNewSprite(new Terrain(new Location(1126, 300), 200, 25, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(1350, 250), 200, 25, "blockmoving2", "author/images/betterblock.png"));
 		
 		myLevel.addNewSprite(new Enemy(new Location(1226, 401), 100, 100, "goomba1", "author/images/angry_goomba.png"));
 		myLevel.addNewSprite(new Item(new Location(2000, 400), 50, 200, "flag", "author/images/victory_flag.png"));
@@ -102,9 +103,9 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				}
 				// }
 				if(s.getName().equals("blockmoving") || s.getName().equals("blockmoving2")){
-					//ss.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new StickyTop(s));
+					s.addCharacteristic(new BouncerTop(500, s));
+					//s.addCharacteristic(new TransparentBottomImpassable(s));
+					//s.addCharacteristic(new StickyTop(s));
 				}
 				else if(!s.getName().equals("flag")){
 					s.addCharacteristic(new Impassable(s));
@@ -121,7 +122,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				s.addState(new Physics(new SpritePhysics()));
 			}
 			if(s.getName().equals("blockmoving")){
-				s.addCharacteristic(new PacerAlternative("VERTICAL", 300, s));
+				s.addCharacteristic(new PacerAlternative("VERTICAL", 500, s));
 				s.setMyYVelocity(-200);
 			}
 			if(s.getName().equals("blockmoving2")){
