@@ -20,7 +20,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	public ConcreteMovableSprite(Sprite aSpriteInstance, Sprite aSpritePreset) {
 		super(aSpriteInstance);
 		this.spritePreset = aSpritePreset;
-		this.presetInvalidationListener = initPresetListener(aSpriteInstance, this.spritePreset);
+		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
 	}
 	
@@ -64,6 +64,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
 					removePresetListener();
+					this.getSprite().setPreset(null);
 					new SpriteEditWindow(this.getSprite()).openWindow();
 				}
 			}

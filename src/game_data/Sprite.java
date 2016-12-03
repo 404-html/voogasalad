@@ -202,5 +202,10 @@ public abstract class Sprite extends GameObject {
 	public Sprite getPreset(){
 		return this.preset;
 	}
+	
+	public void setPreset(Sprite aPreset){
+		this.preset = aPreset;
+		notifyListeners();
+	}
 
 }

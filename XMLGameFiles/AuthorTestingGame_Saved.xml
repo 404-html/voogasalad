@@ -3,16 +3,35 @@
   <myLevels>
     <game__data.Level>
       <name>Level1</name>
-      <width>779</width>
-      <height>709</height>
+      <width>1279</width>
+      <height>847</height>
       <backgroundImageFilePath>lib/XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
       <mySprites>
         <game__data.sprites.Player>
-          <name>Mario</name>
+          <name>Mario256</name>
           <myLocation>
             <myHeading>0.0</myHeading>
-            <myXLocation>381.5</myXLocation>
-            <myYLocation>169.5</myYLocation>
+            <myXLocation>803.5</myXLocation>
+            <myYLocation>15.0</myYLocation>
+          </myLocation>
+          <myWidth>50</myWidth>
+          <myHeight>500</myHeight>
+          <myImagePath>lib/XMLGameFiles/mario.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+        <game__data.sprites.Player>
+          <name>Mario12</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>50.5</myXLocation>
+            <myYLocation>198.0</myYLocation>
           </myLocation>
           <preset class="game_data.sprites.Player">
             <name>Mario</name>
@@ -21,26 +40,46 @@
               <myXLocation>0.0</myXLocation>
               <myYLocation>0.0</myYLocation>
             </myLocation>
-            <myWidth>50</myWidth>
-            <myHeight>50</myHeight>
+            <myWidth>500</myWidth>
+            <myHeight>500</myHeight>
             <myImagePath>lib/XMLGameFiles/mario.png</myImagePath>
             <myXVelocity>0.0</myXVelocity>
             <myYVelocity>0.0</myYVelocity>
             <myXAcceleration>0.0</myXAcceleration>
             <myYAcceleration>0.0</myYAcceleration>
-            <myCollisionHandler/>
+            <myCollisionHandler reference="../../../game__data.sprites.Player/myCollisionHandler"/>
             <myCharacteristics/>
-            <id>ConcreteDraggableSprite1480807269186</id>
+            <id>ConcreteDraggableSprite1480807856668</id>
             <myStates/>
           </preset>
-          <myWidth>50</myWidth>
-          <myHeight>50</myHeight>
+          <myWidth>500</myWidth>
+          <myHeight>500</myHeight>
           <myImagePath>lib/XMLGameFiles/mario.png</myImagePath>
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
           <myXAcceleration>0.0</myXAcceleration>
           <myYAcceleration>0.0</myYAcceleration>
-          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Player/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+        <game__data.sprites.Player>
+          <name>Mario</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>391.5</myXLocation>
+            <myYLocation>456.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player" reference="../../game__data.sprites.Player[2]/preset"/>
+          <myWidth>500</myWidth>
+          <myHeight>500</myHeight>
+          <myImagePath>lib/XMLGameFiles/mario.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Player/myCollisionHandler"/>
           <myCharacteristics/>
           <id></id>
           <myStates/>
@@ -48,9 +87,17 @@
       </mySprites>
       <myKeyCommands/>
     </game__data.Level>
+    <game__data.Level>
+      <name>Level2</name>
+      <width>1279</width>
+      <height>847</height>
+      <backgroundImageFilePath>lib/XMLGameFiles/mari-background-2.gif</backgroundImageFilePath>
+      <mySprites/>
+      <myKeyCommands/>
+    </game__data.Level>
   </myLevels>
   <spritePresets>
-    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player[2]/preset"/>
   </spritePresets>
   <currentLevel reference="../myLevels/game__data.Level"/>
 </game__data.Game>
