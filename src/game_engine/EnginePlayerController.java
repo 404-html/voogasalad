@@ -70,8 +70,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //					s.addCharacteristic(new Bouncer(100, s));
 //				}
 				//else{
-				s.addCharacteristic(new Impassable(s));
+				//s.addCharacteristic(new Impassable(s));
+				if(s.getName().equals("block5000")){
+				s.addCharacteristic(new Bouncer(25, s));}
 				//}
+				else{
+					s.addCharacteristic(new Impassable(s));
+				}
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}
