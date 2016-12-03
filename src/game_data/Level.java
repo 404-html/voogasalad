@@ -108,7 +108,7 @@ public class Level extends GameObject{
 	}
 	
 	public void setLevelWon(){
-		didLose = true;
+		didWin = true;
 	}
 	
 	public boolean wonLevel(){

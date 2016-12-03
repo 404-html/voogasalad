@@ -97,7 +97,6 @@ public class UpdateStates {
 				}
 			}
 		}
-		System.out.println(myLevel.wonLevel());
 	}
 
 	//keys will only control the main player rn
