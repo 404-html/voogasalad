@@ -5,8 +5,9 @@ public class MovementHandler {
 	private double myXMovement;
 	private double myYMovement;
 	
-	public void setYMovement(double aYVelocity) {
-		double answer = aYVelocity * .0106589;
+	public void setYMovement(double aYLocation, double aScreenHeight) {
+		System.out.println(aYLocation);
+		double answer = aYLocation - (aScreenHeight * .5); 
 		myYMovement = answer;
 	}
 	
@@ -14,9 +15,10 @@ public class MovementHandler {
 		return -myYMovement;
 	}
 	
-	public void setXMovement(double aXVelocity) {
+	public void setXMovement(double aXLocation, double aScreenWidth) {
+		System.out.println(aXLocation);
 		//System.out.println("velocity: " + aXVelocity + "\n");
-		double answer = aXVelocity * .0166589;
+		double answer = aXLocation - aScreenWidth *.5;
 		myXMovement = answer;
 	}
 	

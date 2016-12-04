@@ -13,6 +13,8 @@ import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -120,7 +122,7 @@ public class ApplicationController extends AbstractController {
 			if (chosenGame != null) {
 				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame, this);
 				gamePlay.displayGame();
-				myStoredGames.addGame(gamePlay.getGame());
+				myStoredGames.addGame(gamePlay.getGame(), gamePlay.getGame().getName(), chosenGame);
 			}
 		}, ButtonDisplay.TEXT);
 		gameChoice.addButton(myButtonLabels.getString("Options"), e -> {
