@@ -29,15 +29,8 @@ public class GUIGenerator implements IGUIGenerator {
 		myButtonBuilder = new ButtonFactory();
 	}
 	
-	public ImageView createImage(String aFileName, double aWidth) {
-		ImageView image = new ImageView(new File(aFileName).toURI().toString());
-		image.setPreserveRatio(true);
-		image.setFitWidth(aWidth);
-		return image;
-	}
-	
-	
-	public TextField createTextField(String aplaceholder, int x, int y, int width){
+	@Override
+	public TextField createTextField(String aplaceholder, int x, int y, int width) {
 		TextField newTextField = new TextField(aplaceholder);
 		newTextField.setTranslateX(x);
 		newTextField.setTranslateY(y);
@@ -45,15 +38,20 @@ public class GUIGenerator implements IGUIGenerator {
 		return newTextField;
 	}
 	
-	public Label createLabel(String atext, int x, int y){
+	@Override
+	public Label createLabel(String atext, int x, int y) {
 		Label newLabel = new Label(atext);
 		newLabel.setTranslateX(x);
 		newLabel.setTranslateY(y);
 		return newLabel;
 	}
 	
-	public void setBackground(Pane avalue, String afilepath){
-		//avalue.setBackground(new Background(createBackgroundImage(afilepath)));
+	@Override
+	public ImageView createImage(String aFileName, double aWidth) {
+		ImageView image = new ImageView(new File(aFileName).toURI().toString());
+		image.setPreserveRatio(true);
+		image.setFitWidth(aWidth);
+		return image;
 	}
 	
 	public ComboBox<Pane> createComboBox(List<Pane> aListOfPanes) {
@@ -99,5 +97,5 @@ public class GUIGenerator implements IGUIGenerator {
 		}
 		return menu;
 	}
-	
+
 }

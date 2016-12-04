@@ -10,19 +10,14 @@ import game_engine.actions.Hit;
 import game_engine.actions.HitTop;
 import javafx.geometry.Side;
 
-/**
- * @author Alex & James
- *
- */
-@CharacteristicAnnotation(name = "Impassable")
-public class Impassable implements Characteristic{
+@CharacteristicAnnotation(name = "TransparentBottomImpassable")
+public class TransparentBottomImpassable implements Characteristic{
 	
 	private Sprite mySprite;
-	private boolean movesThroughBottom;
 	private Action myAction;
 	
 	@ParameterAnnotation(parameters={"Sprite"})
-	public Impassable(Sprite aSprite){
+	public TransparentBottomImpassable(Sprite aSprite){
 		mySprite = aSprite;
 	}
 	
@@ -30,14 +25,14 @@ public class Impassable implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			myAction = new Hit(collidedSprite, myCollisionMap.get(collidedSprite), mySprite);
+			myAction = new HitTop(collidedSprite, myCollisionMap.get(collidedSprite), mySprite);
 			myAction.act();
 		}
 	}
 
 	@Override
 	public Characteristic copy() {
-		return new Impassable(mySprite);
+		return new TransparentBottomImpassable(mySprite);
 	}
 
 }
