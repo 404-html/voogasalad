@@ -8,11 +8,17 @@ public class SpeedBoost implements Action {
 	private Sprite myPlayerSprite;
 	private double timeInEffect;
 	private double speedBoost;
+	private double prevSpeed;
 
 	public SpeedBoost(Sprite playerSprite, double speedBoost, double timeInEffect) {
 		myPlayerSprite = playerSprite;
 		this.timeInEffect = timeInEffect;
 		this.speedBoost = speedBoost;
+		prevSpeed = 0;
+	}
+	
+	public double getPrevSpeed(){
+		return prevSpeed;
 	}
 
 	@Override
@@ -23,6 +29,8 @@ public class SpeedBoost implements Action {
 		// or
 		// myPlayerSprite.getSpritePhysics().setHorizontalGravity(.5);
 		// myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
+		
+		prevSpeed = myPlayerSprite.getMyXVelocity();
 		myPlayerSprite.setMyXVelocity(myPlayerSprite.getMyXVelocity() + speedBoost);
 	}
 

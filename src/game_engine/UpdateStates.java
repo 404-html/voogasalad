@@ -25,6 +25,7 @@ import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpFly;
 import game_engine.actions.MoveUpJump;
+import game_engine.actions.SpeedBoost;
 import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
 import game_engine.actions.StopUpMovement;
@@ -60,6 +61,7 @@ public class UpdateStates {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
 	private Map<KeyCode, Action> myKeyReleasedMap;
+	private Map<Action, Double> myCurrentPowerUps;
 
 	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
 			Map<Sprite, ImageView> mySpriteImages) {
@@ -70,13 +72,13 @@ public class UpdateStates {
 		this.myKeysReleased = myKeysReleased;
 		this.mySpriteImages = mySpriteImages;
 
-		System.out.println("number of sprites" + myLevel.getMySpriteList().size());
-//		 for(State myState:aLevel.getMainPlayer().getStates()){
-//		 if(myState instanceof Health ){
-//		 System.out.println("Health of sprite" +
-//		 ((Health)myState).getMyHealth());
-//		 }
-//		 }
+		// System.out.println("number of sprites" +
+		// myLevel.getMySpriteList().size());
+//		for (State myState : aLevel.getMainPlayer().getStates()) {
+//			if (myState instanceof Health) {
+//				System.out.println("Health of sprite" + ((Health) myState).getMyHealth());
+//			}
+//		}
 		// how do I make an ImageView
 		// hardcode
 		// ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
@@ -91,8 +93,25 @@ public class UpdateStates {
 		executeCharacteristics();
 		cleanGame();
 		updateSpritePositions();
+		checkPowerUps();
 		// checkForWin();
 		// checkForLoss();
+	}
+
+	private void checkPowerUps() {
+		for(Action powerUp:myCurrentPowerUps.keySet()){
+			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp)-1);
+			if(myCurrentPowerUps.get(powerUp) <= 0){
+				myCurrentPowerUps.remove(powerUp);
+				powerUpHasBeenRemoved(powerUp);
+			}
+		}
+	}
+
+	private void powerUpHasBeenRemoved(Action powerUp) {
+		if(powerUp instanceof SpeedBoost){
+			//SpeedBoost powerDown = new SpeedBoost((SpeedBoost) powerUp).getPrevSpeed());
+		}
 	}
 
 	private void cleanGame() {
@@ -100,14 +119,14 @@ public class UpdateStates {
 		for (Sprite mySprite : mySpriteList) {
 			for (State state : mySprite.getStates()) {
 				if (state instanceof Health) {
-					if(!((Health) state).isAlive()){
-//						System.out.println("DEAD SPRITE");
+					if (!((Health) state).isAlive()) {
+						// System.out.println("DEAD SPRITE");
 						removeSprites.add(mySprite);
 					}
 				}
 			}
 		}
-		for(Sprite mySprite : removeSprites){
+		for (Sprite mySprite : removeSprites) {
 			myLevel.removeSprite(mySprite);
 			mySpriteImages.remove(mySprite);
 		}
