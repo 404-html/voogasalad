@@ -39,7 +39,6 @@ public class GamePlayController extends AbstractController {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
 	private ApplicationController myApplicationController;
-	private double myTimeElapsed = 0;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
 		myStage = aStage;
@@ -85,10 +84,6 @@ public class GamePlayController extends AbstractController {
 		myAnimationLoop.init( elapsedTime -> {
 			resetSprites(elapsedTime);
 			updateScene();
-			myTimeElapsed += elapsedTime;
-			if (myTimeElapsed > 3) {
-				myGameController.getMyLevel().removeSprite(myGameController.getMyLevel().getMainPlayer());
-			}
 		});
 	}
 
@@ -107,23 +102,13 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void updateSprites() {
-		System.out.println(myGameController.getMySpriteList().size());
-		for (Sprite sprite : myGameController.getMySpriteList()) {
+		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
 	}
 	
 	private void getUpdatedSpriteMap(Sprite aSprite) {
 		ImageView image;
-	//	if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()){
-		
-//		if(mySpriteMap.keySet().size() > 4){
-//			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-//			System.out.println("START" + mySpriteMap.size());
-//
-//			mySpriteMap.keySet().retainAll(s);
-//			System.out.println("END" + mySpriteMap.size());
-//		}
 		if (mySpriteMap.containsKey(aSprite)) {
 			image = mySpriteMap.get(aSprite);
 			setImageProperties(aSprite, image);
@@ -146,7 +131,6 @@ public class GamePlayController extends AbstractController {
 
 	private void clearKeys() {
 		myKeysReleased.clear();
-		//myKeysPressed.clear();
 	}
 	
 	private void setMenu() {
