@@ -7,6 +7,7 @@ import game_data.Sprite;
 import game_data.characteristics.Bouncer;
 import game_data.characteristics.Breakable;
 import game_data.characteristics.Damager;
+import game_data.characteristics.HealthPowerUpper;
 import game_data.characteristics.Impassable;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.sprites.Character;
@@ -87,15 +88,17 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				// s.addCharacteristic(new Impassable(s));
 				if (s.getName().equals("block5000")) {
 					s.addCharacteristic(new Breakable(true, true,true, true, 1, s));
-//					s.addCharacteristic(new SpeedPowerUpper(5, 5000, s));
+//					s.addCharacteristic(new SpeedPowerUpper(20, 5000, s));
+//					s.addCharacteristic(new HealthPowerUpper(20, s));
 				}
-				// }
-				//else {
+				 
+				else {
 					s.addCharacteristic(new Impassable(s));
 				}
 				s.addState(new Health(10));
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
+		}
 		
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
 		// myLevel.getMySpriteList().get(1).getStates().size());

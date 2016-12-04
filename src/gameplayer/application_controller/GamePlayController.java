@@ -104,10 +104,10 @@ public class GamePlayController extends AbstractController {
 	
 	private void updateSprites() {
 		// A sprite has been removed
-		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
-			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-			mySpriteMap.keySet().retainAll(s);
-		}
+//		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
+//			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
+//			mySpriteMap.keySet().retainAll(s);
+//		}
 		for (Sprite sprite : myGameController.getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
@@ -115,17 +115,23 @@ public class GamePlayController extends AbstractController {
 	
 	private void getUpdatedSpriteMap(Sprite aSprite) {
 		ImageView image;
-		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()){
-			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-			mySpriteMap.keySet().retainAll(s);
-		}
+	//	if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()){
+		
+//		if(mySpriteMap.keySet().size() > 4){
+//			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
+//			System.out.println("START" + mySpriteMap.size());
+//
+//			mySpriteMap.keySet().retainAll(s);
+//			System.out.println("END" + mySpriteMap.size());
+//		}
 		if (mySpriteMap.containsKey(aSprite)) {
 			image = mySpriteMap.get(aSprite);
+			setImageProperties(aSprite, image);
 		} else {
 			image = new ImageView(aSprite.getMyImagePath());
+			setImageProperties(aSprite, image);
 			mySpriteMap.put(aSprite, image);
 		}
-		setImageProperties(aSprite, image);
 		myGamePlayScene.addImageToView(image);
 	}
 

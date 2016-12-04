@@ -70,12 +70,13 @@ public class UpdateStates {
 		this.myKeysReleased = myKeysReleased;
 		this.mySpriteImages = mySpriteImages;
 
-		// for(State myState:aLevel.getMainPlayer().getStates()){
-		// if(myState instanceof Health ){
-		// System.out.println("Health of sprite" +
-		// ((Health)myState).getMyHealth());
-		// }
-		// }
+		System.out.println("number of sprites" + myLevel.getMySpriteList().size());
+//		 for(State myState:aLevel.getMainPlayer().getStates()){
+//		 if(myState instanceof Health ){
+//		 System.out.println("Health of sprite" +
+//		 ((Health)myState).getMyHealth());
+//		 }
+//		 }
 		// how do I make an ImageView
 		// hardcode
 		// ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
@@ -89,8 +90,6 @@ public class UpdateStates {
 		runKeyReleased();
 		executeCharacteristics();
 		cleanGame();
-		System.out.println("size " + aLevel.getMySpriteList().size());
-
 		updateSpritePositions();
 		// checkForWin();
 		// checkForLoss();
@@ -102,22 +101,15 @@ public class UpdateStates {
 			for (State state : mySprite.getStates()) {
 				if (state instanceof Health) {
 					if(!((Health) state).isAlive()){
-						System.out.println(mySprite.getName() + "is dead");
+//						System.out.println("DEAD SPRITE");
 						removeSprites.add(mySprite);
 					}
 				}
 			}
 		}
-		System.out.println(removeSprites.size());
 		for(Sprite mySprite : removeSprites){
-//			System.out.println(mySprite.getName());
-			//System.out.println("init size" + myLevel.getMySpriteList().size());
 			myLevel.removeSprite(mySprite);
 			mySpriteImages.remove(mySprite);
-			//System.out.println("end size" + myLevel.getMySpriteList().size());
-			//mySpriteList.remove(mySprite);
-//			System.out.println(mySpriteList.contains(mySprite));
-//			myLevel.getMySpriteList().remove(mySprite);
 		}
 	}
 
