@@ -4,6 +4,7 @@ import game_data.Controllable;
 import game_data.Game;
 import game_data.Level;
 import game_data.Location;
+import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
 import game_data.characteristics.Breakable;
@@ -72,34 +73,45 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteHealthList = new ArrayList<>();
 		mySpriteIsAliveList = new ArrayList<>();
 	}
+
 	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
 		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
-		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(myLevel.getMainPlayer().getMyLocation(), 100, 100, "block", "author/images/betterblock.png");
+		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+		// System.out.println(myLevel.getMainPlayer()==null);
+		myKeyPressedMap.put(KeyCode.RIGHT,
+				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT,
+				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP,
+				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		Terrain myProjectile = new Terrain(myLevel.getMainPlayer().getMyLocation(), 100, 100, "block",
+				"author/images/betterblock.png");
 		myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), myProjectile, 0, 0, myLevel));
 		return myKeyPressedMap;
-		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
+		// myKeyPressedMap.put(KeyCode.SPACE, new
+		// Launch(myLevel.getMainPlayer(), 10, 0));
 	}
+
 	public EnginePlayerController(Game game) {
 		myGame = game;
-		//myLevel=new Level();
+		// myLevel=new Level();
 		myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
 		myLevel.setPlayerSprite((Player) myLevel.getMySpriteList().get(0));
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 		myLevel.getMainPlayer().addState(new Health(1));
 		myLevel.getMainPlayer().addState(new LevelWon());
-		myLevel.getMainPlayer().setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
+		myLevel.getMainPlayer()
+				.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
 
 		for (int i = 226; i < 8226; i += 100) {
-			myLevel.addNewSprite(new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
+			
+				myLevel.addNewSprite(
+						new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
+			
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
 			// Bouncer(20, myLevel.getMySpriteList().get(j)));
 			// System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
@@ -110,9 +122,10 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			// System.out.println(myLevel.getMySpriteList().size());
 			j++;
 		}
-		int k =842;
+		int k = 842;
 		for (int g = 1926; g < 4226; g += 300) {
-			myLevel.addNewSprite(new Terrain(new Location(g, 130), 100, 100, "block" + k, "author/images/betterblock.png"));
+			myLevel.addNewSprite(
+					new Terrain(new Location(g, 130), 100, 100, "block" + k, "author/images/betterblock.png"));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
 			// Bouncer(20, myLevel.getMySpriteList().get(j)));
 			// System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
@@ -123,13 +136,23 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			// System.out.println(myLevel.getMySpriteList().size());
 			k++;
 		}
-		myLevel.addNewSprite(new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(926, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
 		
-		myLevel.addNewSprite(new Terrain(new Location(1126, 300), 200, 25, "blockmoving", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(1350, 250), 200, 25, "blockmoving2", "author/images/betterblock.png"));
-		
+		Item t = new Item(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png");
+//		myLevel.addNewSprite(
+//				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png"));
+//		
+		myLevel.addNewSprite(t);
+		t.addCharacteristic(new SpeedPowerUpper(30, 5000, t, myLevel));
+		myLevel.addNewSprite(
+				new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
+		myLevel.addNewSprite(
+				new Terrain(new Location(926, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
+
+		myLevel.addNewSprite(
+				new Terrain(new Location(1126, 300), 200, 25, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(
+				new Terrain(new Location(1350, 250), 200, 25, "blockmoving2", "author/images/betterblock.png"));
+
 		myLevel.addNewSprite(new Enemy(new Location(1226, 401), 80, 80, "goomba1", "author/images/angry_goomba.png"));
 		myLevel.addNewSprite(new Enemy(new Location(1426, 401), 80, 80, "goomba2", "author/images/angry_goomba.png"));
 		myLevel.addNewSprite(new Enemy(new Location(2226, -1), 80, 80, "goomba3", "author/images/angry_goomba.png"));
@@ -140,65 +163,64 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				// s.addCharacteristic(new Bouncer(100, s));
 				// }
 				// else{
-//				// s.addCharacteristic(new Impassable(s));
-//<<<<<<< HEAD
-//				if (s.getName().equals("block5000")) {
-//					s.addCharacteristic(new Breakable(true, true,true, true, 1, s));
-////					s.addCharacteristic(new SpeedPowerUpper(20, 5000, s));
-//					s.addCharacteristic(new HealthPowerUpper(20, s));
-//					
-//				}
-//				 
-//				else {
-//					s.addCharacteristic(new Impassable(s));
-//				}
-//				s.addState(new Health(10));
-//=======
-//				if (s.getName().equals("block5000")) {
-//					s.addCharacteristic(new Damager(25, s));
-//				}
+				// // s.addCharacteristic(new Impassable(s));
+				// <<<<<<< HEAD
+				// if (s.getName().equals("block5000")) {
+				// s.addCharacteristic(new Breakable(true, true,true, true, 1,
+				// s));
+				//// s.addCharacteristic(new SpeedPowerUpper(20, 5000, s));
+				// s.addCharacteristic(new HealthPowerUpper(20, s));
+				//
 				// }
-				if(s.getName().equals("blockmoving")){
-					//s.addCharacteristic(new BouncerTop(500, s));
+				//
+				// else {
+				// s.addCharacteristic(new Impassable(s));
+				// }
+				// s.addState(new Health(10));
+				// =======
+				// if (s.getName().equals("block5000")) {
+				// s.addCharacteristic(new Damager(25, s));
+				// }
+				// }
+				if (s.getName().equals("blockmoving")) {
+					// s.addCharacteristic(new BouncerTop(500, s));
 					s.addCharacteristic(new TransparentBottomImpassable(s));
 					s.addCharacteristic(new StickyTopVertical(s));
-				}
-				else if(s.getName().equals("blockmoving2")) {
-					//s.addCharacteristic(new BouncerTop(500, s));
-					//s.addCharacteristic(new TransparentBottomImpassable(s));
+				} else if (s.getName().equals("blockmoving2")) {
+					// s.addCharacteristic(new BouncerTop(500, s));
+					// s.addCharacteristic(new TransparentBottomImpassable(s));
 					s.addCharacteristic(new Impassable(s));
 					s.addCharacteristic(new StickyTopHorizontal(s));
-				}
-				else if(!s.getName().equals("flag")){
+				} else if (!s.getName().equals("flag")) {
 					s.addCharacteristic(new Impassable(s));
 				}
-				if(s.getName().equals("flag")){
+				if (s.getName().equals("flag")) {
 					s.addCharacteristic(new Winnable(s));
 				}
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
-			if(s instanceof Enemy && !s.getName().equals("goomba2")){
+			if (s instanceof Enemy && !s.getName().equals("goomba2")) {
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500, s));
 				s.setMyXVelocity(100);
 				s.addCharacteristic(new Damager(1, s));
 				s.addState(new Physics(new SpritePhysics()));
 			}
-			if(s.getName().equals("goomba2")){
+			if (s.getName().equals("goomba2")) {
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500, s));
 				s.setMyXVelocity(300);
 				s.addCharacteristic(new Damager(1, s));
 				s.addState(new Physics(new SpritePhysics()));
 			}
-			if(s.getName().equals("blockmoving")){
+			if (s.getName().equals("blockmoving")) {
 				s.addCharacteristic(new PacerAlternative("VERTICAL", 200, s));
 				s.setMyYVelocity(-200);
 			}
-			if(s.getName().equals("blockmoving2")){
+			if (s.getName().equals("blockmoving2")) {
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 300, s));
 				s.setMyXVelocity(200);
 			}
 		}
-		
+
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
 		// myLevel.getMySpriteList().get(1).getStates().size());
 		// System.out.println(myLevel.getMySpriteList().get(2).getName() + " " +

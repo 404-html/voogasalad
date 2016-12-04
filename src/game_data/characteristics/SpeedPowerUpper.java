@@ -4,6 +4,7 @@ package game_data.characteristics;
 
 import java.util.Map;
 
+import game_data.Level;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
@@ -24,13 +25,15 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 	private double myTimeInEffect;
 	private double myCurrentTime;
 	private Action myAction;
+	private Level myLevel;
 	
 	@ParameterAnnotation(parameters = {"Speed Boost", "Time In Effect", "Sprite"})
-	public SpeedPowerUpper(double speedBoost, double timeInEffect, Sprite aSprite){
+	public SpeedPowerUpper(double speedBoost, double timeInEffect, Sprite aSprite, Level myLevel){
 		super(aSprite);
 		mySpeedBoost = speedBoost;
 		myTimeInEffect = timeInEffect;
 		myCurrentTime = 0;
+		this.myLevel = myLevel;
 	}
 	
 	public double getSpeedBoost(){
@@ -39,7 +42,7 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 
 	@Override
 	public Characteristic copy() {
-		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite());
+		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite(), myLevel);
 	}
 
 	@Override
@@ -50,6 +53,7 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 			//unless we want non players to be able to speed up upon hitting a powerup
 			if(collidedSprite instanceof Player){
 				myAction = new SpeedBoost(collidedSprite, mySpeedBoost, myTimeInEffect);
+				System.out.println("characteristic in");
 				myAction.act();
 			}
 		}

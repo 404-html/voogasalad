@@ -1,11 +1,14 @@
 package game_data;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import game_data.characteristics.Characteristic;
 import game_data.states.State;
 import game_engine.GameResources;
+import game_engine.actions.Action;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -27,7 +30,11 @@ public abstract class Sprite extends GameObject {
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
 	private Controllable myControllable;
+	private double terminalXVel;
+	private double terminalYVel;
 	private String id = "";
+	private Map<Action, Double> myPowerUps;
+
 
 	private Set<State> myStates;
 
@@ -41,10 +48,13 @@ public abstract class Sprite extends GameObject {
 		myYVelocity = 0;
 		myXAcceleration = 0;
 		myYAcceleration = 0;
+		terminalXVel = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
-		myControllable=new Controllable(this);
+		myControllable = new Controllable(this);
+		myPowerUps = new HashMap<Action, Double>();
 	}
 
 	// for copying sprites
@@ -69,6 +79,8 @@ public abstract class Sprite extends GameObject {
 																// yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
+		myPowerUps = new HashMap<Action, Double>();
+
 	}
 
 	/**
@@ -95,12 +107,15 @@ public abstract class Sprite extends GameObject {
 		}
 		return stateCopies;
 	}
-	public void setControllable(Controllable control){
-		myControllable=control;
+
+	public void setControllable(Controllable control) {
+		myControllable = control;
 	}
-	public Controllable getControllable(){
+
+	public Controllable getControllable() {
 		return myControllable;
 	}
+
 	public Set<Characteristic> getCharacteristics() {
 		return myCharacteristics;
 	}
@@ -147,20 +162,18 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyXVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
-		}
-		else{
+		if (Math.abs(myVelocity) > terminalXVel) {
+			this.myXVelocity = (myVelocity / Math.abs(myVelocity)) * terminalXVel;
+		} else {
 			this.myXVelocity = myVelocity;
 		}
 		notifyListeners();
 	}
 
 	public void setMyYVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
-			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
-		}
-		else{
+		if (Math.abs(myVelocity) > terminalYVel) {
+			this.myYVelocity = (myVelocity / Math.abs(myVelocity)) * terminalYVel;
+		} else {
 			this.myYVelocity = myVelocity;
 		}
 		notifyListeners();
@@ -231,4 +244,35 @@ public abstract class Sprite extends GameObject {
 		return this.preset;
 	}
 
+	public double getTerminalXVel() {
+		return terminalXVel;
+	}
+
+	public void setTerminalXVel(double terminalXVel) {
+		this.terminalXVel = terminalXVel;
+	}
+
+	public double getTerminalYVel() {
+		return terminalYVel;
+	}
+
+	public void setTerminalYVel(double terminalYVel) {
+		this.terminalYVel = terminalYVel;
+	}
+	public void resetTerminalVelocities(){
+		this.terminalXVel = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		this.terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+
+	}
+
+
+
+	public Map<Action, Double> getMyPowerUps() {
+		if(myPowerUps==null) return new HashMap<Action,Double>();
+		return myPowerUps;
+	}
+
+	public void setMyPowerUps(Map<Action, Double> myPowerUps) {
+		this.myPowerUps = myPowerUps;
+	}
 }
