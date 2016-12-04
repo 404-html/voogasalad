@@ -111,6 +111,7 @@ public class GamePlayController extends AbstractController {
 		for (Sprite sprite : myGameController.getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
+		//needs to be updated for when a sprite has been added
 	}
 	
 	private void getUpdatedSpriteMap(Sprite aSprite) {

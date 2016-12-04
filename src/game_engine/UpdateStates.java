@@ -72,7 +72,6 @@ public class UpdateStates {
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		myControllableSpriteList=new ArrayList<Sprite>();
 		this.myControllableSpriteList=myLevel.getMyControllableSpriteList();
-		System.out.println("size:" + myControllableSpriteList.size());
 		
 		generateDefaultKeyPressedMap();
 		//generateDefaultKeyReleasedMap();
@@ -84,9 +83,10 @@ public class UpdateStates {
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();
+		//System.out.println("want this to be after launching");
 	}
 	private void executeControls(){
-		for(Sprite mySprite:myLevel.getMyControllableSpriteList()){
+		for(Sprite mySprite:myControllableSpriteList){
 			//System.out.println("sprite list length " + mySpriteList.size());
 			//System.out.println("sprite image list length " + mySpriteImages.size());
 			//ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages, timeElapsed);

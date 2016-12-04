@@ -7,9 +7,11 @@ import java.util.Set;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.sprites.Projectile;
 import game_data.sprites.Terrain;
 import game_engine.GameResources;
 import game_engine.actions.Action;
+import game_engine.actions.Launch;
 import game_engine.actions.Move;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
@@ -25,15 +27,17 @@ public class Controllable {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
+	private Level myLevel;
 	@ParameterAnnotation(parameters="Sprite")
 	public Controllable(Sprite aSprite){
 		this.mySprite=aSprite;
 		isControllable=false;
 	}
-	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap) {
+	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap, Level aLevel) {
 		this.mySprite=aSprite;
 		this.myKeyPressedMap=myKeyPressedMap;
 		isControllable=true;
+		myLevel=aLevel;
 		myKeyReleasedMap=new HashMap<KeyCode, Move>();
 		
 		generateMyKeyReleasedMap();
@@ -102,6 +106,8 @@ public class Controllable {
 		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(mySprite, GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(mySprite, GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(mySprite, GameResources.JUMP_SPEED.getDoubleResource()));
+		Terrain myProjectile = new Terrain(mySprite.getMyLocation(), 100, 100, "block", "author/images/betterblock.png");
+		myKeyPressedMap.put(KeyCode.SPACE, new Launch(mySprite, myProjectile, 0, 0, myLevel));
 		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}
 

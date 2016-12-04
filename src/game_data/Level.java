@@ -111,19 +111,16 @@ public class Level extends GameObject{
 		return new ArrayList<>(mySprites);
 	}
 	public void setMyControllableSpriteList(){
-		System.out.println("setting sprite list");
 		List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
 		//List<Sprite> mySpriteList = getMySpriteList();
 		for(Sprite s: mySprites){
 			if(s.getControllable()!=null && s.getControllable().isControllable()){
 				myControllableSpriteList.add(s);
-				System.out.println("adding mars");
 			}
 		}
 		this.myControllableSpriteList=myControllableSpriteList;
 	}
 	public List<Sprite> getMyControllableSpriteList(){
-		System.out.println("gettng the shit" + myControllableSpriteList.size());
 		return myControllableSpriteList;
 	}
 	public void setLevelLost(){

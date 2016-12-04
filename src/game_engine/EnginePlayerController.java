@@ -27,6 +27,7 @@ import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
+import game_engine.actions.Launch;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
@@ -75,6 +76,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		Terrain myProjectile = new Terrain(myLevel.getMainPlayer().getMyLocation(), 100, 100, "block", "author/images/betterblock.png");
+		myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), myProjectile, 0, 0, myLevel));
 		return myKeyPressedMap;
 		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}
@@ -87,7 +90,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 		myLevel.getMainPlayer().addState(new Health(1));
 		myLevel.getMainPlayer().addState(new LevelWon());
-		myLevel.getMainPlayer().setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
+		myLevel.getMainPlayer().setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){

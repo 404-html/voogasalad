@@ -21,9 +21,9 @@ public class LauncherWithKey implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		if(isKeyPressed()){
-			Launch launch = new Launch(myLauncher, myProjectile, myXVelocity, myYVelocity);
-			launch.act();
-			}
+			//Launch launch = new Launch(myLauncher, myProjectile, myXVelocity, myYVelocity);
+			//launch.act();
+		}
 	}
 		
 
