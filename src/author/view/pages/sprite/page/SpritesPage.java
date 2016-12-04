@@ -1,7 +1,10 @@
 package author.view.pages.sprite.page;
 
+import java.io.File;
+import util.XMLTranslator;
 import author.controller.IAuthorController;
 import author.view.util.facades.TabPaneFacade;
+import author.view.util.file_helpers.FolderListor;
 import game_data.Sprite;
 import game_data.sprites.Enemy;
 import game_data.sprites.Item;
@@ -38,7 +41,19 @@ public class SpritesPage implements InvalidationListener {
 		myTerrainScroller = new SpriteScroller(SpriteFactory.TERRAIN, myController);
 		myItemScroller = new SpriteScroller(SpriteFactory.ITEM, myController);
 		myProjectileScroller = new SpriteScroller(SpriteFactory.PROJECTILE, myController);
+		loadDefaultSprites();
 	}
+	
+	private void loadDefaultSprites() {
+		FolderListor fl = new FolderListor("data/sprite/default_sprites/");
+		for(String fileName : fl.getFileNames()){
+			File aFile = new File(fileName);
+			XMLTranslator myLoader = new XMLTranslator();
+			myController.getModel().getGame().addPreset((Sprite) myLoader.loadFromFile(aFile));
+		}
+	}
+	
+	
 
 	private void addTabsToFacade() {
 		myPane = new TabPaneFacade();
