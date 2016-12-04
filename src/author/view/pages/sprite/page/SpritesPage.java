@@ -52,8 +52,6 @@ public class SpritesPage implements InvalidationListener {
 			myController.getModel().getGame().addPreset((Sprite) myLoader.loadFromFile(aFile));
 		}
 	}
-	
-	
 
 	private void addTabsToFacade() {
 		myPane = new TabPaneFacade();

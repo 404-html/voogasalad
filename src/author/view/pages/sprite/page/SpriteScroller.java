@@ -96,6 +96,8 @@ public class SpriteScroller {
 	}
 	
 	private void loadSprite(File aFile){
+		if(aFile == null)
+			return;
 		XMLTranslator myLoader = new XMLTranslator();
 		Sprite ns = (Sprite) myLoader.loadFromFile(aFile);
 		myController.getModel().getGame().addPreset(ns);
