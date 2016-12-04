@@ -10,7 +10,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.characteristics.characteristic_annotations.ViewableVariable;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import javafx.geometry.Side;
@@ -75,22 +75,22 @@ public class Breakable implements Characteristic{
 		return new Breakable(breakableNorth, breakableSouth, breakableEast, breakableWest, myDurability, mySprite);
 	}
 
-	@ViewableVariable(description="Breaks on Top", type=boolean.class)
+	@ViewableMethodOutput(description="Breaks on Top", type=boolean.class)
 	public boolean breaksOnTop(){
 		return breaksAtDirection(Side.TOP);
 	}
 	
-	@ViewableVariable(description="Breaks on Left", type=boolean.class)
+	@ViewableMethodOutput(description="Breaks on Left", type=boolean.class)
 	public boolean breaksOnLeft(){
 		return breaksAtDirection(Side.LEFT);
 	}
 	
-	@ViewableVariable(description="Breaks on Bottom", type=boolean.class)
+	@ViewableMethodOutput(description="Breaks on Bottom", type=boolean.class)
 	public boolean breaksOnBottom(){
 		return breaksAtDirection(Side.BOTTOM);
 	}
 	
-	@ViewableVariable(description="Breaks on Right", type=boolean.class)
+	@ViewableMethodOutput(description="Breaks on Right", type=boolean.class)
 	public boolean breaksOnRight(){
 		return breaksAtDirection(Side.RIGHT);
 	}

@@ -1,7 +1,7 @@
 package game_data.states;
 
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.characteristics.characteristic_annotations.ViewableVariable;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 
 public class Score implements State{
 
@@ -17,7 +17,7 @@ public class Score implements State{
 		return new Score(myScore);
 	}
 	
-	@ViewableVariable(description="Score", type=int.class)
+	@ViewableMethodOutput(description="Score", type=int.class)
 	public int getMyScore() {
 		return myScore;
 	}

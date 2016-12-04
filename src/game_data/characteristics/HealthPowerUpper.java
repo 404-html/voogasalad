@@ -6,7 +6,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.characteristics.characteristic_annotations.ViewableVariable;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
 import javafx.geometry.Side;
@@ -27,7 +27,7 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 		myHealthToGain = healthToGain;
 	}
 	
-	@ViewableVariable(type=int.class, description="Health to Gain")
+	@ViewableMethodOutput(type=int.class, description="Health to Gain")
 	public int getHealthToGain(){
 		return myHealthToGain;
 	}

@@ -1,6 +1,6 @@
 package author.view.pages.sprite.editor.settings.characteristics;
 
-import author.view.pages.sprite.editor.settings.SettingsViewColumn;
+import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
 import javafx.scene.control.Label;
 

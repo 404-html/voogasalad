@@ -5,7 +5,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.characteristics.characteristic_annotations.ViewableVariable;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_engine.actions.Pace;
 import javafx.geometry.Side;
 
@@ -42,7 +42,7 @@ public class PacerAlternative implements Characteristic{
 		originalYPosition = associatedSprite.getMyLocation().getYLocation();
 	}
 	
-	@ViewableVariable(type=double.class, description="Distance")
+	@ViewableMethodOutput(type=double.class, description="Distance")
 	public double getDistance() {
 		return myDistance;
 	}

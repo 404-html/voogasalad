@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import author.view.util.file_helpers.PropertySelector;
 import game_data.Sprite;
 import javafx.beans.property.BooleanProperty;

@@ -5,7 +5,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.characteristics.characteristic_annotations.ViewableVariable;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import javafx.geometry.Side;
 
 @NameAnnotation(name = "Losable By Time")
@@ -21,7 +21,7 @@ public class LosableByTime extends Losable implements Characteristic{
 		mySprite = aSprite;
 	}
 	
-	@ViewableVariable(type=double.class, description="Time")
+	@ViewableMethodOutput(type=double.class, description="Time")
 	public double getTime(){
 		return myTime;
 	}

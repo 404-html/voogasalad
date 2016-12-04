@@ -1,4 +1,4 @@
-package author.view.pages.sprite.editor.settings;
+package author.view.pages.sprite.editor.settings.view;
 
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;

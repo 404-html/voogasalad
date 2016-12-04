@@ -10,7 +10,7 @@ import java.util.Map;
 import game_data.*;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.characteristics.characteristic_annotations.ViewableVariable;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import javafx.geometry.Side;
 //are we going to need a separate launcher class that reacts to key commands?
 //big question is how are we going to handle launching projectiles when it's not on a uniform time
@@ -32,7 +32,7 @@ public class Launcher implements Characteristic{
 		return mySprite;	
 	}
 
-	@ViewableVariable(type=int.class, description="Time Interval")
+	@ViewableMethodOutput(type=int.class, description="Time Interval")
 	public int getTimeInterval(){
 		return myTimeInterval;
 	}
