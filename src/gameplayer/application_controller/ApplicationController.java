@@ -13,8 +13,6 @@ import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -70,7 +68,9 @@ public class ApplicationController extends AbstractController {
 			Scene scene = authorControllerExternal.getScene();
 			myStage.setWidth(scene.getWidth());
 			myStage.setHeight(scene.getHeight());
+			myStage.close();
 			myStage.setScene(scene);
+			myStage.show();
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
 			myFacebookInformation.authenticatePlayer();
