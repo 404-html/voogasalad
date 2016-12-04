@@ -66,6 +66,7 @@ public class UpdateStates {
 	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
 			Map<Sprite, ImageView> mySpriteImages) {
 		this.myLevel = aLevel;
+		this.myCurrentPowerUps = new HashMap<Action, Double>();
 		this.mySpriteList = myLevel.getMySpriteList();
 		this.timeElapsed = timeElapsed;
 		this.myKeysPressed = myKeysPressed;
@@ -110,7 +111,7 @@ public class UpdateStates {
 
 	private void powerUpHasBeenRemoved(Action powerUp) {
 		if(powerUp instanceof SpeedBoost){
-			//SpeedBoost powerDown = new SpeedBoost((SpeedBoost) powerUp).getPrevSpeed());
+			SpeedBoost powerDown = new SpeedBoost(null, ((SpeedBoost) powerUp).getPrevSpeed(), timeElapsed);
 		}
 	}
 
