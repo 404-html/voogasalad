@@ -1,5 +1,6 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
+import util.XMLTranslator;
 import author.view.pages.sprite.editor.inheritance.character.EnemySpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.item.ItemSpriteEditPage;
@@ -82,9 +83,17 @@ public abstract class BaseSpriteEditPage {
 					myCharacteristicEditor.addSettings();
 					myStateEditor.addSettings();
 				}).getButton();
+		
+		Button saveAsDefaultButton = new ButtonFactory().createButton(
+				"Save As Default", e-> {
+					XMLTranslator mySaver = new XMLTranslator();
+					mySaver.saveToFile(mySprite, "data/sprite/default_sprites/", mySprite.getName() + "_author_saved");
+				}).getButton();
+				
 
 		myToolBarBuilder.addBurst(new Label(getSpriteType()));
 		myToolBarBuilder.addBurst(buildButton);
+		myToolBarBuilder.addBurst(saveAsDefaultButton);
 
 		mySpriteEditBox.setLocation(aSprite.getMyLocation());
 		mySpriteEditBox.setImageFile(aSprite.getMyImagePath());

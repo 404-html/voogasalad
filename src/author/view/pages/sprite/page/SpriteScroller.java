@@ -1,11 +1,16 @@
 package author.view.pages.sprite.page;
 
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import util.XMLTranslator;
 import author.controller.IAuthorController;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.facades.ToolBarBuilder;
+import author.view.util.file_helpers.FileLoader;
+import author.view.util.file_helpers.FolderListor;
+import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Sprite;
 import game_data.sprites.SpriteFactory;
 import javafx.scene.Node;
@@ -77,6 +82,9 @@ public class SpriteScroller {
 		toolBarBuilder.addBurst(new ButtonFactory().createButton("New " + aScrollType, e -> {
 			buildNewSprite();
 		}).getButton());
+		toolBarBuilder.addBurst(new ButtonFactory().createButton("Load Saved " + aScrollType, e -> {
+			loadSprite(new FileLoader(FileType.XML).loadImage());
+		}).getButton());
 
 		return toolBarBuilder.getToolBar();
 	}
@@ -84,6 +92,14 @@ public class SpriteScroller {
 	private void buildNewSprite() {
 		Sprite ns = mySpriteFactory.buildEmpty();
 		giveSprite(ns);
+		myController.getModel().getGame().addPreset(ns);
+	}
+	
+	private void loadSprite(File aFile){
+		if(aFile == null)
+			return;
+		XMLTranslator myLoader = new XMLTranslator();
+		Sprite ns = (Sprite) myLoader.loadFromFile(aFile);
 		myController.getModel().getGame().addPreset(ns);
 	}
 

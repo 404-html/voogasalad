@@ -26,7 +26,8 @@ import javafx.scene.paint.Color;
  * @author George Bernard, Cleveland Thompson, Addison Howenstine
  */
 public class AuthorView {
-
+	
+	private static final String STYLESHEET = "data/GUI/author-style.css";
 	Scene myScene;
 	Pane myPane = new VBox();
 	TabPaneFacade myTabPaneFacade;
@@ -42,6 +43,8 @@ public class AuthorView {
 	public AuthorView(IAuthorController authorController) {
 		this.authorController = authorController;
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
+		File css = new File(STYLESHEET);
+		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
 	}
 	
@@ -110,6 +113,11 @@ public class AuthorView {
 	private File loadFileChooser() {
 		File file = new FileLoader(FileType.XML).loadImage();
 		return file;
+	}
+	
+	private String getStyleSheet(){
+		File css = new File(STYLESHEET);
+		return "file:"+ css.getAbsolutePath();
 	}
 
 }

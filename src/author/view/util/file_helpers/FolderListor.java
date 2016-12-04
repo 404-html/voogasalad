@@ -52,7 +52,7 @@ public class FolderListor {
 		Function<String, String> extensionRemover = (s) -> s.substring(0, s.lastIndexOf("."));
 		
 		return myFileNameList.stream()
-				.filter(s -> {return s.endsWith(".java");})
+				.filter(s -> {return s.endsWith(aExtension);})
 				.map(extensionRemover)
 				.collect(Collectors.toList());
 	}
