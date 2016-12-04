@@ -72,7 +72,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
-		for (int i = 226; i < 13226; i += 105) {
+		for (int i = 226; i < 8226; i += 100) {
 			myLevel.addNewSprite(new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
 			// Bouncer(20, myLevel.getMySpriteList().get(j)));
@@ -83,6 +83,19 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			// System.out.println(j);
 			// System.out.println(myLevel.getMySpriteList().size());
 			j++;
+		}
+		int k =842;
+		for (int g = 1526; g < 4226; g += 100) {
+			myLevel.addNewSprite(new Terrain(new Location(g, 100), 100, 100, "block" + k, "author/images/betterblock.png"));
+			// myLevel.getMySpriteList().get(j).addCharacteristic(new
+			// Bouncer(20, myLevel.getMySpriteList().get(j)));
+			// System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
+			// myLevel.getMySpriteList().get(j).addState(new Physics(new
+			// SpritePhysics(0.0)));
+			// System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
+			// System.out.println(j);
+			// System.out.println(myLevel.getMySpriteList().size());
+			k++;
 		}
 		myLevel.addNewSprite(new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
@@ -107,12 +120,12 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				if(s.getName().equals("blockmoving")){
 					//s.addCharacteristic(new BouncerTop(500, s));
 					s.addCharacteristic(new TransparentBottomImpassable(s));
-					//s.addCharacteristic(new StickyTopVertical(s));
+					s.addCharacteristic(new StickyTopVertical(s));
 				}
 				else if(s.getName().equals("blockmoving2")) {
 					//s.addCharacteristic(new BouncerTop(500, s));
 					s.addCharacteristic(new TransparentBottomImpassable(s));
-					//s.addCharacteristic(new StickyTopHorizontal(s));
+					s.addCharacteristic(new StickyTopHorizontal(s));
 				}
 				else if(!s.getName().equals("flag")){
 					s.addCharacteristic(new Impassable(s));
