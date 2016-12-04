@@ -16,5 +16,8 @@ public class MoveUpFly extends Move {
 	public void setVelocity(){
 		mySprite.setMyYVelocity(-myVelocity);
 	}
+	public void stop(){
+		return;
+	}
 
 }

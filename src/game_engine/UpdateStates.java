@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+import game_data.Controllable;
 import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
@@ -21,6 +21,7 @@ import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.actions.Action;
+import game_engine.actions.Launch;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpFly;
@@ -69,16 +70,31 @@ public class UpdateStates {
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyPressedMap();
-		generateDefaultKeyReleasedMap();
-		runKeyCalls();
-		runKeyReleased();
+		//generateDefaultKeyReleasedMap();
+		//runKeyCalls();
+		//runKeyReleased();
+		executeControls();
 		executeCharacteristics();
 
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();
 	}
-
+	private void executeControls(){
+		for(Sprite mySprite:mySpriteList){
+			//System.out.println("sprite list length " + mySpriteList.size());
+			//System.out.println("sprite image list length " + mySpriteImages.size());
+			//ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages, timeElapsed);
+			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
+			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
+			Controllable control = mySprite.getControllable();
+			//System.out.println(myCollisionMap.size());
+			if(control.isControllable()){
+				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
+				control.execute(myCollisionMap);
+			}
+		}
+	}
 	private void checkForLoss() {
 		for(State s: myLevel.getMainPlayer().getStates()){
 			if(s instanceof Health){
@@ -103,9 +119,10 @@ public class UpdateStates {
 	private void generateDefaultKeyPressedMap() {
 		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
 		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages, timeElapsed));
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}
 	private void generateDefaultKeyReleasedMap(){
 		myKeyReleasedMap.put(KeyCode.RIGHT, new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
@@ -138,8 +155,9 @@ public class UpdateStates {
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
 			//System.out.println(myCollisionMap.size());
-			for(Characteristic myCharacteristic:characteristics){	
-				myCharacteristic.execute(myCollisionMap);
+			for(Characteristic myCharacteristic:characteristics){
+					myCharacteristic.execute(myCollisionMap);
+				
 			}
 		}
 	}

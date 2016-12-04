@@ -1,5 +1,6 @@
 package game_engine;
 
+import game_data.Controllable;
 import game_data.Game;
 import game_data.Level;
 import game_data.Location;
@@ -23,11 +24,18 @@ import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
+import game_engine.actions.Action;
 import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
+import game_engine.actions.MoveLeft;
+import game_engine.actions.MoveRight;
+import game_engine.actions.MoveUpJump;
+import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Katrina, Austin, Lucia
@@ -60,7 +68,16 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteHealthList = new ArrayList<>();
 		mySpriteIsAliveList = new ArrayList<>();
 	}
-
+	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
+		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
+		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+		//System.out.println(myLevel.getMainPlayer()==null);
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		return myKeyPressedMap;
+		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
+	}
 	public EnginePlayerController(Game game) {
 		myGame = game;
 		myLevel = myGame.getCurrentLevel();
@@ -69,10 +86,11 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 		myLevel.getMainPlayer().addState(new Health(1));
 		myLevel.getMainPlayer().addState(new LevelWon());
+		myLevel.getMainPlayer().setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
-		for (int i = 226; i < 13226; i += 105) {
+		for (int i = 226; i < 13226; i += 100) {
 			myLevel.addNewSprite(new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
 			// Bouncer(20, myLevel.getMySpriteList().get(j)));

@@ -17,5 +17,8 @@ public class MoveDown extends Move {
 	public void setVelocity(){
 		mySprite.setMyYVelocity(myVelocity);
 	}
+	public void stop(){
+		return;
+	}
 
 }
