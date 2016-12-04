@@ -48,17 +48,22 @@ public class PacerAlternative implements Characteristic{
 		if(myType.equals(HORIZONTAL)){
 			return atXBound();
 		}
-		return collision;
+		//TEMPORARILY HARDCODED
+		return false;
+		//return collision;
 	}
 	
 	private boolean atYBound(){
 		double currentYLocation = mySprite.getMyLocation().getYLocation();
-		return currentYLocation<=originalYPosition || currentYLocation>= (originalYPosition+myDistance);			
+		return currentYLocation>originalYPosition || currentYLocation<(originalYPosition-myDistance);			
 	}
 	
 	private boolean atXBound(){
+		//System.out.println("x is " + mySprite.getMyLocation().getXLocation());
+		//System.out.println("y is " + mySprite.getMyLocation().getYLocation());
+		//System.out.println();
 		double currentXLocation = mySprite.getMyLocation().getXLocation();
-		return currentXLocation<=originalYPosition || currentXLocation>= (originalXPosition+myDistance);			
+		return currentXLocation<originalXPosition || currentXLocation>(originalXPosition+myDistance);			
 	}
 
 	@Override
@@ -68,7 +73,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0), myType);
 		pace.act();
 	}
 

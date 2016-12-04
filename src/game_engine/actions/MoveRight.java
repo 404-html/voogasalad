@@ -15,12 +15,10 @@ import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 
 public class MoveRight extends Move {
-	private List<Sprite>mySpriteList;
-	private Map<Sprite, ImageView>mySpriteImages;
-	public MoveRight(Sprite aSprite, double aVelocity, List<Sprite> aSpriteList, Map<Sprite, ImageView>aSpriteImages) {
+	
+	
+	public MoveRight(Sprite aSprite, double aVelocity) {
 		super(aSprite, aVelocity);
-		mySpriteList=aSpriteList;
-		mySpriteImages=aSpriteImages;
 	}
 /*	@Override
 	public Location changeCoordinates(){
@@ -33,13 +31,18 @@ public class MoveRight extends Move {
 		//System.out.println("changing right velocity");
 		mySprite.setMyXVelocity(myVelocity);
 	}
-private boolean checkSpriteSolidity() {
+/*private boolean checkSpriteSolidity() {
 	boolean solid = false;
 	for(State myState:mySprite.getStates()){
 		if(myState instanceof Solid){ solid = true;
 		}
 	}
 	return solid;
-}
+}*/
+	public void stop(){
+		if(mySprite.getMyXVelocity()>0){
+			mySprite.setMyXVelocity(mySprite.getMyXVelocity()-myVelocity);
+		}
+	}
 
 }

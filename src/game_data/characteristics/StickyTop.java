@@ -6,38 +6,30 @@ import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.actions.Action;
-import game_engine.actions.Hit;
 import game_engine.actions.HitTop;
+import game_engine.actions.Stick;
 import javafx.geometry.Side;
 
-/**
- * @author Alex & James
- *
- */
-@CharacteristicAnnotation(name = "Impassable")
-public class Impassable implements Characteristic{
+@CharacteristicAnnotation(name = "StickyTop")
+public abstract class StickyTop implements Characteristic{
 	
 	private Sprite mySprite;
-	private boolean movesThroughBottom;
 	private Action myAction;
+	private boolean horizontal;
 	
 	@ParameterAnnotation(parameters={"Sprite"})
-	public Impassable(Sprite aSprite){
+	public StickyTop(Sprite aSprite, boolean hori){
 		mySprite = aSprite;
+		horizontal = hori;
 	}
 	
 	
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			myAction = new Hit(collidedSprite, myCollisionMap.get(collidedSprite), mySprite);
+			myAction = new Stick(collidedSprite, mySprite, horizontal);
 			myAction.act();
 		}
-	}
-
-	@Override
-	public Characteristic copy() {
-		return new Impassable(mySprite);
 	}
 
 }

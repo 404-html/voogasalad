@@ -91,8 +91,10 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		clearKeys();
-		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
-		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyYVelocity());
+		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
+		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+		if (myGameController.getMyLevel().lostLevel()) createLosingScene();
+		if (myGameController.getMyLevel().wonLevel()) createWinningScene();
 		myGamePlayScene.moveScreen(myKeyHandler);
 	}
 
@@ -111,6 +113,7 @@ public class GamePlayController extends AbstractController {
 		for (Sprite sprite : myGameController.getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
+		//needs to be updated for when a sprite has been added
 	}
 	
 	private void getUpdatedSpriteMap(Sprite aSprite) {
@@ -163,16 +166,24 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			save();
 		}, e -> {
-			myAnimationLoop.stop();
-			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-			setLosingSceneHandlers((INavigationDisplay) ls);
-			resetStage(ls);
+			createLosingScene();
 		}, e -> {
-			myAnimationLoop.stop();
-			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-			setWinningSceneHandlers((INavigationDisplay) ls);
-			resetStage(ls);
+			createWinningScene();
 		});
+	}
+	
+	private void createLosingScene() {
+		myAnimationLoop.stop();
+		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
+		setLosingSceneHandlers((INavigationDisplay) ls);
+		resetStage(ls);
+	}
+	
+	private void createWinningScene() {
+		myAnimationLoop.stop();
+		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
+		setWinningSceneHandlers((INavigationDisplay) ls);
+		resetStage(ls);
 	}
 
 	@SuppressWarnings("unchecked")

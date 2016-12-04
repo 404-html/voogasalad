@@ -9,11 +9,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+import game_data.Controllable;
 import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.sprites.WinningObject;
 import game_data.states.Health;
@@ -21,6 +22,7 @@ import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.actions.Action;
+import game_engine.actions.Launch;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpFly;
@@ -46,7 +48,7 @@ import javafx.scene.input.KeyCode;
  * check for collision repeatedly. Do we have to deal with if the sprite hits a
  * block at multiple sides?
  * 
- * @author LuciaMartos
+ * @author LuciaMartos, Austin Gartside
  *
  */
 
@@ -63,8 +65,8 @@ public class UpdateStates {
 	private Map<KeyCode, Action> myKeyReleasedMap;
 	private Map<Action, Double> myCurrentPowerUps;
 
-	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
-			Map<Sprite, ImageView> mySpriteImages) {
+	private List<Sprite> myControllableSpriteList;
+	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased, Map<Sprite, ImageView> mySpriteImages) {
 		this.myLevel = aLevel;
 		this.myCurrentPowerUps = new HashMap<Action, Double>();
 		this.mySpriteList = myLevel.getMySpriteList();
@@ -85,12 +87,17 @@ public class UpdateStates {
 		// ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
 		// this.mySpriteImages.put(mySpriteList.get(1), view);
 		// end hardcode
+
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
+		myControllableSpriteList=new ArrayList<Sprite>();
+		this.myControllableSpriteList=myLevel.getMyControllableSpriteList();
+		
 		generateDefaultKeyPressedMap();
-		generateDefaultKeyReleasedMap();
-		runKeyCalls();
-		runKeyReleased();
+		//generateDefaultKeyReleasedMap();
+		//runKeyCalls();
+		//runKeyReleased();
+		executeControls();
 		executeCharacteristics();
 		cleanGame();
 		updateSpritePositions();
@@ -131,6 +138,44 @@ public class UpdateStates {
 			myLevel.removeSprite(mySprite);
 			mySpriteImages.remove(mySprite);
 		}
+		updateSpritePositions();
+		checkForWin();
+		checkForLoss();
+		//System.out.println("want this to be after launching");
+	}
+	private void executeControls(){
+		for(Sprite mySprite:myControllableSpriteList){
+			//System.out.println("sprite list length " + mySpriteList.size());
+			//System.out.println("sprite image list length " + mySpriteImages.size());
+			//ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages, timeElapsed);
+			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
+			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
+			Controllable control = mySprite.getControllable();
+			//System.out.println(myCollisionMap.size());
+			if(control.isControllable()){
+				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
+				control.execute(myCollisionMap);
+			}
+		}
+	}
+	private void checkForLoss() {
+		for(State s: myLevel.getMainPlayer().getStates()){
+			if(s instanceof Health){
+				if(!(((Health) s).isAlive()) || myLevel.getMainPlayer().getMyLocation().getYLocation()>myLevel.getHeight()){
+					myLevel.setLevelLost();
+				}
+			}
+		}
+	}
+//
+	private void checkForWin() {
+		for(State s: myLevel.getMainPlayer().getStates()){
+			if(s instanceof LevelWon){
+				if(((LevelWon) s).isHasWon()){
+					myLevel.setLevelWon();
+				}
+			}
+		}
 	}
 
 	// private void checkForLoss() {
@@ -152,15 +197,29 @@ public class UpdateStates {
 
 	// keys will only control the main player rn
 	private void generateDefaultKeyPressedMap() {
-		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		// System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(),
-				GameResources.MOVE_RIGHT_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
-		myKeyPressedMap.put(KeyCode.LEFT,
-				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(),
-				GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages, timeElapsed));
+//<<<<<<< HEAD
+//		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+//		// System.out.println(myLevel.getMainPlayer()==null);
+//		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(),
+//				GameResources.MOVE_RIGHT_SPEED.getDoubleResource(), mySpriteList, mySpriteImages));
+//		myKeyPressedMap.put(KeyCode.LEFT,
+//				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+//		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(),
+//				GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList, mySpriteImages, timeElapsed));
+//=======
+		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+		//System.out.println(myLevel.getMainPlayer()==null);
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}
+//	private void generateDefaultKeyReleasedMap(){
+//		myKeyReleasedMap.put(KeyCode.RIGHT, new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+//		myKeyReleasedMap.put(KeyCode.LEFT, new StopLeftMovement(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+//		//myKeyReleasedMap.put(KeyCode.UP, new StopUpMovement(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+//>>>>>>> katrina
+//	}
 
 	private void generateDefaultKeyReleasedMap() {
 		myKeyReleasedMap.put(KeyCode.RIGHT,
@@ -200,9 +259,20 @@ public class UpdateStates {
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
-			// System.out.println(myCollisionMap.size());
-			for (Characteristic myCharacteristic : characteristics) {
-				myCharacteristic.execute(myCollisionMap);
+//<<<<<<< HEAD
+//			// System.out.println(myCollisionMap.size());
+//			for (Characteristic myCharacteristic : characteristics) {
+//				myCharacteristic.execute(myCollisionMap);
+			//System.out.println(myCollisionMap.size());
+/*			Controllable control = mySprite.getControllable();
+			//System.out.println(myCollisionMap.size());
+			if(control.isControllable()){
+				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
+				control.execute(myCollisionMap);
+			}*/
+			for(Characteristic myCharacteristic:characteristics){
+					myCharacteristic.execute(myCollisionMap);
+				
 			}
 		}
 	}
@@ -257,8 +327,9 @@ public class UpdateStates {
 		for (Sprite sprite : mySpriteList) {
 			UpdateLocation updateLocation = new UpdateLocation(sprite, timeElapsed);
 			updateLocation.updateSpriteParameters();
-			if (sprite instanceof Player) {
-				// System.out.println(sprite.getMyLocation().getXLocation());
+			if(sprite instanceof Enemy){
+				//System.out.println("x is " + sprite.getMyLocation().getXLocation());
+				//System.out.println("y is " + sprite.getMyLocation().getYLocation());
 			}
 		}
 	}

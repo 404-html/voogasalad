@@ -26,6 +26,7 @@ public abstract class Sprite extends GameObject {
 	private double myYAcceleration;
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
+	private Controllable myControllable;
 	private String id = "";
 
 	private Set<State> myStates;
@@ -43,6 +44,7 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
+		myControllable=new Controllable(this);
 	}
 
 	// for copying sprites
@@ -93,7 +95,12 @@ public abstract class Sprite extends GameObject {
 		}
 		return stateCopies;
 	}
-
+	public void setControllable(Controllable control){
+		myControllable=control;
+	}
+	public Controllable getControllable(){
+		return myControllable;
+	}
 	public Set<Characteristic> getCharacteristics() {
 		return myCharacteristics;
 	}
@@ -140,8 +147,8 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyXVelocity(double myVelocity) {
-		if (myXVelocity > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
-			this.myXVelocity = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
+			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
 		}
 		else{
 			this.myXVelocity = myVelocity;
@@ -150,8 +157,8 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyYVelocity(double myVelocity) {
-		if (myYVelocity > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
-			this.myYVelocity = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+		if (Math.abs(myVelocity) > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
+			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
 		}
 		else{
 			this.myYVelocity = myVelocity;

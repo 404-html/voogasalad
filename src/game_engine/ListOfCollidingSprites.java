@@ -6,7 +6,11 @@ import java.util.Map;
 
 import game_data.Location;
 import game_data.Sprite;
+import game_data.characteristics.BouncerTop;
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.TransparentBottomImpassable;
 import game_data.sprites.Player;
+import game_data.sprites.Terrain;
 import game_data.states.Physics;
 import game_data.states.State;
 import javafx.geometry.Side;
@@ -14,6 +18,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
+/**
+ * @author Austin Gartside, Lucia
+ *
+ */
 public class ListOfCollidingSprites {
 	
 	private static double SHIFT_CONSTANT = .005;
@@ -54,8 +62,12 @@ public class ListOfCollidingSprites {
 			updateLocation.updateSpriteParameters();
 			mySpriteImages.get(mySprite).setX(mySprite.getMyLocation().getXLocation());
 			mySpriteImages.get(mySprite).setY(mySprite.getMyLocation().getYLocation());*/
-			if(!mySprite.getName().equals(targetSprite.getName()) && (mySpriteImages.get(mySprite)
-					.getBoundsInParent()).intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
+			//System.out.println("this seems null" + mySpriteImages.get(mySprite));
+			if(!mySprite.getName().equals(targetSprite.getName()) && 
+					(mySpriteImages.get(mySprite)
+					.getBoundsInParent()).
+					intersects(mySpriteImages.get(targetSprite).
+							getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));			
 			}
 			/*mySprite.getMyLocation().setLocation(oldX2, oldY2);
@@ -118,12 +130,40 @@ public class ListOfCollidingSprites {
 		double bottomDistance = Math.abs(block.getY()+block.getHeight()-middleY);
 	
 		int min = getMaxEdge(leftDistance, rightDistance, topDistance, bottomDistance);
-		if(mySprite instanceof Player){
+		//if(!(mySprite instanceof Terrain)){
+		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent()){
 		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
 			shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
 			//printSide(min);
 		}
+		if(mySprite instanceof Player && isTransparent() && pastPlatform(mySprite)){
+			if(min == 2){
+				//System.out.println("fuck this shit");
+				shiftPlayer(min, mySprite, leftDistance, rightDistance, topDistance, bottomDistance);
+				//System.out.println("player y is " + mySprite.getMyLocation().getYLocation()+mySprite.getMyHeight());
+				//System.out.println("block y is " + targetSprite.getMyLocation().getYLocation());
+				
+			}
+		}
+//		if(mySprite instanceof Player && isTransparent()){
+//			printSide(min);
+//		}
 		return pickSide(min, mySprite);
+	}
+	
+	private boolean pastPlatform(Sprite myPlayerSprite){
+		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<targetSprite
+						.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
+		//return myPlayerSprite.getMyYVelocity()>0;
+	}
+	
+	private boolean isTransparent(){
+		for(Characteristic c: targetSprite.getCharacteristics()){
+			if(c instanceof TransparentBottomImpassable || c instanceof BouncerTop){// && pastPlatform(playerSprite)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
