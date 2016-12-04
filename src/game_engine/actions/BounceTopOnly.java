@@ -4,7 +4,7 @@ import javafx.geometry.Side;
 import game_data.Sprite;
 
 /**
- * @author Alex & James
+ * @author Austin
  *
  */
 
@@ -35,15 +35,9 @@ public class BounceTopOnly implements Action {
 			//System.out.println("player is at " + myPlayerSprite.getMyLocation().getYLocation());
 			//System.out.println("bouncer is at " + myBouncer.getMyLocation().getYLocation());
 			myPlayerSprite.setMyYVelocity(-1*myBounceSpeed);
-			System.out.println("Bounce Speed is " + myBounceSpeed);
-			System.out.println("velocity is " + myPlayerSprite.getMyYVelocity());
-			System.out.println("fuck this fucking piece of shitting fuck");
-			System.out.println();
-			System.out.println();
 			//myPlayerSprite.getMyLocation().setLocation(myPlayerSprite.getMyLocation().getXLocation(), 
 			//		myBouncer.getMyLocation().getYLocation());
 		}	
-		System.out.println("this should match " + myPlayerSprite.getMyYVelocity());
 		//System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
 		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
 		//myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
