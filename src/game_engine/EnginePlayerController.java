@@ -90,6 +90,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 					s.addCharacteristic(new Breakable(true, true,true, true, 1, s));
 //					s.addCharacteristic(new SpeedPowerUpper(20, 5000, s));
 //					s.addCharacteristic(new HealthPowerUpper(20, s));
+					
 				}
 				 
 				else {
@@ -179,7 +180,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	}
 
 	public List<Sprite> getMySpriteList() {
-		return mySpriteList;
+		return myLevel.getMySpriteList();
 	}
 
 	public List<Double> getMySpriteXCoordinateList() {
