@@ -3,6 +3,7 @@ package gameplayer.application_controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
@@ -118,13 +119,24 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
-		gameChoice.addNode(getGUIGenerator().createComboBox(getDisplayOfGames()));
+		ComboBox<Pane> cBox = myComboBoxGenerator.createComboBox(getDisplayOfGames());
+		cBox.setOnAction(e -> {
+			//System.out.println(cBox.getSelectionModel().getSelectedItem().getChildren().get(0));
+			String gameName = ((String) ((Label) cBox.getSelectionModel().getSelectedItem().getChildren().get(0)).getText());
+			cBox.setPromptText(gameName);
+			System.out.println(gameName);
+			File gameFile = myStoredGames.getGameFilePath(gameName);
+			//System.out.println(gameFile.getAbsolutePath());
+			GamePlayController gamePlay = new GamePlayController(myStage, gameFile, this);
+			gamePlay.displayGame();
+		});
+		gameChoice.addNode(cBox);
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
 				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame, this);
 				gamePlay.displayGame();
-				myStoredGames.addGame(gamePlay.getGame(), gamePlay.getGame().getName(), chosenGame);
+				myStoredGames.addGame(gamePlay.getGame().getName(), chosenGame);
 			}
 		}, ButtonDisplay.TEXT);
 		gameChoice.addButton(myButtonLabels.getString("Options"), e -> {
@@ -139,9 +151,9 @@ public class ApplicationController extends AbstractController {
 
 	private List<Pane> getDisplayOfGames() {
 		List<Pane> aList = new ArrayList<Pane>();
-		for (Game game : myStoredGames.getGames()) {
+		for (String game : myStoredGames.getGameNames()) {
 			HBox box = new HBox();
-			box.getChildren().add(getGUIGenerator().createLabel(game.getName(), 0, 0));
+			box.getChildren().add(getGUIGenerator().createLabel(game, 0,0));
 			aList.add(box);
 		}
 		return aList;

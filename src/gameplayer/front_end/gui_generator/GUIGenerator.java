@@ -1,11 +1,14 @@
 package gameplayer.front_end.gui_generator;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.event.ChangeListener;
 
+import game_data.Game;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
+import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +27,7 @@ import javafx.scene.layout.Pane;
 public class GUIGenerator implements IGUIGenerator {
 	
 	private ButtonFactory myButtonBuilder;
-	
+
 	public GUIGenerator() {
 		myButtonBuilder = new ButtonFactory();
 	}
@@ -52,21 +55,6 @@ public class GUIGenerator implements IGUIGenerator {
 		image.setPreserveRatio(true);
 		image.setFitWidth(aWidth);
 		return image;
-	}
-	
-	public ComboBox<Pane> createComboBox(List<Pane> aListOfPanes) {
-		ComboBox<Pane> box = new ComboBox<Pane>();
-		ObservableList<Pane> items = FXCollections.observableArrayList(aListOfPanes);
-		box.setItems(items);
-		box.setPromptText("CHOOSE GAME");
-		box.setEditable(true);        
-		box.setOnAction(e -> {
-		    //Pane selectedPane = box.getSelectionModel().getSelectedItem();
-		    //String name = ((Label) selectedPane.getChildren().get(0)).getText();
-		 	//box.setAccessibleText(name.);
-		    //System.out.println("ComboBox Action (selected: " + name + ")");
-		});
-		return box;
 	}
 
 	@Override
@@ -97,5 +85,6 @@ public class GUIGenerator implements IGUIGenerator {
 		}
 		return menu;
 	}
+
 
 }

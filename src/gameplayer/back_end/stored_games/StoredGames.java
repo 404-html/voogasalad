@@ -9,28 +9,24 @@ import game_data.Game;
 
 public class StoredGames {
 	
-	private Map<Game, String> myStoredGameNames;
-	private Map<Game, File> myStoredGameFiles;
+	//private Map<String, Game> myStoredGameNames;
+	private Map<String, File> myStoredGameFiles;
 	
 	public StoredGames() {
-		myStoredGameNames = new HashMap<Game, String>(); 
-		myStoredGameFiles = new HashMap<Game, File>();
+		//myStoredGameNames = new HashMap<String, Game>(); 
+		myStoredGameFiles = new HashMap<String, File>();
 	}
 	
-	public Collection<Game> getGames() {
-		return myStoredGameNames.keySet();
+	public Collection<String> getGameNames() {
+		return myStoredGameFiles.keySet();
 	}
 	
-    public void addGame(Game aGame, String aGameName, File aGameFilePath) {
-    	myStoredGameNames.put(aGame, aGameName);
-    	myStoredGameFiles.put(aGame, aGameFilePath);
+    public void addGame(String aGameName, File aGameFilePath) {
+    	//myStoredGameNames.put(aGameName, aGame);
+    	myStoredGameFiles.put(aGameName, aGameFilePath);
     }
     
-    public String getGameName(Game aGame) {
-    	return myStoredGameNames.get(aGame);
-    }
-    
-    public File getGameFilePath(Game aGame) {
-    	return myStoredGameFiles.get(aGame);
+    public File getGameFilePath(String aGameName) {
+    	return myStoredGameFiles.get(aGameName);
     }
 }
