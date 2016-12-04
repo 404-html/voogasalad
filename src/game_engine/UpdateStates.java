@@ -155,6 +155,12 @@ public class UpdateStates {
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
 			//System.out.println(myCollisionMap.size());
+/*			Controllable control = mySprite.getControllable();
+			//System.out.println(myCollisionMap.size());
+			if(control.isControllable()){
+				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
+				control.execute(myCollisionMap);
+			}*/
 			for(Characteristic myCharacteristic:characteristics){
 					myCharacteristic.execute(myCollisionMap);
 				
