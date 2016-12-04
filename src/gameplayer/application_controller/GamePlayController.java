@@ -93,6 +93,7 @@ public class GamePlayController extends AbstractController {
 		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyXVelocity());
 		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyYVelocity());
 		myGamePlayScene.moveScreen(myKeyHandler);
+		setHealthLabel();
 	}
 
 	private void resetSprites(double elapsedTime) {
@@ -136,6 +137,7 @@ public class GamePlayController extends AbstractController {
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
+		setHealthLabel();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -169,6 +171,14 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayMainMenu();
 		});
 	}
+	
+	private void setHealthLabel() {
+		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+	}
+	
+//	private void setScoreLabel() {
+//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer());
+//	}
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
@@ -192,10 +202,6 @@ public class GamePlayController extends AbstractController {
 		myKeysPressed.remove(key);
 		myKeySet.remove(key);
 	}
-
-	public Game getGame() {
-		return myGameController.getMyGame();
-	}
 	
 	private void setWinningSceneHandlers(INavigationDisplay winScene) {
 		winScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
@@ -217,5 +223,9 @@ public class GamePlayController extends AbstractController {
 		loseScene.addButton(myButtonLabels.getString("HighScores"), e -> {
 			myApplicationController.displayHighScoreScene();
 		}, ButtonDisplay.TEXT);
+	}
+	
+	public Game getGame() {
+		return myGameController.getMyGame();
 	}
 }

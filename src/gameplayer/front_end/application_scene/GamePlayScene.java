@@ -56,6 +56,10 @@ public class GamePlayScene extends AbstractPlayerScene {
 	public void addMenu(ImageView aImage, String[] names, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... eventHandler) {
 		myHeadsUpDisplay.addMenu(aImage, names, eventHandler);
 	}
+	
+	public void addLabel(String aText){
+		myHeadsUpDisplay.addLabel(aText);
+	}
 
 	public void setKeyHandlers(KeyPressable aPressHandler, KeyPressable aReleaseHandler) {
 		myScene.setOnKeyPressed(e -> aPressHandler.handleKeyInput(e.getCode()));
