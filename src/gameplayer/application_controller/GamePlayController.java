@@ -93,6 +93,7 @@ public class GamePlayController extends AbstractController {
 		clearKeys();
 		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+		if (myGameController.getMyLevel().lostLevel()) createLosingScene();
 		myGamePlayScene.moveScreen(myKeyHandler);
 	}
 
@@ -152,16 +153,20 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			save();
 		}, e -> {
-			myAnimationLoop.stop();
-			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-			setLosingSceneHandlers((INavigationDisplay) ls);
-			resetStage(ls);
+			createLosingScene();
 		}, e -> {
 			myAnimationLoop.stop();
 			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
 			setWinningSceneHandlers((INavigationDisplay) ls);
 			resetStage(ls);
 		});
+	}
+	
+	private void createLosingScene() {
+		myAnimationLoop.stop();
+		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
+		setLosingSceneHandlers((INavigationDisplay) ls);
+		resetStage(ls);
 	}
 
 	@SuppressWarnings("unchecked")
