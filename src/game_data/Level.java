@@ -25,7 +25,7 @@ public class Level extends GameObject{
 	private String backgroundImageFilePath;
 	private Player myPlayerSprite;
 	Set<Sprite> mySprites;
-	private List<Sprite>myControllableSpriteList=new ArrayList<Sprite>();;
+	private List<Sprite>myControllableSpriteList=new ArrayList<Sprite>();
 
 	Map<KeyCode, KeyCommand> myKeyCommands;
 	

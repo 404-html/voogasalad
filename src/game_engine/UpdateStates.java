@@ -78,6 +78,7 @@ public class UpdateStates {
 		this.myKeysReleased = myKeysReleased;
 		this.mySpriteImages = mySpriteImages;
 
+		
 		// System.out.println("number of sprites" +
 		// myLevel.getMySpriteList().size());
 		// for (State myState : aLevel.getMainPlayer().getStates()) {
@@ -109,6 +110,8 @@ public class UpdateStates {
 		activatePowerUps();
 		checkPowerUps();
 		
+		System.out.println("size of sprites " +myLevel.getMySpriteList().size());
+
 		// checkForWin();
 		// checkForLoss();
 	}

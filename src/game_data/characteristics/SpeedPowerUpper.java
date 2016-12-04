@@ -28,12 +28,11 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 	private Level myLevel;
 	
 	@ParameterAnnotation(parameters = {"Speed Boost", "Time In Effect", "Sprite"})
-	public SpeedPowerUpper(double speedBoost, double timeInEffect, Sprite aSprite, Level myLevel){
+	public SpeedPowerUpper(double speedBoost, double timeInEffect, Sprite aSprite){
 		super(aSprite);
 		mySpeedBoost = speedBoost;
 		myTimeInEffect = timeInEffect;
 		myCurrentTime = 0;
-		this.myLevel = myLevel;
 	}
 	
 	public double getSpeedBoost(){
@@ -42,7 +41,7 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 
 	@Override
 	public Characteristic copy() {
-		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite(), myLevel);
+		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite());
 	}
 
 	@Override
