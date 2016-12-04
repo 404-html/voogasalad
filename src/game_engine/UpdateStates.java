@@ -3,6 +3,7 @@ package game_engine;
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +60,7 @@ public class UpdateStates {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
 	private Map<KeyCode, Action> myKeyReleasedMap;
-
+	private List<Sprite> myControllableSpriteList;
 	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased, Map<Sprite, ImageView> mySpriteImages) {
 		this.myLevel = aLevel;
 		this.mySpriteList = myLevel.getMySpriteList();
@@ -69,6 +70,10 @@ public class UpdateStates {
 		this.mySpriteImages=mySpriteImages;
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
+		myControllableSpriteList=new ArrayList<Sprite>();
+		this.myControllableSpriteList=myLevel.getMyControllableSpriteList();
+		System.out.println("size:" + myControllableSpriteList.size());
+		
 		generateDefaultKeyPressedMap();
 		//generateDefaultKeyReleasedMap();
 		//runKeyCalls();
@@ -81,7 +86,7 @@ public class UpdateStates {
 		checkForLoss();
 	}
 	private void executeControls(){
-		for(Sprite mySprite:mySpriteList){
+		for(Sprite mySprite:myLevel.getMyControllableSpriteList()){
 			//System.out.println("sprite list length " + mySpriteList.size());
 			//System.out.println("sprite image list length " + mySpriteImages.size());
 			//ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages, timeElapsed);

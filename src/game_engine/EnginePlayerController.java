@@ -80,6 +80,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	}
 	public EnginePlayerController(Game game) {
 		myGame = game;
+		//myLevel=new Level();
 		myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
 		myLevel.setPlayerSprite((Player) myLevel.getMySpriteList().get(0));
@@ -187,6 +188,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteImagePathList = new ArrayList<>();
 		mySpriteHealthList = new ArrayList<>();
 		mySpriteIsAliveList = new ArrayList<>();
+		myLevel.setMyControllableSpriteList();
 		updateSpriteData();
 	}
 
