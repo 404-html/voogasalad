@@ -3,6 +3,8 @@
  */
 package author.view.util.edit_window;
 
+import java.io.File;
+
 import game_data.GameObject;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,6 +18,8 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 	private Stage stage;
 	private static final String TITLE = "New Game";
 	private GameObjectEditPage<T> gameObjectEditPage;
+	private static final String STYLESHEET = "data/GUI/author-style.css";
+
 	
 	GameObjectEditWindow(){
 		this.gameObjectEditPage = getGameObjectLevelPage();
@@ -33,6 +37,7 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 		this.stage = new Stage();
 		this.stage.setTitle(TITLE);
 		this.stage.setScene(new Scene(this.gameObjectEditPage.getPane()));
+		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);
 		this.stage.showAndWait();
 	}
@@ -40,6 +45,11 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 	@Override
 	public void close() {
 		this.stage.close();
+	}
+	
+	private String getStyleSheet(){
+		File css = new File(STYLESHEET);
+		return "file:"+ css.getAbsolutePath();
 	}
 
 }
