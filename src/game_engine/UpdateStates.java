@@ -140,7 +140,7 @@ public class UpdateStates {
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
 				if (powerUp instanceof SpeedBooster) {
 					generateDefaultKeyPressedMap();
-					myLevel.getMainPlayer().resetTerminalVelocities();
+					//myLevel.getMainPlayer().resetTerminalVelocities();
 				}
 				myCurrentPowerUps.remove(powerUp);
 				powerUpHasBeenRemoved(powerUp);

@@ -25,7 +25,6 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 	private double myTimeInEffect;
 	private double myCurrentTime;
 	private Action myAction;
-	private Level myLevel;
 	
 	@ParameterAnnotation(parameters = {"Speed Boost", "Time In Effect", "Sprite"})
 	public SpeedPowerUpper(double speedBoost, double timeInEffect, Sprite aSprite){
