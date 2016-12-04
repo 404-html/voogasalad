@@ -29,6 +29,7 @@ public class AnimationPane {
 	}
 	
 	public void clear() {
+		System.out.println("cleared");
 		myGamePlayCanvas.getChildren().clear();
 	}
 	

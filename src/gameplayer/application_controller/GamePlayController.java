@@ -1,7 +1,6 @@
 package gameplayer.application_controller;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -40,6 +39,7 @@ public class GamePlayController extends AbstractController {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
 	private ApplicationController myApplicationController;
+	private double myTimeElapsed = 0;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
 		myStage = aStage;
@@ -85,6 +85,10 @@ public class GamePlayController extends AbstractController {
 		myAnimationLoop.init( elapsedTime -> {
 			resetSprites(elapsedTime);
 			updateScene();
+			myTimeElapsed += elapsedTime;
+			if (myTimeElapsed > 3) {
+				myGameController.getMyLevel().removeSprite(myGameController.getMyLevel().getMainPlayer());
+			}
 		});
 	}
 
@@ -97,17 +101,13 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void resetSprites(double elapsedTime) {
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		myGamePlayScene.clearSprites();
+		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		updateSprites();
 	}
 	
 	private void updateSprites() {
-		// A sprite has been removed
-		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
-			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-			mySpriteMap.keySet().retainAll(s);
-		}
+		System.out.println(myGameController.getMySpriteList().size());
 		for (Sprite sprite : myGameController.getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
@@ -122,7 +122,7 @@ public class GamePlayController extends AbstractController {
 			mySpriteMap.put(aSprite, image);
 		}
 		setImageProperties(aSprite, image);
-		myGamePlayScene.addImageToView(mySpriteMap.get(aSprite));
+		myGamePlayScene.addImageToView(image);
 	}
 
 	private void setImageProperties(Sprite aSprite, ImageView image) {
