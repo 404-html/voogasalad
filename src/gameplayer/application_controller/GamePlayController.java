@@ -94,6 +94,7 @@ public class GamePlayController extends AbstractController {
 		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) createLosingScene();
+		if (myGameController.getMyLevel().wonLevel()) createWinningScene();
 		myGamePlayScene.moveScreen(myKeyHandler);
 	}
 
@@ -155,10 +156,7 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			createLosingScene();
 		}, e -> {
-			myAnimationLoop.stop();
-			IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-			setWinningSceneHandlers((INavigationDisplay) ls);
-			resetStage(ls);
+			createWinningScene();
 		});
 	}
 	
@@ -166,6 +164,13 @@ public class GamePlayController extends AbstractController {
 		myAnimationLoop.stop();
 		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
 		setLosingSceneHandlers((INavigationDisplay) ls);
+		resetStage(ls);
+	}
+	
+	private void createWinningScene() {
+		myAnimationLoop.stop();
+		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
+		setWinningSceneHandlers((INavigationDisplay) ls);
 		resetStage(ls);
 	}
 
