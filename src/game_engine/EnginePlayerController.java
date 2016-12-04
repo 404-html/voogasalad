@@ -5,8 +5,11 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
+import game_data.characteristics.Breakable;
 import game_data.characteristics.Damager;
+import game_data.characteristics.HealthPowerUpper;
 import game_data.characteristics.Impassable;
+import game_data.characteristics.SpeedPowerUpper;
 import game_data.sprites.Character;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
@@ -57,7 +60,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
-		for (int i = 226; i < 13226; i += 100) {
+		for (int i = 226; i < 13226; i += 105) {
 			myLevel.addNewSprite(
 					new Terrain(new Location(i, 500), 100, 100, "block" + j, "author/images/betterblock.png"));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
@@ -84,15 +87,19 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				// else{
 				// s.addCharacteristic(new Impassable(s));
 				if (s.getName().equals("block5000")) {
-					s.addCharacteristic(new Damager(25, s));
+					s.addCharacteristic(new Breakable(true, true,true, true, 1, s));
+//					s.addCharacteristic(new SpeedPowerUpper(20, 5000, s));
+//					s.addCharacteristic(new HealthPowerUpper(20, s));
 				}
-				// }
+				 
 				else {
 					s.addCharacteristic(new Impassable(s));
 				}
+				s.addState(new Health(10));
 				s.addState(new Physics(new SpritePhysics(0.0)));
 			}
 		}
+		
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
 		// myLevel.getMySpriteList().get(1).getStates().size());
 		// System.out.println(myLevel.getMySpriteList().get(2).getName() + " " +

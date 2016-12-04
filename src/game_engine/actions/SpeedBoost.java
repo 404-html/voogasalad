@@ -1,25 +1,29 @@
 package game_engine.actions;
 
 import game_data.Sprite;
+import game_engine.GameResources;
 
 public class SpeedBoost implements Action {
-	
-	private Sprite myPlayerSprite;
 
-	public SpeedBoost(Sprite playerSprite){
+	private Sprite myPlayerSprite;
+	private double timeInEffect;
+	private double speedBoost;
+
+	public SpeedBoost(Sprite playerSprite, double speedBoost, double timeInEffect) {
 		myPlayerSprite = playerSprite;
+		this.timeInEffect = timeInEffect;
+		this.speedBoost = speedBoost;
 	}
-	
+
 	@Override
 	public void act() {
-		//Possible to change the physics for one specific sprite?
-		//If so:
-		//myPlayerSprite.setSpritePhysics(SpritePhysics speedBoostPhysics); 
-		//or
-		//myPlayerSprite.getSpritePhysics().setHorizontalGravity(.5);
-		//myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
-		
-		
+		// Possible to change the physics for one specific sprite?
+		// If so:
+		// myPlayerSprite.setSpritePhysics(SpritePhysics speedBoostPhysics);
+		// or
+		// myPlayerSprite.getSpritePhysics().setHorizontalGravity(.5);
+		// myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
+		myPlayerSprite.setMyXVelocity(myPlayerSprite.getMyXVelocity() + speedBoost);
 	}
 
 }

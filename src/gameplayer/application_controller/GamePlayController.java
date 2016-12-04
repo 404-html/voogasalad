@@ -1,7 +1,6 @@
 package gameplayer.application_controller;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -97,18 +96,13 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void resetSprites(double elapsedTime) {
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		myGamePlayScene.clearSprites();
+		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		updateSprites();
 	}
 	
 	private void updateSprites() {
-		// A sprite has been removed
-		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
-			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-			mySpriteMap.keySet().retainAll(s);
-		}
-		for (Sprite sprite : myGameController.getMySpriteList()) {
+		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
 	}
@@ -117,13 +111,16 @@ public class GamePlayController extends AbstractController {
 		ImageView image;
 		if (mySpriteMap.containsKey(aSprite)) {
 			image = mySpriteMap.get(aSprite);
+			setImageProperties(aSprite, image);
 		} else {
 			image = new ImageView(aSprite.getMyImagePath());
+			setImageProperties(aSprite, image);
 			mySpriteMap.put(aSprite, image);
 		}
 		setImageProperties(aSprite, image);
-		myGamePlayScene.addImageToView(mySpriteMap.get(aSprite));
+		myGamePlayScene.addImageToView(image);
 	}
+
 
 	private void setImageProperties(Sprite aSprite, ImageView image) {
 		image.setFitWidth(aSprite.getMyWidth());
@@ -134,7 +131,6 @@ public class GamePlayController extends AbstractController {
 
 	private void clearKeys() {
 		myKeysReleased.clear();
-		//myKeysPressed.clear();
 	}
 	
 	private void setMenu() {
