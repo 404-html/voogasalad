@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
@@ -19,6 +18,8 @@ public class PlayerOptionsPopUp {
 	private ResourceBundle myButtonLabels;
 	protected static final String RESOURCE_FILE = "gameplayerlabels.";
 	protected static final String BUTTONLABEL = "ButtonLabels"; 
+	private String myCurrentKeyChoice;
+	private String myCurrentColorChoice;
 	
 	public PlayerOptionsPopUp() {
 		myOptions = new ArrayList<HBox>();
@@ -38,13 +39,15 @@ public class PlayerOptionsPopUp {
 		RadioButton defaultKey = new RadioButton(myButtonLabels.getString("Default"));
 		defaultKey.setToggleGroup(keyboardGroup);
 		defaultKey.setSelected(true);
+		defaultKey.setUserData("Default");
 		RadioButton leftKeys = new RadioButton(myButtonLabels.getString("Left"));
 		leftKeys.setToggleGroup(keyboardGroup);
 		leftKeys.setSelected(false);
+		leftKeys.setUserData("Left");
 		keyboardGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-				
+				myCurrentKeyChoice = newValue.getUserData().toString();
 			}
 		});
 		keyOption.getChildren().addAll(defaultKey, leftKeys);
@@ -69,11 +72,20 @@ public class PlayerOptionsPopUp {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				if (fontGroup.getSelectedToggle() != null) {
-					//TODO: 
+
+					myCurrentColorChoice = newValue.getUserData().toString();
 				}
 			}
 		});
 		fontOption.getChildren().addAll(red, green, blue);
 		myOptions.add(fontOption);
+	}
+	
+	public String getKeyChoice() {
+		return myCurrentKeyChoice == null ? "black": myCurrentKeyChoice;
+	}
+	
+	public String getColorChoice() {
+		return myCurrentColorChoice == null ? "black": myCurrentColorChoice;
 	}
 }

@@ -38,12 +38,12 @@ public class AnimationPane {
 	}
 	
 	public void moveScreen(MovementHandler aHandler) {
-		myGamePlayCanvas.setTranslateX(myGamePlayCanvas.getTranslateX() + aHandler.getXMovement());
+		myGamePlayCanvas.setTranslateX(aHandler.getXMovement());
+		myGamePlayCanvas.setTranslateY(aHandler.getYMovement());
 	}
 	
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}
-	
 }
 

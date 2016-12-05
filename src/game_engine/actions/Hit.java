@@ -14,11 +14,13 @@ import game_engine.SpritePhysics;
 public class Hit implements Action {
 	
 	private Sprite myPlayerSprite;
+	private Sprite myNonPlayerSprite;
 	private Side mySide;
 	
 
-	public Hit(Sprite player, Side aSide) {
+	public Hit(Sprite player,  Side aSide, Sprite nonPlayerSprite) {
 		myPlayerSprite = player;
+		myNonPlayerSprite = nonPlayerSprite;
 		mySide = aSide;
 	}
 
@@ -27,9 +29,13 @@ public class Hit implements Action {
 		
 		
 		//get new Velocity –– gets horizontal or vertical components to zero
-
 		setNewVelocity();
 		setNewAcceleration();
+	}
+	
+	private boolean pastPlatform(){
+		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myNonPlayerSprite
+				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity()>0;		
 	}
 	
 	private void setNewVelocity() {
@@ -39,12 +45,12 @@ public class Hit implements Action {
 			if(myPlayerSprite.getMyXVelocity()>0){
 				
 				myPlayerSprite.setMyXVelocity(0);
-				System.out.println("hittin left side of block");
+				//System.out.println("hittin left side of block");
 			}
 		}
 		if(mySide==Side.RIGHT) {
 			if(myPlayerSprite.getMyXVelocity()<0){
-				System.out.println("hittin right side of block");
+				//System.out.println("hittin right side of block");
 				myPlayerSprite.setMyXVelocity(0);
 			}
 		}

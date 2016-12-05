@@ -14,6 +14,7 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.sprites.WinningObject;
 import game_data.states.Health;
@@ -45,7 +46,7 @@ import javafx.scene.input.KeyCode;
  * check for collision repeatedly. Do we have to deal with if the sprite hits a
  * block at multiple sides?
  * 
- * @author LuciaMartos
+ * @author LuciaMartos, Austin Gartside
  *
  */
 
@@ -67,21 +68,9 @@ public class UpdateStates {
 		this.mySpriteList = myLevel.getMySpriteList();
 		this.timeElapsed = timeElapsed;
 		this.myKeysPressed = myKeysPressed;
-		this.myKeysReleased = myKeysReleased;
-		this.mySpriteImages = mySpriteImages;
 
-		System.out.println("number of sprites" + myLevel.getMySpriteList().size());
-//		 for(State myState:aLevel.getMainPlayer().getStates()){
-//		 if(myState instanceof Health ){
-//		 System.out.println("Health of sprite" +
-//		 ((Health)myState).getMyHealth());
-//		 }
-//		 }
-		// how do I make an ImageView
-		// hardcode
-		// ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
-		// this.mySpriteImages.put(mySpriteList.get(1), view);
-		// end hardcode
+		this.myKeysReleased=myKeysReleased;
+		this.mySpriteImages=mySpriteImages;
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		generateDefaultKeyPressedMap();
@@ -111,7 +100,33 @@ public class UpdateStates {
 			myLevel.removeSprite(mySprite);
 			mySpriteImages.remove(mySprite);
 		}
+
+		updateSpritePositions();
+		checkForWin();
+		checkForLoss();
 	}
+
+	private void checkForLoss() {
+		for(State s: myLevel.getMainPlayer().getStates()){
+			if(s instanceof Health){
+				if(!(((Health) s).isAlive()) || myLevel.getMainPlayer().getMyLocation().getYLocation()>myLevel.getHeight()){
+					myLevel.setLevelLost();
+				}
+			}
+		}
+	}
+//
+	private void checkForWin() {
+		for(State s: myLevel.getMainPlayer().getStates()){
+			if(s instanceof LevelWon){
+				if(((LevelWon) s).isHasWon()){
+					myLevel.setLevelWon();
+				}
+			}
+		}
+	}
+
+	
 
 	// private void checkForLoss() {
 	// for(State s: myLevel.getMainPlayer().getStates()){
@@ -237,8 +252,9 @@ public class UpdateStates {
 		for (Sprite sprite : mySpriteList) {
 			UpdateLocation updateLocation = new UpdateLocation(sprite, timeElapsed);
 			updateLocation.updateSpriteParameters();
-			if (sprite instanceof Player) {
-				// System.out.println(sprite.getMyLocation().getXLocation());
+			if(sprite instanceof Enemy){
+				//System.out.println("x is " + sprite.getMyLocation().getXLocation());
+				//System.out.println("y is " + sprite.getMyLocation().getYLocation());
 			}
 		}
 	}
