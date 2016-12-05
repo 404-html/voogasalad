@@ -156,8 +156,8 @@ public abstract class Sprite extends GameObject {
 
 	public void setMyXVelocity(double myVelocity) {
 		System.out.println("TERMINAL X " + terminalXVel);
-		if (Math.abs(myVelocity) > terminalXVel) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
+		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
+			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
 		}
 		else{
 			this.myXVelocity = myVelocity;
