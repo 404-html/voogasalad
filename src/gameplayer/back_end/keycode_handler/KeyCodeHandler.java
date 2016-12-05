@@ -2,7 +2,6 @@ package gameplayer.back_end.keycode_handler;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import gameplayer.application_controller.KeyCodeTranslator;
 import javafx.scene.input.KeyCode;
 
@@ -18,18 +17,6 @@ public class KeyCodeHandler {
 		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
-	}
-	
-	public void addToKeySet(KeyCode aKeyCode){
-		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
-	}
-	
-	public void addKeyPressed(KeyCode aKeyCode){
-		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
-	}
-	
-	public void addKeyReleased(KeyCode aKeyCode){
-		myKeysReleased.add(myKeyCodeTranslator.getCode(aKeyCode));
 	}
 	
 	public Set<KeyCode> getKeySet(){
@@ -51,5 +38,16 @@ public class KeyCodeHandler {
 	
 	public void clearReleased() {
 		myKeysReleased.clear();
+	}
+	
+	public void handleKeyPress(KeyCode aKeyCode){
+		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
+		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
+	}
+	
+	public void handleKeyRelease(KeyCode aKeyCode) {
+		myKeysReleased.add(myKeyCodeTranslator.getCode(aKeyCode));
+		myKeySet.remove(myKeyCodeTranslator.getCode(aKeyCode));
+		myKeysPressed.remove(myKeyCodeTranslator.getCode(aKeyCode));
 	}
 }

@@ -19,7 +19,6 @@ import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import util.XMLTranslator;
@@ -29,13 +28,13 @@ public class GamePlayController extends AbstractController {
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
-	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
 	private MovementHandler myKeyHandler;
 	private GamePlayScene myGamePlayScene;
 	private KeyCodeHandler myKeyCodeHandler;
-	private Map<Sprite, ImageView> mySpriteMap;
 	private ApplicationController myApplicationController;
+	private File myGameFile;
+	private Map<Sprite, ImageView> mySpriteMap;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, String aKeyInput) {
 		myStage = aStage;
@@ -46,7 +45,7 @@ public class GamePlayController extends AbstractController {
 		mySceneBuilder = new SceneFactory();
 		initializeKeySets(aKeyInput);
 		initializeEngineComponents(aFile);
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight(), aAppController.getUserDefaults().getFontColor("black"));
+		initializeScene();
 		updateSprites();
 	}
 
@@ -71,12 +70,13 @@ public class GamePlayController extends AbstractController {
 
 	private void initializeScene() {
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), myApplicationController.getUserDefaults().getFontColor("black"));
-		myGamePlayScene.setKeyHandlers(e -> handleKeyPress(e), e -> handleKeyRelease(e));
+		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
 
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
+			//This is what gets called every time cycle
 			resetSprites(elapsedTime);
 			updateScene();
 		});
@@ -184,16 +184,6 @@ public class GamePlayController extends AbstractController {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
-	}
-	
-	private void handleKeyPress(KeyCode aKey) {
-		myKeyCodeHandler.addKeyPressed(aKey);
-		myKeyCodeHandler.addToKeySet(aKey);
-	}
-	
-	private void handleKeyRelease(KeyCode aKey) {
-		myKeyCodeHandler.addKeyReleased(aKey);
-		myKeyCodeHandler.remove(aKey);
 	}
 	
 	private void setResultSceneHandlers(INavigationDisplay winScene, String aMessage) {
