@@ -123,7 +123,7 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
 			if (chosenGame != null) {
-				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame, this);
+				GamePlayController gamePlay = new GamePlayController(myStage, chosenGame, this, myUserDefaults.getKeyInputColor("default"));
 				gamePlay.displayGame();
 				myStoredGames.addGame(gamePlay.getGame(), gamePlay.getGame().getName(), chosenGame);
 			}

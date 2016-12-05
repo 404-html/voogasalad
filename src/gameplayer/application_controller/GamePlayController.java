@@ -34,20 +34,22 @@ public class GamePlayController extends AbstractController {
 	private AnimationLoop myAnimationLoop;
 	private MovementHandler myKeyHandler;
 	private GamePlayScene myGamePlayScene;
+	private KeyCodeTranslator myKeyCodeTranslator;
 	private Set<KeyCode> myKeySet;
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
 	private ApplicationController myApplicationController;
 	
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, String aKeyInput) {
 		myStage = aStage;
 		myGameFile = aFile;
 		mySpriteMap = new HashMap<Sprite, ImageView>();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myApplicationController = aAppController;
 		mySceneBuilder = new SceneFactory();
-		initializeKeySets(); 
+		myKeyCodeTranslator = new KeyCodeTranslator(aKeyInput);
+		initializeKeySets();
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight(), aAppController.getUserDefaults().getFontColor("black"));
 		updateSprites();
@@ -181,7 +183,7 @@ public class GamePlayController extends AbstractController {
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myApplicationController.getUserDefaults().getKeyInputColor("default"));
 		gameControl.displayGame();
 	}
 	
@@ -192,14 +194,14 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void handleKeyPress(KeyCode aKey) {
-		myKeysPressed.add(aKey);
-        myKeySet.add(aKey);
+		myKeysPressed.add(myKeyCodeTranslator.getCode(aKey));
+        myKeySet.add(myKeyCodeTranslator.getCode(aKey));
 	}
 	
-	private void handleKeyRelease(KeyCode key) {
-		myKeysReleased.add(key);
-		myKeysPressed.remove(key);
-		myKeySet.remove(key);
+	private void handleKeyRelease(KeyCode aKey) {
+		myKeysReleased.add(myKeyCodeTranslator.getCode(aKey));
+		myKeysPressed.remove(myKeyCodeTranslator.getCode(aKey));
+		myKeySet.remove(myKeyCodeTranslator.getCode(aKey));
 	}
 	
 	private void setResultSceneHandlers(INavigationDisplay winScene, String aMessage) {
