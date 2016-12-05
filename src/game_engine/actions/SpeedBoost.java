@@ -35,14 +35,14 @@ public class SpeedBoost implements Action {
 		for(Action action: myPlayerSprite.getMyPowerUps().keySet()){
 			if(action instanceof SpeedBoost){
 				myPlayerSprite.getMyPowerUps().put(action, timeInEffect);
-				System.out.println("hello" );
+//				System.out.println("hello" );
 				hasChanged = true;
 			}
 		}
 		
 		if(!hasChanged) {				
 			myPlayerSprite.getMyPowerUps().put(this, timeInEffect);
-			System.out.println("hello2" );
+//			System.out.println("hello2" );
 		}
 
 		myPlayerSprite.setMyPowerUps(myPlayerSprite.getMyPowerUps());
