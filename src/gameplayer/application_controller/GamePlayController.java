@@ -2,16 +2,15 @@ package gameplayer.application_controller;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
-import java.util.Set;
 import game_data.Game;
 import game_data.Sprite;
 import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
+import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.IDisplay;
@@ -34,10 +33,7 @@ public class GamePlayController extends AbstractController {
 	private AnimationLoop myAnimationLoop;
 	private MovementHandler myKeyHandler;
 	private GamePlayScene myGamePlayScene;
-	private KeyCodeTranslator myKeyCodeTranslator;
-	private Set<KeyCode> myKeySet;
-	private Set<KeyCode> myKeysPressed;
-	private Set<KeyCode> myKeysReleased;
+	private KeyCodeHandler myKeyCodeHandler;
 	private Map<Sprite, ImageView> mySpriteMap;
 	private ApplicationController myApplicationController;
 	
@@ -48,8 +44,7 @@ public class GamePlayController extends AbstractController {
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myApplicationController = aAppController;
 		mySceneBuilder = new SceneFactory();
-		myKeyCodeTranslator = new KeyCodeTranslator(aKeyInput);
-		initializeKeySets();
+		initializeKeySets(aKeyInput);
 		initializeEngineComponents(aFile);
 		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight(), aAppController.getUserDefaults().getFontColor("black"));
 		updateSprites();
@@ -61,10 +56,8 @@ public class GamePlayController extends AbstractController {
 		myGameUpdater = new UpdateGame();
 	}
 
-	private void initializeKeySets() {
-		myKeySet = new HashSet<KeyCode>();
-		myKeysPressed= new HashSet<KeyCode>();
-		myKeysReleased = new HashSet<KeyCode>();
+	private void initializeKeySets(String aKeyInput) {
+		myKeyCodeHandler = new KeyCodeHandler(aKeyInput);
 		myKeyHandler = new MovementHandler();
 	}
 	
@@ -91,7 +84,7 @@ public class GamePlayController extends AbstractController {
 
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
-		myKeysReleased.clear();
+		myKeyCodeHandler.clearReleased();
 		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) createResultScene(myButtonLabels.getString("YouLost"));
@@ -102,7 +95,7 @@ public class GamePlayController extends AbstractController {
 
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
+		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteMap);
 		updateSprites();
 	}
 	
@@ -194,14 +187,13 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void handleKeyPress(KeyCode aKey) {
-		myKeysPressed.add(myKeyCodeTranslator.getCode(aKey));
-        myKeySet.add(myKeyCodeTranslator.getCode(aKey));
+		myKeyCodeHandler.addKeyPressed(aKey);
+		myKeyCodeHandler.addToKeySet(aKey);
 	}
 	
 	private void handleKeyRelease(KeyCode aKey) {
-		myKeysReleased.add(myKeyCodeTranslator.getCode(aKey));
-		myKeysPressed.remove(myKeyCodeTranslator.getCode(aKey));
-		myKeySet.remove(myKeyCodeTranslator.getCode(aKey));
+		myKeyCodeHandler.addKeyReleased(aKey);
+		myKeyCodeHandler.remove(aKey);
 	}
 	
 	private void setResultSceneHandlers(INavigationDisplay winScene, String aMessage) {
