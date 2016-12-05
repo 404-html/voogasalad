@@ -19,15 +19,15 @@ public class KeyCodeHandler {
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
 	}
 	
-	public Set<KeyCode> getKeySet(){
+	public Set<KeyCode> getKeySet() {
 		return myKeySet;
 	}
 	
-	public Set<KeyCode> getKeysPressed(){
+	public Set<KeyCode> getKeysPressed() {
 		return myKeysPressed;
 	}
 	
-	public Set<KeyCode> getKeysReleased(){
+	public Set<KeyCode> getKeysReleased() {
 		return myKeysReleased;
 	}
 	
