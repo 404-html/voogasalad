@@ -27,7 +27,7 @@ import javafx.scene.paint.Color;
  */
 public class AuthorView {
 	
-	private static final String STYLESHEET = "data/GUI/author-style.css";
+	private static final String STYLESHEET = "../images/author-style.css";
 	Scene myScene;
 	Pane myPane = new VBox();
 	TabPaneFacade myTabPaneFacade;
@@ -43,8 +43,7 @@ public class AuthorView {
 	public AuthorView(IAuthorController authorController) {
 		this.authorController = authorController;
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
-		File css = new File(STYLESHEET);
-		myScene.getStylesheets().add(getStyleSheet());
+		myScene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
 		initializeView();
 	}
 	
