@@ -17,15 +17,16 @@ import javafx.scene.layout.VBox;
 
 public class HeadsUpDisplay {
 
-	//	private MenuBar myTopMenu; 
 	private HBox myTop;
 	private MenuBar myTopMenu;
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
-
-	public HeadsUpDisplay(double aWidth, double aHeight) {
+	private String myFontColor;
+	
+	public HeadsUpDisplay(double aWidth, double aHeight, String aFontColor) {
 		myGUIGenerator = new GUIGenerator();
 		myRoot = new BorderPane();
+		myFontColor = aFontColor;
 	}
 
 	public void addMenu(String aTitle, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... aHandler) {
@@ -40,7 +41,9 @@ public class HeadsUpDisplay {
 		if(myTop.getChildren().size() > 1){
 			myTop.getChildren().remove(1);
 		}
-		myTop.getChildren().add(new Label(aText));
+		Label label = myGUIGenerator.createLabel(aText, 0, 0);
+		label.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
+		myTop.getChildren().add(label);
 	}
 
 	private Node createTop() {

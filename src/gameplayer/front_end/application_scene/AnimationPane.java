@@ -45,6 +45,5 @@ public class AnimationPane {
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}
-	
 }
 

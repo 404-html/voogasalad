@@ -17,12 +17,12 @@ public class GamePlayScene extends AbstractPlayerScene {
 	private AnimationPane myGamePlay;
 	private HeadsUpDisplay myHeadsUpDisplay;
 	private Background myBackgroundDisplay;
-
-	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight) {
+	
+	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
 		myStack = new StackPane();
 		myScene = new Scene(myStack, aWidth, aHeight);
 		myGamePlay = new AnimationPane();
-		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight);
+		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight, aFontColor);
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
 		initializeScene();
 	}

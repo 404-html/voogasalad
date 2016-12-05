@@ -10,6 +10,7 @@ import author.controller.IAuthorControllerExternal;
 import game_data.Game;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.stored_games.StoredGames;
+import gameplayer.back_end.user_information.UserDefaults;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
@@ -36,6 +37,7 @@ public class ApplicationController extends AbstractController {
 	private PlayerInformationController myInformationController;
 	private FacebookInformation myFacebookInformation;
 	private StoredGames myStoredGames;
+	private UserDefaults myUserDefaults;
 	
 	public ApplicationController (Stage aStage) {
 		myStage = aStage;
@@ -44,6 +46,7 @@ public class ApplicationController extends AbstractController {
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myFacebookInformation = new FacebookInformation();
 		myStoredGames = new StoredGames();
+		myUserDefaults = new UserDefaults(this.getClass().toString());
 	}
 	
 	public void startScene() throws FileNotFoundException {
@@ -68,9 +71,7 @@ public class ApplicationController extends AbstractController {
 			Scene scene = authorControllerExternal.getScene();
 			myStage.setWidth(scene.getWidth());
 			myStage.setHeight(scene.getHeight());
-			myStage.close();
 			myStage.setScene(scene);
-			myStage.show();
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
 			myFacebookInformation.authenticatePlayer();
@@ -110,7 +111,7 @@ public class ApplicationController extends AbstractController {
 		}, ButtonDisplay.TEXT);
 	}
 	
-	private void displayGameChoice(){
+	private void displayGameChoice() {
 		IDisplay gameChoice = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
 		resetStage(gameChoice);
 		createNavigationButtons((INavigationDisplay) gameChoice);
@@ -130,9 +131,13 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addButton(myButtonLabels.getString("Options"), e -> {
 			PopUpController popup = new PopUpController();
 			PlayerOptionsPopUp options = new PlayerOptionsPopUp();
-			for(HBox box : options.addOptions()){
+			for (HBox box : options.addOptions()) {
 				popup.addOption(box);
 			}
+			popup.setOnClosed(a -> {
+				myUserDefaults.setFontColor(options.getColorChoice());
+				myUserDefaults.setKeyInput(options.getKeyChoice());
+			});
 			popup.show();
 		}, ButtonDisplay.TEXT);
 	}
@@ -145,5 +150,9 @@ public class ApplicationController extends AbstractController {
 			aList.add(box);
 		}
 		return aList;
+	}
+	
+	public UserDefaults getUserDefaults(){
+		return myUserDefaults;
 	}
 }

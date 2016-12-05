@@ -49,7 +49,7 @@ public class GamePlayController extends AbstractController {
 		mySceneBuilder = new SceneFactory();
 		initializeKeySets(); 
 		initializeEngineComponents(aFile);
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
+		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight(), aAppController.getUserDefaults().getFontColor("black"));
 		updateSprites();
 	}
 
@@ -75,7 +75,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void initializeScene() {
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
+		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), myApplicationController.getUserDefaults().getFontColor("black"));
 		myGamePlayScene.setKeyHandlers(e -> handleKeyPress(e), e -> handleKeyRelease(e));
 	}
 
@@ -89,7 +89,7 @@ public class GamePlayController extends AbstractController {
 
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
-		clearKeys();
+		myKeysReleased.clear();
 		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) createResultScene(myButtonLabels.getString("YouLost"));
@@ -130,10 +130,6 @@ public class GamePlayController extends AbstractController {
 		image.setFitHeight(aSprite.getMyHeight());
 		image.setX(aSprite.getMyLocation().getXLocation());
 		image.setY(aSprite.getMyLocation().getYLocation());
-	}
-
-	private void clearKeys() {
-		myKeysReleased.clear();
 	}
 	
 	private void setMenu() {
