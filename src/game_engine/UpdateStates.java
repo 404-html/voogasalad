@@ -77,49 +77,28 @@ public class UpdateStates {
 		this.myKeysPressed = myKeysPressed;
 		this.myKeysReleased = myKeysReleased;
 		this.mySpriteImages = mySpriteImages;
-
-		
-		// System.out.println("number of sprites" +
-		// myLevel.getMySpriteList().size());
-		// for (State myState : aLevel.getMainPlayer().getStates()) {
-		// if (myState instanceof Health) {
-		// System.out.println("Health of sprite" + ((Health)
-		// myState).getMyHealth());
-		// }
-		// }
-		// how do I make an ImageView
-		// hardcode
-		// ImageView view = new ImageView(mySpriteList.get(1).getMyImagePath());
-		// this.mySpriteImages.put(mySpriteList.get(1), view);
-		// end hardcode
-
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		myControllableSpriteList = new ArrayList<Sprite>();
 		this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
 
 		generateDefaultKeyPressedMap();
-		// generateDefaultKeyReleasedMap();
-		// runKeyCalls();
-		// runKeyReleased();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
 		updateSpritePositions();
-//		System.out.println("size of map " +myLevel.getMyPowerUps().size());
 		activatePowerUps();
 		checkPowerUps();
-		
-		System.out.println("size of sprites " +myLevel.getMySpriteList().size());
-
-		// checkForWin();
-		// checkForLoss();
+		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
+		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
+		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
+		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
 	}
 
 	private void activatePowerUps() {
 		for (Action powerUp : myCurrentPowerUps.keySet()) {
 			if (powerUp instanceof SpeedBooster) {
-//				System.out.println("Activate Power up " + myCurrentPowerUps.get(powerUp));
+				System.out.println("Activate Power up " + myCurrentPowerUps.get(powerUp));
 				myKeyPressedMap.put(KeyCode.RIGHT,
 						new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()
 								+ GameResources.SPEED_BOOST.getDoubleResource()));
@@ -138,10 +117,6 @@ public class UpdateStates {
 			System.out.println("POWER UP SPEED" + myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
-				if (powerUp instanceof SpeedBooster) {
-					generateDefaultKeyPressedMap();
-					//myLevel.getMainPlayer().resetTerminalVelocities();
-				}
 				myCurrentPowerUps.remove(powerUp);
 				powerUpHasBeenRemoved(powerUp);
 			}
@@ -150,8 +125,8 @@ public class UpdateStates {
 
 	private void powerUpHasBeenRemoved(Action powerUp) {
 		if (powerUp instanceof SpeedBoost) {
-			// SpeedBoost powerDown = new SpeedBoost(null, ((SpeedBoost)
-			// powerUp).getPrevSpeed(), timeElapsed);
+			myLevel.getMainPlayer().resetTerminalVelocities();
+			generateDefaultKeyPressedMap();
 		}
 	}
 
@@ -179,17 +154,10 @@ public class UpdateStates {
 
 	private void executeControls() {
 		for (Sprite mySprite : myControllableSpriteList) {
-			// System.out.println("sprite list length " + mySpriteList.size());
-			// System.out.println("sprite image list length " +
-			// mySpriteImages.size());
-			// ListOfCollidingSprites collidingSprites = new
-			// ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages,
-			// timeElapsed);
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList,
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Controllable control = mySprite.getControllable();
-			// System.out.println(myCollisionMap.size());
 			if (control.isControllable()) {
 				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
 				control.execute(myCollisionMap);

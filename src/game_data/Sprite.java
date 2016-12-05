@@ -27,6 +27,8 @@ public abstract class Sprite extends GameObject {
 	private double myYVelocity;
 	private double myXAcceleration;
 	private double myYAcceleration;
+	private double terminalXVel;
+	private double terminalYVel;
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
 	private Controllable myControllable;
@@ -36,6 +38,7 @@ public abstract class Sprite extends GameObject {
 	private Set<State> myStates;
 
 	public Sprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
+		resetTerminalVelocities();
 		myLocation = aLocation;
 		myWidth = aWidth;
 		myHeight = aHeight;
@@ -53,6 +56,7 @@ public abstract class Sprite extends GameObject {
 
 	// for copying sprites
 	public Sprite(Sprite aSprite) {
+		resetTerminalVelocities();
 		preset = aSprite;
 		myLocation = new Location(aSprite.getMyLocation().getXLocation(), aSprite.getMyLocation().getYLocation());
 		myWidth = aSprite.getMyWidth();
@@ -151,8 +155,9 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyXVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		System.out.println("TERMINAL X" + terminalXVel);
+		if (Math.abs(myVelocity) > terminalXVel) {
+			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
 		}
 		else{
 			this.myXVelocity = myVelocity;
@@ -234,6 +239,24 @@ public abstract class Sprite extends GameObject {
 	public Sprite getPreset() {
 		return this.preset;
 	}
+	
+	public double getTerminalXVel() {
+		return terminalXVel;
+	}
+	public void setTerminalXVel(double terminalXVel) {
+		this.terminalXVel = terminalXVel;
+	}
+	public double getTerminalYVel() {
+		return terminalYVel;
+	}
+	public void setTerminalYVel(double terminalYVel) {
+		this.terminalYVel = terminalYVel;
+	}
+	public void resetTerminalVelocities(){
+		this.terminalXVel = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		this.terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+	}
+	
 	public Map<Action, Double> getMyPowerUps() {
 		if(powerUps == null) return new HashMap<Action, Double>();
 		return powerUps;

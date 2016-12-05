@@ -51,7 +51,7 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 			//unless we want non players to be able to speed up upon hitting a powerup
 			if(collidedSprite instanceof Player){
 				myAction = new SpeedBoost(collidedSprite, mySpeedBoost, myTimeInEffect);
-				System.out.println("characteristic in");
+//				System.out.println("characteristic in");
 				myAction.act();
 			}
 		}

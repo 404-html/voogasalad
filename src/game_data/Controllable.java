@@ -64,12 +64,12 @@ public class Controllable {
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		runKeyCalls(myCollisionMap);
 		runKeyReleased();
-		// TODO Auto-generated method stub
 	}
 	private void runKeyCalls(Map<Sprite, Side> myCollisionMap) {
 		for(KeyCode myKey: myKeysPressed){
 			if(myKeyPressedMap.containsKey(myKey)){
 				if((myKeyPressedMap.get(myKey) instanceof MoveUpJump)){
+					System.out.println("LUCIA");
 					if(isTerrainOnBottom(myCollisionMap)){
 						myKeyPressedMap.get(myKey).act();
 					}

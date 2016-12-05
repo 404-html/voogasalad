@@ -30,18 +30,25 @@ public class SpeedBoost implements Action {
 		// or
 		// myPlayerSprite.getSpritePhysics().setHorizontalGravity(.5);
 		// myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
+		
+		boolean hasChanged = false;
 		for(Action action: myPlayerSprite.getMyPowerUps().keySet()){
 			if(action instanceof SpeedBoost){
 				myPlayerSprite.getMyPowerUps().put(action, timeInEffect);
-			}
-			else{
-				myPlayerSprite.getMyPowerUps().put(this, timeInEffect);
+				System.out.println("hello" );
+				hasChanged = true;
 			}
 		}
+		
+		if(!hasChanged) {				
+			myPlayerSprite.getMyPowerUps().put(this, timeInEffect);
+			System.out.println("hello2" );
+		}
+
 		myPlayerSprite.setMyPowerUps(myPlayerSprite.getMyPowerUps());
 
-	//	myPlayerSprite.setTerminalXVel(myPlayerSprite.getTerminalXVel()+speedBoost);		
-		//myPlayerSprite.setTerminalYVel(myPlayerSprite.getTerminalYVel()+speedBoost);
+		myPlayerSprite.setTerminalXVel(myPlayerSprite.getTerminalXVel()+speedBoost);		
+		myPlayerSprite.setTerminalYVel(myPlayerSprite.getTerminalYVel()+speedBoost);
 
 //		System.out.println("SIZE int" +myLevel.getMyPowerUps().size() );
 //		System.out.println("SIZE end" +myLevel.getMyPowerUps().size() );
