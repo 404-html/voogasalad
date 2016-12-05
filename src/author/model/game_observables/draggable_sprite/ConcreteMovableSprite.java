@@ -25,7 +25,9 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	}
 	
 	public void removePresetListener(){
-		this.spritePreset.removeListener(presetInvalidationListener);
+		if (this.spritePreset!=null){
+			this.spritePreset.removeListener(presetInvalidationListener);
+		}
 	}
 
 	private void styleSprite() {
@@ -50,11 +52,8 @@ public class ConcreteMovableSprite extends DraggableSprite {
 					super.getImageView().getLayoutY() + super.getImageView().getFitHeight());
 
 		});
-
 		onMousePressed();
-
 		onMouseDragged();
-
 		onMouseReleased();
 	}
 	

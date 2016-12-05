@@ -4,17 +4,13 @@
 package author.view.pages.level_editor.windows.level_window;
 
 import author.controller.IAuthorController;
-import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
-import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.level_editor.windows.ILevelEditorWindowInternal;
 import game_data.Sprite;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 
 /**
  * @author Cleveland Thompson V (ct168)
@@ -23,7 +19,7 @@ import javafx.scene.layout.Pane;
 public class LevelWindowPaneFactory {
 	@SuppressWarnings("unused")
 	private ILevelEditorWindowInternal myLevelEditorWindowInternal;
-	private Pane levelPane;
+	private LevelWindowPane levelWindowPane;
 	private IAuthorController authorController;
 	
 	public LevelWindowPaneFactory(ILevelEditorWindowInternal levelEditorWindowInternal, IAuthorController authorController) {
@@ -31,35 +27,37 @@ public class LevelWindowPaneFactory {
 		this.authorController = authorController;
 	}
 	
-	public Pane create(){
-		this.levelPane = new Pane();
-		
+	public ILevelWindowPane create(){
+		this.levelWindowPane = new LevelWindowPane();
 		acceptDraggableSprites();
 		
-		this.levelPane.setOnDragEntered(e -> {
-			//TODO: Set on drag entered
+		this.levelWindowPane.getPane().setOnDragEntered(e -> {
+			Dragboard dragboard = e.getDragboard();
+			Sprite sprite = findSprite(dragboard.getString());
+			this.levelWindowPane.updateGrid(sprite.getMyWidth(), sprite.getMyHeight());
 		});
-		return this.levelPane;
+		return this.levelWindowPane;
 	}
 	
 	private void acceptDraggableSprites() {
 
-		levelPane.setOnDragDropped((DragEvent event) -> {
+		this.levelWindowPane.getPane().setOnDragDropped((DragEvent event) -> {
 			if (checkGameHasLevel()) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
 					Sprite sprite = findSprite(db.getString());
 					Sprite clone = sprite.clone();
-					clone.getMyLocation().setLocation(event.getX(), event.getY());
+					clone.getMyLocation().setLocation(levelWindowPane.adjustX((int) event.getX()), levelWindowPane.adjustY((int) event.getY()));
 					this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);		
 				}
+				this.levelWindowPane.removeGrid();
 				event.setDropCompleted(success);
 				event.consume();
 			}
 		});
 		
-		this.levelPane.setOnDragOver((DragEvent event) -> {
+		this.levelWindowPane.getPane().setOnDragOver((DragEvent event) -> {
 			if (event.getDragboard().hasString()) {
 				event.acceptTransferModes(TransferMode.MOVE);
 			}
