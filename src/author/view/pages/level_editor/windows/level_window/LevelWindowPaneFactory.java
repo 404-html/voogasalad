@@ -36,6 +36,9 @@ public class LevelWindowPaneFactory {
 			Sprite sprite = findSprite(dragboard.getString());
 			this.levelWindowPane.updateGrid(sprite.getMyWidth(), sprite.getMyHeight());
 		});
+		this.levelWindowPane.getPane().setOnDragExited(e -> {
+			this.levelWindowPane.removeGrid();
+		});
 		return this.levelWindowPane;
 	}
 	
