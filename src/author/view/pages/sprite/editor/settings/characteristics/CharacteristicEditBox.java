@@ -33,5 +33,11 @@ final class CharacteristicEditBox extends SpriteSettingsEditBox {
 		return new CharacteristicsFactory<Characteristic>(getName(), getSprite());
 	}
 
+	@Override
+	public void removeSpriteSetting() {
+		getSprite().getCharacteristics().removeIf( p -> {return p.getClass().getSimpleName().equals(getName());});
+		getSprite().setName(getSprite().getName());
+	}
+
 
 }

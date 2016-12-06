@@ -72,8 +72,14 @@ public abstract class BaseSpriteEditPage {
 		mySpriteEditBox = new BaseSpriteEditBox();
 
 		myTabPaneFacade.addTab(mySpriteEditBox.getClass().getSimpleName(), mySpriteEditBox.getPane());
+		mySpriteEditBox.getPane().prefWidthProperty().bind(myTabPaneFacade.getTabPane().widthProperty());
+		
 		myTabPaneFacade.addTab(myCharacteristicEditor.getClass().getSimpleName(), myCharacteristicEditor.getPane());
+		myCharacteristicEditor.getPane().prefWidthProperty().bind(myTabPaneFacade.getTabPane().widthProperty());
+		
 		myTabPaneFacade.addTab(myStateEditor.getClass().getSimpleName(), myStateEditor.getPane());
+		myStateEditor.getPane().prefWidthProperty().bind(myTabPaneFacade.getTabPane().widthProperty());
+		
 		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
 
 		Button buildButton = new ButtonFactory().createButton(

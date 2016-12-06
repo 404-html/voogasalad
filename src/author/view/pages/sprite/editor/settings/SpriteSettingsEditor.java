@@ -52,7 +52,7 @@ public abstract class SpriteSettingsEditor {
 		
 		Pane viewColumn = makeViewColumn(aSprite).getPane();
 		
-		Arrays.asList(new Node[]{viewColumn, scroll, mySelector.getPane()}).forEach(n -> {
+		Arrays.asList(new Node[]{mySelector.getPane(), scroll, viewColumn}).forEach(n -> {
 			myPane.getChildren().add(n);
 		});
 	}
@@ -64,6 +64,7 @@ public abstract class SpriteSettingsEditor {
 					.get(e.getName())
 					.getValue();
 			if ( charIsAvailable ) e.addSpriteSetting();	
+			else 				   e.removeSpriteSetting();
 		});
 	}
 	

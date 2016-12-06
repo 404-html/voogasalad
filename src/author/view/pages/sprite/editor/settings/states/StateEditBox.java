@@ -28,6 +28,12 @@ public class StateEditBox extends SpriteSettingsEditBox {
 		getSprite().getStates().removeIf( p -> {
 			return p.getClass().getSimpleName().equals(s.getClass().getSimpleName());
 		});
-		getSprite().getStates().remove(s);
+		getSprite().addState(s);
+	}
+
+	@Override
+	public void removeSpriteSetting() {
+		getSprite().getStates().removeIf( p -> {return p.getClass().getSimpleName().equals(getName());});
+		getSprite().setName(getSprite().getName());
 	}
 }

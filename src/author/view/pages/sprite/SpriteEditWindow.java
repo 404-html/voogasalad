@@ -22,7 +22,7 @@ public class SpriteEditWindow {
 		Stage stage = new Stage();
 		stage.setTitle(mySpriteEditPage.getSpriteType());
 		stage.setScene(new Scene(this.mySpriteEditPage.getPane()));
-		stage.setResizable(false);
+		stage.setResizable(true);
 		stage.show();
 	}
 	

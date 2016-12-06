@@ -58,13 +58,13 @@ public class SettingsViewBox {
 	}
 
 	private void buildViewBox(Object input, Map<String, Object> infoMap){
-		myPane.getChildren().addAll(new ToolBar(new Label(input.toString())) );
+		myPane.getChildren().addAll(new ToolBar(new Label(input.getClass().getSimpleName())) );
 
 		infoMap.entrySet().forEach( e -> {
 			Pane box = new HBox();
 			box.getChildren().addAll(
-					new Label(e.getKey().toString()),
-					new Label(e.getValue().toString())
+					new Label( e.getKey().toString()),
+					new Label( "  |  " + e.getValue().toString())
 					);
 			myPane.getChildren().add(box);
 		} );		
