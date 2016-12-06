@@ -13,6 +13,7 @@ public abstract class SettingsViewColumn implements InvalidationListener {
 	public  SettingsViewColumn(Sprite aSprite) {
 		aSprite.addListener(this);
 		myPane = new VBox();
+		updateList(aSprite);
 	}
 
 	public Pane getPane() {

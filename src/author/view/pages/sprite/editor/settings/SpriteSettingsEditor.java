@@ -1,6 +1,7 @@
 package author.view.pages.sprite.editor.settings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -8,6 +9,7 @@ import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import author.view.util.file_helpers.PropertySelector;
 import game_data.Sprite;
 import javafx.beans.property.BooleanProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
@@ -26,12 +28,10 @@ public abstract class SpriteSettingsEditor {
 	public SpriteSettingsEditor(Sprite aSprite) {
 		mySprite = aSprite;
 		
-		myPane = new HBox(5);
+		myPane = new HBox();
 		myAccordion = new Accordion();
 		myEditBoxList = new ArrayList<>();
 		mySelector = new PropertySelector( getDirectoryPath() + mySprite.getClass().getSimpleName());
-		
-		myPane.getChildren().add(mySelector.getPane());
 		
 		for(Entry<String, BooleanProperty> e: mySelector.getSelectedMap().entrySet()){
 			
@@ -50,10 +50,11 @@ public abstract class SpriteSettingsEditor {
 		scroll.minViewportWidthProperty().bind(myAccordion.widthProperty());
 		scroll.setContent(myAccordion);
 		
-		myPane.getChildren().add(scroll);
+		Pane viewColumn = makeViewColumn(aSprite).getPane();
 		
-		myPane.getChildren().add(makeViewColumn(aSprite).getPane());
-
+		Arrays.asList(new Node[]{viewColumn, scroll, mySelector.getPane()}).forEach(n -> {
+			myPane.getChildren().add(n);
+		});
 	}
 
 	public final void addSettings(){

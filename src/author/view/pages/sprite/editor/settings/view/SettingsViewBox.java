@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import game_data.characteristics.Breakable;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -24,21 +24,20 @@ public class SettingsViewBox {
 		myInfo = new TreeMap<>();
 		myPane = new VBox();
 
-		//myPane.getChildren().add(new Label("Class: " + input.toString()));
-		buildViewBox(input);			
+		buildInfoMap(input);
+		buildViewBox(input, myInfo);
 	}
 
-	public void buildViewBox(Object input) {
+	public Pane getPane(){
+		return myPane;
+	}
+	
+	private void buildInfoMap(Object input) {
 		Method[] methods = input.getClass().getMethods();
 
-		Arrays.asList(methods).forEach( m -> {
-			System.out.println();
-			System.out.println(m + " | " + Arrays.asList(m.getAnnotations()));
-		});;
-		
 		for(Method m : methods){
 			List<Annotation> annotationList = Arrays.asList(m.getAnnotations());
-			
+
 			ViewableMethodOutput vvAnnotation = null;
 
 			for(Annotation a : annotationList){
@@ -48,7 +47,7 @@ public class SettingsViewBox {
 						myInfo.put( vv.description(), m.invoke(input, (Object[]) null) );
 					} catch (ExceptionInInitializerError | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						e.printStackTrace();
-						System.out.println("Seems like you cucked this one");
+						System.out.println("You're a cuck");
 						continue;
 					}
 				}
@@ -58,10 +57,17 @@ public class SettingsViewBox {
 		}		
 	}
 
-	public static void main(String[] args) {
-		SettingsViewBox svb = new SettingsViewBox(new Breakable(true, false, true, false, 20, null));
-		
-		System.out.println(svb.myInfo);
-	} 
-	
+	private void buildViewBox(Object input, Map<String, Object> infoMap){
+		myPane.getChildren().addAll(new ToolBar(new Label(input.toString())) );
+
+		infoMap.entrySet().forEach( e -> {
+			Pane box = new HBox();
+			box.getChildren().addAll(
+					new Label(e.getKey().toString()),
+					new Label(e.getValue().toString())
+					);
+			myPane.getChildren().add(box);
+		} );		
+	}
+
 }
