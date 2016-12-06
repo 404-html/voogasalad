@@ -2,8 +2,6 @@ package gameplayer.application_controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
@@ -117,7 +115,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
-		gameChoice.addNode(getGUIGenerator().createComboBox(getDisplayOfGames(), (aChoice) -> {
+		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), (aChoice) -> {
 			displayGame(myStoredGames.getGameFilePath(aChoice));
 		}));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
@@ -143,14 +141,6 @@ public class ApplicationController extends AbstractController {
 	private void displayGame(File chosenGame) {
 		GamePlayController gamePlay = new GamePlayController(myStage, chosenGame, this, myUserDefaults.getKeyInputColor("default"));
 		gamePlay.displayGame();
-	}
-
-	private List<String> getDisplayOfGames() {
-		List<String> aList = new ArrayList<String>();
-		for (String s : myStoredGames.getGames()) {
-			aList.add(s);
-		}
-		return aList;
 	}
 
 	public UserDefaults getUserDefaults(){

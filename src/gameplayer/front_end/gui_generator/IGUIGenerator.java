@@ -1,7 +1,6 @@
 package gameplayer.front_end.gui_generator;
 
 import java.util.List;
-
 import gameplayer.application_controller.Choosable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,7 +30,6 @@ public interface IGUIGenerator {
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 	
-	public ComboBox createComboBox(List<String> aList, Choosable aChoice);
-
+	public ComboBox createComboBox(List<String> aList, List<String> aListOfFiles, Choosable aChoice);
 	
 }
