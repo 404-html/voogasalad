@@ -1,12 +1,13 @@
-package author.model.game_observables.draggable_sprite;
+package author.model.game_observables.draggable_sprite.context_menu;
 
 import author.controller.IAuthorController;
+import author.model.game_observables.draggable_sprite.DraggableSprite;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 
-public class SpriteContextMenu {
+public class SpriteContextMenu implements ISpriteContextMenu {
 
 	private DraggableSprite mySprite;
 	private ContextMenu myMenu;
@@ -20,31 +21,18 @@ public class SpriteContextMenu {
 
 	private void createContextMenu() {
 		myMenu = new ContextMenu();
-		myMenu.getItems().add(new FunctionalMenuItem("Delete", e -> {
+		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Delete", e -> {
 			myAuthorController.getModel().getGame().getCurrentLevel().removeSprite(mySprite.getSprite());
-		}).getMenu());
-		myMenu.getItems().add(new FunctionalMenuItem("Copy", e -> {
+		}).getItem());
+		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Copy", e -> {
 			myAuthorController.getModel().getGame().getCurrentLevel().addNewSprite(mySprite.getSprite().clone());
-		}).getMenu());
+		}).getItem());
 
 	}
 
+	@Override
 	public ContextMenu getMenu() {
 		return myMenu;
-	}
-
-	private class FunctionalMenuItem {
-
-		private MenuItem item;
-
-		FunctionalMenuItem(String label, EventHandler<ActionEvent> event) {
-			item = new MenuItem(label);
-			this.item.setOnAction(event);
-		}
-
-		protected MenuItem getMenu() {
-			return item;
-		}
 	}
 
 }

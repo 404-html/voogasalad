@@ -9,7 +9,7 @@ import java.util.Set;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
-import author.model.game_observables.draggable_sprite.SpriteContextMenu;
+import author.model.game_observables.draggable_sprite.context_menu.SpriteContextMenu;
 import author.view.pages.level_editor.windows.level_window.ILevelWindowPane;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
