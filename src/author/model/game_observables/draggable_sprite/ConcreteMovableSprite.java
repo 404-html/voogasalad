@@ -9,7 +9,13 @@ import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Line;
-
+/**
+ * Extension of DraggableSprite. This class defines the functionality of the sprites that are actually placed on 
+ * the level editor. 
+ * Allows users to click and drag sprites around the level editor, along with other functionality.
+ * @author Jordan Frazier
+ *
+ */
 public class ConcreteMovableSprite extends DraggableSprite {
 
 	private double mouseX;
@@ -43,15 +49,6 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	 */
 	@Override
 	protected void makeDraggable() {
-
-		super.getDraggableItem().setOnMouseDragOver(event -> {
-			super.getDraggableItem();
-			// Set boundaries to visible
-			Line line = new Line(super.getImageView().getLayoutX(), super.getImageView().getLayoutY(),
-					super.getImageView().getLayoutX() + super.getImageView().getFitWidth(),
-					super.getImageView().getLayoutY() + super.getImageView().getFitHeight());
-
-		});
 		onMousePressed();
 		onMouseDragged();
 		onMouseReleased();
