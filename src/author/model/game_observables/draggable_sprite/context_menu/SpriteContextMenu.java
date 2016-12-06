@@ -2,10 +2,9 @@ package author.model.game_observables.draggable_sprite.context_menu;
 
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import game_data.Location;
+import game_data.Sprite;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 
 public class SpriteContextMenu implements ISpriteContextMenu {
 
@@ -25,7 +24,10 @@ public class SpriteContextMenu implements ISpriteContextMenu {
 			myAuthorController.getModel().getGame().getCurrentLevel().removeSprite(mySprite.getSprite());
 		}).getItem());
 		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Copy", e -> {
-			myAuthorController.getModel().getGame().getCurrentLevel().addNewSprite(mySprite.getSprite().clone());
+			Sprite clone = mySprite.getSprite().clone();
+			clone.setMyLocation(new Location(clone.getMyLocation().getXLocation() + 15,
+					clone.getMyLocation().getYLocation() + 15, clone.getMyLocation().getMyHeading()));
+			myAuthorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
 		}).getItem());
 
 	}
