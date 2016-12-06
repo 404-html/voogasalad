@@ -33,5 +33,6 @@ public interface IGUIGenerator {
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 
+	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames);
 	
 }

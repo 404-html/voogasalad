@@ -3,13 +3,10 @@ package gameplayer.application_controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
-import game_data.Game;
-import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
@@ -37,7 +34,6 @@ import javafx.stage.Stage;
 public class ApplicationController extends AbstractController {
 	
 	private PlayerInformationController myInformationController;
-	private FacebookInformation myFacebookInformation;
 	private StoredGames myStoredGames;
 	
 	public ApplicationController (Stage aStage) {
@@ -45,7 +41,6 @@ public class ApplicationController extends AbstractController {
 		mySceneBuilder = new SceneFactory();
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
-		myFacebookInformation = new FacebookInformation();
 		myStoredGames = new StoredGames();
 	}
 	
@@ -74,7 +69,7 @@ public class ApplicationController extends AbstractController {
 			myStage.setScene(scene);
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
-			myFacebookInformation.authenticatePlayer();
+			myInformationController.facebookLogin();
 		}, ButtonDisplay.FACEBOOK);
 	}
 	
@@ -96,12 +91,13 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	private void setHighScoreHandlers(INavigationDisplay highScoreScene) {
-		highScoreScene.addNode(getGUIGenerator().createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
+		//highScoreScene.addNode(getGUIGenerator().createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
 	}
 
 	private void displayUserScene() {
-		IDisplay userProfile = mySceneBuilder.create(SceneIdentifier.USERPROFILE, myStage.getWidth(), myStage.getHeight());
+		IDisplay userProfile = mySceneBuilder.create(myInformationController.getUser(), myStage.getWidth(), myStage.getHeight());
 		resetStage(userProfile);
+		createNavigationButtons((INavigationDisplay) userProfile);
 		setUserProfileButtonHandlers((INavigationDisplay) userProfile);
 	}
 	
@@ -111,7 +107,7 @@ public class ApplicationController extends AbstractController {
 		}, ButtonDisplay.TEXT);
 	}
 	
-	private void displayGameChoice(){
+	private void displayGameChoice() {
 		IDisplay gameChoice = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
 		resetStage(gameChoice);
 		createNavigationButtons((INavigationDisplay) gameChoice);
@@ -119,14 +115,11 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
-		ComboBox<Pane> cBox = myComboBoxGenerator.createComboBox(getDisplayOfGames());
+		ComboBox<Pane> cBox = getGUIGenerator().createComboBox(getDisplayOfGames());
 		cBox.setOnAction(e -> {
-			//System.out.println(cBox.getSelectionModel().getSelectedItem().getChildren().get(0));
 			String gameName = ((String) ((Label) cBox.getSelectionModel().getSelectedItem().getChildren().get(0)).getText());
 			cBox.setPromptText(gameName);
-			System.out.println(gameName);
 			File gameFile = myStoredGames.getGameFilePath(gameName);
-			//System.out.println(gameFile.getAbsolutePath());
 			GamePlayController gamePlay = new GamePlayController(myStage, gameFile, this);
 			gamePlay.displayGame();
 		});

@@ -18,7 +18,6 @@ public abstract class AbstractController {
 	protected Stage myStage;
 	protected ResourceBundle myButtonLabels;
 	private IGUIGenerator myGUIGenerator = new GUIGenerator();
-	protected ComboBoxFactory myComboBoxGenerator = new ComboBoxFactory();
 	
 	public AbstractController() {
 		

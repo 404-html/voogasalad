@@ -27,9 +27,11 @@ import javafx.scene.layout.Pane;
 public class GUIGenerator implements IGUIGenerator {
 	
 	private ButtonFactory myButtonBuilder;
+	private ComboBoxFactory myComboBoxBuilder; 
 
 	public GUIGenerator() {
 		myButtonBuilder = new ButtonFactory();
+		myComboBoxBuilder = new ComboBoxFactory();
 	}
 	
 	@Override
@@ -84,6 +86,11 @@ public class GUIGenerator implements IGUIGenerator {
 			menu.getItems().add(item);
 		}
 		return menu;
+	}
+
+	@Override
+	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
+		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
 	}
 
 

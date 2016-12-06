@@ -7,13 +7,15 @@ public class SceneFactory {
 			return new MainMenuScene(aWidth, aHeight);
 		} else if (aIdentifier.equals(SceneIdentifier.GAMECHOICE)) {
 			return new GameChoiceScene(aWidth, aHeight);
-		} else if (aIdentifier.equals(SceneIdentifier.USERPROFILE)) {
-			return new UserProfileScene(aWidth, aHeight);
 		} else if (aIdentifier.equals(SceneIdentifier.HIGHSCORE)) {
 			return new HighScoreScene(aWidth, aHeight);
 		} else if (aIdentifier.equals(SceneIdentifier.RESULT)) {
 			return new ResultScene(aWidth, aHeight);
 		}
 		return null;
+	}
+	
+	public IDisplay create(String aName, double aWidth, double aHeight) {
+		return new UserProfileScene(aName, aWidth, aHeight);
 	}
 }
