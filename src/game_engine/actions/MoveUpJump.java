@@ -18,7 +18,9 @@ public class MoveUpJump extends Move {
 
 	}
 	public void setVelocity(){
-		mySprite.setMyYVelocity(-myVelocity);
+		if(mySprite.getMyYVelocity()>=0){
+			mySprite.setMyYVelocity(-myVelocity);
+		}
 	}
 /*	@Override
 	public Location changeCoordinates(){

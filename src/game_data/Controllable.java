@@ -48,7 +48,6 @@ public class Controllable {
 	private void generateMyKeyReleasedMap(){
 		for(KeyCode key: myKeyPressedMap.keySet()){
 			if(myKeyPressedMap.get(key) instanceof MoveRight){		
-				System.out.println(myKeyPressedMap.get(key));
 				myKeyReleasedMap.put(key, (MoveRight) myKeyPressedMap.get(key));
 			}
 			else if(myKeyPressedMap.get(key) instanceof MoveLeft){

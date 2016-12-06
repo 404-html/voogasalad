@@ -73,7 +73,7 @@ public class UpdateStates {
 		myControllableSpriteList=new ArrayList<Sprite>();
 		this.myControllableSpriteList=myLevel.getMyControllableSpriteList();
 		
-		generateDefaultKeyPressedMap();
+		//generateDefaultKeyPressedMap();
 		//generateDefaultKeyReleasedMap();
 		//runKeyCalls();
 		//runKeyReleased();
@@ -83,6 +83,7 @@ public class UpdateStates {
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();
+		//System.out.println(myLevel.getMainPlayer().getMyLocation().getXLocation());
 		//System.out.println("want this to be after launching");
 	}
 	private void executeControls(){
