@@ -65,6 +65,7 @@ public class UpdateStates {
 	private Map<Sprite, ImageView> mySpriteImages;
 	private Map<KeyCode, Action> myKeyReleasedMap;
 	private Map<Action, Double> myCurrentPowerUps;
+	private Controllable mainPlayerControllable;
 
 	private List<Sprite> myControllableSpriteList;
 
@@ -81,32 +82,27 @@ public class UpdateStates {
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		myControllableSpriteList = new ArrayList<Sprite>();
 		this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
+		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
 		generateDefaultKeyPressedMap();
+		activatePowerUps();
+		checkPowerUps();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
 		updateSpritePositions();
-		activatePowerUps();
-		checkPowerUps();
-		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
-		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
-		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
-		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
+
+//		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
+//		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
+//		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
+//		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
 	}
 
 	private void activatePowerUps() {
 		for (Action powerUp : myCurrentPowerUps.keySet()) {
-			if (powerUp instanceof SpeedBooster) {
-				System.out.println("Activate Power up " + myCurrentPowerUps.get(powerUp));
-				myKeyPressedMap.put(KeyCode.RIGHT,
-						new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()
-								+ GameResources.SPEED_BOOST.getDoubleResource()));
-				myKeyPressedMap.put(KeyCode.LEFT,
-						new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()
-								+ GameResources.SPEED_BOOST.getDoubleResource()));
-				myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(),
-						GameResources.JUMP_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
+			if (powerUp instanceof SpeedBoost) {
+//				System.out.println("LUCIA");
+				mainPlayerControllable.setMyKeyPressedMap(generateBoostedKeyPressedMap());
 			}
 
 		}
@@ -114,9 +110,10 @@ public class UpdateStates {
 
 	private void checkPowerUps() {
 		for (Action powerUp : myCurrentPowerUps.keySet()) {
-			System.out.println("POWER UP SPEED" + myCurrentPowerUps.get(powerUp));
+//			System.out.println("POWER UP SPEED " + myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
+//				System.out.println("HELLOOOOOO");
 				myCurrentPowerUps.remove(powerUp);
 				powerUpHasBeenRemoved(powerUp);
 			}
@@ -157,7 +154,14 @@ public class UpdateStates {
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList,
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
-			Controllable control = mySprite.getControllable();
+			Controllable control;
+			if(mySprite instanceof Player)
+				control = mainPlayerControllable;
+			
+			else{
+				control = mySprite.getControllable();
+
+			}
 			if (control.isControllable()) {
 				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
 				control.execute(myCollisionMap);
@@ -205,46 +209,29 @@ public class UpdateStates {
 	// }
 
 	// keys will only control the main player rn
+	
+	private Map<KeyCode,Action> generateBoostedKeyPressedMap(){
+		myKeyPressedMap.put(KeyCode.RIGHT,
+				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()
+						+ GameResources.SPEED_BOOST.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT,
+				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()
+						+ GameResources.SPEED_BOOST.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(),
+				GameResources.JUMP_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
+		return myKeyPressedMap;
+	}
+	
 	private void generateDefaultKeyPressedMap() {
-		// <<<<<<< HEAD
-		// //
-		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		// // System.out.println(myLevel.getMainPlayer()==null);
-		// myKeyPressedMap.put(KeyCode.RIGHT, new
-		// MoveRight(myLevel.getMainPlayer(),
-		// GameResources.MOVE_RIGHT_SPEED.getDoubleResource(), mySpriteList,
-		// mySpriteImages));
-		// myKeyPressedMap.put(KeyCode.LEFT,
-		// new MoveLeft(myLevel.getMainPlayer(),
-		// GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		// myKeyPressedMap.put(KeyCode.UP, new
-		// MoveUpJump(myLevel.getMainPlayer(),
-		// GameResources.JUMP_SPEED.getDoubleResource(), mySpriteList,
-		// mySpriteImages, timeElapsed));
-		// =======
-		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		// System.out.println(myLevel.getMainPlayer()==null);
+	
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT,
 				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP,
 				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		// myKeyPressedMap.put(KeyCode.SPACE, new
-		// Launch(myLevel.getMainPlayer(), 10, 0));
+
 	}
-	// private void generateDefaultKeyReleasedMap(){
-	// myKeyReleasedMap.put(KeyCode.RIGHT, new
-	// StopRightMovement(myLevel.getMainPlayer(),
-	// GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-	// myKeyReleasedMap.put(KeyCode.LEFT, new
-	// StopLeftMovement(myLevel.getMainPlayer(),
-	// GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-	// //myKeyReleasedMap.put(KeyCode.UP, new
-	// StopUpMovement(myLevel.getMainPlayer(),
-	// GameResources.JUMP_SPEED.getDoubleResource()));
-	// >>>>>>> katrina
-	// }
 
 	private void generateDefaultKeyReleasedMap() {
 		myKeyReleasedMap.put(KeyCode.RIGHT,
@@ -274,28 +261,12 @@ public class UpdateStates {
 
 	private void executeCharacteristics() {
 		for (Sprite mySprite : mySpriteList) {
-			// System.out.println("sprite list length " + mySpriteList.size());
-			// System.out.println("sprite image list length " +
-			// mySpriteImages.size());
-			// ListOfCollidingSprites collidingSprites = new
-			// ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages,
-			// timeElapsed);
+			
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList,
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
-			// <<<<<<< HEAD
-			// // System.out.println(myCollisionMap.size());
-			// for (Characteristic myCharacteristic : characteristics) {
-			// myCharacteristic.execute(myCollisionMap);
-			// System.out.println(myCollisionMap.size());
-			/*
-			 * Controllable control = mySprite.getControllable();
-			 * //System.out.println(myCollisionMap.size());
-			 * if(control.isControllable()){
-			 * control.sendCurrentKeys(myKeysPressed, myKeysReleased);
-			 * control.execute(myCollisionMap); }
-			 */
+			
 			for (Characteristic myCharacteristic : characteristics) {
 				myCharacteristic.execute(myCollisionMap);
 

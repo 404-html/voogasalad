@@ -94,6 +94,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 	public EnginePlayerController(Game game) {
 		myGame = game;
+		
 		// myLevel=new Level();
 		myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
@@ -104,6 +105,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.getMainPlayer()
 				.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
 
+		myLevel.getMainPlayer().resetTerminalVelocities();
 		int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
 
@@ -142,7 +144,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png"));
 //		
 		myLevel.addNewSprite(t);
-		t.addCharacteristic(new SpeedPowerUpper(200, 50, t));
+		t.addCharacteristic(new SpeedPowerUpper(200, 500, t));
 		myLevel.addNewSprite(
 				new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 		myLevel.addNewSprite(

@@ -155,9 +155,9 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyXVelocity(double myVelocity) {
-		System.out.println("TERMINAL X " + terminalXVel);
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+//		System.out.println("TERMINAL X " + terminalXVel);
+		if (Math.abs(myVelocity) > terminalXVel) {
+			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
 		}
 		else{
 			this.myXVelocity = myVelocity;
@@ -166,8 +166,8 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyYVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
-			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+		if (Math.abs(myVelocity) > terminalYVel) {
+			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*terminalYVel;
 		}
 		else{
 			this.myYVelocity = myVelocity;
@@ -253,6 +253,7 @@ public abstract class Sprite extends GameObject {
 		this.terminalYVel = terminalYVel;
 	}
 	public void resetTerminalVelocities(){
+//		System.out.println("LUCIA");
 		this.terminalXVel = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
 		this.terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
 	}

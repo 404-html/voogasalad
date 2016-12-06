@@ -39,9 +39,8 @@ public class Controllable {
 		isControllable=true;
 		myLevel=aLevel;
 		myKeyReleasedMap=new HashMap<KeyCode, Move>();
-		
-		generateMyKeyReleasedMap();
 	}
+	
 	public boolean isControllable(){
 		return isControllable;
 	}
@@ -62,6 +61,8 @@ public class Controllable {
 	}
 	
 	public void execute(Map<Sprite, Side> myCollisionMap) {
+		generateMyKeyReleasedMap();
+
 		runKeyCalls(myCollisionMap);
 		runKeyReleased();
 	}
@@ -69,7 +70,7 @@ public class Controllable {
 		for(KeyCode myKey: myKeysPressed){
 			if(myKeyPressedMap.containsKey(myKey)){
 				if((myKeyPressedMap.get(myKey) instanceof MoveUpJump)){
-					System.out.println("LUCIA");
+//					System.out.println("LUCIA");
 					if(isTerrainOnBottom(myCollisionMap)){
 						myKeyPressedMap.get(myKey).act();
 					}
@@ -110,5 +111,10 @@ public class Controllable {
 		myKeyPressedMap.put(KeyCode.SPACE, new Launch(mySprite, myProjectile, 0, 0, myLevel));
 		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}
+	
+	public void setMyKeyPressedMap(Map<KeyCode, Action> myKeyPressedMap) {
+		this.myKeyPressedMap = myKeyPressedMap;
+	}
+
 
 }
