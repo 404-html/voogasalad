@@ -21,7 +21,7 @@ public interface IGUIGenerator {
 	public ImageView createImage(String aFileName, double aWidth);
 		
 	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
-		
+	
 	public TextField createTextField(String aPlaceHolder, int aXPos, int aYPos, int aWidth);
 		
 	public Label createLabel(String aText, int aXPos, int aYPos);

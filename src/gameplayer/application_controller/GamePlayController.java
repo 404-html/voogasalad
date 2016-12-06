@@ -39,9 +39,9 @@ public class GamePlayController extends AbstractController {
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, String aKeyInput) {
 		myStage = aStage;
 		myGameFile = aFile;
+		myApplicationController = aAppController;
 		mySpriteMap = new HashMap<Sprite, ImageView>();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
-		myApplicationController = aAppController;
 		mySceneBuilder = new SceneFactory();
 		initializeKeySets(aKeyInput);
 		initializeEngineComponents(aFile);
@@ -76,7 +76,7 @@ public class GamePlayController extends AbstractController {
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
-			//This is what gets called every time cycle
+			//This is what gets called every update cycle
 			resetSprites(elapsedTime);
 			updateScene();
 		});

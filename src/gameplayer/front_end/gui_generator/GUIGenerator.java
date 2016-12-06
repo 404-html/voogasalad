@@ -106,5 +106,4 @@ public class GUIGenerator implements IGUIGenerator {
 		}
 		return menu;
 	}
-
 }
