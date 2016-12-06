@@ -9,8 +9,7 @@ import javafx.stage.Stage;
 
 public class PopUpController implements IPopUpDisplay {
 	
-	private static final String STYLESHEET = "GUI/style.css";
-	private static final String FILE = "file:";
+	private static final String STYLESHEET = "gui/style.css";
 	private final int SIZE = 500;
 	private Stage myStage;
 	private VBox myOptions;
@@ -21,7 +20,7 @@ public class PopUpController implements IPopUpDisplay {
 		myOptions.setAlignment(Pos.CENTER);
 		Scene stageScene = new Scene(myOptions, SIZE, SIZE);
 		File css = new File(STYLESHEET);
-		stageScene.getStylesheets().add(FILE + css.getAbsolutePath());
+		stageScene.getStylesheets().add(css.toURI().toString());
 		myStage.setScene(stageScene);
 	}
 	

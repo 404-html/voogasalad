@@ -16,7 +16,7 @@ public class MovementHandler {
 	}
 	
 	public void setXMovement(double aXLocation, double aScreenWidth) {
-		System.out.println(aXLocation);
+		//System.out.println(aXLocation);
 		//System.out.println("velocity: " + aXVelocity + "\n");
 		double answer = aXLocation - aScreenWidth *.5;
 		myXMovement = answer;
