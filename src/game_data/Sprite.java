@@ -6,6 +6,7 @@ import java.util.Set;
 import game_data.characteristics.Characteristic;
 import game_data.states.State;
 import game_engine.GameResources;
+import game_engine.properties.RandomMoveHandler;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -27,7 +28,7 @@ public abstract class Sprite extends GameObject {
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
 	private String id = "";
-
+	private RandomMoveHandler myRandomMoveHandler;
 	private Set<State> myStates;
 
 	public Sprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
@@ -43,6 +44,7 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
+		myRandomMoveHandler = null;
 	}
 
 	// for copying sprites
@@ -67,6 +69,7 @@ public abstract class Sprite extends GameObject {
 																// yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
+		myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
 	}
 
 	/**
@@ -222,6 +225,14 @@ public abstract class Sprite extends GameObject {
 
 	public Sprite getPreset() {
 		return this.preset;
+	}
+	
+	public RandomMoveHandler getMyRandomMoveHandler() {
+		return myRandomMoveHandler;
+	}
+
+	public void setMyRandomMoveHandler(RandomMoveHandler myRandomMoveHandler) {
+		this.myRandomMoveHandler = myRandomMoveHandler;
 	}
 
 }
