@@ -26,7 +26,8 @@ public class FacebookInformation {
 		String domain = "http://google.com/";
 		String appID = "204787326597008";
 		String authenticateURL = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appID + 
-				"&redirect_uri=" + domain + "&scope=user_about_me";
+				"&redirect_uri=" + domain + "&scope=user_about_me, user_photos, ads_management, manage_pages, " +
+				"business_management, user_status";
 		
 		File chromeDriverFile = new File("data/chromedriver");
 		chromeDriverFile.setExecutable(true);
@@ -35,7 +36,6 @@ public class FacebookInformation {
 		
 		WebDriver driver = new ChromeDriver();
 		driver.get(authenticateURL);
-		
 		
 		String accessToken;
 		while(true) {
@@ -46,13 +46,14 @@ public class FacebookInformation {
 				
 				DefaultFacebookClient fbClient = new DefaultFacebookClient(accessToken);
 				myUser = fbClient.fetchObject("me", User.class);
+				//System.out.println(myUser);
 				
 				break;
 			}
 			
 		}
-		System.out.println(myUser);
 		driver.quit();
+		System.out.println(myUser.getPicture());
 		return;
 	}
 	 

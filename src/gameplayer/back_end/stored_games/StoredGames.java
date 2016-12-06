@@ -1,24 +1,32 @@
 package gameplayer.back_end.stored_games;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import game_data.Game;
 
 public class StoredGames {
 	
-	private List<Game> myStoredGames;
+	//private Map<String, Game> myStoredGameNames;
+	private Map<String, File> myStoredGameFiles;
 	
 	public StoredGames() {
-		myStoredGames = new ArrayList<Game>(); 
+		//myStoredGameNames = new HashMap<String, Game>(); 
+		myStoredGameFiles = new HashMap<String, File>();
 	}
 	
-	public List<Game> getGames() {
-		return myStoredGames;
+	public Collection<String> getGameNames() {
+		return myStoredGameFiles.keySet();
 	}
 	
-    public void addGame(Game aGame) {
-    	myStoredGames.add(aGame);
+    public void addGame(String aGameName, File aGameFilePath) {
+    	//myStoredGameNames.put(aGameName, aGame);
+    	myStoredGameFiles.put(aGameName, aGameFilePath);
     }
-
+    
+    public File getGameFilePath(String aGameName) {
+    	return myStoredGameFiles.get(aGameName);
+    }
 }

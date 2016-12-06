@@ -22,16 +22,22 @@ public class Stick implements Action{
 	public void act() {
 		
 		double xLoc, yLoc;
-		
-		if(horizontal) {
-			xLoc = myCollidedSprite.getMyLocation().getXLocation() + mySprite.getMyXVelocity()/60;
-			yLoc = myCollidedSprite.getMyLocation().getYLocation() - 4.9;
-		} else {
-			xLoc = myCollidedSprite.getMyLocation().getXLocation();
-			yLoc = myCollidedSprite.getMyLocation().getYLocation() + mySprite.getMyYVelocity()/60 - 4.9;
+		if(pastPlatform()){
+			if(horizontal) {
+				xLoc = myCollidedSprite.getMyLocation().getXLocation() + mySprite.getMyXVelocity()/60;
+				yLoc = myCollidedSprite.getMyLocation().getYLocation();
+			} else {
+				xLoc = myCollidedSprite.getMyLocation().getXLocation();
+				yLoc = myCollidedSprite.getMyLocation().getYLocation() + mySprite.getMyYVelocity()/60;
+			}
+			myCollidedSprite.getMyLocation().setLocation(xLoc, yLoc);
 		}
-		myCollidedSprite.getMyLocation().setLocation(xLoc, yLoc);
 		
+	}
+	
+	private boolean pastPlatform(){
+		return myCollidedSprite.getMyLocation().getYLocation()+myCollidedSprite.getMyHeight()<mySprite
+				.getMyLocation().getYLocation()+(mySprite.getMyHeight()*.5) && myCollidedSprite.getMyYVelocity()>=0;
 	}
 
 }

@@ -2,21 +2,29 @@ package gameplayer.back_end.keycode_handler;
 
 public class MovementHandler {
 	
-	private double myMovement;
+	private double myXMovement;
+	private double myYMovement;
 	
-	public MovementHandler() {
-		//myKeyCodeMap.put(KeyCode.RIGHT, -3.3);
-		//myKeyCodeMap.put(KeyCode.LEFT, 3.3);
+	public void setYMovement(double aYLocation, double aScreenHeight) {
+		System.out.println(aYLocation);
+		double answer = aYLocation - (aScreenHeight * .5); 
+		myYMovement = answer;
 	}
 	
-	public void setMovement(double aXVelocity) {
+	public double getYMovement() {
+		return -myYMovement;
+	}
+	
+	public void setXMovement(double aXLocation, double aScreenWidth) {
+		System.out.println(aXLocation);
 		//System.out.println("velocity: " + aXVelocity + "\n");
-		double answer = aXVelocity * .0166589;
-		myMovement = answer;
+		double answer = aXLocation - aScreenWidth *.5;
+		myXMovement = answer;
 	}
 	
-	public double getMovement() {
+	public double getXMovement() {
 		//System.out.println("key: " + aKey);
-		return -myMovement;
+		return -myXMovement;
 	}
+	
 }

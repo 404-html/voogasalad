@@ -10,26 +10,26 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 	
 	private FacebookInformation myUserInformation;
 	private GUIGenerator myGUIGenerator; 
+	private String myUserName;
 
-	public UserProfileScene(double aWidth, double aHeight) {
+	public UserProfileScene(String aName, double aWidth, double aHeight) {
 		super(aWidth, aHeight);
-		myUserInformation = new FacebookInformation();
 		myGUIGenerator = new GUIGenerator();
+		myUserName = aName;
 	}
 
 	@Override
 	public Scene init(){
-		myRoot.setCenter(addNodes());
+		//getRoot().setCenter(addNodes());
+		getRoot().setCenter(addTop());
 		System.out.println(myScene);
 		return myScene;
 	}
 
-	private VBox addNodes() {
-		myOptions = new VBox(BOX_INSETS);
-		myOptions.getChildren().add(myGUIGenerator.createLabel(myUserInformation.getUserName(), 0, 0));
-		myOptions.setAlignment(Pos.CENTER);
+	private VBox addTop() {
+		getOptions().getChildren().add(myGUIGenerator.createLabel(myUserName, 0, 0));
+		getOptions().setAlignment(Pos.TOP_LEFT);
 		//myOptions.bin
-		return myOptions;
+		return getOptions();
 	}
-
 }

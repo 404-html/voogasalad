@@ -140,8 +140,8 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyXVelocity(double myVelocity) {
-		if (myXVelocity > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
-			this.myXVelocity = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
+			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
 		}
 		else{
 			this.myXVelocity = myVelocity;
@@ -150,8 +150,8 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyYVelocity(double myVelocity) {
-		if (myYVelocity > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
-			this.myYVelocity = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+		if (Math.abs(myVelocity) > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
+			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
 		}
 		else{
 			this.myYVelocity = myVelocity;

@@ -21,19 +21,27 @@ public class GamePlayScene extends AbstractPlayerScene {
 	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight) {
 		myStack = new StackPane();
 		myScene = new Scene(myStack, aWidth, aHeight);
-		myGamePlay = new AnimationPane(aKeyHandler, aWidth, aHeight);
+		myGamePlay = new AnimationPane();
 		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight);
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
 		initializeScene();
 	}
 	
+	public double getAnimationScreenXPosition() {
+		return myGamePlay.getAnimationScreenXPosition();
+	}
+	
+	public double getAnimationScreenYPosition() {
+		return myGamePlay.getAnimationScreenYPosition();
+	}
+	
 	@Override
-	public Scene init(){
+	public Scene init() {
 		return myScene;
 	}
 
-	public void moveScreen() {
-		myGamePlay.moveScreen();
+	public void moveScreen(MovementHandler aHandler) {
+		myGamePlay.moveScreen(aHandler);
 	}
 
 	public void clearSprites() {
@@ -67,5 +75,4 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myStack.getChildren().add(myHeadsUpDisplay.init());
 		myStack.setBackground(myBackgroundDisplay);
 	}
-
 }
