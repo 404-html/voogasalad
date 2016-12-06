@@ -49,7 +49,7 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 	
 	private String getStyleSheet(){
 		File css = new File(STYLESHEET);
-		return "file:"+ css.getAbsolutePath();
+		return css.toURI().toString();
 	}
 
 }

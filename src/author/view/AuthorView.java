@@ -116,7 +116,7 @@ public class AuthorView {
 	
 	private String getStyleSheet(){
 		File css = new File(STYLESHEET);
-		return "file:"+ css.getAbsolutePath();
+		return css.toURI().toString();
 	}
 
 }
