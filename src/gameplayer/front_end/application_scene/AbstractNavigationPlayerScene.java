@@ -18,24 +18,11 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 	private static final String STYLESHEET = "data/gui/style.css";
 	private MenuBar myNavigation;
 	private BorderPane myRoot;
-	private VBox myOptions;
 	
 	public AbstractNavigationPlayerScene(double aWidth, double aHeight) {
 		initializeRoot();
 		initializeScene(aWidth, aHeight);
 		addNavigation();
-	}
-	
-	@Override
-	public void addButton(String aLabel, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aType) {
-		myOptions.getChildren().add(getGUIGenerator().createButton(aLabel, 0, 0, aHandler, aType));
-	}
-	
-	@Override
-	public void addNode(Node aNode) {
-		aNode.setLayoutX(0);
-		aNode.setLayoutY(0);
-		myOptions.getChildren().add(aNode);
 	}
 	
 	@Override
@@ -47,14 +34,10 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 		return myRoot;
 	}
 	
-	protected VBox getOptions(){
-		return myOptions;
-	}
 	
 	private void initializeRoot() {
 		myRoot = new BorderPane();
 		myRoot.setId("pane");
-		myOptions = new VBox(BOX_INSETS);
 	}
 	
 	private void initializeScene(double aWidth, double aHeight) {
@@ -66,7 +49,6 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 	private void addNavigation() {
 		myNavigation = new MenuBar();
 		myRoot.setTop(myNavigation);
-		myOptions.setAlignment(Pos.CENTER);
-		myRoot.setCenter(myOptions);
+		myRoot.setCenter(getOptions());
 	}
 }

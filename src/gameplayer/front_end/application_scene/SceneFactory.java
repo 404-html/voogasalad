@@ -9,9 +9,7 @@ public class SceneFactory {
 			return new GameChoiceScene(aWidth, aHeight);
 		} else if (aIdentifier.equals(SceneIdentifier.HIGHSCORE)) {
 			return new HighScoreScene(aWidth, aHeight);
-		} else if (aIdentifier.equals(SceneIdentifier.RESULT)) {
-			return new ResultScene(aWidth, aHeight);
-		}
+		}  
 		return null;
 	}
 	

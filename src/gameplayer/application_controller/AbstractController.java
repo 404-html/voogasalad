@@ -6,6 +6,7 @@ import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
 import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public abstract class AbstractController {

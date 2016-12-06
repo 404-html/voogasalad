@@ -13,6 +13,7 @@ import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -122,15 +123,21 @@ public class ApplicationController extends AbstractController {
 			String gameName = ((Label) cBox.getSelectionModel().getSelectedItem().getChildren().get(0)).getText();
 			cBox.setPromptText(gameName);
 			File gameFile = myStoredGames.getGameFilePath(gameName);
-			myGamePlay = new GamePlayController(myStage, gameFile, this);
+			myGamePlay = new GamePlayController(myStage, gameFile, this, 0);
+			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		});
 		gameChoice.addNode(cBox);
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
-			myGamePlay = new GamePlayController(myStage, chosenGame, this);
+			myGamePlay = new GamePlayController(myStage, chosenGame, this, 0);
 			myStoredGames.addGame(myGamePlay.getGame().getName(), chosenGame);
-		}, ButtonDisplay.TEXT);
-		HBox hbox = new HBox(10); 
+			setGameChoiceSecondRoundButtonHandlers(gameChoice);
+		}, ButtonDisplay.TEXT); 
+	}
+	
+	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
+		HBox hbox = new HBox(10);
+		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {
 			if (myGamePlay != null) {
 				PopUpController popup = new PopUpController();
@@ -141,7 +148,7 @@ public class ApplicationController extends AbstractController {
 				popup.show();
 			}
 		}, ButtonDisplay.TEXT));
-		hbox.getChildren().add(getGUIGenerator().createButton("Levels", 0, 0, e -> {
+		hbox.getChildren().add(getGUIGenerator().createButton("LEVELS", 0, 0, e -> {
 			if (myGamePlay != null) {
 				PopUpController popup = new PopUpController();
 				LevelSelectionPopUp levelSelection = new LevelSelectionPopUp(myGamePlay.getGame().getLevels().size());
@@ -149,14 +156,15 @@ public class ApplicationController extends AbstractController {
 					popup.addOption(box);
 				}
 				popup.show();
-			}
-		}, ButtonDisplay.TEXT));
-		hbox.getChildren().add(getGUIGenerator().createButton("Play", 0, 0, e -> {
-			if (myGamePlay != null) {
-				myGamePlay.displayGame();
+				myGamePlay.setLevel(levelSelection.getSelectedLevel());
 			}
 		}, ButtonDisplay.TEXT));
 		gameChoice.addNode(hbox);
+		gameChoice.addButton("PLAY", e -> {
+			if (myGamePlay != null) {
+				myGamePlay.displayGame();
+			}
+		}, ButtonDisplay.TEXT);
 	}
 
 	private List<Pane> getDisplayOfGames() {

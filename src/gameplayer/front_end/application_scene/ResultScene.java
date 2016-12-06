@@ -1,14 +1,18 @@
 package gameplayer.front_end.application_scene;
-import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
-public class ResultScene extends AbstractNavigationPlayerScene implements INavigationDisplay {
+public class ResultScene extends AbstractPlayerScene {
+	
+	private BorderPane myPane;
 
-	public ResultScene(double aWidth, double aHeight) {
-		super(aWidth, aHeight);
+	public ResultScene() {
+		myPane = new BorderPane();
+		myPane.getChildren().add(getOptions());
 	}
 
-	@Override
-	public Scene init() {
-		return myScene;
+	public Pane getPane() {
+		return getOptions();
 	}
+	
 }

@@ -5,7 +5,11 @@ import java.io.File;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Parameter;
+import com.restfb.json.JsonObject;
 import com.restfb.types.User;
 
 public class FacebookInformation {
@@ -44,16 +48,19 @@ public class FacebookInformation {
 				accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
 				driver.quit();
 				
-				DefaultFacebookClient fbClient = new DefaultFacebookClient(accessToken);
+				FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 				myUser = fbClient.fetchObject("me", User.class);
+				JsonObject picture = 
+					      fbClient.fetchObject("me/picture", 
+						      JsonObject.class, Parameter.with("redirect","false"));
 				//System.out.println(myUser);
+				System.out.println(picture.keys());
 				
 				break;
 			}
 			
 		}
 		driver.quit();
-		System.out.println(myUser.getPicture());
 		return;
 	}
 	 

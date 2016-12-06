@@ -21,16 +21,17 @@ public class LevelSelectionPopUp {
 	private List<HBox> myOptions;
 	private ResourceBundle myButtonLabels;
 	private int myNumberOfLevels;
+	private int mySelectedLevel;
 	
 	public LevelSelectionPopUp(int aNumLevels) {
 		myOptions = new ArrayList<HBox>();
 		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
 		myNumberOfLevels = aNumLevels;
+		mySelectedLevel = 0;
 	}
 	
 	public List<HBox> addOptions() {
 		createLevelOptions();
-		createPlayButton();
 		return myOptions;
 	}
 
@@ -52,16 +53,16 @@ public class LevelSelectionPopUp {
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-				
+				String selectedButton = group.selectedToggleProperty().getName(); 
+				mySelectedLevel = (int) selectedButton.charAt(selectedButton.length() - 1);
+				mySelectedLevel--;
 			}
 		});
 		myOptions.add(levelSelection);
 	}
-
-	private void createPlayButton() {
-		HBox buttonBox = new HBox(10); 
-		Button playButton = new Button("Play");
-		buttonBox.getChildren().add(playButton);
-		myOptions.add(buttonBox);
+	
+	public int getSelectedLevel() {
+		return mySelectedLevel;
 	}
+
 }
