@@ -23,4 +23,6 @@ public interface IDisplay {
 	
 	public void addNode(Node aNode);
 	
+	public void setBackground(String aFilePath, double aWidth, double aHeight);
+	
 }

@@ -87,4 +87,10 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myStack.getChildren().add(myHeadsUpDisplay.init());
 		myStack.setBackground(myBackgroundDisplay);
 	}
+
+	@Override
+	public void setBackground(String aFilePath, double aWidth, double aHeight) {
+		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aFilePath, myStack.getWidth(), myStack.getHeight());
+		myStack.setBackground(myBackgroundDisplay);
+	}
 }

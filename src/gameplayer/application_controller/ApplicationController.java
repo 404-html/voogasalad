@@ -38,6 +38,11 @@ public class ApplicationController extends AbstractController {
 	private PlayerInformationController myInformationController;
 	private StoredGames myStoredGames;
 	private GamePlayController myGamePlay;
+	private IDisplay myCurrentDisplay;
+	private String[] myShirtBackgrounds = {"data/gui/hawaiian_shirt_background1.jpeg", "data/gui/hawaiian_shirt_background2.jpeg", 
+			"data/gui/hawaiian_shirt_background3.png", "data/gui/hawaiian_shirt_background4.jpeg", 
+			"data/gui/hawaiian_shirt_background5.jpeg", "data/gui/hawaiian_shirt_background6.jpeg", 
+			"data/gui/hawaiian_shirt_background7.jpeg"};
 	
 	public ApplicationController (Stage aStage) {
 		myStage = aStage;
@@ -48,15 +53,15 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	public void startScene() throws FileNotFoundException {
-		IDisplay mainMenu = mySceneBuilder.create(SceneIdentifier.MAINMENU, SCENE_SIZE, SCENE_SIZE);
-		resetStage(mainMenu);
-		setMainMenuButtonHandlers((MainMenuScene) mainMenu);
+		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, SCENE_SIZE, SCENE_SIZE);
+		resetStage(myCurrentDisplay);
+		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
 	}
 
 	public void displayMainMenu() {
-		MainMenuScene mainMenu = (MainMenuScene) mySceneBuilder.create(SceneIdentifier.MAINMENU, myStage.getWidth(), myStage.getHeight());
-		resetStage(mainMenu);
-		setMainMenuButtonHandlers(mainMenu);
+		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, myStage.getWidth(), myStage.getHeight());
+		resetStage(myCurrentDisplay);
+		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
 	}
 
 	private void setMainMenuButtonHandlers(INavigationDisplay mainMenu) {
@@ -78,12 +83,14 @@ public class ApplicationController extends AbstractController {
 	
 	@SuppressWarnings("unchecked")
 	private void createNavigationButtons(INavigationDisplay aMenu) {
-		String[] names = {myButtonLabels.getString("MainMenu"), myButtonLabels.getString("Profile")};
+		String[] names = {myButtonLabels.getString("MainMenu"), myButtonLabels.getString("Profile"), "New HawaiianShirt"};
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
 			displayMainMenu();
 		}, e -> {
 			displayUserScene();
+		}, e-> {
+			myCurrentDisplay.setBackground(myShirtBackgrounds[(int) Math.floor(Math.random() * 7)], myStage.getWidth(), myStage.getHeight());
 		});
 	}
 	
@@ -98,10 +105,10 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void displayUserScene() {
-		IDisplay userProfile = mySceneBuilder.create(myInformationController.getUser(), myStage.getWidth(), myStage.getHeight());
-		resetStage(userProfile);
-		createNavigationButtons((INavigationDisplay) userProfile);
-		setUserProfileButtonHandlers((INavigationDisplay) userProfile);
+		myCurrentDisplay = mySceneBuilder.create(myInformationController.getUser(), myStage.getWidth(), myStage.getHeight());
+		resetStage(myCurrentDisplay);
+		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
+		setUserProfileButtonHandlers((INavigationDisplay) myCurrentDisplay);
 	}
 	
 	private void setUserProfileButtonHandlers(INavigationDisplay userProfile) {
@@ -111,10 +118,10 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	private void displayGameChoice() {
-		IDisplay gameChoice = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
-		resetStage(gameChoice);
-		createNavigationButtons((INavigationDisplay) gameChoice);
-		setGameChoiceButtonHandlers((INavigationDisplay) gameChoice);
+		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
+		resetStage(myCurrentDisplay);
+		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay);
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
