@@ -51,19 +51,7 @@ abstract class GameObjectEditBox <T extends GameObject>{
 		editBox.setAlignment(Pos.CENTER);
 		
 		editBox.getChildren().add(createHBox(new Label("Name: "), nameField));
-		editBox.getChildren().add(new ButtonFactory().createButton("Choose Background", e -> updateBackgroundString()).getButton());
 		return editBox;
-	}
-	
-	private void updateBackgroundString(){
-		File file = new FileLoader(
-				FileType.GIF, 
-				FileType.JPEG, 
-				FileType.PNG,
-				FileType.JPG ).loadImage();
-		
-		if (file !=null)
-			this.imagePath = file.toURI().toString();
 	}
 	
 	private HBox createHBox(Node...nodes){
