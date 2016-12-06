@@ -51,7 +51,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	
 	private String getStyleSheet(){
 		File css = new File(STYLESHEET);
-		return "file:"+ css.getAbsolutePath();
+		return css.toURI().toString();
 	}
 	
 }
