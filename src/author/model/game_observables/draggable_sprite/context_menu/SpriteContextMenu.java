@@ -5,7 +5,12 @@ import author.model.game_observables.draggable_sprite.DraggableSprite;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.scene.control.ContextMenu;
-
+/**
+ * Concrete implementation of the context menu that opens when a user right clicks on a movable sprite.
+ * From here, you can copy / delete / etc sprites on the level editor
+ * @author Jordan Frazier
+ *
+ */
 public class SpriteContextMenu implements ISpriteContextMenu {
 
 	private DraggableSprite mySprite;

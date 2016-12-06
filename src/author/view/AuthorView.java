@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
 /**
  * AuthorView handles the JavaFX GUI.
  * 
- * @author George Bernard, Cleveland Thompson, Addison Howenstine
+ * @author George Bernard, Cleveland Thompson, Addison Howenstine, Jordan Frazier
  */
 public class AuthorView {
 	

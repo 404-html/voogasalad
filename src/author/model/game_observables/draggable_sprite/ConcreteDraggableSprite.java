@@ -8,7 +8,8 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.text.Text;
 
 /**
- * 
+ * The concrete implementation that populates the @EntityWindow. 
+ * Makes sprites draggable from the window and populates the dragboard and clipboard with the ID. 
  * @author Jordan Frazier
  *
  */
