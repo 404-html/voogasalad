@@ -29,7 +29,10 @@ public enum GameResources {
 	
 	//terminal 
 	TERMINAL_X_VELOCITY(600),
-	TERMINAL_Y_VELOCITY(600);
+	TERMINAL_Y_VELOCITY(600), 
+	
+	//speed bosst
+	SPEED_BOOST(300);
 
     private double resourceDouble;
     private String resourceString;

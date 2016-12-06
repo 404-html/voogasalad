@@ -4,6 +4,7 @@ package game_data.characteristics;
 
 import java.util.Map;
 
+import game_data.Level;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
@@ -49,7 +50,8 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 			//unless we want non players to be able to speed up upon hitting a powerup
 			if(collidedSprite instanceof Player){
-				myAction = new SpeedBoost(collidedSprite);
+				myAction = new SpeedBoost(collidedSprite, mySpeedBoost, myTimeInEffect);
+//				System.out.println("characteristic in");
 				myAction.act();
 			}
 		}
