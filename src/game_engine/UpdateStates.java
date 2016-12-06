@@ -81,12 +81,16 @@ public class UpdateStates {
 		runKeyCalls();
 		runKeyReleased();
 		executeCharacteristics();
-
 		updateSpritePositions();
+		moveRandomSprites();
 		checkForWin();
 		checkForLoss();
 	}
 
+	private void moveRandomSprites() {
+		
+	}
+	
 	private void checkForLoss() {
 		for(State s: myLevel.getMainPlayer().getStates()){
 			if(s instanceof Health){
