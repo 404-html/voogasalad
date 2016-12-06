@@ -17,7 +17,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	private Stage stage;
 	private static final String TITLE = "New Level";
 	private LevelEditPage levelEditPage;
-	private static final String STYLESHEET = "../../../../../images/author-style.css";
+	private static final String STYLESHEET = "data/gui/author-style.css";
 
 	
 	LevelEditWindow(){
