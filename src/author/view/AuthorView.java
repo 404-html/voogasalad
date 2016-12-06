@@ -109,12 +109,12 @@ public class AuthorView {
 	}
 
 	private void openSaveDialog() {
-		TextInputDialog input = new TextInputDialog();
+		TextInputDialog input = new TextInputDialog("Sample_Name");
 		input.setTitle("Save Dialog");
 		input.setHeaderText("Input Game Name");
 		input.setContentText("Name: ");
 		input.setOnCloseRequest(e -> {
-			authorController.getModel().saveGame(input.getContentText());
+			authorController.getModel().saveGame(input.getResult());
 		});
 		input.showAndWait();
 	}
