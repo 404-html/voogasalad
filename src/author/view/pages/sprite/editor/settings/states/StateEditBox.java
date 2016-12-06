@@ -22,25 +22,12 @@ public class StateEditBox extends SpriteSettingsEditBox {
 		return new StatesFactory<State>(getName(), getSprite());
 	}
 
-	private State hasStateAlready(State state) {
-		Set<State> spriteStates = getSprite().getStates();
-
-		for (State s : spriteStates) {
-			if(state.getClass().getSimpleName().equals(s.getClass().getSimpleName()))
-				return s;
-		}
-
-		return null;
-	}
-
 	@Override
 	public void addSpriteSetting() {
 		State s = makeState();
-		if(hasStateAlready(s) == null) // Does not have state
-			getSprite().addState(s);
-		else {						   // If it does, replace the old one
-			getSprite().getStates().remove(hasStateAlready(s));
-			getSprite().getStates().remove(s);
-		}
+		getSprite().getStates().removeIf( p -> {
+			return p.getClass().getSimpleName().equals(s.getClass().getSimpleName());
+		});
+		getSprite().getStates().remove(s);
 	}
 }
