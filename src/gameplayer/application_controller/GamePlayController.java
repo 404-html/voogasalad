@@ -98,7 +98,8 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void resetSprites(double elapsedTime) {
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
+		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap, 
+				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		myGamePlayScene.clearSprites();
 		updateSprites();
 	}

@@ -41,6 +41,14 @@ public class AnimationPane {
 		myGamePlayCanvas.setTranslateY(aHandler.getYMovement());
 	}
 	
+	public double getAnimationScreenXPosition() {
+		return myGamePlayCanvas.getTranslateX();
+	}
+	
+	public double getAnimationScreenYPosition() {
+		return myGamePlayCanvas.getTranslateY();
+	}
+	
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}

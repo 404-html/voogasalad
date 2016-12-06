@@ -27,6 +27,14 @@ public class GamePlayScene extends AbstractPlayerScene {
 		initializeScene();
 	}
 	
+	public double getAnimationScreenXPosition() {
+		return myGamePlay.getAnimationScreenXPosition();
+	}
+	
+	public double getAnimationScreenYPosition() {
+		return myGamePlay.getAnimationScreenYPosition();
+	}
+	
 	@Override
 	public Scene init() {
 		return myScene;
