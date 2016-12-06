@@ -1,10 +1,13 @@
 package author.model.game_observables.draggable_sprite;
 
 import java.io.File;
+
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Line;
 
 public class ConcreteMovableSprite extends DraggableSprite {
@@ -17,12 +20,14 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	public ConcreteMovableSprite(Sprite aSpriteInstance, Sprite aSpritePreset) {
 		super(aSpriteInstance);
 		this.spritePreset = aSpritePreset;
-		this.presetInvalidationListener = initPresetListener(aSpriteInstance, this.spritePreset);
+		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
 	}
 	
 	public void removePresetListener(){
-		this.spritePreset.removeListener(presetInvalidationListener);
+		if (this.spritePreset!=null){
+			this.spritePreset.removeListener(presetInvalidationListener);
+		}
 	}
 
 	private void styleSprite() {
@@ -47,12 +52,22 @@ public class ConcreteMovableSprite extends DraggableSprite {
 					super.getImageView().getLayoutY() + super.getImageView().getFitHeight());
 
 		});
-
 		onMousePressed();
-
 		onMouseDragged();
-
 		onMouseReleased();
+	}
+	
+	@Override
+	protected void openPreferences() {
+		this.getDraggableItem().setOnMouseClicked(e -> {
+			if (e.getButton().equals(MouseButton.PRIMARY)) {
+				if (e.getClickCount() == 2) {
+					removePresetListener();
+					this.getSprite().setPreset(null);
+					new SpriteEditWindow(this.getSprite()).openWindow();
+				}
+			}
+		});
 	}
 
 	private InvalidationListener initPresetListener(Sprite instanceSprite, Sprite spritePreset) {

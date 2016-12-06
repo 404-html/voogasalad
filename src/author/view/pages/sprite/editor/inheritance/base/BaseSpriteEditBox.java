@@ -89,8 +89,10 @@ public class BaseSpriteEditBox {
 	}
 	
 	protected final void setImageFile(String aImagePath){
-		myImagePath = (new File(aImagePath)).toURI().toString();
-		myImageView.setImage(new Image( myImagePath ));
+		RelativePathFinder pf = new RelativePathFinder();
+		File file = new File(aImagePath);
+		myImagePath = pf.getPath(file);
+		myImageView.setImage(new Image(file.toURI().toString()));
 	}
 
 	private Node makeNameField(){
