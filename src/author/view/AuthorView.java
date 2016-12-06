@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,11 +24,12 @@ import javafx.scene.paint.Color;
 /**
  * AuthorView handles the JavaFX GUI.
  * 
- * @author George Bernard, Cleveland Thompson, Addison Howenstine
+ * @author George Bernard, Cleveland Thompson, Addison Howenstine, Jordan
+ *         Frazier
  */
 public class AuthorView {
-	
-	private static final String STYLESHEET = "../images/author-style.css";
+
+	private static final String STYLESHEET = "data/gui/author-style.css";
 	Scene myScene;
 	Pane myPane = new VBox();
 	TabPaneFacade myTabPaneFacade;
@@ -43,18 +45,18 @@ public class AuthorView {
 	public AuthorView(IAuthorController authorController) {
 		this.authorController = authorController;
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
-		myScene.getStylesheets().add(getClass().getResource(STYLESHEET).toExternalForm());
+		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
 	}
-	
-	private void initializeView(){
+
+	private void initializeView() {
 		this.mySpritesPage = new SpritesPage(authorController);
 		this.myLevelEditor = new LevelEditorFactory().create(this.authorController);
-		
+
 		myPane.getChildren().addAll(buildToolBar(), buildTabPane());
 	}
-	
-	public void reinitializeView(){
+
+	public void reinitializeView() {
 		this.myPane.getChildren().clear();
 		initializeView();
 	}
@@ -74,17 +76,18 @@ public class AuthorView {
 			this.authorController.getModel().newGame();
 		}).getItem(), new MenuFactory().createItem("New Level", e -> {
 			Level createdLevel = this.myLevelEditor.createLevel();
-			if (createdLevel != null){
+			if (createdLevel != null) {
 				this.authorController.getModel().getGame().addNewLevel(createdLevel);
 			}
 		}).getItem());
-		
+
 		menuSave.getItems().add(new MenuFactory().createItem(("Save Game"), e -> {
-			authorController.getModel().saveGame("Saved");// TODO: prompt user for name
+			openSaveDialog();
 		}).getItem());
 
 		menuLoad.getItems().add(new MenuFactory().createItem("Load Game", e -> {
-			authorController.getModel().loadGame(loadFileChooser());;
+			authorController.getModel().loadGame(loadFileChooser());
+			;
 		}).getItem());
 
 		return menuBar;
@@ -104,19 +107,30 @@ public class AuthorView {
 
 		return myTabPaneFacade.getTabPane();
 	}
-	
-	public Scene getScene() {
-		return myScene;
+
+	private void openSaveDialog() {
+		TextInputDialog input = new TextInputDialog("Sample_Name");
+		input.setTitle("Save Dialog");
+		input.setHeaderText("Input Game Name");
+		input.setContentText("Name: ");
+		input.setOnCloseRequest(e -> {
+			authorController.getModel().saveGame(input.getResult());
+		});
+		input.showAndWait();
 	}
-	
+
 	private File loadFileChooser() {
 		File file = new FileLoader(FileType.XML).loadImage();
 		return file;
 	}
-	
-	private String getStyleSheet(){
+
+	private String getStyleSheet() {
 		File css = new File(STYLESHEET);
 		return css.toURI().toString();
+	}
+
+	public Scene getScene() {
+		return myScene;
 	}
 
 }

@@ -17,7 +17,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	private Stage stage;
 	private static final String TITLE = "New Level";
 	private LevelEditPage levelEditPage;
-	private static final String STYLESHEET = "../../../../../images/author-style.css";
+	private static final String STYLESHEET = "data/gui/author-style.css";
 
 	
 	LevelEditWindow(){
@@ -39,7 +39,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 		this.stage = new Stage();
 		this.stage.setTitle(TITLE);
 		this.stage.setScene(new Scene(this.levelEditPage.getPane()));
-		this.stage.getScene().getStylesheets().add(this.getClass().getResource(STYLESHEET).toExternalForm());
+		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);
 		this.stage.showAndWait();
 	}

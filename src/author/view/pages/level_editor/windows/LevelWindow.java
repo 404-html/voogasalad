@@ -9,6 +9,7 @@ import java.util.Set;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
+import author.model.game_observables.draggable_sprite.context_menu.SpriteContextMenu;
 import author.view.pages.level_editor.windows.level_window.ILevelWindowPane;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
@@ -20,6 +21,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -108,14 +110,6 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		removeSprites(this.getRemovedSprites(this.getMovableSprites(), aLevel.getMySpriteList()));
 	}
 	
-
-	
-
-	
-	
-	
-	
-	
 	
 	//Helper Methods
 	
@@ -133,7 +127,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY){
-				this.getController().getModel().getGame().getCurrentLevel().removeSprite(draggableSprite.getSprite());
+				openContextMenu(draggableSprite, event);
 			}
 			else{
 				currentHandler.handle(event);
@@ -151,6 +145,11 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				}
 			});
 		});
+	}
+	
+	private void openContextMenu(DraggableSprite sprite, MouseEvent event) {
+		SpriteContextMenu contextMenu = new SpriteContextMenu(sprite, this.getController());
+		contextMenu.getMenu().show(sprite.getImageView(), event.getScreenX(), event.getScreenY());
 	}
 	
 	private void setBackgroundImage(String filePath) {
