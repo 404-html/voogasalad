@@ -91,7 +91,7 @@ public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 	}
 	
 	private void loadSavedGame(){
-		File aFile = new FileLoader(FileType.XML).loadImage();
+		File aFile = new FileLoader("XMLGameFiles/", FileType.XML).loadImage();
 		if (aFile != null){
 			authorControllerExternal = new AuthorControllerFactory().create(aFile);
 			openGame();

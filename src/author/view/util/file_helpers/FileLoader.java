@@ -100,6 +100,18 @@ public class FileLoader {
 		myExtensions.forEach(fileType -> myFileChooser.getExtensionFilters()
 				.add(new FileChooser.ExtensionFilter(fileType.toString(), fileType.getExtension())));
 	}
+	
+	public FileLoader(String aFilePath, FileType... aFileTypes) {
+		this();
+		this.setInitialDirectory(new File(aFilePath));
+		myExtensions = Arrays.asList(aFileTypes);
+		myExtensions.forEach(fileType -> myFileChooser.getExtensionFilters()
+				.add(new FileChooser.ExtensionFilter(fileType.toString(), fileType.getExtension())));
+	}
+	
+	public void setInitialDirectory(File aFile){
+		myFileChooser.setInitialDirectory(aFile);
+	}
 
 	/**
 	 * Returns the file chosen after the file chooser is completed 

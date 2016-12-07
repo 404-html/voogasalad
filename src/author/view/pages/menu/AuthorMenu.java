@@ -19,7 +19,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
 
 public class AuthorMenu {
-	
+
 	private HBox myContainer;
 	private MenuBar myMenu;
 	private IAuthorController myAuthorController;
@@ -41,30 +41,30 @@ public class AuthorMenu {
 		Menu menuLoad = new Menu("Load");
 		Menu menuHelp = new Menu("Help");
 		myMenu.getMenus().addAll(menuNew, menuSave, menuLoad, menuHelp);
-		
+
 		addNewMenuItem(menuNew);
 		addSaveMenuItem(menuSave);
 		addLoadMenuItem(menuLoad);
 		addHelpMenuItem(menuHelp);
-		
+
 		myContainer.getChildren().add(myMenu);
 	}
-	
+
 	public void addFiller(){
 		final Pane filler = new Pane();
-        HBox.setHgrow(
-                filler,
-                Priority.SOMETIMES
-        );  
-        myContainer.getChildren().add(filler);
+		HBox.setHgrow(
+				filler,
+				Priority.SOMETIMES
+				);  
+		myContainer.getChildren().add(filler);
 	}
-	
+
 	private void addGameTitle() {
 		Label gameTitle = new Label(myAuthorController.getModel().getGame().getName());
 		gameTitle.setTextAlignment(TextAlignment.JUSTIFY);
 		myContainer.getChildren().add(gameTitle);
 	}
-	
+
 	// TODO: Consolidate other methods into this one that accepts lambdas
 	private void addMenuItem(Menu menuItem, String name, EventHandler<ActionEvent> e) {
 		menuItem.getItems().add(new MenuFactory().createItem(name, e).getItem());
@@ -78,7 +78,9 @@ public class AuthorMenu {
 
 	private void addLoadMenuItem(Menu menuLoad) {
 		menuLoad.getItems().add(new MenuFactory().createItem("Load Game", e -> {
-			myAuthorController.getModel().loadGame(loadFileChooser());
+			File aFile =loadFileChooser();
+			if (aFile != null)
+				myAuthorController.getModel().loadGame(loadFileChooser());
 		}).getItem());
 	}
 
@@ -111,10 +113,10 @@ public class AuthorMenu {
 	}
 
 	private File loadFileChooser() {
-		File file = new FileLoader(FileType.XML).loadImage();
+		File file = new FileLoader("XMLGameFiles/", FileType.XML).loadImage();
 		return file;
 	}
-	
+
 	private void openHelpDialog() {
 		HelpDialog helpDialog = new HelpDialog();
 		helpDialog.display();
@@ -123,7 +125,7 @@ public class AuthorMenu {
 	public MenuBar getMenu() {
 		return myMenu;
 	}
-	
+
 	public HBox getContainer() {
 		return myContainer;
 	}

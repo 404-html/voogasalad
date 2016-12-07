@@ -45,7 +45,7 @@ public class LevelWindowToolBarFactory {
 	}
 	
 	private void newBackgroundImage() {
-		File file = new FileLoader(FileType.GIF, FileType.JPEG, FileType.PNG, FileType.JPG).loadImage();
+		File file = new FileLoader("data/images/level_images/", FileType.GIF, FileType.JPEG, FileType.PNG, FileType.JPG).loadImage();
 
 		if (file != null)
 			this.authorController.getModel().getGame().getCurrentLevel()
