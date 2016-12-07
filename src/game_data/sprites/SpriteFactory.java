@@ -34,7 +34,7 @@ public enum SpriteFactory implements SpriteBuilder {
 	}
 	
 	public Sprite buildEmpty(){
-		return buildSprite(new Location(0,0,0), 0, 0, "No Name", EmptyImage.INSTANCE.getFile().toString());
+		return buildSprite(new Location(0,0), 0, 0, "No Name", EmptyImage.INSTANCE.getFile().toString());
 	}
 	
 	@Override

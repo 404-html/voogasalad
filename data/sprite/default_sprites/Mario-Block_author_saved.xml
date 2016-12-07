@@ -1,7 +1,6 @@
 <game__data.sprites.Terrain>
   <name>Mario-Block</name>
   <myLocation>
-    <myHeading>0.0</myHeading>
     <myXLocation>0.0</myXLocation>
     <myYLocation>0.0</myYLocation>
   </myLocation>

@@ -2,23 +2,27 @@ package gameplayer.front_end.application_scene;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 
 public class HighScoreScene extends AbstractNavigationPlayerScene {
+	
+	private Pane myPane;
 
 	public HighScoreScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
+		myPane = new Pane();
 	} 
 
 	@Override
 	public Scene init(){
-		myRoot.setCenter(addNodes());
+		getRoot().setCenter(addNodes());
 		return myScene;
 	}
 
-	private VBox addNodes() {
-		myOptions = new VBox(BOX_INSETS);
-		myOptions.setAlignment(Pos.CENTER);
-		return myOptions;
+	private Pane addNodes() {
+		myPane.getChildren().add(getOptions());
+		myPane.setOpacity(0.5);
+		getOptions().setAlignment(Pos.CENTER);
+		return myPane;
 	}
 }

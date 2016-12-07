@@ -27,7 +27,9 @@ public class StopLeftMovement extends StopMovement {
 		if(myCollisionMap.isEmpty()){
 			mySprite.setMyXVelocity(0);
 		}*/
-		mySprite.setMyXVelocity(0);
+		if(mySprite.getMyXVelocity()<0){
+			mySprite.setMyXVelocity(mySprite.getMyXVelocity()+myVelocity);
+		}
 		//mySprite.setMyXVelocity(mySprite.getMyXVelocity()+myVelocity);
 	}
 

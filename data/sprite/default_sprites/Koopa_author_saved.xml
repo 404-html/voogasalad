@@ -1,7 +1,6 @@
 <game__data.sprites.Enemy>
   <name>Koopa</name>
   <myLocation>
-    <myHeading>0.0</myHeading>
     <myXLocation>0.0</myXLocation>
     <myYLocation>0.0</myYLocation>
   </myLocation>
