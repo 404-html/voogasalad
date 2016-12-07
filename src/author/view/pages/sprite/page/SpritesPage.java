@@ -16,6 +16,10 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.layout.Region;
 
+/**
+ * @author Addison Howenstine
+ *
+ */
 public class SpritesPage implements InvalidationListener {
 
 	private TabPaneFacade myPane;

@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 
 /**
  * @author George Bernard
- * @author Addison Howenstine (arh55)
+ * @author Addison Howenstine
  */
 public class ConcreteAuthorController implements IAuthorController, IAuthorControllerExternal{
 

@@ -17,7 +17,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class AuthoringSplashScreen {
+/**
+ * @author Addison Howenstine
+ *
+ */
+public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 	
 	private Stage stage;
 	private VBox menu;
@@ -28,10 +32,11 @@ public class AuthoringSplashScreen {
 
 
 	public AuthoringSplashScreen(){
-		initializeWindow();
+		
 	}
 
-	private void initializeWindow(){
+	@Override
+	public void initializeWindow(){
 		this.stage = new Stage();
 		this.stage.setTitle(TITLE);
 		this.stage.setScene(initScene());
@@ -42,7 +47,7 @@ public class AuthoringSplashScreen {
 	
 	private Scene initScene(){
 		initPane();
-		initToolBarBuilder();
+		initSplashButtons();
 		Scene s = new Scene(menu, 500, 500);
 		return s;
 	}
@@ -52,14 +57,13 @@ public class AuthoringSplashScreen {
 		return css.toURI().toString();
 	}
 	
-	private void initToolBarBuilder(){
+	private void initSplashButtons(){
 		this.menu.getChildren().add(
 				createHBox(new Label("Name: "), gameNameTextField));
 		
 		this.menu.getChildren().add(
 				createHBox( new ButtonFactory().createButton("New Game", e -> createNewGame()).getButton("splash-button"),
 							new ButtonFactory().createButton("Load Game", e -> loadSavedGame()).getButton("splash-button") ));
-		
 	}
 	
 	private void initPane(){
@@ -76,15 +80,9 @@ public class AuthoringSplashScreen {
 		hBox.setAlignment(Pos.BOTTOM_CENTER);
 		hBox.setSpacing(10);
 		hBox.setPadding(new Insets(0, 20, 10, 20)); 
-
 		return hBox;
 	}
-	
-	private VBox createVBox(Node...nodes){
-		VBox vBox = new VBox();
-		vBox.getChildren().addAll(nodes);
-		return vBox;
-	}
+
 	
 	private void createNewGame(){
 		authorControllerExternal = new AuthorControllerFactory().create();

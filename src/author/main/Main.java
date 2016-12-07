@@ -1,17 +1,16 @@
 package author.main;
 
-import author.controller.AuthorControllerFactory;
-import author.controller.IAuthorControllerExternal;
-import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreen;
+import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
+import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
 	@Override
 	public void start(Stage aStage) throws Exception {
-		AuthoringSplashScreen ass = new AuthoringSplashScreen();
+		IAuthoringSplashScreen aSplashScreen = (new AuthoringSplashScreenFactory()).create();
+		aSplashScreen.initializeWindow();
 	}
 
 	public static void main(String[] args){
