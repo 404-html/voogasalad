@@ -1,6 +1,6 @@
 package author.model.game_observables.draggable_sprite.drag_resize;
 
-import author.model.game_observables.draggable_sprite.DraggableSprite;
+import author.model.game_observables.draggable_sprite.ResizableSprite;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
@@ -103,7 +103,7 @@ public class DragResizeMod {
 	private S state = S.DEFAULT;
 
 	private Node node;
-	private DraggableSprite mySprite;
+	private ResizableSprite mySprite;
 	private Sprite mySpritePreset;
 	private OnDragResizeEventListener listener = defaultListener;
 	private InvalidationListener myPresetInvalidationListener;
@@ -115,7 +115,7 @@ public class DragResizeMod {
 	private static final double MIN_W = 30;
 	private static final double MIN_H = 30;
 
-	public DragResizeMod(DraggableSprite sprite, Node node, Sprite spritePreset, InvalidationListener invalidationListener, OnDragResizeEventListener listener) {
+	public DragResizeMod(ResizableSprite sprite, Node node, Sprite spritePreset, InvalidationListener invalidationListener, OnDragResizeEventListener listener) {
 		this.node = node;
 		mySprite = sprite;
 		mySpritePreset = spritePreset;
