@@ -48,4 +48,10 @@ public class ConcreteAuthorController implements IAuthorController, IAuthorContr
 		authorModel.loadGame(aFile);
 	}
 
+	@Override
+	public void createNewGame(String aName) {
+		authorModel.createNewGame(aName);
+		authorView.loadDefaultSprites();
+	}
+
 }

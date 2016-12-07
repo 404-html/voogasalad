@@ -13,11 +13,14 @@ import game_data.Game;
  */
 public interface IAuthorModel {
 	
-	public void newGame();
+	public void newGameWindow();
+	
+	public void createNewGame(String aName);
 	
 	public Game getGame();
 	
 	public void saveGame(String aFileName);
 	
 	public void loadGame(File aFile);
+	
 }

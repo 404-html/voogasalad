@@ -47,12 +47,12 @@ public class AuthorView {
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
+		loadDefaultSprites();
 	}
 
 	private void initializeView() {
 		this.mySpritesPage = new SpritesPage(authorController);
 		this.myLevelEditor = new LevelEditorFactory().create(this.authorController);
-
 		myPane.getChildren().addAll(buildToolBar(), buildTabPane());
 	}
 
@@ -60,7 +60,11 @@ public class AuthorView {
 		this.myPane.getChildren().clear();
 		initializeView();
 	}
-
+	
+	public void loadDefaultSprites(){
+		this.mySpritesPage.loadDefaultSprites();
+	}
+	
 	/**
 	 * Returns Toolbar built for primary AuthorScene
 	 */
@@ -73,7 +77,7 @@ public class AuthorView {
 		menuBar.getMenus().addAll(menuNew, menuSave, menuLoad);
 
 		menuNew.getItems().addAll(new MenuFactory().createItem("New Game", e -> {
-			this.authorController.getModel().newGame();
+			this.authorController.getModel().newGameWindow();
 		}).getItem(), new MenuFactory().createItem("New Level", e -> {
 			Level createdLevel = this.myLevelEditor.createLevel();
 			if (createdLevel != null) {
@@ -109,7 +113,7 @@ public class AuthorView {
 	}
 
 	private void openSaveDialog() {
-		TextInputDialog input = new TextInputDialog("Sample_Name");
+		TextInputDialog input = new TextInputDialog(authorController.getModel().getGame().getName() + "_");
 		input.setTitle("Save Dialog");
 		input.setHeaderText("Input Game Name");
 		input.setContentText("Name: ");
