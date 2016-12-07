@@ -142,11 +142,11 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		
 		Item t = new Item(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png");
-//		myLevel.addNewSprite(
-//				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png"));
+		myLevel.addNewSprite(
+				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png"));
 //		
 		myLevel.addNewSprite(t);
-		t.addCharacteristic(new SpeedPowerUpper(200, 500, t));
+		t.addCharacteristic(new Bouncer(GameResources.BOUNCE_SPEED_HORIZONTAL.getDoubleResource(), GameResources.BOUNCE_SPEED_VERTICAL.getDoubleResource(), t));
 		myLevel.addNewSprite(
 				new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 		myLevel.addNewSprite(

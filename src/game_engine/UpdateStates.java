@@ -49,7 +49,7 @@ import javafx.scene.input.KeyCode;
  * check for collision repeatedly. Do we have to deal with if the sprite hits a
  * block at multiple sides?
  * 
- * @author LuciaMartos, Austin Gartside
+ * @author LuciaMartos, Austin Gartside, Katrina Zhu
  *
  */
 
@@ -91,7 +91,7 @@ public class UpdateStates {
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		updateSpritePositions();
+		//updateSpritePositions();
 
 //		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
 //		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		

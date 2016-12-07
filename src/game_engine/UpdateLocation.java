@@ -4,7 +4,10 @@ import game_data.Location;
 import game_data.Sprite;
 import game_data.states.Physics;
 import game_data.states.State;
-
+/**
+ * @author Austin, Katrina
+ *
+ */
 public class UpdateLocation {
 	private Sprite mySprite;
 	private double myTimeElapsed;

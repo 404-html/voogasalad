@@ -1,6 +1,7 @@
 package game_engine.actions;
 
 import java.util.List;
+
 import java.util.Map;
 
 import game_data.Location;
@@ -9,6 +10,10 @@ import game_data.sprites.Terrain;
 import game_engine.ListOfCollidingSprites;
 import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
+/**
+ * @author Katrina
+ *
+ */
 //this class needs to be edited so it won't fly
 //aka check if it's colliding, if it isn't, then don't set the velocity
 public class MoveUpJump extends Move {

@@ -19,6 +19,10 @@ import game_engine.actions.MoveUpJump;
 import javafx.geometry.Side;
 import javafx.scene.input.KeyCode;
 
+/**
+ * @author Katrina
+ *
+ */
 @CharacteristicAnnotation(name = "Controllable")
 public class Controllable {
 	private Sprite mySprite;
@@ -61,7 +65,6 @@ public class Controllable {
 	
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		generateMyKeyReleasedMap();
-
 		runKeyCalls(myCollisionMap);
 		runKeyReleased();
 	}
@@ -110,7 +113,9 @@ public class Controllable {
 		myKeyPressedMap.put(KeyCode.SPACE, new Launch(mySprite, myProjectile, 0, 0, myLevel));
 		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}
-	
+	public Map<KeyCode, Action> getMyKeyPressedMap(){
+		return myKeyPressedMap;
+	}
 	public void setMyKeyPressedMap(Map<KeyCode, Action> myKeyPressedMap) {
 		this.myKeyPressedMap = myKeyPressedMap;
 	}

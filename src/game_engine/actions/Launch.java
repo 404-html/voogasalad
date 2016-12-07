@@ -3,7 +3,10 @@ package game_engine.actions;
 import game_data.Controllable;
 import game_data.Level;
 import game_data.Sprite;
-
+/**
+ * @author Katrina
+ *
+ */
 public class Launch implements Action{
 	private Sprite myLauncher;
 	private Sprite myProjectile;

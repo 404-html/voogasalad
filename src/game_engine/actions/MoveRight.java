@@ -13,7 +13,10 @@ import game_data.states.State;
 import game_engine.ListOfCollidingSprites;
 import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
-
+/**
+ * @author Katrina
+ *
+ */
 public class MoveRight extends Move {
 	
 	

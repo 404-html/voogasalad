@@ -45,7 +45,7 @@ public class BouncerTop implements Characteristic {
 
 	@Override
 	public Characteristic copy() {
-		return new Bouncer(myBounceSpeed, mySprite);
+		return new Bouncer(myBounceSpeed, myBounceSpeed, mySprite);
 	}
 
 }
