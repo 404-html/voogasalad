@@ -103,8 +103,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 			if (powerUp instanceof SpeedPowerUpper) {
-//				System.out.println("LUCIA");
-//				setKeyPressedMapWithBoosts();
 				((SpeedPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
 			}
 			if(powerUp instanceof InvincibilityPowerUpper){
@@ -134,8 +132,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void powerUpHasBeenRemoved(Characteristic powerUp) {
 		if (powerUp instanceof SpeedPowerUpper) {
 			((SpeedPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
-//			myLevel.getMainPlayer().resetTerminalVelocities();
-//			generateDefaultKeyPressedMap();
 		}
 		if(powerUp instanceof InvincibilityPowerUpper){
 			((InvincibilityPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
