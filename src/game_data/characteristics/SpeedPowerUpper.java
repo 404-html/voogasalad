@@ -54,9 +54,7 @@ public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristi
 	}
 
 	@Override
-	public void execute(Map<Sprite, Side> myCollisionMap) {
-		//TODO: make and execute speed Up action
-		
+	public void execute(Map<Sprite, Side> myCollisionMap) {		
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 			//unless we want non players to be able to speed up upon hitting a powerup
 			if(collidedSprite instanceof Player){
