@@ -1,11 +1,14 @@
 package gameplayer.front_end.popup;
 
 import java.io.File;
+
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class PopUpController implements IPopUpDisplay {
 	
@@ -30,5 +33,9 @@ public class PopUpController implements IPopUpDisplay {
 	
 	public void show() {
 		myStage.show();
+	}
+	
+	public void setOnClosed(EventHandler<WindowEvent> aHandler){
+		myStage.setOnCloseRequest(aHandler);
 	}
 }

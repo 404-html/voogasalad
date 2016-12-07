@@ -6,7 +6,7 @@ public class MovementHandler {
 	private double myYMovement;
 	
 	public void setYMovement(double aYLocation, double aScreenHeight) {
-		System.out.println(aYLocation);
+		//System.out.println(aYLocation);
 		double answer = aYLocation - (aScreenHeight * .5); 
 		myYMovement = answer;
 	}

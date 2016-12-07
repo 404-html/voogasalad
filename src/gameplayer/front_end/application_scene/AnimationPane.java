@@ -29,6 +29,7 @@ public class AnimationPane {
 	}
 	
 	public void clear() {
+		System.out.println("cleared");
 		myGamePlayCanvas.getChildren().clear();
 	}
 	
@@ -56,6 +57,5 @@ public class AnimationPane {
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}
-	
 }
 

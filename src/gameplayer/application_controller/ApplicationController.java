@@ -8,6 +8,7 @@ import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
 import gameplayer.back_end.stored_games.StoredGames;
+import gameplayer.back_end.user_information.UserDefaults;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
@@ -39,6 +40,8 @@ public class ApplicationController extends AbstractController {
 	private StoredGames myStoredGames;
 	private GamePlayController myGamePlay;
 	private IDisplay myCurrentDisplay;
+	private UserDefaults myUserDefaults;
+	
 	//change to resource file / maybe make new CSS? 
 	private String[] myShirtBackgrounds = {"data/gui/hawaiian_shirt_background1.jpeg", "data/gui/hawaiian_shirt_background2.jpeg", 
 			"data/gui/hawaiian_shirt_background3.png", "data/gui/hawaiian_shirt_background4.jpeg", 
@@ -51,6 +54,7 @@ public class ApplicationController extends AbstractController {
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myStoredGames = new StoredGames();
+		myUserDefaults = new UserDefaults(this.getClass().toString());
 	}
 	
 	public void startScene() throws FileNotFoundException {
@@ -131,13 +135,13 @@ public class ApplicationController extends AbstractController {
 			String gameName = ((Label) cBox.getSelectionModel().getSelectedItem().getChildren().get(0)).getText();
 			cBox.setPromptText(gameName);
 			File gameFile = myStoredGames.getGameFilePath(gameName);
-			myGamePlay = new GamePlayController(myStage, gameFile, this, 0);
+			displayGame(gameFile);
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		});
 		gameChoice.addNode(cBox);
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileController().show(myStage);
-			myGamePlay = new GamePlayController(myStage, chosenGame, this, 0);
+			displayGame(chosenGame);
 			myStoredGames.addGame(myGamePlay.getGame().getName(), chosenGame);
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
@@ -183,5 +187,13 @@ public class ApplicationController extends AbstractController {
 			aList.add(box);
 		}
 		return aList;
+	}
+	
+	private void displayGame(File chosenGame) {
+		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0, myUserDefaults.getKeyInputColor("default"));
+	}
+	
+	public UserDefaults getUserDefaults(){
+		return myUserDefaults;
 	}
 }

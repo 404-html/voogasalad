@@ -5,9 +5,12 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
+import game_data.characteristics.Breakable;
 import game_data.characteristics.BouncerTop;
 import game_data.characteristics.Damager;
+import game_data.characteristics.HealthPowerUpper;
 import game_data.characteristics.Impassable;
+import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.PacerAlternative;
 import game_data.characteristics.StickyTop;
 import game_data.characteristics.StickyTopHorizontal;
@@ -25,7 +28,6 @@ import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -159,6 +161,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				s.setMyXVelocity(200);
 			}
 		}
+		
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
 		// myLevel.getMySpriteList().get(1).getStates().size());
 		// System.out.println(myLevel.getMySpriteList().get(2).getName() + " " +

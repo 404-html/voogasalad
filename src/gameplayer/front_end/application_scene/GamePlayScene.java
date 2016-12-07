@@ -20,13 +20,12 @@ public class GamePlayScene extends AbstractPlayerScene {
 	private Background myBackgroundDisplay;
 	private ResultScene myResultScene;
 	private String myBackgroundFilePath;
-
-	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight) {
+	
+	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
 		myStack = new StackPane();
 		myScene = new Scene(myStack, aWidth, aHeight);
 		myGamePlay = new AnimationPane();
-		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight);
-		myBackgroundFilePath = aBackgroundImageFilePath;
+		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight, aFontColor);
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
 		myResultScene = new ResultScene();
 		initializeScene();
@@ -75,6 +74,10 @@ public class GamePlayScene extends AbstractPlayerScene {
 	
 	public void addMenu(ImageView aImage, String[] names, @SuppressWarnings("unchecked") EventHandler<ActionEvent>... eventHandler) {
 		myHeadsUpDisplay.addMenu(aImage, names, eventHandler);
+	}
+	
+	public void addLabel(String aText){
+		myHeadsUpDisplay.addLabel(aText);
 	}
 
 	public void setKeyHandlers(KeyPressable aPressHandler, KeyPressable aReleaseHandler) {

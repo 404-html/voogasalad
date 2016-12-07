@@ -10,6 +10,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.sprites.Player;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import javafx.geometry.Side;
@@ -42,7 +43,8 @@ public class Breakable implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			if(breaksAtDirection(myCollisionMap.get(collidedSprite))){
+			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && collidedSprite instanceof Player){
+//				System.out.println("SIDE HIT: "+myCollisionMap.get(collidedSprite));
 				if(isBroken()) {
 					myAction = new Break(mySprite, collidedSprite);
 					myAction.act();
