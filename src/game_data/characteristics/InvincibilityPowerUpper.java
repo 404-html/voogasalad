@@ -5,7 +5,7 @@ import java.util.Map;
 
 import game_data.Level;
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_data.states.State;
@@ -23,7 +23,7 @@ import javafx.geometry.Side;
  *
  */
 
-@CharacteristicAnnotation(name = "Invincibility Power Up")
+@NameAnnotation(name = "Invincibility Power Up")
 public class InvincibilityPowerUpper extends TemporalPowerUpper implements Characteristic {
 
 	private double myTimeInEffect;

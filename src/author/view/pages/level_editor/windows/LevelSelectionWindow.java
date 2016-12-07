@@ -125,6 +125,7 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow {
 
 	private void highlightCurrentLabel(String name) {
 		FunctionalLabel label = labelMap.get(name);
-		label.getLabel().setTextFill(Color.CHOCOLATE);
+		label.getLabel().setTextFill(Color.RED);
+		label.getLabel().setStyle("-fx-border-color: green;" + "-fx-border-width: 0.5;" + "-fx-border-style: solid;");
 	}
 }

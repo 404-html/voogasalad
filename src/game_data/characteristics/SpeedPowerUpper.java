@@ -6,8 +6,9 @@ import java.util.Map;
 
 import game_data.Level;
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
 import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
@@ -20,7 +21,8 @@ import javafx.geometry.Side;
  *
  */
 
-@CharacteristicAnnotation(name = "Speed Power Up")
+
+@NameAnnotation(name = "Speed Power Up")
 public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristic{
 	
 	private double mySpeedBoost;
@@ -36,10 +38,16 @@ public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristi
 		myCurrentTime = 0;
 	}
 	
+	@ViewableMethodOutput(description="Speed Boost", type=double.class)
 	public double getSpeedBoost(){
 		return mySpeedBoost;
 	}
 
+	@ViewableMethodOutput(description="Time In Effect", type=double.class)
+	public double getTimeInEffect(){
+		return myTimeInEffect;
+	}
+	
 	@Override
 	public Characteristic copy() {
 		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite());

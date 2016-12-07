@@ -3,7 +3,7 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_engine.actions.WinLevel;
@@ -13,7 +13,7 @@ import javafx.geometry.Side;
  * @author austingartside
  *
  */
-@CharacteristicAnnotation(name = "Winnable")
+@NameAnnotation(name = "Winnable")
 public class Winnable implements Characteristic{
 	
 	private Sprite mySprite;

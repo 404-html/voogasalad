@@ -1,7 +1,7 @@
 package game_data.characteristics;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
@@ -10,7 +10,7 @@ import game_engine.UpdateStates;
  *
  */
 
-@CharacteristicAnnotation(name = "Temporal Power Up")
+@NameAnnotation(name = "Temporal Power Up")
 public abstract class TemporalPowerUpper extends PowerUpper implements Characteristic{
 		
 	@ParameterAnnotation(parameters = {"Sprite"})

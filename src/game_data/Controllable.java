@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import game_data.characteristics.Characteristic;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Projectile;
 import game_data.sprites.Terrain;
@@ -23,7 +23,7 @@ import javafx.scene.input.KeyCode;
  * @author Katrina
  *
  */
-@CharacteristicAnnotation(name = "Controllable")
+@NameAnnotation(name = "Controllable")
 public class Controllable {
 	private Sprite mySprite;
 	private Map<KeyCode, Action> myKeyPressedMap;

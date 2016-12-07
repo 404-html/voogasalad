@@ -9,10 +9,11 @@
 package game_data.characteristics;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 
-@CharacteristicAnnotation(name = "Pacer")
+@NameAnnotation(name = "Pacer")
 public abstract class Pacer {
 	
 	private int mySpeed;
@@ -28,6 +29,7 @@ public abstract class Pacer {
 		return true;
 	}
 	
+	@ViewableMethodOutput(description="Speed", type=int.class)
 	public int getSpeed() {
 		return mySpeed;
 	}

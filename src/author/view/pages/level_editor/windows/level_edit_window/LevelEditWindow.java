@@ -3,6 +3,8 @@
  */
 package author.view.pages.level_editor.windows.level_edit_window;
 
+import java.io.File;
+
 import game_data.Level;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,6 +17,8 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	private Stage stage;
 	private static final String TITLE = "New Level";
 	private LevelEditPage levelEditPage;
+	private static final String STYLESHEET = "data/gui/author-style.css";
+
 	
 	LevelEditWindow(){
 		this.levelEditPage = new LevelEditPage((ILevelEditWindowInternal) this);
@@ -35,6 +39,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 		this.stage = new Stage();
 		this.stage.setTitle(TITLE);
 		this.stage.setScene(new Scene(this.levelEditPage.getPane()));
+		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);
 		this.stage.showAndWait();
 	}
@@ -42,6 +47,11 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	@Override
 	public void close() {
 		this.stage.close();
+	}
+	
+	private String getStyleSheet(){
+		File css = new File(STYLESHEET);
+		return css.toURI().toString();
 	}
 	
 }

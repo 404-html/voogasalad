@@ -3,10 +3,10 @@ package game_data.characteristics;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
@@ -21,7 +21,8 @@ import javafx.scene.input.KeyCode;
  *
  */
 
-@CharacteristicAnnotation(name = "Bouncer")
+
+@NameAnnotation(name = "Bouncer")
 public class Bouncer implements Characteristic {
 	private Side bouncingSpriteSide;
 	private double myBounceSpeedHorizontal;
@@ -40,9 +41,12 @@ public class Bouncer implements Characteristic {
 		originalKeyPressedMap=null;
 	}
 
+	@ViewableMethodOutput(description="Bounce Speed Horizontal", type=double.class)
 	public double getBounceSpeedHorizontal() {
 		return myBounceSpeedHorizontal;
 	}
+	
+	@ViewableMethodOutput(description="Bounce Speed Vertical", type=double.class)
 	public double getBounceSpeedVertical(){
 		return myBounceSpeedVertical;
 	}

@@ -1,7 +1,7 @@
 package game_data.characteristics;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 
 /**
@@ -10,7 +10,7 @@ import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
  * which is why it is a super class for now despite doing nothing
  */
 
-@CharacteristicAnnotation(name = "Losable")
+@NameAnnotation(name = "Losable")
 public class Losable{
 
 

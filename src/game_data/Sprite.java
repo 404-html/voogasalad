@@ -68,13 +68,13 @@ public abstract class Sprite extends GameObject {
 		myXAcceleration = aSprite.getMyXAcceleration();
 		myYAcceleration = aSprite.getMyYAcceleration();
 		myCollisionHandler = aSprite.getMyCollisionHandler(); // to change:
-																// would need to
-																// have the same
-																// collision
-																// handler but
-																// we don't know
-																// what that is
-																// yet
+		// would need to
+		// have the same
+		// collision
+		// handler but
+		// we don't know
+		// what that is
+		// yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
 		myControllable=aSprite.getControllable();
@@ -104,12 +104,16 @@ public abstract class Sprite extends GameObject {
 		}
 		return stateCopies;
 	}
+
+
 	public void setControllable(Controllable control){
 		myControllable=control;
 	}
+
 	public Controllable getControllable(){
 		return myControllable;
 	}
+
 	public Set<Characteristic> getCharacteristics() {
 		return myCharacteristics;
 	}
@@ -156,7 +160,7 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setMyXVelocity(double myVelocity) {
-//		System.out.println("TERMINAL X " + terminalXVel);
+		//		System.out.println("TERMINAL X " + terminalXVel);
 		if (Math.abs(myVelocity) > terminalXVel) {
 			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
 		}
@@ -240,7 +244,12 @@ public abstract class Sprite extends GameObject {
 	public Sprite getPreset() {
 		return this.preset;
 	}
-	
+
+	public void setPreset(Sprite aPreset){
+		this.preset = aPreset;
+		notifyListeners();
+	}
+
 	public double getTerminalXVel() {
 		return terminalXVel;
 	}
@@ -254,18 +263,17 @@ public abstract class Sprite extends GameObject {
 		this.terminalYVel = terminalYVel;
 	}
 	public void resetTerminalVelocities(){
-//		System.out.println("LUCIA");
+		//		System.out.println("LUCIA");
 		this.terminalXVel = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
 		this.terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
 	}
-	
+
 	public Map<Characteristic, Double> getMyPowerUps() {
 		if(powerUps == null) return new HashMap<Characteristic, Double>();
 		return powerUps;
 	}
-	
+
 	public void setMyPowerUps(Map<Characteristic, Double> powerUps){
 		this.powerUps = powerUps;
 	}
-	
 }
