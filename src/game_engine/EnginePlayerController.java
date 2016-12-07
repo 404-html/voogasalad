@@ -76,17 +76,19 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
 		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
-		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		// System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT,
+		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+		//System.out.println(myLevel.getMainPlayer()==null);
+		myKeyPressedMap.put(KeyCode.RIGHT, 
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT,
+		myKeyPressedMap.put(KeyCode.LEFT, 
 				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP,
+		myKeyPressedMap.put(KeyCode.UP, 
 				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(myLevel.getMainPlayer().getMyLocation(), 100, 100, "block",
-				"author/images/betterblock.png");
-		myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), myProjectile, 0, 0, myLevel));
+		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getMyLocation().getXLocation(),
+				myLevel.getMainPlayer().getMyLocation().getYLocation()+100), 25, 25, "block", "author/images/betterblock.png");
+		myProjectile.addState(new Physics(new SpritePhysics(0.0)));
+		myProjectile.addCharacteristic(new Impassable(myProjectile));
+		myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), myProjectile, 50, 0, myLevel));
 		return myKeyPressedMap;
 		// myKeyPressedMap.put(KeyCode.SPACE, new
 		// Launch(myLevel.getMainPlayer(), 10, 0));
@@ -140,11 +142,11 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		
 		Item t = new Item(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png");
-//		myLevel.addNewSprite(
-//				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png"));
+		myLevel.addNewSprite(
+				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png"));
 //		
 		myLevel.addNewSprite(t);
-		t.addCharacteristic(new SpeedPowerUpper(200, 500, t));
+		t.addCharacteristic(new Bouncer(GameResources.BOUNCE_SPEED_HORIZONTAL.getDoubleResource(), GameResources.BOUNCE_SPEED_VERTICAL.getDoubleResource(), t));
 		myLevel.addNewSprite(
 				new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 		myLevel.addNewSprite(

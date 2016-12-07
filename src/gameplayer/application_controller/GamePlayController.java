@@ -106,11 +106,11 @@ public class GamePlayController extends AbstractController {
 	
 	private void updateSprites() {
 		// A sprite has been removed
-//		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
-//			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-//			mySpriteMap.keySet().retainAll(s);
-//		}
-		for (Sprite sprite : myGameController.getMySpriteList()) {
+		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
+			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
+			mySpriteMap.keySet().retainAll(s);
+		}
+		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
 		}
 		//needs to be updated for when a sprite has been added
@@ -148,7 +148,7 @@ public class GamePlayController extends AbstractController {
 
 	private void clearKeys() {
 		myKeysReleased.clear();
-		//myKeysPressed.clear();
+		myKeysPressed.clear();
 	}
 	
 	private void setMenu() {
@@ -209,14 +209,20 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void handleKeyPress(KeyCode aKey) {
+/*		if(myKeySet.contains(aKey)){
+			myKeysPressed.remove(aKey);
+		}    
+		else{
+			myKeysPressed.add(aKey);
+			myKeySet.add(aKey);
+		}   */
 		myKeysPressed.add(aKey);
-        myKeySet.add(aKey);
 	}
 	
 	private void handleKeyRelease(KeyCode key) {
 		myKeysReleased.add(key);
+		//myKeySet.remove(key);
 		myKeysPressed.remove(key);
-		myKeySet.remove(key);
 	}
 
 	public Game getGame() {

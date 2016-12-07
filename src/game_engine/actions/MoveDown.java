@@ -2,7 +2,10 @@ package game_engine.actions;
 
 import game_data.Location;
 import game_data.Sprite;
-
+/**
+ * @author Katrina
+ *
+ */
 public class MoveDown extends Move {
 
 	public MoveDown(Sprite aSprite, double aVelocity) {

@@ -77,6 +77,7 @@ public abstract class Sprite extends GameObject {
 																// yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
+		myControllable=aSprite.getControllable();
 	}
 
 	/**

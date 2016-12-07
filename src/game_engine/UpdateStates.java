@@ -51,7 +51,7 @@ import javafx.scene.input.KeyCode;
  * check for collision repeatedly. Do we have to deal with if the sprite hits a
  * block at multiple sides?
  * 
- * @author LuciaMartos, Austin Gartside
+ * @author LuciaMartos, Austin Gartside, Katrina Zhu
  *
  */
 
@@ -82,17 +82,18 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		this.mySpriteImages = mySpriteImages;
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
+
 		myControllableSpriteList = new ArrayList<Sprite>();
 		this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
 		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
-		generateDefaultKeyPressedMap();
+		//generateDefaultKeyPressedMap();
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		updateSpritePositions();
+		//updateSpritePositions();
 
 //		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
 //		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
@@ -157,7 +158,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		updateSpritePositions();
 		checkForWin();
 		checkForLoss();
-		// System.out.println("want this to be after launching");
+
 	}
 
 	private void executeControls() {

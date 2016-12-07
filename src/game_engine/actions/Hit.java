@@ -7,7 +7,7 @@ import game_data.Sprite;
 import game_engine.SpritePhysics;
 
 /**
- * @author Alex
+ * @author Katrina
  *
  */
 
