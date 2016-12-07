@@ -9,11 +9,18 @@ import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.TextAlignment;
 
 public class AuthorMenu {
+	
+	private HBox myContainer;
 	private MenuBar myMenu;
 	private IAuthorController myAuthorController;
 	private ILevelEditorExternal myLevelEditor;
@@ -21,7 +28,10 @@ public class AuthorMenu {
 	public AuthorMenu(IAuthorController authorController, ILevelEditorExternal levelEditor) {
 		myAuthorController = authorController;
 		myLevelEditor = levelEditor;
+		myContainer = new HBox();
 		buildMenu();
+		addFiller();
+		addGameTitle();
 	}
 
 	private void buildMenu() {
@@ -36,6 +46,23 @@ public class AuthorMenu {
 		addSaveMenuItem(menuSave);
 		addLoadMenuItem(menuLoad);
 		addHelpMenuItem(menuHelp);
+		
+		myContainer.getChildren().add(myMenu);
+	}
+	
+	public void addFiller(){
+		final Pane filler = new Pane();
+        HBox.setHgrow(
+                filler,
+                Priority.SOMETIMES
+        );  
+        myContainer.getChildren().add(filler);
+	}
+	
+	private void addGameTitle() {
+		Label gameTitle = new Label(myAuthorController.getModel().getGame().getName());
+		gameTitle.setTextAlignment(TextAlignment.JUSTIFY);
+		myContainer.getChildren().add(gameTitle);
 	}
 	
 	// TODO: Consolidate other methods into this one that accepts lambdas
@@ -95,5 +122,9 @@ public class AuthorMenu {
 
 	public MenuBar getMenu() {
 		return myMenu;
+	}
+	
+	public HBox getContainer() {
+		return myContainer;
 	}
 }
