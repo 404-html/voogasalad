@@ -4,13 +4,8 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-import util.XMLTranslator;
 import author.controller.IAuthorController;
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.facades.ToolBarBuilder;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FolderListor;
-import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Sprite;
 import game_data.sprites.SpriteFactory;
 import javafx.scene.Node;
@@ -19,6 +14,10 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.XMLTranslator;
+import util.facades.ToolBarBuilder;
+import util.filehelpers.FileLoader.FileExtension;
+import util.filehelpers.FileLoader.FileLoader;
 
 public class SpriteScroller {
 
@@ -83,7 +82,12 @@ public class SpriteScroller {
 			buildNewSprite();
 		}).getButton());
 		toolBarBuilder.addBurst(new ButtonFactory().createButton("Load Saved " + aScrollType, e -> {
-			loadSprite(new FileLoader(FileType.XML).loadImage());
+			try {
+				loadSprite(new FileLoader(FileExtension.XML).loadSingle());
+			} catch (Exception e1) {
+				// TODO Throw File Not Found Pop Up;
+				e1.printStackTrace();
+			}
 		}).getButton());
 
 		return toolBarBuilder.getToolBar();

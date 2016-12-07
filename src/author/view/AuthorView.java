@@ -1,15 +1,13 @@
 package author.view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.pages.level_editor.LevelEditorFactory;
 import author.view.pages.menu.MenuFactory;
 import author.view.pages.sprite.page.SpritesPage;
-import author.view.util.facades.TabPaneFacade;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import javafx.geometry.Side;
 import javafx.scene.Node;
@@ -20,6 +18,9 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import util.facades.TabPaneFacade;
+import util.filehelpers.FileLoader.FileExtension;
+import util.filehelpers.FileLoader.FileLoader;
 
 /**
  * AuthorView handles the JavaFX GUI.
@@ -120,8 +121,15 @@ public class AuthorView {
 	}
 
 	private File loadFileChooser() {
-		File file = new FileLoader(FileType.XML).loadImage();
-		return file;
+		File file;
+		try {
+			file = new FileLoader(FileExtension.XML).loadSingle();
+			return file;
+		} catch (FileNotFoundException e) {
+			// TODO: Popup Error window
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private String getStyleSheet() {

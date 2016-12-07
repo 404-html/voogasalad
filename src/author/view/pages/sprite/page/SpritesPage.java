@@ -2,9 +2,9 @@ package author.view.pages.sprite.page;
 
 import java.io.File;
 import util.XMLTranslator;
+import util.facades.TabPaneFacade;
+import util.filehelpers.FolderListor;
 import author.controller.IAuthorController;
-import author.view.util.facades.TabPaneFacade;
-import author.view.util.file_helpers.FolderListor;
 import game_data.Sprite;
 import game_data.sprites.Enemy;
 import game_data.sprites.Item;
