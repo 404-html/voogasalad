@@ -9,6 +9,7 @@ import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
+import game_engine.UpdateStates;
 import game_engine.actions.Action;
 import game_engine.actions.SpeedBoost;
 import javafx.geometry.Side;
@@ -56,6 +57,19 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 				myAction.act();
 			}
 		}
+	}
+
+	@Override
+	public void reversePowerUp(Sprite playerSprite, UpdateStates myUpdateState) {
+		playerSprite.resetTerminalVelocities();
+		myUpdateState.generateDefaultKeyPressedMap();
+		
+	}
+
+	@Override
+	public void activatePowerUp(Sprite palyerSprite, UpdateStates myUpdateState, Double timeElapsed) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

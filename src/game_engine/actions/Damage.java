@@ -16,12 +16,27 @@ public class Damage implements Action {
 	
 	@Override
 	public void act() {
+		//looop through all states, if it contains health check boolean 
+		boolean hasHealth = false;
+		State health = null;
+		boolean isInvincible = false; 
+		
 		for(State i : myDamageTaker.getStates()){
 			if (i instanceof Health){
-				((Health) i).updateState(damageToGive);
-				if(((Health) i).getMyHealth()<=0){
-					((Health) i).kill();
+				hasHealth = true;
+				health = i;
+			}
+				else if(i instanceof Vincibility){
+					if(!((Vincibility) i).isVincibility())
+						isInvincible = true;
 				}
+			
+		}
+		
+		if(!isInvincible && hasHealth){
+			((Health) health).updateState(damageToGive);
+			if(((Health) health).getMyHealth()<=0){
+				((Health) health).kill();
 			}
 		}
 		

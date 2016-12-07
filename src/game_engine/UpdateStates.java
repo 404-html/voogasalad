@@ -15,6 +15,7 @@ import game_data.Location;
 import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.sprites.Enemy;
 import game_data.sprites.Player;
@@ -124,15 +125,16 @@ public class UpdateStates {
 		}
 	}
 
+	//IS THERE A BETTER WAY TO DO THIS WITHOUT IFS?
 	private void powerUpHasBeenRemoved(Characteristic powerUp) {
 		if (powerUp instanceof SpeedPowerUpper) {
-			myLevel.getMainPlayer().resetTerminalVelocities();
-			generateDefaultKeyPressedMap();
+			((SpeedPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
+//			myLevel.getMainPlayer().resetTerminalVelocities();
+//			generateDefaultKeyPressedMap();
 		}
-//		if(powerUp instanceof InvincibilePowerUp){
-//			Action vincible = new Vincible(myPlayerControllable);
-//			vincible.act();
-//		}
+		if(powerUp instanceof InvincibilityPowerUpper){
+			((InvincibilityPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
+		}
 	}
 
 	private void cleanGame() {
@@ -230,7 +232,7 @@ public class UpdateStates {
 		return myKeyPressedMap;
 	}
 	
-	private void generateDefaultKeyPressedMap() {
+	public void generateDefaultKeyPressedMap() {
 	
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
