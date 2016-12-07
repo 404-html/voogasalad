@@ -2,13 +2,13 @@ package author.model.game_observables.draggable_sprite;
 
 import java.io.File;
 
+import author.model.game_observables.draggable_sprite.drag_resize.DragResizeMod;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.shape.Line;
 /**
  * Extension of DraggableSprite. This class defines the functionality of the sprites that are actually placed on 
  * the level editor. 
@@ -16,7 +16,7 @@ import javafx.scene.shape.Line;
  * @author Jordan Frazier
  *
  */
-public class ConcreteMovableSprite extends DraggableSprite {
+public class ConcreteMovableSprite extends DraggableSprite implements ResizableSprite {
 
 	private double mouseX;
 	private double mouseY;
@@ -28,6 +28,10 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		this.spritePreset = aSpritePreset;
 		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
+//		makeDraggable();
+		DragResizeMod resizer = new DragResizeMod(this, this.getDraggableItem(), null);
+		resizer.makeResizable(this.getDraggableItem(), null);
+		
 	}
 	
 	public void removePresetListener(){
@@ -102,6 +106,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		super.getDraggableItem().setOnMousePressed(event -> {
 			mouseX = event.getSceneX();
 			mouseY = event.getSceneY();
+			super.getDraggableItem().toFront();
 		});
 	}
 
