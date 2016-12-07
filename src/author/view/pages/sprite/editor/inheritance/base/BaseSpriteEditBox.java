@@ -35,7 +35,7 @@ public class BaseSpriteEditBox {
 	
 	public BaseSpriteEditBox() {
 		myPane = new VBox();
-		myFileLoader = new FileLoader(FileType.PNG, FileType.GIF,FileType.JPG, FileType.JPEG);
+		myFileLoader = new FileLoader("data/images/sprite_images/", FileType.PNG, FileType.GIF,FileType.JPG, FileType.JPEG);
 		myPane.getChildren().addAll(
 				makeNameField(), 
 				makeLocationFields(),

@@ -1,0 +1,19 @@
+<game__data.sprites.Item>
+  <name>Coin</name>
+  <myLocation>
+    <myHeading>0.0</myHeading>
+    <myXLocation>0.0</myXLocation>
+    <myYLocation>0.0</myYLocation>
+  </myLocation>
+  <myWidth>45</myWidth>
+  <myHeight>60</myHeight>
+  <myImagePath>data/images/sprite_images/coin.png</myImagePath>
+  <myXVelocity>0.0</myXVelocity>
+  <myYVelocity>0.0</myYVelocity>
+  <myXAcceleration>0.0</myXAcceleration>
+  <myYAcceleration>0.0</myYAcceleration>
+  <myCollisionHandler/>
+  <myCharacteristics/>
+  <id>ConcreteDraggableSprite1481144989292</id>
+  <myStates/>
+</game__data.sprites.Item>

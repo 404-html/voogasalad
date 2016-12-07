@@ -47,7 +47,6 @@ public class SettingsViewBox {
 						myInfo.put( vv.description(), m.invoke(input, (Object[]) null) );
 					} catch (ExceptionInInitializerError | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						e.printStackTrace();
-						System.out.println("You're a cuck");
 						continue;
 					}
 				}
