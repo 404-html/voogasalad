@@ -4,14 +4,11 @@ import game_data.Sprite;
 import game_data.states.*;
 
 
-public class Damage implements Action {
-	
-	private int damageToGive;
-	private Sprite myDamageTaker;
+public class Damage extends PointsChanger implements Action {
+
 	
 	public Damage(int damage, Sprite damageTaker){
-		damageToGive = damage;
-		myDamageTaker = damageTaker;
+		super(damage, damageTaker);
 	}
 	
 	@Override
@@ -21,7 +18,7 @@ public class Damage implements Action {
 		State health = null;
 		boolean isInvincible = false; 
 		
-		for(State i : myDamageTaker.getStates()){
+		for(State i : spriteAffected.getStates()){
 			if (i instanceof Health){
 				hasHealth = true;
 				health = i;
@@ -34,7 +31,7 @@ public class Damage implements Action {
 		}
 		
 		if(!isInvincible && hasHealth){
-			((Health) health).updateState(damageToGive);
+			((Health) health).updateState(pointsToGive);
 			if(((Health) health).getMyHealth()<=0){
 				((Health) health).kill();
 			}
