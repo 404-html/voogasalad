@@ -63,7 +63,7 @@ public class AuthorMenu {
 
 	private void addNewMenuItem(Menu menuNew) {
 		menuNew.getItems().addAll(new MenuFactory().createItem("New Game", e -> {
-			this.myAuthorController.getModel().newGame();
+			this.myAuthorController.getModel().newGameWindow();
 		}).getItem(), new MenuFactory().createItem("New Level", e -> {
 			Level createdLevel = this.myLevelEditor.createLevel();
 			if (createdLevel != null) {
@@ -73,7 +73,7 @@ public class AuthorMenu {
 	}
 
 	private void openSaveDialog() {
-		TextInputDialog input = new TextInputDialog("Sample_Name");
+		TextInputDialog input = new TextInputDialog(myAuthorController.getModel().getGame().getName());
 		input.setTitle("Save Dialog");
 		input.setHeaderText("Input Game Name");
 		input.setContentText("Name: ");

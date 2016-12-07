@@ -12,4 +12,7 @@ import javafx.scene.Scene;
 public interface IAuthorControllerExternal {
 
 	public Scene getScene();
+
+	public void createNewGame(String aName);
+	
 }

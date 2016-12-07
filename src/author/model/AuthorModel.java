@@ -21,47 +21,49 @@ import game_data.Sprite;
 public abstract class AuthorModel implements IAuthorModel{
 
 	private IAuthorController authorController;
-	
+
 	private Game activeGame;
 	private Level activeLevel;
-	
-	
+
+
 	public AuthorModel(IAuthorController aAuthorController) {
 		this.authorController = aAuthorController;
 	}
-	
+
 	@Deprecated
 	public Level addLevel(int aWidth, int aHeight, String aBackgroundImageFilePath){
 		this.activeLevel = new Level("Level 1", aWidth, aHeight, aBackgroundImageFilePath);
 		this.activeGame.addNewLevel(this.activeLevel);
 		return this.activeLevel;
 	}
-	
+
 	@Deprecated
 	public Sprite addSprite(Sprite aSpritePreset){
 		Sprite createdSprite = aSpritePreset.clone();
 		this.activeLevel.addNewSprite(createdSprite);
 		return createdSprite;
 	}
-	
+
 	@Override
-	public void newGame(){
+	public void newGameWindow(){
 		IGameObjectEditWindowExternal<Game> gameObjectEditWindowExternal = new GameEditWindowFactory().create();
 		Game newGame = gameObjectEditWindowExternal.getResult();
-		if (newGame != null){
-			this.activeGame = newGame;
-			this.authorController.reinitializeView();
-			this.activeGame.setName(this.activeGame.getName());
-		}
+
 	}
-	
+
 	@Override
 	public Game getGame(){
 		if (activeGame == null)
-			this.activeGame = new Game("Game1");
+			this.activeGame = new Game("Unnamed_Game");
 		return this.activeGame;
 	}
-	
+
+	@Override
+	public void createNewGame(String aName){
+		this.activeGame = new Game(aName);
+		this.authorController.reinitializeView();
+	}
+
 	@Override
 	public void loadGame(File aFile){
 		XMLTranslator gameLoader = new XMLTranslator();
@@ -69,11 +71,11 @@ public abstract class AuthorModel implements IAuthorModel{
 		this.authorController.reinitializeView();
 		this.activeGame.setName(this.activeGame.getName());
 	}
-	
+
 	@Override
 	public void saveGame(String aFileName){
 		XMLTranslator gameSaver = new XMLTranslator();
-		gameSaver.saveToFile(activeGame, "XMLGameFiles/", activeGame.getName() + "_" + aFileName);
+		gameSaver.saveToFile(activeGame, "XMLGameFiles/", aFileName);
 	}
 
 }
