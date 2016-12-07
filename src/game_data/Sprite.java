@@ -33,7 +33,7 @@ public abstract class Sprite extends GameObject {
 	private Set<Characteristic> myCharacteristics;
 	private Controllable myControllable;
 	private String id = "";
-	private Map<Action, Double> powerUps;
+	private Map<Characteristic, Double> powerUps;
 
 	private Set<State> myStates;
 
@@ -258,12 +258,12 @@ public abstract class Sprite extends GameObject {
 		this.terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
 	}
 	
-	public Map<Action, Double> getMyPowerUps() {
-		if(powerUps == null) return new HashMap<Action, Double>();
+	public Map<Characteristic, Double> getMyPowerUps() {
+		if(powerUps == null) return new HashMap<Characteristic, Double>();
 		return powerUps;
 	}
 	
-	public void setMyPowerUps(Map<Action, Double> powerUps){
+	public void setMyPowerUps(Map<Characteristic, Double> powerUps){
 		this.powerUps = powerUps;
 	}
 	

@@ -15,6 +15,7 @@ import game_data.Location;
 import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.characteristics.SpeedPowerUpper;
 import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.sprites.WinningObject;
@@ -64,7 +65,7 @@ public class UpdateStates {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
 	private Map<KeyCode, Action> myKeyReleasedMap;
-	private Map<Action, Double> myCurrentPowerUps;
+	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
 
 	private List<Sprite> myControllableSpriteList;
@@ -99,17 +100,20 @@ public class UpdateStates {
 	}
 
 	private void activatePowerUps() {
-		for (Action powerUp : myCurrentPowerUps.keySet()) {
-			if (powerUp instanceof SpeedBoost) {
+		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
+			if (powerUp instanceof SpeedPowerUpper) {
 //				System.out.println("LUCIA");
 				mainPlayerControllable.setMyKeyPressedMap(generateBoostedKeyPressedMap());
 			}
+//			if(powerUp instanceof InvincibilePowerUp){
+//				
+//			}
 
 		}
 	}
 
 	private void checkPowerUps() {
-		for (Action powerUp : myCurrentPowerUps.keySet()) {
+		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 //			System.out.println("POWER UP SPEED " + myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
@@ -120,11 +124,15 @@ public class UpdateStates {
 		}
 	}
 
-	private void powerUpHasBeenRemoved(Action powerUp) {
-		if (powerUp instanceof SpeedBoost) {
+	private void powerUpHasBeenRemoved(Characteristic powerUp) {
+		if (powerUp instanceof SpeedPowerUpper) {
 			myLevel.getMainPlayer().resetTerminalVelocities();
 			generateDefaultKeyPressedMap();
 		}
+//		if(powerUp instanceof InvincibilePowerUp){
+//			Action vincible = new Vincible(myPlayerControllable);
+//			vincible.act();
+//		}
 	}
 
 	private void cleanGame() {

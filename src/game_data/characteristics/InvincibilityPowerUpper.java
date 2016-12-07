@@ -10,6 +10,7 @@ import game_data.characteristics.characteristic_annotations.CharacteristicAnnota
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_engine.actions.Action;
+import game_engine.actions.Invincibility;
 import game_engine.actions.SpeedBoost;
 import javafx.geometry.Side;
 
@@ -18,29 +19,21 @@ import javafx.geometry.Side;
  *
  */
 
-@CharacteristicAnnotation(name = "Speed Power Up")
-public class SpeedPowerUpper extends PowerUpper implements Characteristic{
+@CharacteristicAnnotation(name = "Invincibility Power Up")
+public class InvincibilityPowerUpper extends PowerUpper implements Characteristic{
 	
-	private double mySpeedBoost;
 	private double myTimeInEffect;
-	private double myCurrentTime;
 	private Action myAction;
 	
-	@ParameterAnnotation(parameters = {"Speed Boost", "Time In Effect", "Sprite"})
-	public SpeedPowerUpper(double speedBoost, double timeInEffect, Sprite aSprite){
+	@ParameterAnnotation(parameters = {"Time In Effect", "Sprite"})
+	public InvincibilityPowerUpper(double timeInEffect, Sprite aSprite){
 		super(aSprite);
-		mySpeedBoost = speedBoost;
 		myTimeInEffect = timeInEffect;
-		myCurrentTime = 0;
-	}
-	
-	public double getSpeedBoost(){
-		return mySpeedBoost;
 	}
 
 	@Override
 	public Characteristic copy() {
-		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite());
+		return new InvincibilityPowerUpper( myTimeInEffect, this.getSprite());
 	}
 
 	@Override
@@ -51,12 +44,11 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 			//unless we want non players to be able to speed up upon hitting a powerup
 			if(collidedSprite instanceof Player){
 				addToPowerUpMap(collidedSprite,myTimeInEffect);
-				myAction = new SpeedBoost(collidedSprite, mySpeedBoost);
+				myAction = new Invincibility(collidedSprite);
 //				System.out.println("characteristic in");
 				myAction.act();
 			}
 		}
 	}
-
 
 }

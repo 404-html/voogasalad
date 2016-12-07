@@ -2,6 +2,8 @@ package game_engine.actions;
 
 import game_data.Level;
 import game_data.Sprite;
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.SpeedPowerUpper;
 import game_engine.GameResources;
 
 public class SpeedBoost implements Action {
@@ -11,9 +13,8 @@ public class SpeedBoost implements Action {
 	private double speedBoost;
 	private double prevSpeed;
 
-	public SpeedBoost(Sprite playerSprite, double speedBoost, double timeInEffect) {
+	public SpeedBoost(Sprite playerSprite, double speedBoost) {
 		myPlayerSprite = playerSprite;
-		this.timeInEffect = timeInEffect;
 		this.speedBoost = speedBoost;
 		prevSpeed = 0;
 	}
@@ -30,21 +31,6 @@ public class SpeedBoost implements Action {
 		// or
 		// myPlayerSprite.getSpritePhysics().setHorizontalGravity(.5);
 		// myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
-		boolean hasChanged = false;
-		for(Action action: myPlayerSprite.getMyPowerUps().keySet()){
-			if(action instanceof SpeedBoost){
-				myPlayerSprite.getMyPowerUps().put(action, timeInEffect);
-//				System.out.println("hello" );
-				hasChanged = true;
-			}
-		}
-		
-		if(!hasChanged) {				
-			myPlayerSprite.getMyPowerUps().put(this, timeInEffect);
-//			System.out.println("hello2" );
-		}
-
-		myPlayerSprite.setMyPowerUps(myPlayerSprite.getMyPowerUps());
 
 		myPlayerSprite.setTerminalXVel(GameResources.TERMINAL_X_VELOCITY.getDoubleResource()+speedBoost);		
 		myPlayerSprite.setTerminalYVel(GameResources.TERMINAL_X_VELOCITY.getDoubleResource()+speedBoost);
