@@ -1,6 +1,7 @@
 package author.view.pages.sprite.editor.settings.characteristics;
 
-import author.view.pages.sprite.editor.settings.SettingsViewColumn;
+import author.view.pages.sprite.editor.settings.view.SettingsViewBox;
+import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
 import javafx.scene.control.Label;
 
@@ -15,7 +16,7 @@ public class CharacteristicsViewColumn extends SettingsViewColumn {
 		getPane().getChildren().clear();
 		
 		aSprite.getCharacteristics().forEach( c -> {
-			getPane().getChildren().add(new Label(c.getClass().getSimpleName()));
+			getPane().getChildren().add(new SettingsViewBox(c).getPane());
 		});
 	}
 

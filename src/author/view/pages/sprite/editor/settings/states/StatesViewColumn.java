@@ -1,8 +1,8 @@
 package author.view.pages.sprite.editor.settings.states;
 
-import author.view.pages.sprite.editor.settings.SettingsViewColumn;
+import author.view.pages.sprite.editor.settings.view.SettingsViewBox;
+import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
-import javafx.scene.control.Label;
 
 public class StatesViewColumn extends SettingsViewColumn {
 
@@ -15,7 +15,7 @@ public class StatesViewColumn extends SettingsViewColumn {
 		getPane().getChildren().clear();
 		
 		aSprite.getStates().forEach( c -> {
-			getPane().getChildren().add(new Label(c.getClass().getSimpleName()));
+			getPane().getChildren().add(new SettingsViewBox(c).getPane());
 		});
 	}
 

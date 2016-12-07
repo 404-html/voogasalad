@@ -73,6 +73,8 @@ public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 	protected final SettingsFactory<?> getSettingFactory(){
 		return myFactory;
 	}
+
+	public abstract void removeSpriteSetting();
 	
 	
 	
