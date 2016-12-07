@@ -69,7 +69,7 @@ public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristi
 
 	@Override
 	public void activatePowerUp(Sprite palyerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed) {
-		System.out.println("LUCIA");
+//		System.out.println("LUCIA");
 		myInterface.setKeyPressedMapWithBoosts();
 	}
 
