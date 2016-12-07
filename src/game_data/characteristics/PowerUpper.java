@@ -25,25 +25,5 @@ public abstract class PowerUpper implements Characteristic{
 		return mySprite;
 	}
 	
-	public abstract void reversePowerUp(Sprite playerSprite,IUpdateStatesAndPowerUps myInterface);
-	
-	public abstract void activatePowerUp(Sprite palyerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed);
-	
-	public void addToPowerUpMap(Sprite collidedSprite, double myTimeInEffect){
-		boolean hasChanged = false;
-		for(Characteristic characteristic: collidedSprite.getMyPowerUps().keySet()){
-			if(characteristic instanceof SpeedPowerUpper){
-				collidedSprite.getMyPowerUps().put(characteristic, myTimeInEffect);
-				hasChanged = true;
-			}
-		}
-		
-		if(!hasChanged) {				
-			collidedSprite.getMyPowerUps().put(this, myTimeInEffect);
-		}
-
-		collidedSprite.setMyPowerUps(collidedSprite.getMyPowerUps());
-	}
-	
 
 }

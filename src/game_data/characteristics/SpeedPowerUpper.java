@@ -21,7 +21,7 @@ import javafx.geometry.Side;
  */
 
 @CharacteristicAnnotation(name = "Speed Power Up")
-public class SpeedPowerUpper extends PowerUpper implements Characteristic{
+public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristic{
 	
 	private double mySpeedBoost;
 	private double myTimeInEffect;
@@ -69,6 +69,7 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 
 	@Override
 	public void activatePowerUp(Sprite palyerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed) {
+		System.out.println("LUCIA");
 		myInterface.setKeyPressedMapWithBoosts();
 	}
 

@@ -24,7 +24,7 @@ import javafx.geometry.Side;
  */
 
 @CharacteristicAnnotation(name = "Invincibility Power Up")
-public class InvincibilityPowerUpper extends PowerUpper implements Characteristic {
+public class InvincibilityPowerUpper extends TemporalPowerUpper implements Characteristic {
 
 	private double myTimeInEffect;
 	private Action myAction;

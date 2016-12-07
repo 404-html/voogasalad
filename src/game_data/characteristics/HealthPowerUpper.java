@@ -1,4 +1,5 @@
 package game_data.characteristics;
+import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.actions.*;
 
 import java.util.Map;
