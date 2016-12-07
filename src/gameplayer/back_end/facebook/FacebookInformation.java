@@ -1,6 +1,7 @@
 package gameplayer.back_end.facebook;
 
 import java.io.File;
+import java.util.Iterator;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,6 +18,7 @@ public class FacebookInformation {
 	//private static final String ACCESS_TOKEN = "EAACEdEose0cBAKqz91ZCys1MtLyDmwA5Urg1dTYiqpXc6EeAowOTnIAwAxfgZASsu77VhmJaof5vild7evkIjLrWE1ZBAc4j7ZAhGmS0BZASXZCPe93HnZBfmoEcq5py12e6dP54PhUwjNy54fhEncXaKhpp4izdMEaEpzheZAMJkQZDZD";
 	
 	private User myUser;
+	private String myPictureUrl;
 	
 	public String getUserName() {
 		return myUser.getName();
@@ -51,11 +53,10 @@ public class FacebookInformation {
 				FacebookClient fbClient = new DefaultFacebookClient(accessToken);
 				myUser = fbClient.fetchObject("me", User.class);
 				JsonObject picture = 
-					      fbClient.fetchObject("me/picture", 
+					      fbClient.fetchObject("me/picture/data", 
 						      JsonObject.class, Parameter.with("redirect","false"));
 				//System.out.println(myUser);
-				System.out.println(picture.keys());
-				
+				//myPictureUrl = picture.getString("url");
 				break;
 			}
 			

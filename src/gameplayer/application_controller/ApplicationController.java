@@ -39,6 +39,7 @@ public class ApplicationController extends AbstractController {
 	private StoredGames myStoredGames;
 	private GamePlayController myGamePlay;
 	private IDisplay myCurrentDisplay;
+	//change to resource file / maybe make new CSS? 
 	private String[] myShirtBackgrounds = {"data/gui/hawaiian_shirt_background1.jpeg", "data/gui/hawaiian_shirt_background2.jpeg", 
 			"data/gui/hawaiian_shirt_background3.png", "data/gui/hawaiian_shirt_background4.jpeg", 
 			"data/gui/hawaiian_shirt_background5.jpeg", "data/gui/hawaiian_shirt_background6.jpeg", 
