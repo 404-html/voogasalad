@@ -88,7 +88,11 @@ public class UpdateStates {
 	}
 
 	private void moveRandomSprites() {
-		
+		for(Sprite mySprite : mySpriteList) {
+			if(mySprite.getMyRandomMoveHandler() != null) {
+				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
+			}
+		}
 	}
 	
 	private void checkForLoss() {

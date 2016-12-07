@@ -25,6 +25,7 @@ import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
+import game_engine.properties.RandomMoveHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		myLevel.addNewSprite(new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(926, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(326, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
 		
 		myLevel.addNewSprite(new Terrain(new Location(1126, 300), 200, 25, "blockmoving", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(1350, 250), 200, 25, "blockmoving2", "author/images/betterblock.png"));
@@ -157,6 +158,9 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			if(s.getName().equals("blockmoving2")){
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 300, s));
 				s.setMyXVelocity(200);
+			}
+			if(s.getName().equals("block123123123")){
+				s.setMyRandomMoveHandler(new RandomMoveHandler(false));
 			}
 		}
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
