@@ -9,6 +9,7 @@ import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
+import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
 import game_engine.actions.Action;
 import game_engine.actions.SpeedBoost;
@@ -60,16 +61,15 @@ public class SpeedPowerUpper extends PowerUpper implements Characteristic{
 	}
 
 	@Override
-	public void reversePowerUp(Sprite playerSprite, UpdateStates myUpdateState) {
+	public void reversePowerUp(Sprite playerSprite, IUpdateStatesAndPowerUps myInterface) {
 		playerSprite.resetTerminalVelocities();
-		myUpdateState.generateDefaultKeyPressedMap();
+		myInterface.generateDefaultKeyPressedMap();
 		
 	}
 
 	@Override
-	public void activatePowerUp(Sprite palyerSprite, UpdateStates myUpdateState, Double timeElapsed) {
-		// TODO Auto-generated method stub
-		
+	public void activatePowerUp(Sprite palyerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed) {
+		myInterface.setKeyPressedMapWithBoosts();
 	}
 
 

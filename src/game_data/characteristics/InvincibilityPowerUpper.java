@@ -11,6 +11,7 @@ import game_data.sprites.Player;
 import game_data.states.State;
 import game_data.states.Vincibility;
 import game_data.states.Visible;
+import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
 import game_engine.actions.Action;
 import game_engine.actions.Invincibility;
@@ -56,7 +57,7 @@ public class InvincibilityPowerUpper extends PowerUpper implements Characteristi
 	}
 
 	@Override
-	public void reversePowerUp(Sprite playerSprite, UpdateStates myUpdateState) {
+	public void reversePowerUp(Sprite playerSprite, IUpdateStatesAndPowerUps  myInterface) {
 		for (State state : playerSprite.getStates()) {
 			if (state instanceof Vincibility) {
 				((Vincibility) state).setVincibility(true);
@@ -69,9 +70,8 @@ public class InvincibilityPowerUpper extends PowerUpper implements Characteristi
 	}
 
 	@Override
-	public void activatePowerUp(Sprite playerSprite, UpdateStates myUpdateState, Double timeElapsed) {
+	public void activatePowerUp(Sprite playerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed) {
 		boolean hasVisibility = false;
-		boolean setVisibility = false;
 		for (State state : playerSprite.getStates()) {
 			if (state instanceof Visible) {
 				hasVisibility = true;
@@ -81,7 +81,6 @@ public class InvincibilityPowerUpper extends PowerUpper implements Characteristi
 		}
 		if (!hasVisibility) {
 			playerSprite.addState(new Visible((timeElapsed.intValue()) % 3 == 0));
-
 		}
 	}
 }

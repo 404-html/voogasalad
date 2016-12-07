@@ -3,6 +3,7 @@ package game_data.characteristics;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
 
 /**
@@ -24,9 +25,9 @@ public abstract class PowerUpper implements Characteristic{
 		return mySprite;
 	}
 	
-	public abstract void reversePowerUp(Sprite playerSprite,UpdateStates myUpdateState);
+	public abstract void reversePowerUp(Sprite playerSprite,IUpdateStatesAndPowerUps myInterface);
 	
-	public abstract void activatePowerUp(Sprite palyerSprite, UpdateStates myUpdateState, Double timeElapsed);
+	public abstract void activatePowerUp(Sprite palyerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed);
 	
 	public void addToPowerUpMap(Sprite collidedSprite, double myTimeInEffect){
 		boolean hasChanged = false;

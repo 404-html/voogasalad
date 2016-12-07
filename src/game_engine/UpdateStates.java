@@ -55,7 +55,7 @@ import javafx.scene.input.KeyCode;
  *
  */
 
-public class UpdateStates {
+public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private Level myLevel;
 	private List<Sprite> mySpriteList;
@@ -104,13 +104,18 @@ public class UpdateStates {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 			if (powerUp instanceof SpeedPowerUpper) {
 //				System.out.println("LUCIA");
-				mainPlayerControllable.setMyKeyPressedMap(generateBoostedKeyPressedMap());
+//				setKeyPressedMapWithBoosts();
+				((SpeedPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
 			}
-//			if(powerUp instanceof InvincibilePowerUp){
-//				
-//			}
+			if(powerUp instanceof InvincibilityPowerUpper){
+				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));	
+			}
 
 		}
+	}
+
+	public void setKeyPressedMapWithBoosts() {
+		mainPlayerControllable.setMyKeyPressedMap(generateBoostedKeyPressedMap());
 	}
 
 	private void checkPowerUps() {
