@@ -73,7 +73,7 @@ public class AuthorView {
 
 	private Node buildMenu() {
 		AuthorMenu menu = new AuthorMenu(myAuthorController, myLevelEditor);
-		return menu.getMenu();
+		return menu.getContainer();
 	}
 
 	/**
@@ -89,22 +89,6 @@ public class AuthorView {
 		myTabPaneFacade.addTab(myLevelEditor.toString(), myLevelEditor.getPane());
 
 		return myTabPaneFacade.getTabPane();
-	}
-
-	private void openSaveDialog() {
-		TextInputDialog input = new TextInputDialog(myAuthorController.getModel().getGame().getName() + "_");
-		input.setTitle("Save Dialog");
-		input.setHeaderText("Input Game Name");
-		input.setContentText("Name: ");
-		input.setOnCloseRequest(e -> {
-			myAuthorController.getModel().saveGame(input.getResult());
-		});
-		input.showAndWait();
-	}
-
-	private File loadFileChooser() {
-		File file = new FileLoader(FileType.XML).loadImage();
-		return file;
 	}
 
 	private String getStyleSheet() {
