@@ -27,7 +27,7 @@ public class FolderListor {
 		File folder = new File(aFilePath);	
 		
 		Function<File, String> fileConverter = (s) -> s.toString();
-		Function<String, String> pathRemover = (s) -> s.substring(s.lastIndexOf(File.separatorChar, s.length()) + 1);
+		Function<String, String> pathRemover = (s) -> s.substring(s.lastIndexOf(File.pathSeparatorChar, s.length()) + 1);
 		
 		myFileNameList = Arrays.asList(folder.listFiles())
 			.stream()
@@ -52,7 +52,7 @@ public class FolderListor {
 		Function<String, String> extensionRemover = (s) -> s.substring(0, s.lastIndexOf("."));
 		
 		return myFileNameList.stream()
-				.filter(s -> {return s.endsWith(".java");})
+				.filter(s -> {return s.endsWith(aExtension);})
 				.map(extensionRemover)
 				.collect(Collectors.toList());
 	}

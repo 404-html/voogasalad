@@ -1,0 +1,32 @@
+<game__data.sprites.Player>
+  <name>Mario</name>
+  <myLocation>
+    <myHeading>0.0</myHeading>
+    <myXLocation>0.0</myXLocation>
+    <myYLocation>0.0</myYLocation>
+  </myLocation>
+  <myWidth>100</myWidth>
+  <myHeight>100</myHeight>
+  <myImagePath>src/author/images/MarioSMBW.png</myImagePath>
+  <myXVelocity>0.0</myXVelocity>
+  <myYVelocity>0.0</myYVelocity>
+  <myXAcceleration>0.0</myXAcceleration>
+  <myYAcceleration>0.0</myYAcceleration>
+  <myCollisionHandler/>
+  <myCharacteristics>
+    <game__data.characteristics.Damager>
+      <myDamageToGive>0</myDamageToGive>
+      <mySprite class="game_data.sprites.Player" reference="../../.."/>
+    </game__data.characteristics.Damager>
+  </myCharacteristics>
+  <id></id>
+  <myStates>
+    <game__data.states.Health>
+      <myHealth>5</myHealth>
+      <isAlive>true</isAlive>
+    </game__data.states.Health>
+    <game__data.states.Score>
+      <myScore>10</myScore>
+    </game__data.states.Score>
+  </myStates>
+</game__data.sprites.Player>

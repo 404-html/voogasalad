@@ -63,7 +63,7 @@ public abstract class DraggableSprite {
 		return invalidationListener;
 	}
 
-	private void openPreferences() {
+	protected void openPreferences() {
 		draggableItem.setOnMouseClicked(e -> {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {

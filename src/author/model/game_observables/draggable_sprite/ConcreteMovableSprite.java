@@ -1,12 +1,21 @@
 package author.model.game_observables.draggable_sprite;
 
 import java.io.File;
+
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Line;
-
+/**
+ * Extension of DraggableSprite. This class defines the functionality of the sprites that are actually placed on 
+ * the level editor. 
+ * Allows users to click and drag sprites around the level editor, along with other functionality.
+ * @author Jordan Frazier
+ *
+ */
 public class ConcreteMovableSprite extends DraggableSprite {
 
 	private double mouseX;
@@ -17,12 +26,14 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	public ConcreteMovableSprite(Sprite aSpriteInstance, Sprite aSpritePreset) {
 		super(aSpriteInstance);
 		this.spritePreset = aSpritePreset;
-		this.presetInvalidationListener = initPresetListener(aSpriteInstance, this.spritePreset);
+		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
 	}
 	
 	public void removePresetListener(){
-		this.spritePreset.removeListener(presetInvalidationListener);
+		if (this.spritePreset!=null){
+			this.spritePreset.removeListener(presetInvalidationListener);
+		}
 	}
 
 	private void styleSprite() {
@@ -38,21 +49,22 @@ public class ConcreteMovableSprite extends DraggableSprite {
 	 */
 	@Override
 	protected void makeDraggable() {
-
-		super.getDraggableItem().setOnMouseDragOver(event -> {
-			super.getDraggableItem();
-			// Set boundaries to visible
-			Line line = new Line(super.getImageView().getLayoutX(), super.getImageView().getLayoutY(),
-					super.getImageView().getLayoutX() + super.getImageView().getFitWidth(),
-					super.getImageView().getLayoutY() + super.getImageView().getFitHeight());
-
-		});
-
 		onMousePressed();
-
 		onMouseDragged();
-
 		onMouseReleased();
+	}
+	
+	@Override
+	protected void openPreferences() {
+		this.getDraggableItem().setOnMouseClicked(e -> {
+			if (e.getButton().equals(MouseButton.PRIMARY)) {
+				if (e.getClickCount() == 2) {
+					removePresetListener();
+					this.getSprite().setPreset(null);
+					new SpriteEditWindow(this.getSprite()).openWindow();
+				}
+			}
+		});
 	}
 
 	private InvalidationListener initPresetListener(Sprite instanceSprite, Sprite spritePreset) {
