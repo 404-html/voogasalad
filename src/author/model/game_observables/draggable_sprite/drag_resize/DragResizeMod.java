@@ -1,6 +1,8 @@
 package author.model.game_observables.draggable_sprite.drag_resize;
 
 import author.model.game_observables.draggable_sprite.DraggableSprite;
+import game_data.Sprite;
+import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -102,7 +104,9 @@ public class DragResizeMod {
 
 	private Node node;
 	private DraggableSprite mySprite;
+	private Sprite mySpritePreset;
 	private OnDragResizeEventListener listener = defaultListener;
+	private InvalidationListener myPresetInvalidationListener;
 
 	private double myMouseX;
 	private double myMouseY;
@@ -111,9 +115,11 @@ public class DragResizeMod {
 	private static final double MIN_W = 30;
 	private static final double MIN_H = 30;
 
-	public DragResizeMod(DraggableSprite sprite, Node node, OnDragResizeEventListener listener) {
+	public DragResizeMod(DraggableSprite sprite, Node node, Sprite spritePreset, InvalidationListener invalidationListener, OnDragResizeEventListener listener) {
 		this.node = node;
 		mySprite = sprite;
+		mySpritePreset = spritePreset;
+		myPresetInvalidationListener = invalidationListener;
 		if (listener != null)
 			this.listener = listener;
 	}
@@ -122,6 +128,11 @@ public class DragResizeMod {
 		makeResizable(node, null);
 	}
 
+	public void removePresetListener(){
+		if (mySpritePreset!=null){
+			mySpritePreset.removeListener(myPresetInvalidationListener);
+		}
+	}
 	public void makeResizable(Node node, OnDragResizeEventListener listener) {
 
 		node.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -157,6 +168,8 @@ public class DragResizeMod {
 			mySprite.getSprite().getMyLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY());
 		} else {
+			removePresetListener();
+			mySprite.getSprite().setPreset(null);
 			mySprite.getSprite().setMyHeight((int) mySprite.getDraggableItem().getHeight());
 			mySprite.getSprite().setMyWidth((int) mySprite.getDraggableItem().getWidth());
 		}

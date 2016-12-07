@@ -29,7 +29,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
 //		makeDraggable();
-		DragResizeMod resizer = new DragResizeMod(this, this.getDraggableItem(), null);
+		DragResizeMod resizer = new DragResizeMod(this, this.getDraggableItem(), this.spritePreset, this.presetInvalidationListener,  null);
 		resizer.makeResizable(this.getDraggableItem(), null);
 		
 	}
