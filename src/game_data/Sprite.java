@@ -86,6 +86,11 @@ public abstract class Sprite extends GameObject {
 		return stateCopies;	
 	}
 	
+	@Override
+	public boolean equals(Object aObject){
+		return (aObject instanceof Sprite && this.getName() == ( (Sprite) aObject).getName());
+	}
+	
 	public Set<Characteristic> getCharacteristics(){
 		return myCharacteristics;
 	}

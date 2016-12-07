@@ -1,4 +1,4 @@
-package author.view.pages.sprite.editor.settings;
+package author.view.pages.sprite.editor.settings.view;
 
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
@@ -13,6 +13,7 @@ public abstract class SettingsViewColumn implements InvalidationListener {
 	public  SettingsViewColumn(Sprite aSprite) {
 		aSprite.addListener(this);
 		myPane = new VBox();
+		updateList(aSprite);
 	}
 
 	public Pane getPane() {

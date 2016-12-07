@@ -1,5 +1,7 @@
 package author.view.pages.sprite.editor.settings.states;
 
+import java.util.Set;
+
 import author.view.pages.sprite.editor.settings.SettingsFactory;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import game_data.Sprite;
@@ -14,7 +16,7 @@ public class StateEditBox extends SpriteSettingsEditBox {
 	private State makeState() {
 		return (State) getSettingFactory().getSettingInstance(makeTextToValueMap());
 	}
-	
+
 	@Override
 	protected SettingsFactory<?> buildSettingFactory() {
 		return new StatesFactory<State>(getName(), getSprite());
@@ -22,6 +24,16 @@ public class StateEditBox extends SpriteSettingsEditBox {
 
 	@Override
 	public void addSpriteSetting() {
-		getSprite().addState(makeState());		
+		State s = makeState();
+		getSprite().getStates().removeIf( p -> {
+			return p.getClass().getSimpleName().equals(s.getClass().getSimpleName());
+		});
+		getSprite().addState(s);
+	}
+
+	@Override
+	public void removeSpriteSetting() {
+		getSprite().getStates().removeIf( p -> {return p.getClass().getSimpleName().equals(getName());});
+		getSprite().setName(getSprite().getName());
 	}
 }

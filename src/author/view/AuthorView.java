@@ -5,6 +5,7 @@ import java.io.File;
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.pages.level_editor.LevelEditorFactory;
+import author.view.pages.menu.AuthorMenu;
 import author.view.pages.menu.MenuFactory;
 import author.view.pages.sprite.page.SpritesPage;
 import author.view.util.facades.TabPaneFacade;
@@ -33,7 +34,7 @@ public class AuthorView {
 	Scene myScene;
 	Pane myPane = new VBox();
 	TabPaneFacade myTabPaneFacade;
-	IAuthorController authorController;
+	IAuthorController myAuthorController;
 
 	private SpritesPage mySpritesPage;
 	private ILevelEditorExternal myLevelEditor;
@@ -43,54 +44,36 @@ public class AuthorView {
 	public static final int HEIGHT = 800;
 
 	public AuthorView(IAuthorController authorController) {
-		this.authorController = authorController;
+		this.myAuthorController = authorController;
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
+		loadDefaultSprites();
 	}
 
 	private void initializeView() {
-		this.mySpritesPage = new SpritesPage(authorController);
-		this.myLevelEditor = new LevelEditorFactory().create(this.authorController);
 
-		myPane.getChildren().addAll(buildToolBar(), buildTabPane());
+		this.mySpritesPage = new SpritesPage(myAuthorController);
+		this.myLevelEditor = new LevelEditorFactory().create(this.myAuthorController);
+		myPane.getChildren().addAll(buildMenu(), buildTabPane());
 	}
 
 	public void reinitializeView() {
 		this.myPane.getChildren().clear();
 		initializeView();
 	}
-
+	
+	public void loadDefaultSprites(){
+		this.mySpritesPage.loadDefaultSprites();
+	}
+	
 	/**
 	 * Returns Toolbar built for primary AuthorScene
 	 */
-	private Node buildToolBar() {
 
-		MenuBar menuBar = new MenuBar();
-		Menu menuNew = new Menu("New");
-		Menu menuSave = new Menu("Save");
-		Menu menuLoad = new Menu("Load");
-		menuBar.getMenus().addAll(menuNew, menuSave, menuLoad);
-
-		menuNew.getItems().addAll(new MenuFactory().createItem("New Game", e -> {
-			this.authorController.getModel().newGame();
-		}).getItem(), new MenuFactory().createItem("New Level", e -> {
-			Level createdLevel = this.myLevelEditor.createLevel();
-			if (createdLevel != null) {
-				this.authorController.getModel().getGame().addNewLevel(createdLevel);
-			}
-		}).getItem());
-
-		menuSave.getItems().add(new MenuFactory().createItem(("Save Game"), e -> {
-			openSaveDialog();
-		}).getItem());
-
-		menuLoad.getItems().add(new MenuFactory().createItem("Load Game", e -> {
-			authorController.getModel().loadGame(loadFileChooser());
-			;
-		}).getItem());
-
-		return menuBar;
+	private Node buildMenu() {
+		AuthorMenu menu = new AuthorMenu(myAuthorController, myLevelEditor);
+		return menu.getContainer();
 	}
 
 	/**
@@ -106,22 +89,6 @@ public class AuthorView {
 		myTabPaneFacade.addTab(myLevelEditor.toString(), myLevelEditor.getPane());
 
 		return myTabPaneFacade.getTabPane();
-	}
-
-	private void openSaveDialog() {
-		TextInputDialog input = new TextInputDialog("Sample_Name");
-		input.setTitle("Save Dialog");
-		input.setHeaderText("Input Game Name");
-		input.setContentText("Name: ");
-		input.setOnCloseRequest(e -> {
-			authorController.getModel().saveGame(input.getResult());
-		});
-		input.showAndWait();
-	}
-
-	private File loadFileChooser() {
-		File file = new FileLoader(FileType.XML).loadImage();
-		return file;
 	}
 
 	private String getStyleSheet() {

@@ -3,7 +3,7 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import javafx.geometry.Side;
 
@@ -15,7 +15,7 @@ import javafx.geometry.Side;
  * in Mario)
  */
 
-@CharacteristicAnnotation(name="Collision Score Updater")
+@NameAnnotation(name="Collision Score Updater")
 public class CollisionScoreUpdater implements Characteristic{
 
 	private Sprite mySprite;

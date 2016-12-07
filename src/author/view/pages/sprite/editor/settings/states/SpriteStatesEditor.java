@@ -1,8 +1,8 @@
 package author.view.pages.sprite.editor.settings.states;
 
-import author.view.pages.sprite.editor.settings.SettingsViewColumn;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
+import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
 
 public class SpriteStatesEditor extends SpriteSettingsEditor {

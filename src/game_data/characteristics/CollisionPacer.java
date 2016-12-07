@@ -3,11 +3,11 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import javafx.geometry.Side;
 
-@CharacteristicAnnotation(name = "Collision Pacer")
+@NameAnnotation(name = "Collision Pacer")
 public class CollisionPacer extends Pacer implements Characteristic{
 
 	@ParameterAnnotation(parameters = {"Speed", "Sprite"})

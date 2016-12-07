@@ -2,7 +2,6 @@ package author.view.pages.sprite.editor.settings;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

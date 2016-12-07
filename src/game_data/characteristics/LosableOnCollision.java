@@ -3,11 +3,11 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import javafx.geometry.Side;
 
-@CharacteristicAnnotation(name = "Losable On Collision")
+@NameAnnotation(name = "Losable On Collision")
 public class LosableOnCollision extends Losable implements Characteristic{
 
 	private Sprite mySprite;

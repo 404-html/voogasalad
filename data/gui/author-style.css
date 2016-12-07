@@ -87,3 +87,14 @@ Box for text input
     -fx-background-color: #3a3a3a;
 }
 
+.splash-button{
+    -fx-text-fill: #db2d68;
+    -fx-background-color: #fdbe3b;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 15;
+	-fx-font-size: 24;
+}
+.splash-button:hover{
+	-fx-background-color: #9bd637;
+}
