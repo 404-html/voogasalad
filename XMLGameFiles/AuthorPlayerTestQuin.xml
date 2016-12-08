@@ -1,0 +1,540 @@
+<game__data.Game>
+  <name>AuthorPlayerTestQuin</name>
+  <myLevels>
+    <game__data.Level>
+      <name>Level1</name>
+      <width>1239</width>
+      <height>817</height>
+      <backgroundImageFilePath>lib/XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain">
+            <name>Mario Block</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>600.0</myXLocation>
+              <myYLocation>300.0</myYLocation>
+            </myLocation>
+            <preset class="game_data.sprites.Terrain">
+              <name>Mario Block</name>
+              <myLocation>
+                <myHeading>0.0</myHeading>
+                <myXLocation>0.0</myXLocation>
+                <myYLocation>0.0</myYLocation>
+              </myLocation>
+              <myWidth>100</myWidth>
+              <myHeight>100</myHeight>
+              <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+              <myXVelocity>0.0</myXVelocity>
+              <myYVelocity>0.0</myYVelocity>
+              <myXAcceleration>0.0</myXAcceleration>
+              <myYAcceleration>0.0</myYAcceleration>
+              <myCollisionHandler/>
+              <myCharacteristics/>
+              <id>ConcreteDraggableSprite1481160391750</id>
+              <myStates/>
+            </preset>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler reference="../preset/myCollisionHandler"/>
+            <myCharacteristics/>
+            <id></id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain">
+            <name>Mario Block</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>1000.0</myXLocation>
+              <myYLocation>400.0</myYLocation>
+            </myLocation>
+            <preset class="game_data.sprites.Terrain" reference="../../../game__data.sprites.Terrain/preset/preset"/>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler reference="../../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+            <myCharacteristics/>
+            <id></id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>100.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>200.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>400.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>300.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[2]/preset"/>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>500.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>1000.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>200.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>700.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>400.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>600.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain/preset"/>
+        <game__data.sprites.Player>
+          <name>Mario</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>500.0</myXLocation>
+            <myYLocation>200.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player">
+            <name>Mario</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>src/author/images/MarioSMBW.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Damager>
+                <myDamageToGive>0</myDamageToGive>
+                <mySprite class="game_data.sprites.Player" reference="../../.."/>
+              </game__data.characteristics.Damager>
+            </myCharacteristics>
+            <id>ConcreteDraggableSprite1481160280652</id>
+            <myStates>
+              <game__data.states.Score>
+                <myScore>10</myScore>
+              </game__data.states.Score>
+              <game__data.states.Health>
+                <myHealth>5</myHealth>
+                <isAlive>true</isAlive>
+              </game__data.states.Health>
+            </myStates>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>src/author/images/MarioSMBW.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Damager>
+              <myDamageToGive>0</myDamageToGive>
+              <mySprite class="game_data.sprites.Player" reference="../../../preset"/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>5</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Score>
+              <myScore>10</myScore>
+            </game__data.states.Score>
+          </myStates>
+        </game__data.sprites.Player>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>500.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>700.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Mario Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>300.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain[2]/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>lib/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+      </mySprites>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset/preset"/>
+    <game__data.sprites.Terrain>
+      <name>Block</name>
+      <myLocation>
+        <myHeading>0.0</myHeading>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>src/author/images/duvall_scary.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <myCollisionHandler/>
+      <myCharacteristics/>
+      <id></id>
+      <myStates/>
+    </game__data.sprites.Terrain>
+  </spritePresets>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

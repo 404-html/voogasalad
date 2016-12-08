@@ -29,6 +29,7 @@ public class LevelWindowPaneFactory {
 	
 	public ILevelWindowPane create(){
 		this.levelWindowPane = new LevelWindowPane();
+		this.levelWindowPane.getPane().setFocusTraversable(true);
 		acceptDraggableSprites();
 		acceptCopiedSprites();
 		manageGridDisplay();
@@ -42,21 +43,25 @@ public class LevelWindowPaneFactory {
 			Sprite sprite = findSprite(dragboard.getString());
 			this.levelWindowPane.updateGrid(sprite.getMyWidth(), sprite.getMyHeight());
 		});
-		this.levelWindowPane.getPane().setOnDragExited(e -> {
+		this.levelWindowPane.getPane().setOnMouseExited(e -> {
 			this.levelWindowPane.removeGrid();
 		});
+		
 	}
 	
 	private void acceptCopiedSprites(){
 
 		this.levelWindowPane.getPane().setOnMouseClicked((event) ->{
+			this.levelWindowPane.getPane().requestFocus();
 			if (this.levelWindowInternal.getSelectedSprite() != null && event.isControlDown()){
 				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
 			}
 			event.consume();
 		});
-		
-		this.levelWindowPane.getPane().setOnMouseMoved((event) -> {
+		this.levelWindowPane.getPane().setOnMouseEntered((event)->{
+			this.levelWindowPane.getPane().requestFocus();
+		});
+		this.levelWindowPane.getPane().setOnKeyReleased((event) -> {
 			if (!event.isControlDown()){
 				this.levelWindowPane.removeGrid();
 			}

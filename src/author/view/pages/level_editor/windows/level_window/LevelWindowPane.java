@@ -48,7 +48,6 @@ class LevelWindowPane implements ILevelWindowPane{
 			columnConstraints.setPrefWidth(width);
 			columnConstraintsSet.add(columnConstraints);
 		}
-		
 		return columnConstraintsSet;
 	}
 	
@@ -64,12 +63,13 @@ class LevelWindowPane implements ILevelWindowPane{
 
 	@Override
 	public void updateGrid(int width, int height) {
+		removeGrid();
 		this.width = width;
 		this.height = height;
 		this.gridPane = createGridPane(width, height);
 		this.levelPane.getChildren().add(gridPane);
 		
-		this.gridPane.toBack();
+		//this.gridPane.toBack();
 	}
 
 	@Override

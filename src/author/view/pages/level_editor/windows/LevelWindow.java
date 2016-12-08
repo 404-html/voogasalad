@@ -127,8 +127,9 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 	
 	private void addSpriteClickListeners(DraggableSprite draggableSprite){
-		EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
+		// EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
+			this.levelWindowPane.getPane().requestFocus();
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY){
 				openContextMenu(draggableSprite, event);
 			}
@@ -137,7 +138,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getMyWidth(), this.selectedSprite.getSprite().getMyHeight());
 				event.consume();
 			}
-			currentHandler.handle(event);
+			event.consume();
 		});
 
 	}
