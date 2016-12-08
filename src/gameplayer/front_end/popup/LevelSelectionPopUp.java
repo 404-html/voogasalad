@@ -3,23 +3,15 @@ package gameplayer.front_end.popup;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-public class LevelSelectionPopUp {
-	
-	private static final String RESOURCE_FILE = "gameplayerlabels.";
-	private static final String BUTTONLABEL = "ButtonLabels"; 
+public class LevelSelectionPopUp extends AbstractOptions {
 
-	private List<HBox> myOptions;
-	private ResourceBundle myButtonLabels;
 	private int myNumberOfLevels;
 	private int mySelectedLevel;
 	
@@ -29,24 +21,18 @@ public class LevelSelectionPopUp {
 		myNumberOfLevels = aNumLevels;
 		mySelectedLevel = 0;
 	}
-	
-	public List<HBox> addOptions() {
-		createLevelOptions();
-		return myOptions;
-	}
 
-	private void createLevelOptions() {
-		HBox levelSelection = new HBox(10);
+	protected List<HBox> setOptions() {
+		HBox levelSelection = new HBox(20);
 		ToggleGroup group = new ToggleGroup(); 
 		int levelsPerLine = 5;
 		boolean selected = true;
 		if (myNumberOfLevels < 5) levelsPerLine = myNumberOfLevels;
 		for (int j = 0; j < myNumberOfLevels; j=j+levelsPerLine) {
 			for (int i = 0; i < levelsPerLine; i++) { 
-				RadioButton button = new RadioButton("Level " + (j + i + 1));
+				RadioButton button = createRadioButton("Level " + (j + i + 1), group);
 				button.setSelected(selected);
 				selected = false;
-				button.setToggleGroup(group);
 				levelSelection.getChildren().add(button);
 			}
 		}
@@ -59,10 +45,10 @@ public class LevelSelectionPopUp {
 			}
 		});
 		myOptions.add(levelSelection);
+		return myOptions;
 	}
 	
 	public int getSelectedLevel() {
 		return mySelectedLevel;
 	}
-
 }

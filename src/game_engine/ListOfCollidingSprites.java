@@ -62,8 +62,12 @@ public class ListOfCollidingSprites {
 			updateLocation.updateSpriteParameters();
 			mySpriteImages.get(mySprite).setX(mySprite.getMyLocation().getXLocation());
 			mySpriteImages.get(mySprite).setY(mySprite.getMyLocation().getYLocation());*/
-			if(!mySprite.getName().equals(targetSprite.getName()) && (mySpriteImages.get(mySprite)
-					.getBoundsInParent()).intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
+			//System.out.println("this seems null" + mySpriteImages.get(mySprite));
+			if(!mySprite.getName().equals(targetSprite.getName()) && 
+					(mySpriteImages.get(mySprite)
+					.getBoundsInParent()).
+					intersects(mySpriteImages.get(targetSprite).
+							getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));			
 			}
 			/*mySprite.getMyLocation().setLocation(oldX2, oldY2);

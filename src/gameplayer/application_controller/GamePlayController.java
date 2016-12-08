@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.PropertyResourceBundle;
 import game_data.Game;
 import game_data.Sprite;
+import game_data.states.State;
+import game_data.states.Visible;
 import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
@@ -22,7 +24,7 @@ import javafx.stage.Stage;
 import util.XMLTranslator;
 
 public class GamePlayController extends AbstractController {
-	
+
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
@@ -34,7 +36,7 @@ public class GamePlayController extends AbstractController {
 	private File myGameFile;
 	private Map<Sprite, ImageView> mySpriteMap;
 	private int myLevel;
-	
+
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel, String aKeyInput) {
 		myLevel = aLevel;
 		myStage = aStage;
@@ -59,7 +61,7 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler = new KeyCodeHandler(aKeyInput);
 		myMovementHandler = new MovementHandler();
 	}
-	
+
 	public void displayGame() {
 		initializeScene();
 		setMenu();
@@ -85,11 +87,11 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
-//		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
-//		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
-//		if (myGameController.getMyLevel().lostLevel()) createResultScene(myButtonLabels.getString("YouLost"));
-//		if (myGameController.getMyLevel().wonLevel()) createResultScene(myButtonLabels.getString("YouWon"));
-//		myGamePlayScene.moveScreen(myMovementHandler);
+		//		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
+		//		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+		//		if (myGameController.getMyLevel().lostLevel()) createResultScene(myButtonLabels.getString("YouLost"));
+		//		if (myGameController.getMyLevel().wonLevel()) createResultScene(myButtonLabels.getString("YouWon"));
+		//		myGamePlayScene.moveScreen(myMovementHandler);
 		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) setLosingScene();
@@ -104,13 +106,21 @@ public class GamePlayController extends AbstractController {
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		updateSprites();
 	}
-	
+
 	private void updateSprites() {
+		// A sprite has been removed
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
-			getUpdatedSpriteMap(sprite);
+			for (State state : sprite.getStates()) {
+				if (state instanceof Visible && ((Visible) state).isVisibile()) {
+					getUpdatedSpriteMap(sprite);
+				} else {
+					getUpdatedSpriteMap(sprite);
+				}
+			}
 		}
+		//needs to be updated for when a sprite has been added
 	}
-	
+
 	private void getUpdatedSpriteMap(Sprite aSprite) {
 		ImageView image;
 		if (mySpriteMap.containsKey(aSprite)) {
@@ -131,7 +141,7 @@ public class GamePlayController extends AbstractController {
 		image.setX(aSprite.getMyLocation().getXLocation());
 		image.setY(aSprite.getMyLocation().getYLocation());
 	}
-	
+
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
@@ -153,13 +163,6 @@ public class GamePlayController extends AbstractController {
 			setWinningScene();
 		});
 	}
-	
-//	private void createResultScene(String aMessage) {
-//		myAnimationLoop.stop();
-//		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-//		setResultSceneHandlers((INavigationDisplay) ls, aMessage);
-//		resetStage(ls);
-//	}
 
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
@@ -170,27 +173,27 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayMainMenu();
 		});
 	}
-	
+
 	private void setHealthLabel() {
 		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
-	
-//	private void setScoreLabel() {
-//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer().getScore());
-//	}
+
+	//	private void setScoreLabel() {
+	//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer().getScore());
+	//	}
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
 		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel, myApplicationController.getUserDefaults().getKeyInputColor("default"));
 		gameControl.displayGame();
 	}
-	
+
 	private void save() {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
-	
+
 	public void setLevel(int aLevel) {
 		myLevel = aLevel;
 	}
@@ -198,14 +201,14 @@ public class GamePlayController extends AbstractController {
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}
-	
+
 	private void setWinningScene() {
 		myAnimationLoop.stop();
 		Pane winScene = myGamePlayScene.createResultScene();
 		winScene.getChildren().add(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
 		setResultSceneHandlers(winScene);
 	}
-	
+
 	private void setLosingScene() {
 		myAnimationLoop.stop();
 		Pane loseScene = myGamePlayScene.createResultScene();
@@ -224,5 +227,5 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayHighScoreScene();
 		}, ButtonDisplay.TEXT));
 	}
-	
+
 }

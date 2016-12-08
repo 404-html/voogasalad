@@ -16,36 +16,35 @@ import game_engine.actions.Damage;
 import javafx.geometry.Side;
 
 /**
- * @author austingartside
+ * @author Lucia Martos
  *
  */
-@CharacteristicAnnotation(name = "Health Power Up")
-public class HealthPowerUpper extends PowerUpper implements Characteristic{
+@CharacteristicAnnotation(name = "Score Power Up")
+public class ScorePowerUpper extends PowerUpper implements Characteristic{
 
-	private int myHealthToGain;
+	private int myScoreToGain;
 	private Action myAction;
 	
-	@ParameterAnnotation(parameters = {"Health Gained", "Sprite"})
-	public HealthPowerUpper(int healthToGain, Sprite aSprite){
+	@ParameterAnnotation(parameters = {"Score Gained", "Sprite"})
+	public ScorePowerUpper(int scoreToGain, Sprite aSprite){
 		super(aSprite);
-		myHealthToGain = healthToGain;
+		myScoreToGain = scoreToGain;
 	}
 	
-	public int getHealthToGain(){
-		return myHealthToGain;
+	public int getScoreToGain(){
+		return myScoreToGain;
 	}
 	
 	@Override
 	public Characteristic copy() {
-		return new HealthPowerUpper(myHealthToGain, mySprite);
+		return new ScorePowerUpper(myScoreToGain, mySprite);
 	}
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-
 			if (collidedSprite instanceof Player){
-				myAction = new Damage(-getHealthToGain(), collidedSprite);
+				myAction = new ScoreAdder(getScoreToGain(), collidedSprite);
 				myAction.act();
 			}		
 		}

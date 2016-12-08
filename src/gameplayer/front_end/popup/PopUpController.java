@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -17,7 +18,7 @@ public class PopUpController implements IPopUpDisplay {
 	private Stage myStage;
 	private VBox myOptions;
 	
-	public PopUpController() {
+	public PopUpController(AbstractOptions aOptions) {
 		myStage = new Stage();
 		myOptions = new VBox(40);
 		myOptions.setAlignment(Pos.CENTER);
@@ -25,9 +26,12 @@ public class PopUpController implements IPopUpDisplay {
 		File css = new File(STYLESHEET);
 		stageScene.getStylesheets().add(css.toURI().toString());
 		myStage.setScene(stageScene);
+		for (HBox option : aOptions.addOptions()) {
+			addOption(option);
+		}
 	}
 	
-	public void addOption(Node node) {
+	private void addOption(Node node) {
 		myOptions.getChildren().add(node);
 	}
 	

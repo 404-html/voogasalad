@@ -21,5 +21,8 @@ public class MoveWithHeading extends Move {
 	public void setVelocity(){
 		mySprite.setMyYVelocity(-myVelocity);
 	}
+	public void stop(){
+		return;
+	}
 
 }

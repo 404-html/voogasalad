@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import game_data.sprites.Player;
+import game_engine.actions.Action;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -24,9 +25,12 @@ public class Level extends GameObject{
 	private String backgroundImageFilePath;
 	private Player myPlayerSprite;
 	Set<Sprite> mySprites;
+	private List<Sprite>myControllableSpriteList=new ArrayList<Sprite>();
+
 	Map<KeyCode, KeyCommand> myKeyCommands;
 	
 	public Level(String aName, int width, int height, String backgroundImageFilePath){
+		System.out.println("instantiating level");
 		setName(aName);
 		didLose = false;
 		didWin = false;
@@ -35,8 +39,11 @@ public class Level extends GameObject{
 		this.backgroundImageFilePath = backgroundImageFilePath;
 		mySprites = new HashSet<Sprite>();
 		myKeyCommands = new HashMap<KeyCode, KeyCommand>();
+		myControllableSpriteList=new ArrayList<Sprite>();
+		setMyControllableSpriteList();
 	}
 	
+
 	public Player getMainPlayer(){
 		return myPlayerSprite;
 	}
@@ -75,6 +82,9 @@ public class Level extends GameObject{
 	
 	public void addNewSprite(Sprite  aSprite){
 		mySprites.add(aSprite);
+		if(aSprite.getControllable().isControllable()){
+			myControllableSpriteList.add(aSprite);
+		}
 		this.notifyListeners();
 	}
 	
@@ -91,14 +101,30 @@ public class Level extends GameObject{
 	public void removeSprite(Sprite aSprite){
 		if(mySprites.contains(aSprite)){
 			mySprites.remove(aSprite);
+			if(aSprite.getControllable().isControllable()){
+				myControllableSpriteList.remove(aSprite);
+			}
 			this.notifyListeners();
 		}
 	}
 
 	public List<Sprite> getMySpriteList() {
+
 		return new ArrayList<>(mySprites);
 	}
-	
+	public void setMyControllableSpriteList(){
+		List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
+		//List<Sprite> mySpriteList = getMySpriteList();
+		for(Sprite s: mySprites){
+			if(s.getControllable()!=null && s.getControllable().isControllable()){
+				myControllableSpriteList.add(s);
+			}
+		}
+		this.myControllableSpriteList=myControllableSpriteList;
+	}
+	public List<Sprite> getMyControllableSpriteList(){
+		return myControllableSpriteList;
+	}
 	public void setLevelLost(){
 		didLose = true;
 	}

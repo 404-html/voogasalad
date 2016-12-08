@@ -1,7 +1,10 @@
 package game_engine.actions;
 
 import game_data.Sprite;
-
+/**
+ * @author Katrina
+ *
+ */
 public class Pace implements Action {
 	//	private int direction;
 	private Sprite mySprite;
