@@ -79,7 +79,7 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 		for (State state : playerSprite.getStates()) {
 			if (state instanceof Visible) {
 				hasVisibility = true;
-				System.out.println("Should be invisible");
+//				System.out.println("Should be invisible");
 				((Visible) state).setVisibility((timeElapsed.intValue()) % GameResources.FLASH_RATE.getDoubleResource() == 0);
 
 			}

@@ -109,18 +109,18 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
-			System.out.println("Number of power ups " + myCurrentPowerUps.size());
+//			System.out.println("Number of power ups " + myCurrentPowerUps.size());
 			if (powerUp instanceof TemporalPowerUpper) {
 				((TemporalPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this,
 						myCurrentPowerUps.get(powerUp));
-				System.out.println("Time left " + myCurrentPowerUps.get(powerUp));
+//				System.out.println("Time left " + myCurrentPowerUps.get(powerUp));
 			}
 		}
 	}
 
 	public static void activateSingularPowerUp(Characteristic powerUp, Sprite spriteToActOn, double timeRemaining) {
 		// BUGGY!!!!
-		System.out.println("Time left " + timeRemaining);
+//		System.out.println("Time left " + timeRemaining);
 
 		if (powerUp instanceof TemporalPowerUpper) {
 			// System.out.println("LUCIA");
