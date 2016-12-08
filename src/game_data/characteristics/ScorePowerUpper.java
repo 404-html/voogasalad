@@ -1,15 +1,15 @@
 package game_data.characteristics;
 import game_engine.IUpdateStatesAndPowerUps;
+
 import game_engine.actions.*;
 
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
@@ -19,7 +19,7 @@ import javafx.geometry.Side;
  * @author Lucia Martos
  *
  */
-@CharacteristicAnnotation(name = "Score Power Up")
+@NameAnnotation(name = "Score Power Up")
 public class ScorePowerUpper extends PowerUpper implements Characteristic{
 
 	private int myScoreToGain;
