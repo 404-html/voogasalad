@@ -110,8 +110,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.addNewSprite(new Terrain(new Location(0, 600), 200, 50, "blockmoving", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(0, 700), 200, 50, "blockmoving", "author/images/betterblock.png"));
 		myLevel.addNewSprite(new Terrain(new Location(0, 800), 200, 50, "blockmoving", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(400, 900), 200, 50, "blockmoving", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(000, 1000), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(400, 900), 200, 50, "blockmoving2", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(000, 1000), 200, 50, "blockmoving2", "author/images/betterblock.png"));
 		
 		//myLevel.addNewSprite(new Enemy(new Location(1226, 401), 80, 80, "goomba1", "author/images/angry_goomba.png"));
 		//myLevel.addNewSprite(new Enemy(new Location(1426, 401), 80, 80, "goomba2", "author/images/angry_goomba.png"));
@@ -119,57 +119,21 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		//myLevel.addNewSprite(new Item(new Location(4040, 30), 50, 100, "flag", "author/images/victory_flag.png"));
 		for (Sprite s : myLevel.getMySpriteList()) {
 			if (!(s instanceof Player || s instanceof Enemy)) {
-				// if(s.getName().equals("block1")){
-				// s.addCharacteristic(new Bouncer(100, s));
-				// }
-				// else{
-				// s.addCharacteristic(new Impassable(s));
-//				if (s.getName().equals("block5000")) {
-//					s.addCharacteristic(new Damager(25, s));
-//				}
-				// }
 				if(s.getName().equals("blockmoving")){
 					//s.addCharacteristic(new BouncerTop(500, s));
 					s.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new StickyTopVertical(s));
+					//s.addCharacteristic(new StickyTopVertical(s));
+					s.addCharacteristic(new BouncerTop(8000,s));
 					s.setMyRandomMoveHandler(new RandomMoveHandler(true));
 				}
 				else if(s.getName().equals("blockmoving2")) {
-					//s.addCharacteristic(new BouncerTop(500, s));
-					//s.addCharacteristic(new TransparentBottomImpassable(s));
-					s.addCharacteristic(new Impassable(s));
-					s.addCharacteristic(new StickyTopHorizontal(s));
-				}
-				else if(!s.getName().equals("flag")){
-					s.addCharacteristic(new Impassable(s));
-				}
-				if(s.getName().equals("flag")){
-					s.addCharacteristic(new Winnable(s));
+					s.addCharacteristic(new TransparentBottomImpassable(s));
+					s.addCharacteristic(new BouncerTop(8000,s));
+					s.setMyRandomMoveHandler(new RandomMoveHandler(true));
+					s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500,s));
+					s.setMyXVelocity(200);
 				}
 				s.addState(new Physics(new SpritePhysics(0.0)));
-			}
-			if(s instanceof Enemy && !s.getName().equals("goomba2")){
-				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500, s));
-				s.setMyXVelocity(100);
-				s.addCharacteristic(new Damager(1, s));
-				s.addState(new Physics(new SpritePhysics()));
-			}
-			if(s.getName().equals("goomba2")){
-				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500, s));
-				s.setMyXVelocity(300);
-				s.addCharacteristic(new Damager(1, s));
-				s.addState(new Physics(new SpritePhysics()));
-			}
-			if(s.getName().equals("blockmoving")){
-//				s.addCharacteristic(new PacerAlternative("VERTICAL", 20000, s));
-//				s.setMyYVelocity(-100);
-			}
-			if(s.getName().equals("blockmoving2")){
-				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 300, s));
-				s.setMyXVelocity(200);
-			}
-			if(s.getName().equals("block123123123")){
-				s.setMyRandomMoveHandler(new RandomMoveHandler(true));
 			}
 		}
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
