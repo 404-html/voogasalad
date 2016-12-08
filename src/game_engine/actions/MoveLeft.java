@@ -2,7 +2,10 @@ package game_engine.actions;
 
 import game_data.Location;
 import game_data.Sprite;
-
+/**
+ * @author Katrina
+ *
+ */
 public class MoveLeft extends Move {
 
 	public MoveLeft(Sprite aSprite, double aVelocity) {
@@ -16,5 +19,10 @@ public class MoveLeft extends Move {
 	}*/
 	public void setVelocity(){
 		mySprite.setMyXVelocity(-myVelocity);
+	}
+	public void stop(){
+		if(mySprite.getMyXVelocity()<0){
+			mySprite.setMyXVelocity(mySprite.getMyXVelocity()+myVelocity);
+		}
 	}
 }

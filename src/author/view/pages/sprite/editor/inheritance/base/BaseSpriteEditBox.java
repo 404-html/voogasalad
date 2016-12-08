@@ -72,8 +72,7 @@ public class BaseSpriteEditBox {
 	public final Location getLocation(){
 		return new Location(
 				myXPositionField.getDouble(),
-				myYPositionField.getDouble(),
-				myHeadingField.getDouble()
+				myYPositionField.getDouble()
 				);
 
 	}
@@ -81,7 +80,6 @@ public class BaseSpriteEditBox {
 	protected final void setLocation(Location aLocation){
 		myXPositionField.setValue(aLocation.getXLocation());
 		myYPositionField.setValue(aLocation.getYLocation());
-		myHeadingField.setValue(aLocation.getMyHeading());
 	}
 	
 	protected final String getImageFile(){

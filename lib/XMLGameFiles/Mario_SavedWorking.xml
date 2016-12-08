@@ -10,7 +10,6 @@
         <game__data.sprites.Player>
           <name>Mario</name>
           <myLocation>
-            <myHeading>0.0</myHeading>
             <myXLocation>389.5</myXLocation>
             <myYLocation>300</myYLocation>
           </myLocation>
@@ -32,7 +31,6 @@
     <game__data.sprites.Player>
       <name>No Name</name>
       <myLocation>
-        <myHeading>0.0</myHeading>
         <myXLocation>0.0</myXLocation>
         <myYLocation>0.0</myYLocation>
       </myLocation>
