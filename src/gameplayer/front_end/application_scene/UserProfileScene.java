@@ -6,39 +6,48 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.ImageViewBuilder;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class UserProfileScene extends AbstractNavigationPlayerScene {
 	
 	private FacebookInformation myUserInformation;
 	private GUIGenerator myGUIGenerator; 
 	private String myUserName;
-	private String myPictureUrl;
+	private String myPictureUrl = "gui/blank_profile_page.jpeg";
+	private double myWidth;
+	private double myHeight;
+	private Pane myPane;
 
 	public UserProfileScene(String aName, String aUrl, double aWidth, double aHeight) {
 		super(aWidth, aHeight);
 		myGUIGenerator = new GUIGenerator();
 		myUserName = aName;
-		myPictureUrl = aUrl;
+		myWidth = aWidth;
+		myHeight = aHeight;
+		myPane = new Pane();
+		if (aUrl != null) myPictureUrl = aUrl;
 	}
 
 	@Override
 	public Scene init(){
 		//getRoot().setCenter(addNodes());
-		getRoot().setCenter(addTop());
-		System.out.println(myScene);
+		addTop();
+		getRoot().setCenter(myPane);
 		return myScene;
 	}
 
-	private VBox addTop() {
-		getOptions().getChildren().add(myGUIGenerator.createLabel(myUserName, 0, 0));
-		getOptions().setAlignment(Pos.TOP_LEFT);
-        
-        ImageView profilePicture = new ImageView(new Image(myPictureUrl));
-         
-        getOptions().getChildren().add(profilePicture);
-		//myOptions.bin
-		return getOptions();
+	private void addTop() {
+		HBox hbox = new HBox(BOX_INSETS); 
+		ImageView profilePicture = new ImageView(new Image(myPictureUrl));
+		profilePicture.setFitWidth(myWidth * .1);
+		profilePicture.setPreserveRatio(true);
+		//profilePicture.setFitHeight(myHeight * .1);
+		hbox.getChildren().add(profilePicture);
+		hbox.getChildren().add(myGUIGenerator.createLabel(myUserName, 0, 0));
+		hbox.setAlignment(Pos.TOP_LEFT);
+		//hbox.setLayoutX(myWidth * .1);
+		//hbox.setLayoutY(myHeight * .1);
+		myPane.getChildren().add(hbox);
 	}
 }
