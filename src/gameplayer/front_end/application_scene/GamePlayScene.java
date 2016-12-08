@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
@@ -17,6 +18,8 @@ public class GamePlayScene extends AbstractPlayerScene {
 	private AnimationPane myGamePlay;
 	private HeadsUpDisplay myHeadsUpDisplay;
 	private Background myBackgroundDisplay;
+	private ResultScene myResultScene;
+	private String myBackgroundFilePath;
 	
 	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
 		myStack = new StackPane();
@@ -24,7 +27,23 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myGamePlay = new AnimationPane();
 		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight, aFontColor);
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
+		myResultScene = new ResultScene();
 		initializeScene();
+	}
+	
+	public Pane createResultScene() {
+		myGamePlay.setOpacity(0.5);
+		myStack.getChildren().add(myResultScene.getPane());
+		return myResultScene.getPane();
+	}
+	
+	public double getAnimationScreenXPosition() {
+		return myGamePlay.getAnimationScreenXPosition();
+	}
+	
+	
+	public double getAnimationScreenYPosition() {
+		return myGamePlay.getAnimationScreenYPosition();
 	}
 	
 	@Override
@@ -43,9 +62,9 @@ public class GamePlayScene extends AbstractPlayerScene {
 	public void addImageToView(ImageView aImage) {
 		myGamePlay.addImageToView(aImage);
 	}
-
-	public void changeBackground(Color red) {
-		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(red, myStack.getWidth(), myStack.getHeight());
+	
+	public void changeBackground(Color aColor) {
+		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aColor, myStack.getWidth(), myStack.getHeight());
 		myStack.setBackground(myBackgroundDisplay);
 	}
 
@@ -69,6 +88,12 @@ public class GamePlayScene extends AbstractPlayerScene {
 	private void initializeScene() {
 		myStack.getChildren().add(myGamePlay.init());
 		myStack.getChildren().add(myHeadsUpDisplay.init());
+		myStack.setBackground(myBackgroundDisplay);
+	}
+
+	@Override
+	public void setBackground(String aFilePath, double aWidth, double aHeight) {
+		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aFilePath, myStack.getWidth(), myStack.getHeight());
 		myStack.setBackground(myBackgroundDisplay);
 	}
 }

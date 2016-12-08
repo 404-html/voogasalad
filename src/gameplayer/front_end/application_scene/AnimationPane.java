@@ -42,6 +42,18 @@ public class AnimationPane {
 		myGamePlayCanvas.setTranslateY(aHandler.getYMovement());
 	}
 	
+	public void setOpacity(double aOpacity) {
+		myGamePlayCanvas.setOpacity(aOpacity);
+	}
+	
+	public double getAnimationScreenXPosition() {
+		return myGamePlayCanvas.getTranslateX();
+	}
+	
+	public double getAnimationScreenYPosition() {
+		return myGamePlayCanvas.getTranslateY();
+	}
+	
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}

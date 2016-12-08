@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import gameplayer.application_controller.Choosable;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
+import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,9 +23,11 @@ import javafx.scene.layout.HBox;
 public class GUIGenerator implements IGUIGenerator {
 	
 	private ButtonFactory myButtonBuilder;
-	
+	private ComboBoxFactory myComboBoxBuilder; 
+
 	public GUIGenerator() {
 		myButtonBuilder = new ButtonFactory();
+		myComboBoxBuilder = new ComboBoxFactory();
 	}
 	
 	@Override
@@ -106,4 +109,9 @@ public class GUIGenerator implements IGUIGenerator {
 		}
 		return menu;
 	}
+
+//	@Override
+//	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
+//		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
+//	}
 }

@@ -61,9 +61,14 @@ public class UpdateStates {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
 	private Map<KeyCode, Action> myKeyReleasedMap;
+	private double myScreenWidth;
+	private double myScreenHeight;
+	private double myScreenXPosition;
+	private double myScreenYPosition;
+
 
 	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
-			Map<Sprite, ImageView> mySpriteImages) {
+			Map<Sprite, ImageView> mySpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
 		this.myLevel = aLevel;
 		this.mySpriteList = myLevel.getMySpriteList();
 		this.timeElapsed = timeElapsed;
@@ -73,6 +78,10 @@ public class UpdateStates {
 		this.mySpriteImages=mySpriteImages;
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
+		this.myScreenWidth = aScreenWidth;
+		this.myScreenHeight = aScreenHeight;
+		this.myScreenXPosition = aScreenXPosition;
+		this.myScreenYPosition = aScreenYPosition;
 		generateDefaultKeyPressedMap();
 		generateDefaultKeyReleasedMap();
 		runKeyCalls();
