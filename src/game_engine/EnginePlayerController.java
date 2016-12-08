@@ -87,7 +87,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		int k =842;
 		for (int g = 1926; g < 4226; g += 300) {
-			//myLevel.addNewSprite(new Terrain(new Location(g, 130), 100, 100, "block" + k, "author/images/betterblock.png"));
+			myLevel.addNewSprite(new Terrain(new Location(g, 130), 100, 100, "block" + k, "author/images/betterblock.png"));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
 			// Bouncer(20, myLevel.getMySpriteList().get(j)));
 			// System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
@@ -100,10 +100,18 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		//myLevel.addNewSprite(new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 		//myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
-		myLevel.addNewSprite(new Terrain(new Location(326, 200), 100, 100, "block123123123", "author/images/betterblock.png"));
+		//myLevel.addNewSprite(new Terrain(new Location(0, 0), 200, 50, "block123123123", "author/images/betterblock.png"));
 		
-		myLevel.addNewSprite(new Terrain(new Location(600, 500), 200, 25, "blockmoving", "author/images/betterblock.png"));
-		//myLevel.addNewSprite(new Terrain(new Location(1350, 250), 200, 25, "blockmoving2", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(0, 100), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(0, 200), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(0, 300), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(200, 400), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(600, 500), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(0, 600), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(0, 700), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(0, 800), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(400, 900), 200, 50, "blockmoving", "author/images/betterblock.png"));
+		myLevel.addNewSprite(new Terrain(new Location(000, 1000), 200, 50, "blockmoving", "author/images/betterblock.png"));
 		
 		//myLevel.addNewSprite(new Enemy(new Location(1226, 401), 80, 80, "goomba1", "author/images/angry_goomba.png"));
 		//myLevel.addNewSprite(new Enemy(new Location(1426, 401), 80, 80, "goomba2", "author/images/angry_goomba.png"));
@@ -124,6 +132,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 					//s.addCharacteristic(new BouncerTop(500, s));
 					s.addCharacteristic(new TransparentBottomImpassable(s));
 					s.addCharacteristic(new StickyTopVertical(s));
+					s.setMyRandomMoveHandler(new RandomMoveHandler(true));
 				}
 				else if(s.getName().equals("blockmoving2")) {
 					//s.addCharacteristic(new BouncerTop(500, s));
@@ -152,8 +161,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				s.addState(new Physics(new SpritePhysics()));
 			}
 			if(s.getName().equals("blockmoving")){
-				s.addCharacteristic(new PacerAlternative("VERTICAL", 20000, s));
-				s.setMyYVelocity(-100);
+//				s.addCharacteristic(new PacerAlternative("VERTICAL", 20000, s));
+//				s.setMyYVelocity(-100);
 			}
 			if(s.getName().equals("blockmoving2")){
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 300, s));

@@ -27,18 +27,29 @@ public class RandomMoveHandler {
 		myScreenHeight = aMyScreenHeight;
 		myScreenXPosition = aMyScreenXPosition*-1; //switch to different coordinates – left side
 		myScreenYPosition = aMyScreenYPosition*-1; //switching to different coordinates – top side
+
+//		if(onScreen()) {
+//			onScreenOnceSinceJump = true;
+//			return;
+//		}
+//		if(!onScreenOnceSinceJump) {
+//			return;
+//		}
 		
-		if(onScreen()) {
-			onScreenOnceSinceJump = true;
-			return;
+		if(objectPassed()) {
+			setSpritesNewLocation();
 		}
-		if(!onScreenOnceSinceJump) {
-			return;
+		
+//		onScreenOnceSinceJump = false;
+		
+	}
+	
+	private boolean objectPassed() {
+		if(verticalMove) {
+			return mySprite.getMyLocation().getYLocation() > myScreenYPosition+myScreenHeight;
+		} else {
+			return mySprite.getMyLocation().getXLocation()+mySprite.getMyWidth() < myScreenXPosition;
 		}
-		
-		setSpritesNewLocation();
-		onScreenOnceSinceJump = false;
-		
 	}
 	
 	private void setSpritesNewLocation() {
