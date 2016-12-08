@@ -41,7 +41,6 @@ public class AuthorView {
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
-		loadDefaultSprites();
 	}
 
 	private void initializeView() {
@@ -55,10 +54,7 @@ public class AuthorView {
 		this.myPane.getChildren().clear();
 		initializeView();
 	}
-	
-	public void loadDefaultSprites(){
-		this.mySpritesPage.loadDefaultSprites();
-	}
+
 	
 	/**
 	 * Returns Toolbar built for primary AuthorScene

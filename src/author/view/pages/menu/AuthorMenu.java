@@ -78,9 +78,9 @@ public class AuthorMenu {
 
 	private void addLoadMenuItem(Menu menuLoad) {
 		menuLoad.getItems().add(new MenuFactory().createItem("Load Game", e -> {
-			File aFile =loadFileChooser();
+			File aFile = loadFileChooser();
 			if (aFile != null)
-				myAuthorController.getModel().loadGame(loadFileChooser());
+				myAuthorController.getModel().loadGame(aFile);
 		}).getItem());
 	}
 
