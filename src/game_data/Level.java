@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import game_data.sprites.Player;
+import game_data.states.LevelWon;
 import game_engine.actions.Action;
 import javafx.scene.input.KeyCode;
 
@@ -81,6 +82,10 @@ public class Level extends GameObject{
 	
 	public void addNewSprite(Sprite  aSprite){
 		mySprites.add(aSprite);
+		if(aSprite instanceof Player){
+			setPlayerSprite((Player) aSprite);
+			aSprite.addState(new LevelWon());
+		}
 		if(aSprite.getControllable() != null) {
 			if(aSprite.getControllable().isControllable()){
 				myControllableSpriteList.add(aSprite);

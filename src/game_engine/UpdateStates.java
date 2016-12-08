@@ -281,7 +281,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			
 			for (Characteristic myCharacteristic : characteristics) {
 				myCharacteristic.execute(myCollisionMap);
-
 			}
 		}
 	}

@@ -103,10 +103,10 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		// temporary to see if moving the player works, hardcoded
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
-				myLevel.setPlayerSprite((Player)s);
+				//myLevel.setPlayerSprite((Player)s);
 				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 				myLevel.getMainPlayer().addState(new Health(200));
-				myLevel.getMainPlayer().addState(new LevelWon());
+				//myLevel.getMainPlayer().addState(new LevelWon());
 				myLevel.getMainPlayer()
 						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
 		
