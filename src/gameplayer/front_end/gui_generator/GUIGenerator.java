@@ -58,12 +58,13 @@ public class GUIGenerator implements IGUIGenerator {
 	@Override
 	public ComboBox<HBox> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
 		ComboBox<HBox> box = new ComboBox<HBox>();
+		box.setPromptText("CHOOSE GAME");
 		List<HBox> options = new ArrayList<HBox>();
 		for(int i = 0; i < aListOfNames.size(); i++){
 			HBox hbox = new HBox();
 			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
 				System.out.println("here");
-				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 75));
+				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
 			} else {
 				hbox.getChildren().add(new ImageView());
 			}
@@ -75,8 +76,12 @@ public class GUIGenerator implements IGUIGenerator {
 		box.setPromptText("CHOOSE GAME");
 		box.setEditable(true);        
 		box.setOnAction(e -> {
-			Label label = (Label) box.getSelectionModel().getSelectedItem().getChildren().get(1);
-		    aChooser.choose(label.getText());
+			System.out.println(box.getSelectionModel().getSelectedItem());
+			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
+			System.out.println(label);
+			//label.setId("combobox-label");
+		    aChooser.choose(label);
+		    box.setPromptText(label);
 		});
 		return box;
 	}

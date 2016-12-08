@@ -1,6 +1,7 @@
 package gameplayer.application_controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -108,6 +109,7 @@ public class GamePlayController extends AbstractController {
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			getUpdatedSpriteMap(sprite);
+			
 		}
 	}
 	

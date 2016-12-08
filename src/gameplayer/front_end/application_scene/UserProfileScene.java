@@ -1,13 +1,17 @@
 package gameplayer.front_end.application_scene;
 
 import gameplayer.back_end.facebook.FacebookInformation;
+import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class UserProfileScene extends AbstractNavigationPlayerScene {
 	
@@ -26,6 +30,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		myWidth = aWidth;
 		myHeight = aHeight;
 		myPane = new Pane();
+		myPane.setId("glass");
 		if (aUrl != null) myPictureUrl = aUrl;
 	}
 
@@ -39,12 +44,15 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 
 	private void addTop() {
 		HBox hbox = new HBox(BOX_INSETS); 
+		hbox.setOpacity(1);
 		ImageView profilePicture = new ImageView(new Image(myPictureUrl));
 		profilePicture.setFitWidth(myWidth * .1);
 		profilePicture.setPreserveRatio(true);
 		//profilePicture.setFitHeight(myHeight * .1);
 		hbox.getChildren().add(profilePicture);
-		hbox.getChildren().add(myGUIGenerator.createLabel(myUserName, 0, 0));
+		Label userName = myGUIGenerator.createLabel(myUserName, 0, 0);
+		userName.setId("heading");
+		hbox.getChildren().add(userName);
 		hbox.setAlignment(Pos.TOP_LEFT);
 		//hbox.setLayoutX(myWidth * .1);
 		//hbox.setLayoutY(myHeight * .1);
