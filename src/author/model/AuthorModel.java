@@ -48,7 +48,9 @@ public abstract class AuthorModel implements IAuthorModel{
 	public void newGameWindow(){
 		IGameObjectEditWindowExternal<Game> gameObjectEditWindowExternal = new GameEditWindowFactory().create();
 		Game newGame = gameObjectEditWindowExternal.getResult();
-
+		if(newGame != null){
+			createNewGame(newGame.getName());
+		}
 	}
 
 	@Override

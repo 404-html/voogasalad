@@ -1,7 +1,6 @@
 <game__data.sprites.Terrain>
-  <name>Mario-Block</name>
+  <name>Block</name>
   <myLocation>
-    <myHeading>0.0</myHeading>
     <myXLocation>0.0</myXLocation>
     <myYLocation>0.0</myYLocation>
   </myLocation>
@@ -12,12 +11,19 @@
   <myYVelocity>0.0</myYVelocity>
   <myXAcceleration>0.0</myXAcceleration>
   <myYAcceleration>0.0</myYAcceleration>
+  <terminalXVel>600.0</terminalXVel>
+  <terminalYVel>600.0</terminalYVel>
   <myCollisionHandler/>
   <myCharacteristics>
     <game__data.characteristics.Impassable>
       <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+      <movesThroughBottom>false</movesThroughBottom>
     </game__data.characteristics.Impassable>
   </myCharacteristics>
+  <myControllable>
+    <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+    <isControllable>false</isControllable>
+  </myControllable>
   <id></id>
   <myStates/>
 </game__data.sprites.Terrain>

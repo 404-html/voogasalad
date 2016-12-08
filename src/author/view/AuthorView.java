@@ -41,7 +41,7 @@ public class AuthorView {
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
-		loadDefaultSprites();
+		//loadDefaultSprites();
 	}
 
 	private void initializeView() {
