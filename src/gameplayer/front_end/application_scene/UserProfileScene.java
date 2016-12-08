@@ -4,6 +4,9 @@ import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.ImageViewBuilder;
 import javafx.scene.layout.VBox;
 
 public class UserProfileScene extends AbstractNavigationPlayerScene {
@@ -11,11 +14,13 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 	private FacebookInformation myUserInformation;
 	private GUIGenerator myGUIGenerator; 
 	private String myUserName;
+	private String myPictureUrl;
 
-	public UserProfileScene(String aName, double aWidth, double aHeight) {
+	public UserProfileScene(String aName, String aUrl, double aWidth, double aHeight) {
 		super(aWidth, aHeight);
 		myGUIGenerator = new GUIGenerator();
 		myUserName = aName;
+		myPictureUrl = aUrl;
 	}
 
 	@Override
@@ -29,6 +34,10 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 	private VBox addTop() {
 		getOptions().getChildren().add(myGUIGenerator.createLabel(myUserName, 0, 0));
 		getOptions().setAlignment(Pos.TOP_LEFT);
+        
+        ImageView profilePicture = new ImageView(new Image(myPictureUrl));
+         
+        getOptions().getChildren().add(profilePicture);
 		//myOptions.bin
 		return getOptions();
 	}

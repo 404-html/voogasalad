@@ -25,7 +25,7 @@ public class FacebookInformation {
 	}
 	
 	public String getProfilePicture() {
-		return myUser.getPicture().getUrl();
+		return myPictureUrl;
 	}
 	
 	public void authenticatePlayer() {
@@ -55,8 +55,12 @@ public class FacebookInformation {
 				JsonObject picture = 
 					      fbClient.fetchObject("me/picture/data", 
 						      JsonObject.class, Parameter.with("redirect","false"));
-				//System.out.println(myUser);
+				//System.out.println(picture);
 				//myPictureUrl = picture.getString("url");
+				
+				
+				myPictureUrl = picture.getJsonObject("data").getString("url");
+				
 				break;
 			}
 			

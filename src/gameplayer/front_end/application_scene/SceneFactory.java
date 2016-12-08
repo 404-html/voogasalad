@@ -13,7 +13,7 @@ public class SceneFactory {
 		return null;
 	}
 	
-	public IDisplay create(String aName, double aWidth, double aHeight) {
-		return new UserProfileScene(aName, aWidth, aHeight);
+	public IDisplay create(String aName, String aUrl, double aWidth, double aHeight) {
+		return new UserProfileScene(aName, aUrl, aWidth, aHeight);
 	}
 }

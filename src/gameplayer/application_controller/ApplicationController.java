@@ -110,7 +110,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void displayUserScene() {
-		myCurrentDisplay = mySceneBuilder.create(myInformationController.getUser(), myStage.getWidth(), myStage.getHeight());
+		myCurrentDisplay = mySceneBuilder.create(myInformationController.getUser(), myInformationController.getPictureUrl(), myStage.getWidth(), myStage.getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
 		setUserProfileButtonHandlers((INavigationDisplay) myCurrentDisplay);
