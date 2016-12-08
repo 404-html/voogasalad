@@ -27,9 +27,8 @@ public class Level extends GameObject {
 	private List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
 
 	Map<KeyCode, KeyCommand> myKeyCommands;
-
-	public Level(String aName, int width, int height, String backgroundImageFilePath) {
-		System.out.println("instantiating level");
+	
+	public Level(String aName, int width, int height, String backgroundImageFilePath){
 		setName(aName);
 		didLose = false;
 		didWin = false;
@@ -80,8 +79,8 @@ public class Level extends GameObject {
 
 	public void addNewSprite(Sprite aSprite) {
 		mySprites.add(aSprite);
-		if (aSprite.getControllable() != null) {
-			if (aSprite.getControllable().isControllable()) {
+		if(aSprite.getControllable() != null) {
+			if(aSprite.getControllable().isControllable()){
 				myControllableSpriteList.add(aSprite);
 			}
 		}

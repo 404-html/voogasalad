@@ -20,6 +20,7 @@ import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -131,7 +132,8 @@ public class GamePlayController extends AbstractController {
 			image = mySpriteMap.get(aSprite);
 			setImageProperties(aSprite, image);
 		} else {
-			image = new ImageView(aSprite.getMyImagePath());
+			//System.out.println(aSprite.getMyImagePath());
+			image = new ImageView(new File(aSprite.getMyImagePath()).toURI().toString());
 			setImageProperties(aSprite, image);
 			mySpriteMap.put(aSprite, image);
 		}

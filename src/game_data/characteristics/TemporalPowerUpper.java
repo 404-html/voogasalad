@@ -7,7 +7,7 @@ import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
 
 /**
- *
+ *@author Lucia Martos
  */
 
 @NameAnnotation(name = "Temporal Power Up")
