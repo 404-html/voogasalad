@@ -1,0 +1,19 @@
+<game__data.sprites.Player>
+  <name>No Name</name>
+  <myLocation>
+    <myHeading>0.0</myHeading>
+    <myXLocation>0.0</myXLocation>
+    <myYLocation>0.0</myYLocation>
+  </myLocation>
+  <myWidth>0</myWidth>
+  <myHeight>0</myHeight>
+  <myImagePath>data/images/sprite_images/Empty.png</myImagePath>
+  <myXVelocity>0.0</myXVelocity>
+  <myYVelocity>0.0</myYVelocity>
+  <myXAcceleration>0.0</myXAcceleration>
+  <myYAcceleration>0.0</myYAcceleration>
+  <myCollisionHandler/>
+  <myCharacteristics/>
+  <id></id>
+  <myStates/>
+</game__data.sprites.Player>
