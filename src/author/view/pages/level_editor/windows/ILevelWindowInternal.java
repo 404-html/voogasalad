@@ -5,7 +5,7 @@ package author.view.pages.level_editor.windows;
 
 import java.util.Set;
 
-import game_data.Level;
+import author.model.game_observables.draggable_sprite.DraggableSprite;
 import javafx.beans.property.IntegerProperty;
 
 /**
@@ -18,5 +18,8 @@ public interface ILevelWindowInternal extends ILevelEditorWindowInternal{
 	
 	public IntegerProperty getVerticalPanes();
 	
-	public Set<Level> getSelectedSprites();
+	public Set<DraggableSprite> getSelectedSprites();
+	
+	public DraggableSprite getSelectedSprite();
+
 }

@@ -47,7 +47,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private IntegerProperty horizontalPanes = new SimpleIntegerProperty(1);
 	private IntegerProperty verticalPanes = new SimpleIntegerProperty(1);
 	private Map<Level, ILevelWindowPane> levelPanes = new HashMap<>();
-	private Set<Level> selectedSprites = new HashSet<>();
+	private Set<DraggableSprite> selectedSprites = new HashSet<>();
+	private DraggableSprite selectedSprite;
 
 	public LevelWindow(IAuthorController authorController) {
 		super(authorController);
@@ -55,7 +56,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private void createScroller() {
-		this.levelWindowPane = new LevelWindowPaneFactory((ILevelEditorWindowInternal) this, this.getController())
+		this.levelWindowPane = new LevelWindowPaneFactory((ILevelWindowInternal) this, this.getController())
 				.create();
 		this.levelScroller = new LevelWindowScrollerFactory((ILevelEditorWindowInternal) this).create();
 		this.levelScroller.setContent(this.levelWindowPane.getPane());
@@ -81,7 +82,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		
 		if (!this.levelPanes.containsKey(aLevel)) {
 
-			this.levelWindowPane = new LevelWindowPaneFactory((ILevelEditorWindowInternal) this, this.getController())
+			this.levelWindowPane = new LevelWindowPaneFactory((ILevelWindowInternal) this, this.getController())
 					.create();
 			this.levelPanes.put(aLevel, this.levelWindowPane);
 			this.levelScroller.setContent(this.levelWindowPane.getPane());
@@ -118,21 +119,27 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			ConcreteMovableSprite draggableSprite = new ConcreteMovableSprite(sprite, sprite.getPreset());
 			this.addMovableSprite(draggableSprite);
 //			DragResizeMod.makeResizable(draggableSprite.getDraggableItem(), null);
-			addRightClickListener(draggableSprite);
+			addSpriteClickListeners(draggableSprite);
+			
 			this.levelWindowPane.getPane().getChildren().addAll(draggableSprite.getDraggableItem());
 		});
+		
 	}
 	
-	private void addRightClickListener(DraggableSprite draggableSprite){
+	private void addSpriteClickListeners(DraggableSprite draggableSprite){
 		EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY){
 				openContextMenu(draggableSprite, event);
 			}
-			else{
-				currentHandler.handle(event);
+			else if (event.isControlDown()){
+				this.selectedSprite = draggableSprite;
+				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getMyWidth(), this.selectedSprite.getSprite().getMyHeight());
+				event.consume();
 			}
+			currentHandler.handle(event);
 		});
+
 	}
 	
 	private void removeSprites(Set<Sprite> removedSprites){
@@ -183,7 +190,12 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	@Override
-	public Set<Level> getSelectedSprites() {
+	public Set<DraggableSprite> getSelectedSprites() {
 		return this.selectedSprites;
+	}
+
+	@Override
+	public DraggableSprite getSelectedSprite() {
+		return this.selectedSprite;
 	}
 }
