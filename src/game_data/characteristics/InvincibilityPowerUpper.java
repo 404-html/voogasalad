@@ -11,6 +11,7 @@ import game_data.sprites.Player;
 import game_data.states.State;
 import game_data.states.Vincibility;
 import game_data.states.Visible;
+import game_engine.GameResources;
 import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
 import game_engine.actions.Action;
@@ -48,7 +49,8 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 			// unless we want non players to be able to speed up upon hitting a
 			// powerup
 			if (collidedSprite instanceof Player) {
-				addToPowerUpMap(collidedSprite, myTimeInEffect);
+//				System.out.println("HELLO");
+//				addToPowerUpMap(collidedSprite, myTimeInEffect);
 				myAction = new Invincibility(collidedSprite);
 				// System.out.println("characteristic in");
 				myAction.act();
@@ -71,16 +73,19 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 
 	@Override
 	public void activatePowerUp(Sprite playerSprite, IUpdateStatesAndPowerUps myInterface, Double timeElapsed) {
+//		System.out.println("Should be invisible");
+		addToPowerUpMap(playerSprite, timeElapsed);
 		boolean hasVisibility = false;
 		for (State state : playerSprite.getStates()) {
 			if (state instanceof Visible) {
 				hasVisibility = true;
-				((Visible) state).setVisibility((timeElapsed.intValue()) % 3 == 0);
+				System.out.println("Should be invisible");
+				((Visible) state).setVisibility((timeElapsed.intValue()) % GameResources.FLASH_RATE.getDoubleResource() == 0);
 
 			}
 		}
 		if (!hasVisibility) {
-			playerSprite.addState(new Visible((timeElapsed.intValue()) % 3 == 0));
+			playerSprite.addState(new Visible((timeElapsed.intValue()) % GameResources.FLASH_RATE.getDoubleResource() == 0));
 		}
 	}
 }

@@ -26,7 +26,7 @@ public abstract class TemporalPowerUpper extends PowerUpper implements Character
 	public void addToPowerUpMap(Sprite collidedSprite, double myTimeInEffect){
 		boolean hasChanged = false;
 		for(Characteristic characteristic: collidedSprite.getMyPowerUps().keySet()){
-			if(characteristic instanceof SpeedPowerUpper){
+			if(characteristic instanceof TemporalPowerUpper){
 				collidedSprite.getMyPowerUps().put(characteristic, myTimeInEffect);
 				hasChanged = true;
 			}

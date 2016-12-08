@@ -16,7 +16,9 @@ import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.InvincibilityPowerUpper;
+import game_data.characteristics.PowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
+import game_data.characteristics.TemporalPowerUpper;
 import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.sprites.WinningObject;
@@ -87,30 +89,48 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
 		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
-		//generateDefaultKeyPressedMap();
+		// generateDefaultKeyPressedMap();
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		//updateSpritePositions();
+		// updateSpritePositions();
 
-//		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
-//		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
-//		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
-//		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
+		// System.out.println("xvel " +
+		// myLevel.getMainPlayer().getMyXVelocity());
+		// System.out.println("yvel " +
+		// myLevel.getMainPlayer().getMyYVelocity());
+		// System.out.println("xtermvel " +
+		// myLevel.getMainPlayer().getTerminalXVel());
+		// System.out.println("ytermvel " +
+		// myLevel.getMainPlayer().getTerminalYVel());
 	}
 
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
-			if (powerUp instanceof SpeedPowerUpper) {
-				((SpeedPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
+			System.out.println("Number of power ups " + myCurrentPowerUps.size());
+			if (powerUp instanceof TemporalPowerUpper) {
+				((TemporalPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this,
+						myCurrentPowerUps.get(powerUp));
+				System.out.println("Time left " + myCurrentPowerUps.get(powerUp));
 			}
-			if(powerUp instanceof InvincibilityPowerUpper){
-				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));	
-			}
+		}
+	}
+
+	public static void activateSingularPowerUp(Characteristic powerUp, Sprite spriteToActOn, double timeRemaining) {
+		// BUGGY!!!!
+		System.out.println("Time left " + timeRemaining);
+
+		if (powerUp instanceof TemporalPowerUpper) {
+			// System.out.println("LUCIA");
+			// if(powerUp instanceof InvincibilityPowerUpper)
+			// System.out.println("Knows type");
+
+			((TemporalPowerUpper) powerUp).activatePowerUp(spriteToActOn, null, timeRemaining);
 
 		}
+
 	}
 
 	public void setKeyPressedMapWithBoosts() {
@@ -118,25 +138,27 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 
 	private void checkPowerUps() {
+		ArrayList<Characteristic> toRemove = new ArrayList<Characteristic>();
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
-//			System.out.println("POWER UP SPEED " + myCurrentPowerUps.get(powerUp));
+			// System.out.println("POWER UP SPEED " +
+			// myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
-//				System.out.println("HELLOOOOOO");
-				myCurrentPowerUps.remove(powerUp);
-				powerUpHasBeenRemoved(powerUp);
+				// System.out.println("HELLOOOOOO");
+				toRemove.add(powerUp);
 			}
 		}
+
+		// remove power ups
+		for (Characteristic remove : toRemove) {
+			myCurrentPowerUps.remove(remove);
+			powerUpHasBeenRemoved(remove);
+		}
+
 	}
 
-	//IS THERE A BETTER WAY TO DO THIS WITHOUT IFS?
 	private void powerUpHasBeenRemoved(Characteristic powerUp) {
-		if (powerUp instanceof SpeedPowerUpper) {
-			((SpeedPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
-		}
-		if(powerUp instanceof InvincibilityPowerUpper){
-			((InvincibilityPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
-		}
+		((TemporalPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
 	}
 
 	private void cleanGame() {
@@ -167,10 +189,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Controllable control;
-			if(mySprite instanceof Player)
+			if (mySprite instanceof Player)
 				control = mainPlayerControllable;
-			
-			else{
+
+			else {
 				control = mySprite.getControllable();
 
 			}
@@ -221,21 +243,19 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	// }
 
 	// keys will only control the main player rn
-	
-	private Map<KeyCode,Action> generateBoostedKeyPressedMap(){
-		myKeyPressedMap.put(KeyCode.RIGHT,
-				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()
-						+ GameResources.SPEED_BOOST.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT,
-				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()
-						+ GameResources.SPEED_BOOST.getDoubleResource()));
+
+	private Map<KeyCode, Action> generateBoostedKeyPressedMap() {
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(),
+				GameResources.MOVE_RIGHT_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(),
+				GameResources.MOVE_LEFT_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(),
 				GameResources.JUMP_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
 		return myKeyPressedMap;
 	}
-	
+
 	public void generateDefaultKeyPressedMap() {
-	
+
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT,
@@ -273,12 +293,12 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private void executeCharacteristics() {
 		for (Sprite mySprite : mySpriteList) {
-			
+
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList,
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
-			
+
 			for (Characteristic myCharacteristic : characteristics) {
 				myCharacteristic.execute(myCollisionMap);
 

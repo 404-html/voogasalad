@@ -16,7 +16,8 @@ public class Visible implements State{
 		isVisible = visible;
 	}
 	
-	public boolean isVincibility(){
+	public boolean isVisibile(){
+//		System.out.println("IS VISIBILE :" + isVisible);
 		return isVisible;
 	}
 	
@@ -28,5 +29,6 @@ public class Visible implements State{
 	@Override
 	public void updateState(int pain) {
 		// TODO Auto-generated method stub
-	}	
+	}
+
 }
