@@ -60,6 +60,7 @@ class LevelEditBox {
 		}
 		catch (NumberFormatException e) {
 			//  LOL
+			// double lol
 		}
 		
 		return this.level;
@@ -111,5 +112,8 @@ class LevelEditBox {
 		}; 
 	}
 	
+	public TextField getTextField() {
+		return nameField;
+	}
 
 }
