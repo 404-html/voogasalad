@@ -1,19 +1,15 @@
 package gameplayer.front_end.gui_generator;
 
 import java.io.File;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.event.ChangeListener;
-
-import game_data.Game;
+import gameplayer.application_controller.Choosable;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
 import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -22,7 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.HBox;
 
 public class GUIGenerator implements IGUIGenerator {
 	
@@ -58,6 +54,32 @@ public class GUIGenerator implements IGUIGenerator {
 		image.setFitWidth(aWidth);
 		return image;
 	}
+	
+	@Override
+	public ComboBox<HBox> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
+		ComboBox<HBox> box = new ComboBox<HBox>();
+		List<HBox> options = new ArrayList<HBox>();
+		for(int i = 0; i < aListOfNames.size(); i++){
+			HBox hbox = new HBox();
+			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
+				System.out.println("here");
+				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 75));
+			} else {
+				hbox.getChildren().add(new ImageView());
+			}
+			hbox.getChildren().add(new Label(aListOfNames.get(i)));
+			options.add(hbox);
+		}
+		ObservableList<HBox> items = FXCollections.observableArrayList(options);
+		box.setItems(items);
+		box.setPromptText("CHOOSE GAME");
+		box.setEditable(true);        
+		box.setOnAction(e -> {
+			Label label = (Label) box.getSelectionModel().getSelectedItem().getChildren().get(1);
+		    aChooser.choose(label.getText());
+		});
+		return box;
+	}
 
 	@Override
 	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler,
@@ -88,10 +110,8 @@ public class GUIGenerator implements IGUIGenerator {
 		return menu;
 	}
 
-	@Override
-	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
-		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
-	}
-
-
+//	@Override
+//	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
+//		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
+//	}
 }

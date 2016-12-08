@@ -27,7 +27,7 @@ public class GamePlayController extends AbstractController {
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
 	private AnimationLoop myAnimationLoop;
-	private MovementHandler myKeyHandler;
+	private MovementHandler myMovementHandler;
 	private GamePlayScene myGamePlayScene;
 	private KeyCodeHandler myKeyCodeHandler;
 	private ApplicationController myApplicationController;
@@ -39,9 +39,9 @@ public class GamePlayController extends AbstractController {
 		myLevel = aLevel;
 		myStage = aStage;
 		myGameFile = aFile;
+		myApplicationController = aAppController;
 		mySpriteMap = new HashMap<Sprite, ImageView>();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
-		myApplicationController = aAppController;
 		mySceneBuilder = new SceneFactory();
 		initializeKeySets(aKeyInput);
 		initializeEngineComponents(aFile);
@@ -57,7 +57,7 @@ public class GamePlayController extends AbstractController {
 
 	private void initializeKeySets(String aKeyInput) {
 		myKeyCodeHandler = new KeyCodeHandler(aKeyInput);
-		myKeyHandler = new MovementHandler();
+		myMovementHandler = new MovementHandler();
 	}
 	
 	public void displayGame() {
@@ -69,14 +69,14 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void initializeScene() {
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), myApplicationController.getUserDefaults().getFontColor("black"));
+		myGamePlayScene = new GamePlayScene(myMovementHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), myApplicationController.getUserDefaults().getFontColor("black"));
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
 
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
-			//This is what gets called every time cycle
+			//This is what gets called every update cycle
 			resetSprites(elapsedTime);
 			updateScene();
 		});
@@ -85,11 +85,16 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
-		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
-		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+//		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
+//		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+//		if (myGameController.getMyLevel().lostLevel()) createResultScene(myButtonLabels.getString("YouLost"));
+//		if (myGameController.getMyLevel().wonLevel()) createResultScene(myButtonLabels.getString("YouWon"));
+//		myGamePlayScene.moveScreen(myMovementHandler);
+		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
+		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) setLosingScene();
 		if (myGameController.getMyLevel().wonLevel()) setWinningScene();
-		myGamePlayScene.moveScreen(myKeyHandler);
+		myGamePlayScene.moveScreen(myMovementHandler);
 		setHealthLabel();
 	}
 
@@ -120,7 +125,6 @@ public class GamePlayController extends AbstractController {
 		myGamePlayScene.addImageToView(image);
 	}
 
-
 	private void setImageProperties(Sprite aSprite, ImageView image) {
 		image.setFitWidth(aSprite.getMyWidth());
 		image.setFitHeight(aSprite.getMyHeight());
@@ -149,6 +153,13 @@ public class GamePlayController extends AbstractController {
 			setWinningScene();
 		});
 	}
+	
+//	private void createResultScene(String aMessage) {
+//		myAnimationLoop.stop();
+//		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
+//		setResultSceneHandlers((INavigationDisplay) ls, aMessage);
+//		resetStage(ls);
+//	}
 
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
