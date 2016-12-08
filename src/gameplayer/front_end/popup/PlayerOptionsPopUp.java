@@ -72,7 +72,6 @@ public class PlayerOptionsPopUp {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				if (fontGroup.getSelectedToggle() != null) {
-
 					myCurrentColorChoice = newValue.getUserData().toString();
 				}
 			}

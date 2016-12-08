@@ -5,11 +5,11 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
-public class FileController {
+public class FileChoiceController {
 
 	FileChooser myFileChooser;
 	
-	public FileController(){
+	public FileChoiceController(){
 		myFileChooser = new FileChooser();
 		myFileChooser.setTitle("Choose New Game");
         myFileChooser.getExtensionFilters().add(new ExtensionFilter("Game Files", "*.xml"));
