@@ -30,7 +30,6 @@ public class Level extends GameObject{
 	Map<KeyCode, KeyCommand> myKeyCommands;
 	
 	public Level(String aName, int width, int height, String backgroundImageFilePath){
-		System.out.println("instantiating level");
 		setName(aName);
 		didLose = false;
 		didWin = false;

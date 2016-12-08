@@ -8,6 +8,7 @@ import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
 import game_data.characteristics.Breakable;
+import game_data.characteristics.Characteristic;
 import game_data.characteristics.BouncerTop;
 import game_data.characteristics.Damager;
 import game_data.characteristics.HealthPowerUpper;
@@ -100,15 +101,22 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		// myLevel=new Level();
 		myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
-		myLevel.setPlayerSprite((Player) myLevel.getMySpriteList().get(0));
-		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
-		myLevel.getMainPlayer().addState(new Health(1));
-		myLevel.getMainPlayer().addState(new LevelWon());
-		myLevel.getMainPlayer()
-				.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
-
-		myLevel.getMainPlayer().resetTerminalVelocities();
-		int j = 1;
+		for(Sprite s: myLevel.getMySpriteList()){
+			if(s instanceof Player){
+				myLevel.setPlayerSprite((Player)s);
+				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+				myLevel.getMainPlayer().addState(new Health(200));
+				myLevel.getMainPlayer().addState(new LevelWon());
+				myLevel.getMainPlayer()
+						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
+		
+				myLevel.getMainPlayer().resetTerminalVelocities();
+			}
+			else{
+				s.addState(new Physics(new SpritePhysics(0.0)));
+			}
+		}
+		/*int j = 1;
 		// for(int i = 226; i<10260; i+=1000){
 
 		for (int i = 226; i < 8226; i += 100) {
@@ -224,7 +232,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 300, s));
 				s.setMyXVelocity(200);
 			}
-		}
+		}*/
 
 		// System.out.println(myLevel.getMySpriteList().get(1).getName() + " " +
 		// myLevel.getMySpriteList().get(1).getStates().size());
