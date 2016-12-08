@@ -11,7 +11,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-public class PlayerOptionsPopUp extends AbstractOptions {
+public class PlayerOptionsPopUp extends AbstractOptionsPopUp {
 
 	private String myCurrentKeyChoice;
 	private String myCurrentColorChoice;

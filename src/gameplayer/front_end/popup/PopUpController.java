@@ -18,7 +18,7 @@ public class PopUpController implements IPopUpDisplay {
 	private Stage myStage;
 	private VBox myOptions;
 	
-	public PopUpController(AbstractOptions aOptions) {
+	public PopUpController(AbstractOptionsPopUp aOptions) {
 		myStage = new Stage();
 		myOptions = new VBox(40);
 		myOptions.setAlignment(Pos.CENTER);

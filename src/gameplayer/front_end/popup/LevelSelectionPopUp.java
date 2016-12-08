@@ -10,7 +10,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-public class LevelSelectionPopUp extends AbstractOptions {
+public class LevelSelectionPopUp extends AbstractOptionsPopUp {
 
 	private int myNumberOfLevels;
 	private int mySelectedLevel;

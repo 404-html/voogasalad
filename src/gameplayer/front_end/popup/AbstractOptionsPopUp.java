@@ -7,7 +7,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 
-public abstract class AbstractOptions {
+public abstract class AbstractOptionsPopUp {
 
 	protected List<HBox> myOptions;
 	protected ResourceBundle myButtonLabels;

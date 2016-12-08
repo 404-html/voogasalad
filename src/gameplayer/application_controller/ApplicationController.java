@@ -6,7 +6,7 @@ import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
 import gameplayer.back_end.stored_games.StoredGames;
-import gameplayer.back_end.user_information.UserDefaults;
+import gameplayer.back_end.user_information.UserOptions;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
@@ -17,11 +17,11 @@ import javafx.scene.layout.HBox;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import gameplayer.front_end.popup.AbstractOptions;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import gameplayer.front_end.popup.PopUpController;
 import javafx.stage.Stage;
+import util.XMLTranslator;
 
 /**
  * Where the player part can interact with the game engine and get the appropriate data to be displayed
@@ -36,7 +36,6 @@ public class ApplicationController extends AbstractController {
 	private StoredGames myStoredGames;
 	private GamePlayController myGamePlay;
 	private IDisplay myCurrentDisplay;
-	private UserDefaults myUserDefaults;
 	
 	//change to resource file / maybe make new CSS? 
 	private String[] myShirtBackgrounds = {"data/gui/hawaiian_shirt_background1.jpeg", "data/gui/hawaiian_shirt_background2.jpeg", 
@@ -50,7 +49,6 @@ public class ApplicationController extends AbstractController {
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myStoredGames = new StoredGames();
-		myUserDefaults = new UserDefaults(this.getClass().toString());
 	}
 
 	public void startScene() throws FileNotFoundException {
@@ -130,18 +128,9 @@ public class ApplicationController extends AbstractController {
 			resetGame(myStoredGames.getGameFilePath(aChoice));
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}));
-//		ComboBox<Pane> cBox = getGUIGenerator().createComboBox(getDisplayOfGames());
-//		cBox.setOnAction(e -> {
-//			String gameName = ((Label) cBox.getSelectionModel().getSelectedItem().getChildren().get(0)).getText();
-//			cBox.setPromptText(gameName);
-//			File gameFile = myStoredGames.getGameFilePath(gameName);
-//			displayGame(gameFile);
-//			setGameChoiceSecondRoundButtonHandlers(gameChoice);
-//		});
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
 			resetGame(chosenGame);
-			//myStoredGames.addGame(myGamePlay.getGame().getName(), chosenGame);
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
 	}
@@ -151,9 +140,13 @@ public class ApplicationController extends AbstractController {
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {
 			if (myGamePlay != null) {
-				AbstractOptions options = new PlayerOptionsPopUp();
-				PopUpController popup = new PopUpController(options);
+				PlayerOptionsPopUp optionsPopUp = new PlayerOptionsPopUp();
+				PopUpController popup = new PopUpController(optionsPopUp);
 				popup.show();
+				popup.setOnClosed(k -> {
+					UserOptions options = new UserOptions(optionsPopUp.getColorChoice(), optionsPopUp.getKeyChoice());
+					save(options, myInformationController.getUser() + "-options-" + myGamePlay.getGame().getName());
+				});
 			}
 		}, ButtonDisplay.TEXT));
 		hbox.getChildren().add(getGUIGenerator().createButton("LEVELS", 0, 0, e -> {
@@ -161,22 +154,23 @@ public class ApplicationController extends AbstractController {
 				LevelSelectionPopUp levelSelection = new LevelSelectionPopUp(myGamePlay.getGame().getLevels().size());
 				PopUpController popup = new PopUpController(new LevelSelectionPopUp(myGamePlay.getGame().getLevels().size()));
 				popup.show();
-				myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				popup.setOnClosed(k -> {
+					myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				});
 			}
 		}, ButtonDisplay.TEXT));
 		gameChoice.addNode(hbox);
 		gameChoice.addButton("PLAY", e -> {
 			if (myGamePlay != null) {
+				XMLTranslator myTranslator = new XMLTranslator();
+				UserOptions myOptions = (gameplayer.back_end.user_information.UserOptions) myTranslator.loadFromFile(new File("XMLGameFiles/" + myInformationController.getUser() + "-options-" + myGamePlay.getGame().getName() + ".xml"));
+				myGamePlay.setOptions(myOptions);
 				myGamePlay.displayGame();
 			}
 		}, ButtonDisplay.TEXT);
 	}
 	
 	private void resetGame(File chosenGame) {
-		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0, myUserDefaults.getKeyInputColor("default"));
-	}
-	
-	public UserDefaults getUserDefaults(){
-		return myUserDefaults;
+		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0);
 	}
 }
