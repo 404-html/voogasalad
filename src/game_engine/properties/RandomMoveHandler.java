@@ -25,12 +25,8 @@ public class RandomMoveHandler {
 		mySprite = aMySprite;
 		myScreenWidth = aMyScreenWidth;
 		myScreenHeight = aMyScreenHeight;
-		myScreenXPosition = aMyScreenXPosition + myScreenWidth/2; //middle to left
-		myScreenYPosition = aMyScreenYPosition + myScreenHeight/2; //middle to top
-//		System.out.println("asdfasdf a     " + myScreenXPosition);
-//		System.out.println("asdfasdf a     " + myScreenYPosition);
-//		System.out.println("asdfasdf a     " + mySprite.getMyLocation().getXLocation());
-//		System.out.println("asdfasdf a     " + mySprite.getMyLocation().getYLocation());
+		myScreenXPosition = aMyScreenXPosition*-1; //switch to different coordinates – left side
+		myScreenYPosition = aMyScreenYPosition*-1; //switching to different coordinates – top side
 		
 		if(onScreen()) {
 			onScreenOnceSinceJump = true;
@@ -40,13 +36,22 @@ public class RandomMoveHandler {
 			return;
 		}
 		
-		if(verticalMove) {
-			mySprite.getMyLocation().setLocation(Math.random()*500, mySprite.getMyLocation().getYLocation()+myScreenHeight);
-		} else {
-			mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation()+myScreenWidth, Math.random()*500);
-		}
-		
+		setSpritesNewLocation();
 		onScreenOnceSinceJump = false;
+		
+	}
+	
+	private void setSpritesNewLocation() {
+		
+		double newXLoc, newYLoc;
+		if(verticalMove) {
+			newXLoc = Math.random()*myScreenWidth;
+			newYLoc = mySprite.getMyLocation().getYLocation()+myScreenHeight+mySprite.getMyHeight();
+		} else {
+			newXLoc = mySprite.getMyLocation().getXLocation()+myScreenWidth+mySprite.getMyWidth();
+			newYLoc = Math.random()*myScreenHeight;
+		}
+		mySprite.getMyLocation().setLocation(newXLoc, newYLoc);
 		
 	}
 	
