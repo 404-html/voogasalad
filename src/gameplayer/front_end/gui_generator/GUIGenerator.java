@@ -77,6 +77,7 @@ public class GUIGenerator implements IGUIGenerator {
 		box.setEditable(true);        
 		box.setOnAction(e -> {
 			System.out.println(box.getSelectionModel().getSelectedItem());
+			System.out.println(box.getSelectionModel().getSelectedItem().getChildren().get(1));
 			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
 			System.out.println(label);
 			//label.setId("combobox-label");

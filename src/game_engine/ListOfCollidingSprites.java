@@ -14,6 +14,7 @@ import game_data.sprites.Terrain;
 import game_data.states.Physics;
 import game_data.states.State;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -31,10 +32,10 @@ public class ListOfCollidingSprites {
 	private Map<Sprite, ImageView> mySpriteImages;
 	//private double myTimeElapsed;
 	//public ListOfCollidingSprites(Sprite targetSprite, List<Sprite> spriteList, Map<Sprite, ImageView> spriteImages, double timeElapsed) {
-	public ListOfCollidingSprites(Sprite targetSprite, List<Sprite> spriteList, Map<Sprite, ImageView> spriteImages) {
+	public ListOfCollidingSprites(Sprite targetSprite, List<Sprite> spriteList, Map<Sprite, ImageView> mySpriteImages2) {
 		this.targetSprite = targetSprite;
 		this.spriteList = spriteList;
-		this.mySpriteImages=spriteImages;
+		this.mySpriteImages=mySpriteImages2;
 		//myTimeElapsed=timeElapsed;
 		getListOfSpritesCollided();
 	}

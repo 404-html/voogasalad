@@ -9,7 +9,7 @@ import javafx.scene.Node;
 public class SpriteDisplayController implements Iterable<Node>, ISpriteDisplay {
 	
 	private List<Node> mySprites;
-	private SpriteDisplayFactory mySpriteDisplay;
+	private SpriteDisplay mySpriteDisplay;
 	
 	public SpriteDisplayController() {
 		this.mySprites = new ArrayList<Node>();

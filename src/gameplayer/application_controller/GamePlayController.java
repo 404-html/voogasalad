@@ -16,9 +16,11 @@ import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
+import gameplayer.front_end.sprite_display.SpriteDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import util.XMLTranslator;
 
@@ -33,7 +35,7 @@ public class GamePlayController extends AbstractController {
 	private KeyCodeHandler myKeyCodeHandler;
 	private ApplicationController myApplicationController;
 	private File myGameFile;
-	private Map<Sprite, ImageView> mySpriteMap;
+	private SpriteDisplay mySpriteDisplay;
 	private int myLevel;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel, String aKeyInput) {
@@ -41,7 +43,7 @@ public class GamePlayController extends AbstractController {
 		myStage = aStage;
 		myGameFile = aFile;
 		myApplicationController = aAppController;
-		mySpriteMap = new HashMap<Sprite, ImageView>();
+		mySpriteDisplay = new SpriteDisplay();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		mySceneBuilder = new SceneFactory();
 		initializeKeySets(aKeyInput);
@@ -65,6 +67,7 @@ public class GamePlayController extends AbstractController {
 		initializeScene();
 		setMenu();
 		updateSprites();
+		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer()));
 		initializeAnimation();
 		resetStage(myGamePlayScene);
 	}
@@ -101,37 +104,16 @@ public class GamePlayController extends AbstractController {
 
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteMap, 
+		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
+		mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
 		updateSprites();
 	}
 	
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
-			getUpdatedSpriteMap(sprite);
-			
+			mySpriteDisplay.getUpdatedSpriteMap(sprite);
 		}
-	}
-	
-	private void getUpdatedSpriteMap(Sprite aSprite) {
-		ImageView image;
-		if (mySpriteMap.containsKey(aSprite)) {
-			image = mySpriteMap.get(aSprite);
-			setImageProperties(aSprite, image);
-		} else {
-			image = new ImageView(aSprite.getMyImagePath());
-			setImageProperties(aSprite, image);
-			mySpriteMap.put(aSprite, image);
-		}
-		setImageProperties(aSprite, image);
-		myGamePlayScene.addImageToView(image);
-	}
-
-	private void setImageProperties(Sprite aSprite, ImageView image) {
-		image.setFitWidth(aSprite.getMyWidth());
-		image.setFitHeight(aSprite.getMyHeight());
-		image.setX(aSprite.getMyLocation().getXLocation());
-		image.setY(aSprite.getMyLocation().getYLocation());
 	}
 	
 	private void setMenu() {

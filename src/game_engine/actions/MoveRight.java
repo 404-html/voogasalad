@@ -12,15 +12,16 @@ import game_data.states.Solid;
 import game_data.states.State;
 import game_engine.ListOfCollidingSprites;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class MoveRight extends Move {
 	private List<Sprite>mySpriteList;
 	private Map<Sprite, ImageView>mySpriteImages;
-	public MoveRight(Sprite aSprite, double aVelocity, List<Sprite> aSpriteList, Map<Sprite, ImageView>aSpriteImages) {
+	public MoveRight(Sprite aSprite, double aVelocity, List<Sprite> aSpriteList, Map<Sprite, ImageView> mySpriteImages2) {
 		super(aSprite, aVelocity);
 		mySpriteList=aSpriteList;
-		mySpriteImages=aSpriteImages;
+		mySpriteImages=mySpriteImages2;
 	}
 /*	@Override
 	public Location changeCoordinates(){

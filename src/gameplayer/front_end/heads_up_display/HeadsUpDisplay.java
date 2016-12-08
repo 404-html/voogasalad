@@ -22,6 +22,7 @@ public class HeadsUpDisplay {
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
 	private String myFontColor;
+	private HBox myBottom;
 	
 	public HeadsUpDisplay(double aWidth, double aHeight, String aFontColor) {
 		myGUIGenerator = new GUIGenerator();
@@ -36,48 +37,31 @@ public class HeadsUpDisplay {
 	public void addMenu(ImageView aImage, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
+	
 
 	public void addLabel(String aText){
-		if(myTop.getChildren().size() > 1){
-			myTop.getChildren().remove(1);
+		if(myBottom.getChildren().size() > 0){
+			myBottom.getChildren().remove(0);
 		}
 		Label label = myGUIGenerator.createLabel(aText, 0, 0);
 		label.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
-		myTop.getChildren().add(label);
+		myBottom.getChildren().add(label);
 	}
 
 	private Node createTop() {
 		myTopMenu = new MenuBar();
-		myTop = new HBox();
-		myTop.getChildren().add(myTopMenu);
+		//myTop.getChildren().add(myTopMenu);
 		//myTopMenu.setAlignment(Pos.CENTER);
-		return myTop;
-	}
-
-	private Node createLeft(){
-		VBox leftMenu = new VBox();
-		leftMenu.getChildren().add(myGUIGenerator.createLabel("Left", 0, 0));
-		leftMenu.setAlignment(Pos.CENTER);
-		return leftMenu;
-	}
-
-	private Node createRight(){
-		VBox rightMenu = new VBox();
-		rightMenu.getChildren().add(myGUIGenerator.createLabel("Right", 0, 0));
-		rightMenu.setAlignment(Pos.CENTER);
-		return rightMenu;
+		return myTopMenu;
 	}
 
 	private Node createBottom(){
-		HBox bottomMenu = new HBox();
-		bottomMenu.getChildren().add(myGUIGenerator.createLabel("Bottom", 0, 0));
-		bottomMenu.setAlignment(Pos.CENTER);
-		return bottomMenu;
+		myBottom = new HBox();
+		myBottom.setAlignment(Pos.CENTER);
+		return myBottom;
 	}
 
 	public Pane init() {
-		myRoot.setRight(createRight());
-		myRoot.setLeft(createLeft());
 		myRoot.setBottom(createBottom());
 		myRoot.setTop(createTop());
 		myRoot.setBackground(Background.EMPTY);

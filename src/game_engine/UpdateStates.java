@@ -30,6 +30,7 @@ import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
 import game_engine.actions.StopUpMovement;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
@@ -68,14 +69,14 @@ public class UpdateStates {
 
 
 	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
-			Map<Sprite, ImageView> mySpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
+			Map<Sprite, ImageView> map, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
 		this.myLevel = aLevel;
 		this.mySpriteList = myLevel.getMySpriteList();
 		this.timeElapsed = timeElapsed;
 		this.myKeysPressed = myKeysPressed;
 
 		this.myKeysReleased=myKeysReleased;
-		this.mySpriteImages=mySpriteImages;
+		this.mySpriteImages=map;
 		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
 		this.myScreenWidth = aScreenWidth;
@@ -154,7 +155,7 @@ public class UpdateStates {
 	//
 	// }
 
-	// keys will only control the main player rn
+	// keys will only control the main player rn 
 	private void generateDefaultKeyPressedMap() {
 		// System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
 		// System.out.println(myLevel.getMainPlayer()==null);
