@@ -82,8 +82,10 @@ public class Level extends GameObject{
 	
 	public void addNewSprite(Sprite  aSprite){
 		mySprites.add(aSprite);
-		if(aSprite.getControllable().isControllable()){
-			myControllableSpriteList.add(aSprite);
+		if(aSprite.getControllable() != null) {
+			if(aSprite.getControllable().isControllable()){
+				myControllableSpriteList.add(aSprite);
+			}
 		}
 		this.notifyListeners();
 	}
