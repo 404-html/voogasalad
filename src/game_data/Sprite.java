@@ -36,6 +36,19 @@ public abstract class Sprite extends GameObject {
 	private Map<Characteristic, Double> powerUps;
 
 	private Set<State> myStates;
+	
+	public Sprite() {
+		resetTerminalVelocities();
+		myXVelocity = 0;
+		myYVelocity = 0;
+		myXAcceleration = 0;
+		myYAcceleration = 0;
+		myCollisionHandler = new CollisionHandler();
+		myCharacteristics = new HashSet<Characteristic>();
+		myStates = new HashSet<State>();
+		myControllable=new Controllable(this);
+	}
+	
 
 	public Sprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
 		resetTerminalVelocities();
@@ -68,13 +81,6 @@ public abstract class Sprite extends GameObject {
 		myXAcceleration = aSprite.getMyXAcceleration();
 		myYAcceleration = aSprite.getMyYAcceleration();
 		myCollisionHandler = aSprite.getMyCollisionHandler(); // to change:
-		// would need to
-		// have the same
-		// collision
-		// handler but
-		// we don't know
-		// what that is
-		// yet
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
 		myControllable=aSprite.getControllable();

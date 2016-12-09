@@ -12,6 +12,10 @@ public class Player extends Character {
 		super(aLocation, aWidth, aHeight, aName, aImagePath);
 	}
 	
+	public Player() {
+		super();
+	}
+	
 	public Player(Player aPlayer){
 		super(aPlayer);
 	}
