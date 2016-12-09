@@ -1,6 +1,7 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import util.XMLTranslator;
+import author.view.pages.sprite.editor.controllable.ControllableEditor;
 import author.view.pages.sprite.editor.inheritance.character.EnemySpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.item.ItemSpriteEditPage;
@@ -60,14 +61,16 @@ public abstract class BaseSpriteEditPage {
 	private BaseSpriteEditBox mySpriteEditBox;
 	private SpriteSettingsEditor myCharacteristicEditor;
 	private SpriteSettingsEditor myStateEditor;
+	private ControllableEditor myControlEditor;
 	private TabPaneFacade myTabPaneFacade;
-
+	
 	public BaseSpriteEditPage(Sprite aSprite){
 		mySprite = aSprite;
 
 		myPane = new VBox();
 		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite);
 		myStateEditor = new SpriteStatesEditor(mySprite);
+		myControlEditor = new ControllableEditor();
 		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
@@ -80,6 +83,8 @@ public abstract class BaseSpriteEditPage {
 		
 		myTabPaneFacade.addTab(myStateEditor.getClass().getSimpleName(), myStateEditor.getPane());
 		myStateEditor.getPane().prefWidthProperty().bind(myTabPaneFacade.getTabPane().widthProperty());
+		
+		myTabPaneFacade.addTab(myControlEditor.getClass().getSimpleName(), myControlEditor.getPane());
 		
 		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
 
