@@ -12,6 +12,10 @@ public class Enemy extends Character {
 	public Enemy(Enemy aEnemy){
 		super(aEnemy);
 	}
+	
+	public Enemy() {
+		super();
+	}
 
 	@Override
 	public Sprite clone() {

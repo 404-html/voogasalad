@@ -4,6 +4,7 @@ import java.io.File;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
+import javafx.scene.Cursor;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -58,7 +59,7 @@ public abstract class DraggableSprite {
 
 	protected InvalidationListener initListener(Sprite aSprite) {
 		InvalidationListener invalidationListener = (sprite) -> {
-			this.getImageView().setImage(new Image( (new File(aSprite.getMyImagePath()).toURI().toString())));
+			this.getImageView().setImage(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
 		};
 		return invalidationListener;
 	}
@@ -74,26 +75,27 @@ public abstract class DraggableSprite {
 	}
 
 	protected abstract void makeDraggable();
-	
+
 	private void setOnMouseHover() {
 		draggableItem.setOnMouseEntered(e -> {
-			 String style_inner = "-fx-border-color: red;"
-		              + "-fx-border-width: 1;"
-		              + "-fx-border-style: dotted;";
-		      draggableItem.setStyle(style_inner);
-		      displayNameOnHover();
+			String style_inner = "-fx-border-color: red;" + "-fx-border-width: 1;" + "-fx-border-style: dotted;";
+			draggableItem.setStyle(style_inner);
+			draggableItem.setCursor(Cursor.HAND);
+			displayNameOnHover();
+
 		});
 		draggableItem.setOnMouseExited(e -> {
-			 String style_inner = "";
-		      draggableItem.setStyle(style_inner);
+			String style_inner = "";
+			draggableItem.setStyle(style_inner);
 		});
+
 	}
 
 	private void displayNameOnHover() {
 		Tooltip tip = new Tooltip(mySprite.getName());
 		Tooltip.install(draggableItem, tip);
 	}
-	
+
 	public HBox getDraggableItem() {
 		return draggableItem;
 	}

@@ -134,6 +134,11 @@ public class FileLoader {
 		myFileChooser.getExtensionFilters().add(filter);
 	}
 
+	public FileLoader(String aDirectory, FileType aFileType) {
+		this(DEFAULT_START, aFileType);
+		myFileChooser.setInitialDirectory(new File(aDirectory));
+	}
+
 	/**
 	 * Returns the file chosen after the file chooser is completed 
 	 * 

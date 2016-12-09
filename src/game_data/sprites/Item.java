@@ -11,6 +11,10 @@ public class Item extends Sprite{
 	public Item(Item aItem){
 		super(aItem);
 	}
+	
+	public Item() {
+		super();
+	}
 
 	@Override
 	public Sprite clone() {

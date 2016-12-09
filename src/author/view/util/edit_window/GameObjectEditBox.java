@@ -3,10 +3,6 @@
  */
 package author.view.util.edit_window;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
-import author.view.util.authoring_buttons.ButtonFactory;
 import game_data.GameObject;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -16,8 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import util.filehelpers.FileLoader.FileExtension;
-import util.filehelpers.FileLoader.FileLoader;
 
 /**
  * @author Cleveland Thompson V (ct168)
@@ -52,23 +46,7 @@ abstract class GameObjectEditBox <T extends GameObject>{
 		editBox.setAlignment(Pos.CENTER);
 		
 		editBox.getChildren().add(createHBox(new Label("Name: "), nameField));
-		editBox.getChildren().add(new ButtonFactory().createButton("Choose Background", e -> updateBackgroundString()).getButton());
 		return editBox;
-	}
-	
-	private void updateBackgroundString(){
-		File file;
-		try {
-			file = new FileLoader(
-					FileExtension.GIF, 
-					FileExtension.PNG,
-					FileExtension.JPG ).loadSingle();
-			this.imagePath = file.toURI().toString();
-		} catch (FileNotFoundException e) {
-			// TODO: Show Error Screen;
-			e.printStackTrace();
-		}
-		
 	}
 	
 	private HBox createHBox(Node...nodes){

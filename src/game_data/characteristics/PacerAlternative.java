@@ -3,8 +3,9 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_engine.actions.Pace;
 import javafx.geometry.Side;
 
@@ -12,7 +13,7 @@ import javafx.geometry.Side;
  * @author austingartside
  * alternative version of pacer where user does not to include bounds, but rather how far it can travel
  */
- @CharacteristicAnnotation(name = "Pacer Alternative")
+ @NameAnnotation(name = "Pacer Alternative")
 public class PacerAlternative implements Characteristic{
 
 	private static final String VERTICAL = "VERTICAL";
@@ -41,6 +42,11 @@ public class PacerAlternative implements Characteristic{
 		originalYPosition = associatedSprite.getMyLocation().getYLocation();
 	}
 	
+	@ViewableMethodOutput(type=double.class, description="Distance")
+	public double getDistance() {
+		return myDistance;
+	}
+	
 	private boolean changeDirection(boolean collision){
 		if(myType.equals(VERTICAL)){
 			return atYBound();
@@ -48,17 +54,22 @@ public class PacerAlternative implements Characteristic{
 		if(myType.equals(HORIZONTAL)){
 			return atXBound();
 		}
-		return collision;
+		//TEMPORARILY HARDCODED
+		return false;
+		//return collision;
 	}
 	
 	private boolean atYBound(){
 		double currentYLocation = mySprite.getMyLocation().getYLocation();
-		return currentYLocation<=originalYPosition || currentYLocation>= (originalYPosition+myDistance);			
+		return currentYLocation>originalYPosition || currentYLocation<(originalYPosition-myDistance);			
 	}
 	
 	private boolean atXBound(){
+		//System.out.println("x is " + mySprite.getMyLocation().getXLocation());
+		//System.out.println("y is " + mySprite.getMyLocation().getYLocation());
+		//System.out.println();
 		double currentXLocation = mySprite.getMyLocation().getXLocation();
-		return currentXLocation<=originalYPosition || currentXLocation>= (originalXPosition+myDistance);			
+		return currentXLocation<originalXPosition || currentXLocation>(originalXPosition+myDistance);			
 	}
 
 	@Override
@@ -68,7 +79,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0), myType);
 		pace.act();
 	}
 

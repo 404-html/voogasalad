@@ -91,6 +91,6 @@ public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 		return myFactory;
 	}
 
-
-
+	public abstract void removeSpriteSetting();
+	
 }

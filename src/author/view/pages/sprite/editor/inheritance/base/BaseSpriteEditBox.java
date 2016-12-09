@@ -1,11 +1,7 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import java.io.File;
-import util.RelativePathFinder;
-import util.filehelpers.FileLoader.FileExtension;
-import util.filehelpers.FileLoader.FileLoader;
-import util.filehelpers.FileLoader.FileType;
-import util.inputfields.NumberFieldBox;
+
 import game_data.Location;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,6 +14,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import util.RelativePathFinder;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
+import util.inputfields.NumberFieldBox;
 
 public class BaseSpriteEditBox {
 
@@ -36,10 +36,12 @@ public class BaseSpriteEditBox {
 	
 	public BaseSpriteEditBox() {
 		myPane = new VBox();
+
 		myFileLoader = new FileLoader(
-				FileLoader.StartDirectory.SOURCE_DIRECTORY,
+				"data/images/sprite_images/",
 				FileType.RASTER_IMAGE
 				);
+
 		myPane.getChildren().addAll(
 				makeNameField(), 
 				makeLocationFields(),
@@ -76,8 +78,7 @@ public class BaseSpriteEditBox {
 	public final Location getLocation(){
 		return new Location(
 				myXPositionField.getDouble(),
-				myYPositionField.getDouble(),
-				myHeadingField.getDouble()
+				myYPositionField.getDouble()
 				);
 
 	}
@@ -85,7 +86,6 @@ public class BaseSpriteEditBox {
 	protected final void setLocation(Location aLocation){
 		myXPositionField.setValue(aLocation.getXLocation());
 		myYPositionField.setValue(aLocation.getYLocation());
-		myHeadingField.setValue(aLocation.getMyHeading());
 	}
 	
 	protected final String getImageFile(){

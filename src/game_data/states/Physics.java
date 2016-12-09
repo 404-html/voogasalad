@@ -17,7 +17,7 @@ public class Physics implements State{
 	@Override
 	public State copy() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Physics(myPhysics.copy());
 	}
 
 	@Override

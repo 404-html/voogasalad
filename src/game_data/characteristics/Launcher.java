@@ -8,12 +8,13 @@ package game_data.characteristics;
 import java.util.Map;
 
 import game_data.*;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import javafx.geometry.Side;
 //are we going to need a separate launcher class that reacts to key commands?
 //big question is how are we going to handle launching projectiles when it's not on a uniform time
-@CharacteristicAnnotation(name = "Launcher")
+@NameAnnotation(name = "Launcher")
 public class Launcher implements Characteristic{
 	
 	private Sprite mySprite;
@@ -31,6 +32,11 @@ public class Launcher implements Characteristic{
 		return mySprite;	
 	}
 
+	@ViewableMethodOutput(type=int.class, description="Time Interval")
+	public int getTimeInterval(){
+		return myTimeInterval;
+	}
+	
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {

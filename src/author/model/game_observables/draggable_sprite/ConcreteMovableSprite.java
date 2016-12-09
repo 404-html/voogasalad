@@ -2,13 +2,13 @@ package author.model.game_observables.draggable_sprite;
 
 import java.io.File;
 
+import author.model.game_observables.draggable_sprite.drag_resize.DragResizeMod;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.shape.Line;
 /**
  * Extension of DraggableSprite. This class defines the functionality of the sprites that are actually placed on 
  * the level editor. 
@@ -16,7 +16,7 @@ import javafx.scene.shape.Line;
  * @author Jordan Frazier
  *
  */
-public class ConcreteMovableSprite extends DraggableSprite {
+public class ConcreteMovableSprite extends DraggableSprite implements ResizableSprite {
 
 	private double mouseX;
 	private double mouseY;
@@ -28,6 +28,10 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		this.spritePreset = aSpritePreset;
 		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
+		//makeDraggable();
+		DragResizeMod resizer = new DragResizeMod(this, this.getDraggableItem(), this.spritePreset, this.presetInvalidationListener,  null);
+		resizer.makeResizable(this.getDraggableItem(), null);
+		
 	}
 	
 	public void removePresetListener(){
@@ -41,7 +45,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		getDraggableItem().setLayoutY(getSprite().getMyLocation().getYLocation());
 		getDraggableItem().setPrefWidth(getSprite().getMyWidth());
 		getDraggableItem().setPrefHeight(getSprite().getMyHeight());
-		getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
+		//getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
 	}
 
 	/**
@@ -72,7 +76,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
 			instanceSprite.setMyWidth(spritePreset.getMyWidth());
 			instanceSprite.setMyHeight(spritePreset.getMyHeight());
-			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation(), spritePreset.getMyLocation().getMyHeading()));
+			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation()));
 			spritePreset.getCharacteristics()
 					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
 		};
@@ -84,6 +88,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		super.getDraggableItem().setOnMouseReleased(e -> {
 			super.getSprite().getMyLocation().setLocation(super.getDraggableItem().getLayoutX(),
 					super.getDraggableItem().getLayoutY());
+			super.getSprite().setName(super.getSprite().getName());
 		});
 	}
 
@@ -102,6 +107,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 		super.getDraggableItem().setOnMousePressed(event -> {
 			mouseX = event.getSceneX();
 			mouseY = event.getSceneY();
+			super.getDraggableItem().toFront();
 		});
 	}
 
@@ -111,7 +117,7 @@ public class ConcreteMovableSprite extends DraggableSprite {
 			this.getImageView().setImage(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
 			this.getDraggableItem().setPrefWidth(aSprite.getMyWidth());
 			this.getDraggableItem().setPrefHeight(aSprite.getMyHeight());
-			this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
+			//this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
 		};
 		return invalidationListener;
 	}

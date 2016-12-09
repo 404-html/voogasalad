@@ -2,9 +2,11 @@ package game_data.characteristics;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import game_data.Sprite;
 import javafx.geometry.Side;
+import javafx.scene.input.KeyCode;
 
 public interface Characteristic {
 	
@@ -14,6 +16,8 @@ public interface Characteristic {
 	 * time step. 
 	 * 
 	 * @author Austin Gartside
+	 * @param myKeysReleased 
+	 * @param myKeysPressed 
 	 */
 	//public boolean toAct();
 	public void execute(Map<Sprite, Side> myCollisionMap);

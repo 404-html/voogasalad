@@ -14,6 +14,7 @@ import javafx.scene.control.ToolBar;
 import util.facades.ToolBarBuilder;
 import util.filehelpers.FileLoader.FileExtension;
 import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
 
 /**
  * @author Cleveland Thompson V (ct168)
@@ -48,7 +49,7 @@ public class LevelWindowToolBarFactory {
 	private void newBackgroundImage() {
 		File file;
 		try {
-			file = new FileLoader(FileExtension.GIF, FileExtension.PNG, FileExtension.JPG).loadSingle();
+			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
 			this.authorController.getModel().getGame().getCurrentLevel()
 				.setBackgroundImageFilePath(file.toURI().toString());
 		} catch (FileNotFoundException e) {
