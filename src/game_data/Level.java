@@ -82,10 +82,10 @@ public class Level extends GameObject{
 	
 	public void addNewSprite(Sprite  aSprite){
 		mySprites.add(aSprite);
-		if(aSprite instanceof Player){
-			setPlayerSprite((Player) aSprite);
-			aSprite.addState(new LevelWon());
-		}
+//		if(aSprite instanceof Player){
+//			setPlayerSprite((Player) aSprite);
+//			aSprite.addState(new LevelWon());
+//		}
 		if(aSprite.getControllable() != null) {
 			if(aSprite.getControllable().isControllable()){
 				myControllableSpriteList.add(aSprite);
