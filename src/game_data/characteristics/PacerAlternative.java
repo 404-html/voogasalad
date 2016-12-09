@@ -79,7 +79,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0), myType);
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
 		pace.act();
 	}
 
