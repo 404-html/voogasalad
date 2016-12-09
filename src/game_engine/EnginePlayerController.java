@@ -115,7 +115,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			else{
 				s.addState(new Physics(new SpritePhysics(0.0)));
 				if(s.getCharacteristics().size()>1){
-					s.setMyXVelocity(100.0);
+					//s.setMyXVelocity(100.0);
 					s.setMyYVelocity(-100.0);
 				}
 			}

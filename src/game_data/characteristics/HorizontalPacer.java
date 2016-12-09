@@ -38,7 +38,7 @@ public class HorizontalPacer extends Pacer{
 
 	@Override
 	public Characteristic copy() {
-		return new VerticalPacer(getDistance(), getSprite().clone());
+		return new HorizontalPacer(getDistance(), getSprite().clone());
 	}
 	
 	@Override
