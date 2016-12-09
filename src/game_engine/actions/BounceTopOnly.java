@@ -41,7 +41,7 @@ public class BounceTopOnly implements Action {
 		//System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
 		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
 		//myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
-		
+		//
 	}
 	
 	private boolean pastPlatform(){
