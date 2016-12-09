@@ -278,8 +278,11 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
-			
 			for (Characteristic myCharacteristic : characteristics) {
+				if(myCharacteristic == null){
+					System.out.println(mySprite.getName());
+					System.out.println(characteristics.size());
+				}
 				myCharacteristic.execute(myCollisionMap);
 			}
 		}

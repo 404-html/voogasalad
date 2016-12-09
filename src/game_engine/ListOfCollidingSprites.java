@@ -294,7 +294,7 @@ public class ListOfCollidingSprites {
 			System.out.println("sprite x is " + aSprite.getMyLocation().getXLocation());
 			System.out.println("left distance is " + leftDistance);
 			System.out.println("shiftX distance is " + shiftX);
-			System.out.println();
+			//System.out.println();
 		}
 		if(min == 1){
 //			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 

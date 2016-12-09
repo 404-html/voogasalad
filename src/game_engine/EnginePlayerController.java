@@ -97,7 +97,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 	public EnginePlayerController(Game game) {
 		myGame = game;
-		
+		//do a tiny shift to avoid hitting corner/side
 		// myLevel=new Level();
 		myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
