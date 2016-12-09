@@ -47,16 +47,6 @@ public class SpritesPage implements InvalidationListener {
 		myProjectileScroller = new SpriteScroller(SpriteFactory.PROJECTILE, myController);
 	}
 
-	public void loadDefaultSprites() {
-		FolderListor fl = new FolderListor("data/sprite/default_sprites/");
-		for(String fileName : fl.getFileNames()){
-			File aFile = new File(fileName);
-			XMLTranslator myLoader = new XMLTranslator();
-			Sprite aSprite = (Sprite) myLoader.loadFromFile(aFile);
-			myController.getModel().getGame().addPreset(aSprite);
-		}
-	}
-
 	private void addTabsToFacade() {
 		myPane = new TabPaneFacade();
 		myPane.addTab(SpriteFactory.PLAYER.name(), myPlayerScroller.getNode());

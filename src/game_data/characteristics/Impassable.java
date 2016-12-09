@@ -17,6 +17,7 @@ import javafx.geometry.Side;
 public class Impassable implements Characteristic{
 	
 	private Sprite mySprite;
+	private boolean movesThroughBottom;
 	private Action myAction;
 	
 	@ParameterAnnotation(parameters={"Sprite"})
@@ -28,7 +29,7 @@ public class Impassable implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			myAction = new Hit(collidedSprite, myCollisionMap.get(collidedSprite));
+			myAction = new Hit(collidedSprite, myCollisionMap.get(collidedSprite), mySprite);
 			myAction.act();
 		}
 	}

@@ -60,6 +60,7 @@ class LevelEditBox {
 		}
 		catch (NumberFormatException e) {
 			//  LOL
+			// double lol
 		}
 		
 		return this.level;
@@ -77,12 +78,14 @@ class LevelEditBox {
 	}
 	
 	private void updateBackgroundString(){
-		File file = new FileLoader(
+		FileLoader fl = new FileLoader(
 				FileType.GIF, 
 				FileType.JPEG, 
 				FileType.PNG,
-				FileType.JPG ).loadImage();
+				FileType.JPG );
 		
+		fl.setInitialDirectory(new File("data/images/level_images/"));
+		File file = fl.loadImage();
 		if (file !=null){
 			RelativePathFinder pf = new RelativePathFinder();
 			this.backgroundPath = pf.getPath(file);
@@ -109,5 +112,8 @@ class LevelEditBox {
 		}; 
 	}
 	
+	public TextField getTextField() {
+		return nameField;
+	}
 
 }

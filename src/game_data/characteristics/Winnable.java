@@ -33,6 +33,7 @@ public class Winnable implements Characteristic{
 		//TODO: make and execute win action
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 			if(collidedSprite instanceof Player){
+				//System.out.println("poop if winning");
 				WinLevel winlevel=new WinLevel(collidedSprite);
 				winlevel.act();
 			}

@@ -6,18 +6,14 @@ import author.controller.IAuthorController;
 import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.pages.level_editor.LevelEditorFactory;
 import author.view.pages.menu.AuthorMenu;
-import author.view.pages.menu.MenuFactory;
 import author.view.pages.sprite.page.SpritesPage;
 import author.view.util.facades.TabPaneFacade;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
-import game_data.Level;
+import javafx.application.Platform;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -31,11 +27,12 @@ import javafx.scene.paint.Color;
 public class AuthorView {
 
 	private static final String STYLESHEET = "data/gui/author-style.css";
-	Scene myScene;
-	Pane myPane = new VBox();
-	TabPaneFacade myTabPaneFacade;
-	IAuthorController myAuthorController;
+	private Scene myScene;
+	private Pane myPane = new VBox();
+	private TabPaneFacade myTabPaneFacade;
+	private IAuthorController myAuthorController;
 
+	private boolean displayInformationDialog = true;
 	private SpritesPage mySpritesPage;
 	private ILevelEditorExternal myLevelEditor;
 
@@ -48,25 +45,32 @@ public class AuthorView {
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
-		loadDefaultSprites();
+		displayInformation();
 	}
 
 	private void initializeView() {
-
 		this.mySpritesPage = new SpritesPage(myAuthorController);
 		this.myLevelEditor = new LevelEditorFactory().create(this.myAuthorController);
 		myPane.getChildren().addAll(buildMenu(), buildTabPane());
+	}
+
+	private void displayInformation() {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				if (displayInformationDialog) {
+					displayInformationalDialog();
+					displayInformationDialog = false;
+				}
+			}
+		});
 	}
 
 	public void reinitializeView() {
 		this.myPane.getChildren().clear();
 		initializeView();
 	}
-	
-	public void loadDefaultSprites(){
-		this.mySpritesPage.loadDefaultSprites();
-	}
-	
+
 	/**
 	 * Returns Toolbar built for primary AuthorScene
 	 */
@@ -94,6 +98,15 @@ public class AuthorView {
 	private String getStyleSheet() {
 		File css = new File(STYLESHEET);
 		return css.toURI().toString();
+	}
+
+	private void displayInformationalDialog() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("VoogaSalad Game");
+		alert.setHeaderText("Welcome to your new game!");
+		alert.setContentText(
+				"To get started, select 'New', then 'New Level', to begin creating your game.\nFrom there, you can create Characters in the Sprite Editor, then drag and drop them onto your level in the Level Editor.\n ");
+		alert.showAndWait();
 	}
 
 	public Scene getScene() {

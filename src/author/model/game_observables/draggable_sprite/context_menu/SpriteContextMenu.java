@@ -31,7 +31,7 @@ public class SpriteContextMenu implements ISpriteContextMenu {
 		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Copy", e -> {
 			Sprite clone = mySprite.getSprite().clone();
 			clone.setMyLocation(new Location(clone.getMyLocation().getXLocation() + 15,
-					clone.getMyLocation().getYLocation() + 15, clone.getMyLocation().getMyHeading()));
+					clone.getMyLocation().getYLocation() + 15));
 			myAuthorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
 		}).getItem());
 

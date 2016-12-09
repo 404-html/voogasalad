@@ -45,7 +45,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 		getDraggableItem().setLayoutY(getSprite().getMyLocation().getYLocation());
 		getDraggableItem().setPrefWidth(getSprite().getMyWidth());
 		getDraggableItem().setPrefHeight(getSprite().getMyHeight());
-		getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
+		//getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			instanceSprite.setMyImagePath(spritePreset.getMyImagePath());
 			instanceSprite.setMyWidth(spritePreset.getMyWidth());
 			instanceSprite.setMyHeight(spritePreset.getMyHeight());
-			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation(), spritePreset.getMyLocation().getMyHeading()));
+			instanceSprite.setMyLocation(new Location(instanceSprite.getMyLocation().getXLocation(), instanceSprite.getMyLocation().getYLocation()));
 			spritePreset.getCharacteristics()
 					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
 		};
@@ -117,7 +117,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			this.getImageView().setImage(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
 			this.getDraggableItem().setPrefWidth(aSprite.getMyWidth());
 			this.getDraggableItem().setPrefHeight(aSprite.getMyHeight());
-			this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
+			//this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
 		};
 		return invalidationListener;
 	}
