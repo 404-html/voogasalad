@@ -5,33 +5,33 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import author.view.pages.sprite.editor.settings.SettingsFactory.AcceptedParameterTypes;
-import author.view.util.input_fields.BooleanSelector;
-import author.view.util.input_fields.NumberFieldBox;
-import author.view.util.input_fields.SettingsEditBox;
-import author.view.util.input_fields.TextFieldBox;
 import game_data.Sprite;
+import util.inputfields.BooleanSelector;
+import util.inputfields.NumberFieldBox;
+import util.inputfields.SettingsEditBox;
+import util.inputfields.TextFieldBox;
 
 public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 
 	private SettingsFactory<?> myFactory;
 	private Sprite mySprite;
-	
+
 	public SpriteSettingsEditBox(Sprite aSprite, String aName) {
 		super(aName);
 		mySprite = aSprite;
 		myFactory = buildSettingFactory();
 		buildSelectors();
 	}
-	
+
 	public abstract void addSpriteSetting();
-	
+
 	protected abstract SettingsFactory<?> buildSettingFactory();
-	
+
 	protected final void buildSelectors(){
 		Map<String, AcceptedParameterTypes> paramMap = myFactory.getParameterTextToTypeMap();
-		
+
 		for( Entry<String, AcceptedParameterTypes> e: paramMap.entrySet()) {
-			
+
 			switch (e.getValue()) {
 			case BOOL:
 				addBooleanSelectors(e.getKey(), new BooleanSelector(e.getKey()) );
@@ -55,27 +55,42 @@ public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 
 	protected Map<String, Object> makeTextToValueMap(){
 		Map<String, Object> textToValueMap = new HashMap<>();
-		
+
 		getBooleanFieldMap().forEach( (s, b) -> textToValueMap.put(s, b.getBoolean()) );
-		getIntegerFieldMap().forEach( (s, n) -> textToValueMap.put(s, n.getInteger()));
-		getDoubleFieldMap().forEach( (s, d) -> textToValueMap.put(s, d.getDouble()));
+		getIntegerFieldMap().forEach( (s, n) -> {
+				int x;
+				try {
+					x = n.getInteger();
+				} catch(NumberFormatException e) {
+					x = 0;
+				}
+				textToValueMap.put(s, x);
+			});
+		getDoubleFieldMap().forEach( (s, d) -> {
+				double x;
+				try {
+					x = d.getDouble();
+				}
+				catch(NumberFormatException e) {
+					x = 0.0;
+				}
+				textToValueMap.put(s, x);
+		});
 		getTextFieldMap().forEach( (s, t) -> textToValueMap.put(s, t.getText()));
-		
+
 		textToValueMap.put("Sprite", mySprite);
-		
+
 		return textToValueMap;
 	}
-	
+
 	protected final Sprite getSprite(){
 		return mySprite;
 	}
-		
+
 	protected final SettingsFactory<?> getSettingFactory(){
 		return myFactory;
 	}
 
 	public abstract void removeSpriteSetting();
-	
-	
 	
 }

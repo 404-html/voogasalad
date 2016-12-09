@@ -1,10 +1,7 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import java.io.File;
-import util.RelativePathFinder;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
-import author.view.util.input_fields.NumberFieldBox;
+
 import game_data.Location;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -17,6 +14,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import util.RelativePathFinder;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
+import util.inputfields.NumberFieldBox;
 
 public class BaseSpriteEditBox {
 
@@ -35,7 +36,12 @@ public class BaseSpriteEditBox {
 	
 	public BaseSpriteEditBox() {
 		myPane = new VBox();
-		myFileLoader = new FileLoader("data/images/sprite_images/", FileType.PNG, FileType.GIF,FileType.JPG, FileType.JPEG);
+
+		myFileLoader = new FileLoader(
+				"data/images/sprite_images/",
+				FileType.RASTER_IMAGE
+				);
+
 		myPane.getChildren().addAll(
 				makeNameField(), 
 				makeLocationFields(),
@@ -159,12 +165,17 @@ public class BaseSpriteEditBox {
 		imageSelectBox.getChildren().addAll(imageButton, myImageView);
 		
 		imageButton.setOnMouseClicked(e -> {
-			File file = myFileLoader.loadImage();
-			if(file != null){
+			File file;
+			try {
+				file = myFileLoader.loadSingle();
 				RelativePathFinder pf = new RelativePathFinder();
 				myImagePath = pf.getPath(file);
 				myImageView.setImage(new Image(file.toURI().toString()));
+			} catch (Exception e1) {
+				// TODO : Throw Error message if file not found
+				e1.printStackTrace();
 			}
+
 		});
 		
 		return imageSelectBox;

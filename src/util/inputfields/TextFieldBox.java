@@ -1,4 +1,4 @@
-package author.view.util.input_fields;
+package util.inputfields;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,7 +24,7 @@ public class TextFieldBox {
 	 * Used if to not be constructed with Name Label
 	 */
 	public TextFieldBox() {
-		myPane = new HBox(5);
+		myPane = new HBox(SPACING);
 		myTextField = new TextField();
 		myLabel = new Label();		
 		

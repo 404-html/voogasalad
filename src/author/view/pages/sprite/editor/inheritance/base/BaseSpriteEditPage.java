@@ -2,6 +2,8 @@ package author.view.pages.sprite.editor.inheritance.base;
 
 import util.XMLTranslator;
 import author.view.pages.sprite.editor.controllable.ControllableEditor;
+import util.facades.TabPaneFacade;
+import util.facades.ToolBarBuilder;
 import author.view.pages.sprite.editor.inheritance.character.EnemySpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.item.ItemSpriteEditPage;
@@ -11,8 +13,6 @@ import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
 import author.view.pages.sprite.editor.settings.characteristics.SpriteCharacteristicEditor;
 import author.view.pages.sprite.editor.settings.states.SpriteStatesEditor;
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.facades.TabPaneFacade;
-import author.view.util.facades.ToolBarBuilder;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.sprites.Enemy;
