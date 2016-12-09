@@ -7,35 +7,38 @@ import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.WindowEvent;
 
-public class LevelSelectionPopUp {
+public class LevelSelectionPopUp extends AbstractPopUp implements IPopUpDisplay {
 	
 	private static final String RESOURCE_FILE = "gameplayerlabels.";
 	private static final String BUTTONLABEL = "ButtonLabels"; 
 
-	private List<HBox> myOptions;
 	private ResourceBundle myButtonLabels;
 	private int myNumberOfLevels;
 	private int mySelectedLevel;
 	
 	public LevelSelectionPopUp(int aNumLevels) {
-		myOptions = new ArrayList<HBox>();
+		super();
 		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
 		myNumberOfLevels = aNumLevels;
 		mySelectedLevel = 0;
+		addOptions();
 	}
 	
-	public List<HBox> addOptions() {
-		createLevelOptions();
-		return myOptions;
+	public void addOptions() {
+		addOption(createLevelOptions());
 	}
 
-	private void createLevelOptions() {
+	private Pane createLevelOptions() {
 		HBox levelSelection = new HBox(10);
 		ToggleGroup group = new ToggleGroup(); 
 		int levelsPerLine = 5;
@@ -58,11 +61,8 @@ public class LevelSelectionPopUp {
 				mySelectedLevel--;
 			}
 		});
-		myOptions.add(levelSelection);
+		return levelSelection;
 	}
 	
-	public int getSelectedLevel() {
-		return mySelectedLevel;
-	}
 
 }

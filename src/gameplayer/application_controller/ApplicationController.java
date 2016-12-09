@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
+import gameplayer.back_end.Resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.UserDefaults;
 import gameplayer.front_end.application_scene.IDisplay;
@@ -14,12 +15,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
-import gameplayer.front_end.popup.PopUpController;
+import gameplayer.front_end.popup.PopUpFactory;
+import gameplayer.front_end.popup.AbstractPopUp;
+import gameplayer.front_end.popup.IPopUpDisplay;
 import javafx.stage.Stage;
 
 /**
@@ -37,12 +41,6 @@ public class ApplicationController extends AbstractController {
 	private IDisplay myCurrentDisplay;
 	private UserDefaults myUserDefaults;
 	
-	//change to resource file / maybe make new CSS? 
-	private String[] myShirtBackgrounds = {"data/gui/hawaiian_shirt_background1.jpeg", "data/gui/hawaiian_shirt_background2.jpeg", 
-			"data/gui/hawaiian_shirt_background3.png", "data/gui/hawaiian_shirt_background4.jpeg", 
-			"data/gui/hawaiian_shirt_background5.jpeg", "data/gui/hawaiian_shirt_background6.jpeg", 
-			"data/gui/hawaiian_shirt_background7.jpeg"};
-	
 	public ApplicationController (Stage aStage) {
 		myStage = aStage;
 		mySceneBuilder = new SceneFactory();
@@ -53,7 +51,8 @@ public class ApplicationController extends AbstractController {
 	}
 
 	public void startScene() throws FileNotFoundException {
-		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, SCENE_SIZE, SCENE_SIZE);
+		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, FrontEndResources.SCENE_SIZE.getDoubleResource(),
+				FrontEndResources.SCENE_SIZE.getDoubleResource());
 		resetStage(myCurrentDisplay);
 		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
 	}
@@ -69,16 +68,19 @@ public class ApplicationController extends AbstractController {
 			displayGameChoice();
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton(myButtonLabels.getString("Author"), e -> {
-			IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
-			myStage.setTitle("VOOGASalad");
-			Scene scene = authorControllerExternal.getScene();
-			myStage.setWidth(scene.getWidth());
-			myStage.setHeight(scene.getHeight());
-			myStage.setScene(scene);
+			displayAuthoring();
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
 			myInformationController.facebookLogin();
 		}, ButtonDisplay.FACEBOOK);
+	}
+	
+	private void displayAuthoring() {
+		IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
+		Scene scene = authorControllerExternal.getScene();
+		myStage.setWidth(scene.getWidth());
+		myStage.setHeight(scene.getHeight());
+		myStage.setScene(scene);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -90,18 +92,14 @@ public class ApplicationController extends AbstractController {
 		}, e -> {
 			displayUserScene();
 		}, e-> {
-			myCurrentDisplay.setBackground(myShirtBackgrounds[(int) Math.floor(Math.random() * 7)], myStage.getWidth(), myStage.getHeight());
+			myCurrentDisplay.setBackground(myButtonLabels.getString("Shirt" + (int) Math.floor(Math.random() * 7)), myStage.getWidth(), myStage.getHeight());
 		});
 	}
 
 	public void displayHighScoreScene() {
 		IDisplay highScore = mySceneBuilder.create(SceneIdentifier.HIGHSCORE, myStage.getWidth(), myStage.getHeight());
 		resetStage(highScore);
-		setHighScoreHandlers((INavigationDisplay) highScore);
-	}
-
-	private void setHighScoreHandlers(INavigationDisplay highScoreScene) {
-		//highScoreScene.addNode(getGUIGenerator().createLabel("" + myInformationController.getHighScoresForUser("hi"), 0, 0));
+		//setHighScoreHandlers((INavigationDisplay) highScore);
 	}
 
 	private void displayUserScene() {
@@ -129,51 +127,27 @@ public class ApplicationController extends AbstractController {
 			displayGame(myStoredGames.getGameFilePath(aChoice));
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}));
-//		ComboBox<Pane> cBox = getGUIGenerator().createComboBox(getDisplayOfGames());
-//		cBox.setOnAction(e -> {
-//			String gameName = ((Label) cBox.getSelectionModel().getSelectedItem().getChildren().get(0)).getText();
-//			cBox.setPromptText(gameName);
-//			File gameFile = myStoredGames.getGameFilePath(gameName);
-//			displayGame(gameFile);
-//			setGameChoiceSecondRoundButtonHandlers(gameChoice);
-//		});
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
 			displayGame(chosenGame);
-			//myStoredGames.addGame(myGamePlay.getGame().getName(), chosenGame);
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
 	}
 	
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
-		HBox hbox = new HBox(10);
+		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {
-			if (myGamePlay != null) {
-				PopUpController popup = new PopUpController();
-				PlayerOptionsPopUp options = new PlayerOptionsPopUp();
-				for(HBox box : options.addOptions()){
-					popup.addOption(box);
-				}
-				popup.show();
-			}
+			IPopUpDisplay options = new PopUpFactory().buildPopUpDisplay();
+			options.show();
 		}, ButtonDisplay.TEXT));
 		hbox.getChildren().add(getGUIGenerator().createButton("LEVELS", 0, 0, e -> {
-			if (myGamePlay != null) {
-				PopUpController popup = new PopUpController();
-				LevelSelectionPopUp levelSelection = new LevelSelectionPopUp(myGamePlay.getGame().getLevels().size());
-				for (HBox box : levelSelection.addOptions()) {
-					popup.addOption(box);
-				}
-				popup.show();
-				myGamePlay.setLevel(levelSelection.getSelectedLevel());
-			}
+			IPopUpDisplay levelSelection = new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
+			levelSelection.show();
 		}, ButtonDisplay.TEXT));
 		gameChoice.addNode(hbox);
 		gameChoice.addButton("PLAY", e -> {
-			if (myGamePlay != null) {
-				myGamePlay.displayGame();
-			}
+			myGamePlay.displayGame();
 		}, ButtonDisplay.TEXT);
 	}
 	

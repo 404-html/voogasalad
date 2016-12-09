@@ -1,9 +1,6 @@
 package gameplayer.application_controller;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PropertyResourceBundle;
 import game_data.Game;
 import game_data.Sprite;
@@ -20,7 +17,6 @@ import gameplayer.front_end.sprite_display.SpriteDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import util.XMLTranslator;
 
@@ -47,13 +43,13 @@ public class GamePlayController extends AbstractController {
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		mySceneBuilder = new SceneFactory();
 		initializeKeySets(aKeyInput);
-		initializeEngineComponents(aFile);
+		initializeEngineComponents();
 		initializeScene();
 		updateSprites();
 	}
 
-	private void initializeEngineComponents(File aFile) {
-		myGameEngine = new GameEngine(aFile, myLevel);
+	private void initializeEngineComponents() {
+		myGameEngine = new GameEngine(myGameFile, myLevel);
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame();
 	}
@@ -80,7 +76,6 @@ public class GamePlayController extends AbstractController {
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
-			//This is what gets called every update cycle
 			resetSprites(elapsedTime);
 			updateScene();
 		});
@@ -89,17 +84,16 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
-//		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
-//		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
-//		if (myGameController.getMyLevel().lostLevel()) createResultScene(myButtonLabels.getString("YouLost"));
-//		if (myGameController.getMyLevel().wonLevel()) createResultScene(myButtonLabels.getString("YouWon"));
-//		myGamePlayScene.moveScreen(myMovementHandler);
 		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
-		if (myGameController.getMyLevel().lostLevel()) setLosingScene();
-		if (myGameController.getMyLevel().wonLevel()) setWinningScene();
+		checkResult();
 		myGamePlayScene.moveScreen(myMovementHandler);
 		setHealthLabel();
+	}
+	
+	private void checkResult() {
+		if (myGameController.getMyLevel().lostLevel()) setResultScene(myButtonLabels.getString("YouLose"));
+		if (myGameController.getMyLevel().wonLevel()) setResultScene(myButtonLabels.getString("YouWon"));
 	}
 
 	private void resetSprites(double elapsedTime) {
@@ -132,18 +126,12 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			save();
 		}, e -> {
-			setLosingScene(); 
+			setResultScene(myButtonLabels.getString("YouLose")); 
 		}, e -> {
-			setWinningScene();
+			setResultScene(myButtonLabels.getString("YouWon"));
 		});
 	}
 	
-//	private void createResultScene(String aMessage) {
-//		myAnimationLoop.stop();
-//		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-//		setResultSceneHandlers((INavigationDisplay) ls, aMessage);
-//		resetStage(ls);
-//	}
 
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
@@ -158,10 +146,7 @@ public class GamePlayController extends AbstractController {
 	private void setHealthLabel() {
 		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
-	
-//	private void setScoreLabel() {
-//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer().getScore());
-//	}
+
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
@@ -183,20 +168,13 @@ public class GamePlayController extends AbstractController {
 		return myGameController.getMyGame();
 	}
 	
-	private void setWinningScene() {
+	private void setResultScene(String aLabel) {
 		myAnimationLoop.stop();
 		Pane winScene = myGamePlayScene.createResultScene();
-		winScene.getChildren().add(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
+		winScene.getChildren().add(getGUIGenerator().createLabel(aLabel, 0, 0));
 		setResultSceneHandlers(winScene);
 	}
 	
-	private void setLosingScene() {
-		myAnimationLoop.stop();
-		Pane loseScene = myGamePlayScene.createResultScene();
-		loseScene.getChildren().add(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
-		setResultSceneHandlers(loseScene);
-	}
-
 	private void setResultSceneHandlers(Pane loseScene) {
 		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
 			myApplicationController.displayMainMenu();

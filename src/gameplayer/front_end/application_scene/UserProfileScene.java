@@ -1,5 +1,6 @@
 package gameplayer.front_end.application_scene;
 
+import gameplayer.back_end.Resources.FrontEndResources;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
@@ -43,7 +44,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 	}
 
 	private void addTop() {
-		HBox hbox = new HBox(BOX_INSETS); 
+		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource()); 
 		hbox.setOpacity(1);
 		ImageView profilePicture = new ImageView(new Image(myPictureUrl));
 		profilePicture.setFitWidth(myWidth * .1);

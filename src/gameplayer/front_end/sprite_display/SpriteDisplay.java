@@ -4,12 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import game_data.Sprite;
-import gameplayer.front_end.sprite_display.ISpriteDisplay.Shape;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 
 public class SpriteDisplay {
@@ -20,7 +16,7 @@ public class SpriteDisplay {
 		mySpriteViews = new HashMap<Sprite, ImageView>();
 	}
 	
-	public ImageView buildSpriteDisplay(Sprite aSprite) {
+	private ImageView buildSpriteDisplay(Sprite aSprite) {
 		ImageView image = new ImageView(aSprite.getMyImagePath());
 		setImageProperties(aSprite, image);
 		return image;

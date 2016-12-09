@@ -14,8 +14,6 @@ import javafx.scene.input.MouseEvent;
  *
  */
 public interface IDisplay {
-
-	public final int BOX_INSETS = 20;
 	
 	public Scene init();
 	

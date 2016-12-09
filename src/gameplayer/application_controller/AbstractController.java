@@ -13,7 +13,6 @@ public abstract class AbstractController {
 	
 	protected static final String FILE = "gameplayerlabels.";
 	protected static final String BUTTONLABEL = "ButtonLabels"; 
-	protected static final int SCENE_SIZE = 1000;
 
 	protected SceneFactory mySceneBuilder;
 	protected Stage myStage;
@@ -21,7 +20,7 @@ public abstract class AbstractController {
 	private IGUIGenerator myGUIGenerator = new GUIGenerator();
 	
 	public AbstractController() {
-		
+		myStage.setTitle(myButtonLabels.getString("Title"));
 	}
 	
 	protected void resetStage(IDisplay aScene) {

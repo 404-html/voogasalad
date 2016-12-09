@@ -23,11 +23,9 @@ import javafx.scene.layout.HBox;
 public class GUIGenerator implements IGUIGenerator {
 	
 	private ButtonFactory myButtonBuilder;
-	private ComboBoxFactory myComboBoxBuilder; 
 
 	public GUIGenerator() {
 		myButtonBuilder = new ButtonFactory();
-		myComboBoxBuilder = new ComboBoxFactory();
 	}
 	
 	@Override
@@ -76,11 +74,7 @@ public class GUIGenerator implements IGUIGenerator {
 		box.setPromptText("CHOOSE GAME");
 		box.setEditable(true);        
 		box.setOnAction(e -> {
-			System.out.println(box.getSelectionModel().getSelectedItem());
-			System.out.println(box.getSelectionModel().getSelectedItem().getChildren().get(1));
 			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
-			System.out.println(label);
-			//label.setId("combobox-label");
 		    aChooser.choose(label);
 		    box.setPromptText(label);
 		});
