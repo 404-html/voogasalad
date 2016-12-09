@@ -16,6 +16,10 @@ public class Projectile extends Sprite{
 	public Projectile(Projectile aProjectile){
 		super(aProjectile);
 	}
+	
+	public Projectile() {
+		super();
+	}
 
 	@Override
 	public Sprite clone() {
