@@ -198,6 +198,7 @@ public class ListOfCollidingSprites {
 		double targetBottomRightX = targetSprite.getMyLocation().getXLocation() + targetSprite.getMyWidth();
 		double targetBottomRightY = targetSprite.getMyLocation().getYLocation() + targetSprite.getMyHeight();
 
+		//if (mySprite instanceof Player) {
 		if (mySprite instanceof Player) {
 
 			double mySprite_bottom = mySprite.getMyLocation().getYLocation() + mySprite.getMyHeight();
@@ -212,9 +213,11 @@ public class ListOfCollidingSprites {
 
 			if (top_collision < bottom_collision && top_collision < left_collision && top_collision < right_collision) {
 				System.out.println("top");
-				mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
+				//if(targetSprite instanceof Terrain && !isTransparent()){
+					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
+				//}
 				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
-					findSideOfCollision(mySprite);
+					return findSideOfCollision(mySprite);
 				}
 				return Side.TOP;
 			} else if (bottom_collision < top_collision && bottom_collision < left_collision
