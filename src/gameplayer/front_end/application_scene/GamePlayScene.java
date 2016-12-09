@@ -23,7 +23,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myScene = new Scene(myStack, aWidth, aHeight);
 		myGamePlay = new AnimationPane();
 		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight);
-		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
+	//	myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
 		initializeScene();
 	}
 	

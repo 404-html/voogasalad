@@ -12,5 +12,9 @@ public abstract class Character extends Sprite {
 	public Character(Character aCharacter){
 		super(aCharacter);
 	}
+	
+	public Character() {
+		super();
+	}
 
 }

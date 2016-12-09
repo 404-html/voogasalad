@@ -13,20 +13,19 @@ import game_engine.actions.Action;
 import javafx.scene.input.KeyCode;
 
 /**
- * Represents a level of a Game. Has a List of Sprites
- * active on that Level as well as a background image and
- * Level specific KeyCommands
+ * Represents a level of a Game. Has a List of Sprites active on that Level as
+ * well as a background image and Level specific KeyCommands
  * 
  * @author Addison, Cleveland Thompson, Austin
  */
-public class Level extends GameObject{
-	
+public class Level extends GameObject {
+
 	private boolean didLose, didWin;
 	private int width, height;
 	private String backgroundImageFilePath;
 	private Player myPlayerSprite;
 	Set<Sprite> mySprites;
-	private List<Sprite>myControllableSpriteList=new ArrayList<Sprite>();
+	private List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
 
 	Map<KeyCode, KeyCommand> myKeyCommands;
 	
@@ -39,20 +38,19 @@ public class Level extends GameObject{
 		this.backgroundImageFilePath = backgroundImageFilePath;
 		mySprites = new HashSet<Sprite>();
 		myKeyCommands = new HashMap<KeyCode, KeyCommand>();
-		myControllableSpriteList=new ArrayList<Sprite>();
+		myControllableSpriteList = new ArrayList<Sprite>();
 		setMyControllableSpriteList();
 	}
-	
 
-	public Player getMainPlayer(){
+	public Player getMainPlayer() {
 		return myPlayerSprite;
 	}
-	
-	public void setPlayerSprite(Player aPlayer){
+
+	public void setPlayerSprite(Player aPlayer) {
 		myPlayerSprite = aPlayer;
 		notifyListeners();
 	}
-	
+
 	public int getWidth() {
 		return width;
 	}
@@ -71,16 +69,16 @@ public class Level extends GameObject{
 		this.notifyListeners();
 	}
 
-	public void setBackgroundImageFilePath(String backgroundImageFilePath){
+	public void setBackgroundImageFilePath(String backgroundImageFilePath) {
 		this.backgroundImageFilePath = backgroundImageFilePath;
 		this.notifyListeners();
 	}
-	
-	public String getBackgroundImageFilePath(){
+
+	public String getBackgroundImageFilePath() {
 		return backgroundImageFilePath;
 	}
-	
-	public void addNewSprite(Sprite  aSprite){
+
+	public void addNewSprite(Sprite aSprite) {
 		mySprites.add(aSprite);
 //		if(aSprite instanceof Player){
 //			setPlayerSprite((Player) aSprite);
@@ -93,21 +91,21 @@ public class Level extends GameObject{
 		}
 		this.notifyListeners();
 	}
-	
-	public void setKeyCommand(KeyCode aKeyCode, KeyCommand aKeyCommand){
+
+	public void setKeyCommand(KeyCode aKeyCode, KeyCommand aKeyCommand) {
 		myKeyCommands.put(aKeyCode, aKeyCommand);
 		this.notifyListeners();
 	}
-	
-	public void deleteKeyCommand(KeyCode aKeyCode){
+
+	public void deleteKeyCommand(KeyCode aKeyCode) {
 		myKeyCommands.remove(aKeyCode);
 		this.notifyListeners();
 	}
-	
-	public void removeSprite(Sprite aSprite){
-		if(mySprites.contains(aSprite)){
+
+	public void removeSprite(Sprite aSprite) {
+		if (mySprites.contains(aSprite)) {
 			mySprites.remove(aSprite);
-			if(aSprite.getControllable().isControllable()){
+			if (aSprite.getControllable().isControllable()) {
 				myControllableSpriteList.remove(aSprite);
 			}
 			this.notifyListeners();
@@ -118,32 +116,35 @@ public class Level extends GameObject{
 
 		return new ArrayList<>(mySprites);
 	}
-	public void setMyControllableSpriteList(){
+
+	public void setMyControllableSpriteList() {
 		List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
-		//List<Sprite> mySpriteList = getMySpriteList();
-		for(Sprite s: mySprites){
-			if(s.getControllable()!=null && s.getControllable().isControllable()){
+		// List<Sprite> mySpriteList = getMySpriteList();
+		for (Sprite s : mySprites) {
+			if (s.getControllable() != null && s.getControllable().isControllable()) {
 				myControllableSpriteList.add(s);
 			}
 		}
-		this.myControllableSpriteList=myControllableSpriteList;
+		this.myControllableSpriteList = myControllableSpriteList;
 	}
-	public List<Sprite> getMyControllableSpriteList(){
+
+	public List<Sprite> getMyControllableSpriteList() {
 		return myControllableSpriteList;
 	}
-	public void setLevelLost(){
+
+	public void setLevelLost() {
 		didLose = true;
 	}
-	
-	public boolean lostLevel(){
+
+	public boolean lostLevel() {
 		return didLose;
 	}
-	
-	public void setLevelWon(){
+
+	public void setLevelWon() {
 		didWin = true;
 	}
-	
-	public boolean wonLevel(){
+
+	public boolean wonLevel() {
 		return didWin;
 	}
 }
