@@ -1,4 +1,4 @@
-package author.view.util.input_fields;
+package util.inputfields;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyBooleanProperty;
@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 /**
- * Helpful wrapper class for boolean input
+ * JavaFX Helper class to handle boolean inputs.  
  * 
  * @author George Bernard
  */
@@ -20,14 +20,14 @@ public class BooleanSelector {
 	private CheckBox myCheckBox;
 	
 	/**
-	 * If made without a label
+	 * Constructs a BooleanSelector without descriptive text
 	 */
 	public BooleanSelector() {
 		myPane = new HBox();
 		myCheckBox = new CheckBox();
 		myCheckBox.setAllowIndeterminate(false);
 		myPane.getChildren().add(myCheckBox);
-		
+				
 		myBool = myCheckBox.selectedProperty();
 		
 		setBoolean(false);
@@ -35,9 +35,9 @@ public class BooleanSelector {
 	}
 	
 	/**
-	 * If to be made with a label
+	 * Constructs a BooleanSelector with the given text
 	 * 
-	 * @param aText
+	 * @param text description
 	 */
 	public BooleanSelector(String aText){
 		this();
@@ -45,7 +45,7 @@ public class BooleanSelector {
 	}
 	
 	/**
-	 * If to be made with a boolean on construction
+	 * Constructs a BooleanSelector in the given boolean state
 	 * 
 	 * @param aBoolean
 	 */
@@ -56,7 +56,7 @@ public class BooleanSelector {
 
 	
 	/**
-	 * If to be made with a boolean and label on construction
+	 * Constructs a BooleanSelector with the given Boolean state and with the given text.
 	 * 
 	 * @param aBoolean
 	 * @param aText
@@ -67,13 +67,17 @@ public class BooleanSelector {
 	}
 	
 	/**
-	 * @return if selected
+	 * Returns primitive boolean value of underlying selector
+	 * 
+	 * @return if selected is true
 	 */
 	public boolean getBoolean(){
 		return myBool.get();
 	}
 	
 	/**
+	 * Sets whether the selector is selected
+	 * 
 	 * @param Selection Value
 	 */
 	public void setBoolean(boolean aBoolean){
@@ -81,6 +85,8 @@ public class BooleanSelector {
 	}
 
 	/**
+	 * Returns the ReadOnly/immutable boolean property of the underlying selector
+	 * 
 	 * @return immutable boolean property
 	 */
 	public ReadOnlyBooleanProperty getBooleanProperty(){
@@ -89,6 +95,8 @@ public class BooleanSelector {
 	}
 	
 	/**
+	 * Returns the javafx Pane showing the selector field
+	 * 
 	 * @return Input Field
 	 */
 	public Pane getPane(){
