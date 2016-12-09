@@ -20,7 +20,6 @@ public abstract class AbstractController {
 	private IGUIGenerator myGUIGenerator = new GUIGenerator();
 	
 	public AbstractController() {
-		myStage.setTitle(myButtonLabels.getString("Title"));
 	}
 	
 	protected void resetStage(IDisplay aScene) {

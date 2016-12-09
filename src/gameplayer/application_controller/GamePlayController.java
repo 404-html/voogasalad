@@ -10,6 +10,10 @@ import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.keycode_handler.MovementHandler;
+import gameplayer.back_end.keycode_handler.MovementHandlerFactory;
+import gameplayer.back_end.keycode_handler.XMovementHandler;
+import gameplayer.back_end.keycode_handler.XYMovementHandler;
+import gameplayer.back_end.keycode_handler.YMovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
@@ -26,7 +30,6 @@ public class GamePlayController extends AbstractController {
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
 	private AnimationLoop myAnimationLoop;
-	private MovementHandler myMovementHandler;
 	private GamePlayScene myGamePlayScene;
 	private KeyCodeHandler myKeyCodeHandler;
 	private ApplicationController myApplicationController;
@@ -39,10 +42,10 @@ public class GamePlayController extends AbstractController {
 		myStage = aStage;
 		myGameFile = aFile;
 		myApplicationController = aAppController;
-		mySpriteDisplay = new SpriteDisplay();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		mySceneBuilder = new SceneFactory();
-		initializeKeySets(aKeyInput);
+		mySpriteDisplay = new SpriteDisplay();
+		myKeyCodeHandler = new KeyCodeHandler(aKeyInput);
 		initializeEngineComponents();
 		initializeScene();
 		updateSprites();
@@ -52,11 +55,6 @@ public class GamePlayController extends AbstractController {
 		myGameEngine = new GameEngine(myGameFile, myLevel);
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame();
-	}
-
-	private void initializeKeySets(String aKeyInput) {
-		myKeyCodeHandler = new KeyCodeHandler(aKeyInput);
-		myMovementHandler = new MovementHandler();
 	}
 	
 	public void displayGame() {
@@ -69,7 +67,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void initializeScene() {
-		myGamePlayScene = new GamePlayScene(myMovementHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), myApplicationController.getUserDefaults().getFontColor("black"));
+		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), myApplicationController.getUserDefaults().getFontColor("black"));
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
 
@@ -84,15 +82,15 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
-		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
-		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), 
+				myStage.getWidth(), myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight(), 3);
 		checkResult();
-		myGamePlayScene.moveScreen(myMovementHandler);
+		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
 	}
 	
 	private void checkResult() {
-		if (myGameController.getMyLevel().lostLevel()) setResultScene(myButtonLabels.getString("YouLose"));
+		if (myGameController.getMyLevel().lostLevel()) setResultScene(myButtonLabels.getString("YouLost"));
 		if (myGameController.getMyLevel().wonLevel()) setResultScene(myButtonLabels.getString("YouWon"));
 	}
 
@@ -100,7 +98,7 @@ public class GamePlayController extends AbstractController {
 		myGamePlayScene.clearSprites();
 		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
-		mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
+		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
 		updateSprites();
 	}
 	
@@ -126,7 +124,7 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			save();
 		}, e -> {
-			setResultScene(myButtonLabels.getString("YouLose")); 
+			setResultScene(myButtonLabels.getString("YouLost")); 
 		}, e -> {
 			setResultScene(myButtonLabels.getString("YouWon"));
 		});

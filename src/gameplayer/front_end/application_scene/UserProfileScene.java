@@ -52,7 +52,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		//profilePicture.setFitHeight(myHeight * .1);
 		hbox.getChildren().add(profilePicture);
 		Label userName = myGUIGenerator.createLabel(myUserName, 0, 0);
-		userName.setId("heading");
+		//userName.setId("heading");
 		hbox.getChildren().add(userName);
 		hbox.setAlignment(Pos.TOP_LEFT);
 		//hbox.setLayoutX(myWidth * .1);

@@ -46,6 +46,7 @@ public class ApplicationController extends AbstractController {
 		mySceneBuilder = new SceneFactory();
 		myInformationController = new PlayerInformationController();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
+		myStage.setTitle(myButtonLabels.getString("Title"));
 		myStoredGames = new StoredGames();
 		myUserDefaults = new UserDefaults(this.getClass().toString());
 	}
@@ -70,7 +71,7 @@ public class ApplicationController extends AbstractController {
 		mainMenu.addButton(myButtonLabels.getString("Author"), e -> {
 			displayAuthoring();
 		}, ButtonDisplay.TEXT);
-		mainMenu.addButton("LOGIN TO FACEBOOK", e -> {
+		mainMenu.addButton(myButtonLabels.getString("Login"), e -> {
 			myInformationController.facebookLogin();
 		}, ButtonDisplay.FACEBOOK);
 	}
@@ -110,9 +111,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setUserProfileButtonHandlers(INavigationDisplay userProfile) {
-		userProfile.addButton(myButtonLabels.getString("Hi"), e -> {
-			//do nothing
-		}, ButtonDisplay.TEXT);
+		//do nothing
 	}
 
 	private void displayGameChoice() {
@@ -141,7 +140,7 @@ public class ApplicationController extends AbstractController {
 			IPopUpDisplay options = new PopUpFactory().buildPopUpDisplay();
 			options.show();
 		}, ButtonDisplay.TEXT));
-		hbox.getChildren().add(getGUIGenerator().createButton("LEVELS", 0, 0, e -> {
+		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Levels"), 0, 0, e -> {
 			IPopUpDisplay levelSelection = new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
 			levelSelection.show();
 		}, ButtonDisplay.TEXT));
