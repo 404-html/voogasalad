@@ -6,6 +6,8 @@ package author.view.pages.level_editor.windows.level_edit_window;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.facades.ToolBarBuilder;
 import game_data.Level;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -52,17 +54,30 @@ class LevelEditPage {
 	}
 	
 	private void saveAndClose(Level aLevel){
-		if (aLevel != null){
+		if (aLevel != null && !this.levelEditBox.getTextField().getText().isEmpty()){
 			this.level = aLevel;
 			this.iLevelEditInternal.close();
+		} else {
+			displayEmptyLevelNameDialog();
 		}
 	}
 	
 	private void cancel(){
 		this.iLevelEditInternal.close();
 	}
+	
+	private void displayEmptyLevelNameDialog() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("VoogaSalad Game");
+		alert.setHeaderText("Invalid Level Name");
+		alert.setContentText("Name must contain a non-empty set of valid characters");
+		alert.showAndWait();
+	}
+	
 	public Level getLevel(){
 		return this.level;
 	}
+	
+	
 
 }
