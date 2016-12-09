@@ -90,11 +90,14 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
 		// generateDefaultKeyPressedMap();
+		System.out.println("Nubmer of characteristics BEFROE " + myLevel.getMainPlayer().getCharacteristics().size());
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
+		System.out.println("Nubmer of characteristics AFTER " + myLevel.getMainPlayer().getCharacteristics().size());
+
 		// updateSpritePositions();
 
 		// System.out.println("xvel " +
@@ -118,20 +121,20 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		}
 	}
 
-	public static void activateSingularPowerUp(Characteristic powerUp, Sprite spriteToActOn, double timeRemaining) {
-		// BUGGY!!!!
-//		System.out.println("Time left " + timeRemaining);
-
-		if (powerUp instanceof TemporalPowerUpper) {
-			// System.out.println("LUCIA");
-			// if(powerUp instanceof InvincibilityPowerUpper)
-			// System.out.println("Knows type");
-
-			((TemporalPowerUpper) powerUp).activatePowerUp(spriteToActOn, null, timeRemaining);
-
-		}
-
-	}
+//	public static void activateSingularPowerUp(Characteristic powerUp, Sprite spriteToActOn, double timeRemaining) {
+//		// BUGGY!!!!
+////		System.out.println("Time left " + timeRemaining);
+//
+//		if (powerUp instanceof TemporalPowerUpper) {
+//			// System.out.println("LUCIA");
+//			// if(powerUp instanceof InvincibilityPowerUpper)
+//			// System.out.println("Knows type");
+//
+//			((TemporalPowerUpper) powerUp).activatePowerUp(spriteToActOn, null, timeRemaining);
+//
+//		}
+//
+//	}
 
 	public void setKeyPressedMapWithBoosts() {
 		mainPlayerControllable.setMyKeyPressedMap(generateBoostedKeyPressedMap());

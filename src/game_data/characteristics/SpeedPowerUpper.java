@@ -71,5 +71,15 @@ public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristi
 		myInterface.setKeyPressedMapWithBoosts();
 	}
 
+	@Override
+	public boolean checkForSpecificTemporalPowerUpper(Sprite collidedSprite, double myTimeInEffect, boolean hasChanged,
+			Characteristic characteristic) {
+			if(characteristic instanceof SpeedPowerUpper){
+				collidedSprite.getMyPowerUps().put(characteristic, myTimeInEffect);
+				hasChanged = true;
+			}
+			return hasChanged;
+	}
+
 
 }

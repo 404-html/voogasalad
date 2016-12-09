@@ -40,7 +40,7 @@ public class Damager implements Characteristic{
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			Action myAction = new Damage(myDamageToGive, collidedSprite, this);
+			Action myAction = new Damage(myDamageToGive, collidedSprite);
 			myAction.act();
 		}
 		

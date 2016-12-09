@@ -149,7 +149,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 //		
 		myLevel.addNewSprite(t);
-//		t.addCharacteristic(new Bouncer(GameResources.BOUNCE_SPEED_HORIZONTAL.getDoubleResource(), GameResources.BOUNCE_SPEED_VERTICAL.getDoubleResource(), t));
+		t.addCharacteristic(new Bouncer(GameResources.BOUNCE_SPEED_HORIZONTAL.getDoubleResource(), GameResources.BOUNCE_SPEED_VERTICAL.getDoubleResource(), t));
 		myLevel.addNewSprite(
 				new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 		myLevel.addNewSprite(

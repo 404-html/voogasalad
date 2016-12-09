@@ -88,4 +88,16 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 			playerSprite.addState(new Visible((timeElapsed.intValue()) % GameResources.FLASH_RATE.getDoubleResource() == 0));
 		}
 	}
+
+	@Override
+	public boolean checkForSpecificTemporalPowerUpper(Sprite collidedSprite, double myTimeInEffect, boolean hasChanged,
+			Characteristic characteristic) {
+			if(characteristic instanceof InvincibilityPowerUpper){
+//				System.out.println("LUCIA:");
+				collidedSprite.getMyPowerUps().put(characteristic, myTimeInEffect);
+				hasChanged = true;
+			}
+			return hasChanged;
+	}
+	
 }
