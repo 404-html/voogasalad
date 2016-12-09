@@ -212,45 +212,51 @@ public class ListOfCollidingSprites {
 			double right_collision = targetSprite_right - mySprite.getMyLocation().getXLocation();
 
 			if (top_collision < bottom_collision && top_collision < left_collision && top_collision < right_collision) {
-				System.out.println("top");
-				//if(targetSprite instanceof Terrain && !isTransparent()){
+				//System.out.println("top");
+				if((targetSprite instanceof Terrain && !isTransparent()) || (isTransparent() && pastPlatform(mySprite))){
 					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
-				//}
+				}
 				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
 				}
 				return Side.TOP;
 			} else if (bottom_collision < top_collision && bottom_collision < left_collision
 					&& bottom_collision < right_collision) {
-				System.out.println("bottom");
-				mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
+				//System.out.println("bottom");
+				if(targetSprite instanceof Terrain && !isTransparent()){
+					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
+				}
 				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
 				}
 				return Side.BOTTOM;
 			} else if (left_collision < right_collision && left_collision < top_collision
 					&& left_collision < bottom_collision) {
-				System.out.println("left");
-				if (left_collision > 10) {
-					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
-					mySprite.setMyLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
+				//System.out.println("left");
+				//if (left_collision > 10) {
+					if(targetSprite instanceof Terrain && !isTransparent()){
+						mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
+						mySprite.setMyLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
+					}
 					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
 					}
 					return Side.LEFT;
-				}
+				//}
 
 			} else if (right_collision < left_collision && right_collision < top_collision
 					&& right_collision < bottom_collision) {
-				System.out.println("right");
-				if (right_collision > 10) {
+				//System.out.println("right");
+				//if (right_collision > 10) {
+				if(targetSprite instanceof Terrain && !isTransparent()){
 					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 					mySprite.setMyLocation(new Location(myTopLeftX + right_collision, myTopLeftY));
+				}
 					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
 					}
 					return Side.RIGHT;
-				}
+				//}
 
 			}
 		}
@@ -259,9 +265,7 @@ public class ListOfCollidingSprites {
 
 	private boolean pastPlatform(Sprite myPlayerSprite) {
 		return myPlayerSprite.getMyLocation().getYLocation() + myPlayerSprite.getMyHeight() < targetSprite
-				.getMyLocation().getYLocation()
-				// return myPlayerSprite.getMyYVelocity()>0;
-				&& myPlayerSprite.getMyYVelocity() > 0;
+				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity() > 0;
 	}
 
 	private boolean isTransparent() {
