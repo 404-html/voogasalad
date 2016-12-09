@@ -1,11 +1,11 @@
 <game__data.sprites.Terrain>
-  <name>workingblock</name>
+  <name>Block</name>
   <myLocation>
     <myXLocation>0.0</myXLocation>
     <myYLocation>0.0</myYLocation>
   </myLocation>
-  <myWidth>50</myWidth>
-  <myHeight>50</myHeight>
+  <myWidth>100</myWidth>
+  <myHeight>100</myHeight>
   <myImagePath>data/images/sprite_images/block.png</myImagePath>
   <myXVelocity>0.0</myXVelocity>
   <myYVelocity>0.0</myYVelocity>
@@ -14,7 +14,12 @@
   <terminalXVel>600.0</terminalXVel>
   <terminalYVel>600.0</terminalYVel>
   <myCollisionHandler/>
-  <myCharacteristics/>
+  <myCharacteristics>
+    <game__data.characteristics.Impassable>
+      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+      <movesThroughBottom>false</movesThroughBottom>
+    </game__data.characteristics.Impassable>
+  </myCharacteristics>
   <myControllable>
     <mySprite class="game_data.sprites.Terrain" reference="../.."/>
     <isControllable>false</isControllable>

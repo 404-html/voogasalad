@@ -104,9 +104,9 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
 				myLevel.setPlayerSprite((Player)s);
-				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
-				myLevel.getMainPlayer().addState(new Health(200));
-				myLevel.getMainPlayer().addState(new LevelWon());
+				//myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+				//myLevel.getMainPlayer().addState(new Health(200));
+				//myLevel.getMainPlayer().addState(new LevelWon());
 				myLevel.getMainPlayer()
 						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
 		
@@ -114,6 +114,10 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			}
 			else{
 				s.addState(new Physics(new SpritePhysics(0.0)));
+				if(s.getCharacteristics().size()>1){
+					//s.setMyXVelocity(100.0);
+					s.setMyYVelocity(-100.0);
+				}
 			}
 		}
 		/*int j = 1;
