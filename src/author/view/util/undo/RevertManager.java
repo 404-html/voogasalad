@@ -9,41 +9,59 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.stream.Collectors;
-
 import game_data.Level;
 import game_data.Sprite;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 
 /**
  * @author Cleveland Thompson V (ct168)
  *
  */
-class RevertManager implements IRevertManager{
-	private Map<Sprite, InvalidationListener> existingSprites = new HashMap<>();
-	private Stack<Sprite> eventList = new Stack<>();
+class RevertManager implements IRevertManager, IRevertManagerInternal{
+	private Map<Sprite, GameChangeEvent> existingSprites = new HashMap<>();
+	private Stack<GameChangeEvent> eventList = new Stack<>();
 	/**
 	 * 
 	 */
 	RevertManager(Level level) {
-		level.getMySpriteList().forEach((sprite) -> initSpriteListener(sprite));
+		initLevelListener(level);
+	}
+	
+	@Override
+	public void undo(){
+		if (!this.eventList.isEmpty()){
+			System.out.println("Undo");
+			GameChangeEvent gameChangeEvent = eventList.pop();
+			gameChangeEvent.restore();
+		}
 	}
 	
 	private void initLevelListener(Level aLevel){
 		aLevel.addListener((level) -> {
 			Set<Sprite> newSprites = getNewSprites(this.existingSprites.keySet(), aLevel.getMySpriteList());
-			Set<Sprite> removedSprites = getRemovedSprites(this.existingSprites.keySet(), aLevel.getMySpriteList());
-		
+			//Set<Sprite> removedSprites = getRemovedSprites(this.existingSprites.keySet(), aLevel.getMySpriteList());
+			addSprites(newSprites);
 		});
 	}
 	
-	private void initSpriteListener(Sprite aSprite){
-		InvalidationListener invalidationListener = ((listener) -> {
-			
+	private void addSprites(Collection<Sprite> aSprites){
+		
+		aSprites.forEach((sprite) -> {
+			System.out.println("Add Sprite");
+			this.existingSprites.put(sprite, new GameChangeEvent(sprite, (IRevertManagerInternal) this));			
 		});
-		aSprite.addListener(invalidationListener);
-		this.existingSprites.put(aSprite, invalidationListener);
+	}
+	
+	@Override
+	public void addEvent(GameChangeEvent gameChangeEvent) {
+		this.eventList.push(gameChangeEvent);
+	}
+	
+	
+	
+	
+	@SuppressWarnings("unused")
+	private void removeSprites(Collection<Sprite> aSprites){
+		
 	}
 	
 	private Set<Sprite> getNewSprites(Collection<Sprite> aOldSprites, Collection<Sprite> aNewSprites){
@@ -52,10 +70,13 @@ class RevertManager implements IRevertManager{
 		return sprites;
 	}
 	
+	@SuppressWarnings("unused")
 	private Set<Sprite> getRemovedSprites(Collection<Sprite> aOldSprites, Collection<Sprite> aNewSprites){
 		Set<Sprite> sprites = new HashSet<>(aOldSprites);
 		sprites.removeAll(aNewSprites);
 		return sprites;
 	}
+
+
 
 }

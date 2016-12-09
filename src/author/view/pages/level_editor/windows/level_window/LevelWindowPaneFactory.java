@@ -56,7 +56,6 @@ public class LevelWindowPaneFactory {
 			if (this.levelWindowInternal.getSelectedSprite() != null && event.isControlDown()){
 				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
 			}
-			event.consume();
 		});
 		this.levelWindowPane.getPane().setOnMouseEntered((event)->{
 			this.levelWindowPane.getPane().requestFocus();
@@ -80,7 +79,6 @@ public class LevelWindowPaneFactory {
 				}
 				this.levelWindowPane.removeGrid();
 				event.setDropCompleted(success);
-				event.consume();
 			}
 		});
 		
@@ -88,7 +86,6 @@ public class LevelWindowPaneFactory {
 			if (event.getDragboard().hasString()) {
 				event.acceptTransferModes(TransferMode.MOVE);
 			}
-			event.consume();
 		});
 	}
 	

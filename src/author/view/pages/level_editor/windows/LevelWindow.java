@@ -14,6 +14,8 @@ import author.view.pages.level_editor.windows.level_window.ILevelWindowPane;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowToolBarFactory;
+import author.view.util.undo.IRevertManager;
+import author.view.util.undo.RevertManagerFactory;
 import game_data.Level;
 import game_data.Sprite;
 import javafx.beans.property.IntegerProperty;
@@ -22,6 +24,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -49,6 +52,9 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private Map<Level, ILevelWindowPane> levelPanes = new HashMap<>();
 	private Set<DraggableSprite> selectedSprites = new HashSet<>();
 	private DraggableSprite selectedSprite;
+	
+	
+	private IRevertManager iRevertManager;
 
 	public LevelWindow(IAuthorController authorController) {
 		super(authorController);
@@ -80,8 +86,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	
 	private void updateLevel(Level aLevel) {
 		
-		if (!this.levelPanes.containsKey(aLevel)) {
-
+		if (!this.levelPanes.containsKey(aLevel)) {	
+			
 			this.levelWindowPane = new LevelWindowPaneFactory((ILevelWindowInternal) this, this.getController())
 					.create();
 			this.levelPanes.put(aLevel, this.levelWindowPane);
@@ -90,7 +96,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			this.levelScroller.boundsInLocalProperty().addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
-
+			//createUndo(aLevel);
 			aLevel.addListener((level) -> {
 				updatePane(aLevel);
 			});
@@ -100,6 +106,18 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		this.levelWindowPane = this.levelPanes.get(aLevel);
 		this.levelScroller.setContent(this.levelWindowPane.getPane());
 		updatePane(aLevel);
+	}
+	
+	private void createUndo(Level aLevel){
+		this.iRevertManager = new RevertManagerFactory().create(aLevel);
+		
+		this.levelWindowPane.getPane().setOnKeyPressed((event) ->{
+			System.out.println("Key Pressed");
+			if (event.getCode().equals(KeyCode.Z)){
+				System.out.println("Z");
+				this.iRevertManager.undo();
+			}
+		});
 	}
 
 	private void updatePane(Level aLevel) {
@@ -127,18 +145,18 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 	
 	private void addSpriteClickListeners(DraggableSprite draggableSprite){
-		// EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
+		//EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			this.levelWindowPane.getPane().requestFocus();
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY){
 				openContextMenu(draggableSprite, event);
+				event.consume();
 			}
 			else if (event.isControlDown()){
 				this.selectedSprite = draggableSprite;
 				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getMyWidth(), this.selectedSprite.getSprite().getMyHeight());
 				event.consume();
 			}
-			event.consume();
 		});
 
 	}
