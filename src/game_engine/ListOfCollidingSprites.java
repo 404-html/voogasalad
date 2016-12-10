@@ -89,7 +89,7 @@ public class ListOfCollidingSprites {
 			// mySpriteImages.get(mySprite));
 			// findSideOfCollision(mySprite);
 			frameTime = System.currentTimeMillis();
-			if (!mySprite.getName().equals(targetSprite.getName()) && (mySpriteImages.get(mySprite).getBoundsInParent())
+			if ((!mySprite.getName().equals(targetSprite.getName())) && (mySpriteImages.get(mySprite).getBoundsInParent())
 					.intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));
 			}
@@ -147,6 +147,7 @@ public class ListOfCollidingSprites {
 	}
 
 	private Side findSideOfCollision(Sprite mySprite) {
+		System.out.println("hi");
 //		Rectangle player = createRectangle(mySprite);
 //		Rectangle block = createRectangle(targetSprite);
 //		Shape intersection = Shape.intersect(block, player);

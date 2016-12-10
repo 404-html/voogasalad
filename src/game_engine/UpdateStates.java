@@ -73,7 +73,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private List<Sprite> myControllableSpriteList;
 
-	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
+	/*public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
 			Map<Sprite, ImageView> map, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
 		this.myLevel = aLevel;
 		this.myCurrentPowerUps = myLevel.getMainPlayer().getMyPowerUps();
@@ -108,7 +108,37 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 //		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
 //		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
 //		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
-	}
+	}*/
+	
+	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
+			Map<Sprite, ImageView> mySpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
+			this.myLevel = aLevel;
+			this.myCurrentPowerUps = myLevel.getMainPlayer().getMyPowerUps();
+			this.mySpriteList = myLevel.getMySpriteList();
+			this.timeElapsed = timeElapsed;
+			this.myKeysPressed = myKeysPressed;
+			this.myKeysReleased = myKeysReleased;
+			this.mySpriteImages = mySpriteImages;
+			this.myKeyPressedMap = new HashMap<KeyCode, Action>();
+			this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
+
+			myControllableSpriteList = new ArrayList<Sprite>();
+			this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
+			this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
+
+			//generateDefaultKeyPressedMap();
+			activatePowerUps();
+			checkPowerUps();
+			executeControls();
+			executeCharacteristics();
+			cleanGame();
+			//updateSpritePositions();
+
+			//System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
+			//System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());
+			//System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
+			//System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
+			}
 
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
