@@ -9,6 +9,8 @@ import java.util.PropertyResourceBundle;
 import java.util.Set;
 import game_data.Game;
 import game_data.Sprite;
+import game_data.states.State;
+import game_data.states.Visible;
 import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
@@ -28,7 +30,7 @@ import javafx.stage.Stage;
 import util.XMLTranslator;
 
 public class GamePlayController extends AbstractController {
-	
+
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
@@ -41,7 +43,7 @@ public class GamePlayController extends AbstractController {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteMap;
 	private ApplicationController myApplicationController;
-	
+
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
 		myStage = aStage;
 		myGameFile = aFile;
@@ -49,9 +51,10 @@ public class GamePlayController extends AbstractController {
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myApplicationController = aAppController;
 		mySceneBuilder = new SceneFactory();
-		initializeKeySets(); 
+		initializeKeySets();
 		initializeEngineComponents(aFile);
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), aStage.getWidth(), aStage.getHeight());
+		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(),
+				aStage.getWidth(), aStage.getHeight());
 		updateSprites();
 	}
 
@@ -63,11 +66,11 @@ public class GamePlayController extends AbstractController {
 
 	private void initializeKeySets() {
 		myKeySet = new HashSet<KeyCode>();
-		myKeysPressed= new HashSet<KeyCode>();
+		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
 		myKeyHandler = new MovementHandler();
 	}
-	
+
 	public void displayGame() {
 		initializeScene();
 		setMenu();
@@ -77,25 +80,31 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void initializeScene() {
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
+		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(),
+				myStage.getWidth(), myStage.getHeight());
 		myGamePlayScene.setKeyHandlers(e -> handleKeyPress(e), e -> handleKeyRelease(e));
 	}
 
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
-		myAnimationLoop.init( elapsedTime -> {
+		myAnimationLoop.init(elapsedTime -> {
 			resetSprites(elapsedTime);
 			updateScene();
 		});
 	}
 
 	private void updateScene() {
-		//the below line makes sure the keys released aren't stored in the set after they're released
+		// the below line makes sure the keys released aren't stored in the set
+		// after they're released
 		clearKeys();
 		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(), myStage.getWidth());
 		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) createLosingScene();
 		if (myGameController.getMyLevel().wonLevel()) createWinningScene();
+		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(),
+				myStage.getWidth());
+		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(),
+				myStage.getHeight());
 		myGamePlayScene.moveScreen(myKeyHandler);
 	}
 
@@ -104,52 +113,77 @@ public class GamePlayController extends AbstractController {
 		myGamePlayScene.clearSprites();
 		updateSprites();
 	}
-	
+
 	private void updateSprites() {
 		// A sprite has been removed
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
-			
-			getUpdatedSpriteMap(sprite);
+			boolean mapped = false;
+			for (State state : sprite.getStates()) {
+				if (state instanceof Visible) {
+					getUpdatedSpriteMap(sprite, ((Visible) state).isVisibile());
+					mapped = true;
+					break;
+				}
+			}
+			if(!mapped) {
+				getUpdatedSpriteMap(sprite, true);
+			}
 		}
-		//needs to be updated for when a sprite has been added
+		// needs to be updated for when a sprite has been added
 	}
-	
-	private void getUpdatedSpriteMap(Sprite aSprite) {
+
+	// private void updateSprites() {
+	//
+	// // A sprite has been removed
+	// if (mySpriteMap.keySet().size() >
+	// myGameController.getMySpriteList().size()) {
+	// Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
+	// mySpriteMap.keySet().retainAll(s);
+	// }
+	// for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
+	// getUpdatedSpriteMap(sprite);
+	// }
+	// //needs to be updated for when a sprite has been added
+	// }
+
+	private void getUpdatedSpriteMap(Sprite aSprite, boolean isVisible) {
 		ImageView image;
-	//	if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()){
-		
-//		if(mySpriteMap.keySet().size() > 4){
-//			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-//			System.out.println("START" + mySpriteMap.size());
-//
-//			mySpriteMap.keySet().retainAll(s);
-//			System.out.println("END" + mySpriteMap.size());
-//		}
+		// if (mySpriteMap.keySet().size() >
+		// myGameController.getMySpriteList().size()){
+
+		// if(mySpriteMap.keySet().size() > 4){
+		// Set<Sprite> s = new
+		// HashSet<Sprite>(myGameController.getMySpriteList());
+		// System.out.println("START" + mySpriteMap.size());
+		//
+		// mySpriteMap.keySet().retainAll(s);
+		// System.out.println("END" + mySpriteMap.size());
+		// }
 		if (mySpriteMap.containsKey(aSprite)) {
 			image = mySpriteMap.get(aSprite);
-			setImageProperties(aSprite, image);
+			setImageProperties(aSprite, image, isVisible);
 		} else {
 			//System.out.println(aSprite.getMyImagePath());
 			image = new ImageView(new File(aSprite.getImagePath()).toURI().toString());
-			setImageProperties(aSprite, image);
+			setImageProperties(aSprite, image, isVisible);
 			mySpriteMap.put(aSprite, image);
 		}
 		myGamePlayScene.addImageToView(image);
 	}
 
-
-	private void setImageProperties(Sprite aSprite, ImageView image) {
+	private void setImageProperties(Sprite aSprite, ImageView image, boolean isVisible) {
 		image.setFitWidth(aSprite.getWidth());
 		image.setFitHeight(aSprite.getHeight());
 		image.setX(aSprite.getLocation().getXLocation());
 		image.setY(aSprite.getLocation().getYLocation());
+		image.setVisible(isVisible);
 	}
 
 	private void clearKeys() {
 		myKeysReleased.clear();
 		myKeysPressed.clear();
 	}
-	
+
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
@@ -157,7 +191,8 @@ public class GamePlayController extends AbstractController {
 
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
-		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "lose", "win"};
+		String[] namesForGamePlay = { myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"),
+				myButtonLabels.getString("Save"), "lose", "win" };
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
 		}, e -> {
@@ -170,14 +205,14 @@ public class GamePlayController extends AbstractController {
 			createWinningScene();
 		});
 	}
-	
+
 	private void createLosingScene() {
 		myAnimationLoop.stop();
 		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
 		setLosingSceneHandlers((INavigationDisplay) ls);
 		resetStage(ls);
 	}
-	
+
 	private void createWinningScene() {
 		myAnimationLoop.stop();
 		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
@@ -187,8 +222,8 @@ public class GamePlayController extends AbstractController {
 
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
-		String[] names = {myButtonLabels.getString("MainMenu")};
-		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
+		String[] names = { myButtonLabels.getString("MainMenu") };
+		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png", 30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			myApplicationController.displayMainMenu();
@@ -200,39 +235,36 @@ public class GamePlayController extends AbstractController {
 		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
 		gameControl.displayGame();
 	}
-	
+
 	private void save() {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
-	
+
 	private void handleKeyPress(KeyCode aKey) {
-/*		if(myKeySet.contains(aKey)){
-			myKeysPressed.remove(aKey);
-		}    
-		else{
-			myKeysPressed.add(aKey);
-			myKeySet.add(aKey);
-		}   */
+		/*
+		 * if(myKeySet.contains(aKey)){ myKeysPressed.remove(aKey); } else{
+		 * myKeysPressed.add(aKey); myKeySet.add(aKey); }
+		 */
 		myKeysPressed.add(aKey);
 	}
-	
+
 	private void handleKeyRelease(KeyCode key) {
 		myKeysReleased.add(key);
-		//myKeySet.remove(key);
+		// myKeySet.remove(key);
 		myKeysPressed.remove(key);
 	}
 
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}
-	
+
 	private void setWinningSceneHandlers(INavigationDisplay winScene) {
 		winScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
 		setResultSceneHandlers(winScene);
 	}
-	
+
 	private void setLosingSceneHandlers(INavigationDisplay loseScene) {
 		loseScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
 		setResultSceneHandlers(loseScene);

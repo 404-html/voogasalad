@@ -12,6 +12,7 @@ import game_data.characteristics.BouncerTop;
 import game_data.characteristics.Damager;
 import game_data.characteristics.HealthPowerUpper;
 import game_data.characteristics.Impassable;
+import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.PacerAlternative;
 import game_data.characteristics.StickyTop;
@@ -120,6 +121,16 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			}
 		}
 		/*int j = 1;
+		myLevel.setPlayerSprite((Player) myLevel.getMySpriteList().get(0));
+		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+		myLevel.getMainPlayer().addState(new Health(10000));
+		myLevel.getMainPlayer().addState(new LevelWon());
+		myLevel.getMainPlayer()
+				.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
+
+		myLevel.getMainPlayer().resetTerminalVelocities();
+		int j = 1;
+		
 		// for(int i = 226; i<10260; i+=1000){
 
 		for (int i = 226; i < 8226; i += 100) {
@@ -153,7 +164,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		
 		Item t = new Item(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png");
-		 t.addCharacteristic(new SpeedPowerUpper(20, 5000, t));
+//		 t.addCharacteristic(new SpeedPowerUpper(20, 5000, t));
+		 t.addCharacteristic(new Damager(20, t));
 //		myLevel.addNewSprite(
 //				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 //		

@@ -11,7 +11,7 @@ import game_engine.UpdateStates;
  */
 
 @NameAnnotation(name = "Temporal Power Up")
-public abstract class TemporalPowerUpper extends PowerUpper implements Characteristic{
+public abstract class TemporalPowerUpper extends PowerUpper implements Characteristic, ICharactericticAction {
 		
 	@ParameterAnnotation(parameters = {"Sprite"})
 	public TemporalPowerUpper(Sprite aSprite){
@@ -26,10 +26,7 @@ public abstract class TemporalPowerUpper extends PowerUpper implements Character
 	public void addToPowerUpMap(Sprite collidedSprite, double myTimeInEffect){
 		boolean hasChanged = false;
 		for(Characteristic characteristic: collidedSprite.getPowerUps().keySet()){
-			if(characteristic instanceof SpeedPowerUpper){
-				collidedSprite.getPowerUps().put(characteristic, myTimeInEffect);
-				hasChanged = true;
-			}
+			hasChanged = checkForSpecificTemporalPowerUpper(collidedSprite, myTimeInEffect, hasChanged, characteristic);
 		}
 		
 		if(!hasChanged) {				
@@ -37,6 +34,14 @@ public abstract class TemporalPowerUpper extends PowerUpper implements Character
 		}
 
 		collidedSprite.setPowerUps(collidedSprite.getPowerUps());
+	}
+
+
+	public abstract boolean checkForSpecificTemporalPowerUpper(Sprite collidedSprite, double myTimeInEffect, boolean hasChanged,
+			Characteristic characteristic);
+	
+	public ICharactericticAction getInterface(){
+		return this;
 	}
 	
 
