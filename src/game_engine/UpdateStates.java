@@ -74,6 +74,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		this.myLevel = aLevel;
 		this.myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
 		this.mySpriteList = myLevel.getMySpriteList();
+		//System.out.println("mySpriteList is being updated"+mySpriteList.size());
+
 		this.timeElapsed = timeElapsed;
 		this.myKeysPressed = myKeysPressed;
 		this.myKeysReleased = myKeysReleased;
