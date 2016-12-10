@@ -9,7 +9,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		ApplicationController appControl = new ApplicationController(primaryStage);
-		appControl.startScene();
+		appControl.displayMainMenu();
 	}
 	
 	public static void main(String[] args){
