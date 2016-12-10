@@ -7,7 +7,6 @@ package author.view.pages.level_editor.windows.level_window;
 import author.view.pages.level_editor.windows.ILevelEditorWindowInternal;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.layout.Pane;
 
 /**
  * @author Cleveland Thompson V (ct168)
