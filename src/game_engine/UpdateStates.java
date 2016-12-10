@@ -51,7 +51,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
-	private Map<KeyCode, Action> myKeyReleasedMap;
 	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
 	private List<Sprite> myControllableSpriteList;
@@ -192,10 +191,13 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 
 	private void checkForLoss() {
+
 		for (State s : myLevel.getMainPlayer().getStates()) {
+			if (myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
+				myLevel.setLevelLost();
+			}
 			if (s instanceof Health) {
-				if (!(((Health) s).isAlive())
-						|| myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
+				if (!(((Health) s).isAlive())) {
 					myLevel.setLevelLost();
 				}
 			}

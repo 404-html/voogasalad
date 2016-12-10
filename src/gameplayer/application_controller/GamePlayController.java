@@ -36,9 +36,9 @@ public class GamePlayController extends AbstractController {
 	private UserOptions myUserOptions;
 	private HighscoreManager myHighscoreManager;
 	private SpriteDisplay mySpriteDisplay;
-	private int myLevel;
+	private int myStartLevel;
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel) {
-		myLevel = aLevel;
+		myStartLevel = aLevel;
 		myStage = aStage;
 		myGameFile = aFile;
 		myApplicationController = aAppController;
@@ -59,9 +59,9 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 	private void initializeEngineComponents() {
-		myGameEngine = new GameEngine(myGameFile, myLevel);
+		myGameEngine = new GameEngine(myGameFile, myStartLevel);
 		myGameController = myGameEngine.getMyEnginePlayerController();
-		myGameUpdater = new UpdateGame();
+		myGameUpdater = new UpdateGame(myGameController.getMyGame());
 	}
 	private void initializeKeySets(UserOptions aOptions) {
 		if (aOptions != null) {
@@ -105,13 +105,13 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void checkResult() {
-		if (myGameController.getMyLevel().lostLevel()) setResultScene(myButtonLabels.getString("YouLost"));
-		if (myGameController.getMyLevel().wonLevel()) setResultScene(myButtonLabels.getString("YouWon"));
+		if (myGameController.getMyGame().hasLost()) setResultScene(myButtonLabels.getString("YouLost"));
+		if (myGameController.getMyGame().hasWon()) setResultScene(myButtonLabels.getString("YouWon"));
 	}
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		System.out.println(myKeyCodeHandler.getKeysPressed());
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
+		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
 		updateSprites();
@@ -163,7 +163,7 @@ public class GamePlayController extends AbstractController {
 	//	}
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel, myUserOptions);
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myStartLevel);
 		gameControl.displayGame();
 	}
 	
@@ -173,10 +173,6 @@ public class GamePlayController extends AbstractController {
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
 	
-	public void setLevel(int aLevel) {
-		//TODO: Update the game engine with the new level
-		myLevel = aLevel;
-	}
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}

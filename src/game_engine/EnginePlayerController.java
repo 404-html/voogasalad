@@ -56,28 +56,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteIsAliveList = new ArrayList<>();
 	}
 
-	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
-		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
-		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, 
-				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT, 
-				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, 
-				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
-				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
-
-		myProjectile.addState(new Physics(new SpritePhysics(0.0)));
-		myProjectile.addCharacteristic(new Impassable(myProjectile));
-		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
-		//System.out.println("doing the shit");
-		return myKeyPressedMap;
-		// myKeyPressedMap.put(KeyCode.SPACE, new
-		// Launch(myLevel.getMainPlayer(), 10, 0));
-	}
-
 	public EnginePlayerController(Game game) {
 		myGame = game;
 		
@@ -272,6 +250,27 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteIsAliveList = new ArrayList<>();
 		myLevel.setMyControllableSpriteList();
 		updateSpriteData();
+	}
+	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
+		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
+		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+		//System.out.println(myLevel.getMainPlayer()==null);
+		myKeyPressedMap.put(KeyCode.RIGHT, 
+				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, 
+				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP, 
+				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
+				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
+
+		myProjectile.addState(new Physics(new SpritePhysics(0.0)));
+		myProjectile.addCharacteristic(new Impassable(myProjectile));
+		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
+		//System.out.println("doing the shit");
+		return myKeyPressedMap;
+		// myKeyPressedMap.put(KeyCode.SPACE, new
+		// Launch(myLevel.getMainPlayer(), 10, 0));
 	}
 
 	public void updateControllerData() {
