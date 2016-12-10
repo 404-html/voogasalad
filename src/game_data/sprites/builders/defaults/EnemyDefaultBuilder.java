@@ -9,6 +9,7 @@ import game_data.sprites.builders.SpriteDefaultBuilder;
 import game_data.states.Health;
 import game_data.states.Physics;
 import game_data.states.State;
+import game_engine.GameResources;
 import game_engine.SpritePhysics;
 
 /**
@@ -24,7 +25,7 @@ public class EnemyDefaultBuilder implements SpriteDefaultBuilder {
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(new SpritePhysics()),
+			 new Physics(GameResources.DEFAULT_VERTICAL_GRAVITY.getDoubleResource(), GameResources.DEFAULT_HORIZONTAL_GRAVITY.getDoubleResource()),
 			 new Health(1)
 
 	};

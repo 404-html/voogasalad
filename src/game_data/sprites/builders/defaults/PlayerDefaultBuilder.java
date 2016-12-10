@@ -10,6 +10,7 @@ import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
+import game_engine.GameResources;
 import game_engine.SpritePhysics;
 /**
 <<<<<<< HEAD
@@ -30,7 +31,7 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 	
 	private final State[] STATES = 
 			new State[]{
-				 new Physics(new SpritePhysics()),
+				 new Physics(GameResources.DEFAULT_VERTICAL_GRAVITY.getDoubleResource(), GameResources.DEFAULT_HORIZONTAL_GRAVITY.getDoubleResource()),
 				 new LevelWon(),
 				 new Health(1)
 			};

@@ -11,7 +11,7 @@ import game_data.states.State;
 public class UpdateLocation {
 	private Sprite mySprite;
 	private double myTimeElapsed;
-	private SpritePhysics mySpritePhysics;
+	private Physics mySpritePhysics;
 	
 	public UpdateLocation(Sprite sprite, double timeElapsed) {
 		myTimeElapsed=timeElapsed;
@@ -19,7 +19,7 @@ public class UpdateLocation {
 		mySpritePhysics=null;
 		for(State s: mySprite.getStates()){
 			if(s instanceof Physics){
-				mySpritePhysics = ((Physics) s).getPhysics();
+				mySpritePhysics = (Physics) s;
 			}
 		}
 	}

@@ -24,7 +24,7 @@ public class ItemDefaultBuilder implements SpriteDefaultBuilder {
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(new SpritePhysics(0.0)) 
+			 new Physics(0, 0) 
 	};
 
 	private static final String NAME = "Item_Name";

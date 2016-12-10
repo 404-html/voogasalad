@@ -34,10 +34,10 @@ public class HitTop implements Action {
 		//get new Velocity –– gets horizontal or vertical components to zero
 		//setNewVelocity();
 		//setNewAcceleration();
-		SpritePhysics mySpritePhysics = null;
+		Physics mySpritePhysics = null;
 		for(State s: myPlayerSprite.getStates()){
 			if(s instanceof Physics){
-				mySpritePhysics = ((Physics) s).getPhysics();
+				mySpritePhysics = (Physics) s;
 			}
 		}
 		
