@@ -9,11 +9,8 @@ import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
-import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.back_end.keycode_handler.MovementHandlerFactory;
-import gameplayer.back_end.keycode_handler.XMovementHandler;
 import gameplayer.back_end.keycode_handler.XYMovementHandler;
-import gameplayer.back_end.keycode_handler.YMovementHandler;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
@@ -55,6 +52,7 @@ public class GamePlayController extends AbstractController {
 		myGameEngine = new GameEngine(myGameFile, myLevel);
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame();
+		//getGUIGenerator().createMediaPlayer("");
 	}
 	
 	public void displayGame() {

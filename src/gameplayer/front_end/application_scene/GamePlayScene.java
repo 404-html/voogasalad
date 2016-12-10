@@ -2,7 +2,6 @@ package gameplayer.front_end.application_scene;
 
 import java.io.File;
 
-import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.back_end.keycode_handler.XYMovementHandler;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.heads_up_display.HeadsUpDisplay;

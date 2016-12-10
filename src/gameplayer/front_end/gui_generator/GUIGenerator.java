@@ -19,6 +19,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GUIGenerator implements IGUIGenerator {
 	
@@ -53,9 +56,16 @@ public class GUIGenerator implements IGUIGenerator {
 		return image;
 	}
 	
+	public MediaPlayer createMediaPlayer(String aFilePath) {
+		Media media = new Media(new File(aFilePath).toURI().toString());
+		MediaPlayer soundPlayer = new MediaPlayer(media); 
+		soundPlayer.setAutoPlay(true);
+		return soundPlayer;
+	}
+	
 	@Override
-	public ComboBox<HBox> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
-		ComboBox<HBox> box = new ComboBox<HBox>();
+	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
+		ComboBox<Pane> box = new ComboBox<Pane>();
 		box.setPromptText("CHOOSE GAME");
 		List<HBox> options = new ArrayList<HBox>();
 		for(int i = 0; i < aListOfNames.size(); i++){
@@ -69,7 +79,7 @@ public class GUIGenerator implements IGUIGenerator {
 			hbox.getChildren().add(new Label(aListOfNames.get(i)));
 			options.add(hbox);
 		}
-		ObservableList<HBox> items = FXCollections.observableArrayList(options);
+		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
 		box.setPromptText("CHOOSE GAME");
 		box.setEditable(true);        

@@ -1,6 +1,5 @@
 package gameplayer.front_end.application_scene;
 
-import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.back_end.keycode_handler.XYMovementHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
