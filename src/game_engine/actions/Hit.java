@@ -1,9 +1,10 @@
 package game_engine.actions;
 
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_data.Sprite;
+import game_engine.Side;
 import game_engine.SpritePhysics;
 
 /**
@@ -27,18 +28,29 @@ public class Hit implements Action {
 	@Override
 	public void act() {
 		
-		
+		SpritePhysics mySpritePhysics = null;
+		for(State s: myPlayerSprite.getStates()){
+			if(s instanceof Physics){
+				mySpritePhysics = ((Physics) s).getPhysics();
+			}
+		}
 		//get new Velocity –– gets horizontal or vertical components to zero
-		setNewVelocity();
-		setNewAcceleration();
+
+		//setNewVelocity();
+		//setNewAcceleration();
+		mySide.hitImpassable(myPlayerSprite, mySpritePhysics);
+
+		//setNewVelocity();
+		//setNewAcceleration();
 	}
 	
 	private boolean pastPlatform(){
 		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()>myNonPlayerSprite
 				.getLocation().getYLocation() && myPlayerSprite.getYVelocity()>0;		
+
 	}
 	
-	private void setNewVelocity() {
+	/*private void setNewVelocity() {
 				
 		if(mySide == Side.LEFT) {
 			//System.out.println("hitting this");
@@ -66,9 +78,6 @@ public class Hit implements Action {
 				myPlayerSprite.setYVelocity(-.5*myPlayerSprite.getYVelocity());
 			}
 		}
-/*		if(mySide==Side.BOTTOM){
-			myPlayerSprite.setMyYVelocity(-myPlayerSprite.getMyYVelocity());
-		}*/
 	}
 	private void setNewAcceleration(){
 		SpritePhysics mySpritePhysics = null;
@@ -85,25 +94,7 @@ public class Hit implements Action {
 			myPlayerSprite.setYAcceleration(-mySpritePhysics.getVerticalGravity());
 		}
 		
-	}
-/*	private double getNewHeading(double oldHeading, double oldVelocity) {
-		
-		if(mySide == Side.LEFT || mySide == Side.RIGHT) {
-			
-			if(oldHeading > 0 && oldHeading < 180) {
-				return 90;
-			}
-			return 270;
-			
-		}
-		
-		if(oldHeading > 270 || oldHeading < 90) {
-			return  0;
-		}
-		return 180;
-
 	}*/
-	
 	
 		
 }

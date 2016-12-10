@@ -7,7 +7,9 @@ import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
 import game_data.characteristics.Breakable;
+
 import game_data.characteristics.Characteristic;
+
 import game_data.characteristics.BouncerTop;
 import game_data.characteristics.Damager;
 import game_data.characteristics.HealthPowerUpper;
@@ -32,6 +34,7 @@ import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
+
 import game_engine.actions.Launch;
 import game_engine.actions.LaunchProxy;
 import game_engine.actions.MoveLeft;
@@ -107,17 +110,28 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
 				myLevel.setPlayerSprite((Player)s);
-				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
-				myLevel.getMainPlayer().addState(new Health(200));
-				myLevel.getMainPlayer().addState(new LevelWon());
+				//myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+				//myLevel.getMainPlayer().addState(new Health(1));
+				//myLevel.getMainPlayer().addState(new LevelWon());
 				myLevel.getMainPlayer()
 						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
 		
 				myLevel.getMainPlayer().resetTerminalVelocities();
 				myLevel.getMainPlayer().setLevel(myLevel);
 			}
+			else if(s instanceof Enemy){
+				s.addState(new Physics(new SpritePhysics()));
+				if(s.getName().equals("goomba")){
+					s.setXVelocity(100);
+				}
+			}
 			else{
 				s.addState(new Physics(new SpritePhysics(0.0)));
+				//if(s.getCharacteristics().size()>1){
+				//	s.setXVelocity(100.0);
+				//	s.addState(new Health(10));
+					//s.setYVelocity(200);
+				//}
 			}
 		}
 		/*int j = 1;
@@ -203,6 +217,12 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				//
 				// else {
 				// s.addCharacteristic(new Impassable(s));
+<<<<<<< HEAD
+//				if (s.getName().equals("block5000")) {
+//					s.addCharacteristic(new Damager(25, s));
+//				}
+=======
+>>>>>>> 48d78ac850e44a47957b530a216ee8172c366a8c
 				// }
 				// s.addState(new Health(10));
 				// =======
@@ -229,23 +249,23 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			}
 			if (s instanceof Enemy && !s.getName().equals("goomba2")) {
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500, s));
-				s.setMyXVelocity(100);
+				s.setXVelocity(100);
 				s.addCharacteristic(new Damager(1, s));
 				s.addState(new Physics(new SpritePhysics()));
 			}
 			if (s.getName().equals("goomba2")) {
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 500, s));
-				s.setMyXVelocity(300);
+				s.setXVelocity(300);
 				s.addCharacteristic(new Damager(1, s));
 				s.addState(new Physics(new SpritePhysics()));
 			}
 			if (s.getName().equals("blockmoving")) {
 				s.addCharacteristic(new PacerAlternative("VERTICAL", 200, s));
-				s.setMyYVelocity(-200);
+				s.setYVelocity(-200);
 			}
 			if (s.getName().equals("blockmoving2")) {
 				s.addCharacteristic(new PacerAlternative("HORIZONTAL", 300, s));
-				s.setMyXVelocity(200);
+				s.setXVelocity(200);
 			}
 		}*/
 
@@ -316,11 +336,11 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		return myLevel;
 	}
 
-	public int getMyWidth() {
+	public int getWidth() {
 		return myWidth;
 	}
 
-	public int getMyHeight() {
+	public int getHeight() {
 		return myHeight;
 	}
 

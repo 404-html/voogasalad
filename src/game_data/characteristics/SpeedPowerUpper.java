@@ -3,6 +3,7 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Level;
 import game_data.Sprite;
@@ -14,7 +15,7 @@ import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.UpdateStates;
 import game_engine.actions.Action;
 import game_engine.actions.SpeedBoost;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside

@@ -1,5 +1,9 @@
 package game_engine;
 
+import java.awt.Image;
+
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,9 +24,14 @@ import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
-import javafx.geometry.Side;
+import game_engine.actions.SpeedBoost;
+import game_engine.actions.StopLeftMovement;
+import game_engine.actions.StopRightMovement;
+import game_engine.actions.StopUpMovement;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import game_engine.Side;
 
 /**
  * TODO make sure that player doesnt run into walls or thigns NOTE: doing the
@@ -49,6 +58,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
+	private Map<KeyCode, Action> myKeyReleasedMap;
 	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
 	private List<Sprite> myControllableSpriteList;
@@ -64,7 +74,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		myControllableSpriteList = new ArrayList<Sprite>();
 		mainPlayerControllable=new Controllable();
 	}
-	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages){
+	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
 		myTimeElapsed=aTimeElapsed;
 		setKeysPressed(aKeysPressed);
 		setKeysReleased(aKeysReleased);
@@ -88,6 +98,15 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	public Level getLevel(){
 		return myLevel;
 	}
+		//updateSpritePositions();
+
+//		System.out.println("xvel " + myLevel.getMainPlayer().getXVelocity());
+//		System.out.println("yvel " + myLevel.getMainPlayer().getYVelocity());		
+//		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
+//		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
+	//}
+	
+
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 //			System.out.println("Number of power ups " + myCurrentPowerUps.size());
@@ -206,22 +225,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		}
 	}
 
-	// private void checkForLoss() {
-	// for(State s: myLevel.getMainPlayer().getStates()){
-	// if(s instanceof Health){
-	// myLevel.setLevelLost(!((Health)s).isAlive());
-	// }
-	// }
-	// }
-	//
-	// private void checkForWin() {
-	// for(State s: myLevel.getMainPlayer().getStates()){
-	// if(s instanceof LevelWon){
-	// myLevel.setLevelWon(((LevelWon)s).isHasWon());
-	// }
-	// }
-	//
-	// }
+
 
 	// keys will only control the main player rn
 
@@ -257,7 +261,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 			for (Characteristic myCharacteristic : characteristics) {
 				myCharacteristic.execute(myCollisionMap);
-
 			}
 		}
 	}
@@ -312,12 +315,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		for (Sprite sprite : mySpriteList) {
 			UpdateLocation updateLocation = new UpdateLocation(sprite, myTimeElapsed);
 			updateLocation.updateSpriteParameters();
-			if (sprite instanceof Enemy) {
-				// System.out.println("x is " +
-				// sprite.getMyLocation().getXLocation());
-				// System.out.println("y is " +
-				// sprite.getMyLocation().getYLocation());
-			}
 		}
 	}
 }

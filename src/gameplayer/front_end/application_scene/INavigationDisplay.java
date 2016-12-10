@@ -9,9 +9,6 @@ import javafx.scene.input.MouseEvent;
 
 public interface INavigationDisplay extends IDisplay {
 	
-	public void addButton(String aLabel, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aType);
-	
 	public void addNavigationMenu(ImageView aImage, String[] aString, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ...aHandlers);
 	
-	public void addNode(Node aNode);
 }

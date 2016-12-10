@@ -1,14 +1,29 @@
 package gameplayer.front_end.application_scene;
-import javafx.scene.Scene;
+import java.io.File;
 
-public class ResultScene extends AbstractNavigationPlayerScene implements INavigationDisplay {
+import gameplayer.front_end.background_display.BackgroundDisplayFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 
-	public ResultScene(double aWidth, double aHeight) {
-		super(aWidth, aHeight);
+public class ResultScene extends AbstractPlayerScene {
+	
+	private BorderPane myPane;
+
+	public ResultScene() {
+		myPane = new BorderPane();
+		myPane.setId(new File("gui/style.css").toURI().toString());
+		myPane.getChildren().add(getOptions());
+		myPane.setId("pane");
 	}
 
-	@Override
-	public Scene init() {
-		return myScene;
+	public Pane getPane() {
+		return getOptions();
 	}
+	
+	public void setBackground(String aFile, double aWidth, double aHeight) {
+		Background background = new BackgroundDisplayFactory().buildBackgroundDisplay(aFile, aWidth, aHeight);
+		myPane.setBackground(background);
+	}
+	
 }

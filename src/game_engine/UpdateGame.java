@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import game_data.Game;
 import game_data.Sprite;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 /**
@@ -17,8 +18,8 @@ public class UpdateGame {
 		myGame=aGame;
 		myUpdateLevel = new UpdateStates(myGame.getCurrentLevel());
 	}
-	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages){
-		myUpdateLevel.update(aTimeElapsed, aKeysPressed, aKeysReleased, aSpriteImages);
+	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
+		myUpdateLevel.update(aTimeElapsed, aKeysPressed, aKeysReleased, aSpriteImages, aScreenHeight, aScreenWidth, aScreenXPosition, aScreenYPosition);
 		changeLevel();
 	}
 	public void changeLevel(){
@@ -35,4 +36,5 @@ public class UpdateGame {
 			myGame.setHasLost(true);
 		}
 	}
+
 }

@@ -26,16 +26,16 @@ interface SpriteBuilder {
 /**
  * Sprite factory
  * 
- * @author George Bernard
+ * @author George Bernard (ghb5), Addison Howenstine (awh55)
  */
 public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
 	PLAYER((loc, width, height, xvel, yvel, name, path) -> {
 		return new Player(loc, width, height, xvel, yvel, name, path);
 	}, () -> new PlayerDefaultBuilder().build()),
 
-	ENEMY((loc, width, height, xvel, yvel, name, path) -> {
-		return new Player(loc, width, height, xvel, yvel, name, path);
-	}, () -> new EnemyDefaultBuilder().build()),
+	ENEMY((loc, width, height, xvel, yvel, name, path) -> { 
+		return new Enemy(loc, width, height, xvel, yvel, name, path);
+	}, () -> new EnemyDefaultBuilder().build()),	
 
 	TERRAIN((loc, width, height, xvel, yvel, name, path) -> {
 		return new Terrain(loc, width, height, xvel, yvel, name, path);
@@ -45,9 +45,9 @@ public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
 		return new Terrain(loc, width, height, xvel, yvel, name, path);
 	}, () -> new ItemDefaultBuilder().build()),
 
-	PROJECTILE((loc, width, height, xvel, yvel, name, path) -> {
-		return new Terrain(loc, width, height, xvel, yvel, name, path);
-	}, () -> new ProjectileDefaultBuilder().build());
+	PROJECTILE(
+			(loc, width, height, xvel, yvel, name, path) -> { return new Terrain(loc, width, height, xvel, yvel, name, path);} , 
+			() -> new ProjectileDefaultBuilder().build() );
 
 	private SpriteBuilder myBuilder;
 	private SpriteDefaultBuilder myDefaultBuilder;

@@ -9,6 +9,7 @@ import game_data.Sprite;
 import game_data.sprites.Terrain;
 import game_engine.ListOfCollidingSprites;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 /**
  * @author Katrina
@@ -39,7 +40,7 @@ public class MoveUpJump extends Move {
 			for(Sprite s: myCollisionMap.keySet()){
 				if(s instanceof Terrain){
 					if(myCollisionMap.get(s).equals(Side.BOTTOM)){
-						mySprite.setMyYVelocity(-myVelocity);
+						mySprite.setYVelocity(-myVelocity);
 					}
 				}
 			}
