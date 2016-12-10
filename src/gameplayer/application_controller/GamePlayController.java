@@ -107,11 +107,8 @@ public class GamePlayController extends AbstractController {
 	
 	private void updateSprites() {
 		// A sprite has been removed
-		if (mySpriteMap.keySet().size() > myGameController.getMySpriteList().size()) {
-			Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-			mySpriteMap.keySet().retainAll(s);
-		}
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
+			
 			getUpdatedSpriteMap(sprite);
 		}
 		//needs to be updated for when a sprite has been added
