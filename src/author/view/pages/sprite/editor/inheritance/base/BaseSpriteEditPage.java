@@ -70,7 +70,7 @@ public abstract class BaseSpriteEditPage {
 		myPane = new VBox();
 		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite);
 		myStateEditor = new SpriteStatesEditor(mySprite);
-		myControlEditor = new ControllableEditor();
+		myControlEditor = new ControllableEditor(mySprite);
 		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
@@ -90,13 +90,12 @@ public abstract class BaseSpriteEditPage {
 
 		Button buildButton = new ButtonFactory().createButton(
 				"Save", e -> {
-					editSprite();
-					myCharacteristicEditor.addSettings();
-					myStateEditor.addSettings();
+					saveSprite();
 				}).getButton();
 		
 		Button saveAsDefaultButton = new ButtonFactory().createButton(
 				"Save As Default", e-> {
+					saveSprite();
 					XMLTranslator mySaver = new XMLTranslator();
 					mySaver.saveToFile(mySprite, "data/sprite/default_sprites/", mySprite.getName() + "_author_saved");
 				}).getButton();
@@ -112,6 +111,13 @@ public abstract class BaseSpriteEditPage {
 		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
 	}
 
+	private void saveSprite(){
+		editSprite();
+		myCharacteristicEditor.addSettings();
+		myStateEditor.addSettings();
+		myControlEditor.setControllable();
+	}
+	
 	public static BaseSpriteEditPage build( Sprite aSprite){
 
 		switch (SpriteType.discern(aSprite)) {
