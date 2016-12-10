@@ -19,12 +19,14 @@ public class PacerAlternative implements Characteristic{
 
 	private static final String VERTICAL = "VERTICAL";
 	private static final String HORIZONTAL = "HORIZONTAL";
+	private static final double TIME_STEP = 60;
 	
 	private String myType;
 	private double myDistance;
 	private double originalXPosition;
 	private double originalYPosition;
 	private Sprite mySprite;
+	private double myDistanceTraveled;
 	
 	@ParameterAnnotation(parameters = {"Type", "Distance", "Sprite"})
 	public PacerAlternative(String type, double distance, Sprite associatedSprite){
@@ -48,14 +50,13 @@ public class PacerAlternative implements Characteristic{
 		return myDistance;
 	}
 	
-	private boolean changeDirection(boolean collision){
-		if(myType.equals(VERTICAL)){
-			return atYBound();
+	private boolean changeDirection(){
+		double speed = Math.sqrt(Math.pow(mySprite.getMyXVelocity(),2) + Math.pow(mySprite.getMyYVelocity(),2));
+		myDistanceTraveled += speed/TIME_STEP;
+		if(myDistanceTraveled >= myDistance) {
+			myDistanceTraveled = 0;
+			return true;
 		}
-		if(myType.equals(HORIZONTAL)){
-			return atXBound();
-		}
-		//TEMPORARILY HARDCODED
 		return false;
 		//return collision;
 	}

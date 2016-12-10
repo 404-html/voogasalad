@@ -65,6 +65,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
 	private Map<KeyCode, Action> myKeyReleasedMap;
+	private double myScreenWidth, myScreenHeight, myScreenXPosition, myScreenYPosition;
 
 	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
@@ -121,7 +122,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			this.mySpriteImages = mySpriteImages;
 			this.myKeyPressedMap = new HashMap<KeyCode, Action>();
 			this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
-
+            this.myScreenWidth = aScreenWidth;
+            this.myScreenHeight = aScreenHeight;
+            this.myScreenXPosition = aScreenXPosition;
+            this.myScreenYPosition = aScreenYPosition;
 			myControllableSpriteList = new ArrayList<Sprite>();
 			this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
 			this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
@@ -194,7 +198,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			myLevel.removeSprite(mySprite);
 			mySpriteImages.remove(mySprite);
 		}
+
 		updateSpritePositions();
+		moveRandomSprites();
 		checkForWin();
 		checkForLoss();
 
@@ -220,6 +226,14 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		}
 	}
 
+	private void moveRandomSprites() {
+		for(Sprite mySprite : mySpriteList) {
+			if(mySprite.getMyRandomMoveHandler() != null) {
+				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
+			}
+		}
+	}
+	
 	private void checkForLoss() {
 		for (State s : myLevel.getMainPlayer().getStates()) {
 			if (s instanceof Health) {
