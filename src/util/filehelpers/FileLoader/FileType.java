@@ -37,7 +37,8 @@ public enum FileType {
 			FileExtension.PPTX,
 			FileExtension.SDF,
 			FileExtension.TAR,
-			FileExtension.VCF
+			FileExtension.VCF,
+			FileExtension.XML
 			),
 	AUDIO(
 			FileExtension.AIF,
