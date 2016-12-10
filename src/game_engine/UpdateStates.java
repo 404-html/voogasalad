@@ -51,6 +51,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
+	private double myScreenWidth, myScreenHeight, myScreenXPosition, myScreenYPosition;
 	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
 	private List<Sprite> myControllableSpriteList;
@@ -67,6 +68,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		mainPlayerControllable=new Controllable();
 	}
 	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
+        myScreenWidth = aScreenWidth;
+        myScreenHeight = aScreenHeight;
+        myScreenXPosition = aScreenXPosition;
+        myScreenYPosition = aScreenYPosition;
 		myTimeElapsed=aTimeElapsed;
 		setKeysPressed(aKeysPressed);
 		setKeysReleased(aKeysReleased);
@@ -90,8 +95,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	public Level getLevel(){
 		return myLevel;
 	}
-		//updateSpritePositions();
-
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 //			System.out.println("Number of power ups " + myCurrentPowerUps.size());
@@ -166,7 +169,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			myLevel.removeSprite(mySprite);
 			mySpriteImages.remove(mySprite);
 		}
+
 		updateSpritePositions();
+		moveRandomSprites();
 		checkForWin();
 		checkForLoss();
 
@@ -190,6 +195,14 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		}
 	}
 
+	private void moveRandomSprites() {
+		for(Sprite mySprite : mySpriteList) {
+			if(mySprite.getMyRandomMoveHandler() != null) {
+				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
+			}
+		}
+	}
+	
 	private void checkForLoss() {
 
 		for (State s : myLevel.getMainPlayer().getStates()) {
