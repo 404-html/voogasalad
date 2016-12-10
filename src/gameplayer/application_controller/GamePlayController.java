@@ -1,6 +1,7 @@
 package gameplayer.application_controller;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.PropertyResourceBundle;
 import game_data.Game;
 import game_data.Sprite;
@@ -171,15 +172,20 @@ public class GamePlayController extends AbstractController {
 		setResultSceneHandlers(winScene);
 	}
 	
-	private void setResultSceneHandlers(Pane loseScene) {
-		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
+	private void setResultSceneHandlers(Pane resultScene) {
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
 			myApplicationController.displayMainMenu();
 		}, ButtonDisplay.TEXT));
-		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("PlayAgain"),0,0, e -> {
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("PlayAgain"),0,0, e -> {
 			handleRestart();
 		}, ButtonDisplay.TEXT));
-		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("HighScores"), 0,0, e -> {
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("HighScores"), 0,0, e -> {
 			myApplicationController.displayHighScoreScene();
+		}, ButtonDisplay.TEXT));
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Publish"), 0, 0, e -> {
+			myApplicationController.publishToFacebook(MessageFormat.format(myButtonLabels.getString("MessageTitle"), 
+					myGameController.getMyGame().getName()), 
+					myButtonLabels.getString("PublishMessage"));
 		}, ButtonDisplay.TEXT));
 	}
 	

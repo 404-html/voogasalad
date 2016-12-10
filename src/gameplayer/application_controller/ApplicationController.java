@@ -157,4 +157,9 @@ public class ApplicationController extends AbstractController {
 	public UserDefaults getUserDefaults(){
 		return myUserDefaults;
 	}
+
+	public void publishToFacebook(String aTitle, String aMessage) {
+		myInformationController.publishToFaceBook(aTitle, aMessage);
+		
+	}
 }

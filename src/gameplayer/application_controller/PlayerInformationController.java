@@ -37,6 +37,10 @@ public class PlayerInformationController {
 	public String getPictureUrl() {
 		return myUserInformation.getPictureUrl();
 	}
+
+	public void publishToFaceBook(String aTitle, String aMessage) {
+		myFacebookInformation.publishNews(aTitle, aMessage);
+	}
 	
 
 	
