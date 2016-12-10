@@ -90,13 +90,13 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
 		// generateDefaultKeyPressedMap();
-		System.out.println("Nubmer of characteristics BEFROE " + myLevel.getMainPlayer().getCharacteristics().size());
+//		System.out.println("Nubmer of characteristics BEFROE " + myLevel.getMainPlayer().getCharacteristics().size());
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		System.out.println("Nubmer of characteristics AFTER " + myLevel.getMainPlayer().getCharacteristics().size());
+//		System.out.println("Nubmer of characteristics AFTER " + myLevel.getMainPlayer().getCharacteristics().size());
 
 		// updateSpritePositions();
 
