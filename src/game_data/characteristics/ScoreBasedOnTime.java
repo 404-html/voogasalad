@@ -11,35 +11,34 @@ import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
+import game_engine.GameResources;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import game_engine.actions.ScoreAdder;
 import javafx.geometry.Side;
 
 @NameAnnotation(name = "Score Based On Position")
-public class ScoreBasedOnPosition implements Characteristic {
+public class ScoreBasedOnTime implements Characteristic {
 
 	private Sprite mySprite;
-	private double initX;
-	private double initY;
+	private double scorePerSecond;
 
-	@ParameterAnnotation(parameters = { "Sprite", "Initial X Cor", "Initial Y Cor" })
-	public ScoreBasedOnPosition(Sprite aSprite, double initX, double initY) {
+	@ParameterAnnotation(parameters = { "Sprite", "Score Per Second" })
+	public ScoreBasedOnTime(Sprite aSprite, double scorePerSecond) {
 		mySprite = aSprite;
-		this.initX = initX;
-		this.initY = initY;
+		this.scorePerSecond = scorePerSecond;
 	}
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		//TODO NEED TO KNOW WHETHER ITS HORIZONTAL OR VERTICAL SCOLLER THIS IS SHITTY WAY OF TELLING MAX SCORE.
-		Action myAction = new ScoreAdder((int) Math.max(Math.abs(mySprite.getLocation().getXLocation()-initX), Math.abs(mySprite.getLocation().getYLocation()-initY)), mySprite);
+		Action myAction = new ScoreAdder(scorePerSecond/GameResources.TIME_FRAME.getDoubleResource(), mySprite);
+//		System.out.println("HELLO")
 		myAction.act();
 	}
 
 	@Override
 	public Characteristic copy() {
-		return new ScoreBasedOnPosition(mySprite, initX, initY);
+		return new ScoreBasedOnTime(mySprite, scorePerSecond);
 	}
 
 }

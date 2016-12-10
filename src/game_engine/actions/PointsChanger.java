@@ -6,10 +6,10 @@ import game_data.states.*;
 
 public abstract class PointsChanger implements Action {
 	
-	protected int pointsToGive;
+	protected double pointsToGive;
 	protected Sprite spriteAffected;
 	
-	public PointsChanger(int damage, Sprite sprite){
+	public PointsChanger(double damage, Sprite sprite){
 		pointsToGive = damage;
 		spriteAffected = sprite;
 	}

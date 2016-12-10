@@ -23,6 +23,7 @@ import game_data.sprites.Player;
 import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
+import game_data.states.Score;
 import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.Launch;
@@ -89,8 +90,15 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
 		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
-		// generateDefaultKeyPressedMap();
+//		 generateDefaultKeyPressedMap();
 //		System.out.println("Nubmer of characteristics BEFROE " + myLevel.getMainPlayer().getCharacteristics().size());
+		for (State state : myLevel.getMainPlayer().getStates()) {
+			if (state instanceof Score) {
+					System.out.println("score is: " + ((Score) state).getMyScore());
+			}
+		}
+		
+		
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();

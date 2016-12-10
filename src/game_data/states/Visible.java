@@ -27,7 +27,7 @@ public class Visible implements State{
 	}
 
 	@Override
-	public void updateState(int pain) {
+	public void updateState(double pain) {
 		// TODO Auto-generated method stub
 	}
 

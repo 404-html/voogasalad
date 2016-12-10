@@ -33,6 +33,7 @@ public enum GameResources {
 	
 	
 	FLASH_RATE(10),
+	TIME_FRAME(60),
 	
 	//speed boost and bounce speed
 	SPEED_BOOST(300), BOUNCE_SPEED_HORIZONTAL(400), BOUNCE_SPEED_VERTICAL(800), RECOVERY_TIME(120);

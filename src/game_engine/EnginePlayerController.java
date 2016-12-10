@@ -15,6 +15,8 @@ import game_data.characteristics.Impassable;
 import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.PacerAlternative;
+import game_data.characteristics.ScoreBasedOnPosition;
+import game_data.characteristics.ScoreBasedOnTime;
 import game_data.characteristics.StickyTop;
 import game_data.characteristics.StickyTopHorizontal;
 import game_data.characteristics.StickyTopVertical;
@@ -28,6 +30,7 @@ import game_data.sprites.Terrain;
 import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
+import game_data.states.Score;
 import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
@@ -109,7 +112,9 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				myLevel.setPlayerSprite((Player)s);
 				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 				myLevel.getMainPlayer().addState(new Health(200));
-				myLevel.getMainPlayer().addState(new LevelWon());
+
+				myLevel.getMainPlayer().addState(new Score());
+				myLevel.getMainPlayer().addCharacteristic(new ScoreBasedOnTime(s, 1));
 				myLevel.getMainPlayer()
 						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
 		
