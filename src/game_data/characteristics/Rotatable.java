@@ -1,29 +1,32 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import javafx.geometry.Side;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
  *
  */
 
-@CharacteristicAnnotation(name = "Rotatable")
+@NameAnnotation(name = "Rotatable")
 public class Rotatable implements Characteristic{
 
 	private double mySpeed;
 	private Sprite mySprite;
 	
-	@ParameterAnnotation(parameters={"Speed","Sprite"})
+	@ParameterAnnotation(parameters={"Rotate Speed","Sprite"})
 	public Rotatable(double speed, Sprite aSprite){
 		mySpeed = speed;
 		mySprite = aSprite;
 	}
 	
+	@ViewableMethodOutput(description="Rotate Speed", type=double.class)
 	public double getSpeed(){
 		return mySpeed;
 	}

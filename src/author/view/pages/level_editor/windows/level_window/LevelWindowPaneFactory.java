@@ -4,84 +4,99 @@
 package author.view.pages.level_editor.windows.level_window;
 
 import author.controller.IAuthorController;
-import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
-import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.level_editor.windows.ILevelEditorWindowInternal;
+import author.view.pages.level_editor.windows.ILevelWindowInternal;
 import game_data.Sprite;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
 
 /**
  * @author Cleveland Thompson V (ct168)
  *
  */
 public class LevelWindowPaneFactory {
-	@SuppressWarnings("unused")
-	private ILevelEditorWindowInternal myLevelEditorWindowInternal;
-	private Pane levelPane;
+	private LevelWindowPane levelWindowPane;
 	private IAuthorController authorController;
+	private ILevelWindowInternal levelWindowInternal;
 	
-	public LevelWindowPaneFactory(ILevelEditorWindowInternal levelEditorWindowInternal, IAuthorController authorController) {
-		this.myLevelEditorWindowInternal = levelEditorWindowInternal;
+	public LevelWindowPaneFactory(ILevelWindowInternal levelWindowInternal, IAuthorController authorController) {
+		this.levelWindowInternal = levelWindowInternal;
 		this.authorController = authorController;
 	}
 	
-	public Pane create(){
-		this.levelPane = new Pane();
-		
+	public ILevelWindowPane create(){
+		this.levelWindowPane = new LevelWindowPane();
+		this.levelWindowPane.getPane().setFocusTraversable(true);
 		acceptDraggableSprites();
+		acceptCopiedSprites();
+		manageGridDisplay();
 		
-		this.levelPane.setOnDragEntered(e -> {
-			//TODO: Set on drag entered
+		return this.levelWindowPane;
+	}
+	
+	private void manageGridDisplay(){
+		this.levelWindowPane.getPane().setOnDragEntered(e -> {
+			Dragboard dragboard = e.getDragboard();
+			Sprite sprite = findSprite(dragboard.getString());
+			this.levelWindowPane.updateGrid(sprite.getWidth(), sprite.getHeight());
 		});
-		return this.levelPane;
+		this.levelWindowPane.getPane().setOnMouseExited(e -> {
+			this.levelWindowPane.removeGrid();
+		});
+		
+	}
+	
+	private void acceptCopiedSprites(){
+
+		this.levelWindowPane.getPane().setOnMouseClicked((event) ->{
+			this.levelWindowPane.getPane().requestFocus();
+			if (this.levelWindowInternal.getSelectedSprite() != null && event.isControlDown()){
+				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
+			}
+		});
+		this.levelWindowPane.getPane().setOnMouseEntered((event)->{
+			this.levelWindowPane.getPane().requestFocus();
+		});
+		this.levelWindowPane.getPane().setOnKeyReleased((event) -> {
+			if (!event.isControlDown()){
+				this.levelWindowPane.removeGrid();
+			}
+		});
 	}
 	
 	private void acceptDraggableSprites() {
 
-		levelPane.setOnDragDropped((DragEvent event) -> {
+		this.levelWindowPane.getPane().setOnDragDropped((DragEvent event) -> {
 			if (checkGameHasLevel()) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;
 				if (db.hasString()) {
 					Sprite sprite = findSprite(db.getString());
-
-					Sprite clone = sprite.clone();
-					clone.getMyLocation().setLocation(event.getX(), event.getY());
-					this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
-					DraggableSprite newSprite;
-					try {
-						newSprite = new ConcreteMovableSprite(clone);
-					} catch (NullPointerException e) {
-						System.out.println(e.getMessage());
-						e.printStackTrace();
-						throw new NullPointerException();
-					}
-
-					ImageView image = newSprite.getImageView();
-					if (image != null) {
-						image.setLayoutX(event.getX());
-						image.setLayoutY(event.getY());
-						success = true;
-					}
-					
+					addSprite(sprite, event.getX(), event.getY());		
 				}
+				this.levelWindowPane.removeGrid();
 				event.setDropCompleted(success);
-				event.consume();
 			}
 		});
-
-		this.levelPane.setOnDragOver((DragEvent event) -> {
+		
+		this.levelWindowPane.getPane().setOnDragOver((DragEvent event) -> {
 			if (event.getDragboard().hasString()) {
 				event.acceptTransferModes(TransferMode.MOVE);
 			}
-			event.consume();
 		});
+	}
+	
+	private void addSprite(Sprite aSprite, double xPos, double yPos){
+		addSprite(aSprite, (int) xPos, (int) yPos);
+	}
+	
+	private void addSprite(Sprite aSprite, int xPos, int yPos){
+		Sprite clone = aSprite.clone();
+		clone.getLocation().setLocation(levelWindowPane.adjustX(xPos), levelWindowPane.adjustY(yPos));
+		this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
 	}
 	
 	private boolean checkGameHasLevel() {

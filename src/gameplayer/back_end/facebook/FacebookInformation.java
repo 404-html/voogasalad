@@ -1,31 +1,29 @@
 package gameplayer.back_end.facebook;
 
 import java.io.File;
-import java.util.Iterator;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.json.JsonObject;
+import com.restfb.types.FacebookType;
 import com.restfb.types.User;
 
 public class FacebookInformation {
 	
-	//private static final String ACCESS_TOKEN = "EAACEdEose0cBAKqz91ZCys1MtLyDmwA5Urg1dTYiqpXc6EeAowOTnIAwAxfgZASsu77VhmJaof5vild7evkIjLrWE1ZBAc4j7ZAhGmS0BZASXZCPe93HnZBfmoEcq5py12e6dP54PhUwjNy54fhEncXaKhpp4izdMEaEpzheZAMJkQZDZD";
-	
 	private User myUser;
 	private String myPictureUrl;
+	private FacebookClient myFBClient;
 	
 	public String getUserName() {
 		return myUser.getName();
 	}
 	
 	public String getProfilePicture() {
-		return myUser.getPicture().getUrl();
+		return myPictureUrl;
 	}
 	
 	public void authenticatePlayer() {
@@ -33,7 +31,7 @@ public class FacebookInformation {
 		String appID = "204787326597008";
 		String authenticateURL = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appID + 
 				"&redirect_uri=" + domain + "&scope=user_about_me, user_photos, ads_management, manage_pages, " +
-				"business_management, user_status";
+				"business_management, user_status, user_posts";
 		
 		File chromeDriverFile = new File("data/chromedriver");
 		chromeDriverFile.setExecutable(true);
@@ -50,19 +48,33 @@ public class FacebookInformation {
 				accessToken = url.replaceAll(".*#access_token=(.+)&.*", "$1");
 				driver.quit();
 				
-				FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-				myUser = fbClient.fetchObject("me", User.class);
+				myFBClient = new DefaultFacebookClient(accessToken);
+				myUser = myFBClient.fetchObject("me", User.class);
 				JsonObject picture = 
-					      fbClient.fetchObject("me/picture/data", 
+					      myFBClient.fetchObject("me/picture/data", 
 						      JsonObject.class, Parameter.with("redirect","false"));
-				//System.out.println(myUser);
+				//System.out.println(picture);
 				//myPictureUrl = picture.getString("url");
+				
+				
+				myPictureUrl = picture.getJsonObject("data").getString("url");
+				
 				break;
 			}
 			
 		}
 		driver.quit();
 		return;
+	}
+	
+	public void publishNews(String aTitle, String aMessage) {
+		// Publishing a simple message.
+		// FacebookType represents any Facebook Graph Object that has an ID property.
+		if (myFBClient != null) {
+			FacebookType publishMessageResponse =
+				myFBClient.publish("me/feed", FacebookType.class,
+				  Parameter.with(aTitle, aMessage));
+		}
 	}
 	 
 	

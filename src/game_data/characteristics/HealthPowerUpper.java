@@ -1,36 +1,38 @@
 package game_data.characteristics;
 import game_engine.IUpdateStatesAndPowerUps;
+import game_engine.Side;
 import game_engine.actions.*;
 
 import java.util.Map;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
+import game_data.sprites.Player;
+import game_engine.actions.Damage;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
-import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.sprites.Player;
-import game_engine.actions.Damage;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
  *
  */
-@CharacteristicAnnotation(name = "Health Power Up")
+@NameAnnotation(name = "Health Power Up")
 public class HealthPowerUpper extends PowerUpper implements Characteristic{
 
 	private int myHealthToGain;
 	private Action myAction;
 	
-	@ParameterAnnotation(parameters = {"Health Gained", "Sprite"})
+	@ParameterAnnotation(parameters = {"Health to Gain", "Sprite"})
 	public HealthPowerUpper(int healthToGain, Sprite aSprite){
 		super(aSprite);
 		myHealthToGain = healthToGain;
 	}
 	
+	@ViewableMethodOutput(type=int.class, description="Health to Gain")
 	public int getHealthToGain(){
 		return myHealthToGain;
 	}

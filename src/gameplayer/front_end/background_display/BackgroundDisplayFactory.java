@@ -15,16 +15,19 @@ import javafx.scene.paint.Paint;
 public class BackgroundDisplayFactory {
 	
 	public Background buildBackgroundDisplay(String aFileName, double aWidth, double aHeight)  {//throws FileNotFoundException {
+		if (aFileName == null) {
+			return buildBackgroundDisplay(Color.WHITE, aWidth, aHeight);
+		}
 		Image image = new Image(new File(aFileName).toURI().toString(), 
-				aWidth, 
-				aHeight, 
-				true, 
-				true);
+			aWidth, 
+			aHeight, 
+			true, 
+			true);
 		BackgroundImage backgroundImage = new BackgroundImage(image, 
-				BackgroundRepeat.NO_REPEAT, 
-				BackgroundRepeat.NO_REPEAT, 
-				BackgroundPosition.DEFAULT,
-				new BackgroundSize(100, 100, true, true, true, true));
+			BackgroundRepeat.NO_REPEAT, 
+			BackgroundRepeat.NO_REPEAT, 
+			BackgroundPosition.DEFAULT,
+			new BackgroundSize(100, 100, true, true, true, true));
 		return new Background(backgroundImage);
 	}
 	

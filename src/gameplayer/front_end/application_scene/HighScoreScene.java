@@ -15,6 +15,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	public HighScoreScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
 		myPane = new Pane();
+		myPane.setId("glass");
 	} 
 
 	@Override

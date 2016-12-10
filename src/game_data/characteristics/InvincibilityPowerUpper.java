@@ -2,10 +2,10 @@
 package game_data.characteristics;
 
 import java.util.Map;
-
+import game_engine.Side;
 import game_data.Level;
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_data.states.State;
@@ -16,14 +16,14 @@ import game_engine.UpdateStates;
 import game_engine.actions.Action;
 import game_engine.actions.Invincibility;
 import game_engine.actions.SpeedBoost;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
  *
  */
 
-@CharacteristicAnnotation(name = "Invincibility Power Up")
+@NameAnnotation(name = "Invincibility Power Up")
 public class InvincibilityPowerUpper extends TemporalPowerUpper implements Characteristic {
 
 	private double myTimeInEffect;

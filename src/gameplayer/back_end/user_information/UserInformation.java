@@ -9,8 +9,9 @@ public class UserInformation {
 		myUser = "RandomUser";
 	}
 	
-	public UserInformation(String aName) {
+	public UserInformation(String aName, String aPictureUrl) {
 		myUser = aName;
+		myImageFilePath = aPictureUrl;
 	}
 	
 	public void setUserImage(String aFilePath) {
@@ -20,5 +21,10 @@ public class UserInformation {
 	public String getUserName() {
 		return myUser;
 	}
+
+	public String getPictureUrl() {
+		return myImageFilePath;
+	}
+
 	
 }

@@ -3,7 +3,7 @@ package gameplayer.front_end.popup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class ErrorAlert implements IPopUpDisplay{
+public class ErrorAlert {
 
 	
 	public void show(Exception e) {
@@ -14,7 +14,6 @@ public class ErrorAlert implements IPopUpDisplay{
         a.showAndWait();
 	}
 
-	@Override
 	public void show() {
         Alert a = new Alert(AlertType.ERROR);
         a.setTitle("Error");

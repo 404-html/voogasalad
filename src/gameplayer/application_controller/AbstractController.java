@@ -19,7 +19,6 @@ public abstract class AbstractController {
 	private IGUIGenerator myGUIGenerator = new GUIGenerator();
 	
 	public AbstractController() {
-		
 	}
 	
 	protected void resetStage(IDisplay aScene) {

@@ -2,21 +2,23 @@ package game_data.characteristics;
 
 import java.util.Map;
 
+
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
+import game_engine.Side;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
 import game_engine.actions.BounceTopOnly;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author Alex & James
  *
  */
 
-@CharacteristicAnnotation(name = "BouncerTop")
+@NameAnnotation(name = "BouncerTop")
 public class BouncerTop implements Characteristic {
 	private double myBounceSpeed;
 	private Sprite mySprite;

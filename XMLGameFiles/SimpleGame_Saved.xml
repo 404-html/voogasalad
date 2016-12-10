@@ -1,0 +1,134 @@
+<game__data.Game>
+  <name>Game</name>
+  <myLevels>
+    <game__data.Level>
+      <name>ONE</name>
+      <width>1026</width>
+      <height>615</height>
+      <backgroundImageFilePath>src/author/images/mario.jpg</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Player>
+          <name>RCD</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>186.0</myXLocation>
+            <myYLocation>384.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player">
+            <name>RCD</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>src/author/images/rcd.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics/>
+            <id>ConcreteDraggableSprite1480800274404</id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>src/author/images/rcd.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>68.0</myXLocation>
+            <myYLocation>494.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain">
+            <name>Block</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>400</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>src/author/images/Empty.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics/>
+            <id>ConcreteDraggableSprite1480800339922</id>
+            <myStates/>
+          </preset>
+          <myWidth>400</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>src/author/images/Empty.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy>
+          <name>ScaryRCD</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>314.0</myXLocation>
+            <myYLocation>330.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Enemy">
+            <name>ScaryRCD</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>50</myWidth>
+            <myHeight>50</myHeight>
+            <myImagePath>src/author/images/duvall_scary.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics/>
+            <id>ConcreteDraggableSprite1480800279318</id>
+            <myStates/>
+          </preset>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>src/author/images/duvall_scary.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Enemy>
+      </mySprites>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Enemy reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy/preset"/>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+  </spritePresets>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

@@ -1,0 +1,26 @@
+<game__data.sprites.Player>
+  <name>Mario</name>
+  <myLocation>
+    <myXLocation>0.0</myXLocation>
+    <myYLocation>0.0</myYLocation>
+  </myLocation>
+  <myWidth>100</myWidth>
+  <myHeight>100</myHeight>
+  <myImagePath>data/images/sprite_images/super-mario.png</myImagePath>
+  <myXVelocity>40.0</myXVelocity>
+  <myYVelocity>20.0</myYVelocity>
+  <myXAcceleration>0.0</myXAcceleration>
+  <myYAcceleration>0.0</myYAcceleration>
+  <terminalXVel>600.0</terminalXVel>
+  <terminalYVel>600.0</terminalYVel>
+  <myCollisionHandler/>
+  <myCharacteristics/>
+  <myControllable>
+    <mySprite class="game_data.sprites.Player" reference="../.."/>
+    <myKeyPressedMap class="tree-map"/>
+    <myKeyReleasedMap/>
+    <isControllable>true</isControllable>
+  </myControllable>
+  <id></id>
+  <myStates/>
+</game__data.sprites.Player>

@@ -5,10 +5,14 @@ package author.view.pages.level_editor.windows.level_edit_window;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
+import util.RelativePathFinder;
+import util.filehelpers.FileLoader.FileExtension;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileLoader.StartDirectory;
+import util.filehelpers.FileLoader.FileType;
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -59,6 +63,7 @@ class LevelEditBox {
 		}
 		catch (NumberFormatException e) {
 			//  LOL
+			// double lol
 		}
 		
 		return this.level;
@@ -76,14 +81,17 @@ class LevelEditBox {
 	}
 	
 	private void updateBackgroundString(){
-		File file = new FileLoader(
-				FileType.GIF, 
-				FileType.JPEG, 
-				FileType.PNG,
-				FileType.JPG ).loadImage();
-		
-		if (file !=null)
-			this.backgroundPath = file.toURI().toString();
+		File file;
+		try {
+		file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
+		if (file !=null){
+			RelativePathFinder pf = new RelativePathFinder();
+			this.backgroundPath = pf.getPath(file);
+		}
+		} catch (FileNotFoundException e) {
+			// TODO Throw Error Screen if exceptional state
+			e.printStackTrace();
+		}
 	}
 	
 	private HBox createHBox(Node...nodes){
@@ -106,5 +114,8 @@ class LevelEditBox {
 		}; 
 	}
 	
+	public TextField getTextField() {
+		return nameField;
+	}
 
 }

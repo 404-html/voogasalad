@@ -1,9 +1,13 @@
 package game_data.states;
 
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
+
 public class Score implements State{
 
 	private int myScore;
 	
+	@ParameterAnnotation(parameters={"Score"})
 	public Score(int score){
 		myScore = score;
 	}
@@ -13,12 +17,11 @@ public class Score implements State{
 		return new Score(myScore);
 	}
 	
+	@ViewableMethodOutput(description="Score", type=int.class)
 	public int getMyScore() {
 		return myScore;
 	}
 	
-
-
 	@Override
 	public void updateState(int pointsUp) {
 		myScore+=pointsUp;

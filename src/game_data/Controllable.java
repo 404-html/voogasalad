@@ -5,25 +5,29 @@ import java.util.Map;
 import java.util.Set;
 
 import game_data.characteristics.Characteristic;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import game_data.sprites.Projectile;
 import game_data.sprites.Terrain;
+import game_engine.Bottom;
 import game_engine.GameResources;
+import game_engine.Side;
+import game_engine.Top;
 import game_engine.actions.Action;
+
 import game_engine.actions.Launch;
+import game_engine.actions.LaunchWithLevel;
 import game_engine.actions.Move;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
-import javafx.geometry.Side;
+////import javafx.geometry.Side;
 import javafx.scene.input.KeyCode;
 
 /**
  * @author Katrina
  *
  */
-@CharacteristicAnnotation(name = "Controllable")
+@NameAnnotation(name = "Controllable")
 public class Controllable {
 	private Sprite mySprite;
 	private Map<KeyCode, Action> myKeyPressedMap;
@@ -31,17 +35,16 @@ public class Controllable {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
-	private Level myLevel;
 	@ParameterAnnotation(parameters="Sprite")
 	public Controllable(Sprite aSprite){
 		this.mySprite=aSprite;
+		myKeyReleasedMap=new HashMap<KeyCode, Move>();
 		isControllable=false;
 	}
-	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap, Level aLevel) {
+	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap) {
 		this.mySprite=aSprite;
 		this.myKeyPressedMap=myKeyPressedMap;
 		isControllable=true;
-		myLevel=aLevel;
 		myKeyReleasedMap=new HashMap<KeyCode, Move>();
 	}
 	
@@ -86,7 +89,8 @@ public class Controllable {
 	private boolean isTerrainOnBottom(Map<Sprite, Side> myCollisionMap){
 		for(Sprite s: myCollisionMap.keySet()){
 			if(s instanceof Terrain){
-				if (myCollisionMap.get(s).equals(Side.BOTTOM));
+				//if (myCollisionMap.get(s).equals(Side.BOTTOM));
+				if(myCollisionMap.get(s) instanceof Top)
 				return true;
 			}
 		}		
@@ -103,16 +107,7 @@ public class Controllable {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	private void generateDefaultKeyPressedMap() {
-		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(mySprite, GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(mySprite, GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(mySprite, GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(mySprite.getMyLocation(), 100, 100, "block", "author/images/betterblock.png");
-		myKeyPressedMap.put(KeyCode.SPACE, new Launch(mySprite, myProjectile, 0, 0, myLevel));
-		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
-	}
+
 	public Map<KeyCode, Action> getMyKeyPressedMap(){
 		return myKeyPressedMap;
 	}

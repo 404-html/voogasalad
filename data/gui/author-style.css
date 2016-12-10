@@ -1,0 +1,100 @@
+
+.root{
+    -fx-base: #1d1d1d;
+    -fx-background: #202020;
+}
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #fdbe3b;
+    -fx-opacity: 1;
+}
+
+
+.menu-bar {
+    -fx-background-color: derive(#202020,20%);
+}
+
+.context-menu {
+    -fx-background-color: derive(#202020,50%);
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #2ab347;
+}
+
+/*
+Box for text input
+*/
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-border-color: #2ab347;
+	-fx-background-radius: 7;
+	-fx-border-radius: 5;
+    -fx-border-width: 2;
+    -fx-font-family: "Segoe UI Semibold";
+	-fx-background-color: #202020;
+	-fx-text-fill: #9bd637;
+}
+
+
+/* 
+ * Metro style Push Button
+ * Author: Pedro Duque Vieira
+ * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
+ */
+.button {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+	-fx-border-radius: 25;
+    -fx-border-width: 2;
+    -fx-background-radius: 25;
+    -fx-background-color: derive(#292929, 10%);
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #db2d68;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: derive(#292929, 80%);
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-text-fill: #84f5aa;
+}
+
+.tab {
+	-fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 5;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 11pt;
+    -fx-text-fill: #80c1d9;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.tab-label {
+	-fx-text-fill: #eb7f4f;
+}
+
+.tab:hover {
+    -fx-background-color: #3a3a3a;
+}
+
+.splash-button{
+    -fx-text-fill: #db2d68;
+    -fx-background-color: #fdbe3b;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 15;
+	-fx-font-size: 24;
+}
+.splash-button:hover{
+	-fx-background-color: #9bd637;
+}

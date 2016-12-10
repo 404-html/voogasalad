@@ -37,8 +37,8 @@ public class SpeedBoost implements Action {
 
 //		System.out.println("SIZE int" +myLevel.getMyPowerUps().size() );
 //		System.out.println("SIZE end" +myLevel.getMyPowerUps().size() );
-		prevSpeed = myPlayerSprite.getMyXVelocity();
-		myPlayerSprite.setMyXVelocity(myPlayerSprite.getMyXVelocity()*speedBoost);
+		prevSpeed = myPlayerSprite.getXVelocity();
+		myPlayerSprite.setXVelocity(myPlayerSprite.getXVelocity()*speedBoost);
 	}
 
 }

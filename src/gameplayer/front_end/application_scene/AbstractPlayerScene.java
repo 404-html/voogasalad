@@ -1,5 +1,6 @@
 package gameplayer.front_end.application_scene;
 
+import gameplayer.back_end.Resources.FrontEndResources;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
@@ -25,7 +26,7 @@ public abstract class AbstractPlayerScene implements IDisplay {
 	
 	public AbstractPlayerScene() {
 	    myGUIGenerator = new GUIGenerator();
-	    myOptions = new VBox(BOX_INSETS);
+	    myOptions = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 	    myOptions.setAlignment(Pos.CENTER);
 	}
 	
