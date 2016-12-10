@@ -43,8 +43,8 @@ public class ApplicationController extends AbstractController {
 		myStoredGames = new StoredGames();
 	}
 
-	public void displayMainMenu() {
-		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, FrontEndResources.SCENE_SIZE.getDoubleResource(), FrontEndResources.SCENE_SIZE.getDoubleResource());
+	public void displayMainMenu(double aWidth, double aHeight) {
+		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, aWidth, aHeight);
 		resetStage(myCurrentDisplay);
 		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
 	}
@@ -68,10 +68,10 @@ public class ApplicationController extends AbstractController {
 
 	@SuppressWarnings("unchecked")
 	private void createNavigationButtons(INavigationDisplay aMenu) {
-		String[] names = {myButtonLabels.getString("MainMenu"), myButtonLabels.getString("Profile"), "New HawaiianShirt"};
+		String[] names = {myButtonLabels.getString("MainMenu"), myButtonLabels.getString("Profile"), myButtonLabels.getString("HawaiianShirt")};
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
-			displayMainMenu();
+			displayMainMenu(myStage.getWidth(), myStage.getHeight());
 		}, e -> {
 			displayUserScene();
 		}, e-> {

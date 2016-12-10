@@ -171,7 +171,7 @@ public class GamePlayController extends AbstractController {
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
-			myApplicationController.displayMainMenu();
+			myApplicationController.displayMainMenu(myStage.getWidth(), myStage.getHeight());
 			myMusic.stopMusic();
 		});
 	}
@@ -216,7 +216,7 @@ public class GamePlayController extends AbstractController {
 	private void setResultSceneHandlers(Pane resultScene) {
 		saveHighscore();
 		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
-			myApplicationController.displayMainMenu();
+			myApplicationController.displayMainMenu(myStage.getWidth(), myStage.getHeight());
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("PlayAgain"),0,0, e -> {
 			handleRestart();

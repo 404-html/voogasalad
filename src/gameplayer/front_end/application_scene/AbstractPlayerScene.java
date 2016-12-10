@@ -28,6 +28,7 @@ public abstract class AbstractPlayerScene implements IDisplay {
 	    myGUIGenerator = new GUIGenerator();
 	    myOptions = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 	    myOptions.setAlignment(Pos.CENTER);
+	    myOptions.setFillWidth(true);
 	}
 	
 	public void clear() {

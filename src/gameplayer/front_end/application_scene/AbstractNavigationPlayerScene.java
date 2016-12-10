@@ -47,6 +47,7 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 		myScene = new Scene(myRoot, aWidth, aHeight);
 		File file = new File(FrontEndResources.STYLESHEET.getStringResource());
 	    myScene.getStylesheets().add(file.toURI().toString());
+	    getOptions().setMaxWidth(aWidth * .45);
 	}
 	
 	private void addNavigation() {
