@@ -21,21 +21,18 @@ public class SettingsViewBox {
 		buildViewBox(input, myInfo);
 	}
 
-	public Pane getPane(){
+	public Pane getPane() {
 		return myPane;
 	}
 
-	private void buildViewBox(Object input, Map<String, Object> infoMap){
-		myPane.getChildren().addAll(new ToolBar(new Label(input.getClass().getSimpleName())) );
+	private void buildViewBox(Object input, Map<String, Object> infoMap) {
+		myPane.getChildren().addAll(new ToolBar(new Label(input.getClass().getSimpleName())));
 
-		infoMap.entrySet().forEach( e -> {
+		infoMap.entrySet().forEach(e -> {
 			Pane box = new HBox();
-			box.getChildren().addAll(
-					new Label( e.getKey().toString()),
-					new Label( "  |  " + e.getValue().toString())
-					);
+			box.getChildren().addAll(new Label(e.getKey().toString()), new Label("  |  " + e.getValue().toString()));
 			myPane.getChildren().add(box);
-		} );		
+		});
 	}
 
 }

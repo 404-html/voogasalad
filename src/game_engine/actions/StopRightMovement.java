@@ -14,7 +14,7 @@ public class StopRightMovement extends StopMovement {
 			mySprite.setXVelocity(mySprite.getXVelocity()-myVelocity);
 		}
 		//System.out.println("stopping right movement");
-		//mySprite.setMyXVelocity(mySprite.getMyXVelocity()-myVelocity);
+		//mySprite.setXVelocity(mySprite.getXVelocity()-myVelocity);
 	}
 
 }

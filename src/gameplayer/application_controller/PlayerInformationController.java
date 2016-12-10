@@ -1,42 +1,47 @@
 package gameplayer.application_controller;
 
+import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.high_score.HighScore;
-import gameplayer.back_end.high_score.IViewableHighScore;
-import gameplayer.back_end.user_information.IViewableUserInformation;
-import gameplayer.back_end.user_information.UserInformationController;
-import gameplayer.front_end.game_display_information.GameDisplayInformation;
-import gameplayer.front_end.game_display_information.IViewableGameDisplayInformation;
+import gameplayer.back_end.user_information.UserInformation;
 
 public class PlayerInformationController {
 	
-	private IViewableUserInformation myUserInformation; 
-	private IViewableGameDisplayInformation myGameDisplayInformation;
-	private HighScore myHighScores; 
+	private UserInformation myUserInformation; 
+	private HighScore myHighScores;
+	private FacebookInformation myFacebookInformation;
 	
 	public PlayerInformationController() {
-		myUserInformation = new UserInformationController();
-		myGameDisplayInformation = new GameDisplayInformation();
+		myUserInformation = new UserInformation();
 		myHighScores = new HighScore();
+		myFacebookInformation = new FacebookInformation();
 	}
 	
-	public void userSignIn(String aUsername, String aPassword) throws Exception{
-		try {
-			myUserInformation.signIn(aUsername, aPassword);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-
-	public void userSignUp(String aUsername, String aPassword) throws Exception {
-		try {
-			myUserInformation.signUp(aUsername, aPassword);
-		} catch (Exception e) {
-			throw e;
-		}
-	}
-	
-	public double getHighScoresForUser(String aUserName) {
+	public double getHighScores(String aUserName) {
 		return myHighScores.getHighScore(aUserName);
 	}
+	
+	public void setUserName(String aUserName, String aPictureUrl) {
+		myUserInformation = new UserInformation(aUserName, aPictureUrl);
+	}
+	
+	public String getUser() {
+		return myUserInformation.getUserName();
+	}
+	
+	public void facebookLogin() {
+		myFacebookInformation.authenticatePlayer();
+		myUserInformation = new UserInformation(myFacebookInformation.getUserName(), myFacebookInformation.getProfilePicture());
+		//myUserInformation.setUserImage(myFacebookInformation.getProfilePicture());
+	}
+
+	public String getPictureUrl() {
+		return myUserInformation.getPictureUrl();
+	}
+
+	public void publishToFaceBook(String aTitle, String aMessage) {
+		myFacebookInformation.publishNews(aTitle, aMessage);
+	}
+	
+
 	
 }

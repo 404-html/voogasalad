@@ -10,10 +10,11 @@ import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
-import game_engine.SpritePhysics;
+import game_engine.GameResources;
 /**
+
  * Default player builder open to extension 
- * @author George, Jordan Frazier
+ * @author George Bernard, Jordan Frazier
  *
  */
 public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
@@ -25,7 +26,8 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 	};
 	
 	private final State[] STATES = 
-			new State[]{ 
+			new State[]{
+				 new Physics(GameResources.DEFAULT_VERTICAL_GRAVITY.getDoubleResource(), GameResources.DEFAULT_HORIZONTAL_GRAVITY.getDoubleResource()),
 				 new LevelWon(),
 				 new Health(1)
 			};

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import game_data.Sprite;
 import game_engine.ListOfCollidingSprites;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 
 public class StopLeftMovement extends StopMovement {
@@ -25,12 +25,12 @@ public class StopLeftMovement extends StopMovement {
 		/*ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList, mySpriteImages);
 		Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 		if(myCollisionMap.isEmpty()){
-			mySprite.setMyXVelocity(0);
+			mySprite.setXVelocity(0);
 		}*/
 		if(mySprite.getXVelocity()<0){
 			mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
 		}
-		//mySprite.setMyXVelocity(mySprite.getMyXVelocity()+myVelocity);
+		//mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
 	}
 
 }

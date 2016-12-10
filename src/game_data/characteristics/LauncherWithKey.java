@@ -1,10 +1,11 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Sprite;
 import game_engine.actions.Launch;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 public class LauncherWithKey implements Characteristic{
 	private Sprite myLauncher;

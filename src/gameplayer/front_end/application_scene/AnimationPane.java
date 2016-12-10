@@ -1,6 +1,6 @@
 package gameplayer.front_end.application_scene;
 
-import gameplayer.back_end.keycode_handler.MovementHandler;
+import gameplayer.back_end.keycode_handler.XYMovementHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
@@ -36,14 +36,25 @@ public class AnimationPane {
 		myGamePlayCanvas.setBackground(aBackground);
 	}
 	
-	public void moveScreen(MovementHandler aHandler) {
-		myGamePlayCanvas.setTranslateX(aHandler.getXMovement());
-		myGamePlayCanvas.setTranslateY(aHandler.getYMovement());
+	public void moveScreen(XYMovementHandler aHandler) {
+		myGamePlayCanvas.setTranslateX(aHandler.getMovement().getX());
+		myGamePlayCanvas.setTranslateY(aHandler.getMovement().getY());
+	}
+	
+	public void setOpacity(double aOpacity) {
+		myGamePlayCanvas.setOpacity(aOpacity);
+	}
+	
+	public double getAnimationScreenXPosition() {
+		return myGamePlayCanvas.getTranslateX();
+	}
+	
+	public double getAnimationScreenYPosition() {
+		return myGamePlayCanvas.getTranslateY();
 	}
 	
 	public void addImageToView(ImageView aImage) {
 		myGamePlayCanvas.getChildren().add(aImage);
 	}
-	
 }
 

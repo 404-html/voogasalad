@@ -6,11 +6,9 @@ import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.sprites.Projectile;
 import game_data.sprites.builders.SpriteDefaultBuilder;
-import game_data.states.Health;
-import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
-import game_engine.SpritePhysics;
+
 /**
  * Creates a new default projectile when new projectile is created
  * @author Jordan Frazier
@@ -27,6 +25,7 @@ public class ProjectileDefaultBuilder implements SpriteDefaultBuilder {
 	
 	private final State[] STATES = 
 			new State[]{ 
+				 new Physics(0, 0),
 			};
 	
 	private static final String NAME = "Projectile_Name";
