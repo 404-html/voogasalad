@@ -231,6 +231,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			if(mySprite.getMyRandomMoveHandler() != null) {
 				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
 			}
+			if(mySprite.getMyRandomMoveConjointHandler() != null) {
+				mySprite.getMyRandomMoveConjointHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
+			}
 		}
 	}
 	
