@@ -37,6 +37,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 	public void removePresetListener(){
 		if (this.spritePreset!=null){
 			this.spritePreset.removeListener(presetInvalidationListener);
+			this.getSprite().setPreset(null);
 		}
 	}
 
@@ -64,7 +65,6 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
 					removePresetListener();
-					this.getSprite().setPreset(null);
 					new SpriteEditWindow(this.getSprite()).openWindow();
 				}
 			}

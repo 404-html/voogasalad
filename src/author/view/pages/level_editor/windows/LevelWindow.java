@@ -139,9 +139,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	
 	private void addSprites(Set<Sprite> addedSprites){
 		addedSprites.forEach((sprite) -> {
-			ConcreteMovableSprite draggableSprite = new ConcreteMovableSprite(sprite, sprite.getPreset());
+			DraggableSprite draggableSprite = new ConcreteMovableSprite(sprite, sprite.getPreset());
 			this.addMovableSprite(draggableSprite);
-			// DragResizeMod.makeResizable(draggableSprite.getDraggableItem(),
 			addSpriteClickListeners(draggableSprite);
 			
 			this.levelWindowPane.getPane().getChildren().addAll(draggableSprite.getDraggableItem());

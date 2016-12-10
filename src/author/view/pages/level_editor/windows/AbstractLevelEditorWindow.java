@@ -24,7 +24,7 @@ import javafx.scene.layout.VBox;
 public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExternal, ILevelEditorWindowInternal{
 
 	private Pane myWindow;
-	private Set<ConcreteMovableSprite> movableSprites = new HashSet<>();
+	private Set<DraggableSprite> movableSprites = new HashSet<>();
 	private IAuthorController authorController;
 	
 	public AbstractLevelEditorWindow(IAuthorController authorController){
@@ -41,11 +41,11 @@ public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExt
 		return myWindow;
 	}
 	
-	protected void addMovableSprite(ConcreteMovableSprite movableSprite){
+	protected void addMovableSprite(DraggableSprite movableSprite){
 		this.movableSprites.add(movableSprite);
 	}
 	
-	protected Set<ConcreteMovableSprite> getMovableSprites(){
+	protected Set<DraggableSprite> getMovableSprites(){
 		return this.movableSprites;
 	}
 	
@@ -66,17 +66,17 @@ public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExt
 	}
 	
 	
-	protected Set<Sprite> getNewSprites(Set<ConcreteMovableSprite> aDraggableSprites, Collection<Sprite> aLevelSprites){
+	protected Set<Sprite> getNewSprites(Set<DraggableSprite> set, Collection<Sprite> aLevelSprites){
 		Set<Sprite> sprites = new HashSet<>();
-		aDraggableSprites.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
+		set.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
 		Set<Sprite> levelSprites = new HashSet<>(aLevelSprites);
 		levelSprites.removeAll(sprites);
 		return levelSprites;
 	}
 	
-	protected Set<Sprite> getRemovedSprites(Set<ConcreteMovableSprite> aDraggableSprites, Collection<Sprite> aLevelSprites){
+	protected Set<Sprite> getRemovedSprites(Set<DraggableSprite> set, Collection<Sprite> aLevelSprites){
 		Set<Sprite> sprites = new HashSet<>();
-		aDraggableSprites.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
+		set.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
 		Set<Sprite> levelSprites = new HashSet<>(aLevelSprites);
 		sprites.removeAll(levelSprites);
 		return sprites;
