@@ -56,13 +56,6 @@ public class GUIGenerator implements IGUIGenerator {
 		return image;
 	}
 	
-	public MediaPlayer createMediaPlayer(String aFilePath) {
-		Media media = new Media(new File(aFilePath).toURI().toString());
-		MediaPlayer soundPlayer = new MediaPlayer(media); 
-		soundPlayer.setAutoPlay(true);
-		return soundPlayer;
-	}
-	
 	@Override
 	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();

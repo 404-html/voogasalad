@@ -16,6 +16,7 @@ import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
+import gameplayer.front_end.gui_generator.media.MediaController;
 import gameplayer.front_end.popup.UserOptions;
 import gameplayer.back_end.keycode_handler.MovementHandlerFactory;
 import gameplayer.back_end.keycode_handler.XYMovementHandler;
@@ -40,6 +41,7 @@ public class GamePlayController extends AbstractController {
 	private HighscoreManager myHighscoreManager;
 	private SpriteDisplay mySpriteDisplay;
 	private int myLevel;
+	private MediaController myMusic;
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel) {
 		myLevel = aLevel;
@@ -53,7 +55,6 @@ public class GamePlayController extends AbstractController {
 		initializeKeySets(myUserOptions);
 		initializeEngineComponents();
 		initializeScene(myUserOptions);
-		initializeEngineComponents();
 		updateSprites();
 	}
 	
@@ -85,6 +86,7 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer()));
 		initializeAnimation();
 		resetStage(myGamePlayScene);
+		if (myGameController.getMyGame().getAudioFilePath() != null) myMusic = new MediaController(myGameController.getMyGame().getAudioFilePath());
 	}
 
 	private void initializeScene(UserOptions aOptions) {
@@ -94,6 +96,7 @@ public class GamePlayController extends AbstractController {
 			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), "black");
 		}
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
+		
 	}
 
 	private void initializeAnimation() {
@@ -154,6 +157,7 @@ public class GamePlayController extends AbstractController {
 		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
+			myMusic.stopMusic();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
@@ -168,6 +172,7 @@ public class GamePlayController extends AbstractController {
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			myApplicationController.displayMainMenu();
+			myMusic.stopMusic();
 		});
 	}
 
@@ -181,7 +186,7 @@ public class GamePlayController extends AbstractController {
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel, myUserOptions);
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel);
 		gameControl.displayGame();
 	}
 	
@@ -205,6 +210,7 @@ public class GamePlayController extends AbstractController {
 		Pane winScene = myGamePlayScene.createResultScene();
 		winScene.getChildren().add(getGUIGenerator().createLabel(aLabel, 0, 0));
 		setResultSceneHandlers(winScene);
+		myMusic.stopMusic();
 	}
 	
 	private void setResultSceneHandlers(Pane resultScene) {

@@ -34,6 +34,4 @@ public interface IGUIGenerator {
 	
 	public ComboBox<Pane> createComboBox(List<String> aList, List<String> aListOfFiles, Choosable aChoice);
 	
-	public MediaPlayer createMediaPlayer(String aFilePath);
-	
 }

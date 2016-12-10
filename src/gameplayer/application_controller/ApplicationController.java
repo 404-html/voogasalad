@@ -124,21 +124,23 @@ public class ApplicationController extends AbstractController {
 		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
-		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay);
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true);
 	}
 
-	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), (aChoice) -> {
-			setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
 			displayGame(chosenGame);
-			setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
 	}
 
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
+		gameChoice.clear();
+		setGameChoiceButtonHandlers(gameChoice, false);
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {

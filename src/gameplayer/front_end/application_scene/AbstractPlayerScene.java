@@ -30,6 +30,10 @@ public abstract class AbstractPlayerScene implements IDisplay {
 	    myOptions.setAlignment(Pos.CENTER);
 	}
 	
+	public void clear() {
+		myOptions.getChildren().clear();
+	}
+	
 	protected IGUIGenerator getGUIGenerator(){
 		return myGUIGenerator;
 	}
