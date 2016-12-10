@@ -93,7 +93,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
 				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
 
-		myProjectile.addState(new Physics(new SpritePhysics(0.0)));
+		myProjectile.addState(new Physics(0.0, 0.0));
 		myProjectile.addCharacteristic(new Impassable(myProjectile));
 		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
 		//System.out.println("doing the shit");
@@ -121,13 +121,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				myLevel.getMainPlayer().setLevel(myLevel);
 			}
 			else if(s instanceof Enemy){
-				s.addState(new Physics(new SpritePhysics()));
+				//s.addState(new Physics(new SpritePhysics()));
 				if(s.getName().equals("goomba")){
 					s.setXVelocity(100);
 				}
 			}
 			else{
-				s.addState(new Physics(new SpritePhysics(0.0)));
+				//s.addState(new Physics(new SpritePhysics(0.0)));
 				//if(s.getCharacteristics().size()>1){
 				//	s.setXVelocity(100.0);
 				//	s.addState(new Health(10));
