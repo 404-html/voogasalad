@@ -11,7 +11,7 @@ import javafx.scene.Scene;
  * @author George Bernard
  * @author Addison Howenstine
  */
-public class ConcreteAuthorController implements IAuthorController, IAuthorControllerExternal{
+public class ConcreteAuthorController implements IAuthorController{
 
 	private IAuthorModel authorModel;
 	private AuthorView authorView;

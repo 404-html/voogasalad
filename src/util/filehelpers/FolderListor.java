@@ -1,4 +1,4 @@
-package author.view.util.file_helpers;
+package util.filehelpers;
 
 import java.io.File;
 import java.util.Arrays;
@@ -18,6 +18,8 @@ public class FolderListor {
 
 	private List<String> myFileNameList;
 
+	private static final char PATH_SEPARATOR = File.pathSeparatorChar;
+	
 	/**
 	 * Must specify path to file
 	 * 
@@ -27,7 +29,7 @@ public class FolderListor {
 		File folder = new File(aFilePath);	
 		
 		Function<File, String> fileConverter = (s) -> s.toString();
-		Function<String, String> pathRemover = (s) -> s.substring(s.lastIndexOf(File.pathSeparatorChar, s.length()) + 1);
+		Function<String, String> pathRemover = (s) -> s.substring(s.lastIndexOf(PATH_SEPARATOR, s.length()) + 1);
 		
 		myFileNameList = Arrays.asList(folder.listFiles())
 			.stream()
@@ -49,7 +51,7 @@ public class FolderListor {
 	 * @return filterd files
 	 */
 	public List<String> getFilesWithExtension(String aExtension) {
-		Function<String, String> extensionRemover = (s) -> s.substring(0, s.lastIndexOf("."));
+		Function<String, String> extensionRemover = (s) -> s.substring(0, s.lastIndexOf(aExtension));
 		
 		return myFileNameList.stream()
 				.filter(s -> {return s.endsWith(aExtension);})

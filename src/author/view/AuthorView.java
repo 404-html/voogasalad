@@ -7,7 +7,6 @@ import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.pages.level_editor.LevelEditorFactory;
 import author.view.pages.menu.AuthorMenu;
 import author.view.pages.sprite.page.SpritesPage;
-import author.view.util.facades.TabPaneFacade;
 import javafx.application.Platform;
 import javafx.geometry.Side;
 import javafx.scene.Node;
@@ -17,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import util.facades.TabPaneFacade;
 
 /**
  * AuthorView handles the JavaFX GUI.

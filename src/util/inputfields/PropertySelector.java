@@ -1,4 +1,4 @@
-package author.view.util.file_helpers;
+package util.inputfields;
 
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -26,23 +26,24 @@ public class PropertySelector {
 	private Pane myPane;
 	private ResourceBundle myResources;
 	
+	private PropertySelector() {
+		myPane = new VBox();
+		mySelectedMap = new TreeMap<String, BooleanProperty>();
+	}
+	
 	/**
-	 * Must specify file paths
+	 * Must specify file path
 	 * 
 	 * @param aFilePath
 	 */
 	public PropertySelector(String aFilePath) {
-		myPane = new VBox();
-		mySelectedMap = new TreeMap<String, BooleanProperty>();
-		
+		this();
 		myResources = PropertyResourceBundle.getBundle( aFilePath );
-		
 		Set<String> keySet = new TreeSet<>(myResources.keySet());
 		
 		for(String s : keySet ) {
 			CheckBox check = new CheckBox(s);
 			check.setAllowIndeterminate(false);
-			
 			myPane.getChildren().add(check);
 			mySelectedMap.put(s, check.selectedProperty());
 		}

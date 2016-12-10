@@ -1,12 +1,11 @@
 package author.view.pages.level_editor.windows.splash_screen;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,6 +17,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
 
 /**
  * @author Addison Howenstine
@@ -94,10 +95,14 @@ public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 	}
 
 	private void loadSavedGame() {
-		File aFile = new FileLoader("XMLGameFiles/", FileType.XML).loadImage();
-		if (aFile != null) {
+		File aFile;
+		try {
+			aFile = new FileLoader("XMLGameFiles/", FileType.DATA).loadSingle();
 			authorControllerExternal = new AuthorControllerFactory().create(aFile);
 			openGame();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
