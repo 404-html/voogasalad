@@ -1,4 +1,4 @@
-package author.view.util.input_fields;
+package util.inputfields;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,13 @@ import java.util.Map;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Flexible JavaFX helper class designed to hold an arbitrary amount of primitive input fields.
+ * <p>
+ * If you need to break encapsulation to get access to input information, feel free to subclass.
+ * 
+ * @author George Bernard
+ */
 public class SettingsEditBox {
 
 	private Pane myPane;
@@ -16,6 +23,9 @@ public class SettingsEditBox {
 	private Map<String, NumberFieldBox> myDoubleFieldMap;
 	private Map<String, TextFieldBox> myTextFieldMap;
 
+	/**
+	 * @param aName
+	 */
 	public SettingsEditBox(String aName) {
 		myName = aName;
 		
@@ -63,10 +73,20 @@ public class SettingsEditBox {
 		myPane.getChildren().add(aNumberField.getPane());
 	}
 	
+	/**
+	 * JavaFX Box containing input information
+	 * 
+	 * @return JavaFX Pane
+	 */
 	public Pane getPane(){
 		return myPane;
 	}	
 	
+	/**
+	 * Returns name of editbox
+	 * 
+	 * @return name of box
+	 */
 	public String getName(){
 		return myName;
 	}

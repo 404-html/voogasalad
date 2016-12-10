@@ -1,4 +1,4 @@
-package author.view.util.facades;
+package util.facades;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -48,11 +48,7 @@ public class ToolBarBuilder {
 	 */
 	public void addFiller(){
 		final Pane filler = new Pane();
-        HBox.setHgrow(
-                filler,
-                Priority.SOMETIMES
-        );
-        
+        HBox.setHgrow( filler, Priority.SOMETIMES );
         myToolBar.getItems().add(filler);
 	}
 	
