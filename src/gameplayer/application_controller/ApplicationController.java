@@ -1,36 +1,23 @@
 package gameplayer.application_controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
-
-import author.controller.AuthorControllerFactory;
-import author.controller.IAuthorControllerExternal;
 import gameplayer.back_end.Resources.FrontEndResources;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
-import game_data.Game;
-import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import gameplayer.front_end.popup.LevelSelectionPopUp;
-import gameplayer.front_end.popup.PlayerOptionsPopUp;
-import gameplayer.front_end.popup.UserOptions;
 import gameplayer.front_end.popup.PopUpFactory;
-import gameplayer.front_end.popup.AbstractPopUp;
 import gameplayer.front_end.popup.IPopUpDisplay;
 import javafx.stage.Stage;
-import util.XMLTranslator;
 
 /**
  * Where the player part can interact with the game engine and get the appropriate data to be displayed
@@ -55,15 +42,8 @@ public class ApplicationController extends AbstractController {
 		myStoredGames = new StoredGames();
 	}
 
-	public void startScene() throws FileNotFoundException {
-		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, FrontEndResources.SCENE_SIZE.getDoubleResource(),
-				FrontEndResources.SCENE_SIZE.getDoubleResource());
-		resetStage(myCurrentDisplay);
-		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
-	}
-
 	public void displayMainMenu() {
-		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, myStage.getWidth(), myStage.getHeight());
+		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.MAINMENU, FrontEndResources.SCENE_SIZE.getDoubleResource(), FrontEndResources.SCENE_SIZE.getDoubleResource());
 		resetStage(myCurrentDisplay);
 		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
 	}
@@ -81,11 +61,6 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void displayAuthoring() {
-		//IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
-		//Scene scene = authorControllerExternal.getScene();
-		//myStage.setWidth(scene.getWidth());
-		//myStage.setHeight(scene.getHeight());
-		//myStage.setScene(scene);
 		IAuthoringSplashScreen aSplashScreen = (new AuthoringSplashScreenFactory()).create();
 		aSplashScreen.initializeWindow();
 	}
@@ -128,7 +103,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
-		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), (aChoice) -> {
+		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
 			resetGame(myStoredGames.getGameFilePath(aChoice));
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}));

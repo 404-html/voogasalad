@@ -2,11 +2,8 @@ package gameplayer.back_end.keycode_handler;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import game_data.Sprite;
 import gameplayer.application_controller.KeyCodeTranslator;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class KeyCodeHandler {
@@ -24,7 +21,7 @@ public class KeyCodeHandler {
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
 	}
 	
-	public KeyCodeHandler(){
+	public KeyCodeHandler() {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();

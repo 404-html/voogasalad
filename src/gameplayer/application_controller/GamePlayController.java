@@ -181,7 +181,7 @@ public class GamePlayController extends AbstractController {
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel, myUserOptions);
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel);
 		gameControl.displayGame();
 	}
 	
