@@ -48,7 +48,7 @@ public class BounceTopOnly implements Action {
 		/*return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myBouncer
 				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity()>0;*/
 		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<myBouncer
-				.getMyLocation().getYLocation()+(myBouncer.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
+				.getMyLocation().getYLocation()+(myBouncer.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>=0;
 	}
 	
 	

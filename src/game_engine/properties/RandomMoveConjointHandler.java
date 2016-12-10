@@ -2,22 +2,23 @@ package game_engine.properties;
 
 import game_data.Sprite;
 
-//this class will be apart of Sprite to handle movement
-public class RandomMoveHandler {
+//THIS IS IN PROGRESS
+public class RandomMoveConjointHandler {
 
 	public enum Orientation {
 		HORIZONTAL, VERTICAL;
 	}
 	private Orientation myOrientation;
 	private Sprite mySprite;
+	private Sprite myConnectedSprite;
 	private double myScreenWidth, myScreenHeight, myScreenXPosition, myScreenYPosition;
 	
-	public RandomMoveHandler(Orientation aOrientation) {
+	public RandomMoveConjointHandler(Sprite Connected, Orientation aOrientation, double aDistanceApart) {
 		myOrientation = aOrientation;
 	}
 	
-	public RandomMoveHandler(RandomMoveHandler aRandomMoveHandler) {
-		myOrientation = aRandomMoveHandler.getMyOrientation();
+	public RandomMoveConjointHandler(RandomMoveConjointHandler aRandomMoveConjointHandler) {
+		myOrientation = aRandomMoveConjointHandler.getMyOrientation();
 	}
 	
 	public void move(Sprite aMySprite, double aMyScreenWidth, double aMyScreenHeight, 
