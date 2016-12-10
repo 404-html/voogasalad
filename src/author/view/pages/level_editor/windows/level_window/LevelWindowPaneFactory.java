@@ -70,6 +70,7 @@ public class LevelWindowPaneFactory {
 	private void acceptDraggableSprites() {
 
 		this.levelWindowPane.getPane().setOnDragDropped((DragEvent event) -> {
+			System.out.println("Dropped");
 			if (checkGameHasLevel()) {
 				Dragboard db = event.getDragboard();
 				boolean success = false;

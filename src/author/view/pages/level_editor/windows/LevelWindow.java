@@ -17,6 +17,7 @@ import author.view.pages.level_editor.windows.level_window.LevelWindowToolBarFac
 import author.view.util.undo.IRevertManager;
 import author.view.util.undo.RevertManagerFactory;
 import game_data.Level;
+import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -153,11 +154,23 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				event.consume();
 			}
 			else if (event.isControlDown()){
+				System.out.println("Shift");
 				this.selectedSprite = draggableSprite;
 				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getMyWidth(), this.selectedSprite.getSprite().getMyHeight());
 				event.consume();
 			}
 		});
+		draggableSprite.getDraggableItem().setOnMouseDragged((event)->{
+			if (event.isShiftDown()){
+				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getMyWidth(), draggableSprite.getSprite().getMyHeight());
+			}
+		});
+		draggableSprite.getDraggableItem().setOnMouseReleased((event) -> {
+			if (event.isShiftDown()){
+				draggableSprite.getSprite().setMyLocation(new Location(this.levelWindowPane.adjustX((int)event.getX()), this.levelWindowPane.adjustY((int)event.getY())));
+			}
+		});
+		
 
 	}
 	
