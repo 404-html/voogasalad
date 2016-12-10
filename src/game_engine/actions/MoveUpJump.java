@@ -23,8 +23,8 @@ public class MoveUpJump extends Move {
 
 	}
 	public void setVelocity(){
-		if(mySprite.getMyYVelocity()>=0){
-			mySprite.setMyYVelocity(-myVelocity);
+		if(mySprite.getYVelocity()>=0){
+			mySprite.setYVelocity(-myVelocity);
 		}
 	}
 /*	@Override

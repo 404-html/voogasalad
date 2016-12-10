@@ -8,8 +8,8 @@ import game_data.Sprite;
 import game_engine.actions.Action;
 
 public class Player extends Character {
-	public Player(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
-		super(aLocation, aWidth, aHeight, aName, aImagePath);
+	public Player(Location aLocation, int aWidth, int aHeight, double xVelocity, double yVelocity, String aName, String aImagePath) {
+		super(aLocation, aWidth, aHeight, xVelocity, yVelocity, aName, aImagePath);
 	}
 	
 	public Player() {

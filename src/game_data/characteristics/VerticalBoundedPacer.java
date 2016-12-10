@@ -17,7 +17,7 @@ public class VerticalBoundedPacer extends BoundedPacer implements Characteristic
 
 	@Override
 	public boolean toChangeDirection(Sprite aSprite) {
-		double yLocation = aSprite.getMyLocation().getYLocation();
+		double yLocation = aSprite.getLocation().getYLocation();
 		return yLocation<=this.getLowerBound() || yLocation>=this.getUpperBound();
 	}
 	

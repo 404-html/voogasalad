@@ -41,7 +41,7 @@ public class LevelWindowPaneFactory {
 		this.levelWindowPane.getPane().setOnDragEntered(e -> {
 			Dragboard dragboard = e.getDragboard();
 			Sprite sprite = findSprite(dragboard.getString());
-			this.levelWindowPane.updateGrid(sprite.getMyWidth(), sprite.getMyHeight());
+			this.levelWindowPane.updateGrid(sprite.getWidth(), sprite.getHeight());
 		});
 		this.levelWindowPane.getPane().setOnMouseExited(e -> {
 			this.levelWindowPane.removeGrid();
@@ -95,7 +95,7 @@ public class LevelWindowPaneFactory {
 	
 	private void addSprite(Sprite aSprite, int xPos, int yPos){
 		Sprite clone = aSprite.clone();
-		clone.getMyLocation().setLocation(levelWindowPane.adjustX(xPos), levelWindowPane.adjustY(yPos));
+		clone.getLocation().setLocation(levelWindowPane.adjustX(xPos), levelWindowPane.adjustY(yPos));
 		this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
 	}
 	

@@ -42,10 +42,10 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			player.addState(state);
 		}
-		player.setMyLocation(new Location(0, 0));
-		player.setMyWidth(WIDTH);
-		player.setMyHeight(HEIGHT);
-		player.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		player.setLocation(new Location(0, 0));
+		player.setWidth(WIDTH);
+		player.setHeight(HEIGHT);
+		player.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		player.setName(NAME);
 		return player;
 	}

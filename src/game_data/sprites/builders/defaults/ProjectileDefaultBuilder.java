@@ -40,10 +40,10 @@ public class ProjectileDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			projectile.addState(state);
 		}
-		projectile.setMyLocation(new Location(0, 0));
-		projectile.setMyWidth(WIDTH);
-		projectile.setMyHeight(HEIGHT);
-		projectile.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		projectile.setLocation(new Location(0, 0));
+		projectile.setWidth(WIDTH);
+		projectile.setHeight(HEIGHT);
+		projectile.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		projectile.setName(NAME);
 		return projectile;
 	}

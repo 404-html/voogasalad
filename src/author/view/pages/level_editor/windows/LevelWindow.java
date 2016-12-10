@@ -154,7 +154,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			}
 			else if (event.isControlDown()){
 				this.selectedSprite = draggableSprite;
-				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getMyWidth(), this.selectedSprite.getSprite().getMyHeight());
+				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getWidth(), this.selectedSprite.getSprite().getHeight());
 				event.consume();
 			}
 		});

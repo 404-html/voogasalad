@@ -17,7 +17,7 @@ public abstract class Move implements Action {
 	public Move(Sprite aSprite, double aVelocity) {
 		mySprite=aSprite;
 		myVelocity=aVelocity;
-		myOldLocation=mySprite.getMyLocation();
+		myOldLocation=mySprite.getLocation();
 		myNewLocation = new Location(0, 0);
 	}
 

@@ -20,7 +20,7 @@ interface SpriteBuilder {
 	 * @param aFilePath
 	 * @return new instance of sprite
 	 */
-	Sprite buildSprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath);
+	Sprite buildSprite(Location aLocation, int aWidth, int aHeight, double xVelocity, double yVelocity, String aName, String aImagePath);
 }
 
 /**
@@ -29,24 +29,24 @@ interface SpriteBuilder {
  * @author George Bernard
  */
 public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
-	PLAYER((loc, width, height, name, path) -> {
-		return new Player(loc, width, height, name, path);
+	PLAYER((loc, width, height, xvel, yvel, name, path) -> {
+		return new Player(loc, width, height, xvel, yvel, name, path);
 	}, () -> new PlayerDefaultBuilder().build()),
 
-	ENEMY((loc, width, height, name, path) -> {
-		return new Player(loc, width, height, name, path);
+	ENEMY((loc, width, height, xvel, yvel, name, path) -> {
+		return new Player(loc, width, height, xvel, yvel, name, path);
 	}, () -> new EnemyDefaultBuilder().build()),
 
-	TERRAIN((loc, width, height, name, path) -> {
-		return new Terrain(loc, width, height, name, path);
+	TERRAIN((loc, width, height, xvel, yvel, name, path) -> {
+		return new Terrain(loc, width, height, xvel, yvel, name, path);
 	}, () -> new TerrainDefaultBuilder().build()),
 
-	ITEM((loc, width, height, name, path) -> {
-		return new Terrain(loc, width, height, name, path);
+	ITEM((loc, width, height, xvel, yvel, name, path) -> {
+		return new Terrain(loc, width, height, xvel, yvel, name, path);
 	}, () -> new ItemDefaultBuilder().build()),
 
-	PROJECTILE((loc, width, height, name, path) -> {
-		return new Terrain(loc, width, height, name, path);
+	PROJECTILE((loc, width, height, xvel, yvel, name, path) -> {
+		return new Terrain(loc, width, height, xvel, yvel, name, path);
 	}, () -> new ProjectileDefaultBuilder().build());
 
 	private SpriteBuilder myBuilder;
@@ -58,12 +58,12 @@ public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
 	}
 
 	public Sprite buildEmpty() {
-		return buildSprite(new Location(0, 0), 0, 0, "No Name", EmptyImage.INSTANCE.getFile().toString());
+		return buildSprite(new Location(0, 0), 0, 0, 0, 0, "No Name", EmptyImage.INSTANCE.getFile().toString());
 	}
 
 	@Override
-	public Sprite buildSprite(Location aLocation, int aWidth, int aHeight, String aName, String aFilePath) {
-		return myBuilder.buildSprite(aLocation, aHeight, aHeight, aName, aFilePath);
+	public Sprite buildSprite(Location aLocation, int aWidth, int aHeight, double XVelocity, double yVelocity, String aName, String aFilePath) {
+		return myBuilder.buildSprite(aLocation, aHeight, aHeight, XVelocity, yVelocity, aName, aFilePath);
 	}
 
 	@Override

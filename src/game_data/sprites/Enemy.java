@@ -5,8 +5,8 @@ import game_data.Sprite;
 
 public class Enemy extends Character {
 
-	public Enemy(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
-		super(aLocation, aWidth, aHeight, aName, aImagePath);
+	public Enemy(Location aLocation, int aWidth, int aHeight, double xVelocity, double yVelocity, String aName, String aImagePath) {
+		super(aLocation, aWidth, aHeight, xVelocity, yVelocity, aName, aImagePath);
 	}
 	
 	public Enemy(Enemy aEnemy){

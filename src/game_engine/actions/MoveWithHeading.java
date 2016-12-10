@@ -19,7 +19,7 @@ public class MoveWithHeading extends Move {
 	}*/
 	//below lines aren't functional, just getting it to compile
 	public void setVelocity(){
-		mySprite.setMyYVelocity(-myVelocity);
+		mySprite.setYVelocity(-myVelocity);
 	}
 	public void stop(){
 		return;
