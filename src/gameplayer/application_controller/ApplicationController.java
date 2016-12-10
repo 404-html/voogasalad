@@ -133,7 +133,7 @@ public class ApplicationController extends AbstractController {
 		}));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
-			displayGame(chosenGame);
+			if (chosenGame != null) displayGame(chosenGame);
 			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
 	}
