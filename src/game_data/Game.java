@@ -17,7 +17,7 @@ import util.XMLTranslator;
  *
  */
 public class Game extends GameObject {
-	
+
 	/*
 	 * description
 	 * icon
@@ -74,6 +74,12 @@ public class Game extends GameObject {
 		return Collections.unmodifiableSet(this.spritePresets);
 	}
 
+	public void removePreset(Sprite aSprite) {
+		if (this.spritePresets.contains(aSprite))
+			this.spritePresets.remove(aSprite);
+		this.notifyListeners();
+	}
+
 	public List<Level> getMyLevels() {
 		return myLevels;
 	}
@@ -92,7 +98,7 @@ public class Game extends GameObject {
 			myLevels.remove(aLevel);
 		this.notifyListeners();
 	}
-	
+
 	public void removeLevel(int levelNumber){
 		if(myLevels.size() > levelNumber)
 			myLevels.remove(levelNumber);
