@@ -4,6 +4,7 @@ import java.util.List;
 import gameplayer.application_controller.Choosable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,6 +33,6 @@ public interface IGUIGenerator {
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 	
-	public ComboBox<Pane> createComboBox(List<String> aList, List<String> aListOfFiles, Choosable aChoice);
+	public ComboBox<Pane> createComboBox(List<String> aList, List<String> aListOfFiles, List<String> aListOfDescriptions, Choosable aChoice);
 	
 }

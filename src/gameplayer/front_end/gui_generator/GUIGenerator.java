@@ -57,19 +57,23 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
+	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
 		box.setPromptText("CHOOSE GAME");
 		List<HBox> options = new ArrayList<HBox>();
 		for(int i = 0; i < aListOfNames.size(); i++){
 			HBox hbox = new HBox();
 			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
-				System.out.println("here");
 				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
 			} else {
 				hbox.getChildren().add(new ImageView());
 			}
-			hbox.getChildren().add(new Label(aListOfNames.get(i)));
+			Label name = new Label(aListOfNames.get(i));
+			name.autosize();
+			Label des = new Label(aListOfDescriptions.get(i));
+			hbox.getChildren().add(name);
+			des.setStyle("-fx-font: 12 arial;");
+			hbox.getChildren().add(des);
 			options.add(hbox);
 		}
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
