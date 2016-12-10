@@ -24,7 +24,6 @@ public class TerrainDefaultBuilder implements SpriteDefaultBuilder {
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(new SpritePhysics(0.0))
 	};
  
 	private static final String NAME = "Terrain_Name";

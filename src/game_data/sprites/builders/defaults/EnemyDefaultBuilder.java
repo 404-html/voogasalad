@@ -26,7 +26,6 @@ public class EnemyDefaultBuilder implements SpriteDefaultBuilder {
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(new SpritePhysics()),
 			 new Health(1) 
 	};
 

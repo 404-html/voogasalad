@@ -36,9 +36,4 @@ public class StateEditBox extends SpriteSettingsEditBox {
 		getSprite().setName(getSprite().getName());
 	}
 
-	@Override
-	public void updateSettings(Map<String, Object> aInfoToValueMap) {
-		// TODO Auto-generated method stub
-		
-	}
 }

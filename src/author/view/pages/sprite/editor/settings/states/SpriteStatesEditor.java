@@ -35,7 +35,7 @@ public class SpriteStatesEditor extends SpriteSettingsEditor {
 			getPropertySelector().getSelectedMap()
 			.get(s.getClass().getSimpleName()).set(true);
 			
-			getEditBoxList().get(s.getClass().getSimpleName())
+		getEditBoxList().get(s.getClass().getSimpleName())
 			.updateSettings(new InfoMap(s).getInfoMap());
 		});
 		

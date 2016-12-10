@@ -7,6 +7,7 @@ import game_data.Level;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
 import game_data.states.State;
 import game_data.states.Vincibility;
@@ -34,7 +35,12 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 		super(aSprite);
 		myTimeInEffect = timeInEffect;
 	}
-
+	
+	@ViewableMethodOutput(description="Time In Effect", type=double.class)
+	public double getTimeInEffect() {
+		return myTimeInEffect;
+	}
+	
 	@Override
 	public Characteristic copy() {
 		return new InvincibilityPowerUpper(myTimeInEffect, this.getSprite());

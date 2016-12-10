@@ -26,7 +26,6 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 	
 	private final State[] STATES = 
 			new State[]{ 
-				 new Physics(new SpritePhysics()),
 				 new LevelWon(),
 				 new Health(1)
 			};

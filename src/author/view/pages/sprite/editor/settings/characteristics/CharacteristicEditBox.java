@@ -1,6 +1,7 @@
 package author.view.pages.sprite.editor.settings.characteristics;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import author.view.pages.sprite.editor.settings.SettingsFactory;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
@@ -39,11 +40,6 @@ final class CharacteristicEditBox extends SpriteSettingsEditBox {
 	public void removeSpriteSetting() {
 		getSprite().getCharacteristics().removeIf( p -> {return p.getClass().getSimpleName().equals(getName());});
 		getSprite().setName(getSprite().getName());
-	}
-
-	@Override
-	public void updateSettings(Map<String, Object> aInfoToValueMap) {
-		
 	}
 
 
