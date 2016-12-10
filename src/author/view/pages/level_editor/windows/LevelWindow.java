@@ -150,7 +150,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private void addSpriteClickListeners(DraggableSprite draggableSprite){
-		//EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
+		
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			this.levelWindowPane.getPane().requestFocus();
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY) {
@@ -158,20 +158,25 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				event.consume();
 			}
 			else if (event.isControlDown()){
-				System.out.println("Shift");
 				this.selectedSprite = draggableSprite;
 				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getWidth(), this.selectedSprite.getSprite().getHeight());
 				event.consume();
 			}
 		});
+		EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseDragged();
 		draggableSprite.getDraggableItem().setOnMouseDragged((event)->{
+			//System.out.println("Dragged");
+			currentHandler.handle(event);
 			if (event.isShiftDown()){
 				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getWidth(), draggableSprite.getSprite().getHeight());
 			}
+			
 		});
 		draggableSprite.getDraggableItem().setOnMouseReleased((event) -> {
 			if (event.isShiftDown()){
-				draggableSprite.getSprite().setLocation(new Location(this.levelWindowPane.adjustX((int)event.getX()), this.levelWindowPane.adjustY((int)event.getY())));
+				int newX = this.levelWindowPane.adjustX((int)draggableSprite.getDraggableItem().getLayoutX() + draggableSprite.getSprite().getWidth()/2);
+				int newY = this.levelWindowPane.adjustY((int)draggableSprite.getDraggableItem().getLayoutY() + draggableSprite.getSprite().getHeight()/2);
+				draggableSprite.getSprite().setLocation(new Location(newX, newY));
 			}
 		});
 		
