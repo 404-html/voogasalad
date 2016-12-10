@@ -8,7 +8,6 @@ import java.util.Map;
 import author.controller.IAuthorController;
 import author.view.util.authoring_buttons.FunctionalLabel;
 import author.view.util.authoring_buttons.LabelFactory;
-import author.view.util.facades.ToolBarBuilder;
 import game_data.Level;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -17,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import util.facades.ToolBarBuilder;
 
 /**
  * This window serves as the container for all levels, where a user will be able
@@ -125,6 +125,7 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow {
 
 	private void highlightCurrentLabel(String name) {
 		FunctionalLabel label = labelMap.get(name);
-		label.getLabel().setTextFill(Color.CHOCOLATE);
+		label.getLabel().setTextFill(Color.RED);
+		label.getLabel().setStyle("-fx-border-color: green;" + "-fx-border-width: 0.5;" + "-fx-border-style: solid;");
 	}
 }

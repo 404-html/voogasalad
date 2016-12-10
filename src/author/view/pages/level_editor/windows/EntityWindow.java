@@ -3,12 +3,12 @@ package author.view.pages.level_editor.windows;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteDraggableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
-import author.view.util.facades.ToolBarBuilder;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.FlowPane;
+import util.facades.ToolBarBuilder;
 
 /**
  * This window contains all of the preset sprites. A user will drag and drop
@@ -24,6 +24,7 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 	private FlowPane container = new FlowPane();
 	
 	private static final int PADDING = 5;
+	private static final int SPRITE_SIZE = 40;
 
 	public EntityWindow(IAuthorController authorController) {
 		super(authorController);
@@ -68,7 +69,9 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 			this.container.getChildren().clear();
 			getController().getModel().getGame().getPresets().forEach((sprite) -> {
 				DraggableSprite dragSprite = new ConcreteDraggableSprite(sprite);
-				this.container.getChildren().add(dragSprite.getImageView());
+				dragSprite.getDraggableItem().setPrefHeight(SPRITE_SIZE);
+				dragSprite.getDraggableItem().setPrefWidth(SPRITE_SIZE);
+				this.container.getChildren().add(dragSprite.getDraggableItem());
 			});
 		});
 	}

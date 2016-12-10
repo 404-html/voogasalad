@@ -2,6 +2,7 @@ package gameplayer.front_end.application_scene;
 
 import java.io.File;
 
+import gameplayer.back_end.Resources.FrontEndResources;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 
 public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene implements INavigationDisplay {
 	
-	private static final String STYLESHEET = "data/gui/style.css";
 	private MenuBar myNavigation;
 	private BorderPane myRoot;
 	private Background myBackground;
@@ -33,7 +33,6 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 		return myRoot;
 	}
 	
-	
 	private void initializeRoot() {
 		myRoot = new BorderPane();
 		myRoot.setId("pane");
@@ -46,7 +45,7 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 	
 	private void initializeScene(double aWidth, double aHeight) {
 		myScene = new Scene(myRoot, aWidth, aHeight);
-		File file = new File(STYLESHEET);
+		File file = new File(FrontEndResources.STYLESHEET.getStringResource());
 	    myScene.getStylesheets().add(file.toURI().toString());
 	}
 	

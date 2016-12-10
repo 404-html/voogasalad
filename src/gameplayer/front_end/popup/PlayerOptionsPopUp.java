@@ -1,7 +1,5 @@
 package gameplayer.front_end.popup;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -11,28 +9,29 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
-public class PlayerOptionsPopUp {
+public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
-	private List<HBox> myOptions;
-	private ResourceBundle myButtonLabels;
-	protected static final String RESOURCE_FILE = "gameplayerlabels.";
-	protected static final String BUTTONLABEL = "ButtonLabels"; 
+	private static final String RESOURCE_FILE = "gameplayerlabels.";
+	private static final String BUTTONLABEL = "ButtonLabels";
+
+	private ResourceBundle myButtonLabels; 
 	private String myCurrentKeyChoice;
 	private String myCurrentColorChoice;
-	
+
 	public PlayerOptionsPopUp() {
-		myOptions = new ArrayList<HBox>();
+		super();
 		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
-	}
-	
-	public List<HBox> addOptions() {
-		createFontOption();
-		createKeyInputOption();
-		return myOptions;
+		addOptions();
 	}
 
-	private void createKeyInputOption() {
+	public void addOptions() {
+		addOption(createKeyInputOption());
+		addOption(createFontOption());
+	}
+
+	private Pane createKeyInputOption() {
 		HBox keyOption = new HBox(20);
 		keyOption.getChildren().add(new Label(myButtonLabels.getString("KeyInput")));
 		final ToggleGroup keyboardGroup = new ToggleGroup();
@@ -51,10 +50,10 @@ public class PlayerOptionsPopUp {
 			}
 		});
 		keyOption.getChildren().addAll(defaultKey, leftKeys);
-		myOptions.add(keyOption);
+		return keyOption;
 	}
 
-	private void createFontOption() {
+	private Pane createFontOption() {
 		HBox fontOption = new HBox(20);
 		fontOption.getChildren().add(new Label(myButtonLabels.getString("HUD")));
 		final ToggleGroup fontGroup = new ToggleGroup();
@@ -77,13 +76,13 @@ public class PlayerOptionsPopUp {
 			}
 		});
 		fontOption.getChildren().addAll(red, green, blue);
-		myOptions.add(fontOption);
+		return fontOption;
 	}
-	
+
 	public String getKeyChoice() {
 		return myCurrentKeyChoice == null ? "black": myCurrentKeyChoice;
 	}
-	
+
 	public String getColorChoice() {
 		return myCurrentColorChoice == null ? "black": myCurrentColorChoice;
 	}

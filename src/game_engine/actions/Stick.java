@@ -23,20 +23,20 @@ public class Stick implements Action{
 		double xLoc, yLoc;
 		if(pastPlatform()){
 			if(horizontal) {
-				xLoc = myCollidedSprite.getMyLocation().getXLocation() + mySprite.getMyXVelocity()/60;
-				yLoc = myCollidedSprite.getMyLocation().getYLocation();
+				xLoc = myCollidedSprite.getLocation().getXLocation() + mySprite.getXVelocity()/60;
+				yLoc = myCollidedSprite.getLocation().getYLocation();
 			} else {
-				xLoc = myCollidedSprite.getMyLocation().getXLocation();
-				yLoc = myCollidedSprite.getMyLocation().getYLocation() + mySprite.getMyYVelocity()/60;
+				xLoc = myCollidedSprite.getLocation().getXLocation();
+				yLoc = myCollidedSprite.getLocation().getYLocation() + mySprite.getYVelocity()/60;
 			}
-			myCollidedSprite.getMyLocation().setLocation(xLoc, yLoc);
+			myCollidedSprite.getLocation().setLocation(xLoc, yLoc);
 		}
 		
 	}
 	
 	private boolean pastPlatform(){
-		return myCollidedSprite.getMyLocation().getYLocation()+myCollidedSprite.getMyHeight()<mySprite
-				.getMyLocation().getYLocation()+(mySprite.getMyHeight()*.5) && myCollidedSprite.getMyYVelocity()>=0;
+		return myCollidedSprite.getLocation().getYLocation()+myCollidedSprite.getHeight()<mySprite
+				.getLocation().getYLocation()+(mySprite.getHeight()*.5) && myCollidedSprite.getYVelocity()>=0;
 	}
 
 }

@@ -17,19 +17,28 @@ import util.XMLTranslator;
  *
  */
 public class Game extends GameObject {
-	
+
 	/*
 	 * description
 	 * icon
 	 */
 
 	List<Level> myLevels;
-	Set<Sprite> spritePresets = new HashSet<>();
-	Level currentLevel;
+	Set<Sprite> mySpritePresets = new HashSet<>();
+	Level myCurrentLevel;
+	String myDescription;
+	String myIconPath;
+	ScrollType myScrollType;
+	String myAudioFilePath;
+
 
 	public Game(String aName) {
 		setName(aName);
 		myLevels = new ArrayList<Level>();
+		myDescription = "New VOOGASalad Game";
+		myIconPath = "data/images/game_icons/flower-icon.jpg";
+		myScrollType = ScrollType.CENTER;
+		myAudioFilePath = "data/audio/Super-Mario-Song.mp3";
 	}
 
 	/**
@@ -51,7 +60,7 @@ public class Game extends GameObject {
 	}
 
 	public void addNewLevel(Level aLevel) {
-		this.currentLevel = aLevel;
+		this.myCurrentLevel = aLevel;
 		myLevels.add(aLevel);
 		this.notifyListeners();
 	}
@@ -61,17 +70,23 @@ public class Game extends GameObject {
 	}
 
 	public void setCurrentLevel(Level aLevel) {
-		this.currentLevel = aLevel;
+		this.myCurrentLevel = aLevel;
 		this.notifyListeners();
 	}
 
 	public void addPreset(Sprite aPresetSprite) {
-		this.spritePresets.add(aPresetSprite);
+		this.mySpritePresets.add(aPresetSprite);
 		this.notifyListeners();
 	}
 
 	public Set<Sprite> getPresets() {
-		return Collections.unmodifiableSet(this.spritePresets);
+		return Collections.unmodifiableSet(this.mySpritePresets);
+	}
+
+	public void removePreset(Sprite aSprite) {
+		if (this.mySpritePresets.contains(aSprite))
+			this.mySpritePresets.remove(aSprite);
+		this.notifyListeners();
 	}
 
 	public List<Level> getMyLevels() {
@@ -79,12 +94,12 @@ public class Game extends GameObject {
 	}
 
 	public void setCurrentLevel(int levelNumber) {
-		currentLevel = myLevels.get(levelNumber);
+		myCurrentLevel = myLevels.get(levelNumber);
 		this.notifyListeners();
 	}
 
 	public Level getCurrentLevel() {
-		return currentLevel;
+		return myCurrentLevel;
 	}
 
 	public void removeLevel(Level aLevel){
@@ -92,12 +107,43 @@ public class Game extends GameObject {
 			myLevels.remove(aLevel);
 		this.notifyListeners();
 	}
-	
+
 	public void removeLevel(int levelNumber){
 		if(myLevels.size() > levelNumber)
 			myLevels.remove(levelNumber);
 		this.notifyListeners();
 	}
 
+	public String getDescription() {
+		return myDescription;
+	}
+
+	public void setDescription(String aDescription) {
+		this.myDescription = aDescription;
+	}
+
+	public String getIconPath() {
+		return myIconPath;
+	}
+
+	public void setIconPath(String aIconPath) {
+		this.myIconPath = aIconPath;
+	}
+
+	public ScrollType getScrollType() {
+		return myScrollType;
+	}
+
+	public void setScrollType(ScrollType aScrollType) {
+		this.myScrollType = aScrollType;
+	}
+	
+	public String getAudioFilePath() {
+		return this.myAudioFilePath;
+	}
+	
+	public void setAudioFilePath(String aAudioFilePath) {
+		this.myAudioFilePath = aAudioFilePath;
+	}
 
 }

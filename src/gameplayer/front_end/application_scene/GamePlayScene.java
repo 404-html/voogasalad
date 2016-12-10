@@ -1,6 +1,8 @@
 package gameplayer.front_end.application_scene;
 
-import gameplayer.back_end.keycode_handler.MovementHandler;
+import java.io.File;
+
+import gameplayer.back_end.keycode_handler.XYMovementHandler;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.heads_up_display.HeadsUpDisplay;
 import javafx.event.ActionEvent;
@@ -13,6 +15,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class GamePlayScene extends AbstractPlayerScene {
+	
+	private static final String STYLESHEET = "data/gui/style.css";
 
 	private StackPane myStack;
 	private AnimationPane myGamePlay;
@@ -21,9 +25,11 @@ public class GamePlayScene extends AbstractPlayerScene {
 	private ResultScene myResultScene;
 	private String myBackgroundFilePath;
 	
-	public GamePlayScene(MovementHandler aKeyHandler, String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
+	public GamePlayScene(String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
 		myStack = new StackPane();
 		myScene = new Scene(myStack, aWidth, aHeight);
+		File file = new File(STYLESHEET);
+	    myScene.getStylesheets().add(file.toURI().toString());
 		myGamePlay = new AnimationPane();
 		myHeadsUpDisplay = new HeadsUpDisplay(aWidth, aHeight, aFontColor);
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aBackgroundImageFilePath, aWidth, aHeight);
@@ -32,6 +38,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 	}
 	
 	public Pane createResultScene() {
+		myStack.getChildren().remove(myHeadsUpDisplay.init());
 		myGamePlay.setOpacity(0.5);
 		myStack.getChildren().add(myResultScene.getPane());
 		return myResultScene.getPane();
@@ -51,7 +58,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 		return myScene;
 	}
 
-	public void moveScreen(MovementHandler aHandler) {
+	public void moveScreen(XYMovementHandler aHandler) {
 		myGamePlay.moveScreen(aHandler);
 	}
 
@@ -96,4 +103,6 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aFilePath, myStack.getWidth(), myStack.getHeight());
 		myStack.setBackground(myBackgroundDisplay);
 	}
+	
+
 }

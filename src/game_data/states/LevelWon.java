@@ -1,9 +1,12 @@
 package game_data.states;
 
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+
 public class LevelWon implements State {
 
 	private boolean hasWon;
 	
+	@ParameterAnnotation(parameters={})
 	public LevelWon() {
 		hasWon = false;
 	}

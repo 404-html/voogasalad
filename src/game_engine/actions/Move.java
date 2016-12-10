@@ -17,16 +17,22 @@ public abstract class Move implements Action {
 	public Move(Sprite aSprite, double aVelocity) {
 		mySprite=aSprite;
 		myVelocity=aVelocity;
-		myOldLocation=mySprite.getMyLocation();
+		myOldLocation=mySprite.getLocation();
 		myNewLocation = new Location(0, 0);
 	}
 
 	@Override
 	public void act() {
-		//mySprite.setMyLocation(changeCoordinates());
+		//mySprite.setLocation(changeCoordinates());
 		setVelocity();
 	}
+	public abstract void stop();
+	
 	//public abstract Location changeCoordinates();
 	public abstract void setVelocity();
+	
+	public double getVelocity(){
+		return myVelocity;
+	}
 	
 }

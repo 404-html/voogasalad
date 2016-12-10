@@ -4,7 +4,10 @@ import game_data.Location;
 import game_data.Sprite;
 import game_data.states.Physics;
 import game_data.states.State;
-
+/**
+ * @author Austin, Katrina
+ *
+ */
 public class UpdateLocation {
 	private Sprite mySprite;
 	private double myTimeElapsed;
@@ -21,20 +24,20 @@ public class UpdateLocation {
 		}
 	}
 	public void updateSpriteParameters(){
-		mySprite.setMyXVelocity(calculateNewXVelocity());
-		mySprite.setMyYVelocity(calculateNewYVelocity());
-		mySprite.setMyLocation(calculateNewLocation());
-		mySprite.setMyXAcceleration(0);
-		mySprite.setMyYAcceleration(0);
+		mySprite.setXVelocity(calculateNewXVelocity());
+		mySprite.setYVelocity(calculateNewYVelocity());
+		mySprite.setLocation(calculateNewLocation());
+		mySprite.setXAcceleration(0);
+		mySprite.setYAcceleration(0);
 	}
 	public double calculateNewXVelocity(){
-		return mySprite.getMyXVelocity() + (mySpritePhysics.getHorizontalGravity() + mySprite.getMyXAcceleration())*myTimeElapsed;
+		return mySprite.getXVelocity() + (mySpritePhysics.getHorizontalGravity() + mySprite.getXAcceleration())*myTimeElapsed;
 	}
 	public double calculateNewYVelocity(){
-		return mySprite.getMyYVelocity() + (mySpritePhysics.getVerticalGravity() + mySprite.getMyYAcceleration())*myTimeElapsed;	
+		return mySprite.getYVelocity() + (mySpritePhysics.getVerticalGravity() + mySprite.getYAcceleration())*myTimeElapsed;	
 	}
 	public Location calculateNewLocation(){
-		Location myCurrentLocation = mySprite.getMyLocation();
+		Location myCurrentLocation = mySprite.getLocation();
 		double curXLoc = myCurrentLocation.getXLocation();
 		double curYLoc = myCurrentLocation.getYLocation();
 		double myXLocation = curXLoc + calculateNewXVelocity()*myTimeElapsed;

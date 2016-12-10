@@ -1,5 +1,7 @@
 package author.controller;
 
+import java.io.File;
+
 import author.model.AuthorModelFactory;
 import author.model.IAuthorModel;
 import author.view.AuthorView;
@@ -7,8 +9,9 @@ import javafx.scene.Scene;
 
 /**
  * @author George Bernard
+ * @author Addison Howenstine
  */
-public class ConcreteAuthorController implements IAuthorController, IAuthorControllerExternal{
+public class ConcreteAuthorController implements IAuthorController{
 
 	private IAuthorModel authorModel;
 	private AuthorView authorView;
@@ -39,6 +42,15 @@ public class ConcreteAuthorController implements IAuthorController, IAuthorContr
 	@Override
 	public void reinitializeView() {
 		this.authorView.reinitializeView();
+	}
+	
+	public void loadGame(File aFile){
+		authorModel.loadGame(aFile);
+	}
+
+	@Override
+	public void createNewGame(String aName) {
+		authorModel.createNewGame(aName);
 	}
 
 }
