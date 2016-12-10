@@ -15,10 +15,10 @@ import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.keycode_handler.MovementHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
-import gameplayer.back_end.user_information.UserOptions;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
+import gameplayer.front_end.popup.UserOptions;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -66,7 +66,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void initializeKeySets(UserOptions aOptions) {
-		if(aOptions != null){
+		if (aOptions != null) {
 			myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 		} else {
 			myKeyCodeHandler = new KeyCodeHandler("default");
@@ -105,8 +105,8 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler.clearReleased();
 		myMovementHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
 		myMovementHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
-		if (myGameController.getMyLevel().lostLevel()) setLosingScene();
-		if (myGameController.getMyLevel().wonLevel()) setWinningScene();
+		if (myGameController.getMyLevel().lostLevel()) setResultSceneHandlers(myGamePlayScene.createResultScene(), "YouLost");
+		if (myGameController.getMyLevel().wonLevel()) setResultSceneHandlers(myGamePlayScene.createResultScene(), "YouWon");
 		myGamePlayScene.moveScreen(myMovementHandler);
 		setHealthLabel();
 	}
@@ -125,9 +125,9 @@ public class GamePlayController extends AbstractController {
 				if (state instanceof Visible && ((Visible) state).isVisibile()) {
 					getUpdatedSpriteMap(sprite);
 					mapped = true;
-				} 
+				}
 			}
-			if(!mapped) {
+			if (!mapped) {
 				getUpdatedSpriteMap(sprite);
 			}
 		}
@@ -160,17 +160,13 @@ public class GamePlayController extends AbstractController {
 
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
-		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "lose", "win"};
+		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
 			save(getGame(), "");
-		}, e -> {
-			setLosingScene(); 
-		}, e -> {
-			setWinningScene();
 		});
 	}
 
@@ -207,23 +203,10 @@ public class GamePlayController extends AbstractController {
 		return myGameController.getMyGame();
 	}
 
-	private void setWinningScene() {
-		myAnimationLoop.stop();
-		Pane winScene = myGamePlayScene.createResultScene();
-		winScene.getChildren().add(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
-		setResultSceneHandlers(winScene);
-	}
-
-	private void setLosingScene() {
-		myAnimationLoop.stop();
-		Pane loseScene = myGamePlayScene.createResultScene();
-		loseScene.getChildren().add(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
-		setResultSceneHandlers(loseScene);
-	}
-
-	private void setResultSceneHandlers(Pane loseScene) {
+	private void setResultSceneHandlers(Pane loseScene, String aProperty) {
 		saveHighscore();
-		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
+		loseScene.getChildren().add(getGUIGenerator().createLabel(myButtonLabels.getString(aProperty), 0, 0));
+		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString(aProperty), 0,0, e -> {
 			myApplicationController.displayMainMenu();
 		}, ButtonDisplay.TEXT));
 		loseScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("PlayAgain"),0,0, e -> {
@@ -240,7 +223,7 @@ public class GamePlayController extends AbstractController {
 		save(myHighscoreManager, "highscores");
 	}
 	
-	public void setOptions(UserOptions aOptions){
+	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		//TODO: update the scene
 	}

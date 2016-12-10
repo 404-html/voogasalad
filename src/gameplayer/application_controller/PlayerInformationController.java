@@ -33,7 +33,5 @@ public class PlayerInformationController {
 		myUserInformation = new UserInformation(myFacebookInformation.getUserName());
 		//myUserInformation.setUserImage(myFacebookInformation.getProfilePicture());
 	}
-	
 
-	
 }

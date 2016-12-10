@@ -1,4 +1,4 @@
-package gameplayer.back_end.user_information;
+package gameplayer.front_end.popup;
 
 public class UserOptions {
 

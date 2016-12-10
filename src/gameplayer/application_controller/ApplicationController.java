@@ -6,7 +6,6 @@ import java.util.PropertyResourceBundle;
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
 import gameplayer.back_end.stored_games.StoredGames;
-import gameplayer.back_end.user_information.UserOptions;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
@@ -20,6 +19,7 @@ import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import gameplayer.front_end.popup.PopUpController;
+import gameplayer.front_end.popup.UserOptions;
 import javafx.stage.Stage;
 import util.XMLTranslator;
 
@@ -163,7 +163,7 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addButton("PLAY", e -> {
 			if (myGamePlay != null) {
 				XMLTranslator myTranslator = new XMLTranslator();
-				UserOptions myOptions = (gameplayer.back_end.user_information.UserOptions) myTranslator.loadFromFile(new File("XMLGameFiles/" + myInformationController.getUser() + "-options-" + myGamePlay.getGame().getName() + ".xml"));
+				UserOptions myOptions = (gameplayer.front_end.popup.UserOptions) myTranslator.loadFromFile(new File("XMLGameFiles/" + myInformationController.getUser() + "-options-" + myGamePlay.getGame().getName() + ".xml"));
 				myGamePlay.setOptions(myOptions);
 				myGamePlay.displayGame();
 			}
