@@ -20,8 +20,8 @@ public class PlayerInformationController {
 		return myHighScores.getHighScore(aUserName);
 	}
 	
-	public void setUserName(String aUserName) {
-		myUserInformation = new UserInformation(aUserName);
+	public void setUserName(String aUserName, String aPictureUrl) {
+		myUserInformation = new UserInformation(aUserName, aPictureUrl);
 	}
 	
 	public String getUser() {
@@ -30,8 +30,16 @@ public class PlayerInformationController {
 	
 	public void facebookLogin() {
 		myFacebookInformation.authenticatePlayer();
-		myUserInformation = new UserInformation(myFacebookInformation.getUserName());
+		myUserInformation = new UserInformation(myFacebookInformation.getUserName(), myFacebookInformation.getProfilePicture());
 		//myUserInformation.setUserImage(myFacebookInformation.getProfilePicture());
+	}
+
+	public String getPictureUrl() {
+		return myUserInformation.getPictureUrl();
+	}
+
+	public void publishToFaceBook(String aTitle, String aMessage) {
+		myFacebookInformation.publishNews(aTitle, aMessage);
 	}
 	
 

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import author.controller.IAuthorController;
+import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.level_editor.windows.level_edit_window.ILevelEditorWindowExternal;
 import game_data.Sprite;
@@ -23,7 +24,7 @@ import javafx.scene.layout.VBox;
 public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExternal, ILevelEditorWindowInternal{
 
 	private Pane myWindow;
-	private Set<DraggableSprite> draggableSprites = new HashSet<>();
+	private Set<DraggableSprite> movableSprites = new HashSet<>();
 	private IAuthorController authorController;
 	
 	public AbstractLevelEditorWindow(IAuthorController authorController){
@@ -40,12 +41,12 @@ public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExt
 		return myWindow;
 	}
 	
-	protected void addDraggableSprite(DraggableSprite draggableSprite){
-		this.draggableSprites.add(draggableSprite);
+	protected void addMovableSprite(DraggableSprite movableSprite){
+		this.movableSprites.add(movableSprite);
 	}
 	
-	protected Set<DraggableSprite> getDraggableSprites(){
-		return this.draggableSprites;
+	protected Set<DraggableSprite> getMovableSprites(){
+		return this.movableSprites;
 	}
 	
 	protected Pane createWindow() {
@@ -65,11 +66,19 @@ public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExt
 	}
 	
 	
-	protected Set<Sprite> getNewSprites(Set<DraggableSprite> aDraggableSprites, Collection<Sprite> aLevelSprites){
+	protected Set<Sprite> getNewSprites(Set<DraggableSprite> set, Collection<Sprite> aLevelSprites){
 		Set<Sprite> sprites = new HashSet<>();
-		aDraggableSprites.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
+		set.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
 		Set<Sprite> levelSprites = new HashSet<>(aLevelSprites);
 		levelSprites.removeAll(sprites);
 		return levelSprites;
+	}
+	
+	protected Set<Sprite> getRemovedSprites(Set<DraggableSprite> set, Collection<Sprite> aLevelSprites){
+		Set<Sprite> sprites = new HashSet<>();
+		set.forEach((draggableSprite) -> sprites.add(draggableSprite.getSprite()));
+		Set<Sprite> levelSprites = new HashSet<>(aLevelSprites);
+		sprites.removeAll(levelSprites);
+		return sprites;
 	}
 }

@@ -7,13 +7,12 @@ import javafx.scene.input.MouseEvent;
 public class AbstractButton implements IButton {
 	
 	public Button createButton(String aMessage, int aXPos, int aYPos, 
-			EventHandler<? super MouseEvent> aHandler){
+		EventHandler<? super MouseEvent> aHandler){
 		Button newButton = new Button();
 		newButton.setOnMouseClicked(aHandler);
 		newButton.setTranslateX(aXPos);
 		newButton.setTranslateY(aYPos);
 		return newButton;
 	}
-	
 
 }

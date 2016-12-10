@@ -1,61 +1,43 @@
 package author.view.pages.sprite.editor.settings.characteristics;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import author.view.pages.sprite.editor.settings.SettingsEditBox;
-import author.view.pages.sprite.editor.settings.characteristics.CharacteristicFactory.AcceptedParameterTypes;
-import author.view.util.input_fields.BooleanSelector;
-import author.view.util.input_fields.NumberFieldBox;
-import author.view.util.input_fields.TextFieldBox;
+import author.view.pages.sprite.editor.settings.SettingsFactory;
+import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 
-class CharacteristicEditBox extends SettingsEditBox {
+final class CharacteristicEditBox extends SpriteSettingsEditBox {
 
-	private CharacteristicFactory myFactory;
-	
-	CharacteristicEditBox(Sprite aSprite, String aName) {
-		super(aName);
-		myFactory = new CharacteristicFactory(aName, aSprite);
-		buildSelectors();
+	CharacteristicEditBox( Sprite aSprite, String aName) {
+		super(aSprite, aName);
 	}
 
-	void buildSelectors(){
-		Map<String, AcceptedParameterTypes> paramMap = myFactory.getParameterTextToTypeMap();
-		
-		for( Entry<String, AcceptedParameterTypes> e: paramMap.entrySet()) {
-			
-			switch (e.getValue()) {
-			case BOOL:
-				addBooleanSelectors(e.getKey(), new BooleanSelector(e.getKey()) );
-				break;
-			case INT:
-				addIntegerBox(e.getKey(), new NumberFieldBox(e.getKey()) );
-				break;
-			case DOUBLE:
-				addDoubleBox(e.getKey(), new NumberFieldBox(e.getKey()) );
-				break;
-			case STRING:
-				addTextBoxes(e.getKey(), new TextFieldBox(e.getKey()) );
-				break;
-			case UNACCEPTABLE:
-			case SPRITE:
-			default:
-				break;
-			}
-		}
+	private Characteristic makeCharacteristic(){
+		return (Characteristic) getSettingFactory().getSettingInstance(makeTextToValueMap());
 	}
-	
-	Characteristic getCharacteristic(){
-		Map<String, Object> textToValueMap = new HashMap<>();
-		
-		getBooleanFieldMap().forEach( (s, b) -> textToValueMap.put(s, b.getBoolean()) );
-		getIntegerFieldMap().forEach( (s, n) -> textToValueMap.put(s, n.getInteger()));
-		getDoubleFieldMap().forEach( (s, d) -> textToValueMap.put(s, d.getDouble()));
-		getTextFieldMap().forEach( (s, t) -> textToValueMap.put(s, t.getText()));
-		
-		return myFactory.getCharacteristicInstance(textToValueMap);
+
+
+	@Override
+	public void addSpriteSetting() {
+		Characteristic c = makeCharacteristic();
+
+		getSprite().getCharacteristics().removeIf( p -> { 
+			return p.getClass().getSimpleName()
+					.equals(c.getClass().getSimpleName());
+			});
+		getSprite().addCharacteristic(c);
+
 	}
+
+	@Override
+	protected SettingsFactory<?> buildSettingFactory() {
+		return new CharacteristicsFactory<Characteristic>(getName(), getSprite());
+	}
+
+	@Override
+	public void removeSpriteSetting() {
+		getSprite().getCharacteristics().removeIf( p -> {return p.getClass().getSimpleName().equals(getName());});
+		getSprite().setName(getSprite().getName());
+	}
+
+
 }

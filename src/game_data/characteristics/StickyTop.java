@@ -1,16 +1,17 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_engine.actions.Action;
 import game_engine.actions.HitTop;
 import game_engine.actions.Stick;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
-@CharacteristicAnnotation(name = "StickyTop")
+@NameAnnotation(name = "StickyTop")
 public abstract class StickyTop implements Characteristic{
 	
 	private Sprite mySprite;

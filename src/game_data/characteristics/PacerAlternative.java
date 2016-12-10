@@ -1,18 +1,20 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_engine.actions.Pace;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
  * alternative version of pacer where user does not to include bounds, but rather how far it can travel
  */
- @CharacteristicAnnotation(name = "Pacer Alternative")
+ @NameAnnotation(name = "Pacer Alternative")
 public class PacerAlternative implements Characteristic{
 
 	private static final String VERTICAL = "VERTICAL";
@@ -31,16 +33,21 @@ public class PacerAlternative implements Characteristic{
 		myType = type;
 		myDistance = distance;
 		mySprite = associatedSprite;
-		originalXPosition = associatedSprite.getMyLocation().getXLocation();
-		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+		originalXPosition = associatedSprite.getLocation().getXLocation();
+		originalYPosition = associatedSprite.getLocation().getYLocation();
 	}
 	
 	public PacerAlternative(Sprite associatedSprite){
 		myType = "";
 		myDistance = 0;
 		mySprite = associatedSprite;
-		originalXPosition = associatedSprite.getMyLocation().getXLocation();
-		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+		originalXPosition = associatedSprite.getLocation().getXLocation();
+		originalYPosition = associatedSprite.getLocation().getYLocation();
+	}
+	
+	@ViewableMethodOutput(type=double.class, description="Distance")
+	public double getDistance() {
+		return myDistance;
 	}
 	
 	private boolean changeDirection(){
@@ -51,20 +58,21 @@ public class PacerAlternative implements Characteristic{
 			return true;
 		}
 		return false;
+		//return collision;
 	}
 	
-//	private boolean atYBound(){
-//		double currentYLocation = mySprite.getMyLocation().getYLocation();
-//		return currentYLocation>originalYPosition || currentYLocation<(originalYPosition-myDistance);			
-//	}
-//	
-//	private boolean atXBound(){
-//		//System.out.println("x is " + mySprite.getMyLocation().getXLocation());
-//		//System.out.println("y is " + mySprite.getMyLocation().getYLocation());
-//		//System.out.println();
-//		double currentXLocation = mySprite.getMyLocation().getXLocation();
-//		return currentXLocation<originalXPosition || currentXLocation>(originalXPosition+myDistance);			
-//	}
+	private boolean atYBound(){
+		double currentYLocation = mySprite.getLocation().getYLocation();
+		return currentYLocation>originalYPosition || currentYLocation<(originalYPosition-myDistance);			
+	}
+	
+	private boolean atXBound(){
+		//System.out.println("x is " + mySprite.getLocation().getXLocation());
+		//System.out.println("y is " + mySprite.getLocation().getYLocation());
+		//System.out.println();
+		double currentXLocation = mySprite.getLocation().getXLocation();
+		return currentXLocation<originalXPosition || currentXLocation>(originalXPosition+myDistance);			
+	}
 
 	@Override
 	public Characteristic copy() {
@@ -73,7 +81,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(), myType);
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
 		pace.act();
 	}
 

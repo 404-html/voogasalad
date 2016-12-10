@@ -1,48 +1,61 @@
 package author.view.pages.sprite.page;
 
+import java.io.File;
+import java.util.Set;
+
+import author.model.game_observables.draggable_sprite.context_menu.FunctionalMenuItemFactory;
+import author.model.game_observables.draggable_sprite.context_menu.SpriteContextMenu;
 import author.view.pages.sprite.SpriteEditWindow;
+import game_data.Game;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class SpriteViewBox implements InvalidationListener {
 
 	private Pane myPane;
-	private Button myImageButton;
-	
-	private static final String IMG_TEXT = "Click to Edit: ";
-	
+	private Button myImageButton;	
+
+
 	private SpriteViewBox() {
 		myPane = new VBox();
-		myImageButton = new Button(IMG_TEXT);
-		myImageButton.setContentDisplay(ContentDisplay.BOTTOM);
+		myImageButton = new Button();
 		myPane.getChildren().addAll(myImageButton);		
 	}
 
-	public SpriteViewBox(Sprite aSprite){
+	public SpriteViewBox(Sprite aSprite, Game aGame, SpriteScroller aSpriteScroller){
 		this();
 		aSprite.addListener(this);
-		myImageButton.setText(IMG_TEXT + aSprite.getName());
-		Image spriteImage = new Image( aSprite.getMyImagePath() );
-		ImageView imageView = new ImageView( spriteImage );
-		imageView.setFitWidth(100);
-		imageView.setFitHeight(100);
-		myImageButton.setGraphic( imageView );
-		myImageButton.maxWidthProperty().bind(myPane.widthProperty());
+		myImageButton.setGraphic( new SpriteQuickView(aSprite).getNode() );
+		myImageButton.minWidthProperty().bind(myPane.minWidthProperty());
+
 		myImageButton.setOnMouseClicked( e -> {
-			SpriteEditWindow sew = new SpriteEditWindow(aSprite);
-			sew.openWindow();
-		});				
+			if (((MouseEvent) e).getButton() == MouseButton.SECONDARY){
+	 				ContextMenu myCM = new ContextMenu();
+					myCM.getItems().add(new FunctionalMenuItemFactory().create("Delete", e2 -> { 
+						aGame.removePreset(aSprite);
+						myPane.setVisible(false);
+						aSpriteScroller.removeInvisible();
+					}).getItem());
+					myCM.show(myPane, e.getSceneX(), e.getSceneY());
+			}
+			else{
+				SpriteEditWindow sew = new SpriteEditWindow(aSprite);
+				sew.openWindow();
+			}
+		});		
 	}
 	
+	public boolean isVisible() {
+		return myImageButton.isVisible();
+	}
+
 	public Pane getPane(){
 		return myPane;
 	}
@@ -51,12 +64,8 @@ public class SpriteViewBox implements InvalidationListener {
 	public void invalidated(Observable observable) {
 		if(observable instanceof Sprite){
 			Sprite s = (Sprite) observable;
-			myImageButton.setText(IMG_TEXT + s.getName());
-			ImageView iv = new ImageView (new Image(s.getMyImagePath()));
-			iv.setFitWidth(100);
-			iv.setFitHeight(100);
-			myImageButton.setGraphic(iv );
+			myImageButton.setGraphic( new SpriteQuickView(s).getNode() );
 		}
 	}
-	
+
 }

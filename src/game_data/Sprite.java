@@ -1,12 +1,15 @@
 package game_data;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import game_data.characteristics.Characteristic;
 import game_data.states.State;
 import game_engine.GameResources;
 import game_engine.properties.RandomMoveHandler;
+import game_engine.actions.Action;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -25,18 +28,18 @@ public abstract class Sprite extends GameObject {
 	private double myYVelocity;
 	private double myXAcceleration;
 	private double myYAcceleration;
+	private double terminalXVel;
+	private double terminalYVel;
 	private CollisionHandler myCollisionHandler;
 	private Set<Characteristic> myCharacteristics;
+	private Controllable myControllable;
 	private String id = "";
 	private RandomMoveHandler myRandomMoveHandler;
+	private Map<Characteristic, Double> powerUps;
 	private Set<State> myStates;
-
-	public Sprite(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
-		myLocation = aLocation;
-		myWidth = aWidth;
-		myHeight = aHeight;
-		setName(aName);
-		myImagePath = aImagePath;
+	
+	public Sprite() {
+		resetTerminalVelocities();
 		myXVelocity = 0;
 		myYVelocity = 0;
 		myXAcceleration = 0;
@@ -44,32 +47,47 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
+		myControllable=new Controllable(this);
 		myRandomMoveHandler = null;
+	}
+	
+
+	public Sprite(Location aLocation, int aWidth, int aHeight, double xVelocity, double yVelocity, String aName, String aImagePath) {
+		resetTerminalVelocities();
+		myLocation = aLocation;
+		myWidth = aWidth;
+		myHeight = aHeight;
+		setName(aName);
+		myImagePath = aImagePath;
+		myXVelocity = xVelocity;
+		myYVelocity = yVelocity;
+		myXAcceleration = 0;
+		myYAcceleration = 0;
+		myCollisionHandler = new CollisionHandler();
+		myCharacteristics = new HashSet<Characteristic>();
+		myStates = new HashSet<State>();
+		myRandomMoveHandler = null;
+		myControllable=new Controllable(this);
 	}
 
 	// for copying sprites
 	public Sprite(Sprite aSprite) {
+		resetTerminalVelocities();
 		preset = aSprite;
-		myLocation = new Location(aSprite.getMyLocation().getXLocation(), aSprite.getMyLocation().getYLocation());
-		myWidth = aSprite.getMyWidth();
-		myHeight = aSprite.getMyHeight();
+		myLocation = new Location(aSprite.getLocation().getXLocation(), aSprite.getLocation().getYLocation());
+		myWidth = aSprite.getWidth();
+		myHeight = aSprite.getHeight();
 		setName(aSprite.getName());
-		myImagePath = aSprite.getMyImagePath();
-		myXVelocity = aSprite.getMyXVelocity();
-		myYVelocity = aSprite.getMyYVelocity();
-		myXAcceleration = aSprite.getMyXAcceleration();
-		myYAcceleration = aSprite.getMyYAcceleration();
-		myCollisionHandler = aSprite.getMyCollisionHandler(); // to change:
-																// would need to
-																// have the same
-																// collision
-																// handler but
-																// we don't know
-																// what that is
-																// yet
+		myImagePath = aSprite.getImagePath();
+		myXVelocity = aSprite.getXVelocity();
+		myYVelocity = aSprite.getYVelocity();
+		myXAcceleration = aSprite.getXAcceleration();
+		myYAcceleration = aSprite.getYAcceleration();
+		myCollisionHandler = aSprite.getCollisionHandler(); // to change:
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
 		myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
+		myControllable=aSprite.getControllable();
 	}
 
 	/**
@@ -95,6 +113,15 @@ public abstract class Sprite extends GameObject {
 			stateCopies.add(c.copy());
 		}
 		return stateCopies;
+	}
+
+
+	public void setControllable(Controllable control){
+		myControllable=control;
+	}
+
+	public Controllable getControllable(){
+		return myControllable;
 	}
 
 	public Set<Characteristic> getCharacteristics() {
@@ -125,26 +152,27 @@ public abstract class Sprite extends GameObject {
 			myStates.remove(aState);
 	}
 
-	public Location getMyLocation() {
+	public Location getLocation() {
 		return myLocation;
 	}
 
-	public void setMyLocation(Location myLocation) {
+	public void setLocation(Location myLocation) {
 		this.myLocation = myLocation;
 		notifyListeners();
 	}
 
-	public double getMyXVelocity() {
+	public double getXVelocity() {
 		return myXVelocity;
 	}
 
-	public double getMyYVelocity() {
+	public double getYVelocity() {
 		return myYVelocity;
 	}
 
-	public void setMyXVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_X_VELOCITY.getDoubleResource()) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+	public void setXVelocity(double myVelocity) {
+		//		System.out.println("TERMINAL X " + terminalXVel);
+		if (Math.abs(myVelocity) > terminalXVel) {
+			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
 		}
 		else{
 			this.myXVelocity = myVelocity;
@@ -152,9 +180,9 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 
-	public void setMyYVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()) {
-			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+	public void setYVelocity(double myVelocity) {
+		if (Math.abs(myVelocity) > terminalYVel) {
+			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*terminalYVel;
 		}
 		else{
 			this.myYVelocity = myVelocity;
@@ -162,36 +190,36 @@ public abstract class Sprite extends GameObject {
 		notifyListeners();
 	}
 
-	public double getMyXAcceleration() {
+	public double getXAcceleration() {
 		return myXAcceleration;
 	}
 
-	public void setMyXAcceleration(double myXAcceleration) {
+	public void setXAcceleration(double myXAcceleration) {
 		this.myXAcceleration = myXAcceleration;
 	}
 
-	public double getMyYAcceleration() {
+	public double getYAcceleration() {
 		return myYAcceleration;
 	}
 
-	public void setMyYAcceleration(double myYAcceleration) {
+	public void setYAcceleration(double myYAcceleration) {
 		this.myYAcceleration = myYAcceleration;
 	}
 
-	public String getMyImagePath() {
+	public String getImagePath() {
 		return myImagePath;
 	}
 
-	public void setMyImagePath(String myImagePath) {
+	public void setImagePath(String myImagePath) {
 		this.myImagePath = myImagePath;
 		notifyListeners();
 	}
 
-	public CollisionHandler getMyCollisionHandler() {
+	public CollisionHandler getCollisionHandler() {
 		return myCollisionHandler;
 	}
 
-	public void setMyCollisionHandler(CollisionHandler myCollisionHandler) {
+	public void setCollisionHandler(CollisionHandler myCollisionHandler) {
 		this.myCollisionHandler = myCollisionHandler;
 		notifyListeners();
 	}
@@ -205,20 +233,20 @@ public abstract class Sprite extends GameObject {
 		return id;
 	}
 
-	public int getMyWidth() {
+	public int getWidth() {
 		return myWidth;
 	}
 
-	public void setMyWidth(int myWidth) {
+	public void setWidth(int myWidth) {
 		this.myWidth = myWidth;
 		notifyListeners();
 	}
 
-	public int getMyHeight() {
+	public int getHeight() {
 		return myHeight;
 	}
 
-	public void setMyHeight(int myHeight) {
+	public void setHeight(int myHeight) {
 		this.myHeight = myHeight;
 		notifyListeners();
 	}
@@ -235,4 +263,35 @@ public abstract class Sprite extends GameObject {
 		this.myRandomMoveHandler = myRandomMoveHandler;
 	}
 
+	public void setPreset(Sprite aPreset){
+		this.preset = aPreset;
+		notifyListeners();
+	}
+
+	public double getTerminalXVel() {
+		return terminalXVel;
+	}
+	public void setTerminalXVel(double terminalXVel) {
+		this.terminalXVel = terminalXVel;
+	}
+	public double getTerminalYVel() {
+		return terminalYVel;
+	}
+	public void setTerminalYVel(double terminalYVel) {
+		this.terminalYVel = terminalYVel;
+	}
+	public void resetTerminalVelocities(){
+		//		System.out.println("LUCIA");
+		this.terminalXVel = GameResources.TERMINAL_X_VELOCITY.getDoubleResource();
+		this.terminalYVel = GameResources.TERMINAL_Y_VELOCITY.getDoubleResource();
+	}
+
+	public Map<Characteristic, Double> getPowerUps() {
+		if(powerUps == null) return new HashMap<Characteristic, Double>();
+		return powerUps;
+	}
+
+	public void setPowerUps(Map<Characteristic, Double> powerUps){
+		this.powerUps = powerUps;
+	}
 }

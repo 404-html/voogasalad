@@ -20,5 +20,10 @@ public class FunctionalButton {
 	public Button getButton() {
 		return myButton;
 	}
+	
+	public Button getButton(String CSStag){
+		myButton.getStyleClass().add(CSStag);
+		return myButton;
+	}
 
 }

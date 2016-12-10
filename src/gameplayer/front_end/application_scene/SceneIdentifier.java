@@ -7,5 +7,4 @@ public enum SceneIdentifier {
 	GAMEPLAY,
 	STARTSCREEN,
 	HIGHSCORE,
-	RESULT
 }
