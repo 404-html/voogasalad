@@ -1,13 +1,14 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_engine.actions.Pace;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
@@ -65,8 +66,8 @@ public class PacerAlternative implements Characteristic{
 	}
 	
 	private boolean atXBound(){
-		//System.out.println("x is " + mySprite.getMyLocation().getXLocation());
-		//System.out.println("y is " + mySprite.getMyLocation().getYLocation());
+		//System.out.println("x is " + mySprite.getLocation().getXLocation());
+		//System.out.println("y is " + mySprite.getLocation().getYLocation());
 		//System.out.println();
 		double currentXLocation = mySprite.getLocation().getXLocation();
 		return currentXLocation<originalXPosition || currentXLocation>(originalXPosition+myDistance);			
@@ -79,7 +80,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0), myType);
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
 		pace.act();
 	}
 

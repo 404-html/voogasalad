@@ -28,45 +28,44 @@ public class SettingsViewBox {
 		buildViewBox(input, myInfo);
 	}
 
-	public Pane getPane(){
+	public Pane getPane() {
 		return myPane;
 	}
-	
+
 	private void buildInfoMap(Object input) {
 		Method[] methods = input.getClass().getMethods();
 
-		for(Method m : methods){
+		for (Method m : methods) {
 			List<Annotation> annotationList = Arrays.asList(m.getAnnotations());
 
 			ViewableMethodOutput vvAnnotation = null;
 
-			for(Annotation a : annotationList){
-				if(a instanceof ViewableMethodOutput){ 
+			for (Annotation a : annotationList) {
+				if (a instanceof ViewableMethodOutput) {
 					ViewableMethodOutput vv = (ViewableMethodOutput) a;
 					try {
-						myInfo.put( vv.description(), m.invoke(input, (Object[]) null) );
-					} catch (ExceptionInInitializerError | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+						myInfo.put(vv.description(), m.invoke(input, (Object[]) null));
+					} catch (ExceptionInInitializerError | IllegalAccessException | IllegalArgumentException
+							| InvocationTargetException e) {
 						e.printStackTrace();
 						continue;
 					}
 				}
 			}
 
-			if(vvAnnotation == null) continue; 
-		}		
+			if (vvAnnotation == null)
+				continue;
+		}
 	}
 
-	private void buildViewBox(Object input, Map<String, Object> infoMap){
-		myPane.getChildren().addAll(new ToolBar(new Label(input.getClass().getSimpleName())) );
+	private void buildViewBox(Object input, Map<String, Object> infoMap) {
+		myPane.getChildren().addAll(new ToolBar(new Label(input.getClass().getSimpleName())));
 
-		infoMap.entrySet().forEach( e -> {
+		infoMap.entrySet().forEach(e -> {
 			Pane box = new HBox();
-			box.getChildren().addAll(
-					new Label( e.getKey().toString()),
-					new Label( "  |  " + e.getValue().toString())
-					);
+			box.getChildren().addAll(new Label(e.getKey().toString()), new Label("  |  " + e.getValue().toString()));
 			myPane.getChildren().add(box);
-		} );		
+		});
 	}
 
 }

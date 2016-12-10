@@ -12,7 +12,11 @@ import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.SpritePhysics;
 /**
+<<<<<<< HEAD
+ * Default builders open to extension 
+=======
  * Default player builder open to extension 
+>>>>>>> 0a837dc1ca251d6f6d8186bb816fe2cc003bcaaa
  * @author George, Jordan Frazier
  *
  */
@@ -25,7 +29,7 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 	};
 	
 	private final State[] STATES = 
-			new State[]{ 
+			new State[]{
 				 new Physics(new SpritePhysics()),
 				 new LevelWon(),
 				 new Health(1)

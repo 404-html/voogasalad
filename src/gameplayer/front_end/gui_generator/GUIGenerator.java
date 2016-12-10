@@ -1,16 +1,15 @@
 package gameplayer.front_end.gui_generator;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.event.ChangeListener;
-
+import gameplayer.application_controller.Choosable;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
+import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -19,12 +18,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GUIGenerator implements IGUIGenerator {
 	
 	private ButtonFactory myButtonBuilder;
-	
+
 	public GUIGenerator() {
 		myButtonBuilder = new ButtonFactory();
 	}
@@ -54,17 +56,37 @@ public class GUIGenerator implements IGUIGenerator {
 		return image;
 	}
 	
-	public ComboBox<Pane> createComboBox(List<Pane> aListOfPanes) {
+	public MediaPlayer createMediaPlayer(String aFilePath) {
+		Media media = new Media(new File(aFilePath).toURI().toString());
+		MediaPlayer soundPlayer = new MediaPlayer(media); 
+		soundPlayer.setAutoPlay(true);
+		return soundPlayer;
+	}
+	
+	@Override
+	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
-		ObservableList<Pane> items = FXCollections.observableArrayList(aListOfPanes);
+		box.setPromptText("CHOOSE GAME");
+		List<HBox> options = new ArrayList<HBox>();
+		for(int i = 0; i < aListOfNames.size(); i++){
+			HBox hbox = new HBox();
+			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
+				System.out.println("here");
+				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
+			} else {
+				hbox.getChildren().add(new ImageView());
+			}
+			hbox.getChildren().add(new Label(aListOfNames.get(i)));
+			options.add(hbox);
+		}
+		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
 		box.setPromptText("CHOOSE GAME");
 		box.setEditable(true);        
 		box.setOnAction(e -> {
-		    //Pane selectedPane = box.getSelectionModel().getSelectedItem();
-		    //String name = ((Label) selectedPane.getChildren().get(0)).getText();
-		 	//box.setAccessibleText(name.);
-		    //System.out.println("ComboBox Action (selected: " + name + ")");
+			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
+		    aChooser.choose(label);
+		    box.setPromptText(label);
 		});
 		return box;
 	}
@@ -98,4 +120,8 @@ public class GUIGenerator implements IGUIGenerator {
 		return menu;
 	}
 
+//	@Override
+//	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
+//		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
+//	}
 }

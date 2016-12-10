@@ -1,7 +1,9 @@
 package game_engine.actions;
 
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import game_data.Sprite;
+import game_engine.Side;
+import game_engine.Top;
 
 /**
  * @author Austin
@@ -25,30 +27,37 @@ public class BounceTopOnly implements Action {
 
 	@Override
 	public void act() {
-		//System.out.println("init y vel" + myPlayerSprite.getMyYVelocity());
+		//System.out.println("init y vel" + myPlayerSprite.getYVelocity());
 		//System.out.println(mySide == Side.TOP);
 		//System.out.println(pastPlatform());
 		//System.out.println("poop");
-		if(mySide==Side.TOP && pastPlatform()){
-			//myPlayerSprite.setMyYVelocity(-(myPlayerSprite.getMyYVelocity()+myBounceSpeed));
+
+		//if(mySide==Side.TOP && pastPlatform()){
+		if(mySide instanceof Top && pastPlatform()){
+			mySide.bounce(myPlayerSprite, myBounceSpeed);
+			/*myPlayerSprite.setYVelocity(-1*myBounceSpeed);*/
+
+		//if(mySide==Side.TOP && pastPlatform()){
+			//myPlayerSprite.setYVelocity(-(myPlayerSprite.getYVelocity()+myBounceSpeed));
 			//System.out.println("asdasdasdasdasd");
-			//System.out.println("player is at " + myPlayerSprite.getMyLocation().getYLocation());
-			//System.out.println("bouncer is at " + myBouncer.getMyLocation().getYLocation());
-			myPlayerSprite.setYVelocity(-1*myBounceSpeed);
-			//myPlayerSprite.getMyLocation().setLocation(myPlayerSprite.getMyLocation().getXLocation(), 
-			//		myBouncer.getMyLocation().getYLocation());
+			//System.out.println("player is at " + myPlayerSprite.getLocation().getYLocation());
+			//System.out.println("bouncer is at " + myBouncer.getLocation().getYLocation());
+			//myPlayerSprite.setYVelocity(-1*myBounceSpeed);
+			//myPlayerSprite.getLocation().setLocation(myPlayerSprite.getLocation().getXLocation(), 
+			//		myBouncer.getLocation().getYLocation());
 		}	
-		//System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
+		//System.out.println(" y vel" + myPlayerSprite.getYVelocity());
 		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
-		//myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
-		
+		//myPlayerSprite.getLocation().setMyHeading( getNewHeading() );
+		//
 	}
 	
 	private boolean pastPlatform(){
-		/*return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myBouncer
-				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity()>0;*/
+		/*return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()>myBouncer
+				.getLocation().getYLocation() && myPlayerSprite.getYVelocity()>0;*/
+
 		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<myBouncer
-				.getLocation().getYLocation()+(myBouncer.getHeight()*.5) && myPlayerSprite.getYVelocity()>0;
+				.getLocation().getYLocation()+(myBouncer.getHeight()*.5) && myPlayerSprite.getYVelocity()>=0;
 	}
 	
 	

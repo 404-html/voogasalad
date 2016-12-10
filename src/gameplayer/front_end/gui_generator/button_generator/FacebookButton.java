@@ -14,12 +14,12 @@ public class FacebookButton extends AbstractButton {
 	@Override
 	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler) {
 		Button button = super.createButton(aMessage, aXPos, aYPos, aHandler); 
-		HBox box = new HBox(5);
+		HBox box = new HBox(10);
 		button.setId("facebook-button");
 		Label fbLabel = new Label(aMessage);
-		ImageView fbImage = new ImageView(new File("data/gui/facebook-icon.png").toURI().toString());
-		fbImage.setFitHeight(25);
-		fbImage.setFitWidth(25);
+		ImageView fbImage = new ImageView(new File("data/gui/facebook_icon.png").toURI().toString());
+		fbImage.setFitHeight(20);
+		fbImage.setPreserveRatio(true);
 		fbLabel.setId("facebook-label");
 		box.getChildren().add(fbImage);
 		box.getChildren().add(fbLabel);
