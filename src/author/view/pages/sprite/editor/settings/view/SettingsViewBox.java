@@ -1,19 +1,13 @@
 package author.view.pages.sprite.editor.settings.view;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.InfoMap;
 
 public class SettingsViewBox {
 
@@ -21,7 +15,7 @@ public class SettingsViewBox {
 	private Map<String, Object> myInfo;
 
 	public SettingsViewBox(Object input) {
-		myInfo = new TreeMap<>();
+		myInfo = new InfoMap(input).getInfoMap();
 		myPane = new VBox();
 
 		buildViewBox(input, myInfo);

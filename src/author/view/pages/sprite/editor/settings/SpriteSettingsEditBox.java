@@ -93,4 +93,6 @@ public abstract class SpriteSettingsEditBox extends SettingsEditBox {
 
 	public abstract void removeSpriteSetting();
 	
+	public abstract void updateSettings(Map<String, Object> aInfoToValueMap);
+	
 }

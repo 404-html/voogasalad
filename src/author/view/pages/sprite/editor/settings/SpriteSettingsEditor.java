@@ -3,7 +3,9 @@ package author.view.pages.sprite.editor.settings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
@@ -20,7 +22,7 @@ public abstract class SpriteSettingsEditor {
 
 	private Pane myPane;
 	private Accordion myAccordion;
-	private List<SpriteSettingsEditBox> myEditBoxList;
+	private Map<String, SpriteSettingsEditBox> myEditBoxMap;
 	private PropertySelector mySelector;
 	private Sprite mySprite;
 	
@@ -30,13 +32,13 @@ public abstract class SpriteSettingsEditor {
 		
 		myPane = new HBox();
 		myAccordion = new Accordion();
-		myEditBoxList = new ArrayList<>();
+		myEditBoxMap = new TreeMap<>();
 		mySelector = new PropertySelector( getDirectoryPath() + mySprite.getClass().getSimpleName());
 		
 		for(Entry<String, BooleanProperty> e: mySelector.getSelectedMap().entrySet()){
 			
 			SpriteSettingsEditBox editBox = makeEditBox(aSprite, e.getKey());
-			myEditBoxList.add(editBox);	
+			myEditBoxMap.put(e.getKey(), editBox);	
 			
 			TitledPane charTitledPane = new TitledPane(e.getKey(), editBox.getPane());
 			charTitledPane.disableProperty().bind(e.getValue().not());
@@ -55,10 +57,12 @@ public abstract class SpriteSettingsEditor {
 		Arrays.asList(new Node[]{mySelector.getPane(), scroll, viewColumn}).forEach(n -> {
 			myPane.getChildren().add(n);
 		});
+		
+		updateSettings();
 	}
 
 	public final void addSettings(){
-		getEditBoxList().forEach( e -> {
+		getEditBoxList().values().forEach( e -> {
 			Boolean charIsAvailable = getPropertySelector()
 					.getSelectedMap()
 					.get(e.getName())
@@ -68,14 +72,20 @@ public abstract class SpriteSettingsEditor {
 		});
 	}
 	
+	public abstract void updateSettings();
+	
 	protected abstract String getDirectoryPath();
 	
 	protected abstract SpriteSettingsEditBox makeEditBox(Sprite aSprite, String aName);
 	
 	protected abstract SettingsViewColumn makeViewColumn(Sprite aSprite);
 	
-	protected final List<SpriteSettingsEditBox> getEditBoxList(){
-		return myEditBoxList;
+	protected final Map<String, SpriteSettingsEditBox> getEditBoxList(){
+		return myEditBoxMap;
+	}
+	
+	protected final Sprite getSprite(){
+		return mySprite;
 	}
 	
 	protected final PropertySelector getPropertySelector(){
