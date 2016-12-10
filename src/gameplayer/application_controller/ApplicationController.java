@@ -99,7 +99,7 @@ public class ApplicationController extends AbstractController {
 		}, e -> {
 			displayUserScene();
 		}, e-> {
-			myCurrentDisplay.setBackground(myButtonLabels.getString("Shirt" + (int) Math.floor(Math.random() * 7)), myStage.getWidth(), myStage.getHeight());
+			myCurrentDisplay.setBackground(myButtonLabels.getString("Shirt" + ((int) Math.floor(Math.random() * 6) + 1)), myStage.getWidth(), myStage.getHeight());
 		});
 	}
 
@@ -127,6 +127,17 @@ public class ApplicationController extends AbstractController {
 		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay);
 	}
 
+	private void setGameChoiceButtonRedoHandlers(INavigationDisplay gameChoice) {
+		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), (aChoice) -> {
+			resetGame(myStoredGames.getGameFilePath(aChoice));
+		}));
+		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
+			File chosenGame = new FileChoiceController().show(myStage);
+			resetGame(chosenGame);
+			displayGame(chosenGame);
+		}, ButtonDisplay.TEXT); 
+	}
+	
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), (aChoice) -> {
 			resetGame(myStoredGames.getGameFilePath(aChoice));
@@ -141,6 +152,8 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
+		gameChoice.clear();
+		setGameChoiceButtonRedoHandlers(gameChoice);
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {

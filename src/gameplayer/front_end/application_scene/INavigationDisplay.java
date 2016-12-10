@@ -11,4 +11,6 @@ public interface INavigationDisplay extends IDisplay {
 	
 	public void addNavigationMenu(ImageView aImage, String[] aString, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ...aHandlers);
 	
+	public void clear();
+	
 }
