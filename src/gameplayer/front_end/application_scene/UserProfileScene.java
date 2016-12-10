@@ -1,7 +1,7 @@
 package gameplayer.front_end.application_scene;
 
-import gameplayer.back_end.Resources.FrontEndResources;
 import gameplayer.back_end.facebook.FacebookInformation;
+import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import javafx.geometry.Pos;

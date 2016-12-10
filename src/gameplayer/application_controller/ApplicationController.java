@@ -6,11 +6,11 @@ import java.util.PropertyResourceBundle;
 
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
-import gameplayer.back_end.Resources.FrontEndResources;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
 import game_data.Game;
 import gameplayer.back_end.facebook.FacebookInformation;
+import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.UserDefaults;
 import gameplayer.front_end.application_scene.IDisplay;
@@ -158,7 +158,7 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	private void displayGame(File chosenGame) {
-		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0, myUserDefaults.getKeyInputColor("default"));
+		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0, null);
 	}
 	
 	public UserDefaults getUserDefaults(){
