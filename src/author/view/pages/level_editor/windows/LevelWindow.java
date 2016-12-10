@@ -177,6 +177,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				int newX = this.levelWindowPane.adjustX((int)draggableSprite.getDraggableItem().getLayoutX() + draggableSprite.getSprite().getWidth()/2);
 				int newY = this.levelWindowPane.adjustY((int)draggableSprite.getDraggableItem().getLayoutY() + draggableSprite.getSprite().getHeight()/2);
 				draggableSprite.getSprite().setLocation(new Location(newX, newY));
+				this.levelWindowPane.removeGrid();
 			}
 		});
 		
