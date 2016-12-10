@@ -107,7 +107,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				myLevel.getMainPlayer().addState(new Health(200));
 				myLevel.getMainPlayer().addState(new LevelWon());
 				myLevel.getMainPlayer()
-						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
+						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
 		
 				myLevel.getMainPlayer().resetTerminalVelocities();
 			}

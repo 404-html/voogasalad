@@ -27,7 +27,12 @@ public abstract class Move implements Action {
 		setVelocity();
 	}
 	public abstract void stop();
+	
 	//public abstract Location changeCoordinates();
 	public abstract void setVelocity();
+	
+	public double getVelocity(){
+		return myVelocity;
+	}
 	
 }

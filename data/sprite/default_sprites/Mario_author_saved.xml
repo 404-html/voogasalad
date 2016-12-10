@@ -17,7 +17,9 @@
   <myCharacteristics/>
   <myControllable>
     <mySprite class="game_data.sprites.Player" reference="../.."/>
-    <isControllable>false</isControllable>
+    <myKeyPressedMap class="tree-map"/>
+    <myKeyReleasedMap/>
+    <isControllable>true</isControllable>
   </myControllable>
   <id></id>
   <myStates/>
