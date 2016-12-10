@@ -16,8 +16,9 @@ import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
+import game_engine.Side;
 import game_engine.actions.Pace;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 @NameAnnotation(name = "Pacer")
 public abstract class Pacer implements Characteristic{

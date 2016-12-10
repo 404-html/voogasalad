@@ -9,14 +9,17 @@ import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Projectile;
 import game_data.sprites.Terrain;
+import game_engine.Bottom;
 import game_engine.GameResources;
+import game_engine.Side;
+import game_engine.Top;
 import game_engine.actions.Action;
 import game_engine.actions.Launch;
 import game_engine.actions.Move;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
-import javafx.geometry.Side;
+////import javafx.geometry.Side;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -86,7 +89,8 @@ public class Controllable {
 	private boolean isTerrainOnBottom(Map<Sprite, Side> myCollisionMap){
 		for(Sprite s: myCollisionMap.keySet()){
 			if(s instanceof Terrain){
-				if (myCollisionMap.get(s).equals(Side.BOTTOM));
+				//if (myCollisionMap.get(s).equals(Side.BOTTOM));
+				if(myCollisionMap.get(s) instanceof Top)
 				return true;
 			}
 		}		

@@ -8,7 +8,7 @@ import game_data.Location;
 import game_data.Sprite;
 import game_data.sprites.Terrain;
 import game_engine.ListOfCollidingSprites;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 /**
  * @author Katrina

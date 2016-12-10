@@ -1,7 +1,9 @@
 package game_engine.actions;
 
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import game_data.Sprite;
+import game_engine.Side;
+import game_engine.Top;
 
 /**
  * @author Austin
@@ -29,14 +31,10 @@ public class BounceTopOnly implements Action {
 		//System.out.println(mySide == Side.TOP);
 		//System.out.println(pastPlatform());
 		//System.out.println("poop");
-		if(mySide==Side.TOP && pastPlatform()){
-			//myPlayerSprite.setMyYVelocity(-(myPlayerSprite.getMyYVelocity()+myBounceSpeed));
-			//System.out.println("asdasdasdasdasd");
-			//System.out.println("player is at " + myPlayerSprite.getMyLocation().getYLocation());
-			//System.out.println("bouncer is at " + myBouncer.getMyLocation().getYLocation());
-			myPlayerSprite.setMyYVelocity(-1*myBounceSpeed);
-			//myPlayerSprite.getMyLocation().setLocation(myPlayerSprite.getMyLocation().getXLocation(), 
-			//		myBouncer.getMyLocation().getYLocation());
+		//if(mySide==Side.TOP && pastPlatform()){
+		if(mySide instanceof Top && pastPlatform()){
+			mySide.bounce(myPlayerSprite, myBounceSpeed);
+			/*myPlayerSprite.setMyYVelocity(-1*myBounceSpeed);*/
 		}	
 		//System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
 		//myPlayerSprite.setMyVelocity( getNewVelocity() );		

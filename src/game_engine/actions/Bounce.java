@@ -1,6 +1,7 @@
 package game_engine.actions;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import game_data.Sprite;
+import game_engine.Side;
 /**
 * @author Alex & James & Austin & Katrina
 *
@@ -20,7 +21,8 @@ public class Bounce implements Action {
     }
     @Override
     public void act() {
-        if(mySide==Side.BOTTOM){
+    	mySide.bounce(myPlayerSprite, myBounceSpeedVertical);
+        /*if(mySide==Side.BOTTOM){
             myPlayerSprite.setMyYVelocity(myBounceSpeedVertical);
         }            
         else if(mySide==Side.TOP){
@@ -31,7 +33,7 @@ public class Bounce implements Action {
         }
         else if(mySide==Side.RIGHT){        	
             myPlayerSprite.setMyXVelocity(myBounceSpeedHorizontal);
-        }
+        }*/
         //myPlayerSprite.setMyVelocity( getNewVelocity() );        
         //myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
         

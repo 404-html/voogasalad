@@ -13,7 +13,8 @@ import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Physics;
 import game_data.states.State;
-import javafx.geometry.Side;
+////import javafx.geometry.Side;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -219,7 +220,8 @@ public class ListOfCollidingSprites {
 				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
 				}
-				return Side.TOP;
+				return new Top();
+				//return Side.TOP;
 			} else if (bottom_collision < top_collision && bottom_collision < left_collision
 					&& bottom_collision < right_collision) {
 				//System.out.println("bottom");
@@ -229,7 +231,8 @@ public class ListOfCollidingSprites {
 				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
 				}
-				return Side.BOTTOM;
+				//return Side.BOTTOM;
+				return new Bottom();
 			} else if (left_collision < right_collision && left_collision < top_collision
 					&& left_collision < bottom_collision) {
 				//System.out.println("left");
@@ -241,7 +244,8 @@ public class ListOfCollidingSprites {
 					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
 					}
-					return Side.LEFT;
+					//return Side.LEFT;
+					return new Left();
 				//}
 
 			} else if (right_collision < left_collision && right_collision < top_collision
@@ -255,12 +259,14 @@ public class ListOfCollidingSprites {
 					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
 					}
-					return Side.RIGHT;
+					//return Side.RIGHT;
+					return new Right();
 				//}
 
 			}
 		}
-		return Side.TOP;
+		//return Side.TOP;
+		return new Top();
 	}
 
 	private boolean pastPlatform(Sprite myPlayerSprite) {
@@ -286,55 +292,59 @@ public class ListOfCollidingSprites {
 //			//aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
 //			//		aSprite.getMyLocation().getYLocation());
 //			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()-leftDistance+shiftX, 
-	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance, double topDistance,
-			double bottomDistance) {
-		if (min == 0) {
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation() - leftDistance + SHIFT_CONSTANT,
-					aSprite.getMyLocation().getYLocation());
-			System.out.println("sprite x is " + aSprite.getMyLocation().getXLocation());
-			System.out.println("left distance is " + leftDistance);
-			System.out.println("shiftX distance is " + shiftX);
-			System.out.println();
-		}
-		if(min == 1){
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
+//	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance, double topDistance,
+//			double bottomDistance) {
+//		if (min == 0) {
+//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation() - leftDistance + SHIFT_CONSTANT,
 //					aSprite.getMyLocation().getYLocation());
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-shiftX, 
-					aSprite.getMyLocation().getYLocation());
-		}
-		if(min == 2){
+//			System.out.println("sprite x is " + aSprite.getMyLocation().getXLocation());
+//			System.out.println("left distance is " + leftDistance);
+//			System.out.println("shiftX distance is " + shiftX);
+//			System.out.println();
+//		}
+//		if(min == 1){
+////			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
+////					aSprite.getMyLocation().getYLocation());
+//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-shiftX, 
+//					aSprite.getMyLocation().getYLocation());
+//		}
+//		if(min == 2){
+////			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
+////					aSprite.getMyLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
 //			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
-//					aSprite.getMyLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
-					aSprite.getMyLocation().getYLocation()-topDistance+shiftY);
-		}
-		if (min == 1) {
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation() + rightDistance - SHIFT_CONSTANT,
-					aSprite.getMyLocation().getYLocation());
-		}
-		if (min == 2) {
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(),
-					aSprite.getMyLocation().getYLocation() - topDistance + SHIFT_CONSTANT);
-		}
-		// if(min == 3){
-		// aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(),
-		// aSprite.getMyLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
-		// }
-	}
+//					aSprite.getMyLocation().getYLocation()-topDistance+shiftY);
+//		}
+//		if (min == 1) {
+//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation() + rightDistance - SHIFT_CONSTANT,
+//					aSprite.getMyLocation().getYLocation());
+//		}
+//		if (min == 2) {
+//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(),
+//					aSprite.getMyLocation().getYLocation() - topDistance + SHIFT_CONSTANT);
+//		}
+//		// if(min == 3){
+//		// aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(),
+//		// aSprite.getMyLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
+//		// }
+//	}
 
 	private Side pickSide(int min, Sprite mySprite) {
 		if (min == 0) {
-			return Side.LEFT;
+			//return Side.LEFT;
+			return new Left();
 		}
 		if (min == 1) {
-			return Side.RIGHT;
+			//return Side.RIGHT;
+			return new Right();
 
 		}
 		if (min == 2) {
-			return Side.TOP;
+			//return Side.TOP;
+			return new Top();
 		}
 		if (min == 3) {
-			return Side.BOTTOM;
+			//return Side.BOTTOM;
+			return new Bottom();
 		}
 		return null;
 	}

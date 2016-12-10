@@ -1,6 +1,7 @@
 package game_engine;
 
 import java.awt.Image;
+
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import game_engine.actions.SpeedBoost;
 import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
 import game_engine.actions.StopUpMovement;
-import javafx.geometry.Side;
+////import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
