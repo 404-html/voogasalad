@@ -9,12 +9,16 @@ import game_data.Sprite;
  */
 public class Projectile extends Sprite{
 	
-	public Projectile(Location aLocation, int aWidth, int aHeight, String aName, String aImagePath) {
-		super(aLocation, aWidth, aHeight, aName, aImagePath);
+	public Projectile(Location aLocation, int aWidth, int aHeight, double xVelocity, double yVelocity, String aName, String aImagePath) {
+		super(aLocation, aWidth, aHeight, xVelocity, yVelocity, aName, aImagePath);
 	}
 	
 	public Projectile(Projectile aProjectile){
 		super(aProjectile);
+	}
+	
+	public Projectile() {
+		super();
 	}
 
 	@Override

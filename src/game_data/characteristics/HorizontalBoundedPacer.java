@@ -17,7 +17,7 @@ public class HorizontalBoundedPacer extends BoundedPacer implements Characterist
 
 	@Override
 	public boolean toChangeDirection(Sprite aSprite) {
-		double xLocation = aSprite.getMyLocation().getXLocation();
+		double xLocation = aSprite.getLocation().getXLocation();
 		return xLocation<=this.getLowerBound() || xLocation>=this.getUpperBound();
 	}
 	

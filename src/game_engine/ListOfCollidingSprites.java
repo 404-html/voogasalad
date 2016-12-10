@@ -94,17 +94,17 @@ public class ListOfCollidingSprites {
 	}
 	
 	private Rectangle createRectangle(Sprite aSprite){
-		double x = aSprite.getMyLocation().getXLocation();
-		double y = aSprite.getMyLocation().getYLocation();
-		double width = aSprite.getMyWidth();
-		double height = aSprite.getMyHeight();
+		double x = aSprite.getLocation().getXLocation();
+		double y = aSprite.getLocation().getYLocation();
+		double width = aSprite.getWidth();
+		double height = aSprite.getHeight();
 		return new Rectangle(x,y,width,height);
 	}
 
 	private int getMaxEdge(double leftDistance, double rightDistance, double topDistance, double bottomDistance) {
 		Map<Integer, Double> thing = new HashMap<Integer, Double>();
-		thing.put(0, leftDistance+0.05*targetSprite.getMyWidth());
-		thing.put(1, rightDistance+0.05*targetSprite.getMyWidth());
+		thing.put(0, leftDistance+0.05*targetSprite.getWidth());
+		thing.put(1, rightDistance+0.05*targetSprite.getWidth());
 		thing.put(2, topDistance);
 		thing.put(3, bottomDistance);
 		int min = 0;
@@ -152,8 +152,8 @@ public class ListOfCollidingSprites {
 	}
 	
 	private boolean pastPlatform(Sprite myPlayerSprite){
-		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<targetSprite
-						.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
+		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<targetSprite
+						.getLocation().getYLocation()+(targetSprite.getHeight()*.5) && myPlayerSprite.getYVelocity()>0;
 		//return myPlayerSprite.getMyYVelocity()>0;
 	}
 	
@@ -169,16 +169,16 @@ public class ListOfCollidingSprites {
 	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
 			double topDistance, double bottomDistance){
 		if(min == 0){
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
-					aSprite.getMyLocation().getYLocation());
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
+					aSprite.getLocation().getYLocation());
 		}
 		if(min == 1){
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
-					aSprite.getMyLocation().getYLocation());
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
+					aSprite.getLocation().getYLocation());
 		}
 		if(min == 2){
-			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
-					aSprite.getMyLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(), 
+					aSprite.getLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
 		}
 		//if(min == 3){
 		//	aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 

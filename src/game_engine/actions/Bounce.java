@@ -21,16 +21,16 @@ public class Bounce implements Action {
     @Override
     public void act() {
         if(mySide==Side.BOTTOM){
-            myPlayerSprite.setMyYVelocity(myBounceSpeedVertical);
+            myPlayerSprite.setYVelocity(myBounceSpeedVertical);
         }            
         else if(mySide==Side.TOP){
-        	 myPlayerSprite.setMyYVelocity(-myBounceSpeedVertical);
+        	 myPlayerSprite.setYVelocity(-myBounceSpeedVertical);
         }
         else if(mySide==Side.LEFT){ 
-        	myPlayerSprite.setMyXVelocity(-myBounceSpeedHorizontal);
+        	myPlayerSprite.setXVelocity(-myBounceSpeedHorizontal);
         }
         else if(mySide==Side.RIGHT){        	
-            myPlayerSprite.setMyXVelocity(myBounceSpeedHorizontal);
+            myPlayerSprite.setXVelocity(myBounceSpeedHorizontal);
         }
         //myPlayerSprite.setMyVelocity( getNewVelocity() );        
         //myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
