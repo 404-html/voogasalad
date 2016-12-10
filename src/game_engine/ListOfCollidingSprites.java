@@ -217,7 +217,7 @@ public class ListOfCollidingSprites {
 				if((targetSprite instanceof Terrain && !isTransparent()) || (isTransparent() && pastPlatform(mySprite))){
 					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 				}
-				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
+				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
 				}
 				return new Top();
@@ -228,7 +228,7 @@ public class ListOfCollidingSprites {
 				if(targetSprite instanceof Terrain && !isTransparent()){
 					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
 				}
-				if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
+				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
 				}
 				//return Side.BOTTOM;
@@ -241,7 +241,7 @@ public class ListOfCollidingSprites {
 						mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 						mySprite.setMyLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
 					}
-					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
+					if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
 					}
 					//return Side.LEFT;
@@ -271,13 +271,12 @@ public class ListOfCollidingSprites {
 
 	private boolean pastPlatform(Sprite myPlayerSprite) {
 		return myPlayerSprite.getMyLocation().getYLocation() + myPlayerSprite.getMyHeight() < targetSprite
-				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity() > 0;
+				.getMyLocation().getYLocation()+.2*targetSprite.getMyHeight() && myPlayerSprite.getMyYVelocity() >= 0;
 	}
 
 	private boolean isTransparent() {
 		for (Characteristic c : targetSprite.getCharacteristics()) {
-			if (c instanceof TransparentBottomImpassable || c instanceof BouncerTop) {// &&
-																						// pastPlatform(playerSprite)){
+			if (c instanceof TransparentBottomImpassable || c instanceof BouncerTop) {
 				return true;
 			}
 		}
