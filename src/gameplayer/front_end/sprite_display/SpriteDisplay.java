@@ -1,5 +1,6 @@
 package gameplayer.front_end.sprite_display;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +18,12 @@ public class SpriteDisplay {
 	}
 	
 	private ImageView buildSpriteDisplay(Sprite aSprite) {
-		ImageView image = new ImageView(aSprite.getMyImagePath());
-		setImageProperties(aSprite, image);
+		ImageView image = new ImageView(new File(aSprite.getMyImagePath()).toURI().toString());
 		return image;
 		
 	}
 	
-	public void getUpdatedSpriteMap(Sprite aSprite) {
+	public ImageView getUpdatedSpriteMap(Sprite aSprite) {
 		ImageView image;
 		if (mySpriteViews.containsKey(aSprite)) {
 			image = mySpriteViews.get(aSprite);
@@ -31,6 +31,8 @@ public class SpriteDisplay {
 			image = buildSpriteDisplay(aSprite);
 			mySpriteViews.put(aSprite, image);
 		}
+		setImageProperties(aSprite, image);
+		return image;
 	}
 	
 	public Node get(Sprite aSprite) {

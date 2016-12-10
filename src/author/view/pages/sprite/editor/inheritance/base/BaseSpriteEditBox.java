@@ -1,7 +1,7 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import java.io.File;
-
+import util.RelativePathFinder;
 import author.view.util.file_helpers.FileLoader;
 import author.view.util.file_helpers.FileLoader.FileType;
 import author.view.util.input_fields.NumberFieldBox;
@@ -35,7 +35,7 @@ public class BaseSpriteEditBox {
 	
 	public BaseSpriteEditBox() {
 		myPane = new VBox();
-		myFileLoader = new FileLoader(FileType.PNG, FileType.GIF,FileType.JPG, FileType.JPEG);
+		myFileLoader = new FileLoader("data/images/sprite_images/", FileType.PNG, FileType.GIF,FileType.JPG, FileType.JPEG);
 		myPane.getChildren().addAll(
 				makeNameField(), 
 				makeLocationFields(),
@@ -87,8 +87,10 @@ public class BaseSpriteEditBox {
 	}
 	
 	protected final void setImageFile(String aImagePath){
-		myImagePath = aImagePath;
-		myImageView.setImage(new Image( myImagePath ));
+		RelativePathFinder pf = new RelativePathFinder();
+		File file = new File(aImagePath);
+		myImagePath = pf.getPath(file);
+		myImageView.setImage(new Image(file.toURI().toString()));
 	}
 
 	private Node makeNameField(){
@@ -159,8 +161,9 @@ public class BaseSpriteEditBox {
 		imageButton.setOnMouseClicked(e -> {
 			File file = myFileLoader.loadImage();
 			if(file != null){
-				myImagePath = file.toURI().toString();
-				myImageView.setImage(new Image(myImagePath));
+				RelativePathFinder pf = new RelativePathFinder();
+				myImagePath = pf.getPath(file);
+				myImageView.setImage(new Image(file.toURI().toString()));
 			}
 		});
 		

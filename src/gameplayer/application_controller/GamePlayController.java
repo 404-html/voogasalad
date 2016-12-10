@@ -103,10 +103,11 @@ public class GamePlayController extends AbstractController {
 	
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
-			mySpriteDisplay.getUpdatedSpriteMap(sprite);
+			myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
 		}
+		//needs to be updated for when a sprite has been added
 	}
-	
+
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
@@ -141,7 +142,7 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void setHealthLabel() {
-		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+		//myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
 
 
@@ -157,6 +158,7 @@ public class GamePlayController extends AbstractController {
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
 	
+
 	public void setLevel(int aLevel) {
 		myLevel = aLevel;
 	}

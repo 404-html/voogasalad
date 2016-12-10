@@ -1,0 +1,307 @@
+<game__data.Game>
+  <name>AuthorTester</name>
+  <myLevels>
+    <game__data.Level>
+      <name>Level1</name>
+      <width>1279</width>
+      <height>847</height>
+      <backgroundImageFilePath>XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
+      <mySprites>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>767.0</myXLocation>
+            <myYLocation>578.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain">
+            <name>Block</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>50</myWidth>
+            <myHeight>50</myHeight>
+            <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Impassable>
+                <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              </game__data.characteristics.Impassable>
+            </myCharacteristics>
+            <id>ConcreteDraggableSprite1480706979005</id>
+            <myStates/>
+          </preset>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../preset"/>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Player>
+          <name>Mario</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>612.0</myXLocation>
+            <myYLocation>521.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player">
+            <name>Mario</name>
+            <myLocation>
+              <myHeading>0.0</myHeading>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>50</myWidth>
+            <myHeight>50</myHeight>
+            <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mario.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Damager>
+                <myDamageToGive>5</myDamageToGive>
+                <mySprite class="game_data.sprites.Player" reference="../../.."/>
+              </game__data.characteristics.Damager>
+            </myCharacteristics>
+            <id>ConcreteDraggableSprite1480706982602</id>
+            <myStates/>
+          </preset>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mario.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Damager>
+              <myDamageToGive>5</myDamageToGive>
+              <mySprite class="game_data.sprites.Player" reference="../../../preset"/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>663.5</myXLocation>
+            <myYLocation>578.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>716.0</myXLocation>
+            <myYLocation>578.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>867.5</myXLocation>
+            <myYLocation>577.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>614.5</myXLocation>
+            <myYLocation>438.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>611.0</myXLocation>
+            <myYLocation>576.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>817.5</myXLocation>
+            <myYLocation>578.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myHeading>0.0</myHeading>
+            <myXLocation>773.0</myXLocation>
+            <myYLocation>527.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>50</myWidth>
+          <myHeight>50</myHeight>
+          <myImagePath>file:/C:/Users/ClevelandThompson/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+      </mySprites>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <spritePresets>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+    <game__data.sprites.Enemy>
+      <name>No Name</name>
+      <myLocation>
+        <myHeading>0.0</myHeading>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>0</myWidth>
+      <myHeight>0</myHeight>
+      <myImagePath>author\images\Empty.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <myCollisionHandler/>
+      <myCharacteristics/>
+      <id></id>
+      <myStates/>
+    </game__data.sprites.Enemy>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+  </spritePresets>
+  <currentLevel reference="../myLevels/game__data.Level"/>
+</game__data.Game>

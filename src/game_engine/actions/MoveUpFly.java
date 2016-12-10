@@ -2,7 +2,10 @@ package game_engine.actions;
 
 import game_data.Location;
 import game_data.Sprite;
-
+/**
+ * @author Katrina
+ *
+ */
 public class MoveUpFly extends Move {
 
 	public MoveUpFly(Sprite aSprite, double aVelocity) {
@@ -15,6 +18,9 @@ public class MoveUpFly extends Move {
 	}*/
 	public void setVelocity(){
 		mySprite.setMyYVelocity(-myVelocity);
+	}
+	public void stop(){
+		return;
 	}
 
 }

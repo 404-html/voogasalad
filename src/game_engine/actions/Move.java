@@ -26,6 +26,7 @@ public abstract class Move implements Action {
 		//mySprite.setMyLocation(changeCoordinates());
 		setVelocity();
 	}
+	public abstract void stop();
 	//public abstract Location changeCoordinates();
 	public abstract void setVelocity();
 	

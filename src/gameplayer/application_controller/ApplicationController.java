@@ -3,9 +3,14 @@ package gameplayer.application_controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.PropertyResourceBundle;
+
 import author.controller.AuthorControllerFactory;
 import author.controller.IAuthorControllerExternal;
 import gameplayer.back_end.Resources.FrontEndResources;
+import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
+import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
+import game_data.Game;
+import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.UserDefaults;
 import gameplayer.front_end.application_scene.IDisplay;

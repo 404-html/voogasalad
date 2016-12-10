@@ -1,18 +1,20 @@
 package game_data.characteristics;
 
 import java.util.Map;
+import game_engine.Side;
 
 import game_data.Sprite;
-import game_data.characteristics.characteristic_annotations.CharacteristicAnnotation;
+import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_engine.actions.Pace;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
  * alternative version of pacer where user does not to include bounds, but rather how far it can travel
  */
- @CharacteristicAnnotation(name = "Pacer Alternative")
+ @NameAnnotation(name = "Pacer Alternative")
 public class PacerAlternative implements Characteristic{
 
 	private static final String VERTICAL = "VERTICAL";
@@ -39,6 +41,11 @@ public class PacerAlternative implements Characteristic{
 		mySprite = associatedSprite;
 		originalXPosition = associatedSprite.getMyLocation().getXLocation();
 		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+	}
+	
+	@ViewableMethodOutput(type=double.class, description="Distance")
+	public double getDistance() {
+		return myDistance;
 	}
 	
 	private boolean changeDirection(boolean collision){
@@ -73,7 +80,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0), myType);
+		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
 		pace.act();
 	}
 

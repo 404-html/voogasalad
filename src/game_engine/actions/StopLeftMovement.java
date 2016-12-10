@@ -5,7 +5,7 @@ import java.util.Map;
 
 import game_data.Sprite;
 import game_engine.ListOfCollidingSprites;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import javafx.scene.image.ImageView;
 
 public class StopLeftMovement extends StopMovement {

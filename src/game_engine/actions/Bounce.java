@@ -1,29 +1,39 @@
 package game_engine.actions;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import game_data.Sprite;
+import game_engine.Side;
 /**
 * @author Alex & James & Austin & Katrina
 *
 */
 public class Bounce implements Action {
     
-    private double myBounceSpeed;
+    private double myBounceSpeedHorizontal;
+    private double myBounceSpeedVertical;
     private Sprite myPlayerSprite;
     private Side mySide;
     
-    public Bounce(double bouncerSpeed, Sprite player, Side aSide) {
-        myBounceSpeed = bouncerSpeed;
+    public Bounce(double bouncerSpeedHorizontal, double bouncerSpeedVertical, Sprite player, Side aSide) {
+        myBounceSpeedHorizontal = bouncerSpeedHorizontal;
+        myBounceSpeedVertical = bouncerSpeedVertical;
         myPlayerSprite = player;
         mySide = aSide;
     }
     @Override
     public void act() {
-        if(mySide==Side.BOTTOM || mySide==Side.TOP){
-            myPlayerSprite.setMyYVelocity(-(myPlayerSprite.getMyYVelocity()+myBounceSpeed));
+    	mySide.bounce(myPlayerSprite, myBounceSpeedVertical);
+        /*if(mySide==Side.BOTTOM){
+            myPlayerSprite.setMyYVelocity(myBounceSpeedVertical);
         }            
-        if(mySide==Side.LEFT || mySide==Side.RIGHT){
-            myPlayerSprite.setMyXVelocity(-(myPlayerSprite.getMyXVelocity()+myBounceSpeed));
+        else if(mySide==Side.TOP){
+        	 myPlayerSprite.setMyYVelocity(-myBounceSpeedVertical);
         }
+        else if(mySide==Side.LEFT){ 
+        	myPlayerSprite.setMyXVelocity(-myBounceSpeedHorizontal);
+        }
+        else if(mySide==Side.RIGHT){        	
+            myPlayerSprite.setMyXVelocity(myBounceSpeedHorizontal);
+        }*/
         //myPlayerSprite.setMyVelocity( getNewVelocity() );        
         //myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
         

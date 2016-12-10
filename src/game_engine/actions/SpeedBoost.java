@@ -1,6 +1,9 @@
 package game_engine.actions;
 
+import game_data.Level;
 import game_data.Sprite;
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.SpeedPowerUpper;
 import game_engine.GameResources;
 
 public class SpeedBoost implements Action {
@@ -8,11 +11,16 @@ public class SpeedBoost implements Action {
 	private Sprite myPlayerSprite;
 	private double timeInEffect;
 	private double speedBoost;
+	private double prevSpeed;
 
-	public SpeedBoost(Sprite playerSprite, double speedBoost, double timeInEffect) {
+	public SpeedBoost(Sprite playerSprite, double speedBoost) {
 		myPlayerSprite = playerSprite;
-		this.timeInEffect = timeInEffect;
 		this.speedBoost = speedBoost;
+		prevSpeed = 0;
+	}
+	
+	public double getPrevSpeed(){
+		return prevSpeed;
 	}
 
 	@Override
@@ -23,7 +31,14 @@ public class SpeedBoost implements Action {
 		// or
 		// myPlayerSprite.getSpritePhysics().setHorizontalGravity(.5);
 		// myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
-		myPlayerSprite.setMyXVelocity(myPlayerSprite.getMyXVelocity() + speedBoost);
+
+		myPlayerSprite.setTerminalXVel(GameResources.TERMINAL_X_VELOCITY.getDoubleResource()+speedBoost);		
+		myPlayerSprite.setTerminalYVel(GameResources.TERMINAL_X_VELOCITY.getDoubleResource()+speedBoost);
+
+//		System.out.println("SIZE int" +myLevel.getMyPowerUps().size() );
+//		System.out.println("SIZE end" +myLevel.getMyPowerUps().size() );
+		prevSpeed = myPlayerSprite.getMyXVelocity();
+		myPlayerSprite.setMyXVelocity(myPlayerSprite.getMyXVelocity()*speedBoost);
 	}
 
 }
