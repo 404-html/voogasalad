@@ -4,7 +4,6 @@ import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
@@ -13,20 +12,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
-	
+
 	private static final String RESOURCE_FILE = "gameplayerlabels.";
 	private static final String BUTTONLABEL = "ButtonLabels";
 
 	private ResourceBundle myButtonLabels; 
 	private String myCurrentKeyChoice;
 	private String myCurrentColorChoice;
-	
+
 	public PlayerOptionsPopUp() {
 		super();
 		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
 		addOptions();
 	}
-	
+
 	public void addOptions() {
 		addOption(createKeyInputOption());
 		addOption(createFontOption());
@@ -79,11 +78,11 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 		fontOption.getChildren().addAll(red, green, blue);
 		return fontOption;
 	}
-	
+
 	public String getKeyChoice() {
 		return myCurrentKeyChoice == null ? "black": myCurrentKeyChoice;
 	}
-	
+
 	public String getColorChoice() {
 		return myCurrentColorChoice == null ? "black": myCurrentColorChoice;
 	}

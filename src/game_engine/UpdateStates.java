@@ -1,9 +1,4 @@
 package game_engine;
-
-import java.awt.Image;
-
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,8 +9,9 @@ import game_data.Controllable;
 import game_data.Level;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
+import game_data.characteristics.InvincibilityPowerUpper;
+import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.TemporalPowerUpper;
-import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.states.Health;
 import game_data.states.LevelWon;
@@ -24,11 +20,8 @@ import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
-import game_engine.actions.SpeedBoost;
 import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
-import game_engine.actions.StopUpMovement;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import game_engine.Side;
@@ -100,13 +93,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 		//updateSpritePositions();
 
-//		System.out.println("xvel " + myLevel.getMainPlayer().getXVelocity());
-//		System.out.println("yvel " + myLevel.getMainPlayer().getYVelocity());		
-//		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
-//		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
-	//}
-	
-
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 //			System.out.println("Number of power ups " + myCurrentPowerUps.size());
@@ -115,6 +101,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 						myCurrentPowerUps.get(powerUp));
 //				System.out.println("Time left " + myCurrentPowerUps.get(powerUp));
 			}
+			if(powerUp instanceof InvincibilityPowerUpper){
+				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
+			}
+
 		}
 	}
 
@@ -191,10 +181,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			Controllable control;
 			if (mySprite instanceof Player)
 				control = mainPlayerControllable;
-
-			else {
+			else{
 				control = mySprite.getControllable();
-
 			}
 			if (control.isControllable()) {
 				control.sendCurrentKeys(myKeysPressed, myKeysReleased);

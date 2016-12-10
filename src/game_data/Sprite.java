@@ -46,7 +46,7 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
-		myControllable=new Controllable(this);
+		myControllable=new Controllable();
 	}
 	
 
@@ -64,7 +64,7 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
-		myControllable=new Controllable(this);
+		myControllable=new Controllable();
 	}
 
 	// for copying sprites

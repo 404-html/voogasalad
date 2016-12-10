@@ -17,7 +17,6 @@ public class Visible implements State{
 	}
 	
 	public boolean isVisibile(){
-//		System.out.println("IS VISIBILE :" + isVisible);
 		return isVisible;
 	}
 	
