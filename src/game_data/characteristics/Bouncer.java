@@ -8,12 +8,15 @@ import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
+import game_engine.Bottom;
+import game_engine.Side;
+import game_engine.Top;
 import game_engine.actions.Action;
 import game_engine.actions.Bounce;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -66,7 +69,8 @@ public class Bouncer implements Characteristic {
 				}
 			}			
 		}
-		if(bouncing && bouncingSpriteSide.isVertical()){
+		//if(bouncing && bouncingSpriteSide.isVertical()){
+		if(bouncing && (bouncingSpriteSide instanceof Top || bouncingSpriteSide instanceof Bottom)){
 			resetControls();
 		}	
 		if(timeAfterCollisionCount>TOTAL_TIME_AFTER_COLLISION){
@@ -89,8 +93,8 @@ public class Bouncer implements Characteristic {
 		bouncingSprite.getControllable().setMyKeyPressedMap(newKeyMap);
 	}
 	private void finishBouncing(){		
-			bouncingSprite.setMyXVelocity(0);
-			bouncingSprite.setMyYVelocity(0);
+			bouncingSprite.setXVelocity(0);
+			bouncingSprite.setYVelocity(0);
 			bouncing=false;
 			//System.out.println("size: " +originalKeyPressedMap.size());
 			bouncingSprite.getControllable().setMyKeyPressedMap(new HashMap<KeyCode, Action>(originalKeyPressedMap));

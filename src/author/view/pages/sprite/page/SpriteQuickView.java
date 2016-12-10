@@ -51,10 +51,10 @@ class SpriteQuickView {
 	
 	SpriteQuickView(Sprite aSprite) {
 		this();
-		myImageView.setImage( new Image((new File(aSprite.getMyImagePath()).toURI().toString())) );
+		myImageView.setImage( new Image((new File(aSprite.getImagePath()).toURI().toString())) );
 		myTypeLabel.setText(aSprite.getClass().getSimpleName());
 		myNameLabel.setText(aSprite.getName());
-		mySizeLabel.setText(aSprite.getMyWidth() + " x " + aSprite.getMyHeight());
+		mySizeLabel.setText(aSprite.getWidth() + " x " + aSprite.getHeight());
 	}
 
 	public Node getNode(){

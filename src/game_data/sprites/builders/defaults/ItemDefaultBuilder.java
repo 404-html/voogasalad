@@ -4,12 +4,12 @@ import author.images.EmptyImage;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
-import game_data.characteristics.Impassable;
 import game_data.sprites.Item;
 import game_data.sprites.builders.SpriteDefaultBuilder;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.SpritePhysics;
+
 /**
  * Creates a new default item when a new item is created
  * @author Jordan Frazier
@@ -38,10 +38,11 @@ public class ItemDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			item.addState(state);
 		}
-		item.setMyLocation(new Location(0, 0));
-		item.setMyWidth(WIDTH);
-		item.setMyHeight(HEIGHT);
-		item.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		
+		item.setLocation(new Location(0, 0));
+		item.setWidth(WIDTH);
+		item.setHeight(HEIGHT);
+		item.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		item.setName(NAME);
 		return item;
 	}

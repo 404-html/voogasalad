@@ -2,12 +2,16 @@ package author.model.game_observables.draggable_sprite.context_menu;
 
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.scene.control.ContextMenu;
+
 /**
- * Concrete implementation of the context menu that opens when a user right clicks on a movable sprite.
- * From here, you can copy / delete / etc sprites on the level editor
+ * Concrete implementation of the context menu that opens when a user right
+ * clicks on a movable sprite. From here, you can copy / delete / etc sprites on
+ * the level editor
+ * 
  * @author Jordan Frazier
  *
  */
@@ -30,9 +34,13 @@ public class SpriteContextMenu implements ISpriteContextMenu {
 		}).getItem());
 		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Copy", e -> {
 			Sprite clone = mySprite.getSprite().clone();
-			clone.setMyLocation(new Location(clone.getMyLocation().getXLocation() + 15,
-					clone.getMyLocation().getYLocation() + 15));
+			clone.setLocation(
+					new Location(clone.getLocation().getXLocation() + 15, clone.getLocation().getYLocation() + 15));
 			myAuthorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
+		}).getItem());
+		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Edit", e -> {
+			mySprite.removePresetListener();
+			new SpriteEditWindow(mySprite.getSprite()).openWindow();
 		}).getItem());
 
 	}

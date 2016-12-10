@@ -1,12 +1,14 @@
 package author.model.game_observables.draggable_sprite.drag_resize;
 
 import author.model.game_observables.draggable_sprite.ResizableSprite;
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
@@ -115,7 +117,8 @@ public class DragResizeMod {
 	private static final double MIN_W = 30;
 	private static final double MIN_H = 30;
 
-	public DragResizeMod(ResizableSprite sprite, Node node, Sprite spritePreset, InvalidationListener invalidationListener, OnDragResizeEventListener listener) {
+	public DragResizeMod(ResizableSprite sprite, Node node, Sprite spritePreset,
+			InvalidationListener invalidationListener, OnDragResizeEventListener listener) {
 		this.node = node;
 		mySprite = sprite;
 		mySpritePreset = spritePreset;
@@ -128,11 +131,12 @@ public class DragResizeMod {
 		makeResizable(node, null);
 	}
 
-	public void removePresetListener(){
-		if (mySpritePreset!=null){
+	public void removePresetListener() {
+		if (mySpritePreset != null) {
 			mySpritePreset.removeListener(myPresetInvalidationListener);
 		}
 	}
+
 	public void makeResizable(Node node, OnDragResizeEventListener listener) {
 
 		node.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -165,13 +169,13 @@ public class DragResizeMod {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
 		if (state == S.DRAG) {
-			mySprite.getSprite().getMyLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
+			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY());
 		} else {
 			removePresetListener();
 			mySprite.getSprite().setPreset(null);
-			mySprite.getSprite().setMyHeight((int) mySprite.getDraggableItem().getHeight());
-			mySprite.getSprite().setMyWidth((int) mySprite.getDraggableItem().getWidth());
+			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());
+			mySprite.getSprite().setWidth((int) mySprite.getDraggableItem().getWidth());
 		}
 	}
 
@@ -291,6 +295,13 @@ public class DragResizeMod {
 	}
 
 	protected void mousePressed(MouseEvent event) {
+		if (event.getButton().equals(MouseButton.PRIMARY)) {
+			if (event.getClickCount() == 2) {
+				removePresetListener();
+				mySprite.getSprite().setPreset(null);
+				new SpriteEditWindow(mySprite.getSprite()).openWindow();
+			}
+		}
 		mySprite.getDraggableItem().toFront();
 		if (isInResizeZone(event)) {
 			setNewInitialEventCoordinates(event);

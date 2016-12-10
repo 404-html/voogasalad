@@ -14,5 +14,6 @@ public interface SpriteDefaultBuilder{
 	static final int WIDTH = 100;
 	static final int HEIGHT = 100;
 	
+
 	public Sprite build(); 
 }

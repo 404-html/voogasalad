@@ -4,15 +4,17 @@
 package author.view.pages.level_editor.windows.level_window;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.ILevelWindowInternal;
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.facades.ToolBarBuilder;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import util.facades.ToolBarBuilder;
+import util.filehelpers.FileLoader.FileExtension;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
 
 /**
  * @author Cleveland Thompson V (ct168)
@@ -40,16 +42,22 @@ public class LevelWindowToolBarFactory {
 			this.iLevelWindowInternal.getVerticalPanes().set(1);
 		}).getButton());
 
-		
+
 		return tbb.getToolBar();
 	}
-	
-	private void newBackgroundImage() {
-		File file = new FileLoader("data/images/level_images/", FileType.GIF, FileType.JPEG, FileType.PNG, FileType.JPG).loadImage();
 
-		if (file != null)
+	private void newBackgroundImage() {
+		File file;
+		try {
+			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
 			this.authorController.getModel().getGame().getCurrentLevel()
-					.setBackgroundImageFilePath(file.toURI().toString());
+				.setBackgroundImageFilePath(file.toURI().toString());
+		} catch (FileNotFoundException e) {
+			// TODO: Show error screen if file not found
+			e.printStackTrace();
+		}
+
+
 	}
 
 }

@@ -32,7 +32,7 @@ public abstract class DraggableSprite {
 	public DraggableSprite(Sprite aSprite) {
 		mySprite = aSprite;
 		draggableItem = new HBox();
-		myImageView = new ImageView(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
+		myImageView = new ImageView(new Image((new File(aSprite.getImagePath()).toURI().toString())));
 		addImageToContainer();
 		setListener(aSprite);
 		makeDraggable();
@@ -59,7 +59,7 @@ public abstract class DraggableSprite {
 
 	protected InvalidationListener initListener(Sprite aSprite) {
 		InvalidationListener invalidationListener = (sprite) -> {
-			this.getImageView().setImage(new Image((new File(aSprite.getMyImagePath()).toURI().toString())));
+			this.getImageView().setImage(new Image((new File(aSprite.getImagePath()).toURI().toString())));
 		};
 		return invalidationListener;
 	}
@@ -112,4 +112,6 @@ public abstract class DraggableSprite {
 		this.myImageView = imageView;
 		makeDraggable();
 	}
+
+	public abstract void removePresetListener();
 }

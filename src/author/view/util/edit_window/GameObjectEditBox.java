@@ -3,11 +3,6 @@
  */
 package author.view.util.edit_window;
 
-import java.io.File;
-
-import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.GameObject;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;

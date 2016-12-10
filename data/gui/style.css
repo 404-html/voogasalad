@@ -4,7 +4,7 @@
 
 
 #pane {
-    -fx-background-image: url("hawaiian_shirt_background3.png");
+    -fx-background-image: url("hawaiian_shirt_background4.jpeg");
     -fx-background-size: 100%;   
     -fx-background-repeat: repeat;
     -fx-background-width: 100%;
@@ -13,43 +13,75 @@
 }
 
 .menu-bar { 
-    -fx-opacity: .6;
+    -fx-background-color: rgba(41, 41, 41, 0.7); 
+}
+
+.menu:focused .label {
+    -fx-background-color: derive(#292929, 10%);
+}
+
+
+.menu-item .graphic-container {
+    -fx-background-color: derive(#292929, 10%);
 }
 
 
 .menu .label { 
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 13px;
-}
-.menu:showing .label { 
-    -fx-font-family: "Helvetica";
-    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
 }
 
+.menu:selected {
+    -fx-background-color: derive(#292929, 10%);
+}
+
+.menu:focused {
+    -fx-background-color: derive(#292929, 10%);
+}
+
+.menu-item:focused {
+    -fx-background-color: black;
+}
+
+.menu:showing .label { 
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
  
 .body {
   width: 100%;
 }
 
+#glass {
+    -fx-background-color: rgba(41, 41, 41, 0.5); 
+    -fx-text-fill: #fdbe3b;
+    -fx-font-size: 40px;
+}
+
 .button {
-    -fx-background-color: #FFC3E1;
+    -fx-background-color: derive(#292929, 10%);
     -fx-background-insets: 0,2;
     -fx-background-radius: 9,8,5,4;
     -fx-padding: 15 30 15 30;
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 13px;
-    -fx-text-fill: #424242;
+    -fx-text-fill: #fdbe3b;
 }
 
+/*
+
 .text-field {
-    -fx-background-color: #EE8EBE , white , white;
+    -fx-background-color: #fdbe3b , white , white;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
 
 .text-field:focused {
-    -fx-background-color: #EE8EBE , #EE8EBE , white;
+    -fx-background-color: #fdbe3b , #fdbe3b , white;
     -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
 }
+
+*/
 
 
 #user-profile-button {
@@ -61,7 +93,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #EE8EBE;
+    -fx-background-color: black;
     -fx-background-insets: 0,2;
     -fx-background-radius: 9,8,5,4;
     -fx-padding: 15 30 15 30;
@@ -92,13 +124,17 @@
 
 
 .combo-box-base {
-    -fx-background-color: #FFC3E1;
+    -fx-background-color: derive(#292929, 10%);
     -fx-background-radius: 5, 5, 4, 3;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
     -fx-padding: 8 4 8 4;
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 13px;
-    -fx-text-fill: #424242;
+    -fx-text-fill: #fdbe3b;
+}
+
+.context-menu {
+    -fx-background-color: rgba(41, 41, 41, 0.9);
 }
 
 
@@ -106,25 +142,36 @@
 {
     -fx-padding: 4 0 4 5;
     -fx-background-color: white;
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
 }
 
 .combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover
 {
     -fx-background: -fx-accent;
-    -fx-background-color: #BABABA;
-    -fx-text-fill: -fx-selection-bar-text;
+    -fx-background-color: derive(#292929, 10%);
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
+}
+
+
+.combo-box-popup .list-view .list-cell:filled:hover
+{
+    -fx-background-color: derive(#292929, 10%);
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
+}
+
+.combo-box {
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
 }
 
 .combo-box-popup .list-view .list-cell:filled:hover
 {
-    -fx-background-color: white;
-    -fx-text-fill: -fx-text-inner-color;
-}
-
-.combo-box-popup .list-view .list-cell:filled:hover
-{
-    -fx-background-color: #BABABA;
-    -fx-text-fill: -fx-text-inner-color;
+    -fx-background-color: derive(#292929, 10%);
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
 }
 
 
@@ -147,26 +194,29 @@
 }
 
 .buttontext {
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 20px;
-    -fx-text-fill: #424242;
+    -fx-text-fill: #fdbe3b;
 }
 
 .label {
-    -fx-text-fill: #FFC3E1;
+    -fx-text-fill: #fdbe3b;
+    -fx-font-size: 40px;
+    -font-weight: bold; 
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+#combobox-label {
+    -fx-text-fill: #fdbe3b;
+    -fx-font-size: 10px;
+    -fx-font-family: "Segoe UI Semibold"; 
+}
+
+#heading {
+    -fx-text-fill: black;
     -fx-font-size: 50px;
     -font-weight: bold; 
-    -fx-font-family: "Helvetica";
+    -fx-font-family: "Segoe UI Semibold";
 }
 
-.chart-title {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-size: 12px;
-  -fx-font-family: "Helvetica";
-}
 
-.axis-label {
-  -fx-text-fill: #FFFFFF;
-  -fx-font-size: 10px;
-  -fx-font-family: "Helvetica";
-}

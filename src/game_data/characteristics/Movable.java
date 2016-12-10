@@ -1,12 +1,13 @@
 package game_data.characteristics;
 
 import java.util.List;
+import game_engine.Side;
 import java.util.Map;
 
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 @NameAnnotation(name="Moveable")
 public class Movable implements Characteristic{

@@ -1,6 +1,9 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import util.XMLTranslator;
+import author.view.pages.sprite.editor.controllable.ControllableEditor;
+import util.facades.TabPaneFacade;
+import util.facades.ToolBarBuilder;
 import author.view.pages.sprite.editor.inheritance.character.EnemySpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.character.PlayerSpriteEditPage;
 import author.view.pages.sprite.editor.inheritance.item.ItemSpriteEditPage;
@@ -10,8 +13,6 @@ import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
 import author.view.pages.sprite.editor.settings.characteristics.SpriteCharacteristicEditor;
 import author.view.pages.sprite.editor.settings.states.SpriteStatesEditor;
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.facades.TabPaneFacade;
-import author.view.util.facades.ToolBarBuilder;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.sprites.Enemy;
@@ -60,14 +61,16 @@ public abstract class BaseSpriteEditPage {
 	private BaseSpriteEditBox mySpriteEditBox;
 	private SpriteSettingsEditor myCharacteristicEditor;
 	private SpriteSettingsEditor myStateEditor;
+	private ControllableEditor myControlEditor;
 	private TabPaneFacade myTabPaneFacade;
-
+	
 	public BaseSpriteEditPage(Sprite aSprite){
 		mySprite = aSprite;
 
 		myPane = new VBox();
 		myCharacteristicEditor = new SpriteCharacteristicEditor(mySprite);
 		myStateEditor = new SpriteStatesEditor(mySprite);
+		myControlEditor = new ControllableEditor(mySprite);
 		myTabPaneFacade = new TabPaneFacade();
 		myToolBarBuilder = new ToolBarBuilder();
 		mySpriteEditBox = new BaseSpriteEditBox();
@@ -81,17 +84,18 @@ public abstract class BaseSpriteEditPage {
 		myTabPaneFacade.addTab(myStateEditor.getClass().getSimpleName(), myStateEditor.getPane());
 		myStateEditor.getPane().prefWidthProperty().bind(myTabPaneFacade.getTabPane().widthProperty());
 		
+		myTabPaneFacade.addTab(myControlEditor.getClass().getSimpleName(), myControlEditor.getPane());
+		
 		myPane.getChildren().addAll(myToolBarBuilder.getToolBar(), myTabPaneFacade.getTabPane());
 
 		Button buildButton = new ButtonFactory().createButton(
 				"Save", e -> {
-					editSprite();
-					myCharacteristicEditor.addSettings();
-					myStateEditor.addSettings();
+					saveSprite();
 				}).getButton();
 		
 		Button saveAsDefaultButton = new ButtonFactory().createButton(
 				"Save As Default", e-> {
+					saveSprite();
 					XMLTranslator mySaver = new XMLTranslator();
 					mySaver.saveToFile(mySprite, "data/sprite/default_sprites/", mySprite.getName() + "_author_saved");
 				}).getButton();
@@ -101,12 +105,20 @@ public abstract class BaseSpriteEditPage {
 		myToolBarBuilder.addBurst(buildButton);
 		myToolBarBuilder.addBurst(saveAsDefaultButton);
 
-		mySpriteEditBox.setLocation(aSprite.getMyLocation());
-		mySpriteEditBox.setImageFile(aSprite.getMyImagePath());
+		mySpriteEditBox.setXVelocity(aSprite.getXVelocity());
+		mySpriteEditBox.setYVelocity(aSprite.getYVelocity());
+		mySpriteEditBox.setImageFile(aSprite.getImagePath());
 		mySpriteEditBox.setName(aSprite.getName());
-		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
+		mySpriteEditBox.setSize(aSprite.getWidth(), aSprite.getHeight());
 	}
 
+	private void saveSprite(){
+		editSprite();
+		myCharacteristicEditor.addSettings();
+		myStateEditor.addSettings();
+		myControlEditor.setControllable();
+	}
+	
 	public static BaseSpriteEditPage build( Sprite aSprite){
 
 		switch (SpriteType.discern(aSprite)) {
@@ -123,10 +135,12 @@ public abstract class BaseSpriteEditPage {
 
 	public Sprite editSprite(){
 
-		getSprite().setMyLocation(getLocation());
-		getSprite().setMyImagePath(getImageFile());
-		getSprite().setMyWidth(getWidth());
-		getSprite().setMyHeight(getHeight());
+		getSprite().setLocation(new Location(0,0));
+		getSprite().setXVelocity(getXVelocity());
+		getSprite().setYVelocity(getYVelocity());
+		getSprite().setImagePath(getImageFile());
+		getSprite().setWidth(getWidth());
+		getSprite().setHeight(getHeight());
 		getSprite().setName(getSpriteName());
 
 		return getSprite();
@@ -151,6 +165,14 @@ public abstract class BaseSpriteEditPage {
 	protected final int getHeight(){
 		return mySpriteEditBox.getHeight();
 	}
+	
+	protected final double getXVelocity(){
+		return mySpriteEditBox.getXVelocity();
+	}
+	
+	protected final double getYVelocity(){
+		return mySpriteEditBox.getYVelocity();
+	}
 
 	protected final boolean hasSprite(){
 		return mySprite == null;
@@ -158,10 +180,6 @@ public abstract class BaseSpriteEditPage {
 
 	protected final String getImageFile(){
 		return mySpriteEditBox.getImageFile();
-	}
-
-	protected final Location getLocation(){
-		return mySpriteEditBox.getLocation();
 	}
 
 	protected ToolBarBuilder getToolBarBuilder(){

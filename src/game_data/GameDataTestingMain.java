@@ -6,9 +6,8 @@ import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.model.presets.TestSprite;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import util.XMLTranslator;
+import util.filehelpers.FileLoader.FileLoader;
 import game_data.sprites.Player;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,7 +31,7 @@ public class GameDataTestingMain {
 		//aGame.saveGameAs("XMLGameFiles/","TestXMLFilea");
 		//Game bGame = (Game) myXMLSaver.deserialize(aFile);
 		//Sprite bSprite = aSprite.clone();
-		//bSprite.setMyLocation(new Location(100,100,90));
+		//bSprite.setLocation(new Location(100,100,90));
 		//bGame.myLevels.get(0).addNewSprite(bSprite);
 		//System.out.println(myXMLSaver.serialize(bGame));
 		//myXMLSaver.saveToFile(bGame, "XMLGameFiles/", "TestXMLFileb");
@@ -95,8 +94,8 @@ public class GameDataTestingMain {
 				setBackgroundImage(aLevel.getBackgroundImageFilePath());
 			aLevel.getMySpriteList().forEach((sprite) -> {
 				/*DraggableSprite draggableSprite = new ConcreteMovableSprite(sprite);
-				draggableSprite.getImageView().setLayoutX(sprite.getMyLocation().getXLocation());
-				draggableSprite.getImageView().setLayoutY(sprite.getMyLocation().getYLocation());
+				draggableSprite.getImageView().setLayoutX(sprite.getLocation().getXLocation());
+				draggableSprite.getImageView().setLayoutY(sprite.getLocation().getYLocation());
 				myContainer.getChildren().add(draggableSprite.getImageView());*/
 			});
 		}
