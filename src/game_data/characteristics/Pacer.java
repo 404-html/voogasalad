@@ -31,15 +31,15 @@ public abstract class Pacer implements Characteristic{
 	public Pacer(double distance, Sprite associatedSprite) {
 		myDistance = distance;
 		mySprite = associatedSprite;
-		originalXPosition = associatedSprite.getMyLocation().getXLocation();
-		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+		originalXPosition = associatedSprite.getLocation().getXLocation();
+		originalYPosition = associatedSprite.getLocation().getYLocation();
 	}
 	
 	public Pacer(Sprite associatedSprite){
 		myDistance = 0;
 		mySprite = associatedSprite;
-		originalXPosition = associatedSprite.getMyLocation().getXLocation();
-		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+		originalXPosition = associatedSprite.getLocation().getXLocation();
+		originalYPosition = associatedSprite.getLocation().getYLocation();
 	}
 	
 	public double getDistance() {

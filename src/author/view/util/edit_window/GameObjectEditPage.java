@@ -4,10 +4,10 @@
 package author.view.util.edit_window;
 
 import author.view.util.authoring_buttons.ButtonFactory;
-import author.view.util.facades.ToolBarBuilder;
 import game_data.GameObject;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.facades.ToolBarBuilder;
 
 /**
  * @author Cleveland Thompson V (ct168)

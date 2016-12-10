@@ -35,37 +35,47 @@ public class Hit implements Action {
 			}
 		}
 		//get new Velocity –– gets horizontal or vertical components to zero
+
 		//setNewVelocity();
 		//setNewAcceleration();
 		mySide.hitImpassable(myPlayerSprite, mySpritePhysics);
+
+		//setNewVelocity();
+		//setNewAcceleration();
+	}
+	
+	private boolean pastPlatform(){
+		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()>myNonPlayerSprite
+				.getLocation().getYLocation() && myPlayerSprite.getYVelocity()>0;		
+
 	}
 	
 	/*private void setNewVelocity() {
 				
 		if(mySide == Side.LEFT) {
 			//System.out.println("hitting this");
-			if(myPlayerSprite.getMyXVelocity()>0){
+			if(myPlayerSprite.getXVelocity()>0){
 				
-				myPlayerSprite.setMyXVelocity(0);
+				myPlayerSprite.setXVelocity(0);
 				//System.out.println("hittin left side of block");
 			}
 		}
 		if(mySide==Side.RIGHT) {
-			if(myPlayerSprite.getMyXVelocity()<0){
+			if(myPlayerSprite.getXVelocity()<0){
 				//System.out.println("hittin right side of block");
-				myPlayerSprite.setMyXVelocity(0);
+				myPlayerSprite.setXVelocity(0);
 			}
 		}
 		if(mySide==Side.TOP){
 			//System.out.println("top");
-			if(myPlayerSprite.getMyYVelocity()>0){
+			if(myPlayerSprite.getYVelocity()>0){
 				//System.out.println("this should be a thing");
-				myPlayerSprite.setMyYVelocity(0);
+				myPlayerSprite.setYVelocity(0);
 			}
 		}
 		if(mySide==Side.BOTTOM){
-			if(myPlayerSprite.getMyYVelocity()<0){
-				myPlayerSprite.setMyYVelocity(-.5*myPlayerSprite.getMyYVelocity());
+			if(myPlayerSprite.getYVelocity()<0){
+				myPlayerSprite.setYVelocity(-.5*myPlayerSprite.getYVelocity());
 			}
 		}
 	}
@@ -77,11 +87,11 @@ public class Hit implements Action {
 			}
 		}
 		if((mySide == Side.LEFT && mySpritePhysics.getHorizontalGravity()>0)||(mySide == Side.RIGHT && mySpritePhysics.getHorizontalGravity()<0)){
-			myPlayerSprite.setMyXAcceleration(-mySpritePhysics.getHorizontalGravity());
+			myPlayerSprite.setXAcceleration(-mySpritePhysics.getHorizontalGravity());
 		}
 		else if((mySide==Side.TOP && mySpritePhysics.getVerticalGravity()>0)||(mySide==Side.BOTTOM && mySpritePhysics.getVerticalGravity()<0)){
 			//System.out.println("this should also be a thing");
-			myPlayerSprite.setMyYAcceleration(-mySpritePhysics.getVerticalGravity());
+			myPlayerSprite.setYAcceleration(-mySpritePhysics.getVerticalGravity());
 		}
 		
 	}*/

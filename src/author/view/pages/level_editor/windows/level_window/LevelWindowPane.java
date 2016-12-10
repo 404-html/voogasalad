@@ -21,12 +21,11 @@ class LevelWindowPane implements ILevelWindowPane{
 	
 	private Pane levelPane = new Pane();
 	private GridPane gridPane;
-	private int width;
-	private int height;
+	private int width = 0;
+	private int height = 0;
 	
 
 	LevelWindowPane() {
-		
 	}
 
 	@Override
@@ -37,9 +36,6 @@ class LevelWindowPane implements ILevelWindowPane{
 	private GridPane createGridPane(int width, int height){
 		GridPane gridPane = new GridPane();
 		gridPane.setGridLinesVisible(true);
-		//gridPane.hgapProperty().set(width);
-		//gridPane.vgapProperty().set(height);
-		//gridPane.getChildren().add(new Label("Test Label"));
 		gridPane.getColumnConstraints().setAll(getColumnConstraints(width));
 		gridPane.getRowConstraints().setAll(getRowConstraints(height));
 		return gridPane;
@@ -52,7 +48,6 @@ class LevelWindowPane implements ILevelWindowPane{
 			columnConstraints.setPrefWidth(width);
 			columnConstraintsSet.add(columnConstraints);
 		}
-		
 		return columnConstraintsSet;
 	}
 	
@@ -68,10 +63,13 @@ class LevelWindowPane implements ILevelWindowPane{
 
 	@Override
 	public void updateGrid(int width, int height) {
+		removeGrid();
 		this.width = width;
 		this.height = height;
 		this.gridPane = createGridPane(width, height);
 		this.levelPane.getChildren().add(gridPane);
+		
+		//this.gridPane.toBack();
 	}
 
 	@Override

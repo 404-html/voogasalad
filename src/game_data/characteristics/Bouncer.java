@@ -93,8 +93,8 @@ public class Bouncer implements Characteristic {
 		bouncingSprite.getControllable().setMyKeyPressedMap(newKeyMap);
 	}
 	private void finishBouncing(){		
-			bouncingSprite.setMyXVelocity(0);
-			bouncingSprite.setMyYVelocity(0);
+			bouncingSprite.setXVelocity(0);
+			bouncingSprite.setYVelocity(0);
 			bouncing=false;
 			//System.out.println("size: " +originalKeyPressedMap.size());
 			bouncingSprite.getControllable().setMyKeyPressedMap(new HashMap<KeyCode, Action>(originalKeyPressedMap));

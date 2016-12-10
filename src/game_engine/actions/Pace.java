@@ -17,11 +17,21 @@ public class Pace implements Action {
 	//this method/class needs to get updated based on moveWithHeading, which is also wrong because it needs to compile
 	@Override
 	public void act() {
+
 		if(myShouldChangeDirection){
-			mySprite.setMyXVelocity(-1*(mySprite.getMyXVelocity()));
-			mySprite.setMyYVelocity(-1*(mySprite.getMyYVelocity()));
+			mySprite.setXVelocity(-1*(mySprite.getXVelocity()));
+			mySprite.setYVelocity(-1*(mySprite.getYVelocity()));
+
+		//if(myShouldChangeDirection==true){
+			//if(myType.equals("HORIZONTAL")){
+				//mySprite.setXVelocity(-1*(mySprite.getXVelocity()));
+			//}
+			//else{
+				//mySprite.setYVelocity(-1*(mySprite.getYVelocity()));
+			//}
+
 		}
-		//MoveWithHeading moveWithHeading = new MoveWithHeading(mySprite, mySprite.getMyXVelocity());
+		//MoveWithHeading moveWithHeading = new MoveWithHeading(mySprite, mySprite.getXVelocity());
 		//moveWithHeading.act();
 	}
 

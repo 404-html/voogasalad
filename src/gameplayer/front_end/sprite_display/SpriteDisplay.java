@@ -18,7 +18,7 @@ public class SpriteDisplay {
 	}
 	
 	private ImageView buildSpriteDisplay(Sprite aSprite) {
-		ImageView image = new ImageView(new File(aSprite.getMyImagePath()).toURI().toString());
+		ImageView image = new ImageView(new File(aSprite.getImagePath()).toURI().toString());
 		return image;
 		
 	}
@@ -40,10 +40,10 @@ public class SpriteDisplay {
 	}
 
 	private void setImageProperties(Sprite aSprite, ImageView image) {
-		image.setFitWidth(aSprite.getMyWidth());
-		image.setFitHeight(aSprite.getMyHeight());
-		image.setX(aSprite.getMyLocation().getXLocation());
-		image.setY(aSprite.getMyLocation().getYLocation());
+		image.setFitWidth(aSprite.getWidth());
+		image.setFitHeight(aSprite.getHeight());
+		image.setX(aSprite.getLocation().getXLocation());
+		image.setY(aSprite.getLocation().getYLocation());
 		image.setRotationAxis(Rotate.Y_AXIS);
 	}
 

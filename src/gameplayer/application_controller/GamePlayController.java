@@ -81,8 +81,8 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
-		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), 
-				myStage.getWidth(), myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight(), 3);
+		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(), 
+				myStage.getWidth(), myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight(), 3);
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
@@ -105,7 +105,9 @@ public class GamePlayController extends AbstractController {
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
 		}
+		//needs to be updated for when a sprite has been added
 	}
+
 
 	private void setMenu() {
 		setMainMenu();

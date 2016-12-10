@@ -34,7 +34,7 @@ public class VerticalPacer extends Pacer{
 	}
 	
 	private boolean atYBound(){
-		double currentYLocation = getSprite().getMyLocation().getYLocation();
+		double currentYLocation = getSprite().getLocation().getYLocation();
 		return currentYLocation>getOriginalYPosition() || currentYLocation<(getOriginalYPosition()-getDistance());			
 	}
 

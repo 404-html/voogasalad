@@ -165,13 +165,13 @@ public class DragResizeMod {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
 		if (state == S.DRAG) {
-			mySprite.getSprite().getMyLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
+			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY());
 		} else {
 			removePresetListener();
 			mySprite.getSprite().setPreset(null);
-			mySprite.getSprite().setMyHeight((int) mySprite.getDraggableItem().getHeight());
-			mySprite.getSprite().setMyWidth((int) mySprite.getDraggableItem().getWidth());
+			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());
+			mySprite.getSprite().setWidth((int) mySprite.getDraggableItem().getWidth());
 		}
 	}
 

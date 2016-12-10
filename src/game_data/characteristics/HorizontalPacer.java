@@ -34,7 +34,7 @@ public class HorizontalPacer extends Pacer{
 	}
 	
 	private boolean atXBound(){
-		double currentXLocation = getSprite().getMyLocation().getXLocation();
+		double currentXLocation = getSprite().getLocation().getXLocation();
 		return currentXLocation<getOriginalXPosition() || currentXLocation>(getOriginalXPosition()+getDistance());			
 	}
 

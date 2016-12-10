@@ -1,12 +1,12 @@
 package author.view.pages.level_editor.windows;
 
 import author.controller.IAuthorController;
-import author.view.util.facades.ToolBarBuilder;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import util.facades.ToolBarBuilder;
 
 /**
  * This window will allow a user to see the progression of their levels.

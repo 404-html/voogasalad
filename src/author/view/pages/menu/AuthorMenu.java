@@ -1,11 +1,10 @@
 package author.view.pages.menu;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.ILevelEditorExternal;
-import author.view.util.file_helpers.FileLoader;
-import author.view.util.file_helpers.FileLoader.FileType;
 import game_data.Level;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TextInputDialog;
+import util.filehelpers.FileLoader.FileExtension;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -113,8 +115,14 @@ public class AuthorMenu {
 	}
 
 	private File loadFileChooser() {
-		File file = new FileLoader("XMLGameFiles/", FileType.XML).loadImage();
-		return file;
+		File file;
+		try {
+			file = file = new FileLoader("XMLGameFiles/", FileType.DATA).loadSingle();
+			return file;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private void openHelpDialog() {

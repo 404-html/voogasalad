@@ -12,7 +12,11 @@ import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.SpritePhysics;
 /**
+<<<<<<< HEAD
  * Default builders open to extension 
+=======
+ * Default player builder open to extension 
+>>>>>>> 0a837dc1ca251d6f6d8186bb816fe2cc003bcaaa
  * @author George, Jordan Frazier
  *
  */
@@ -42,10 +46,10 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			player.addState(state);
 		}
-		player.setMyLocation(new Location(0, 0));
-		player.setMyWidth(WIDTH);
-		player.setMyHeight(HEIGHT);
-		player.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		player.setLocation(new Location(0, 0));
+		player.setWidth(WIDTH);
+		player.setHeight(HEIGHT);
+		player.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		player.setName(NAME);
 		return player;
 	}

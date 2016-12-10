@@ -13,14 +13,12 @@ import java.util.Set;
 import game_data.Controllable;
 import game_data.Level;
 import game_data.Location;
-import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.sprites.Enemy;
 import game_data.sprites.Player;
-import game_data.sprites.WinningObject;
 import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
@@ -76,8 +74,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	/*public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
 			Map<Sprite, ImageView> map, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
 		this.myLevel = aLevel;
-		this.myCurrentPowerUps = myLevel.getMainPlayer().getMyPowerUps();
+		this.myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
 		this.mySpriteList = myLevel.getMySpriteList();
+		//System.out.println("mySpriteList is being updated"+mySpriteList.size());
+
 		this.timeElapsed = timeElapsed;
 		this.myKeysPressed = myKeysPressed;
 
@@ -104,8 +104,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		cleanGame();
 		//updateSpritePositions();
 
-//		System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
-//		System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());		
+//		System.out.println("xvel " + myLevel.getMainPlayer().getXVelocity());
+//		System.out.println("yvel " + myLevel.getMainPlayer().getYVelocity());		
 //		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
 //		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
 	}*/
@@ -113,7 +113,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
 			Map<Sprite, ImageView> mySpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
 			this.myLevel = aLevel;
-			this.myCurrentPowerUps = myLevel.getMainPlayer().getMyPowerUps();
+			this.myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
 			this.mySpriteList = myLevel.getMySpriteList();
 			this.timeElapsed = timeElapsed;
 			this.myKeysPressed = myKeysPressed;
@@ -134,8 +134,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			cleanGame();
 			//updateSpritePositions();
 
-			//System.out.println("xvel " + myLevel.getMainPlayer().getMyXVelocity());
-			//System.out.println("yvel " + myLevel.getMainPlayer().getMyYVelocity());
+			//System.out.println("xvel " + myLevel.getMainPlayer().getXVelocity());
+			//System.out.println("yvel " + myLevel.getMainPlayer().getYVelocity());
 			//System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
 			//System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
 			}
@@ -224,7 +224,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		for (State s : myLevel.getMainPlayer().getStates()) {
 			if (s instanceof Health) {
 				if (!(((Health) s).isAlive())
-						|| myLevel.getMainPlayer().getMyLocation().getYLocation() > myLevel.getHeight()) {
+						|| myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
 					myLevel.setLevelLost();
 				}
 			}

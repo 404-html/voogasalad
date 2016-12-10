@@ -9,7 +9,7 @@ public class Left extends Side{
 	
 	@Override
 	public void bounce(Sprite aSprite, double speed){
-		aSprite.setMyXVelocity(-speed);
+		aSprite.setXVelocity(-speed);
 	}
 	
 	@Override
@@ -19,11 +19,11 @@ public class Left extends Side{
 	
 	@Override
 	public void hitImpassable(Sprite aSprite, SpritePhysics aSpritePhysics){
-		if(aSprite.getMyXVelocity()>0){
-			aSprite.setMyXVelocity(0);
+		if(aSprite.getXVelocity()>0){
+			aSprite.setXVelocity(0);
 		}
 		if(aSpritePhysics.getHorizontalGravity()>0){
-			aSprite.setMyXAcceleration(-aSpritePhysics.getHorizontalGravity());
+			aSprite.setXAcceleration(-aSpritePhysics.getHorizontalGravity());
 		}
 	}
 

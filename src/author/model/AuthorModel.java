@@ -7,10 +7,10 @@ package author.model;
 import java.io.File;
 
 import util.XMLTranslator;
+import util.filehelpers.FolderListor;
 import author.controller.IAuthorController;
 import author.view.util.edit_window.GameEditWindowFactory;
 import author.view.util.edit_window.IGameObjectEditWindowExternal;
-import author.view.util.file_helpers.FolderListor;
 import game_data.Game;
 import game_data.Level;
 import game_data.Sprite;

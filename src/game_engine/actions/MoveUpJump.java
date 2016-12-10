@@ -24,8 +24,8 @@ public class MoveUpJump extends Move {
 
 	}
 	public void setVelocity(){
-		if(mySprite.getMyYVelocity()>=0){
-			mySprite.setMyYVelocity(-myVelocity);
+		if(mySprite.getYVelocity()>=0){
+			mySprite.setYVelocity(-myVelocity);
 		}
 	}
 /*	@Override
@@ -40,7 +40,7 @@ public class MoveUpJump extends Move {
 			for(Sprite s: myCollisionMap.keySet()){
 				if(s instanceof Terrain){
 					if(myCollisionMap.get(s).equals(Side.BOTTOM)){
-						mySprite.setMyYVelocity(-myVelocity);
+						mySprite.setYVelocity(-myVelocity);
 					}
 				}
 			}

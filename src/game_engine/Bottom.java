@@ -10,7 +10,7 @@ public class Bottom extends Side{
 	
 	@Override
 	public void bounce(Sprite aSprite, double speed){
-		aSprite.setMyYVelocity(speed);
+		aSprite.setYVelocity(speed);
 	}
 	
 	@Override
@@ -20,11 +20,11 @@ public class Bottom extends Side{
 	
 	@Override
 	public void hitImpassable(Sprite aSprite, SpritePhysics aSpritePhysics){
-		if(aSprite.getMyYVelocity()<0){
-			aSprite.setMyYVelocity(0);
+		if(aSprite.getYVelocity()<0){
+			aSprite.setYVelocity(0);
 		}
 		if(aSpritePhysics.getVerticalGravity()<0){
-			aSprite.setMyYAcceleration(-aSpritePhysics.getVerticalGravity());
+			aSprite.setYAcceleration(-aSpritePhysics.getVerticalGravity());
 		}
 	}
 

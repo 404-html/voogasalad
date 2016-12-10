@@ -9,7 +9,7 @@ public class Top extends Side{
 	
 	@Override
 	public void bounce(Sprite aSprite, double bounceSpeed){
-		aSprite.setMyYVelocity(-bounceSpeed);
+		aSprite.setYVelocity(-bounceSpeed);
 	}
 	@Override
 	public boolean breaksOnSide(boolean isBreakable){
@@ -18,11 +18,11 @@ public class Top extends Side{
 	
 	@Override
 	public void hitImpassable(Sprite aSprite, SpritePhysics aSpritePhysics){
-		if(aSprite.getMyYVelocity()>0){
-			aSprite.setMyYVelocity(0);
+		if(aSprite.getYVelocity()>0){
+			aSprite.setYVelocity(0);
 		}
 		if(aSpritePhysics.getVerticalGravity()>0){
-			aSprite.setMyYAcceleration(-aSpritePhysics.getVerticalGravity());
+			aSprite.setYAcceleration(-aSpritePhysics.getVerticalGravity());
 		}
 	}
 

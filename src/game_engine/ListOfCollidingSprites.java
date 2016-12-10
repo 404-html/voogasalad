@@ -57,32 +57,32 @@ public class ListOfCollidingSprites {
 		/*
 		 * UpdateLocation updateTargetLocation = new
 		 * UpdateLocation(targetSprite, myTimeElapsed); double oldX =
-		 * targetSprite.getMyLocation().getXLocation(); double oldY =
-		 * targetSprite.getMyLocation().getYLocation(); double oldXVelo =
-		 * targetSprite.getMyXVelocity(); double oldYVelo =
-		 * targetSprite.getMyYVelocity(); double oldXAccel =
+		 * targetSprite.getLocation().getXLocation(); double oldY =
+		 * targetSprite.getLocation().getYLocation(); double oldXVelo =
+		 * targetSprite.getXVelocity(); double oldYVelo =
+		 * targetSprite.getYVelocity(); double oldXAccel =
 		 * targetSprite.getMyXAcceleration(); double oldYAccel =
 		 * targetSprite.getMyYAcceleration();
 		 * updateTargetLocation.updateSpriteParameters();
-		 * mySpriteImages.get(targetSprite).setX(targetSprite.getMyLocation().
+		 * mySpriteImages.get(targetSprite).setX(targetSprite.getLocation().
 		 * getXLocation());
-		 * mySpriteImages.get(targetSprite).setY(targetSprite.getMyLocation().
+		 * mySpriteImages.get(targetSprite).setY(targetSprite.getLocation().
 		 * getYLocation());
 		 */
 		for (Sprite mySprite : spriteList) {
 			/*
 			 * UpdateLocation updateLocation = new UpdateLocation(mySprite,
 			 * myTimeElapsed); double oldX2 =
-			 * mySprite.getMyLocation().getXLocation(); double oldY2 =
-			 * mySprite.getMyLocation().getYLocation(); double oldXVelo2 =
-			 * mySprite.getMyXVelocity(); double oldYVelo2 =
-			 * mySprite.getMyYVelocity(); double oldXAccel2 =
+			 * mySprite.getLocation().getXLocation(); double oldY2 =
+			 * mySprite.getLocation().getYLocation(); double oldXVelo2 =
+			 * mySprite.getXVelocity(); double oldYVelo2 =
+			 * mySprite.getYVelocity(); double oldXAccel2 =
 			 * mySprite.getMyXAcceleration(); double oldYAccel2 =
 			 * mySprite.getMyYAcceleration();
 			 * updateLocation.updateSpriteParameters();
-			 * mySpriteImages.get(mySprite).setX(mySprite.getMyLocation().
+			 * mySpriteImages.get(mySprite).setX(mySprite.getLocation().
 			 * getXLocation());
-			 * mySpriteImages.get(mySprite).setY(mySprite.getMyLocation().
+			 * mySpriteImages.get(mySprite).setY(mySprite.getLocation().
 			 * getYLocation());
 			 */
 			// System.out.println("this seems null" +
@@ -95,26 +95,26 @@ public class ListOfCollidingSprites {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));
 			}
 			/*
-			 * mySprite.getMyLocation().setLocation(oldX2, oldY2);
-			 * mySprite.setMyXVelocity(oldXVelo2);
-			 * mySprite.setMyYVelocity(oldYVelo2);
-			 * mySprite.setMyXAcceleration(oldXAccel2);
-			 * mySprite.setMyYAcceleration(oldYAccel2);
-			 * mySpriteImages.get(mySprite).setX(mySprite.getMyLocation().
+			 * mySprite.getLocation().setLocation(oldX2, oldY2);
+			 * mySprite.setXVelocity(oldXVelo2);
+			 * mySprite.setYVelocity(oldYVelo2);
+			 * mySprite.setXAcceleration(oldXAccel2);
+			 * mySprite.setYAcceleration(oldYAccel2);
+			 * mySpriteImages.get(mySprite).setX(mySprite.getLocation().
 			 * getXLocation());
-			 * mySpriteImages.get(mySprite).setY(mySprite.getMyLocation().
+			 * mySpriteImages.get(mySprite).setY(mySprite.getLocation().
 			 * getYLocation());
 			 */
 		}
 		/*
-		 * targetSprite.getMyLocation().setLocation(oldX, oldY);
-		 * targetSprite.setMyXVelocity(oldXVelo);
-		 * targetSprite.setMyYVelocity(oldYVelo);
-		 * targetSprite.setMyXAcceleration(oldXAccel);
-		 * targetSprite.setMyYAcceleration(oldYAccel);
-		 * mySpriteImages.get(targetSprite).setX(targetSprite.getMyLocation().
+		 * targetSprite.getLocation().setLocation(oldX, oldY);
+		 * targetSprite.setXVelocity(oldXVelo);
+		 * targetSprite.setYVelocity(oldYVelo);
+		 * targetSprite.setXAcceleration(oldXAccel);
+		 * targetSprite.setYAcceleration(oldYAccel);
+		 * mySpriteImages.get(targetSprite).setX(targetSprite.getLocation().
 		 * getXLocation());
-		 * mySpriteImages.get(targetSprite).setY(targetSprite.getMyLocation().
+		 * mySpriteImages.get(targetSprite).setY(targetSprite.getLocation().
 		 * getYLocation());
 		 */
 		return collisionSprites;
@@ -124,18 +124,32 @@ public class ListOfCollidingSprites {
 		return this.collisionSprites;
 	}
 
-	private Rectangle createRectangle(Sprite aSprite) {
-		double x = aSprite.getMyLocation().getXLocation();
-		double y = aSprite.getMyLocation().getYLocation();
-		double width = aSprite.getMyWidth();
-		double height = aSprite.getMyHeight();
-		return new Rectangle(x, y, width, height);
+
+//	private Rectangle createRectangle(Sprite aSprite) {
+//		double x = aSprite.getLocation().getXLocation();
+//		double y = aSprite.getLocation().getYLocation();
+//		double width = aSprite.getWidth();
+//		double height = aSprite.getHeight();
+//		return new Rectangle(x, y, width, height);
+
+	
+	private Rectangle createRectangle(Sprite aSprite){
+		double x = aSprite.getLocation().getXLocation();
+		double y = aSprite.getLocation().getYLocation();
+		double width = aSprite.getWidth();
+		double height = aSprite.getHeight();
+		return new Rectangle(x,y,width,height);
 	}
 
 	private int getClosestEdge(double leftDistance, double rightDistance, double topDistance, double bottomDistance) {
 		Map<Integer, Double> thing = new HashMap<Integer, Double>();
-		thing.put(0, leftDistance + 0.05 * targetSprite.getMyWidth());
-		thing.put(1, rightDistance + 0.05 * targetSprite.getMyWidth());
+
+//		thing.put(0, leftDistance + 0.05 * targetSprite.getWidth());
+//		thing.put(1, rightDistance + 0.05 * targetSprite.getWidth());
+
+		thing.put(0, leftDistance+0.05*targetSprite.getWidth());
+		thing.put(1, rightDistance+0.05*targetSprite.getWidth());
+
 		thing.put(2, topDistance);
 		thing.put(3, bottomDistance);
 		int min = 0;
@@ -162,7 +176,7 @@ public class ListOfCollidingSprites {
 //		int min = getClosestEdge(leftDistance, rightDistance, topDistance, bottomDistance);
 //		//if(!(mySprite instanceof Terrain)){
 //		if(mySprite instanceof Player && targetSprite instanceof Terrain && !isTransparent()){
-//		//	mySprite.getMyLocation().setLocation(mySprite.getMyLocation().getXLocation(), targetSprite.getMyLocation().getYLocation() -0.5- mySprite.getMyHeight());
+//		//	mySprite.getLocation().setLocation(mySprite.getLocation().getXLocation(), targetSprite.getLocation().getYLocation() -0.5- mySprite.getHeight());
 //			printSide(min);
 //			System.out.println("block x is " + block.getX());
 //			System.out.println("middleX is " + middleX);
@@ -177,49 +191,49 @@ public class ListOfCollidingSprites {
 //	}
 //	
 //	private boolean pastPlatform(Sprite myPlayerSprite){
-//		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<targetSprite
-//						.getMyLocation().getYLocation()+(targetSprite.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
-		double myTopLeftX = mySprite.getMyLocation().getXLocation();
-		double myTopLeftY = mySprite.getMyLocation().getYLocation();
-		// System.out.println(mySprite.getMyLocation().getYLocation());
-		double myTopRightX = mySprite.getMyLocation().getXLocation() + mySprite.getMyWidth();
-		double myTopRightY = mySprite.getMyLocation().getYLocation();
+//		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<targetSprite
+//						.getLocation().getYLocation()+(targetSprite.getHeight()*.5) && myPlayerSprite.getYVelocity()>0;
+		double myTopLeftX = mySprite.getLocation().getXLocation();
+		double myTopLeftY = mySprite.getLocation().getYLocation();
+		// System.out.println(mySprite.getLocation().getYLocation());
+		double myTopRightX = mySprite.getLocation().getXLocation() + mySprite.getWidth();
+		double myTopRightY = mySprite.getLocation().getYLocation();
 
-		double myBottomLeftX = mySprite.getMyLocation().getXLocation();
-		double myBottomLeftY = mySprite.getMyLocation().getYLocation() + mySprite.getMyHeight();
+		double myBottomLeftX = mySprite.getLocation().getXLocation();
+		double myBottomLeftY = mySprite.getLocation().getYLocation() + mySprite.getHeight();
 
-		double myBottomRightX = mySprite.getMyLocation().getXLocation() + mySprite.getMyWidth();
-		double myBottomRightY = mySprite.getMyLocation().getYLocation() + mySprite.getMyHeight();
+		double myBottomRightX = mySprite.getLocation().getXLocation() + mySprite.getWidth();
+		double myBottomRightY = mySprite.getLocation().getYLocation() + mySprite.getHeight();
 
-		double targetTopLeftX = targetSprite.getMyLocation().getXLocation();
-		double targetTopLeftY = targetSprite.getMyLocation().getYLocation();
+		double targetTopLeftX = targetSprite.getLocation().getXLocation();
+		double targetTopLeftY = targetSprite.getLocation().getYLocation();
 
-		double targetTopRightX = targetSprite.getMyLocation().getXLocation() + targetSprite.getMyWidth();
-		double targetTopRightY = targetSprite.getMyLocation().getYLocation();
+		double targetTopRightX = targetSprite.getLocation().getXLocation() + targetSprite.getWidth();
+		double targetTopRightY = targetSprite.getLocation().getYLocation();
 
-		double targetBottomLeftX = targetSprite.getMyLocation().getXLocation();
-		double targetBottomLeftY = targetSprite.getMyLocation().getYLocation() + targetSprite.getMyHeight();
+		double targetBottomLeftX = targetSprite.getLocation().getXLocation();
+		double targetBottomLeftY = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
 
-		double targetBottomRightX = targetSprite.getMyLocation().getXLocation() + targetSprite.getMyWidth();
-		double targetBottomRightY = targetSprite.getMyLocation().getYLocation() + targetSprite.getMyHeight();
+		double targetBottomRightX = targetSprite.getLocation().getXLocation() + targetSprite.getWidth();
+		double targetBottomRightY = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
 
 		//if (mySprite instanceof Player) {
 		if (mySprite instanceof Player) {
 
-			double mySprite_bottom = mySprite.getMyLocation().getYLocation() + mySprite.getMyHeight();
-			double targetSprite_bottom = targetSprite.getMyLocation().getYLocation() + targetSprite.getMyHeight();
-			double mySprite_right = mySprite.getMyLocation().getXLocation() + mySprite.getMyWidth();
-			double targetSprite_right = targetSprite.getMyLocation().getXLocation() + targetSprite.getMyWidth();
+			double mySprite_bottom = mySprite.getLocation().getYLocation() + mySprite.getHeight();
+			double targetSprite_bottom = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
+			double mySprite_right = mySprite.getLocation().getXLocation() + mySprite.getWidth();
+			double targetSprite_right = targetSprite.getLocation().getXLocation() + targetSprite.getWidth();
 
-			double bottom_collision = targetSprite_bottom - mySprite.getMyLocation().getYLocation();
-			double top_collision = mySprite_bottom - targetSprite.getMyLocation().getYLocation();
-			double left_collision = mySprite_right - targetSprite.getMyLocation().getXLocation();
-			double right_collision = targetSprite_right - mySprite.getMyLocation().getXLocation();
+			double bottom_collision = targetSprite_bottom - mySprite.getLocation().getYLocation();
+			double top_collision = mySprite_bottom - targetSprite.getLocation().getYLocation();
+			double left_collision = mySprite_right - targetSprite.getLocation().getXLocation();
+			double right_collision = targetSprite_right - mySprite.getLocation().getXLocation();
 
 			if (top_collision < bottom_collision && top_collision < left_collision && top_collision < right_collision) {
 				//System.out.println("top");
 				if((targetSprite instanceof Terrain && !isTransparent()) || (isTransparent() && pastPlatform(mySprite))){
-					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
+					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 				}
 				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
@@ -230,7 +244,7 @@ public class ListOfCollidingSprites {
 					&& bottom_collision < right_collision) {
 				//System.out.println("bottom");
 				if(targetSprite instanceof Terrain && !isTransparent()){
-					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
+					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
 				}
 				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
 					return findSideOfCollision(mySprite);
@@ -242,8 +256,8 @@ public class ListOfCollidingSprites {
 				//System.out.println("left");
 				//if (left_collision > 10) {
 					if(targetSprite instanceof Terrain && !isTransparent()){
-						mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
-						mySprite.setMyLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
+						mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
+						mySprite.setLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
 					}
 					if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
@@ -257,8 +271,8 @@ public class ListOfCollidingSprites {
 				//System.out.println("right");
 				//if (right_collision > 10) {
 				if(targetSprite instanceof Terrain && !isTransparent()){
-					mySprite.setMyLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
-					mySprite.setMyLocation(new Location(myTopLeftX + right_collision, myTopLeftY));
+					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
+					mySprite.setLocation(new Location(myTopLeftX + right_collision, myTopLeftY));
 				}
 					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
 						return findSideOfCollision(mySprite);
@@ -274,8 +288,13 @@ public class ListOfCollidingSprites {
 	}
 
 	private boolean pastPlatform(Sprite myPlayerSprite) {
-		return myPlayerSprite.getMyLocation().getYLocation() + myPlayerSprite.getMyHeight() < targetSprite
-				.getMyLocation().getYLocation()+.2*targetSprite.getMyHeight() && myPlayerSprite.getMyYVelocity() >= 0;
+		return myPlayerSprite.getLocation().getYLocation() + myPlayerSprite.getHeight() < targetSprite
+				.getLocation().getYLocation()+.2*targetSprite.getHeight() && myPlayerSprite.getYVelocity() >= 0;
+	
+//	private boolean pastPlatform(Sprite myPlayerSprite){
+//		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<targetSprite
+//						.getLocation().getYLocation()+(targetSprite.getHeight()*.5) && myPlayerSprite.getYVelocity()>0;
+		//return myPlayerSprite.getYVelocity()>0;
 	}
 
 	private boolean isTransparent() {
@@ -289,48 +308,68 @@ public class ListOfCollidingSprites {
 
 //	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
 //			double topDistance, double bottomDistance){
-//		shiftX = targetSprite.getMyWidth()/20000.0;
-//		shiftY = targetSprite.getMyHeight()/20000.0;
+//		shiftX = targetSprite.getWidth()/20000.0;
+//		shiftY = targetSprite.getHeight()/20000.0;
 //		if(min == 0){
-//			//aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
-//			//		aSprite.getMyLocation().getYLocation());
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()-leftDistance+shiftX, 
+//			//aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
+//			//		aSprite.getLocation().getYLocation());
+//			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()-leftDistance+shiftX, 
 //	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance, double topDistance,
 //			double bottomDistance) {
 //		if (min == 0) {
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation() - leftDistance + SHIFT_CONSTANT,
-//					aSprite.getMyLocation().getYLocation());
-//			System.out.println("sprite x is " + aSprite.getMyLocation().getXLocation());
+//			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation() - leftDistance + SHIFT_CONSTANT,
+//					aSprite.getLocation().getYLocation());
+//			System.out.println("sprite x is " + aSprite.getLocation().getXLocation());
 //			System.out.println("left distance is " + leftDistance);
 //			System.out.println("shiftX distance is " + shiftX);
 //			System.out.println();
 //		}
 //		if(min == 1){
-////			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
-////					aSprite.getMyLocation().getYLocation());
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation()+rightDistance-shiftX, 
-//					aSprite.getMyLocation().getYLocation());
+////			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
+////					aSprite.getLocation().getYLocation());
+//			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()+rightDistance-shiftX, 
+//					aSprite.getLocation().getYLocation());
 //		}
 //		if(min == 2){
-////			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
-////					aSprite.getMyLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(), 
-//					aSprite.getMyLocation().getYLocation()-topDistance+shiftY);
+////			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(), 
+////					aSprite.getLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
+//			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(), 
+//					aSprite.getLocation().getYLocation()-topDistance+shiftY);
 //		}
 //		if (min == 1) {
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation() + rightDistance - SHIFT_CONSTANT,
-//					aSprite.getMyLocation().getYLocation());
+//			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation() + rightDistance - SHIFT_CONSTANT,
+//					aSprite.getLocation().getYLocation());
 //		}
 //		if (min == 2) {
-//			aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(),
-//					aSprite.getMyLocation().getYLocation() - topDistance + SHIFT_CONSTANT);
+//			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(),
+//					aSprite.getLocation().getYLocation() - topDistance + SHIFT_CONSTANT);
 //		}
 //		// if(min == 3){
-//		// aSprite.getMyLocation().setLocation(aSprite.getMyLocation().getXLocation(),
-//		// aSprite.getMyLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
+//		// aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(),
+//		// aSprite.getLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
 //		// }
 //	}
 
+	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
+			double topDistance, double bottomDistance){
+		if(min == 0){
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
+					aSprite.getLocation().getYLocation());
+		}
+		if(min == 1){
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 
+					aSprite.getLocation().getYLocation());
+		}
+		if(min == 2){
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(), 
+					aSprite.getLocation().getYLocation()-topDistance+SHIFT_CONSTANT);
+		}
+		//if(min == 3){
+		//	aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(), 
+		//			aSprite.getLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
+		//}
+	}
+	
 	private Side pickSide(int min, Sprite mySprite) {
 		if (min == 0) {
 			//return Side.LEFT;

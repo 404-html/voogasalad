@@ -31,16 +31,16 @@ public class PacerAlternative implements Characteristic{
 		myType = type;
 		myDistance = distance;
 		mySprite = associatedSprite;
-		originalXPosition = associatedSprite.getMyLocation().getXLocation();
-		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+		originalXPosition = associatedSprite.getLocation().getXLocation();
+		originalYPosition = associatedSprite.getLocation().getYLocation();
 	}
 	
 	public PacerAlternative(Sprite associatedSprite){
 		myType = "";
 		myDistance = 0;
 		mySprite = associatedSprite;
-		originalXPosition = associatedSprite.getMyLocation().getXLocation();
-		originalYPosition = associatedSprite.getMyLocation().getYLocation();
+		originalXPosition = associatedSprite.getLocation().getXLocation();
+		originalYPosition = associatedSprite.getLocation().getYLocation();
 	}
 	
 	@ViewableMethodOutput(type=double.class, description="Distance")
@@ -61,15 +61,15 @@ public class PacerAlternative implements Characteristic{
 	}
 	
 	private boolean atYBound(){
-		double currentYLocation = mySprite.getMyLocation().getYLocation();
+		double currentYLocation = mySprite.getLocation().getYLocation();
 		return currentYLocation>originalYPosition || currentYLocation<(originalYPosition-myDistance);			
 	}
 	
 	private boolean atXBound(){
-		//System.out.println("x is " + mySprite.getMyLocation().getXLocation());
-		//System.out.println("y is " + mySprite.getMyLocation().getYLocation());
+		//System.out.println("x is " + mySprite.getLocation().getXLocation());
+		//System.out.println("y is " + mySprite.getLocation().getYLocation());
 		//System.out.println();
-		double currentXLocation = mySprite.getMyLocation().getXLocation();
+		double currentXLocation = mySprite.getLocation().getXLocation();
 		return currentXLocation<originalXPosition || currentXLocation>(originalXPosition+myDistance);			
 	}
 

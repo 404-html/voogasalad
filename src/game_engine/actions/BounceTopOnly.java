@@ -27,26 +27,37 @@ public class BounceTopOnly implements Action {
 
 	@Override
 	public void act() {
-		//System.out.println("init y vel" + myPlayerSprite.getMyYVelocity());
+		//System.out.println("init y vel" + myPlayerSprite.getYVelocity());
 		//System.out.println(mySide == Side.TOP);
 		//System.out.println(pastPlatform());
 		//System.out.println("poop");
+
 		//if(mySide==Side.TOP && pastPlatform()){
 		if(mySide instanceof Top && pastPlatform()){
 			mySide.bounce(myPlayerSprite, myBounceSpeed);
-			/*myPlayerSprite.setMyYVelocity(-1*myBounceSpeed);*/
+			/*myPlayerSprite.setYVelocity(-1*myBounceSpeed);*/
+
+		//if(mySide==Side.TOP && pastPlatform()){
+			//myPlayerSprite.setYVelocity(-(myPlayerSprite.getYVelocity()+myBounceSpeed));
+			//System.out.println("asdasdasdasdasd");
+			//System.out.println("player is at " + myPlayerSprite.getLocation().getYLocation());
+			//System.out.println("bouncer is at " + myBouncer.getLocation().getYLocation());
+			//myPlayerSprite.setYVelocity(-1*myBounceSpeed);
+			//myPlayerSprite.getLocation().setLocation(myPlayerSprite.getLocation().getXLocation(), 
+			//		myBouncer.getLocation().getYLocation());
 		}	
-		//System.out.println(" y vel" + myPlayerSprite.getMyYVelocity());
+		//System.out.println(" y vel" + myPlayerSprite.getYVelocity());
 		//myPlayerSprite.setMyVelocity( getNewVelocity() );		
-		//myPlayerSprite.getMyLocation().setMyHeading( getNewHeading() );
+		//myPlayerSprite.getLocation().setMyHeading( getNewHeading() );
 		//
 	}
 	
 	private boolean pastPlatform(){
-		/*return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myBouncer
-				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity()>0;*/
-		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<myBouncer
-				.getMyLocation().getYLocation()+(myBouncer.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>=0;
+		/*return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()>myBouncer
+				.getLocation().getYLocation() && myPlayerSprite.getYVelocity()>0;*/
+
+		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<myBouncer
+				.getLocation().getYLocation()+(myBouncer.getHeight()*.5) && myPlayerSprite.getYVelocity()>=0;
 	}
 	
 	
