@@ -3,9 +3,6 @@ package gameplayer.application_controller;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.PropertyResourceBundle;
-
-import com.gargoylesoftware.htmlunit.javascript.host.Set;
-
 import game_data.Game;
 import game_data.Sprite;
 import game_engine.EnginePlayerController;
@@ -108,7 +105,6 @@ public class GamePlayController extends AbstractController {
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
 		}
-		//needs to be updated for when a sprite has been added
 	}
 
 	private void setMenu() {
@@ -132,7 +128,6 @@ public class GamePlayController extends AbstractController {
 			setResultScene(myButtonLabels.getString("YouWon"));
 		});
 	}
-	
 
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
@@ -161,7 +156,6 @@ public class GamePlayController extends AbstractController {
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
 	
-
 	public void setLevel(int aLevel) {
 		myLevel = aLevel;
 	}

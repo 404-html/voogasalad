@@ -82,11 +82,13 @@ public class ApplicationController extends AbstractController {
 	}
 	
 	private void displayAuthoring() {
-		IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
-		Scene scene = authorControllerExternal.getScene();
-		myStage.setWidth(scene.getWidth());
-		myStage.setHeight(scene.getHeight());
-		myStage.setScene(scene);
+		//IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
+		//Scene scene = authorControllerExternal.getScene();
+		//myStage.setWidth(scene.getWidth());
+		//myStage.setHeight(scene.getHeight());
+		//myStage.setScene(scene);
+		IAuthoringSplashScreen aSplashScreen = (new AuthoringSplashScreenFactory()).create();
+		aSplashScreen.initializeWindow();
 	}
 
 	@SuppressWarnings("unchecked")

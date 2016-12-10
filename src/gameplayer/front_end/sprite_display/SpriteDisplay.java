@@ -44,13 +44,11 @@ public class SpriteDisplay {
 		image.setFitHeight(aSprite.getMyHeight());
 		image.setX(aSprite.getMyLocation().getXLocation());
 		image.setY(aSprite.getMyLocation().getYLocation());
-		image.setTranslateZ(image.getBoundsInLocal().getWidth() / 2.0);
 		image.setRotationAxis(Rotate.Y_AXIS);
 	}
 
 	public Map<Sprite, ImageView> getSpriteMap() {
 		return mySpriteViews;
 	}
-	
-	
+
 }
