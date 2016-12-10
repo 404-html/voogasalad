@@ -28,4 +28,14 @@ public class Bottom extends Side{
 		}
 	}
 
+	@Override
+	public boolean isVertical() {
+		return true;
+	}
+
+	@Override
+	public boolean isHorizontal() {
+		return false;
+	}
+
 }

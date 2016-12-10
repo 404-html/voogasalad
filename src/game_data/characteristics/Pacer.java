@@ -72,14 +72,7 @@ public abstract class Pacer implements Characteristic{
 	
 	public abstract boolean changeDirection(boolean collision);
 	
-	public boolean collisionOtherThanPlayer(Map<Sprite, Side> myCollisionMap){
-		int count = 0;
-		for(Sprite s: myCollisionMap.keySet()){
-			if(s instanceof Terrain){
-				count++;
-			}
-		}
-		return count>0;
-	}
+	public abstract boolean collisionOtherThanPlayer(Map<Sprite, Side> myCollisionMap);
+	
 	
 }

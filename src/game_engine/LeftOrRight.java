@@ -26,4 +26,16 @@ public class LeftOrRight extends Side{
 		
 	}
 
+	@Override
+	public boolean isVertical() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isHorizontal() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

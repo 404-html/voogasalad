@@ -8,6 +8,7 @@ import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
+import game_data.sprites.Terrain;
 import game_engine.actions.Pace;
 //import javafx.geometry.Side;
 
@@ -40,6 +41,17 @@ public class VerticalPacer extends Pacer{
 	@Override
 	public Characteristic copy() {
 		return new VerticalPacer(getDistance(), getSprite().clone());
+	}
+	
+	@Override
+	public boolean collisionOtherThanPlayer(Map<Sprite, Side> myCollisionMap){
+		int count = 0;
+		for(Sprite s: myCollisionMap.keySet()){
+			if(s instanceof Terrain && myCollisionMap.get(s).isVertical()){
+				count++;
+			}
+		}
+		return count>0;
 	}
 
 	@Override

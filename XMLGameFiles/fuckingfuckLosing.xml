@@ -945,16 +945,16 @@
             <game__data.states.LevelWon>
               <hasWon>false</hasWon>
             </game__data.states.LevelWon>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
             <game__data.states.Physics>
               <myPhysics>
                 <verticalGravity>800.0</verticalGravity>
                 <horizontalGravity>0.0</horizontalGravity>
               </myPhysics>
             </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Player>
         <game__data.sprites.Terrain>

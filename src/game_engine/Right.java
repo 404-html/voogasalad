@@ -27,5 +27,15 @@ public class Right extends Side{
 		}
 	}
 
+	@Override
+	public boolean isVertical() {
+		return false;
+	}
+
+	@Override
+	public boolean isHorizontal() {
+		return true;
+	}
+
 
 }
