@@ -92,8 +92,8 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		clearKeys();
-		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getXLocation(), myStage.getWidth());
-		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getMyLocation().getYLocation(), myStage.getHeight());
+		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(), myStage.getWidth());
+		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight());
 		if (myGameController.getMyLevel().lostLevel()) createLosingScene();
 		if (myGameController.getMyLevel().wonLevel()) createWinningScene();
 		myGamePlayScene.moveScreen(myKeyHandler);
@@ -133,7 +133,7 @@ public class GamePlayController extends AbstractController {
 			setImageProperties(aSprite, image);
 		} else {
 			//System.out.println(aSprite.getMyImagePath());
-			image = new ImageView(new File(aSprite.getMyImagePath()).toURI().toString());
+			image = new ImageView(new File(aSprite.getImagePath()).toURI().toString());
 			setImageProperties(aSprite, image);
 			mySpriteMap.put(aSprite, image);
 		}
@@ -142,10 +142,10 @@ public class GamePlayController extends AbstractController {
 
 
 	private void setImageProperties(Sprite aSprite, ImageView image) {
-		image.setFitWidth(aSprite.getMyWidth());
-		image.setFitHeight(aSprite.getMyHeight());
-		image.setX(aSprite.getMyLocation().getXLocation());
-		image.setY(aSprite.getMyLocation().getYLocation());
+		image.setFitWidth(aSprite.getWidth());
+		image.setFitHeight(aSprite.getHeight());
+		image.setX(aSprite.getLocation().getXLocation());
+		image.setY(aSprite.getLocation().getYLocation());
 	}
 
 	private void clearKeys() {

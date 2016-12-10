@@ -41,10 +41,10 @@ public class EnemyDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			enemy.addState(state);
 		}
-		enemy.setMyLocation(new Location(0, 0));
-		enemy.setMyWidth(WIDTH);
-		enemy.setMyHeight(HEIGHT);
-		enemy.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		enemy.setLocation(new Location(0, 0));
+		enemy.setWidth(WIDTH);
+		enemy.setHeight(HEIGHT);
+		enemy.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		enemy.setName(NAME);
 		return enemy;
 	}

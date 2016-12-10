@@ -38,10 +38,10 @@ public class TerrainDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			terrain.addState(state);
 		}
-		terrain.setMyLocation(new Location(0, 0));
-		terrain.setMyWidth(WIDTH);
-		terrain.setMyHeight(HEIGHT);
-		terrain.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		terrain.setLocation(new Location(0, 0));
+		terrain.setWidth(WIDTH);
+		terrain.setHeight(HEIGHT);
+		terrain.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		terrain.setName(NAME);
 		return terrain;
 	}

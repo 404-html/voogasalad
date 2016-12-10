@@ -37,18 +37,18 @@ public class GameChangeEvent {
 		if (!this.history.isEmpty()){
 			System.out.println("Restore");
 			Sprite restoreSprite = this.history.pop();
-			System.out.println("Current X:  " + this.activeSprite.getMyLocation().getXLocation() + "   New X: " + restoreSprite.getMyLocation().getXLocation());
-			this.activeSprite.setMyLocation(restoreSprite.getMyLocation());
-			this.activeSprite.setMyHeight(restoreSprite.getMyHeight());
-			this.activeSprite.setMyWidth(restoreSprite.getMyWidth());
-			this.activeSprite.setMyImagePath(restoreSprite.getMyImagePath());
+			System.out.println("Current X:  " + this.activeSprite.getLocation().getXLocation() + "   New X: " + restoreSprite.getLocation().getXLocation());
+			this.activeSprite.setLocation(restoreSprite.getLocation());
+			this.activeSprite.setHeight(restoreSprite.getHeight());
+			this.activeSprite.setWidth(restoreSprite.getWidth());
+			this.activeSprite.setImagePath(restoreSprite.getImagePath());
 		}
 	}
 	
 	private void createSnapShot(){
 		System.out.println("Creating Snapshot");
 		Sprite clone = this.activeSprite.clone();
-		System.out.println(clone.getMyLocation().getXLocation());
+		System.out.println(clone.getLocation().getXLocation());
 		this.history.push(clone);
 	}
 	
@@ -70,7 +70,7 @@ public class GameChangeEvent {
 	}
 	
 	private Boolean compareSnapShot(Sprite activeSprite, Sprite snapshotSprite){
-		return (activeSprite.getMyLocation().equals(snapshotSprite.getMyLocation()) && activeSprite.getMyImagePath().equals(snapshotSprite.getMyImagePath()) && activeSprite.getMyWidth() == snapshotSprite.getMyWidth() && activeSprite.getMyHeight() == snapshotSprite.getMyHeight());
+		return (activeSprite.getLocation().equals(snapshotSprite.getLocation()) && activeSprite.getImagePath().equals(snapshotSprite.getImagePath()) && activeSprite.getWidth() == snapshotSprite.getWidth() && activeSprite.getHeight() == snapshotSprite.getHeight());
 	}
 	
 

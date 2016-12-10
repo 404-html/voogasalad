@@ -15,11 +15,11 @@ public class Launch implements Action{
 	private Level myLevel;
 	public Launch(Sprite myLauncher, Sprite myProjectile, double myXVelocity, double myYVelocity, Level aLevel){
 		this.myLauncher=myLauncher;
-		myProjectile.getMyLocation().setLocation(myLauncher.getMyLocation().getXLocation()+myLauncher.getMyWidth()+1, myLauncher.getMyLocation().getYLocation()+1);
-		myProjectile.setMyXVelocity(myXVelocity);
-		myProjectile.setMyYVelocity(myYVelocity);
-		myProjectile.setMyXAcceleration(0);
-		myProjectile.setMyYAcceleration(0);
+		myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()+1, myLauncher.getLocation().getYLocation()+1);
+		myProjectile.setXVelocity(myXVelocity);
+		myProjectile.setYVelocity(myYVelocity);
+		myProjectile.setXAcceleration(0);
+		myProjectile.setYAcceleration(0);
 		myProjectile.setControllable(new Controllable(myProjectile));
 		this.myProjectile=myProjectile.clone();
 		this.myXVelocity=myXVelocity;
@@ -31,11 +31,11 @@ public class Launch implements Action{
 	public void act() {
 		//System.out.println("acting");
 		myProjectile=myProjectile.clone();
-		myProjectile.getMyLocation().setLocation(myLauncher.getMyLocation().getXLocation()+myLauncher.getMyWidth()+1, myLauncher.getMyLocation().getYLocation()+1);
-		myProjectile.setMyXVelocity(myXVelocity);
-		myProjectile.setMyYVelocity(myYVelocity);
-		myProjectile.setMyXAcceleration(0);
-		myProjectile.setMyYAcceleration(0);
+		myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()+1, myLauncher.getLocation().getYLocation()+1);
+		myProjectile.setXVelocity(myXVelocity);
+		myProjectile.setYVelocity(myYVelocity);
+		myProjectile.setXAcceleration(0);
+		myProjectile.setYAcceleration(0);
 		myLevel.addNewSprite(myProjectile);
 		
 	}

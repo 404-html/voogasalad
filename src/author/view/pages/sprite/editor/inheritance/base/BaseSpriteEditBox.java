@@ -23,17 +23,16 @@ public class BaseSpriteEditBox {
 
 	private Pane myPane;
 	private FileLoader myFileLoader;
-	private NumberFieldBox myXPositionField;
-	private NumberFieldBox myYPositionField;
-	private NumberFieldBox myHeadingField;
+	private NumberFieldBox myXVelocityField;
+	private NumberFieldBox myYVelocityField;
 	private TextField myNameField;
 	private NumberFieldBox myWidthField;
 	private NumberFieldBox myHeightField;
 	private ImageView myImageView;
 	private String myImagePath;
-	
+
 	private static final double CHAR_SIZE = 100;
-	
+
 	public BaseSpriteEditBox() {
 		myPane = new VBox();
 
@@ -44,7 +43,7 @@ public class BaseSpriteEditBox {
 
 		myPane.getChildren().addAll(
 				makeNameField(), 
-				makeLocationFields(),
+				makeVelocityFields(),
 				makeSizeFields(), 
 				makeImageSelect()
 				);	
@@ -57,41 +56,44 @@ public class BaseSpriteEditBox {
 	public final String getName(){
 		return myNameField.getText();
 	}
-	
+
 	public final void setName(String aName){
 		myNameField.setText(aName);		
 	}
-	
+
 	public final void setSize(int aWidth, int aHeight){
 		myWidthField.setValue(aWidth);
 		myHeightField.setValue(aHeight);
 	}
-	
+
 	public final int getWidth(){
 		return myWidthField.getInteger();
 	}
-	
+
 	public final int getHeight(){
 		return myHeightField.getInteger();
 	}
-	
-	public final Location getLocation(){
-		return new Location(
-				myXPositionField.getDouble(),
-				myYPositionField.getDouble()
-				);
 
+	public final double getXVelocity(){
+		return myXVelocityField.getDouble();
 	}
 
-	protected final void setLocation(Location aLocation){
-		myXPositionField.setValue(aLocation.getXLocation());
-		myYPositionField.setValue(aLocation.getYLocation());
+	public final double getYVelocity(){
+		return myYVelocityField.getDouble();
 	}
-	
+
+	protected final void setXVelocity(double aXVelocity){
+		myXVelocityField.setValue(aXVelocity);
+	}
+
+	protected final void setYVelocity(double aYVelocity){
+		myYVelocityField.setValue(aYVelocity);
+	}
+
 	protected final String getImageFile(){
 		return myImagePath;
 	}
-	
+
 	protected final void setImageFile(String aImagePath){
 		RelativePathFinder pf = new RelativePathFinder();
 		File file = new File(aImagePath);
@@ -101,69 +103,67 @@ public class BaseSpriteEditBox {
 
 	private Node makeNameField(){
 		Pane nameBox = new VBox();
-		
+
 		myNameField = new TextField();
 		nameBox.getChildren().addAll(new Label("Name: "), myNameField);
 		HBox.setHgrow(myNameField, Priority.ALWAYS);
-		
+
 		return nameBox;
 	}
-	
+
 	private Node makeSizeFields(){
 		Pane sizeBox = new VBox();
-		
+
 		myWidthField = new NumberFieldBox("Width: ");
 		myHeightField = new NumberFieldBox("Height: ");
-		
+
 		sizeBox.getChildren().addAll(
 				new Label("Size: "), 
 				myWidthField.getPane(),
 				myHeightField.getPane()
 				);		
-		
+
 		return sizeBox;
 	}
-	
-	private Node makeLocationFields(){
-		Pane locationBox = new VBox();
 
-		myXPositionField = new NumberFieldBox("X: ");
-		myYPositionField = new NumberFieldBox("Y: ");
-		myXPositionField.getTextField().setEditable(false);
-		myYPositionField.getTextField().setEditable(false);
-		
-		myHeadingField = new NumberFieldBox("Angle: ");
+	private Node makeVelocityFields(){
+		Pane velocityBox = new VBox();
+
+		myXVelocityField = new NumberFieldBox("X: ");
+		myYVelocityField = new NumberFieldBox("Y: ");
+		myXVelocityField.getTextField();
+		myYVelocityField.getTextField();
+
 
 		Pane coordinateBox = new VBox();
 		coordinateBox.getChildren().addAll(
-				myXPositionField.getPane(),
-				myYPositionField.getPane(),
-				myHeadingField.getPane());
-		
-		locationBox.getChildren().addAll(
-				new Label("Location: "),
+				myXVelocityField.getPane(),
+				myYVelocityField.getPane());
+
+		velocityBox.getChildren().addAll(
+				new Label("Initial Velocity: "),
 				coordinateBox
 				);
 
-		return locationBox;
+		return velocityBox;
 	}
 
 	private Node makeImageSelect(){
 		Pane imageSelectBox = new HBox();
-		
+
 		myImageView = new ImageView();
 		Button imageButton = new Button();
 		imageButton.minWidthProperty().bind(myPane.widthProperty());
 		imageButton.setText("Select Image:");
 		imageButton.setContentDisplay(ContentDisplay.TOP);
 		imageButton.setGraphic(myImageView);
-		
-		
+
+
 		myImageView.setFitWidth(CHAR_SIZE);
 		myImageView.setFitHeight(CHAR_SIZE);
-		
+
 		imageSelectBox.getChildren().addAll(imageButton, myImageView);
-		
+
 		imageButton.setOnMouseClicked(e -> {
 			File file;
 			try {
@@ -177,7 +177,7 @@ public class BaseSpriteEditBox {
 			}
 
 		});
-		
+
 		return imageSelectBox;
 	}
 }

@@ -32,7 +32,7 @@ public class MoveRight extends Move {
 	public void setVelocity(){
 		//mySprite.setMyXVelocity(myVelocity);
 		//System.out.println("changing right velocity");
-		mySprite.setMyXVelocity(myVelocity);
+		mySprite.setXVelocity(myVelocity);
 	}
 /*private boolean checkSpriteSolidity() {
 	boolean solid = false;
@@ -43,8 +43,8 @@ public class MoveRight extends Move {
 	return solid;
 }*/
 	public void stop(){
-		if(mySprite.getMyXVelocity()>0){
-			mySprite.setMyXVelocity(mySprite.getMyXVelocity()-myVelocity);
+		if(mySprite.getXVelocity()>0){
+			mySprite.setXVelocity(mySprite.getXVelocity()-myVelocity);
 		}
 	}
 

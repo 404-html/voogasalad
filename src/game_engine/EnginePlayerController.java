@@ -4,7 +4,6 @@ import game_data.Controllable;
 import game_data.Game;
 import game_data.Level;
 import game_data.Location;
-import game_data.SpeedBooster;
 import game_data.Sprite;
 import game_data.characteristics.Bouncer;
 import game_data.characteristics.Breakable;
@@ -85,8 +84,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, 
 				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getMyLocation().getXLocation(),
-				myLevel.getMainPlayer().getMyLocation().getYLocation()+100), 25, 25, "block", "author/images/betterblock.png");
+		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
+				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
 		myProjectile.addState(new Physics(new SpritePhysics(0.0)));
 		myProjectile.addCharacteristic(new Impassable(myProjectile));
 		myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), myProjectile, 50, 0, myLevel));
@@ -270,8 +269,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		for (int i = 0; i < mySpriteList.size(); i++) {
 			Object sprite = mySpriteList.get(i);
 			// mySpriteImagePathList.set(i, ((Sprite) sprite).getMyImagePath());
-			mySpriteImagePathList.add(((Sprite) sprite).getMyImagePath());
-			Location location = ((Sprite) sprite).getMyLocation();
+			mySpriteImagePathList.add(((Sprite) sprite).getImagePath());
+			Location location = ((Sprite) sprite).getLocation();
 			// mySpriteXCoordinateList.set(i, location.getXLocation());
 			mySpriteXCoordinateList.add(location.getXLocation());
 			// mySpriteYCoordinateList.set(i, location.getYLocation());

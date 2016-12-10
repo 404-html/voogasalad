@@ -101,10 +101,11 @@ public abstract class BaseSpriteEditPage {
 		myToolBarBuilder.addBurst(buildButton);
 		myToolBarBuilder.addBurst(saveAsDefaultButton);
 
-		mySpriteEditBox.setLocation(aSprite.getMyLocation());
-		mySpriteEditBox.setImageFile(aSprite.getMyImagePath());
+		mySpriteEditBox.setXVelocity(aSprite.getXVelocity());
+		mySpriteEditBox.setYVelocity(aSprite.getYVelocity());
+		mySpriteEditBox.setImageFile(aSprite.getImagePath());
 		mySpriteEditBox.setName(aSprite.getName());
-		mySpriteEditBox.setSize(aSprite.getMyWidth(), aSprite.getMyHeight());
+		mySpriteEditBox.setSize(aSprite.getWidth(), aSprite.getHeight());
 	}
 
 	public static BaseSpriteEditPage build( Sprite aSprite){
@@ -123,10 +124,12 @@ public abstract class BaseSpriteEditPage {
 
 	public Sprite editSprite(){
 
-		getSprite().setMyLocation(getLocation());
-		getSprite().setMyImagePath(getImageFile());
-		getSprite().setMyWidth(getWidth());
-		getSprite().setMyHeight(getHeight());
+		getSprite().setLocation(new Location(0,0));
+		getSprite().setXVelocity(getXVelocity());
+		getSprite().setYVelocity(getYVelocity());
+		getSprite().setImagePath(getImageFile());
+		getSprite().setWidth(getWidth());
+		getSprite().setHeight(getHeight());
 		getSprite().setName(getSpriteName());
 
 		return getSprite();
@@ -151,6 +154,14 @@ public abstract class BaseSpriteEditPage {
 	protected final int getHeight(){
 		return mySpriteEditBox.getHeight();
 	}
+	
+	protected final double getXVelocity(){
+		return mySpriteEditBox.getXVelocity();
+	}
+	
+	protected final double getYVelocity(){
+		return mySpriteEditBox.getYVelocity();
+	}
 
 	protected final boolean hasSprite(){
 		return mySprite == null;
@@ -158,10 +169,6 @@ public abstract class BaseSpriteEditPage {
 
 	protected final String getImageFile(){
 		return mySpriteEditBox.getImageFile();
-	}
-
-	protected final Location getLocation(){
-		return mySpriteEditBox.getLocation();
 	}
 
 	protected ToolBarBuilder getToolBarBuilder(){

@@ -21,10 +21,10 @@ public class Pace implements Action {
 	public void act() {
 		if(myShouldChangeDirection==true){
 			if(myType.equals("HORIZONTAL")){
-				mySprite.setMyXVelocity(-1*(mySprite.getMyXVelocity()));
+				mySprite.setXVelocity(-1*(mySprite.getXVelocity()));
 			}
 			else{
-				mySprite.setMyYVelocity(-1*(mySprite.getMyYVelocity()));
+				mySprite.setYVelocity(-1*(mySprite.getYVelocity()));
 			}
 		}
 		//MoveWithHeading moveWithHeading = new MoveWithHeading(mySprite, mySprite.getMyXVelocity());

@@ -109,7 +109,7 @@ public class Controllable {
 		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(mySprite, GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(mySprite, GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(mySprite, GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(mySprite.getMyLocation(), 100, 100, "block", "author/images/betterblock.png");
+		Terrain myProjectile = new Terrain(mySprite.getLocation(), 100, 100, 0,0, "block", "author/images/betterblock.png");
 		myKeyPressedMap.put(KeyCode.SPACE, new Launch(mySprite, myProjectile, 0, 0, myLevel));
 		//myKeyPressedMap.put(KeyCode.SPACE, new Launch(myLevel.getMainPlayer(), 10, 0));
 	}

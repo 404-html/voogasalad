@@ -22,7 +22,7 @@ public class HitTop implements Action {
 		myPlayerSprite = player;
 		myNonPlayerSprite = nonPlayerSprite;
 		mySide = aSide;
-		collisionBuffer = nonPlayerSprite.getMyHeight()*.2;
+		collisionBuffer = nonPlayerSprite.getHeight()*.2;
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public class HitTop implements Action {
 	private void setNewVelocity() {
 
 		if(mySide==Side.TOP){
-			if(myPlayerSprite.getMyYVelocity()>0){
+			if(myPlayerSprite.getYVelocity()>0){
 				if(pastPlatform()){
-					myPlayerSprite.setMyYVelocity(0);
+					myPlayerSprite.setYVelocity(0);
 				}
 			}
 		}
@@ -48,8 +48,8 @@ public class HitTop implements Action {
 	private boolean pastPlatform(){
 //		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myNonPlayerSprite
 //				.getMyLocation().getYLocation()+collisionBuffer && myPlayerSprite.getMyYVelocity()>0;
-		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<myNonPlayerSprite
-				.getMyLocation().getYLocation()+(myNonPlayerSprite.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
+		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<myNonPlayerSprite
+				.getLocation().getYLocation()+(myNonPlayerSprite.getHeight()*.5) && myPlayerSprite.getYVelocity()>0;
 	}
 
 	private void setNewAcceleration(){
@@ -60,7 +60,7 @@ public class HitTop implements Action {
 			}
 		}
 		if((mySide==Side.TOP && mySpritePhysics.getVerticalGravity()>0)&&pastPlatform()){
-			myPlayerSprite.setMyYAcceleration(-mySpritePhysics.getVerticalGravity());
+			myPlayerSprite.setYAcceleration(-mySpritePhysics.getVerticalGravity());
 		}
 		
 	}

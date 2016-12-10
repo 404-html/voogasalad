@@ -34,7 +34,7 @@ public class BounceTopOnly implements Action {
 			//System.out.println("asdasdasdasdasd");
 			//System.out.println("player is at " + myPlayerSprite.getMyLocation().getYLocation());
 			//System.out.println("bouncer is at " + myBouncer.getMyLocation().getYLocation());
-			myPlayerSprite.setMyYVelocity(-1*myBounceSpeed);
+			myPlayerSprite.setYVelocity(-1*myBounceSpeed);
 			//myPlayerSprite.getMyLocation().setLocation(myPlayerSprite.getMyLocation().getXLocation(), 
 			//		myBouncer.getMyLocation().getYLocation());
 		}	
@@ -47,8 +47,8 @@ public class BounceTopOnly implements Action {
 	private boolean pastPlatform(){
 		/*return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()>myBouncer
 				.getMyLocation().getYLocation() && myPlayerSprite.getMyYVelocity()>0;*/
-		return myPlayerSprite.getMyLocation().getYLocation()+myPlayerSprite.getMyHeight()<myBouncer
-				.getMyLocation().getYLocation()+(myBouncer.getMyHeight()*.5) && myPlayerSprite.getMyYVelocity()>0;
+		return myPlayerSprite.getLocation().getYLocation()+myPlayerSprite.getHeight()<myBouncer
+				.getLocation().getYLocation()+(myBouncer.getHeight()*.5) && myPlayerSprite.getYVelocity()>0;
 	}
 	
 	

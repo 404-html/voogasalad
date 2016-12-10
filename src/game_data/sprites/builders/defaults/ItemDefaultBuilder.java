@@ -38,10 +38,10 @@ public class ItemDefaultBuilder implements SpriteDefaultBuilder {
 		for(State state : STATES) {
 			item.addState(state);
 		}
-		item.setMyLocation(new Location(0, 0));
-		item.setMyWidth(WIDTH);
-		item.setMyHeight(HEIGHT);
-		item.setMyImagePath(EmptyImage.INSTANCE.getFile().toString());
+		item.setLocation(new Location(0, 0));
+		item.setWidth(WIDTH);
+		item.setHeight(HEIGHT);
+		item.setImagePath(EmptyImage.INSTANCE.getFile().toString());
 		item.setName(NAME);
 		return item;
 	}
