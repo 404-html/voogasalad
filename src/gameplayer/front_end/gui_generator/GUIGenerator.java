@@ -72,7 +72,7 @@ public class GUIGenerator implements IGUIGenerator {
 			name.autosize();
 			Label des = new Label(aListOfDescriptions.get(i));
 			hbox.getChildren().add(name);
-			des.setStyle("-fx-font: 12 arial;");
+			//des.setStyle("-fx-font: 12 arial;");
 			hbox.getChildren().add(des);
 			options.add(hbox);
 		}
