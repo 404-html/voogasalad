@@ -93,6 +93,7 @@ public class GamePlayController extends AbstractController {
 		} else {
 			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), "black");
 		}
+		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
 
 	private void initializeAnimation() {
@@ -120,6 +121,7 @@ public class GamePlayController extends AbstractController {
 
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
+		System.out.println(myKeyCodeHandler.getKeysPressed());
 		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
@@ -170,7 +172,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setHealthLabel() {
-		//myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+//		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
 
 	//	private void setScoreLabel() {

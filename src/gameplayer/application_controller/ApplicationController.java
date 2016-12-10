@@ -166,6 +166,6 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void displayGame(File chosenGame) {
-		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0, null);
+		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0);
 	}
 }
