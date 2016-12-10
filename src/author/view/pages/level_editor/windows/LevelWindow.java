@@ -166,12 +166,12 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		});
 		draggableSprite.getDraggableItem().setOnMouseDragged((event)->{
 			if (event.isShiftDown()){
-				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getMyWidth(), draggableSprite.getSprite().getMyHeight());
+				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getWidth(), draggableSprite.getSprite().getHeight());
 			}
 		});
 		draggableSprite.getDraggableItem().setOnMouseReleased((event) -> {
 			if (event.isShiftDown()){
-				draggableSprite.getSprite().setMyLocation(new Location(this.levelWindowPane.adjustX((int)event.getX()), this.levelWindowPane.adjustY((int)event.getY())));
+				draggableSprite.getSprite().setLocation(new Location(this.levelWindowPane.adjustX((int)event.getX()), this.levelWindowPane.adjustY((int)event.getY())));
 			}
 		});
 		
