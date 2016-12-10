@@ -37,7 +37,6 @@ public class TextFieldBox {
 	 */
 	public TextFieldBox(String aText) {
 		this();
-		((HBox) myPane ).setSpacing(SPACING);
 		getLabel().setText(aText);
 	}
 
