@@ -1,9 +1,12 @@
 package game_data.states;
 
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+
 public class Solid implements State{
 
 	private boolean isSolid;
 	
+	@ParameterAnnotation(parameters={})
 	public Solid(){
 		this.isSolid = true;
 	}

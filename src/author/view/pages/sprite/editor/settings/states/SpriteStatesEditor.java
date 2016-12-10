@@ -4,6 +4,7 @@ import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
 import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
+import util.InfoMap;
 
 public class SpriteStatesEditor extends SpriteSettingsEditor {
 
@@ -26,6 +27,18 @@ public class SpriteStatesEditor extends SpriteSettingsEditor {
 	@Override
 	protected SettingsViewColumn makeViewColumn(Sprite aSprite) {
 		return new StatesViewColumn(aSprite);
+	}
+
+	@Override
+	public void updateSettings() {
+		getSprite().getStates().forEach( s -> {
+			getPropertySelector().getSelectedMap()
+			.get(s.getClass().getSimpleName()).set(true);
+			
+		getEditBoxList().get(s.getClass().getSimpleName())
+			.updateSettings(new InfoMap(s).getInfoMap());
+		});
+		
 	}
 	
 }
