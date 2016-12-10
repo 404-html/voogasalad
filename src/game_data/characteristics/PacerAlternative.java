@@ -51,7 +51,7 @@ public class PacerAlternative implements Characteristic{
 	}
 	
 	private boolean changeDirection(){
-		double speed = Math.sqrt(Math.pow(mySprite.getMyXVelocity(),2) + Math.pow(mySprite.getMyYVelocity(),2));
+		double speed = Math.sqrt(Math.pow(mySprite.getXVelocity(),2) + Math.pow(mySprite.getYVelocity(),2));
 		myDistanceTraveled += speed/TIME_STEP;
 		if(myDistanceTraveled >= myDistance) {
 			myDistanceTraveled = 0;
@@ -81,7 +81,7 @@ public class PacerAlternative implements Characteristic{
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-		Pace pace=new Pace(mySprite, changeDirection(myCollisionMap.keySet().size()>0));
+		Pace pace=new Pace(mySprite, changeDirection());
 		pace.act();
 	}
 

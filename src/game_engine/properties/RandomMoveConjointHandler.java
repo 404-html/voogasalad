@@ -38,9 +38,9 @@ public class RandomMoveConjointHandler {
 	
 	private boolean objectPassed() {
 		if(myOrientation.equals(Orientation.VERTICAL)) {
-			return mySprite.getMyLocation().getYLocation() > myScreenYPosition+myScreenHeight;
+			return mySprite.getLocation().getYLocation() > myScreenYPosition+myScreenHeight;
 		} else {
-			return mySprite.getMyLocation().getXLocation()+mySprite.getMyWidth() < myScreenXPosition;
+			return mySprite.getLocation().getXLocation()+mySprite.getWidth() < myScreenXPosition;
 		}
 	}
 	
@@ -49,12 +49,12 @@ public class RandomMoveConjointHandler {
 		double newXLoc, newYLoc;
 		if(myOrientation.equals(Orientation.VERTICAL)) {
 			newXLoc = Math.random()*myScreenWidth;
-			newYLoc = mySprite.getMyLocation().getYLocation()-myScreenHeight-mySprite.getMyHeight();
+			newYLoc = mySprite.getLocation().getYLocation()-myScreenHeight-mySprite.getHeight();
 		} else {
-			newXLoc = mySprite.getMyLocation().getXLocation()+myScreenWidth+mySprite.getMyWidth();
+			newXLoc = mySprite.getLocation().getXLocation()+myScreenWidth+mySprite.getWidth();
 			newYLoc = Math.random()*myScreenHeight;
 		}
-		mySprite.getMyLocation().setLocation(newXLoc, newYLoc);
+		mySprite.getLocation().setLocation(newXLoc, newYLoc);
 		
 	}
 	

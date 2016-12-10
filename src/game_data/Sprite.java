@@ -86,7 +86,8 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = aSprite.getCollisionHandler(); // to change:
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
-		myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
+		//myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
+		myRandomMoveHandler = null;
 		myControllable=aSprite.getControllable();
 	}
 
