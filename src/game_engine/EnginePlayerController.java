@@ -5,42 +5,20 @@ import game_data.Game;
 import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
-import game_data.characteristics.Bouncer;
-import game_data.characteristics.Breakable;
-
-import game_data.characteristics.Characteristic;
-
-import game_data.characteristics.BouncerTop;
-import game_data.characteristics.Damager;
-import game_data.characteristics.HealthPowerUpper;
 import game_data.characteristics.Impassable;
-import game_data.characteristics.SpeedPowerUpper;
-import game_data.characteristics.PacerAlternative;
-import game_data.characteristics.StickyTop;
-import game_data.characteristics.StickyTopHorizontal;
-import game_data.characteristics.StickyTopVertical;
-import game_data.characteristics.TransparentBottomImpassable;
-import game_data.characteristics.Winnable;
 import game_data.sprites.Character;
 import game_data.sprites.Enemy;
-import game_data.sprites.Item;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Health;
-import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.actions.Action;
-import game_engine.actions.Bounce;
-import game_engine.actions.Hit;
-
-import game_engine.actions.Launch;
 import game_engine.actions.LaunchProxy;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
 import javafx.scene.input.KeyCode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -210,7 +188,13 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //					s.addCharacteristic(new Damager(25, s));
 //				}
 =======
+<<<<<<< HEAD
+//				if (s.getName().equals("block5000")) {
+//					s.addCharacteristic(new Damager(25, s));
+//				}
+=======
 >>>>>>> 48d78ac850e44a47957b530a216ee8172c366a8c
+>>>>>>> 1c26035e97064aea2aac7e7592cf824b2cffee2f
 				// }
 				// s.addState(new Health(10));
 				// =======

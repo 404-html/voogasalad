@@ -16,7 +16,7 @@ public class Visible implements State{
 		isVisible = visible;
 	}
 	
-	public boolean isVincibility(){
+	public boolean isVisibile(){
 		return isVisible;
 	}
 	
