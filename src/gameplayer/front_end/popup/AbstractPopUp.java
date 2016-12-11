@@ -3,8 +3,6 @@ package gameplayer.front_end.popup;
 import java.io.File;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
-import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
