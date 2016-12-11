@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 
 public class TextButton extends AbstractButton {
 
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler) {
+	public Button createButton(String aMessage, double aXPos, double aYPos, EventHandler<? super MouseEvent> aHandler) {
 		Button button = super.createButton("", aXPos, aYPos, aHandler);
 		button.setText(aMessage);
 		return button;

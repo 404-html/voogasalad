@@ -3,7 +3,6 @@ import gameplayer.front_end.animated_display.AnimatedDisplay;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**

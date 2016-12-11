@@ -1,25 +1,34 @@
 package gameplayer.application_controller;
 
-import java.io.File;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
+import gameplayer.back_end.user_information.HighscoreManager;
+import gameplayer.back_end.user_information.XMLHandler;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
 import javafx.stage.Stage;
-import util.XMLTranslator;
 
 public abstract class AbstractController {
 	
 	protected static final String FILE = "gameplayerlabels.";
 	protected static final String BUTTONLABEL = "ButtonLabels"; 
 	protected static final int SCENE_SIZE = 1000;
-	protected SceneFactory mySceneBuilder;
-	protected Stage myStage;
-	protected ResourceBundle myButtonLabels;
+	private SceneFactory mySceneBuilder;
+	private Stage myStage;
+	private ResourceBundle myButtonLabels;
 	private IGUIGenerator myGUIGenerator = new GUIGenerator();
+	private XMLHandler myXMLHandler;
+	private PlayerInformationController myInformationController;
 	
-	public AbstractController() {
+	public AbstractController(Stage aStage) {
+		myStage = aStage;
+		mySceneBuilder = new SceneFactory();
+		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
+		myStage.setTitle(myButtonLabels.getString("Title"));
+		myXMLHandler = new XMLHandler();
 	}
 	
 	protected void resetStage(IDisplay aScene) {
@@ -32,18 +41,37 @@ public abstract class AbstractController {
 		return myGUIGenerator;
 	}
 	
-	protected void save(Object aObject, String aFilePath) {
-		XMLTranslator mySaver = new XMLTranslator();
-		mySaver.saveToFile(aObject, "XMLGameFiles/", aFilePath);
+	protected XMLHandler getXMLHandler() {
+		return myXMLHandler;
 	}
 	
-	protected Object load(File aFilePath) {
-		XMLTranslator aLoader = new XMLTranslator();
-		return aLoader.loadFromFile(aFilePath);
+	protected Stage getStage() {
+		return myStage;
 	}
 	
-	protected Object load(String aFilePath) {
-		XMLTranslator aLoader = new XMLTranslator();
-		return aLoader.loadFromFile("XMLGameFiles/", aFilePath);
+	protected SceneFactory getSceneFactory() {
+		return mySceneBuilder;
+	}
+	
+	protected PlayerInformationController getPlayerInformationController() {
+		return myInformationController;
+	}
+	
+	protected void setPlayerInformationController(PlayerInformationController aController) {
+		myInformationController = aController;
+	}
+	
+	protected ResourceBundle getButtonLabels(){
+		return myButtonLabels;
+	}
+	
+	protected HighscoreManager loadHighscores() {
+		HighscoreManager hm;
+		try {
+			hm = (HighscoreManager) getXMLHandler().load("highscores");
+		} catch (Exception e) {
+			hm = new HighscoreManager();
+		}
+		return hm;
 	}
 }
