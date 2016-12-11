@@ -39,10 +39,15 @@ public class LevelWindowToolBarFactory {
 		}).getButton(), new ButtonFactory().createButton("Extend Height", e -> {
 			this.iLevelWindowInternal.getVerticalPanes().set(this.iLevelWindowInternal.getVerticalPanes().get() + 1);
 		}).getButton(), new ButtonFactory().createButton("Shrink Width", e -> {
-			this.iLevelWindowInternal.getHorizontalPanes()
-					.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
+			if (this.iLevelWindowInternal.getHorizontalPanes().get() > 1) {
+				this.iLevelWindowInternal.getHorizontalPanes()
+						.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
+			}
 		}).getButton(), new ButtonFactory().createButton("Shrink Height", e -> {
-			this.iLevelWindowInternal.getHorizontalPanes().set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
+			if (this.iLevelWindowInternal.getVerticalPanes().get() > 1) {
+				this.iLevelWindowInternal.getVerticalPanes()
+						.set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
+			}
 		}).getButton(), new ButtonFactory().createButton("Reset Size", e -> {
 			this.iLevelWindowInternal.getHorizontalPanes().set(1);
 			this.iLevelWindowInternal.getVerticalPanes().set(1);
