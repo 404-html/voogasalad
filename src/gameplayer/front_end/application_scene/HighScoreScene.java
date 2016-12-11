@@ -41,7 +41,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	public Scene init() {
 		XMLTranslator myTranslator = new XMLTranslator();
 		HighscoreManager myScores = (HighscoreManager) myTranslator.loadFromFile(
-				new File("XMLGameFiles/" + myGamename + "-highscores" + ".xml"));
+				new File("XMLGameFiles/" + "highscores" + ".xml"));
 		getRoot().setCenter(addNodes());
 		addScores(myScores);
 		return myScene;
