@@ -101,21 +101,26 @@ public class ApplicationController extends AbstractController {
 		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
-		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true);
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true, getButtonLabels().getString("Choose"));
 	}
 
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice, String aLabel) {
+		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
+				myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
+					resetGame(myStoredGames.getGameFilePath(aChoice));
+					if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, aChoice);
+					try {
+						getOptions();
+						getLevel();
+					} catch (Exception x) {
+						//do nothing
+					}
 
-	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice) {
-		gameChoice.addNode(getGUIGenerator().createComboBox(getButtonLabels().getString("Choose"), myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
-			resetGame(myStoredGames.getGameFilePath(aChoice));
-			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
-			getOptions();
-			getLevel();
-		}));
+				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
 			if (chosenGame != null) resetGame(chosenGame);
-			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
 			getOptions();
 			getLevel();
 		}, ButtonDisplay.TEXT); 
@@ -131,9 +136,9 @@ public class ApplicationController extends AbstractController {
 		myGamePlay.setLevel(lm.getLevel());
 	}
 
-	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
+	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice, String aChoice) {
 		gameChoice.clear();
-		setGameChoiceButtonHandlers(gameChoice, false);
+		setGameChoiceButtonHandlers(gameChoice, false, aChoice);
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Options"), 0, 0, e -> {

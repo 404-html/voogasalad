@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent;
 
 public class ButtonFactory {
 	
-	public Button buildButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType) {
+	public Button buildButton(String aMessage, double aXPos, double aYPos, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType) {
 		IButton buttonClass = null;
 		if (aDisplayType.equals(ButtonDisplay.CSS)) {
 			buttonClass = new CSSButton();

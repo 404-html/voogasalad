@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 
 public class AbstractButton implements IButton {
 	
-	public Button createButton(String aMessage, int aXPos, int aYPos, 
+	public Button createButton(String aMessage, double aXPos, double aYPos, 
 		EventHandler<? super MouseEvent> aHandler){
 		Button newButton = new Button();
 		newButton.setOnMouseClicked(aHandler);

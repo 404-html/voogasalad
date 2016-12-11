@@ -23,16 +23,18 @@ public interface IGUIGenerator {
 	
 	public ImageView createImage(String aFileName, double aWidth);
 		
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
+	public Button createButton(String aMessage, double aXPos, double aYPos, 
+			EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
 	
-	public TextField createTextField(String aPlaceHolder, int aXPos, int aYPos, int aWidth);
-		
-	public Label createLabel(String aText, int aXPos, int aYPos);
+	public TextField createTextField(String aPlaceHolder, double aXPos, double aYPos, double aWidth);
 
 	public Menu createMenu(String aTitle, String[] aString, EventHandler<ActionEvent>[] aHandler);
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 	
-	public ComboBox<Pane> createComboBox(String aLabel, List<String> aList, List<String> aListOfFiles, List<String> aListOfDescriptions, Choosable aChoice);
+	public ComboBox<Pane> createComboBox(String aLabel, List<String> aList, List<String> aListOfFiles, 
+			List<String> aListOfDescriptions, Choosable aChoice);
+
+	public Label createLabel(String aText, double aXPos, double aYPos);
 	
 }
