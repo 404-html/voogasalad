@@ -2,6 +2,7 @@ package author.model.game_observables.draggable_sprite.drag_resize;
 
 import author.model.game_observables.draggable_sprite.ResizableSprite;
 import author.view.pages.sprite.SpriteEditWindow;
+import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
@@ -169,10 +170,9 @@ public class DragResizeMod {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
 		if (state == S.DRAG) {
-			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
-					mySprite.getDraggableItem().getLayoutY());
+			mySprite.getSprite().setLocation((new Location(mySprite.getDraggableItem().getLayoutX(),
+					mySprite.getDraggableItem().getLayoutY())));
 		} else {
-			System.out.println("removing");
 			removePresetListener();
 			mySprite.getSprite().setPreset(null);
 			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());

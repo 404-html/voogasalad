@@ -157,8 +157,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setLocation(Location myLocation) {
-		this.myLocation = myLocation;
-		notifyListeners();
+		if (this.myLocation==null || !this.myLocation.equals(myLocation)){
+			this.myLocation = myLocation;
+			notifyListeners();
+		}
 	}
 
 	public double getXVelocity() {
@@ -171,23 +173,28 @@ public abstract class Sprite extends GameObject {
 
 	public void setXVelocity(double myVelocity) {
 		//		System.out.println("TERMINAL X " + terminalXVel);
-		if (Math.abs(myVelocity) > terminalXVel) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
+		if (this.myXVelocity!=myVelocity){
+			if (Math.abs(myVelocity) > terminalXVel) {
+				this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
+			}
+			else{
+				this.myXVelocity = myVelocity;
+			}
+			notifyListeners();
 		}
-		else{
-			this.myXVelocity = myVelocity;
-		}
-		notifyListeners();
+		
 	}
 
 	public void setYVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > terminalYVel) {
-			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*terminalYVel;
+		if (this.myYVelocity!=myVelocity){
+			if (Math.abs(myVelocity) > terminalYVel) {
+				this.myYVelocity = (myVelocity/Math.abs(myVelocity))*terminalYVel;
+			}
+			else{
+				this.myYVelocity = myVelocity;
+			}
+			notifyListeners();
 		}
-		else{
-			this.myYVelocity = myVelocity;
-		}
-		notifyListeners();
 	}
 
 	public double getXAcceleration() {
@@ -211,8 +218,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setImagePath(String myImagePath) {
-		this.myImagePath = myImagePath;
-		notifyListeners();
+		if (this.myImagePath==null || !this.myImagePath.equals(myImagePath)){
+			this.myImagePath = myImagePath;
+			notifyListeners();
+		}
 	}
 
 	public CollisionHandler getCollisionHandler() {
@@ -238,8 +247,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setWidth(int myWidth) {
-		this.myWidth = myWidth;
-		notifyListeners();
+		if (this.myWidth!=myWidth){
+			this.myWidth = myWidth;
+			notifyListeners();
+		}
 	}
 
 	public int getHeight() {
@@ -247,8 +258,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setHeight(int myHeight) {
-		this.myHeight = myHeight;
-		notifyListeners();
+		if (this.myHeight!=myHeight){
+			this.myHeight = myHeight;
+			notifyListeners();
+		}
 	}
 
 	public Sprite getPreset() {

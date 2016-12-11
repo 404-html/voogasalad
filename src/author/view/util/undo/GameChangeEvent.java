@@ -32,21 +32,21 @@ public class GameChangeEvent {
 		initSpriteListener(activeSprite);
 	}
 	
-	public void restore(){
+	public Boolean restore(){
 		
-		if (!this.history.isEmpty()){
-			System.out.println("Restore");
+		if (this.history.size()>1){
 			Sprite restoreSprite = this.history.pop();
-			System.out.println("Current X:  " + this.activeSprite.getLocation().getXLocation() + "   New X: " + restoreSprite.getLocation().getXLocation());
+			restoreSprite=this.history.pop();
 			this.activeSprite.setLocation(restoreSprite.getLocation());
 			this.activeSprite.setHeight(restoreSprite.getHeight());
 			this.activeSprite.setWidth(restoreSprite.getWidth());
 			this.activeSprite.setImagePath(restoreSprite.getImagePath());
+			return true;
 		}
+		return false;
 	}
 	
 	private void createSnapShot(){
-		System.out.println("Creating Snapshot");
 		Sprite clone = this.activeSprite.clone();
 		System.out.println(clone.getLocation().getXLocation());
 		this.history.push(clone);
@@ -54,16 +54,13 @@ public class GameChangeEvent {
 	
 	private void initSpriteListener(Sprite aSprite){
 		InvalidationListener invalidationListener = ((listener) -> {
-			System.out.println("Listen");
 			if (this.history.isEmpty()){
 				createSnapShot();
-				this.iRevertManagerInternal.addEvent(this);
 			}
 			else if (!compareSnapShot(aSprite, this.history.peek())){
-				
 				createSnapShot();
-				this.iRevertManagerInternal.addEvent(this);
 			}
+			this.iRevertManagerInternal.addEvent(this);
 		});
 		aSprite.addListener(invalidationListener);
 		this.invalidationListener = invalidationListener;

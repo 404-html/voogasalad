@@ -94,7 +94,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 					.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
-			// createUndo(aLevel);
+			createUndo(aLevel);
 			aLevel.addListener((level) -> {
 				updatePane(aLevel);
 			});
@@ -108,11 +108,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	private void createUndo(Level aLevel) {
 		this.iRevertManager = new RevertManagerFactory().create(aLevel);
-
 		this.levelWindowPane.getPane().setOnKeyPressed((event) -> {
-			System.out.println("Key Pressed");
-			if (event.getCode().equals(KeyCode.Z)) {
-				System.out.println("Z");
+			if (event.getCode().equals(KeyCode.Z) && event.isControlDown()) {
 				this.iRevertManager.undo();
 			}
 		});
