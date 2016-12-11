@@ -18,6 +18,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.StringConverter;
 
 public class GUIGenerator implements IGUIGenerator {
 	
@@ -75,9 +78,25 @@ public class GUIGenerator implements IGUIGenerator {
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
 		box.setPromptText(aLabel);
-		box.setEditable(true);        
+		box.setEditable(true);
+		box.setConverter(new StringConverter<Pane>() {
+
+		    @Override
+		    public Pane fromString(String string) {
+		        return box.getSelectionModel().getSelectedItem();
+		    }
+
+			@Override
+			public String toString (Pane object) {
+				if (object == null) return null;
+				if (object.getChildren().size() >= 1) {
+					return ((Label) object.getChildren().get(1)).getText();
+				}
+				return null;
+			}
+		});
 		box.setOnAction(e -> {
-			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
+			String label = box.getConverter().toString(box.getSelectionModel().getSelectedItem());
 		    aChooser.choose(label);
 		    box.setPromptText(label);
 		});
