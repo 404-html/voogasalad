@@ -117,6 +117,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			this.getImageView().setImage(new Image((new File(aSprite.getImagePath()).toURI().toString())));
 			this.getDraggableItem().setPrefWidth(aSprite.getWidth());
 			this.getDraggableItem().setPrefHeight(aSprite.getHeight());
+			this.getDraggableItem().relocate(aSprite.getLocation().getXLocation(), aSprite.getLocation().getYLocation());
 			//this.getDraggableItem().setRotate(aSprite.getLocation().getMyHeading());
 		};
 		return invalidationListener;
