@@ -1,0 +1,77 @@
+<game__data.sprites.Player>
+  <name>Super_Mario</name>
+  <myLocation>
+    <myXLocation>0.0</myXLocation>
+    <myYLocation>0.0</myYLocation>
+  </myLocation>
+  <myWidth>50</myWidth>
+  <myHeight>50</myHeight>
+  <myImagePath>data/images/sprite_images/super-mario.png</myImagePath>
+  <myXVelocity>0.0</myXVelocity>
+  <myYVelocity>0.0</myYVelocity>
+  <myXAcceleration>0.0</myXAcceleration>
+  <myYAcceleration>0.0</myYAcceleration>
+  <terminalXVel>600.0</terminalXVel>
+  <terminalYVel>600.0</terminalYVel>
+  <myCollisionHandler/>
+  <myCharacteristics>
+    <game__data.characteristics.Controllable/>
+  </myCharacteristics>
+  <myControllable>
+    <mySprite class="game_data.sprites.Player" reference="../.."/>
+    <myKeyPressedMap class="tree-map">
+      <entry>
+        <javafx.scene.input.KeyCode>LEFT</javafx.scene.input.KeyCode>
+        <game__engine.actions.MoveLeft>
+          <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+          <myOldLocation reference="../../../../../myLocation"/>
+          <myNewLocation>
+            <myXLocation>0.0</myXLocation>
+            <myYLocation>0.0</myYLocation>
+          </myNewLocation>
+          <myVelocity>300.0</myVelocity>
+        </game__engine.actions.MoveLeft>
+      </entry>
+      <entry>
+        <javafx.scene.input.KeyCode>UP</javafx.scene.input.KeyCode>
+        <game__engine.actions.MoveUpJump>
+          <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+          <myOldLocation reference="../../../../../myLocation"/>
+          <myNewLocation>
+            <myXLocation>0.0</myXLocation>
+            <myYLocation>0.0</myYLocation>
+          </myNewLocation>
+          <myVelocity>300.0</myVelocity>
+        </game__engine.actions.MoveUpJump>
+      </entry>
+      <entry>
+        <javafx.scene.input.KeyCode>RIGHT</javafx.scene.input.KeyCode>
+        <game__engine.actions.MoveRight>
+          <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+          <myOldLocation reference="../../../../../myLocation"/>
+          <myNewLocation>
+            <myXLocation>0.0</myXLocation>
+            <myYLocation>0.0</myYLocation>
+          </myNewLocation>
+          <myVelocity>300.0</myVelocity>
+        </game__engine.actions.MoveRight>
+      </entry>
+    </myKeyPressedMap>
+    <myKeyReleasedMap/>
+    <isControllable>true</isControllable>
+  </myControllable>
+  <id></id>
+  <myStates>
+    <game__data.states.Physics>
+      <verticalGravity>800.0</verticalGravity>
+      <horizontalGravity>0.0</horizontalGravity>
+    </game__data.states.Physics>
+    <game__data.states.LevelWon>
+      <hasWon>false</hasWon>
+    </game__data.states.LevelWon>
+    <game__data.states.Health>
+      <myHealth>1</myHealth>
+      <isAlive>true</isAlive>
+    </game__data.states.Health>
+  </myStates>
+</game__data.sprites.Player>
