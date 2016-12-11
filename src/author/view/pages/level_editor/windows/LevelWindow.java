@@ -112,6 +112,9 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			if (event.getCode().equals(KeyCode.Z) && event.isControlDown()) {
 				this.iRevertManager.undo();
 			}
+			else if (event.getCode().equals(KeyCode.Y) && event.isControlDown()) {
+				this.iRevertManager.redo();
+			}
 		});
 	}
 

@@ -11,6 +11,8 @@ import game_data.Sprite;
  */
 public interface IRevertManagerInternal {
 
-	public void addEvent(GameChangeEvent gameChangeEvent);
+	public void addHistory(GameChangeEvent gameChangeEvent);
+	
+	public void addFuture(GameChangeEvent gameChangeEvent);
 
 }

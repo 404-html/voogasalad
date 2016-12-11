@@ -19,7 +19,8 @@ import game_data.Sprite;
  */
 class RevertManager implements IRevertManager, IRevertManagerInternal{
 	private Map<Sprite, GameChangeEvent> existingSprites = new HashMap<>();
-	private Stack<GameChangeEvent> eventList = new Stack<>();
+	private Stack<GameChangeEvent> eventHistory = new Stack<>();
+	private Stack<GameChangeEvent> eventFuture = new Stack<>();
 	
 	private Level level;
 	/**
@@ -32,14 +33,21 @@ class RevertManager implements IRevertManager, IRevertManagerInternal{
 	
 	@Override
 	public void undo(){
-		if (!this.eventList.isEmpty()){
-			GameChangeEvent gameChangeEvent = eventList.pop();
-			if (!gameChangeEvent.restore()){
+		if (!this.eventHistory.isEmpty()){
+			GameChangeEvent gameChangeEvent = eventHistory.pop();
+			eventFuture.push(gameChangeEvent);
+			if (!gameChangeEvent.undo()){
 				removeEvent(gameChangeEvent.getSprite());
 			}
 		}
-		else{
-			System.out.println("Event List is Empty");
+	}
+	
+	@Override
+	public void redo(){
+		if (!this.eventFuture.isEmpty()){
+			GameChangeEvent gameChangeEvent = eventFuture.pop();
+			eventHistory.push(gameChangeEvent);
+			gameChangeEvent.redo();
 		}
 	}
 	
@@ -59,18 +67,24 @@ class RevertManager implements IRevertManager, IRevertManagerInternal{
 	}
 	
 	@Override
-	public void addEvent(GameChangeEvent gameChangeEvent) {
-		this.eventList.push(gameChangeEvent);
-		System.out.println("Size: " + eventList.size());
-		this.eventList.forEach((myGameChangeEvent) -> {
+	public void addHistory(GameChangeEvent aGameChangeEvent) {
+		this.eventHistory.push(aGameChangeEvent);
+		System.out.println("Size: " + eventHistory.size());
+		this.eventHistory.forEach((myGameChangeEvent) -> {
 			System.out.println(myGameChangeEvent);
 		});
+	}
+	
+	@Override
+	public void addFuture(GameChangeEvent aGameChangeEvent){
+		this.eventFuture.push(aGameChangeEvent);
 	}
 	
 	private void removeEvent(Sprite aSprite) {
 		if (this.existingSprites.containsKey(aSprite)){
 			this.existingSprites.get(aSprite).removeListener();
-			this.eventList.removeAll(Collections.singleton(this.existingSprites.get(aSprite)));
+			this.eventHistory.removeAll(Collections.singleton(this.existingSprites.get(aSprite)));
+			this.eventFuture.removeAll(Collections.singleton(this.existingSprites.get(aSprite)));
 			this.level.removeSprite(aSprite);
 			this.existingSprites.remove(aSprite);
 		}
