@@ -252,7 +252,6 @@ public class GamePlayController extends AbstractController {
 	}
 
 	/**
-	 * 
 	 * @param aOptions is the key input and HUD font color for the user
 	 */
 	public void setOptions(UserOptions aOptions) {
@@ -262,7 +261,6 @@ public class GamePlayController extends AbstractController {
 	}
 
 	/**
-	 * 
 	 * @param aLevel is the level that the user chose from the options
 	 */
 	public void setLevel(int aLevel) {

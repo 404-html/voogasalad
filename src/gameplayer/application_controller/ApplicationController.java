@@ -3,6 +3,7 @@ package gameplayer.application_controller;
 import java.io.File;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
+import game_data.Game;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.LevelManager;
@@ -85,6 +86,10 @@ public class ApplicationController extends AbstractController {
 		});
 	}
 
+	/**
+	 * 
+	 * @param aGamename is used to determine which set of highscores to get
+	 */
 	public void displayHighScoreScene(String aGamename) {
 		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getWidth(), getStage().getHeight(), aGamename);
 		createNavigationButtons((INavigationDisplay) highScore);
@@ -116,7 +121,6 @@ public class ApplicationController extends AbstractController {
 					} catch (Exception x) {
 						//do nothing
 					}
-
 				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
@@ -171,12 +175,23 @@ public class ApplicationController extends AbstractController {
 			myGamePlay.displayGame();
 		}, ButtonDisplay.TEXT);
 	}
+	
+	/**
+	 *
+	 * @param aTitle is the message title
+	 * @param aMessage is the message for the post
+	 */
 
 	public void publishToFacebook(String aTitle, String aMessage) {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
 	}
 
 	private void resetGame(File chosenGame) {
-		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
+		try {
+			myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
+		} catch (Exception x) {
+			ErrorAlert ea = new ErrorAlert();
+			ea.show(x);
+		}
 	}
 }
