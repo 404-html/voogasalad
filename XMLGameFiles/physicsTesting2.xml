@@ -8,44 +8,6 @@
       <width>1002</width>
       <height>568</height>
       <mySprites>
-        <game__data.sprites.Player>
-          <name>Player_Name</name>
-          <myLocation>
-            <myXLocation>404.0</myXLocation>
-            <myYLocation>91.0</myYLocation>
-          </myLocation>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myImagePath>data/images/sprite_images/mymario.jpg</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>600.0</terminalXVel>
-          <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler/>
-          <myCharacteristics/>
-          <myControllable>
-            <mySprite class="game_data.sprites.Player" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>800.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.LevelWon>
-              <hasWon>false</hasWon>
-            </game__data.states.LevelWon>
-          </myStates>
-        </game__data.sprites.Player>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
@@ -69,14 +31,14 @@
               <originalYPosition>0.0</originalYPosition>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.HorizontalPacer>
-            <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-              <movesThroughBottom>false</movesThroughBottom>
-            </game__data.characteristics.Impassable>
             <game__data.characteristics.StickyTopHorizontal>
               <mySprite class="game_data.sprites.Terrain" defined-in="game_data.characteristics.StickyTop" reference="../../.."/>
               <horizontal>true</horizontal>
             </game__data.characteristics.StickyTopHorizontal>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -112,16 +74,16 @@
             <game__data.characteristics.TransparentBottomImpassable>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>500.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
             <game__data.characteristics.HorizontalPacer>
-              <myDistance>500.0</myDistance>
+              <myDistance>200.0</myDistance>
               <originalXPosition>0.0</originalXPosition>
               <originalYPosition>0.0</originalYPosition>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.HorizontalPacer>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>0.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -203,6 +165,44 @@
             </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
+        <game__data.sprites.Player>
+          <name>Player_Name</name>
+          <myLocation>
+            <myXLocation>404.0</myXLocation>
+            <myYLocation>91.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/mymario.jpg</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics/>
+          <myControllable>
+            <mySprite class="game_data.sprites.Player" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>800.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.LevelWon>
+              <hasWon>false</hasWon>
+            </game__data.states.LevelWon>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Player>
       </mySprites>
       <myControllableSpriteList>
         <game__data.sprites.Player reference="../../mySprites/game__data.sprites.Player"/>
@@ -244,6 +244,7 @@
         </game__data.states.LevelWon>
       </myStates>
     </game__data.sprites.Player>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[3]/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
     <game__data.sprites.Player>
       <name>asdasd</name>
       <myLocation>
@@ -269,23 +270,22 @@
       </myControllable>
       <id></id>
       <myStates>
-        <game__data.states.Score>
-          <myScore>0</myScore>
-        </game__data.states.Score>
         <game__data.states.Physics>
           <verticalGravity>800.0</verticalGravity>
           <horizontalGravity>0.0</horizontalGravity>
         </game__data.states.Physics>
-        <game__data.states.LevelWon>
-          <hasWon>false</hasWon>
-        </game__data.states.LevelWon>
         <game__data.states.Health>
           <myHealth>1</myHealth>
           <isAlive>true</isAlive>
         </game__data.states.Health>
+        <game__data.states.LevelWon>
+          <hasWon>false</hasWon>
+        </game__data.states.LevelWon>
+        <game__data.states.Score>
+          <myScore>0</myScore>
+        </game__data.states.Score>
       </myStates>
     </game__data.sprites.Player>
-    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[3]/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
   </mySpritePresets>
   <myCurrentLevel reference="../myLevels/game__data.Level"/>
   <myDescription>New VOOGASalad Game</myDescription>
