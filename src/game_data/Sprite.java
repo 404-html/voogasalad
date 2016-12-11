@@ -48,7 +48,7 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
-		myControllable=new Controllable();
+		myControllable = new Controllable();
 		myRandomMoveHandler = null;
 		myRandomMoveConjointHandler = null;
 	}

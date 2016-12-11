@@ -32,11 +32,11 @@ public class ConcreteAuthorController implements IAuthorController {
 	 * @see author.controller.IAuthorControllerExternal#getScene()
 	 */
 	public ConcreteAuthorController() {
+		setLanguageResourceBundle("English");
+		myPathResourceBundle = ResourceBundle.getBundle("author.resources/Paths");
 		this.authorModel = new AuthorModelFactory().create((IAuthorController) this);
 		this.authorView = new AuthorView((IAuthorController) this);
 		this.invalidationListeners = new HashSet<>();
-		setLanguageResourceBundle("English");
-		myLanguageResourceBundle = ResourceBundle.getBundle("author.resources/English");
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class ConcreteAuthorController implements IAuthorController {
 		try {
 			myLanguageResourceBundle = ResourceBundle.getBundle("author.resources/" + aLanguage);
 		} catch (final MissingResourceException e) {
-			// don't change language
+			System.out.println("couldn't find language " + aLanguage);
 		}
 	}
 
