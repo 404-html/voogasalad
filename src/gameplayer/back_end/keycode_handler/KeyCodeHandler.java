@@ -1,9 +1,11 @@
 package gameplayer.back_end.keycode_handler;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import gameplayer.application_controller.KeyCodeTranslator;
-import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class KeyCodeHandler {
@@ -12,12 +14,13 @@ public class KeyCodeHandler {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private KeyCodeTranslator myKeyCodeTranslator;
-	private Node myMainPlayerImage;
+	private List<ImageView> myMainPlayerImage;
 	
 	public KeyCodeHandler(String aInput) {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
+		myMainPlayerImage = new ArrayList<ImageView>();
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
 	}
 	
@@ -28,8 +31,8 @@ public class KeyCodeHandler {
 		myKeyCodeTranslator = new KeyCodeTranslator("Default");
 	}
 	
-	public void addMainPlayer(Node node) {
-		myMainPlayerImage = node;
+	public void addMainPlayer(List<ImageView> aImageList) {
+		myMainPlayerImage = aImageList;
 	}
 	
 	public Set<KeyCode> getKeySet() {
@@ -57,9 +60,13 @@ public class KeyCodeHandler {
 		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
 		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
 		if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
-			myMainPlayerImage.setRotate(180);
+			for (int i = 0; i < myMainPlayerImage.size(); i++) {
+				myMainPlayerImage.get(i).setRotate(180);
+			}
 		} else if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.RIGHT)) {
-			myMainPlayerImage.setRotate(0);
+			for (int i = 0; i < myMainPlayerImage.size(); i++) {
+				myMainPlayerImage.get(i).setRotate(0);
+			}
 		}
 	}
 	
