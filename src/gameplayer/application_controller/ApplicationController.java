@@ -87,6 +87,7 @@ public class ApplicationController extends AbstractController {
 
 	public void displayHighScoreScene(String aGamename) {
 		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getWidth(), getStage().getHeight(), aGamename);
+		createNavigationButtons((INavigationDisplay) highScore);
 		resetStage(highScore);
 		//setHighScoreHandlers((INavigationDisplay) highScore);
 	}
@@ -157,7 +158,6 @@ public class ApplicationController extends AbstractController {
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Levels"), 0, 0, e -> {
 			LevelSelectionPopUp levelSelection = (LevelSelectionPopUp) new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
 			levelSelection.setOnClosed(k -> {
-//				System.out.println(levelSelection.getSelectedLevel());
 				myGamePlay.setLevel(levelSelection.getSelectedLevel());
 			});
 			levelSelection.show();
