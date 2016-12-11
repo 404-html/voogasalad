@@ -77,7 +77,8 @@ public class GUIGenerator implements IGUIGenerator {
 		List<HBox> options = createListOfComboBoxHbox(aListOfNames, aListOfFilePaths, aListOfDescriptions, box);
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
-		box.setEditable(true);
+		//box.setMinWidth(box.getWidth());
+		//box.setEditable(true);
 		box.setConverter(new StringConverter<Pane>() {
 
 		    @Override
