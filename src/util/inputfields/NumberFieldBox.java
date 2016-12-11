@@ -9,8 +9,8 @@ import javafx.beans.value.ChangeListener;
  */
 public class NumberFieldBox extends TextFieldBox {
 
-	private static final String MATCH_NOT_NUMBER_REGEX = "\\d+(\\.\\d+)";
-	private static final String REPLACE_NOT_NUM_REGEX = "[^\\d+(\\.\\d+)]";
+	private static final String NUMBER_REGEX = "\\d+(\\-\\.\\d+)";
+	private static final String NOT_NUM_REGEX = "[^" + NUMBER_REGEX + "]";
 	private static final String REPLACE_NOT_NUM_CHAR = "";
 	
 	private static final Number DEFAULT_VALUE = 0;
@@ -72,8 +72,8 @@ public class NumberFieldBox extends TextFieldBox {
 	 */
 	private final ChangeListener<? super String> makeOnlyNumberProperty(){
 		return (obs, ov, nv) -> { 
-			if(!nv.matches(MATCH_NOT_NUMBER_REGEX)){
-				getTextField().setText(nv.replaceAll(REPLACE_NOT_NUM_REGEX, REPLACE_NOT_NUM_CHAR));
+			if(!nv.matches(NUMBER_REGEX)){
+				getTextField().setText(nv.replaceAll(NOT_NUM_REGEX, REPLACE_NOT_NUM_CHAR));
 			}
 		}; 
 
