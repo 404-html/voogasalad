@@ -1,6 +1,5 @@
 package author.view.pages.sprite.editor.settings.states;
-
-import java.util.Set;
+import java.util.Map;
 
 import author.view.pages.sprite.editor.settings.SettingsFactory;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
@@ -36,4 +35,5 @@ public class StateEditBox extends SpriteSettingsEditBox {
 		getSprite().getStates().removeIf( p -> {return p.getClass().getSimpleName().equals(getName());});
 		getSprite().setName(getSprite().getName());
 	}
+
 }

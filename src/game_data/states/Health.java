@@ -33,8 +33,8 @@ public class Health implements State{
 	}
 
 	@Override
-	public void updateState(int pain) {
-		myHealth-=pain;
+	public void updateState(double pointsToGive) {
+		myHealth-=pointsToGive;
 	}
 	
 	public int getMyHealth() {

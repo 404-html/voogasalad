@@ -21,7 +21,7 @@ public class LaunchWithLevel implements Launch{
 		myProjectile.setYVelocity(myYVelocity);
 		myProjectile.setXAcceleration(0);
 		myProjectile.setYAcceleration(0);
-		myProjectile.setControllable(new Controllable(myProjectile));
+		myProjectile.setControllable(new Controllable());
 		this.myProjectile=myProjectile.clone();
 		this.myXVelocity=myXVelocity;
 		this.myYVelocity=myYVelocity;
