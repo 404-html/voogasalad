@@ -17,7 +17,7 @@ public class Visible implements State{
 	}
 	
 	@ViewableMethodOutput(description="Is Visible", type=boolean.class)
-	public boolean isVincibility(){
+	public boolean isVisible(){
 		return isVisible;
 	}
 	
@@ -27,7 +27,8 @@ public class Visible implements State{
 	}
 
 	@Override
-	public void updateState(int pain) {
+	public void updateState(double pain) {
 		// TODO Auto-generated method stub
-	}	
+	}
+
 }

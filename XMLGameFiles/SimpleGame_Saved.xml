@@ -10,14 +10,12 @@
         <game__data.sprites.Player>
           <name>RCD</name>
           <myLocation>
-            <myHeading>0.0</myHeading>
             <myXLocation>186.0</myXLocation>
             <myYLocation>384.0</myYLocation>
           </myLocation>
           <preset class="game_data.sprites.Player">
             <name>RCD</name>
             <myLocation>
-              <myHeading>0.0</myHeading>
               <myXLocation>0.0</myXLocation>
               <myYLocation>0.0</myYLocation>
             </myLocation>
@@ -48,14 +46,12 @@
         <game__data.sprites.Terrain>
           <name>Block</name>
           <myLocation>
-            <myHeading>0.0</myHeading>
             <myXLocation>68.0</myXLocation>
             <myYLocation>494.0</myYLocation>
           </myLocation>
           <preset class="game_data.sprites.Terrain">
             <name>Block</name>
             <myLocation>
-              <myHeading>0.0</myHeading>
               <myXLocation>0.0</myXLocation>
               <myYLocation>0.0</myYLocation>
             </myLocation>
@@ -86,14 +82,12 @@
         <game__data.sprites.Enemy>
           <name>ScaryRCD</name>
           <myLocation>
-            <myHeading>0.0</myHeading>
             <myXLocation>314.0</myXLocation>
             <myYLocation>330.0</myYLocation>
           </myLocation>
           <preset class="game_data.sprites.Enemy">
             <name>ScaryRCD</name>
             <myLocation>
-              <myHeading>0.0</myHeading>
               <myXLocation>0.0</myXLocation>
               <myYLocation>0.0</myYLocation>
             </myLocation>

@@ -25,6 +25,7 @@ public class SpriteDisplay {
 	
 	public ImageView getUpdatedSpriteMap(Sprite aSprite) {
 		ImageView image;
+		//mySpriteViews=new HashMap<Sprite, ImageView>();
 		if (mySpriteViews.containsKey(aSprite)) {
 			image = mySpriteViews.get(aSprite);
 		} else {

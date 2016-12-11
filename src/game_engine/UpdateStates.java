@@ -1,9 +1,4 @@
 package game_engine;
-
-import java.awt.Image;
-
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,30 +7,26 @@ import java.util.Map;
 import java.util.Set;
 import game_data.Controllable;
 import game_data.Level;
-import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
-import game_data.sprites.Enemy;
+import game_data.characteristics.TemporalPowerUpper;
 import game_data.sprites.Player;
 import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.Physics;
+import game_data.states.Score;
 import game_data.states.State;
 import game_engine.actions.Action;
-import game_engine.actions.Launch;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
-import game_engine.actions.MoveUpFly;
 import game_engine.actions.MoveUpJump;
-import game_engine.actions.SpeedBoost;
 import game_engine.actions.StopLeftMovement;
 import game_engine.actions.StopRightMovement;
-import game_engine.actions.StopUpMovement;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import game_engine.Side;
 
 /**
  * TODO make sure that player doesnt run into walls or thigns NOTE: doing the
@@ -55,131 +46,116 @@ import javafx.scene.input.KeyCode;
  */
 
 public class UpdateStates implements IUpdateStatesAndPowerUps {
-
+	//int count;
 	private Level myLevel;
 	private List<Sprite> mySpriteList;
-	private double timeElapsed;
-	private KeyCode myKey;
-	private Map<KeyCode, Action> myKeyPressedMap;
+	private double myTimeElapsed;
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private Map<Sprite, ImageView> mySpriteImages;
-	private Map<KeyCode, Action> myKeyReleasedMap;
 	private double myScreenWidth, myScreenHeight, myScreenXPosition, myScreenYPosition;
-
 	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
-
 	private List<Sprite> myControllableSpriteList;
 
-	/*public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
-			Map<Sprite, ImageView> map, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
-		this.myLevel = aLevel;
-		this.myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
-		this.mySpriteList = myLevel.getMySpriteList();
-		//System.out.println("mySpriteList is being updated"+mySpriteList.size());
-
-		this.timeElapsed = timeElapsed;
-		this.myKeysPressed = myKeysPressed;
-
-
-		this.myKeysReleased=myKeysReleased;
-		this.mySpriteImages=map;
-		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
-		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
-
-		this.myKeysReleased = myKeysReleased;
-		this.mySpriteImages = mySpriteImages;
-		this.myKeyPressedMap = new HashMap<KeyCode, Action>();
-		this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
-
+	public UpdateStates(Level aLevel) {
+		//count=0;
+		myLevel = aLevel;
+		myCurrentPowerUps = new HashMap<Characteristic, Double>();
+		mySpriteList = new ArrayList<Sprite>();
+		myTimeElapsed = 0;
+		myKeysPressed = new HashSet<KeyCode>();
+		myKeysReleased = new HashSet<KeyCode>();
+		mySpriteImages = new HashMap<Sprite, ImageView>();
 		myControllableSpriteList = new ArrayList<Sprite>();
-		this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
-		this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
 
-		//generateDefaultKeyPressedMap();
+		mainPlayerControllable=new Controllable();
+	}
+	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
+        myScreenWidth = aScreenWidth;
+        myScreenHeight = aScreenHeight;
+        myScreenXPosition = aScreenXPosition;
+        myScreenYPosition = aScreenYPosition;
+		myTimeElapsed=aTimeElapsed;
+		setKeysPressed(aKeysPressed);
+		setKeysReleased(aKeysReleased);
+		mySpriteImages=aSpriteImages;
+		myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
+		mySpriteList = myLevel.getMySpriteList();
+		myControllableSpriteList = myLevel.getMyControllableSpriteList();
+		mainPlayerControllable = myLevel.getMainPlayer().getControllable();	
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		//updateSpritePositions();
+	}
 
-//		System.out.println("xvel " + myLevel.getMainPlayer().getXVelocity());
-//		System.out.println("yvel " + myLevel.getMainPlayer().getYVelocity());		
-//		System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
-//		System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
-	}*/
-	
-	public UpdateStates(Level aLevel, double timeElapsed, Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased,
-			Map<Sprite, ImageView> mySpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition) {
-			this.myLevel = aLevel;
-			this.myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
-			this.mySpriteList = myLevel.getMySpriteList();
-			this.timeElapsed = timeElapsed;
-			this.myKeysPressed = myKeysPressed;
-			this.myKeysReleased = myKeysReleased;
-			this.mySpriteImages = mySpriteImages;
-			this.myKeyPressedMap = new HashMap<KeyCode, Action>();
-			this.myKeyReleasedMap = new HashMap<KeyCode, Action>();
-            this.myScreenWidth = aScreenWidth;
-            this.myScreenHeight = aScreenHeight;
-            this.myScreenXPosition = aScreenXPosition;
-            this.myScreenYPosition = aScreenYPosition;
-			myControllableSpriteList = new ArrayList<Sprite>();
-			this.myControllableSpriteList = myLevel.getMyControllableSpriteList();
-			this.mainPlayerControllable = myLevel.getMainPlayer().getControllable();
-
-			//generateDefaultKeyPressedMap();
-			activatePowerUps();
-			checkPowerUps();
-			executeControls();
-			executeCharacteristics();
-			cleanGame();
-			//updateSpritePositions();
-
-			//System.out.println("xvel " + myLevel.getMainPlayer().getXVelocity());
-			//System.out.println("yvel " + myLevel.getMainPlayer().getYVelocity());
-			//System.out.println("xtermvel " + myLevel.getMainPlayer().getTerminalXVel());
-			//System.out.println("ytermvel " + myLevel.getMainPlayer().getTerminalYVel());
-			}
-
+	private void setKeysPressed(Set<KeyCode> aKeysPressed){
+		myKeysPressed=aKeysPressed;
+	}
+	private void setKeysReleased(Set<KeyCode> aKeysReleased){
+		myKeysReleased=aKeysReleased;
+	}
+	public Level getLevel(){
+		return myLevel;
+	}
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
-			if (powerUp instanceof SpeedPowerUpper) {
-				((SpeedPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
+//			System.out.println("Number of power ups " + myCurrentPowerUps.size());
+			if (powerUp instanceof TemporalPowerUpper) {
+				((TemporalPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this,
+						myCurrentPowerUps.get(powerUp));
+//				System.out.println("Time left " + myCurrentPowerUps.get(powerUp));
 			}
 			if(powerUp instanceof InvincibilityPowerUpper){
-				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));	
+				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
 			}
 
 		}
 	}
 
+//	public static void activateSingularPowerUp(Characteristic powerUp, Sprite spriteToActOn, double timeRemaining) {
+//		// BUGGY!!!!
+////		System.out.println("Time left " + timeRemaining);
+//
+//		if (powerUp instanceof TemporalPowerUpper) {
+//			// System.out.println("LUCIA");
+//			// if(powerUp instanceof InvincibilityPowerUpper)
+//			// System.out.println("Knows type");
+//
+//			((TemporalPowerUpper) powerUp).activatePowerUp(spriteToActOn, null, timeRemaining);
+//
+//		}
+//
+//	}
+
 	public void setKeyPressedMapWithBoosts() {
-		mainPlayerControllable.setMyKeyPressedMap(generateBoostedKeyPressedMap());
+		myLevel.getMainPlayer().getControllable().setMyKeyPressedMap(generateBoostedKeyPressedMap());
 	}
 
 	private void checkPowerUps() {
+		ArrayList<Characteristic> toRemove = new ArrayList<Characteristic>();
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
-//			System.out.println("POWER UP SPEED " + myCurrentPowerUps.get(powerUp));
+			// System.out.println("POWER UP SPEED " +
+			// myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
-//				System.out.println("HELLOOOOOO");
-				myCurrentPowerUps.remove(powerUp);
-				powerUpHasBeenRemoved(powerUp);
+				// System.out.println("HELLOOOOOO");
+				toRemove.add(powerUp);
 			}
 		}
+
+		// remove power ups
+		for (Characteristic remove : toRemove) {
+			myCurrentPowerUps.remove(remove);
+			powerUpHasBeenRemoved(remove);
+		}
+
 	}
 
-	//IS THERE A BETTER WAY TO DO THIS WITHOUT IFS?
 	private void powerUpHasBeenRemoved(Characteristic powerUp) {
-		if (powerUp instanceof SpeedPowerUpper) {
-			((SpeedPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
-		}
-		if(powerUp instanceof InvincibilityPowerUpper){
-			((InvincibilityPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
-		}
+		((TemporalPowerUpper) powerUp).reversePowerUp(myLevel.getMainPlayer(), this);
 	}
 
 	private void cleanGame() {
@@ -212,12 +188,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Controllable control;
-			if(mySprite instanceof Player)
+			if (mySprite instanceof Player)
 				control = mainPlayerControllable;
-			
 			else{
 				control = mySprite.getControllable();
-
 			}
 			if (control.isControllable()) {
 				control.sendCurrentKeys(myKeysPressed, myKeysReleased);
@@ -235,10 +209,15 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 	
 	private void checkForLoss() {
+
 		for (State s : myLevel.getMainPlayer().getStates()) {
+			if (myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
+				myLevel.setLevelLost();
+			}
 			if (s instanceof Health) {
-				if (!(((Health) s).isAlive())
-						|| myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
+				if (!(((Health) s).isAlive())) {
+					System.out.println("it's auto losing");
+
 					myLevel.setLevelLost();
 				}
 			}
@@ -247,6 +226,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	//
 	private void checkForWin() {
+/*		count++;
+		if(count==100){
+			myLevel.setLevelWon();
+		}*/
 		for (State s : myLevel.getMainPlayer().getStates()) {
 			if (s instanceof LevelWon) {
 				if (((LevelWon) s).isHasWon()) {
@@ -259,21 +242,20 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 
 	// keys will only control the main player rn
-	
-	private Map<KeyCode,Action> generateBoostedKeyPressedMap(){
-		myKeyPressedMap.put(KeyCode.RIGHT,
-				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()
-						+ GameResources.SPEED_BOOST.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT,
-				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()
-						+ GameResources.SPEED_BOOST.getDoubleResource()));
+
+	private Map<KeyCode, Action> generateBoostedKeyPressedMap() {
+		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
+		myKeyPressedMap.put(KeyCode.RIGHT, new MoveRight(myLevel.getMainPlayer(),
+				GameResources.MOVE_RIGHT_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, new MoveLeft(myLevel.getMainPlayer(),
+				GameResources.MOVE_LEFT_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.UP, new MoveUpJump(myLevel.getMainPlayer(),
 				GameResources.JUMP_SPEED.getDoubleResource() + GameResources.SPEED_BOOST.getDoubleResource()));
 		return myKeyPressedMap;
 	}
-	
+
 	public void generateDefaultKeyPressedMap() {
-	
+		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT,
@@ -283,40 +265,14 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	}
 
-	private void generateDefaultKeyReleasedMap() {
-		myKeyReleasedMap.put(KeyCode.RIGHT,
-				new StopRightMovement(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyReleasedMap.put(KeyCode.LEFT,
-				new StopLeftMovement(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		// myKeyReleasedMap.put(KeyCode.UP, new
-		// StopUpMovement(myLevel.getMainPlayer(),
-		// GameResources.JUMP_SPEED.getDoubleResource()));
-	}
-
-	private void runKeyCalls() {
-		for (KeyCode myKey : myKeysPressed) {
-			if (myKeyPressedMap.containsKey(myKey)) {
-				myKeyPressedMap.get(myKey).act();
-			}
-		}
-	}
-
-	private void runKeyReleased() {
-		for (KeyCode myKey : myKeysReleased) {
-			if (myKeyReleasedMap.containsKey(myKey)) {
-				myKeyReleasedMap.get(myKey).act();
-			}
-		}
-	}
-
 	private void executeCharacteristics() {
 		for (Sprite mySprite : mySpriteList) {
-			
+
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList,
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
 			Set<Characteristic> characteristics = mySprite.getCharacteristics();
-			
+
 			for (Characteristic myCharacteristic : characteristics) {
 				myCharacteristic.execute(myCollisionMap);
 			}
@@ -371,7 +327,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private void updateSpritePositions() {
 		for (Sprite sprite : mySpriteList) {
-			UpdateLocation updateLocation = new UpdateLocation(sprite, timeElapsed);
+			UpdateLocation updateLocation = new UpdateLocation(sprite, myTimeElapsed);
 			updateLocation.updateSpriteParameters();
 		}
 	}

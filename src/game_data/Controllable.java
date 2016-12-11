@@ -36,9 +36,7 @@ public class Controllable {
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
 	@ParameterAnnotation(parameters="Sprite")
-	public Controllable(Sprite aSprite){
-		this.mySprite=aSprite;
-		myKeyReleasedMap=new HashMap<KeyCode, Move>();
+	public Controllable(){
 		isControllable=false;
 	}
 	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap) {

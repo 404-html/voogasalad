@@ -5,32 +5,28 @@ import game_data.Game;
 import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
-import game_data.characteristics.Bouncer;
-import game_data.characteristics.Breakable;
-
-import game_data.characteristics.Characteristic;
-
-import game_data.characteristics.BouncerTop;
-import game_data.characteristics.Damager;
-import game_data.characteristics.HealthPowerUpper;
 import game_data.characteristics.Impassable;
+import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.PacerAlternative;
+import game_data.characteristics.ScoreBasedOnPosition;
+import game_data.characteristics.ScoreBasedOnTime;
 import game_data.characteristics.StickyTop;
 import game_data.characteristics.StickyTopHorizontal;
 import game_data.characteristics.StickyTopVertical;
 import game_data.characteristics.TransparentBottomImpassable;
 import game_data.characteristics.Winnable;
+
 import game_data.sprites.Character;
 import game_data.sprites.Enemy;
-import game_data.sprites.Item;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Health;
-import game_data.states.LevelWon;
 import game_data.states.Physics;
+import game_data.states.Score;
 import game_data.states.State;
 import game_engine.actions.Action;
+
 import game_engine.actions.Bounce;
 import game_engine.actions.Hit;
 import game_engine.properties.RandomMoveHandler;
@@ -42,18 +38,19 @@ import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
 import javafx.scene.input.KeyCode;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.sun.javafx.scene.traversal.Direction;
 
 /**
  * @author Katrina, Austin, Lucia
  *
  */
 public class EnginePlayerController implements IEnginePlayerControllerInterface {
-	private Level myLevel;
+	//private Level myLevel;
 	private int myWidth, myHeight;
 	private String myBackgroundImageFilePath;
 	private List<Sprite> mySpriteList;
@@ -67,7 +64,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 	public EnginePlayerController() {
 		myGame = null;
-		myLevel = null;
+		//myLevel = null;
 		mySpriteList = null;
 		myBackgroundImageFilePath = "";
 		myWidth = 0;
@@ -80,36 +77,20 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteIsAliveList = new ArrayList<>();
 	}
 
-	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
-		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
-		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		//System.out.println(myLevel.getMainPlayer()==null);
-		myKeyPressedMap.put(KeyCode.RIGHT, 
-				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT, 
-				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, 
-				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
-				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
-
-		myProjectile.addState(new Physics(0.0, 0.0));
-		myProjectile.addCharacteristic(new Impassable(myProjectile));
-		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
-		//System.out.println("doing the shit");
-		return myKeyPressedMap;
-		// myKeyPressedMap.put(KeyCode.SPACE, new
-		// Launch(myLevel.getMainPlayer(), 10, 0));
-	}
 
 	public EnginePlayerController(Game game) {
 		myGame = game;
 		// myLevel=new Level();
-		myLevel = myGame.getCurrentLevel();
+		Level myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
 				myLevel.setPlayerSprite((Player)s);
+//				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+				myLevel.getMainPlayer().addState(new Health(200));
+
+				myLevel.getMainPlayer().addState(new Score());
+//				myLevel.getMainPlayer().addCharacteristic(new ScoreBasedOnPosition(s, Direction.RIGHT));
 				//myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 				//myLevel.getMainPlayer().addState(new Health(1));
 				//myLevel.getMainPlayer().addState(new LevelWon());
@@ -121,6 +102,16 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			}
 		}
 		/*int j = 1;
+		myLevel.setPlayerSprite((Player) myLevel.getMySpriteList().get(0));
+		myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+		myLevel.getMainPlayer().addState(new Health(10000));
+		myLevel.getMainPlayer().addState(new LevelWon());
+		myLevel.getMainPlayer()
+				.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap(), myLevel));
+
+		myLevel.getMainPlayer().resetTerminalVelocities();
+		int j = 1;
+		
 		// for(int i = 226; i<10260; i+=1000){
 
 		for (int i = 226; i < 8226; i += 100) {
@@ -193,7 +184,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 		
 		Item t = new Item(new Location(726, 400), 100, 100, "block5000", "author/images/angry_goomba.png");
-		 t.addCharacteristic(new SpeedPowerUpper(20, 5000, t));
+//		 t.addCharacteristic(new SpeedPowerUpper(20, 5000, t));
+		 t.addCharacteristic(new Damager(20, t));
 //		myLevel.addNewSprite(
 //				new Terrain(new Location(726, 400), 100, 100, "block5000", "author/images/betterblock.png"));
 //		
@@ -234,6 +226,17 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				if (s.getName().equals("block5000")) {
 //					s.addCharacteristic(new Damager(25, s));
 //				}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+//				if (s.getName().equals("block5000")) {
+//					s.addCharacteristic(new Damager(25, s));
+//				}
+=======
+>>>>>>> 48d78ac850e44a47957b530a216ee8172c366a8c
+>>>>>>> 1c26035e97064aea2aac7e7592cf824b2cffee2f
+=======
+>>>>>>> staging
 				// }
 				// s.addState(new Health(10));
 				// =======
@@ -301,10 +304,31 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myLevel.setMyControllableSpriteList();
 		updateSpriteData();
 	}
+	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
+		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
+		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
+		//System.out.println(myLevel.getMainPlayer()==null); 
+		Level myLevel = myGame.getCurrentLevel();
+		myKeyPressedMap.put(KeyCode.RIGHT, 
+				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.LEFT, 
+				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
+		myKeyPressedMap.put(KeyCode.UP, 
+				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
+		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
+				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
+
+		myProjectile.addState(new Physics(0.0, 0.0));
+		myProjectile.addCharacteristic(new Impassable(myProjectile));
+		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
+		//System.out.println("doing the shit");
+		return myKeyPressedMap;
+		// myKeyPressedMap.put(KeyCode.SPACE, new
+		// Launch(myLevel.getMainPlayer(), 10, 0));
+	}
 
 	public void updateControllerData() {
-		// need to update level in here
-
+		Level myLevel=myGame.getCurrentLevel();
 		mySpriteList = myLevel.getMySpriteList();
 		myBackgroundImageFilePath = myLevel.getBackgroundImageFilePath();
 		myWidth = myLevel.getWidth();
@@ -343,9 +367,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 	}
 
-	public Level getMyLevel() {
-		return myLevel;
-	}
 
 	public int getWidth() {
 		return myWidth;
@@ -360,7 +381,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	}
 
 	public List<Sprite> getMySpriteList() {
-		return myLevel.getMySpriteList();
+		return myGame.getCurrentLevel().getMySpriteList();
 	}
 
 	public List<Double> getMySpriteXCoordinateList() {
