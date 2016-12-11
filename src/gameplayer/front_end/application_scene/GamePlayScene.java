@@ -66,8 +66,8 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myGamePlay.clear();
 	}
 
-	public void addImageToView(ImageView aImage) {
-		myGamePlay.addImageToView(aImage);
+	public void addImageToView(ImageView aImage, boolean aVisible) {
+		myGamePlay.addImageToView(aImage, aVisible);
 	}
 	
 	public void changeBackground(Color aColor) {

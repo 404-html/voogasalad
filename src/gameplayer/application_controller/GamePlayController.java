@@ -52,7 +52,7 @@ public class GamePlayController extends AbstractController {
 		initializeEngineComponents();
 		updateSprites();
 	}
-	
+
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel, UserOptions aOptions) {
 		this(aStage, aFile, aAppController, aLevel); 
 		myUserOptions = aOptions;
@@ -103,7 +103,7 @@ public class GamePlayController extends AbstractController {
 		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
 	}
-	
+
 	private void checkResult() {
 		if (myGameController.getMyGame().hasLost()){
 			System.out.println("level lost via update game");
@@ -118,19 +118,19 @@ public class GamePlayController extends AbstractController {
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
-		
+
 	}
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
 			boolean mapped = false;
 			for (State state : sprite.getStates()) {
-				if (state instanceof Visible && ((Visible) state).isVisible()) {
-					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
+				if (state instanceof Visible) {
+					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), ((Visible) state).isVisible());
 					mapped = true;
 				}
 			}
-			if (!mapped) {
-				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
+			if(!mapped){
+				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), true);
 			}
 		}
 	}
@@ -160,7 +160,7 @@ public class GamePlayController extends AbstractController {
 		});
 	}
 	private void setHealthLabel() {
-//		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+		//		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
 	//	private void setScoreLabel() {
 	//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer().getScore());
@@ -170,24 +170,24 @@ public class GamePlayController extends AbstractController {
 		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myStartLevel);
 		gameControl.displayGame();
 	}
-	
+
 	private void save() {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
-	
+
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}
-	
+
 	private void setResultScene(String aLabel) {
 		myAnimationLoop.stop();
 		Pane winScene = myGamePlayScene.createResultScene();
 		winScene.getChildren().add(getGUIGenerator().createLabel(aLabel, 0, 0));
 		setResultSceneHandlers(winScene);
 	}
-	
+
 	private void setResultSceneHandlers(Pane resultScene) {
 		saveHighscore();
 		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
@@ -205,13 +205,13 @@ public class GamePlayController extends AbstractController {
 					myButtonLabels.getString("PublishMessage"));
 		}, ButtonDisplay.TEXT));
 	}
-	
+
 	private void saveHighscore() {
 		//TODO: Finish saving high scores
-//		myHighscoreManager.setHighscore(, myGameController.getScore(), myGameController.getMyGame());
+		//		myHighscoreManager.setHighscore(, myGameController.getScore(), myGameController.getMyGame());
 		save(myHighscoreManager, "highscores");
 	}
-	
+
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		//TODO: update the scene

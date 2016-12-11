@@ -70,6 +70,8 @@ public class ListOfCollidingSprites {
 		 * getYLocation());
 		 */
 		for (Sprite mySprite : spriteList) {
+			
+	
 			/*
 			 * UpdateLocation updateLocation = new UpdateLocation(mySprite,
 			 * myTimeElapsed); double oldX2 =
@@ -94,6 +96,7 @@ public class ListOfCollidingSprites {
 					&& (mySpriteImages.get(mySprite).getBoundsInParent())
 					.intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));
+				
 			}
 			/*
 			 * mySprite.getLocation().setLocation(oldX2, oldY2);
