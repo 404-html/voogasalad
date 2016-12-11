@@ -23,7 +23,7 @@ public abstract class Move implements Action {
 
 	@Override
 	public void act() {
-		//mySprite.setMyLocation(changeCoordinates());
+		//mySprite.setLocation(changeCoordinates());
 		setVelocity();
 	}
 	public abstract void stop();

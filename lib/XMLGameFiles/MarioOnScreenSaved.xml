@@ -3,399 +3,3455 @@
   <myLevels>
     <game__data.Level>
       <name>Level1</name>
-      <width>700</width>
-      <height>550</height>
+      <didLose>false</didLose>
+      <didWin>false</didWin>
+      <width>1279</width>
+      <height>847</height>
       <backgroundImageFilePath>XMLGameFiles/mari-background-1.png</backgroundImageFilePath>
       <myPlayerSprite>
-        <name>No Name</name>
+        <name>Mario</name>
         <myLocation>
-          <myHeading>-4.71238898038469</myHeading>
-          <myXLocation>226.0</myXLocation>
-          <myYLocation>403.095333333334</myYLocation>
+          <myXLocation>1216.037258300781</myXLocation>
+          <myYLocation>168.97356011285063</myYLocation>
         </myLocation>
         <myWidth>100</myWidth>
         <myHeight>100</myHeight>
         <myImagePath>author/images/MarioSMBW.png</myImagePath>
-        <myVelocity>1.3266666666666667</myVelocity>
+        <myXVelocity>0.0</myXVelocity>
+        <myYVelocity>26.666666666666668</myYVelocity>
+        <myXAcceleration>0.0</myXAcceleration>
+        <myYAcceleration>0.0</myYAcceleration>
         <myCollisionHandler/>
         <myCharacteristics/>
         <id></id>
         <myStates>
-          <states.Physics>
+          <game__data.states.Health>
+            <myHealth>1</myHealth>
+            <isAlive>true</isAlive>
+          </game__data.states.Health>
+          <game__data.states.LevelWon>
+            <hasWon>false</hasWon>
+          </game__data.states.LevelWon>
+          <game__data.states.Physics>
             <myPhysics>
-              <verticalGravity>39.8</verticalGravity>
+              <verticalGravity>800.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </myPhysics>
-          </states.Physics>
+          </game__data.states.Physics>
         </myStates>
       </myPlayerSprite>
       <mySprites>
         <game__data.sprites.Terrain>
-          <name>block4</name>
+          <name>block12</name>
           <myLocation>
-            <myHeading>90.0</myHeading>
-            <myXLocation>526.0</myXLocation>
+            <myXLocation>1326.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
-          <myImagePath>author/images/duvall_scary.png</myImagePath>
-          <myVelocity>0.0</myVelocity>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
           <myCollisionHandler/>
           <myCharacteristics>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeed>20.0</myBounceSpeed>
-              <myAction class="game_engine.actions.Bounce">
-                <myBounceSpeed>20.0</myBounceSpeed>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
                 <myPlayerSprite class="game_data.sprites.Terrain">
-                  <name>block3</name>
+                  <name>block11</name>
                   <myLocation>
-                    <myHeading>90.0</myHeading>
-                    <myXLocation>426.0</myXLocation>
+                    <myXLocation>1226.0</myXLocation>
                     <myYLocation>500.0</myYLocation>
                   </myLocation>
                   <myWidth>100</myWidth>
                   <myHeight>100</myHeight>
-                  <myImagePath>author/images/duvall_scary.png</myImagePath>
-                  <myVelocity>0.0</myVelocity>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
                   <myCollisionHandler/>
                   <myCharacteristics>
-                    <game__data.characteristics.Bouncer>
-                      <myBounceSpeed>20.0</myBounceSpeed>
-                      <myAction class="game_engine.actions.Bounce">
-                        <myBounceSpeed>20.0</myBounceSpeed>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block69</name>
+          <myLocation>
+            <myXLocation>7026.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block68</name>
+                  <myLocation>
+                    <myXLocation>6926.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
                         <myPlayerSprite class="game_data.sprites.Terrain">
-                          <name>block2</name>
+                          <name>block67</name>
                           <myLocation>
-                            <myHeading>90.0</myHeading>
-                            <myXLocation>326.0</myXLocation>
+                            <myXLocation>6826.0</myXLocation>
                             <myYLocation>500.0</myYLocation>
                           </myLocation>
                           <myWidth>100</myWidth>
                           <myHeight>100</myHeight>
-                          <myImagePath>author/images/duvall_scary.png</myImagePath>
-                          <myVelocity>0.0</myVelocity>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
                           <myCollisionHandler/>
                           <myCharacteristics>
-                            <game__data.characteristics.Bouncer>
-                              <myBounceSpeed>20.0</myBounceSpeed>
-                              <myAction class="game_engine.actions.Bounce">
-                                <myBounceSpeed>20.0</myBounceSpeed>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block80</name>
+          <myLocation>
+            <myXLocation>8126.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block79</name>
+                  <myLocation>
+                    <myXLocation>8026.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block19</name>
+          <myLocation>
+            <myXLocation>2026.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block20</name>
+                  <myLocation>
+                    <myXLocation>2126.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block59</name>
+          <myLocation>
+            <myXLocation>6026.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block58</name>
+                  <myLocation>
+                    <myXLocation>5926.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block57</name>
+                          <myLocation>
+                            <myXLocation>5826.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block40</name>
+          <myLocation>
+            <myXLocation>4126.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block41</name>
+                  <myLocation>
+                    <myXLocation>4226.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block42</name>
+                          <myLocation>
+                            <myXLocation>4326.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
                                 <myPlayerSprite class="game_data.sprites.Terrain">
-                                  <name>block1</name>
+                                  <name>block43</name>
                                   <myLocation>
-                                    <myHeading>90.0</myHeading>
-                                    <myXLocation>226.0</myXLocation>
+                                    <myXLocation>4426.0</myXLocation>
                                     <myYLocation>500.0</myYLocation>
                                   </myLocation>
                                   <myWidth>100</myWidth>
                                   <myHeight>100</myHeight>
-                                  <myImagePath>author/images/duvall_scary.png</myImagePath>
-                                  <myVelocity>0.0</myVelocity>
+                                  <myImagePath>author/images/betterblock.png</myImagePath>
+                                  <myXVelocity>0.0</myXVelocity>
+                                  <myYVelocity>0.0</myYVelocity>
+                                  <myXAcceleration>0.0</myXAcceleration>
+                                  <myYAcceleration>0.0</myYAcceleration>
                                   <myCollisionHandler/>
                                   <myCharacteristics>
-                                    <game__data.characteristics.Bouncer>
-                                      <myBounceSpeed>20.0</myBounceSpeed>
-                                      <myAction class="game_engine.actions.Bounce">
-                                        <myBounceSpeed>20.0</myBounceSpeed>
-                                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                    <game__data.characteristics.Impassable>
+                                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                                      <movesThroughBottom>false</movesThroughBottom>
+                                      <myAction class="game_engine.actions.Hit">
+                                        <myPlayerSprite class="game_data.sprites.Terrain">
+                                          <name>block44</name>
+                                          <myLocation>
+                                            <myXLocation>4526.0</myXLocation>
+                                            <myYLocation>500.0</myYLocation>
+                                          </myLocation>
+                                          <myWidth>100</myWidth>
+                                          <myHeight>100</myHeight>
+                                          <myImagePath>author/images/betterblock.png</myImagePath>
+                                          <myXVelocity>0.0</myXVelocity>
+                                          <myYVelocity>0.0</myYVelocity>
+                                          <myXAcceleration>0.0</myXAcceleration>
+                                          <myYAcceleration>0.0</myYAcceleration>
+                                          <myCollisionHandler/>
+                                          <myCharacteristics>
+                                            <game__data.characteristics.Impassable>
+                                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                                              <movesThroughBottom>false</movesThroughBottom>
+                                              <myAction class="game_engine.actions.Hit">
+                                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                                <mySide>TOP</mySide>
+                                              </myAction>
+                                            </game__data.characteristics.Impassable>
+                                          </myCharacteristics>
+                                          <id></id>
+                                          <myStates>
+                                            <game__data.states.Physics>
+                                              <myPhysics>
+                                                <verticalGravity>0.0</verticalGravity>
+                                                <horizontalGravity>0.0</horizontalGravity>
+                                              </myPhysics>
+                                            </game__data.states.Physics>
+                                          </myStates>
+                                        </myPlayerSprite>
+                                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                        <mySide>TOP</mySide>
                                       </myAction>
-                                    </game__data.characteristics.Bouncer>
+                                    </game__data.characteristics.Impassable>
                                   </myCharacteristics>
                                   <id></id>
                                   <myStates>
-                                    <states.Physics>
+                                    <game__data.states.Physics>
                                       <myPhysics>
                                         <verticalGravity>0.0</verticalGravity>
                                         <horizontalGravity>0.0</horizontalGravity>
                                       </myPhysics>
-                                    </states.Physics>
+                                    </game__data.states.Physics>
                                   </myStates>
                                 </myPlayerSprite>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
                               </myAction>
-                            </game__data.characteristics.Bouncer>
+                            </game__data.characteristics.Impassable>
                           </myCharacteristics>
                           <id></id>
                           <myStates>
-                            <states.Physics>
+                            <game__data.states.Physics>
                               <myPhysics>
                                 <verticalGravity>0.0</verticalGravity>
                                 <horizontalGravity>0.0</horizontalGravity>
                               </myPhysics>
-                            </states.Physics>
+                            </game__data.states.Physics>
                           </myStates>
                         </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
                       </myAction>
-                    </game__data.characteristics.Bouncer>
+                    </game__data.characteristics.Impassable>
                   </myCharacteristics>
                   <id></id>
                   <myStates>
-                    <states.Physics>
+                    <game__data.states.Physics>
                       <myPhysics>
                         <verticalGravity>0.0</verticalGravity>
                         <horizontalGravity>0.0</horizontalGravity>
                       </myPhysics>
-                    </states.Physics>
+                    </game__data.states.Physics>
                   </myStates>
                 </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
               </myAction>
-            </game__data.characteristics.Bouncer>
+            </game__data.characteristics.Impassable>
           </myCharacteristics>
           <id></id>
           <myStates>
-            <states.Physics>
+            <game__data.states.Physics>
               <myPhysics>
                 <verticalGravity>0.0</verticalGravity>
                 <horizontalGravity>0.0</horizontalGravity>
               </myPhysics>
-            </states.Physics>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Terrain>
-          <name>block5</name>
+          <name>block844</name>
           <myLocation>
-            <myHeading>90.0</myHeading>
-            <myXLocation>626.0</myXLocation>
+            <myXLocation>2526.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block2</name>
+          <myLocation>
+            <myXLocation>326.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
-          <myImagePath>author/images/duvall_scary.png</myImagePath>
-          <myVelocity>0.0</myVelocity>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
           <myCollisionHandler/>
           <myCharacteristics>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeed>20.0</myBounceSpeed>
-              <myAction class="game_engine.actions.Bounce">
-                <myBounceSpeed>20.0</myBounceSpeed>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
                 <myPlayerSprite class="game_data.sprites.Terrain">
-                  <name>block6</name>
+                  <name>block1</name>
                   <myLocation>
-                    <myHeading>90.0</myHeading>
-                    <myXLocation>726.0</myXLocation>
+                    <myXLocation>226.0</myXLocation>
                     <myYLocation>500.0</myYLocation>
                   </myLocation>
                   <myWidth>100</myWidth>
                   <myHeight>100</myHeight>
-                  <myImagePath>author/images/duvall_scary.png</myImagePath>
-                  <myVelocity>0.0</myVelocity>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
                   <myCollisionHandler/>
                   <myCharacteristics>
-                    <game__data.characteristics.Bouncer>
-                      <myBounceSpeed>20.0</myBounceSpeed>
-                      <myAction class="game_engine.actions.Bounce">
-                        <myBounceSpeed>20.0</myBounceSpeed>
-                        <myPlayerSprite class="game_data.sprites.Terrain">
-                          <name>block7</name>
-                          <myLocation>
-                            <myHeading>90.0</myHeading>
-                            <myXLocation>826.0</myXLocation>
-                            <myYLocation>500.0</myYLocation>
-                          </myLocation>
-                          <myWidth>100</myWidth>
-                          <myHeight>100</myHeight>
-                          <myImagePath>author/images/duvall_scary.png</myImagePath>
-                          <myVelocity>0.0</myVelocity>
-                          <myCollisionHandler/>
-                          <myCharacteristics>
-                            <game__data.characteristics.Bouncer>
-                              <myBounceSpeed>20.0</myBounceSpeed>
-                              <myAction class="game_engine.actions.Bounce">
-                                <myBounceSpeed>20.0</myBounceSpeed>
-                                <myPlayerSprite class="game_data.sprites.Terrain">
-                                  <name>block15</name>
-                                  <myLocation>
-                                    <myHeading>90.0</myHeading>
-                                    <myXLocation>826.0</myXLocation>
-                                    <myYLocation>400.0</myYLocation>
-                                  </myLocation>
-                                  <myWidth>100</myWidth>
-                                  <myHeight>100</myHeight>
-                                  <myImagePath>author/images/duvall_scary.png</myImagePath>
-                                  <myVelocity>0.0</myVelocity>
-                                  <myCollisionHandler/>
-                                  <myCharacteristics>
-                                    <game__data.characteristics.Bouncer>
-                                      <myBounceSpeed>20.0</myBounceSpeed>
-                                      <myAction class="game_engine.actions.Bounce">
-                                        <myBounceSpeed>20.0</myBounceSpeed>
-                                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
-                                      </myAction>
-                                    </game__data.characteristics.Bouncer>
-                                  </myCharacteristics>
-                                  <id></id>
-                                  <myStates>
-                                    <states.Physics>
-                                      <myPhysics>
-                                        <verticalGravity>0.0</verticalGravity>
-                                        <horizontalGravity>0.0</horizontalGravity>
-                                      </myPhysics>
-                                    </states.Physics>
-                                  </myStates>
-                                </myPlayerSprite>
-                              </myAction>
-                            </game__data.characteristics.Bouncer>
-                          </myCharacteristics>
-                          <id></id>
-                          <myStates>
-                            <states.Physics>
-                              <myPhysics>
-                                <verticalGravity>0.0</verticalGravity>
-                                <horizontalGravity>0.0</horizontalGravity>
-                              </myPhysics>
-                            </states.Physics>
-                          </myStates>
-                        </myPlayerSprite>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>LEFT</mySide>
                       </myAction>
-                    </game__data.characteristics.Bouncer>
+                    </game__data.characteristics.Impassable>
                   </myCharacteristics>
                   <id></id>
                   <myStates>
-                    <states.Physics>
+                    <game__data.states.Physics>
                       <myPhysics>
                         <verticalGravity>0.0</verticalGravity>
                         <horizontalGravity>0.0</horizontalGravity>
                       </myPhysics>
-                    </states.Physics>
+                    </game__data.states.Physics>
                   </myStates>
                 </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>LEFT</mySide>
               </myAction>
-            </game__data.characteristics.Bouncer>
+            </game__data.characteristics.Impassable>
           </myCharacteristics>
           <id></id>
           <myStates>
-            <states.Physics>
+            <game__data.states.Physics>
               <myPhysics>
                 <verticalGravity>0.0</verticalGravity>
                 <horizontalGravity>0.0</horizontalGravity>
               </myPhysics>
-            </states.Physics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Player reference="../../myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block848</name>
+          <myLocation>
+            <myXLocation>3726.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block843</name>
+          <myLocation>
+            <myXLocation>2226.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Enemy">
+                  <name>goomba3</name>
+                  <myLocation>
+                    <myXLocation>2549.333333333304</myXLocation>
+                    <myYLocation>4320.777777777772</myYLocation>
+                  </myLocation>
+                  <myWidth>80</myWidth>
+                  <myHeight>80</myHeight>
+                  <myImagePath>author/images/angry_goomba.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>600.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.PacerAlternative>
+                      <myType>HORIZONTAL</myType>
+                      <myDistance>500.0</myDistance>
+                      <originalXPosition>2226.0</originalXPosition>
+                      <originalYPosition>-1.0</originalYPosition>
+                      <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+                    </game__data.characteristics.PacerAlternative>
+                    <game__data.characteristics.Damager>
+                      <myDamageToGive>1</myDamageToGive>
+                      <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+                    </game__data.characteristics.Damager>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>800.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block70</name>
+          <myLocation>
+            <myXLocation>7126.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block71</name>
+                  <myLocation>
+                    <myXLocation>7226.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block72</name>
+                          <myLocation>
+                            <myXLocation>7326.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block842</name>
+          <myLocation>
+            <myXLocation>1926.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block39</name>
+          <myLocation>
+            <myXLocation>4026.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[6]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Terrain>
           <name>block9</name>
           <myLocation>
-            <myHeading>90.0</myHeading>
             <myXLocation>1026.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
-          <myImagePath>author/images/duvall_scary.png</myImagePath>
-          <myVelocity>0.0</myVelocity>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
           <myCollisionHandler/>
           <myCharacteristics>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeed>20.0</myBounceSpeed>
-              <myAction class="game_engine.actions.Bounce">
-                <myBounceSpeed>20.0</myBounceSpeed>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
                 <myPlayerSprite class="game_data.sprites.Terrain">
-                  <name>block10</name>
+                  <name>block8</name>
                   <myLocation>
-                    <myHeading>90.0</myHeading>
-                    <myXLocation>1126.0</myXLocation>
+                    <myXLocation>926.0</myXLocation>
                     <myYLocation>500.0</myYLocation>
                   </myLocation>
                   <myWidth>100</myWidth>
                   <myHeight>100</myHeight>
-                  <myImagePath>author/images/duvall_scary.png</myImagePath>
-                  <myVelocity>0.0</myVelocity>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
                   <myCollisionHandler/>
                   <myCharacteristics>
-                    <game__data.characteristics.Bouncer>
-                      <myBounceSpeed>20.0</myBounceSpeed>
-                      <myAction class="game_engine.actions.Bounce">
-                        <myBounceSpeed>20.0</myBounceSpeed>
-                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block7</name>
+                          <myLocation>
+                            <myXLocation>826.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
                       </myAction>
-                    </game__data.characteristics.Bouncer>
+                    </game__data.characteristics.Impassable>
                   </myCharacteristics>
                   <id></id>
                   <myStates>
-                    <states.Physics>
+                    <game__data.states.Physics>
                       <myPhysics>
                         <verticalGravity>0.0</verticalGravity>
                         <horizontalGravity>0.0</horizontalGravity>
                       </myPhysics>
-                    </states.Physics>
+                    </game__data.states.Physics>
                   </myStates>
                 </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
               </myAction>
-            </game__data.characteristics.Bouncer>
+            </game__data.characteristics.Impassable>
           </myCharacteristics>
           <id></id>
           <myStates>
-            <states.Physics>
+            <game__data.states.Physics>
               <myPhysics>
                 <verticalGravity>0.0</verticalGravity>
                 <horizontalGravity>0.0</horizontalGravity>
               </myPhysics>
-            </states.Physics>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[2]/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[3]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
         <game__data.sprites.Terrain>
-          <name>block8</name>
+          <name>block24</name>
           <myLocation>
-            <myHeading>90.0</myHeading>
-            <myXLocation>926.0</myXLocation>
+            <myXLocation>2526.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
-          <myImagePath>author/images/duvall_scary.png</myImagePath>
-          <myVelocity>0.0</myVelocity>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
           <myCollisionHandler/>
           <myCharacteristics>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeed>20.0</myBounceSpeed>
-              <myAction class="game_engine.actions.Bounce">
-                <myBounceSpeed>20.0</myBounceSpeed>
-                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[2]/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block23</name>
+                  <myLocation>
+                    <myXLocation>2426.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
               </myAction>
-            </game__data.characteristics.Bouncer>
+            </game__data.characteristics.Impassable>
           </myCharacteristics>
           <id></id>
           <myStates>
-            <states.Physics>
+            <game__data.states.Physics>
               <myPhysics>
                 <verticalGravity>0.0</verticalGravity>
                 <horizontalGravity>0.0</horizontalGravity>
               </myPhysics>
-            </states.Physics>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[2]/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[2]/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
-        <game__data.sprites.Player reference="../../myPlayerSprite"/>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[3]/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Bouncer/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[6]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block845</name>
+          <myLocation>
+            <myXLocation>2826.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block16</name>
+          <myLocation>
+            <myXLocation>1726.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block15</name>
+                  <myLocation>
+                    <myXLocation>1626.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block14</name>
+                          <myLocation>
+                            <myXLocation>1526.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain">
+                                  <name>block13</name>
+                                  <myLocation>
+                                    <myXLocation>1426.0</myXLocation>
+                                    <myYLocation>500.0</myYLocation>
+                                  </myLocation>
+                                  <myWidth>100</myWidth>
+                                  <myHeight>100</myHeight>
+                                  <myImagePath>author/images/betterblock.png</myImagePath>
+                                  <myXVelocity>0.0</myXVelocity>
+                                  <myYVelocity>0.0</myYVelocity>
+                                  <myXAcceleration>0.0</myXAcceleration>
+                                  <myYAcceleration>0.0</myYAcceleration>
+                                  <myCollisionHandler/>
+                                  <myCharacteristics>
+                                    <game__data.characteristics.Impassable>
+                                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                                      <movesThroughBottom>false</movesThroughBottom>
+                                      <myAction class="game_engine.actions.Hit">
+                                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                        <mySide>TOP</mySide>
+                                      </myAction>
+                                    </game__data.characteristics.Impassable>
+                                  </myCharacteristics>
+                                  <id></id>
+                                  <myStates>
+                                    <game__data.states.Physics>
+                                      <myPhysics>
+                                        <verticalGravity>0.0</verticalGravity>
+                                        <horizontalGravity>0.0</horizontalGravity>
+                                      </myPhysics>
+                                    </game__data.states.Physics>
+                                  </myStates>
+                                </myPlayerSprite>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block60</name>
+          <myLocation>
+            <myXLocation>6126.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block61</name>
+                  <myLocation>
+                    <myXLocation>6226.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block62</name>
+                          <myLocation>
+                            <myXLocation>6326.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block77</name>
+          <myLocation>
+            <myXLocation>7826.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block76</name>
+                  <myLocation>
+                    <myXLocation>7726.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block75</name>
+                          <myLocation>
+                            <myXLocation>7626.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block37</name>
+          <myLocation>
+            <myXLocation>3826.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block36</name>
+                  <myLocation>
+                    <myXLocation>3726.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block35</name>
+                          <myLocation>
+                            <myXLocation>3626.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain">
+                                  <name>block34</name>
+                                  <myLocation>
+                                    <myXLocation>3526.0</myXLocation>
+                                    <myYLocation>500.0</myYLocation>
+                                  </myLocation>
+                                  <myWidth>100</myWidth>
+                                  <myHeight>100</myHeight>
+                                  <myImagePath>author/images/betterblock.png</myImagePath>
+                                  <myXVelocity>0.0</myXVelocity>
+                                  <myYVelocity>0.0</myYVelocity>
+                                  <myXAcceleration>0.0</myXAcceleration>
+                                  <myYAcceleration>0.0</myYAcceleration>
+                                  <myCollisionHandler/>
+                                  <myCharacteristics>
+                                    <game__data.characteristics.Impassable>
+                                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                                      <movesThroughBottom>false</movesThroughBottom>
+                                      <myAction class="game_engine.actions.Hit">
+                                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                        <mySide>TOP</mySide>
+                                      </myAction>
+                                    </game__data.characteristics.Impassable>
+                                  </myCharacteristics>
+                                  <id></id>
+                                  <myStates>
+                                    <game__data.states.Physics>
+                                      <myPhysics>
+                                        <verticalGravity>0.0</verticalGravity>
+                                        <horizontalGravity>0.0</horizontalGravity>
+                                      </myPhysics>
+                                    </game__data.states.Physics>
+                                  </myStates>
+                                </myPlayerSprite>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block38</name>
+          <myLocation>
+            <myXLocation>3926.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[13]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[20]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[11]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[19]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block49</name>
+          <myLocation>
+            <myXLocation>5026.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block48</name>
+                  <myLocation>
+                    <myXLocation>4926.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block47</name>
+                          <myLocation>
+                            <myXLocation>4826.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block55</name>
+          <myLocation>
+            <myXLocation>5626.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block54</name>
+                  <myLocation>
+                    <myXLocation>5526.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block53</name>
+                          <myLocation>
+                            <myXLocation>5426.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block29</name>
+          <myLocation>
+            <myXLocation>3026.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block30</name>
+                  <myLocation>
+                    <myXLocation>3126.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block31</name>
+                          <myLocation>
+                            <myXLocation>3226.0</myXLocation>
+                            <myYLocation>500.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain">
+                                  <name>block32</name>
+                                  <myLocation>
+                                    <myXLocation>3326.0</myXLocation>
+                                    <myYLocation>500.0</myYLocation>
+                                  </myLocation>
+                                  <myWidth>100</myWidth>
+                                  <myHeight>100</myHeight>
+                                  <myImagePath>author/images/betterblock.png</myImagePath>
+                                  <myXVelocity>0.0</myXVelocity>
+                                  <myYVelocity>0.0</myYVelocity>
+                                  <myXAcceleration>0.0</myXAcceleration>
+                                  <myYAcceleration>0.0</myYAcceleration>
+                                  <myCollisionHandler/>
+                                  <myCharacteristics>
+                                    <game__data.characteristics.Impassable>
+                                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                                      <movesThroughBottom>false</movesThroughBottom>
+                                      <myAction class="game_engine.actions.Hit">
+                                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                        <mySide>TOP</mySide>
+                                      </myAction>
+                                    </game__data.characteristics.Impassable>
+                                  </myCharacteristics>
+                                  <id></id>
+                                  <myStates>
+                                    <game__data.states.Physics>
+                                      <myPhysics>
+                                        <verticalGravity>0.0</verticalGravity>
+                                        <horizontalGravity>0.0</horizontalGravity>
+                                      </myPhysics>
+                                    </game__data.states.Physics>
+                                  </myStates>
+                                </myPlayerSprite>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[22]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[14]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block5000</name>
+          <myLocation>
+            <myXLocation>726.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block500001</name>
+                  <myLocation>
+                    <myXLocation>826.0</myXLocation>
+                    <myYLocation>300.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain">
+                          <name>block123123123</name>
+                          <myLocation>
+                            <myXLocation>926.0</myXLocation>
+                            <myYLocation>200.0</myYLocation>
+                          </myLocation>
+                          <myWidth>100</myWidth>
+                          <myHeight>100</myHeight>
+                          <myImagePath>author/images/betterblock.png</myImagePath>
+                          <myXVelocity>0.0</myXVelocity>
+                          <myYVelocity>0.0</myYVelocity>
+                          <myXAcceleration>0.0</myXAcceleration>
+                          <myYAcceleration>0.0</myYAcceleration>
+                          <myCollisionHandler/>
+                          <myCharacteristics>
+                            <game__data.characteristics.Impassable>
+                              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                              <movesThroughBottom>false</movesThroughBottom>
+                              <myAction class="game_engine.actions.Hit">
+                                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                                <mySide>TOP</mySide>
+                              </myAction>
+                            </game__data.characteristics.Impassable>
+                          </myCharacteristics>
+                          <id></id>
+                          <myStates>
+                            <game__data.states.Physics>
+                              <myPhysics>
+                                <verticalGravity>0.0</verticalGravity>
+                                <horizontalGravity>0.0</horizontalGravity>
+                              </myPhysics>
+                            </game__data.states.Physics>
+                          </myStates>
+                        </myPlayerSprite>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block52</name>
+          <myLocation>
+            <myXLocation>5326.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[28]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block846</name>
+          <myLocation>
+            <myXLocation>3126.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[28]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block50</name>
+          <myLocation>
+            <myXLocation>5126.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[27]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block74</name>
+          <myLocation>
+            <myXLocation>7526.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[21]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block46</name>
+          <myLocation>
+            <myXLocation>4726.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[27]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block33</name>
+          <myLocation>
+            <myXLocation>3426.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[22]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block4</name>
+          <myLocation>
+            <myXLocation>526.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block3</name>
+                  <myLocation>
+                    <myXLocation>426.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../../../game__data.sprites.Terrain[8]"/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>LEFT</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block22</name>
+          <myLocation>
+            <myXLocation>2326.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[16]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block45</name>
+          <myLocation>
+            <myXLocation>4626.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[6]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block27</name>
+          <myLocation>
+            <myXLocation>2826.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block26</name>
+                  <myLocation>
+                    <myXLocation>2726.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[32]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Enemy>
+          <name>goomba2</name>
+          <myLocation>
+            <myXLocation>1916.0</myXLocation>
+            <myYLocation>5523.666666666709</myYLocation>
+          </myLocation>
+          <myWidth>80</myWidth>
+          <myHeight>80</myHeight>
+          <myImagePath>author/images/angry_goomba.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>600.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Damager>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+            <game__data.characteristics.PacerAlternative>
+              <myType>HORIZONTAL</myType>
+              <myDistance>500.0</myDistance>
+              <originalXPosition>1426.0</originalXPosition>
+              <originalYPosition>401.0</originalYPosition>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.PacerAlternative>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>800.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[19]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[27]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block10</name>
+          <myLocation>
+            <myXLocation>1126.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[14]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy reference="../game__data.sprites.Terrain[10]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[5]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[29]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[5]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[16]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[6]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block17</name>
+          <myLocation>
+            <myXLocation>1826.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[19]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>blockmoving2</name>
+          <myLocation>
+            <myXLocation>1536.6666666666624</myXLocation>
+            <myYLocation>250.0</myYLocation>
+          </myLocation>
+          <myWidth>200</myWidth>
+          <myHeight>25</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>-200.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.StickyTopHorizontal>
+              <mySprite class="game_data.sprites.Terrain" defined-in="game_data.characteristics.StickyTop" reference="../../.."/>
+              <horizontal>true</horizontal>
+            </game__data.characteristics.StickyTopHorizontal>
+            <game__data.characteristics.PacerAlternative>
+              <myType>HORIZONTAL</myType>
+              <myDistance>300.0</myDistance>
+              <originalXPosition>1350.0</originalXPosition>
+              <originalYPosition>250.0</originalYPosition>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.PacerAlternative>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block18</name>
+          <myLocation>
+            <myXLocation>1926.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[4]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[6]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[11]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[22]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block65</name>
+          <myLocation>
+            <myXLocation>6626.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block64</name>
+                  <myLocation>
+                    <myXLocation>6526.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../.."/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[2]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Enemy>
+          <name>goomba1</name>
+          <myLocation>
+            <myXLocation>1349.333333333339</myXLocation>
+            <myYLocation>5363.666666666703</myYLocation>
+          </myLocation>
+          <myWidth>80</myWidth>
+          <myHeight>80</myHeight>
+          <myImagePath>author/images/angry_goomba.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>600.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Damager>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+            <game__data.characteristics.PacerAlternative>
+              <myType>HORIZONTAL</myType>
+              <myDistance>500.0</myDistance>
+              <originalXPosition>1226.0</originalXPosition>
+              <originalYPosition>401.0</originalYPosition>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.PacerAlternative>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>800.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[21]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block78</name>
+          <myLocation>
+            <myXLocation>7926.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[3]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[14]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[29]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[20]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[4]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[44]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block25</name>
+          <myLocation>
+            <myXLocation>2626.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[44]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block21</name>
+          <myLocation>
+            <myXLocation>2226.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[4]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[60]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[6]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[21]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[8]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>blockmoving</name>
+          <myLocation>
+            <myXLocation>1126.0</myXLocation>
+            <myYLocation>260.0000000000002</myYLocation>
+          </myLocation>
+          <myWidth>200</myWidth>
+          <myHeight>25</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>-200.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.StickyTopVertical>
+              <mySprite class="game_data.sprites.Terrain" defined-in="game_data.characteristics.StickyTop" reference="../../.."/>
+              <myAction class="game_engine.actions.Stick">
+                <myCollidedSprite class="game_data.sprites.Player" reference="../../../../../../myPlayerSprite"/>
+                <mySprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <horizontal>false</horizontal>
+              </myAction>
+              <horizontal>false</horizontal>
+            </game__data.characteristics.StickyTopVertical>
+            <game__data.characteristics.PacerAlternative>
+              <myType>VERTICAL</myType>
+              <myDistance>200.0</myDistance>
+              <originalXPosition>1126.0</originalXPosition>
+              <originalYPosition>300.0</originalYPosition>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.PacerAlternative>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <myAction class="game_engine.actions.HitTop">
+                <collisionBuffer>5.0</collisionBuffer>
+                <myPlayerSprite class="game_data.sprites.Player" reference="../../../../../../myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block28</name>
+          <myLocation>
+            <myXLocation>2926.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[44]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block66</name>
+          <myLocation>
+            <myXLocation>6726.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[60]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Item>
+          <name>flag</name>
+          <myLocation>
+            <myXLocation>4040.0</myXLocation>
+            <myYLocation>30.0</myYLocation>
+          </myLocation>
+          <myWidth>50</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/victory_flag.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Winnable>
+              <mySprite class="game_data.sprites.Item" reference="../../.."/>
+            </game__data.characteristics.Winnable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Item>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[28]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block849</name>
+          <myLocation>
+            <myXLocation>4026.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Item" reference="../../../../../game__data.sprites.Item"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[19]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block63</name>
+          <myLocation>
+            <myXLocation>6426.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[20]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[2]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block5</name>
+          <myLocation>
+            <myXLocation>626.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain">
+                  <name>block6</name>
+                  <myLocation>
+                    <myXLocation>726.0</myXLocation>
+                    <myYLocation>500.0</myYLocation>
+                  </myLocation>
+                  <myWidth>100</myWidth>
+                  <myHeight>100</myHeight>
+                  <myImagePath>author/images/betterblock.png</myImagePath>
+                  <myXVelocity>0.0</myXVelocity>
+                  <myYVelocity>0.0</myYVelocity>
+                  <myXAcceleration>0.0</myXAcceleration>
+                  <myYAcceleration>0.0</myYAcceleration>
+                  <myCollisionHandler/>
+                  <myCharacteristics>
+                    <game__data.characteristics.Impassable>
+                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                      <movesThroughBottom>false</movesThroughBottom>
+                      <myAction class="game_engine.actions.Hit">
+                        <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../../../../../game__data.sprites.Terrain[14]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                        <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                        <mySide>TOP</mySide>
+                      </myAction>
+                    </game__data.characteristics.Impassable>
+                  </myCharacteristics>
+                  <id></id>
+                  <myStates>
+                    <game__data.states.Physics>
+                      <myPhysics>
+                        <verticalGravity>0.0</verticalGravity>
+                        <horizontalGravity>0.0</horizontalGravity>
+                      </myPhysics>
+                    </game__data.states.Physics>
+                  </myStates>
+                </myPlayerSprite>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[22]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[27]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain>
+          <name>block56</name>
+          <myLocation>
+            <myXLocation>5726.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[5]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block51</name>
+          <myLocation>
+            <myXLocation>5226.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[36]"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block73</name>
+          <myLocation>
+            <myXLocation>7426.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+              <myAction class="game_engine.actions.Hit">
+                <myPlayerSprite class="game_data.sprites.Terrain" reference="../../../../../game__data.sprites.Terrain[11]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+                <myNonPlayerSprite class="game_data.sprites.Terrain" reference="../../../.."/>
+                <mySide>TOP</mySide>
+              </myAction>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>block847</name>
+          <myLocation>
+            <myXLocation>3426.0</myXLocation>
+            <myYLocation>130.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>author/images/betterblock.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <myPhysics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </myPhysics>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[83]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[29]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[40]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
+        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[32]/myCharacteristics/game__data.characteristics.Impassable/myAction/myPlayerSprite"/>
       </mySprites>
       <myKeyCommands/>
-      <isLevelLost>false</isLevelLost>
-      <isLevelWon>false</isLevelWon>
     </game__data.Level>
   </myLevels>
   <spritePresets>
     <game__data.sprites.Player>
       <name>No Name</name>
       <myLocation>
-        <myHeading>0.0</myHeading>
         <myXLocation>0.0</myXLocation>
         <myYLocation>0.0</myYLocation>
       </myLocation>
       <myWidth>100</myWidth>
       <myHeight>100</myHeight>
-      <myImagePath>file:/Users/Addison/Documents/workspace/voogasalad_letsjustprayitworks/XMLGameFiles/mario.png</myImagePath>
-      <myVelocity>0.0</myVelocity>
+      <myImagePath>XMLGameFiles/mario.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
       <myCollisionHandler reference="../../../myLevels/game__data.Level/myPlayerSprite/myCollisionHandler"/>
       <myCharacteristics/>
       <id>ConcreteDraggableSprite1480386505583</id>
       <myStates/>
     </game__data.sprites.Player>
   </spritePresets>
-  <myXMLSaver/>
   <currentLevel reference="../myLevels/game__data.Level"/>
 </game__data.Game>

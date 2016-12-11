@@ -19,7 +19,7 @@ import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import game_engine.actions.ScoreAdder;
-import javafx.geometry.Side;
+import game_engine.Side;
 
 @NameAnnotation(name = "Score Based On Position")
 public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPositionSprite {

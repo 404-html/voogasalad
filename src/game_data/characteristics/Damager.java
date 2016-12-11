@@ -7,10 +7,15 @@ import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
+import game_engine.Bottom;
+import game_engine.Left;
+import game_engine.Right;
+import game_engine.Side;
+import game_engine.Top;
 import game_engine.actions.Action;
 import game_engine.actions.Break;
 import game_engine.actions.Damage;
-import javafx.geometry.Side;
+//import javafx.geometry.Side;
 
 /**
  * @author austingartside
@@ -60,13 +65,13 @@ public class Damager implements Characteristic{
 	}
 	
 	private boolean breaksAtDirection(Side aDirection) {
-		if(aDirection == Side.TOP) {
+		if(aDirection instanceof Top) {
 			return breakableNorth;
-		} else if(aDirection == Side.BOTTOM) {
+		} else if(aDirection instanceof Bottom) {
 			return breakableSouth;
-		} else if(aDirection == Side.RIGHT) {
+		} else if(aDirection instanceof Right) {
 			return breakableEast;
-		} else if(aDirection == Side.LEFT) {
+		} else if(aDirection instanceof Left) {
 			return breakableWest;
 		} 
 		return false;
@@ -74,22 +79,22 @@ public class Damager implements Characteristic{
 	
 	@ViewableMethodOutput(description="Breaks on Top", type=boolean.class)
 	public boolean breaksOnTop(){
-		return breaksAtDirection(Side.TOP);
+		return breaksAtDirection(new Top());
 	}
 	
 	@ViewableMethodOutput(description="Breaks on Left", type=boolean.class)
 	public boolean breaksOnLeft(){
-		return breaksAtDirection(Side.LEFT);
+		return breaksAtDirection(new Left());
 	}
 	
 	@ViewableMethodOutput(description="Breaks on Bottom", type=boolean.class)
 	public boolean breaksOnBottom(){
-		return breaksAtDirection(Side.BOTTOM);
+		return breaksAtDirection(new Bottom());
 	}
 	
 	@ViewableMethodOutput(description="Breaks on Right", type=boolean.class)
 	public boolean breaksOnRight(){
-		return breaksAtDirection(Side.RIGHT);
+		return breaksAtDirection(new Right());
 	}
 
 }

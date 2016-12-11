@@ -37,6 +37,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 	public void removePresetListener(){
 		if (this.spritePreset!=null){
 			this.spritePreset.removeListener(presetInvalidationListener);
+			this.getSprite().setPreset(null);
 		}
 	}
 
@@ -45,7 +46,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 		getDraggableItem().setLayoutY(getSprite().getLocation().getYLocation());
 		getDraggableItem().setPrefWidth(getSprite().getWidth());
 		getDraggableItem().setPrefHeight(getSprite().getHeight());
-		//getDraggableItem().setRotate(getSprite().getMyLocation().getMyHeading());
+		//getDraggableItem().setRotate(getSprite().getLocation().getMyHeading());
 	}
 
 	/**
@@ -64,7 +65,6 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
 					removePresetListener();
-					this.getSprite().setPreset(null);
 					new SpriteEditWindow(this.getSprite()).openWindow();
 				}
 			}
@@ -117,7 +117,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			this.getImageView().setImage(new Image((new File(aSprite.getImagePath()).toURI().toString())));
 			this.getDraggableItem().setPrefWidth(aSprite.getWidth());
 			this.getDraggableItem().setPrefHeight(aSprite.getHeight());
-			//this.getDraggableItem().setRotate(aSprite.getMyLocation().getMyHeading());
+			//this.getDraggableItem().setRotate(aSprite.getLocation().getMyHeading());
 		};
 		return invalidationListener;
 	}

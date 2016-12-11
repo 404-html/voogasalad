@@ -1,12 +1,7 @@
 package gameplayer.application_controller;
-
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.text.MessageFormat;
 import java.util.PropertyResourceBundle;
-import java.util.Set;
 import game_data.Game;
 import game_data.Sprite;
 import game_data.states.State;
@@ -15,270 +10,206 @@ import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
-import gameplayer.back_end.keycode_handler.MovementHandler;
+import gameplayer.back_end.keycode_handler.KeyCodeHandler;
+import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.front_end.application_scene.GamePlayScene;
-import gameplayer.front_end.application_scene.IDisplay;
-import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.SceneFactory;
-import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
-import javafx.scene.image.Image;
+import gameplayer.front_end.popup.UserOptions;
+import gameplayer.back_end.keycode_handler.MovementHandlerFactory;
+import gameplayer.back_end.keycode_handler.XYMovementHandler;
+import gameplayer.front_end.sprite_display.SpriteDisplay;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import util.XMLTranslator;
-
 public class GamePlayController extends AbstractController {
-
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
-	private File myGameFile;
 	private AnimationLoop myAnimationLoop;
-	private MovementHandler myKeyHandler;
 	private GamePlayScene myGamePlayScene;
-	private Set<KeyCode> myKeySet;
-	private Set<KeyCode> myKeysPressed;
-	private Set<KeyCode> myKeysReleased;
-	private Map<Sprite, ImageView> mySpriteMap;
+	private KeyCodeHandler myKeyCodeHandler;
 	private ApplicationController myApplicationController;
-
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController) {
+	private File myGameFile;
+	private UserOptions myUserOptions;
+	private HighscoreManager myHighscoreManager;
+	private SpriteDisplay mySpriteDisplay;
+	private int myStartLevel;
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel) {
+		myStartLevel = aLevel;
 		myStage = aStage;
 		myGameFile = aFile;
-		mySpriteMap = new HashMap<Sprite, ImageView>();
-		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myApplicationController = aAppController;
+		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		mySceneBuilder = new SceneFactory();
-		initializeKeySets();
-		initializeEngineComponents(aFile);
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(),
-				aStage.getWidth(), aStage.getHeight());
+		mySpriteDisplay = new SpriteDisplay();
+		myKeyCodeHandler = new KeyCodeHandler();
+		initializeKeySets(myUserOptions);
+		initializeEngineComponents();
+		initializeScene(myUserOptions);
+		initializeEngineComponents();
 		updateSprites();
 	}
-
-	private void initializeEngineComponents(File aFile) {
-		myGameEngine = new GameEngine(aFile, 0);
+	
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel, UserOptions aOptions) {
+		this(aStage, aFile, aAppController, aLevel); 
+		myUserOptions = aOptions;
+		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
+	}
+	private void initializeEngineComponents() {
+		myGameEngine = new GameEngine(myGameFile, myStartLevel);
 		myGameController = myGameEngine.getMyEnginePlayerController();
-		myGameUpdater = new UpdateGame();
+		myGameUpdater = new UpdateGame(myGameController.getMyGame());
 	}
-
-	private void initializeKeySets() {
-		myKeySet = new HashSet<KeyCode>();
-		myKeysPressed = new HashSet<KeyCode>();
-		myKeysReleased = new HashSet<KeyCode>();
-		myKeyHandler = new MovementHandler();
+	private void initializeKeySets(UserOptions aOptions) {
+		if (aOptions != null) {
+			myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
+		} else {
+			myKeyCodeHandler = new KeyCodeHandler("default");
+		}
+		//getGUIGenerator().createMediaPlayer("");
 	}
-
 	public void displayGame() {
-		initializeScene();
+		initializeScene(myUserOptions);
 		setMenu();
 		updateSprites();
+		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer()));
 		initializeAnimation();
 		resetStage(myGamePlayScene);
 	}
-
-	private void initializeScene() {
-		myGamePlayScene = new GamePlayScene(myKeyHandler, myGameController.getMyBackgroundImageFilePath(),
-				myStage.getWidth(), myStage.getHeight());
-		myGamePlayScene.setKeyHandlers(e -> handleKeyPress(e), e -> handleKeyRelease(e));
+	private void initializeScene(UserOptions aOptions) {
+		if (aOptions != null) {
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), aOptions.getMyFontColor());
+		} else {
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), "black");
+		}
+		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
-
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
-		myAnimationLoop.init(elapsedTime -> {
+		myAnimationLoop.init( elapsedTime -> {
 			resetSprites(elapsedTime);
 			updateScene();
 		});
 	}
-
 	private void updateScene() {
-		// the below line makes sure the keys released aren't stored in the set
-		// after they're released
-		clearKeys();
-		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(), myStage.getWidth());
-		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight());
-		if (myGameController.getMyLevel().lostLevel()) createLosingScene();
-		if (myGameController.getMyLevel().wonLevel()) createWinningScene();
-		myKeyHandler.setXMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(),
-				myStage.getWidth());
-		myKeyHandler.setYMovement(myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(),
-				myStage.getHeight());
-		myGamePlayScene.moveScreen(myKeyHandler);
+		//the below line makes sure the keys released aren't stored in the set after they're released
+		myKeyCodeHandler.clearReleased();
+		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(), 
+				myStage.getWidth(), myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight(), 3);
+		checkResult();
+		myGamePlayScene.moveScreen(movementHandler);
+		setHealthLabel();
 	}
-
+	
+	private void checkResult() {
+		if (myGameController.getMyGame().hasLost()) setResultScene(myButtonLabels.getString("YouLost"));
+		if (myGameController.getMyGame().hasWon()) setResultScene(myButtonLabels.getString("YouWon"));
+	}
 	private void resetSprites(double elapsedTime) {
-		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeysPressed, myKeysReleased, mySpriteMap);
 		myGamePlayScene.clearSprites();
+		System.out.println(myKeyCodeHandler.getKeysPressed());
+		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
+				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
+		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
 		updateSprites();
 	}
-
 	private void updateSprites() {
-		// A sprite has been removed
 		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
 			boolean mapped = false;
 			for (State state : sprite.getStates()) {
-				if (state instanceof Visible) {
-					getUpdatedSpriteMap(sprite, ((Visible) state).isVisibile());
+				if (state instanceof Visible && ((Visible) state).isVisibile()) {
+					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
 					mapped = true;
-					break;
 				}
 			}
-			if(!mapped) {
-				getUpdatedSpriteMap(sprite, true);
+			if (!mapped) {
+				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
 			}
 		}
-		// needs to be updated for when a sprite has been added
 	}
-
-	// private void updateSprites() {
-	//
-	// // A sprite has been removed
-	// if (mySpriteMap.keySet().size() >
-	// myGameController.getMySpriteList().size()) {
-	// Set<Sprite> s = new HashSet<Sprite>(myGameController.getMySpriteList());
-	// mySpriteMap.keySet().retainAll(s);
-	// }
-	// for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
-	// getUpdatedSpriteMap(sprite);
-	// }
-	// //needs to be updated for when a sprite has been added
-	// }
-
-	private void getUpdatedSpriteMap(Sprite aSprite, boolean isVisible) {
-		ImageView image;
-		// if (mySpriteMap.keySet().size() >
-		// myGameController.getMySpriteList().size()){
-
-		// if(mySpriteMap.keySet().size() > 4){
-		// Set<Sprite> s = new
-		// HashSet<Sprite>(myGameController.getMySpriteList());
-		// System.out.println("START" + mySpriteMap.size());
-		//
-		// mySpriteMap.keySet().retainAll(s);
-		// System.out.println("END" + mySpriteMap.size());
-		// }
-		if (mySpriteMap.containsKey(aSprite)) {
-			image = mySpriteMap.get(aSprite);
-			setImageProperties(aSprite, image, isVisible);
-		} else {
-			//System.out.println(aSprite.getMyImagePath());
-			image = new ImageView(new File(aSprite.getImagePath()).toURI().toString());
-			setImageProperties(aSprite, image, isVisible);
-			mySpriteMap.put(aSprite, image);
-		}
-		myGamePlayScene.addImageToView(image);
-	}
-
-	private void setImageProperties(Sprite aSprite, ImageView image, boolean isVisible) {
-		image.setFitWidth(aSprite.getWidth());
-		image.setFitHeight(aSprite.getHeight());
-		image.setX(aSprite.getLocation().getXLocation());
-		image.setY(aSprite.getLocation().getYLocation());
-		image.setVisible(isVisible);
-	}
-
-	private void clearKeys() {
-		myKeysReleased.clear();
-		myKeysPressed.clear();
-	}
-
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
+		setHealthLabel();
 	}
-
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
-		String[] namesForGamePlay = { myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"),
-				myButtonLabels.getString("Save"), "lose", "win" };
+		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
 		}, e -> {
 			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
 			save();
-		}, e -> {
-			createLosingScene();
-		}, e -> {
-			createWinningScene();
 		});
 	}
-
-	private void createLosingScene() {
-		myAnimationLoop.stop();
-		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-		setLosingSceneHandlers((INavigationDisplay) ls);
-		resetStage(ls);
-	}
-
-	private void createWinningScene() {
-		myAnimationLoop.stop();
-		IDisplay ls = mySceneBuilder.create(SceneIdentifier.RESULT, myStage.getWidth(), myStage.getHeight());
-		setWinningSceneHandlers((INavigationDisplay) ls);
-		resetStage(ls);
-	}
-
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
-		String[] names = { myButtonLabels.getString("MainMenu") };
-		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png", 30);
+		String[] names = {myButtonLabels.getString("MainMenu")};
+		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
 			myApplicationController.displayMainMenu();
 		});
 	}
-
+	private void setHealthLabel() {
+//		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+	}
+	//	private void setScoreLabel() {
+	//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer().getScore());
+	//	}
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController);
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myStartLevel);
 		gameControl.displayGame();
 	}
-
+	
 	private void save() {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
 	}
-
-	private void handleKeyPress(KeyCode aKey) {
-		/*
-		 * if(myKeySet.contains(aKey)){ myKeysPressed.remove(aKey); } else{
-		 * myKeysPressed.add(aKey); myKeySet.add(aKey); }
-		 */
-		myKeysPressed.add(aKey);
-	}
-
-	private void handleKeyRelease(KeyCode key) {
-		myKeysReleased.add(key);
-		// myKeySet.remove(key);
-		myKeysPressed.remove(key);
-	}
-
+	
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}
-
-	private void setWinningSceneHandlers(INavigationDisplay winScene) {
-		winScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouWon"), 0, 0));
+	
+	private void setResultScene(String aLabel) {
+		myAnimationLoop.stop();
+		Pane winScene = myGamePlayScene.createResultScene();
+		winScene.getChildren().add(getGUIGenerator().createLabel(aLabel, 0, 0));
 		setResultSceneHandlers(winScene);
 	}
-
-	private void setLosingSceneHandlers(INavigationDisplay loseScene) {
-		loseScene.addNode(getGUIGenerator().createLabel(myButtonLabels.getString("YouLost"), 0, 0));
-		setResultSceneHandlers(loseScene);
-	}
-
-	private void setResultSceneHandlers(INavigationDisplay loseScene) {
-		loseScene.addButton(myButtonLabels.getString("MainMenu"), e -> {
+	
+	private void setResultSceneHandlers(Pane resultScene) {
+		saveHighscore();
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
 			myApplicationController.displayMainMenu();
-		}, ButtonDisplay.TEXT);
-		loseScene.addButton(myButtonLabels.getString("PlayAgain"), e -> {
+		}, ButtonDisplay.TEXT));
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("PlayAgain"),0,0, e -> {
 			handleRestart();
-		}, ButtonDisplay.TEXT);
-		loseScene.addButton(myButtonLabels.getString("HighScores"), e -> {
+		}, ButtonDisplay.TEXT));
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("HighScores"), 0,0, e -> {
 			myApplicationController.displayHighScoreScene();
-		}, ButtonDisplay.TEXT);
+		}, ButtonDisplay.TEXT));
+		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Publish"), 0, 0, e -> {
+			myApplicationController.publishToFacebook(MessageFormat.format(myButtonLabels.getString("MessageTitle"), 
+					myGameController.getMyGame().getName()), 
+					myButtonLabels.getString("PublishMessage"));
+		}, ButtonDisplay.TEXT));
+	}
+	
+	private void saveHighscore() {
+		//TODO: Finish saving high scores
+//		myHighscoreManager.setHighscore(, myGameController.getScore(), myGameController.getMyGame());
+		save(myHighscoreManager, "highscores");
+	}
+	
+	public void setOptions(UserOptions aOptions) {
+		myUserOptions = aOptions;
+		//TODO: update the scene
 	}
 }

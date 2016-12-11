@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import game_data.Game;
 import game_data.Sprite;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 /**
@@ -11,11 +12,29 @@ import javafx.scene.input.KeyCode;
  *
  */
 public class UpdateGame {
-	
-	public void update(Game aGame, double timeElapsed, Set<KeyCode> myKeys, Set<KeyCode> myKeysReleased, Map<Sprite, ImageView> mySpriteImages){
-		UpdateStates myLevelState = new UpdateStates(aGame.getCurrentLevel(), timeElapsed, myKeys, myKeysReleased, mySpriteImages);
-		
-		// TODO Update level?
+	private UpdateStates myUpdateLevel;
+	private Game myGame;
+	public UpdateGame(Game aGame){
+		myGame=aGame;
+		myUpdateLevel = new UpdateStates(myGame.getCurrentLevel());
+	}
+	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
+		myUpdateLevel.update(aTimeElapsed, aKeysPressed, aKeysReleased, aSpriteImages, aScreenHeight, aScreenWidth, aScreenXPosition, aScreenYPosition);
+		changeLevel();
+	}
+	public void changeLevel(){
+		if(myUpdateLevel.getLevel().wonLevel()){
+			int currentLevelIndex = myGame.getLevels().indexOf(myGame.getCurrentLevel());
+			if(currentLevelIndex+1<myGame.getLevels().size()){
+				myGame.setCurrentLevel(currentLevelIndex+1);
+			}
+			else{
+				myGame.setHasWon(true);
+			}
+		}
+		else if(myUpdateLevel.getLevel().lostLevel()){
+			myGame.setHasLost(true);
+		}
 	}
 
 }

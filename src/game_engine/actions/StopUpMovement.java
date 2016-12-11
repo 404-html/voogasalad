@@ -11,7 +11,7 @@ public class StopUpMovement extends StopMovement {
 	@Override
 	public void act() {
 		mySprite.setYVelocity(0);
-		//mySprite.setMyYVelocity(mySprite.getMyYVelocity()+myVelocity);
+		//mySprite.setYVelocity(mySprite.getYVelocity()+myVelocity);
 	}
 
 }

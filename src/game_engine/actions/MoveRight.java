@@ -12,17 +12,21 @@ import game_data.states.Solid;
 import game_data.states.State;
 import game_engine.ListOfCollidingSprites;
 import javafx.geometry.Side;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 /**
  * @author Katrina
  *
  */
 public class MoveRight extends Move {
+	private List<Sprite>mySpriteList;
+	private Map<Sprite, ImageView>mySpriteImages;
 	
 	
 	public MoveRight(Sprite aSprite, double aVelocity) {
 		super(aSprite, aVelocity);
 	}
+	
 /*	@Override
 	public Location changeCoordinates(){
 		//myNewLocation.setLocation(myOldLocation.getXLocation()+myVelocity, myOldLocation.getYLocation());
@@ -30,7 +34,7 @@ public class MoveRight extends Move {
 		//return myNewLocation;
 	}*/
 	public void setVelocity(){
-		//mySprite.setMyXVelocity(myVelocity);
+		//mySprite.setXVelocity(myVelocity);
 		//System.out.println("changing right velocity");
 		mySprite.setXVelocity(myVelocity);
 	}

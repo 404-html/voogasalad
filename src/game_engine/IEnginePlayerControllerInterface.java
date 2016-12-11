@@ -12,9 +12,9 @@ public interface IEnginePlayerControllerInterface {
 
 	public Level getMyLevel();
 
-	public int getMyWidth();
+	public int getWidth();
 
-	public int getMyHeight();
+	public int getHeight();
 
 	public String getMyBackgroundImageFilePath();
 

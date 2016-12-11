@@ -10,6 +10,7 @@ import game_data.sprites.builders.SpriteDefaultBuilder;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.SpritePhysics;
+
 /**
  * Creates new default terrain when new terrain is created
  * @author Jordan Frazier
@@ -24,9 +25,9 @@ public class TerrainDefaultBuilder implements SpriteDefaultBuilder {
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(new SpritePhysics(0.0))
+			 new Physics(0,0)
 	};
- 
+
 	private static final String NAME = "Terrain_Name";
 
 	@Override
