@@ -28,9 +28,9 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 		this.spritePreset = aSpritePreset;
 		this.presetInvalidationListener = this.spritePreset == null ? null : initPresetListener(aSpriteInstance, this.spritePreset);
 		styleSprite();
-		//makeDraggable();
-		DragResizeMod resizer = new DragResizeMod(this, this.getDraggableItem(), this.spritePreset, this.presetInvalidationListener,  null);
-		resizer.makeResizable(this.getDraggableItem(), null);
+		makeDraggable();
+		//DragResizeMod resizer = new DragResizeMod(this, this.getDraggableItem(), this.spritePreset, this.presetInvalidationListener,  null);
+		//resizer.makeResizable(this.getDraggableItem(), null);
 		
 	}
 	
@@ -76,7 +76,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			instanceSprite.setImagePath(spritePreset.getImagePath());
 			instanceSprite.setWidth(spritePreset.getWidth());
 			instanceSprite.setHeight(spritePreset.getHeight());
-			instanceSprite.setLocation(new Location(instanceSprite.getLocation().getXLocation(), instanceSprite.getLocation().getYLocation()));
+			//instanceSprite.setLocation(new Location(instanceSprite.getLocation().getXLocation(), instanceSprite.getLocation().getYLocation()));
 			spritePreset.getCharacteristics()
 					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
 		};

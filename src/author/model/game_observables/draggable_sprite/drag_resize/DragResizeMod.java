@@ -168,10 +168,12 @@ public class DragResizeMod {
 	protected void mouseReleased(MouseEvent event) {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
+		System.out.println("Released");
 		if (state == S.DRAG) {
 			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY());
 		} else {
+			System.out.println("removing");
 			removePresetListener();
 			mySprite.getSprite().setPreset(null);
 			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());
