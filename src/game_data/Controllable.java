@@ -85,15 +85,14 @@ public class Controllable {
 		}	
 	}
 	private boolean isTerrainOnBottom(Map<Sprite, Side> myCollisionMap){
-		/*for(Sprite s: myCollisionMap.keySet()){
+		for(Sprite s: myCollisionMap.keySet()){
 			if(s instanceof Terrain){
 				//if (myCollisionMap.get(s).equals(Side.BOTTOM));
 				if(myCollisionMap.get(s) instanceof Top)
 				return true;
 			}
 		}
-		return false;*/
-		return true;
+		return false;
 	}
 	private void runKeyReleased(){
 		for(KeyCode myKey: myKeysReleased){
