@@ -13,6 +13,7 @@ import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
+import gameplayer.back_end.user_information.LevelManager;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
@@ -25,7 +26,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import util.XMLTranslator;
 
 public class GamePlayController extends AbstractController {
 	
@@ -45,7 +45,7 @@ public class GamePlayController extends AbstractController {
 	private PlayerInformationController myPlayerInformation;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
-			PlayerInformationController aInfoController,int aLevel) {
+			PlayerInformationController aInfoController, int aLevel) {
 		myStage = aStage;
 		myGameFile = aFile;
 		myApplicationController = aAppController;
@@ -173,6 +173,7 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		});
 	}
+	
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
 		String[] names = {myButtonLabels.getString("MainMenu")};
@@ -218,8 +219,9 @@ public class GamePlayController extends AbstractController {
 
 	private void saveGame() {
 		Game currentGame = myGameController.getMyGame();
-		XMLTranslator mySaver = new XMLTranslator();
-		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
+		LevelManager lm = new LevelManager(myGameController.getMyGame().getLevelNumber());
+		save(currentGame, currentGame.getName() + "saved");
+		save(lm, currentGame + "levels");
 	}
 
 	public Game getGame() {
@@ -263,5 +265,9 @@ public class GamePlayController extends AbstractController {
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), aOptions.getMyFontColor());
+	}
+	
+	public void setLevel(int aLevel) {
+		initializeEngineComponents(aLevel);
 	}
 }
