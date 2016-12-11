@@ -22,7 +22,6 @@ import gameplayer.back_end.keycode_handler.XYMovementHandler;
 import gameplayer.front_end.sprite_display.SpriteDisplay;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GamePlayController extends AbstractController {
@@ -154,12 +153,9 @@ public class GamePlayController extends AbstractController {
 	
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
-		String[] namesForGamePlay = {getButtonLabels().getString("Restart"), getButtonLabels().getString("Red"), getButtonLabels().getString("Save"), "highscore"};
+		String[] namesForGamePlay = {getButtonLabels().getString("Restart"), getButtonLabels().getString("Save"), "highscore"};
 		myGamePlayScene.addMenu(getButtonLabels().getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
-			myMusic.stopMusic();
-		}, e -> {
-			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
 			save();
 		}, e -> {
@@ -172,9 +168,8 @@ public class GamePlayController extends AbstractController {
 		String[] names = {getButtonLabels().getString("MainMenu")};
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
-			myAnimationLoop.stop();
+			stopLoops();
 			myApplicationController.displayMainMenu(getStage().getWidth(), getStage().getHeight());
-			myMusic.stopMusic();
 		});
 	}
 	
@@ -193,7 +188,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void handleRestart() {
-		myAnimationLoop.stop();
+		stopLoops();
 		if (myUserOptions != null) {
 			GamePlayController gameControl = new GamePlayController(getStage(), myGameFile, 
 					myApplicationController, getPlayerInformationController(), 0, myUserOptions);
@@ -203,6 +198,11 @@ public class GamePlayController extends AbstractController {
 					myApplicationController, getPlayerInformationController(), 0);
 			gameControl.displayGame();
 		}
+	}
+
+	private void stopLoops() {
+		myAnimationLoop.stop();
+		myMusic.stopMusic();
 	}
 	
 	private void save() {

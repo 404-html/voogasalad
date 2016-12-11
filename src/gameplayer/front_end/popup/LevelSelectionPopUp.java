@@ -1,7 +1,5 @@
 package gameplayer.front_end.popup;
 
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.RadioButton;
@@ -12,15 +10,11 @@ import javafx.scene.layout.Pane;
 
 public class LevelSelectionPopUp extends AbstractPopUp implements IPopUpDisplay {
 
-	private static final String RESOURCE_FILE = "gameplayerlabels.";
-	private static final String BUTTONLABEL = "ButtonLabels"; 
-	private ResourceBundle myButtonLabels;
 	private int myNumberOfLevels;
 	private int mySelectedLevel;
 
 	public LevelSelectionPopUp(int aNumLevels) {
 		super();
-		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
 		myNumberOfLevels = aNumLevels;
 		mySelectedLevel = 0;
 		addOptions();

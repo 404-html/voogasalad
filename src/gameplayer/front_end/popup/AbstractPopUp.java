@@ -1,6 +1,8 @@
 package gameplayer.front_end.popup;
 
 import java.io.File;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -18,11 +20,15 @@ public class AbstractPopUp {
 	private final int SIZE = 500;
 	private Stage myStage;
 	private VBox myOptions;
+	protected static final String RESOURCE_FILE = "gameplayerlabels.";
+	protected static final String BUTTONLABEL = "ButtonLabels"; 
+	private ResourceBundle myButtonLabels;
 	
 	public AbstractPopUp() {
 		myStage = new Stage();
 		myOptions = new VBox(40);
 		myOptions.setAlignment(Pos.CENTER);
+		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
 		Scene stageScene = new Scene(myOptions, SIZE, SIZE);
 		File css = new File(STYLESHEET);
 		stageScene.getStylesheets().add(css.toURI().toString());
@@ -40,6 +46,10 @@ public class AbstractPopUp {
 	
 	public void setOnClosed(EventHandler<WindowEvent> aHandler){
 		myStage.setOnCloseRequest(aHandler);
+	}
+	
+	protected String getString(String aProperty) {
+		return myButtonLabels.getString(aProperty);
 	}
 	
 	protected RadioButton createRadioButton(String aMessage, ToggleGroup aGroup) {
