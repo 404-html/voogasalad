@@ -116,8 +116,13 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addNode(getGUIGenerator().createComboBox(myButtonLabels.getString("Choose"), myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
 			displayGame(myStoredGames.getGameFilePath(aChoice));
 			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
-			getOptions();
-			getLevel();
+			try {
+				getOptions();
+				getLevel();
+			} catch (Exception x) {
+				//do nothing
+			}
+
 		}));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
