@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.filehelpers.FileLoader.FileLoader;
 import util.filehelpers.FileLoader.FileType;
@@ -41,6 +42,7 @@ public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 
 	@Override
 	public void initializeWindow() {
+		this.splashStage.initModality(Modality.APPLICATION_MODAL);
 		this.splashStage.setTitle(TITLE);
 		this.splashStage.setScene(initScene());
 		this.splashStage.getScene().getStylesheets().add(getStyleSheet());

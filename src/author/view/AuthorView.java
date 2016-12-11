@@ -45,7 +45,6 @@ public class AuthorView {
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
-		displayInformation();
 	}
 
 	private void initializeView() {
@@ -54,6 +53,7 @@ public class AuthorView {
 		myPane.getChildren().addAll(buildMenu(), buildTabPane());
 	}
 
+	@Deprecated
 	private void displayInformation() {
 		Platform.runLater(new Runnable() {
 			@Override

@@ -160,7 +160,9 @@ public class FileLoader {
 	public File loadSingle() throws FileNotFoundException {
 		File loadedFile = myFileChooser.showOpenDialog(makeStage());
 
-		if(loadedFile == null) throw new FileNotFoundException(ERR_MSG);
+		if(loadedFile == null) {
+			throw new FileNotFoundException(ERR_MSG);
+		}
 
 		return loadedFile;
 	}
