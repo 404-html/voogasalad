@@ -96,8 +96,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myKeyPressedMap.put(KeyCode.UP, 
 				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
 		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
-				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "author/images/betterblock.png");
-
+				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "data/images/sprite_images/block.png");
 		myProjectile.addState(new Physics(0.0, 0.0));
 		myProjectile.addCharacteristic(new Impassable(myProjectile));
 		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
