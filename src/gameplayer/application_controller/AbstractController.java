@@ -2,6 +2,8 @@ package gameplayer.application_controller;
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
+import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.back_end.user_information.XMLHandler;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.SceneFactory;
@@ -61,5 +63,15 @@ public abstract class AbstractController {
 	
 	protected ResourceBundle getButtonLabels(){
 		return myButtonLabels;
+	}
+	
+	protected HighscoreManager loadHighscores() {
+		HighscoreManager hm;
+		try {
+			hm = (HighscoreManager) getXMLHandler().load("highscores");
+		} catch (Exception e) {
+			hm = new HighscoreManager();
+		}
+		return hm;
 	}
 }

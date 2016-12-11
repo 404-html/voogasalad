@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,12 +17,12 @@ import javafx.stage.WindowEvent;
 
 public class AbstractPopUp {
 	
+	protected static final String RESOURCE_FILE = "gameplayerlabels.";
+	protected static final String BUTTONLABEL = "ButtonLabels"; 
 	private static final String STYLESHEET = "data/gui/style.css";
 	private final int SIZE = 500;
 	private Stage myStage;
 	private VBox myOptions;
-	protected static final String RESOURCE_FILE = "gameplayerlabels.";
-	protected static final String BUTTONLABEL = "ButtonLabels"; 
 	private ResourceBundle myButtonLabels;
 	
 	public AbstractPopUp() {
@@ -59,4 +60,5 @@ public class AbstractPopUp {
 		radioButton.setUserData(aMessage);
 		return radioButton;
 	}
+	
 }

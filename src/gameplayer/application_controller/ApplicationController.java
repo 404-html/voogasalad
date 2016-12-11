@@ -92,7 +92,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void displayUserScene() {
-		myCurrentDisplay = getSceneFactory().create(getPlayerInformationController().getUser(), getPlayerInformationController().getPictureUrl(), getStage().getWidth(), getStage().getHeight());
+		myCurrentDisplay = getSceneFactory().create(getPlayerInformationController().getUser(), getPlayerInformationController().getPictureUrl(), getStage().getWidth(), getStage().getHeight(), loadHighscores());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
 	}

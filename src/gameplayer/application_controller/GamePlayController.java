@@ -127,9 +127,9 @@ public class GamePlayController extends AbstractController {
 		updateSprites();
 	}
 	
-	private void checkBackground() {
-		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
-	}
+//	private void checkBackground() {
+//		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
+//	}
 
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
@@ -245,12 +245,7 @@ public class GamePlayController extends AbstractController {
 	
 	private void saveHighscore() {
 		if (myScore != null) {
-			HighscoreManager hm;
-			try {
-				hm = (HighscoreManager) getXMLHandler().load(myGameController.getMyGame().getName() + "highscores");
-			} catch (Exception e) {
-				hm = new HighscoreManager();
-			}
+			HighscoreManager hm = loadHighscores();
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}
