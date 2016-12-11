@@ -1,23 +1,21 @@
 package gameplayer.application_controller;
 
 import gameplayer.back_end.facebook.FacebookInformation;
-import gameplayer.back_end.high_score.HighScore;
 import gameplayer.back_end.user_information.UserInformation;
 
 public class PlayerInformationController {
 	
 	private UserInformation myUserInformation; 
-	private HighScore myHighScores;
 	private FacebookInformation myFacebookInformation;
 	
 	public PlayerInformationController() {
 		myUserInformation = new UserInformation();
-		myHighScores = new HighScore();
 		myFacebookInformation = new FacebookInformation();
 	}
 	
 	public double getHighScores(String aUserName) {
-		return myHighScores.getHighScore(aUserName);
+		//return myHighScores.getHighScore(aUserName);
+		return 0;
 	}
 	
 	public void setUserName(String aUserName, String aPictureUrl) {

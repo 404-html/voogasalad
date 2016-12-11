@@ -4,6 +4,7 @@ import java.util.List;
 import gameplayer.application_controller.Choosable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -22,7 +23,8 @@ public interface IGUIGenerator {
 	
 	public ImageView createImage(String aFileName, double aWidth);
 		
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
+	public Button createButton(String aMessage, int aXPos, int aYPos, 
+			EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
 	
 	public TextField createTextField(String aPlaceHolder, int aXPos, int aYPos, int aWidth);
 		
@@ -32,8 +34,7 @@ public interface IGUIGenerator {
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 	
-	public ComboBox<Pane> createComboBox(List<String> aList, List<String> aListOfFiles, Choosable aChoice);
-	
-	public MediaPlayer createMediaPlayer(String aFilePath);
+	public ComboBox<Pane> createComboBox(String aLabel, List<String> aList, List<String> aListOfFiles, 
+			List<String> aListOfDescriptions, Choosable aChoice);
 	
 }
