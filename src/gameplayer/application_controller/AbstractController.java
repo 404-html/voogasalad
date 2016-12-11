@@ -26,6 +26,7 @@ public abstract class AbstractController {
 		mySceneBuilder = new SceneFactory();
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myStage.setTitle(myButtonLabels.getString("Title"));
+		myXMLHandler = new XMLHandler();
 	}
 	
 	protected void resetStage(IDisplay aScene) {
