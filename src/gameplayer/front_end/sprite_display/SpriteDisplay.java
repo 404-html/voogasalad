@@ -1,10 +1,13 @@
 package gameplayer.front_end.sprite_display;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import game_data.Sprite;
+import game_data.sprites.Player;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
@@ -12,9 +15,12 @@ import javafx.scene.transform.Rotate;
 public class SpriteDisplay {
 
 	private Map<Sprite, ImageView> mySpriteViews;
+	private List<ImageView> myAnimationSpriteImage;
+	private int myCurrentImage; 
 	
 	public SpriteDisplay() {
 		mySpriteViews = new HashMap<Sprite, ImageView>();
+		myAnimationSpriteImage = new ArrayList<ImageView>();
 	}
 	
 	private ImageView buildSpriteDisplay(Sprite aSprite) {
@@ -24,8 +30,10 @@ public class SpriteDisplay {
 	}
 	
 	public ImageView getUpdatedSpriteMap(Sprite aSprite) {
-		ImageView image;
-		//mySpriteViews=new HashMap<Sprite, ImageView>();
+		ImageView image = checkAnimation(aSprite);
+		if (image != null) {
+			return image;
+		}
 		if (mySpriteViews.containsKey(aSprite)) {
 			image = mySpriteViews.get(aSprite);
 		} else {
@@ -33,6 +41,39 @@ public class SpriteDisplay {
 			mySpriteViews.put(aSprite, image);
 		}
 		setImageProperties(aSprite, image);
+		return image;
+	}
+	
+	private ImageView checkAnimation(Sprite aSprite) {
+		File fileOfAnimation = null;
+		ImageView image = null;
+		if (aSprite instanceof Player) {
+			if (myAnimationSpriteImage.size() < 1) {
+				String file = aSprite.getImagePath(); 
+				myAnimationSpriteImage.add(buildSpriteDisplay(aSprite));
+				String[] array = file.split("\\.");
+				StringBuilder buildString = new StringBuilder();
+				buildString.append(array[0]);
+				buildString.append("_animation.");
+				buildString.append(array[1]);
+				String filePathOfAnimation = buildString.toString();
+				fileOfAnimation = new File(filePathOfAnimation);
+				if (fileOfAnimation != null && fileOfAnimation.exists()) {
+					image = new ImageView(fileOfAnimation.toURI().toString());
+					myAnimationSpriteImage.add(image);
+					myCurrentImage = 0;
+				} 
+			} else {
+				image = myAnimationSpriteImage.get(myCurrentImage);
+				if (myCurrentImage == 1) {
+					myCurrentImage = 0;
+				} else {
+					myCurrentImage++;
+				}
+			}
+			mySpriteViews.put(aSprite, image);
+			setImageProperties(aSprite, image);
+		}
 		return image;
 	}
 	
