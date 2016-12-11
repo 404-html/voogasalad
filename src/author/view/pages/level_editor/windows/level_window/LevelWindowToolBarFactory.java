@@ -32,8 +32,6 @@ public class LevelWindowToolBarFactory {
 		tbb.addFiller();
 		tbb.addBurst(new ButtonFactory().createButton("Set Background", e -> {
 			newBackgroundImage();
-		}).getButton(), new ButtonFactory().createButton("Set Theme", e -> {
-			// TODO: Set Theme Here
 		}).getButton(), new ButtonFactory().createButton("Extend Right", e -> {
 			this.iLevelWindowInternal.getHorizontalPanes().set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
 		}).getButton(), new ButtonFactory().createButton("Extend Down", e -> {

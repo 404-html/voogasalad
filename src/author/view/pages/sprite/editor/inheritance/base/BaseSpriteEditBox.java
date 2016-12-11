@@ -1,6 +1,7 @@
 package author.view.pages.sprite.editor.inheritance.base;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import game_data.Location;
 import javafx.scene.Node;
@@ -161,18 +162,17 @@ public class BaseSpriteEditBox {
 
 		imageSelectBox.getChildren().addAll(imageButton, myImageView);
 
-		imageButton.setOnMouseClicked(e -> {
+		imageButton.setOnMouseClicked(event -> {
 			File file;
 			try {
 				file = myFileLoader.loadSingle();
 				RelativePathFinder pf = new RelativePathFinder();
 				myImagePath = pf.getPath(file);
 				myImageView.setImage(new Image(file.toURI().toString()));
-			} catch (Exception e1) {
-				// TODO : Throw Error message if file not found
-				e1.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// Do Nothing
+				return;
 			}
-
 		});
 
 		return imageSelectBox;
