@@ -131,9 +131,6 @@ public class BaseSpriteEditBox {
 
 		myXVelocityField = new NumberFieldBox("X: ");
 		myYVelocityField = new NumberFieldBox("Y: ");
-		myXVelocityField.getTextField();
-		myYVelocityField.getTextField();
-
 
 		Pane coordinateBox = new VBox();
 		coordinateBox.getChildren().addAll(

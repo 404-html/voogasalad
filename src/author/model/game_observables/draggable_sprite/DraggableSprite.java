@@ -112,4 +112,6 @@ public abstract class DraggableSprite {
 		this.myImageView = imageView;
 		makeDraggable();
 	}
+
+	public abstract void removePresetListener();
 }

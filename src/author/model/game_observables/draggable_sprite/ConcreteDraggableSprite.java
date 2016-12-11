@@ -38,4 +38,10 @@ public class ConcreteDraggableSprite extends DraggableSprite {
 		});
 	}
 
+	@Override
+	public void removePresetListener() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

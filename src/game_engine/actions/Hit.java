@@ -28,17 +28,19 @@ public class Hit implements Action {
 	@Override
 	public void act() {
 		
-		SpritePhysics mySpritePhysics = null;
+		Physics myPhysics = null;
 		for(State s: myPlayerSprite.getStates()){
 			if(s instanceof Physics){
-				mySpritePhysics = ((Physics) s).getPhysics();
+				myPhysics = (Physics) s;
 			}
 		}
+		
+		
 		//get new Velocity –– gets horizontal or vertical components to zero
 
 		//setNewVelocity();
 		//setNewAcceleration();
-		mySide.hitImpassable(myPlayerSprite, mySpritePhysics);
+		mySide.hitImpassable(myPlayerSprite, myPhysics);
 
 		//setNewVelocity();
 		//setNewAcceleration();

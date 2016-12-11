@@ -46,6 +46,11 @@ public class Breakable implements Characteristic{
 		myDurability = durability;
 	}
 	
+	@ViewableMethodOutput(description = "Durability", type=int.class)
+	public int getDurability() {
+		return myDurability;
+	}
+	
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
 		for(Sprite collidedSprite:myCollisionMap.keySet()){

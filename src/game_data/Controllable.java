@@ -36,9 +36,7 @@ public class Controllable {
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
 	@ParameterAnnotation(parameters="Sprite")
-	public Controllable(Sprite aSprite){
-		this.mySprite=aSprite;
-		myKeyReleasedMap=new HashMap<KeyCode, Move>();
+	public Controllable(){
 		isControllable=false;
 	}
 	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap) {
@@ -93,7 +91,7 @@ public class Controllable {
 				if(myCollisionMap.get(s) instanceof Top)
 				return true;
 			}
-		}		
+		}
 		return false;
 	}
 	private void runKeyReleased(){

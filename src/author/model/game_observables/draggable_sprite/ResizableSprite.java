@@ -11,4 +11,5 @@ public interface ResizableSprite {
 	ImageView getImageView();
 	
 	Sprite getSprite();
+	
 }
