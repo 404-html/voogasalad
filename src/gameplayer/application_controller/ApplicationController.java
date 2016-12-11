@@ -107,14 +107,14 @@ public class ApplicationController extends AbstractController {
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(getButtonLabels().getString("Choose"), myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
-			displayGame(myStoredGames.getGameFilePath(aChoice));
+			resetGame(myStoredGames.getGameFilePath(aChoice));
 			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 			getOptions();
 			getLevel();
 		}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
-			if (chosenGame != null) displayGame(chosenGame);
+			if (chosenGame != null) resetGame(chosenGame);
 			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 			getOptions();
 			getLevel();
@@ -152,6 +152,7 @@ public class ApplicationController extends AbstractController {
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Levels"), 0, 0, e -> {
 			LevelSelectionPopUp levelSelection = (LevelSelectionPopUp) new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
 			levelSelection.setOnClosed(k -> {
+//				System.out.println(levelSelection.getSelectedLevel());
 				myGamePlay.setLevel(levelSelection.getSelectedLevel());
 			});
 			levelSelection.show();
@@ -166,7 +167,7 @@ public class ApplicationController extends AbstractController {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
 	}
 
-	private void displayGame(File chosenGame) {
-		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController(), 0);
+	private void resetGame(File chosenGame) {
+		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 	}
 }

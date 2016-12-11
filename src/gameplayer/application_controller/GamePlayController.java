@@ -40,21 +40,20 @@ public class GamePlayController extends AbstractController {
 	private Score myScore;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
-			PlayerInformationController aInfoController, int aLevel) {
+			PlayerInformationController aInfoController) {
 		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
 		myKeyCodeHandler = new KeyCodeHandler();
 		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
-		initializeEngineComponents(aLevel);
+		initializeEngineComponents(0);
 		initializeScene(myUserOptions);
 		updateSprites();
 	}
 	
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
-			PlayerInformationController aPlayerController, int aLevel, UserOptions aOptions) {
-		this(aStage, aFile, aAppController, aPlayerController, aLevel); 
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) {
+		this(aStage, aFile, aAppController, aPlayerController); 
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
@@ -191,11 +190,11 @@ public class GamePlayController extends AbstractController {
 		stopLoops();
 		if (myUserOptions != null) {
 			GamePlayController gameControl = new GamePlayController(getStage(), myGameFile, 
-					myApplicationController, getPlayerInformationController(), 0, myUserOptions);
+					myApplicationController, getPlayerInformationController(), myUserOptions);
 			gameControl.displayGame();
 		} else {
 			GamePlayController gameControl = new GamePlayController(getStage(), myGameFile, 
-					myApplicationController, getPlayerInformationController(), 0);
+					myApplicationController, getPlayerInformationController());
 			gameControl.displayGame();
 		}
 	}
@@ -258,7 +257,7 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	public void setLevel(int aLevel) {
-		initializeEngineComponents(aLevel);
+		initializeEngineComponents(aLevel - 1);
 	}
 	
 	public Game getGame() {
