@@ -1,6 +1,5 @@
 package game_data.sprites.builders.defaults;
 
-import author.images.EmptyImage;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
@@ -11,14 +10,10 @@ import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.GameResources;
-import game_engine.SpritePhysics;
 /**
-<<<<<<< HEAD
- * Default builders open to extension 
-=======
+
  * Default player builder open to extension 
->>>>>>> 0a837dc1ca251d6f6d8186bb816fe2cc003bcaaa
- * @author George, Jordan Frazier
+ * @author George Bernard, Jordan Frazier
  *
  */
 public class PlayerDefaultBuilder implements SpriteDefaultBuilder {

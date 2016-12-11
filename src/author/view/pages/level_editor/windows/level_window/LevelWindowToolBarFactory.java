@@ -11,6 +11,7 @@ import author.view.pages.level_editor.windows.ILevelWindowInternal;
 import author.view.util.authoring_buttons.ButtonFactory;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
 import util.filehelpers.FileLoader.FileExtension;
 import util.filehelpers.FileLoader.FileLoader;
@@ -50,8 +51,9 @@ public class LevelWindowToolBarFactory {
 		File file;
 		try {
 			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
+			RelativePathFinder pf = new RelativePathFinder();
 			this.authorController.getModel().getGame().getCurrentLevel()
-				.setBackgroundImageFilePath(file.toURI().toString());
+				.setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
 			e.printStackTrace();
