@@ -1,7 +1,6 @@
 package gameplayer.front_end.application_scene;
 
 import java.io.File;
-
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
@@ -22,7 +21,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		super(aWidth, aHeight);
 		initialize("");
 	}
-	
+
 	public HighScoreScene(double aWidth, double aHeight, String aGamename){
 		super(aWidth, aHeight);
 		initialize(aGamename);
@@ -33,7 +32,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		myPane.setId("glass");
 		myGamename = aGamename;
 	}
-	
+
 	public void setGame(String aGamename) {
 		myGamename = aGamename;
 	}
@@ -67,16 +66,20 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	private void addScores(HighscoreManager aManager) {
 		HBox box = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource() * 2);
 		VBox users = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
-		for (String user: aManager.getUsers()) {
-			users.getChildren().add(new Label(user));
-		}
 		VBox scores = new VBox();
-		for (double d : aManager.getHighscores()) {
-			scores.getChildren().add(new Label(String.valueOf(d)));
+		for (int i = 0; i < aManager.getGames().size(); i++) {
+			if (aManager.getGames().get(i).getName().equals(myGamename)) {
+				addScore(aManager.getUsers().get(i), aManager.getHighscores().get(i), users, scores);
+			}
 		}
 		box.getChildren().add(users);
 		box.getChildren().add(scores);
 		box.setAlignment(Pos.TOP_CENTER);
 		getOptions().getChildren().add(box);
+	}
+	
+	private void addScore(String aUser, double aScore, VBox aUsers, VBox aScores) {
+		aScores.getChildren().add(new Label(String.valueOf(aScore)));
+		aUsers.getChildren().add(new Label(aUser));
 	}
 }
