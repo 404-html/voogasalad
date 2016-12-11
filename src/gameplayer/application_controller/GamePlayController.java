@@ -36,7 +36,6 @@ public class GamePlayController extends AbstractController {
 	private ApplicationController myApplicationController;
 	private File myGameFile;
 	private UserOptions myUserOptions;
-	private HighscoreManager myHighscoreManager;
 	private SpriteDisplay mySpriteDisplay;
 	private MediaController myMusic;
 	private Score myScore;
@@ -47,7 +46,6 @@ public class GamePlayController extends AbstractController {
 		myGameFile = aFile;
 		myApplicationController = aAppController;
 		myKeyCodeHandler = new KeyCodeHandler();
-		myHighscoreManager = new HighscoreManager();
 		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
 		initializeEngineComponents(aLevel);
@@ -247,8 +245,14 @@ public class GamePlayController extends AbstractController {
 	
 	private void saveHighscore() {
 		if (myScore != null) {
-			myHighscoreManager.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
-			getXMLHandler().save(myHighscoreManager, myGameController.getMyGame().getName() + "-highscores");
+			HighscoreManager hm;
+			try {
+				hm = (HighscoreManager) getXMLHandler().load(myGameController.getMyGame().getName() + "highscores");
+			} catch (Exception e) {
+				hm = new HighscoreManager();
+			}
+			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
+			getXMLHandler().save(hm, myGameController.getMyGame().getName() + "-highscores");
 		}
 	}
 	
