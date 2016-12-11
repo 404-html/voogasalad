@@ -104,7 +104,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 	public EnginePlayerController(Game game) {
 		myGame = game;
-		
 		// myLevel=new Level();
 		myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
@@ -119,20 +118,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		
 				myLevel.getMainPlayer().resetTerminalVelocities();
 				myLevel.getMainPlayer().setLevel(myLevel);
-			}
-			else if(s instanceof Enemy){
-				//s.addState(new Physics(new SpritePhysics()));
-				if(s.getName().equals("goomba")){
-					s.setXVelocity(100);
-				}
-			}
-			else{
-				//s.addState(new Physics(new SpritePhysics(0.0)));
-				//if(s.getCharacteristics().size()>1){
-				//	s.setXVelocity(100.0);
-				//	s.addState(new Health(10));
-					//s.setYVelocity(200);
-				//}
 			}
 		}
 		/*int j = 1;
