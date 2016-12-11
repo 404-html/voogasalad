@@ -2,6 +2,7 @@ package author.model.game_observables.draggable_sprite.drag_resize;
 
 import author.model.game_observables.draggable_sprite.ResizableSprite;
 import author.view.pages.sprite.SpriteEditWindow;
+import game_data.Location;
 import game_data.Sprite;
 import javafx.beans.InvalidationListener;
 import javafx.event.EventHandler;
@@ -139,42 +140,30 @@ public class DragResizeMod {
 
 	public void makeResizable(Node node, OnDragResizeEventListener listener) {
 
-		node.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mousePressed(event);
-			}
+		node.setOnMousePressed((event)->{
+			mousePressed(event);
 		});
-		node.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mouseDragged(event);
-			}
+		node.setOnMouseDragged((event)->{
+			mouseDragged(event);
 		});
-		node.setOnMouseMoved(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mouseOver(event);
-			}
+		node.setOnMouseMoved((event)->{
+			mouseOver(event);
 		});
-		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mouseReleased(event);
-			}
+		node.setOnMouseReleased((event) -> {
+			mouseReleased(event);
 		});
 	}
-
+	
 	protected void mouseReleased(MouseEvent event) {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
 		if (state == S.DRAG) {
-			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
-					mySprite.getDraggableItem().getLayoutY());
-		} else {
-			System.out.println("removing");
+			mySprite.getSprite().setLocation((new Location(mySprite.getDraggableItem().getLayoutX(),
+					mySprite.getDraggableItem().getLayoutY())));
+		} 
+		else {
 			removePresetListener();
-			mySprite.getSprite().setPreset(null);
+			//mySprite.getSprite().setPreset(null);
 			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());
 			mySprite.getSprite().setWidth((int) mySprite.getDraggableItem().getWidth());
 		}
