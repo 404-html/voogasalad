@@ -6,6 +6,7 @@ import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import util.XMLTranslator;
@@ -51,7 +52,8 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		return myPane;
 	}
 	
-	private void addScores(HighscoreManager aManager){
+	private void addScores(HighscoreManager aManager) {
+		HBox box = new HBox();
 		VBox users = new VBox();
 		for (String user: aManager.getUsers()) {
 			users.getChildren().add(new Label(user));
@@ -60,7 +62,8 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		for (double d : aManager.getHighscores()) {
 			scores.getChildren().add(new Label(String.valueOf(d)));
 		}
-		myPane.getChildren().add(users);
-		myPane.getChildren().add(scores);
+		box.getChildren().add(users);
+		box.getChildren().add(scores);
+		getOptions().getChildren().add(box);
 	}
 }

@@ -2,7 +2,6 @@ package gameplayer.application_controller;
 
 import java.io.File;
 import java.util.PropertyResourceBundle;
-
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
 import gameplayer.back_end.resources.FrontEndResources;
@@ -17,7 +16,9 @@ import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PopUpFactory;
+import gameplayer.front_end.popup.UserOptions;
 import gameplayer.front_end.popup.IPopUpDisplay;
+import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import javafx.stage.Stage;
 
 /**
@@ -79,8 +80,8 @@ public class ApplicationController extends AbstractController {
 		});
 	}
 
-	public void displayHighScoreScene() {
-		IDisplay highScore = mySceneBuilder.create(SceneIdentifier.HIGHSCORE, myStage.getWidth(), myStage.getHeight());
+	public void displayHighScoreScene(String aGamename) {
+		IDisplay highScore = mySceneBuilder.create(SceneIdentifier.HIGHSCORE, myStage.getWidth(), myStage.getHeight(), aGamename);
 		resetStage(highScore);
 		//setHighScoreHandlers((INavigationDisplay) highScore);
 	}
@@ -122,8 +123,12 @@ public class ApplicationController extends AbstractController {
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {
-			IPopUpDisplay options = new PopUpFactory().buildPopUpDisplay();
+			PlayerOptionsPopUp options = (PlayerOptionsPopUp) new PopUpFactory().buildPopUpDisplay();
 			options.show();
+			options.setOnClosed(k -> {
+				UserOptions ud = new UserOptions(options.getColorChoice(), options.getKeyChoice());
+				save(ud, myGamePlay.getGame().getName() + "options");
+			});
 		}, ButtonDisplay.TEXT));
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Levels"), 0, 0, e -> {
 			IPopUpDisplay levelSelection = new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());

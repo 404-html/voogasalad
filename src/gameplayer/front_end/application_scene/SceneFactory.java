@@ -16,4 +16,8 @@ public class SceneFactory {
 	public IDisplay create(String aName, String aUrl, double aWidth, double aHeight) {
 		return new UserProfileScene(aName, aUrl, aWidth, aHeight);
 	}
+	
+	public IDisplay create(SceneIdentifier aIdentifier, double aWidth, double aHeight, String aGamename){
+		return new HighScoreScene(aWidth, aHeight, aGamename);
+	}
 }

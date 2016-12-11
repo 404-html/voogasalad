@@ -26,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import util.XMLTranslator;
+
 public class GamePlayController extends AbstractController {
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
@@ -165,7 +166,7 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			save();
 		}, e -> {
-			myApplicationController.displayHighScoreScene();
+			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		});
 	}
 	@SuppressWarnings("unchecked")
@@ -232,7 +233,7 @@ public class GamePlayController extends AbstractController {
 			handleRestart();
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("HighScores"), 0,0, e -> {
-			myApplicationController.displayHighScoreScene();
+			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Publish"), 0, 0, e -> {
 			myApplicationController.publishToFacebook(MessageFormat.format(myButtonLabels.getString("MessageTitle"), 
@@ -244,12 +245,13 @@ public class GamePlayController extends AbstractController {
 	private void saveHighscore() {
 		if (myScore != null) {
 			myHighscoreManager.setHighscore(myPlayerInformation.getUser(), myScore.getMyScore(), myGameController.getMyGame());
-			save(myHighscoreManager, "XMLGameFiles/" + myGameController.getMyGame().getName() + "-highscores");
+			save(myHighscoreManager, myGameController.getMyGame().getName() + "-highscores");
 		}
 	}
 	
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		//TODO: update the scene
+		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 }
