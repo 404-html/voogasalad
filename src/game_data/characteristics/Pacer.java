@@ -9,7 +9,6 @@
 package game_data.characteristics;
 
 import java.util.Map;
-
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
@@ -18,22 +17,22 @@ import game_data.sprites.Terrain;
 import game_engine.Side;
 import game_engine.actions.Action;
 import game_engine.actions.Pace;
-//import javafx.geometry.Side;
 
 @NameAnnotation(name = "Pacer")
-public class Pacer implements Characteristic{
+public class Pacer implements Characteristic {
 
 	private double myDistanceNeeded, myDistanceTraveled;
 	private Sprite mySprite;
 	private double previousNonZeroXVelocity, previousNonZeroYVelocity;
+	private boolean previousDirection;
 
 	@ParameterAnnotation(parameters = { "Distance Needed", "Sprite" })
 	public Pacer(double distance, Sprite associatedSprite) {
 		myDistanceTraveled = 0;
 		myDistanceNeeded = distance;
 		mySprite = associatedSprite;
-		previousNonZeroXVelocity = 0;
-		previousNonZeroYVelocity = 0;
+		previousNonZeroXVelocity = mySprite.getXVelocity();
+		previousNonZeroYVelocity = mySprite.getYVelocity();
 	}
 	
 	@ViewableMethodOutput(description="Distance Needed", type=double.class)
@@ -56,21 +55,22 @@ public class Pacer implements Characteristic{
 	private void updateStoredVelocities() {
 		previousNonZeroXVelocity = mySprite.getXVelocity() == 0 ? previousNonZeroXVelocity : mySprite.getXVelocity();
 		previousNonZeroYVelocity = mySprite.getYVelocity() == 0 ? previousNonZeroYVelocity : mySprite.getYVelocity();
+		previousDirection = Math.abs(mySprite.getXVelocity()) >= Math.abs(mySprite.getYVelocity()); //true if X
 	}
 	
 	private void makeSureNonZeroVelocities() {
-		if(mySprite.getXVelocity() == 0) {
+		if(mySprite.getXVelocity() == 0 && previousDirection) {
 			mySprite.setXVelocity(previousNonZeroXVelocity*-1);
 			myDistanceTraveled = 0;
 		}
-		if(mySprite.getYVelocity() == 0) {
+		if(mySprite.getYVelocity() == 0 && !previousDirection) {
 			mySprite.setYVelocity(previousNonZeroYVelocity*-1);
 			myDistanceTraveled = 0;
 		}
 	}
 	
 	private double getTimeStepDistance() {
-		return Math.sqrt(Math.pow(mySprite.getXVelocity(), 2) + Math.pow(mySprite.getYVelocity(),2))/60;
+		return Math.sqrt( Math.pow(mySprite.getXVelocity(), 2) + Math.pow(mySprite.getYVelocity(),2) )/60;
 	}
 	
 	private boolean shouldChangeDirection(boolean collision) {
@@ -91,9 +91,9 @@ public class Pacer implements Characteristic{
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		updateMyDistanceTraveled();
 		updateStoredVelocities();
+		makeSureNonZeroVelocities();
 		Action pace = new Pace(mySprite, shouldChangeDirection(isCollisionOtherThanPlayer(myCollisionMap)));
 		pace.act();
-		makeSureNonZeroVelocities();
 	}
 	
 	@Override
