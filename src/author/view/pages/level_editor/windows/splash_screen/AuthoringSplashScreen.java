@@ -26,25 +26,26 @@ import util.filehelpers.FileLoader.FileType;
  */
 public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 
-	private Stage stage;
+	private Stage splashStage  = new Stage();
 	private VBox menu;
 	private final String TITLE = "VOOGA Authoring";
 	private final String STYLESHEET = "data/GUI/author-style.css";
 	private IAuthorControllerExternal authorControllerExternal;
 	private TextField gameNameTextField = new TextField("");
 
+	private static final Stage AUTHOR_STAGE = new Stage();
+	
 	public AuthoringSplashScreen() {
 
 	}
 
 	@Override
 	public void initializeWindow() {
-		this.stage = new Stage();
-		this.stage.setTitle(TITLE);
-		this.stage.setScene(initScene());
-		this.stage.getScene().getStylesheets().add(getStyleSheet());
-		this.stage.setResizable(false);
-		this.stage.showAndWait();
+		this.splashStage.setTitle(TITLE);
+		this.splashStage.setScene(initScene());
+		this.splashStage.getScene().getStylesheets().add(getStyleSheet());
+		this.splashStage.setResizable(false);
+		this.splashStage.showAndWait();
 	}
 
 	private Scene initScene() {
@@ -97,7 +98,7 @@ public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 	private void loadSavedGame() {
 		File aFile;
 		try {
-			aFile = new FileLoader("XMLGameFiles/", FileType.DATA).loadSingle();
+			aFile = new FileLoader("XMLGameFiles/", FileType.DATA, this.splashStage).loadSingle();
 			authorControllerExternal = new AuthorControllerFactory().create(aFile);
 			openGame();
 		} catch (FileNotFoundException e) {
@@ -122,13 +123,16 @@ public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 	}
 
 	private void openGame() {
-		this.stage.close();
-		Stage aStage = new Stage();
-		aStage.setTitle("VOOGASalad");
+		this.splashStage.close();
+		AUTHOR_STAGE.setTitle("VOOGASalad");
 		Scene scene = authorControllerExternal.getScene();
-		aStage.setMaximized(true);
-		aStage.setResizable(true);
-		aStage.setScene(scene);
-		aStage.show();
+		AUTHOR_STAGE.setMaximized(true);
+		AUTHOR_STAGE.setResizable(true);
+		AUTHOR_STAGE.setScene(scene);
+		AUTHOR_STAGE.show();
+	}
+	
+	public static final Stage getPrimaryAuthorStage(){
+		return AUTHOR_STAGE;
 	}
 }
