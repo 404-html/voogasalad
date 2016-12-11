@@ -34,14 +34,8 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 		HBox keyOption = new HBox(20);
 		keyOption.getChildren().add(new Label(myButtonLabels.getString("KeyInput")));
 		final ToggleGroup keyboardGroup = new ToggleGroup();
-		RadioButton defaultKey = new RadioButton(myButtonLabels.getString("Default"));
-		defaultKey.setToggleGroup(keyboardGroup);
-		defaultKey.setSelected(true);
-		defaultKey.setUserData("Default");
-		RadioButton leftKeys = new RadioButton(myButtonLabels.getString("Left"));
-		leftKeys.setToggleGroup(keyboardGroup);
-		leftKeys.setSelected(false);
-		leftKeys.setUserData("Left");
+		RadioButton defaultKey = createRadioButton(myButtonLabels.getString("Default"), keyboardGroup);
+		RadioButton leftKeys = createRadioButton(myButtonLabels.getString("Left"), keyboardGroup);
 		keyboardGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -56,16 +50,9 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 		HBox fontOption = new HBox(20);
 		fontOption.getChildren().add(new Label(myButtonLabels.getString("HUD")));
 		final ToggleGroup fontGroup = new ToggleGroup();
-		RadioButton red = new RadioButton(myButtonLabels.getString("Red"));
-		red.setToggleGroup(fontGroup);
-		red.setSelected(true);
-		red.setUserData("Red");
-		RadioButton green = new RadioButton(myButtonLabels.getString("Green"));
-		green.setToggleGroup(fontGroup);
-		green.setUserData("Green");
-		RadioButton blue = new RadioButton(myButtonLabels.getString("Blue"));
-		blue.setToggleGroup(fontGroup);
-		blue.setUserData("Blue");
+		RadioButton red = createRadioButton(myButtonLabels.getString("Red"), fontGroup);
+		RadioButton green = createRadioButton(myButtonLabels.getString("Green"), fontGroup);
+		RadioButton blue = createRadioButton(myButtonLabels.getString("Blue"), fontGroup);
 		fontGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {

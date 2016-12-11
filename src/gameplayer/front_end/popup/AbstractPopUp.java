@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -40,4 +42,11 @@ public class AbstractPopUp {
 		myStage.setOnCloseRequest(aHandler);
 	}
 	
+	protected RadioButton createRadioButton(String aMessage, ToggleGroup aGroup) {
+		RadioButton radioButton = new RadioButton(aMessage);
+		radioButton.setToggleGroup(aGroup);
+		radioButton.setSelected(true);
+		radioButton.setUserData(aMessage);
+		return radioButton;
+	}
 }
