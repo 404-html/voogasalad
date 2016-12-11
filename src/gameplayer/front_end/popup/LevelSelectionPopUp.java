@@ -29,6 +29,10 @@ public class LevelSelectionPopUp extends AbstractPopUp implements IPopUpDisplay 
 	public void addOptions() {
 		addOption(createLevelOptions());
 	}
+	
+	public int getSelectedLevel() {
+		return mySelectedLevel;
+	}
 
 	private Pane createLevelOptions() {
 		HBox levelSelection = new HBox(10);

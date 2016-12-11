@@ -1,6 +1,5 @@
 package gameplayer.front_end.popup;
 
-import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 
 public class UserOptions {
 
