@@ -16,7 +16,6 @@ import javafx.scene.layout.Pane;
 
 public class HeadsUpDisplay {
 
-	private HBox myTop;
 	private MenuBar myTopMenu;
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
@@ -36,7 +35,6 @@ public class HeadsUpDisplay {
 	public void addMenu(ImageView aImage, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
-	
 
 	public void addLabel(String aText){
 		if(myBottom.getChildren().size() > 0){

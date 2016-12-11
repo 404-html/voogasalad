@@ -25,6 +25,11 @@
     -fx-background-color: derive(#292929, 10%);
 }
 
+.radio-button .radio {
+    -fx-background-insets: 0;
+    -fx-background-color: rgba(41, 41, 41, 0.7);
+}
+
 
 .menu .label { 
     -fx-font-family: "Segoe UI Semibold";

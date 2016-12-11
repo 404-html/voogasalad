@@ -87,7 +87,7 @@ public class ApplicationController extends AbstractController {
 		}, e -> {
 			displayUserScene();
 		}, e-> {
-			myCurrentDisplay.setBackground(myButtonLabels.getString("Shirt" + (int) Math.floor(Math.random() * 7)), myStage.getWidth(), myStage.getHeight());
+			myCurrentDisplay.setBackground(myButtonLabels.getString("Shirt" + (int) Math.floor(Math.random() * 6)), myStage.getWidth(), myStage.getHeight());
 		});
 	}
 

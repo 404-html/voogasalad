@@ -85,7 +85,7 @@ public class GamePlayController extends AbstractController {
 	
 	public void displayGame() {
 		initializeScene(myUserOptions);
-		setMenu();
+		setMenu(); 
 		updateSprites();
 		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.getMainPlayer());
 		initializeAnimation();
