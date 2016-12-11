@@ -117,6 +117,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		
 				myLevel.getMainPlayer().resetTerminalVelocities();
 				myLevel.getMainPlayer().setLevel(myLevel);
+				s.setXVelocity(300);
+				s.addState(new Health(1));
 			}
 			else if(s instanceof Enemy){
 				s.addState(new Physics(new SpritePhysics()));
@@ -126,6 +128,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 			}
 			else{
 				s.addState(new Physics(new SpritePhysics(0.0)));
+				s.addCharacteristic(new Impassable(s));
 				//if(s.getCharacteristics().size()>1){
 				//	s.setXVelocity(100.0);
 				//	s.addState(new Health(10));
@@ -137,9 +140,10 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //		// for(int i = 226; i<10260; i+=1000){
 //
 		for (int i = 226; i < 8226; i += 100) {
-			Sprite s = new Terrain(new Location(i, 500), 100, 100, 0, 0, "block", "data/images/sprite_images/block.png");
-			myLevel.addNewSprite(s);
-			s.addState(new Physics(new SpritePhysics(0.0)));
+//			Sprite s = new Terrain(new Location(i, 500), 100, 100, 0, 0, "block", "data/images/sprite_images/block.png");
+//			myLevel.addNewSprite(s);
+//			s.addState(new Physics(new SpritePhysics(0.0)));
+//			s.addCharacteristic(new Impassable(s));
 			// myLevel.getMySpriteList().get(j).addCharacteristic(new
 			// Bouncer(20, myLevel.getMySpriteList().get(j)));
 			// System.out.println(myLevel.getMySpriteList().get(j).getStates().size());
@@ -169,7 +173,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //		//myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 //		//myLevel.addNewSprite(new Terrain(new Location(0, 0), 200, 50, "block123123123", "author/images/betterblock.png"));
 //		
-		myLevel.addNewSprite(new Terrain(new Location(200, 400), 200, 50, 0, 0, "blockmoving", "data/images/sprite_images/block.png"));
+		myLevel.addNewSprite(new Terrain(new Location(200, 400), 200, 1000, 0, 0, "blockmoving", "data/images/sprite_images/block.png"));
+		myLevel.addNewSprite(new Terrain(new Location(800, 400), 200, 1000, 0, 0, "blockmoving3", "data/images/sprite_images/block.png"));
 //		myLevel.addNewSprite(new Terrain(new Location(0, 200), 200, 50, 0, 0, "blockmoving", "author/images/betterblock.png"));
 //		myLevel.addNewSprite(new Terrain(new Location(0, 300), 200, 50, 0, 0, "blockmoving", "author/images/betterblock.png"));
 //		myLevel.addNewSprite(new Terrain(new Location(200, 400), 200, 50, 0, 0, "blockmoving", "author/images/betterblock.png"));
@@ -226,13 +231,27 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //		myLevel.addNewSprite(new Enemy(new Location(2226, -1), 80, 80, "goomba3", "author/images/angry_goomba.png"));
 //		myLevel.addNewSprite(new Item(new Location(4040, 30), 50, 100, "flag", "author/images/victory_flag.png"));
 		
-		Sprite newS = new Terrain(new Location(200, 200), 200, 50, 0, 0, "blockmoving2", "data/images/sprite_images/block.png");
+		Sprite newS = new Terrain(new Location(200, 200), 200, 1000, 0, 0, "blockmoving2", "data/images/sprite_images/block.png");
 		newS.addState(new Physics(new SpritePhysics(0.0)));
+		newS.addCharacteristic(new Impassable(newS));
 		myLevel.addNewSprite(newS);
+		newS.addCharacteristic(new Damager(3,newS));
+		Sprite newS2 = new Terrain(new Location(800, 200), 200, 1000, 0, 0, "blockmoving4", "data/images/sprite_images/block.png");
+		newS2.addState(new Physics(new SpritePhysics(0.0)));
+		newS2.addCharacteristic(new Impassable(newS2));
+		myLevel.addNewSprite(newS2);
+		newS2.addCharacteristic(new Damager(3,newS2));
 		for (Sprite s : myLevel.getMySpriteList()) {
 			if(s.getName().equals("blockmoving")) {
-				s.setMyRandomMoveConjointHandler( new RandomMoveConjointHandler(newS,Orientation.HORIZONTAL,200.0));
+				s.setMyRandomMoveConjointHandler( new RandomMoveConjointHandler(newS,Orientation.HORIZONTAL,400.0));
 				s.addState(new Physics(new SpritePhysics(0.0)));
+				s.addCharacteristic(new Impassable(s));
+				s.addCharacteristic(new Damager(3,s));
+			} else if(s.getName().equals("blockmoving3")) {
+				s.setMyRandomMoveConjointHandler( new RandomMoveConjointHandler(newS2,Orientation.HORIZONTAL,400.0));
+				s.addState(new Physics(new SpritePhysics(0.0)));
+				s.addCharacteristic(new Impassable(s));
+				s.addCharacteristic(new Damager(3,s));
 			}
 		}
 //			if (!(s instanceof Player || s instanceof Enemy)) {

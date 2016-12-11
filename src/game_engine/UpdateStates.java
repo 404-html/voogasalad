@@ -240,8 +240,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void checkForLoss() {
 		for (State s : myLevel.getMainPlayer().getStates()) {
 			if (s instanceof Health) {
-				if (!(((Health) s).isAlive())
-						|| myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
+				if (!(((Health) s).isAlive())) {
+						//|| myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
 					myLevel.setLevelLost();
 				}
 			}
