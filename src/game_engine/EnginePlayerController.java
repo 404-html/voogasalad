@@ -17,6 +17,7 @@ import game_data.characteristics.PacerAlternative;
 import game_data.characteristics.StickyTop;
 import game_data.characteristics.StickyTopHorizontal;
 import game_data.characteristics.StickyTopVertical;
+import game_data.characteristics.Teleporter;
 import game_data.characteristics.TransparentBottomImpassable;
 import game_data.characteristics.Winnable;
 import game_data.sprites.Character;
@@ -173,8 +174,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //		//myLevel.addNewSprite(new Terrain(new Location(826, 300), 100, 100, "block500001", "author/images/betterblock.png"));
 //		//myLevel.addNewSprite(new Terrain(new Location(0, 0), 200, 50, "block123123123", "author/images/betterblock.png"));
 //		
-		myLevel.addNewSprite(new Terrain(new Location(200, 400), 200, 1000, 0, 0, "blockmoving", "data/images/sprite_images/block.png"));
-		myLevel.addNewSprite(new Terrain(new Location(800, 400), 200, 1000, 0, 0, "blockmoving3", "data/images/sprite_images/block.png"));
+		myLevel.addNewSprite(new Terrain(new Location(800, 400), 200, 1000, 0, 0, "blockmoving", "data/images/sprite_images/block.png"));
+		myLevel.addNewSprite(new Terrain(new Location(1400, 400), 200, 1000, 0, 0, "blockmoving3", "data/images/sprite_images/block.png"));
 //		myLevel.addNewSprite(new Terrain(new Location(0, 200), 200, 50, 0, 0, "blockmoving", "author/images/betterblock.png"));
 //		myLevel.addNewSprite(new Terrain(new Location(0, 300), 200, 50, 0, 0, "blockmoving", "author/images/betterblock.png"));
 //		myLevel.addNewSprite(new Terrain(new Location(200, 400), 200, 50, 0, 0, "blockmoving", "author/images/betterblock.png"));
@@ -231,12 +232,21 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //		myLevel.addNewSprite(new Enemy(new Location(2226, -1), 80, 80, "goomba3", "author/images/angry_goomba.png"));
 //		myLevel.addNewSprite(new Item(new Location(4040, 30), 50, 100, "flag", "author/images/victory_flag.png"));
 		
-		Sprite newS = new Terrain(new Location(200, 200), 200, 1000, 0, 0, "blockmoving2", "data/images/sprite_images/block.png");
+		Sprite newS = new Terrain(new Location(100, 400), 200, 200, 0, 0, "blockmoving2", "data/images/sprite_images/block.png");
 		newS.addState(new Physics(new SpritePhysics(0.0)));
 		newS.addCharacteristic(new Impassable(newS));
 		myLevel.addNewSprite(newS);
-		newS.addCharacteristic(new Damager(3,newS));
-		Sprite newS2 = new Terrain(new Location(800, 200), 200, 1000, 0, 0, "blockmoving4", "data/images/sprite_images/block.png");
+		//newS.addCharacteristic(new Damager(3,newS));
+		newS.addCharacteristic(new Teleporter(-210,300,newS));
+		
+		Sprite newS3 = new Terrain(new Location(-300, 400), 200, 200, 0, 0, "blockmoving2", "data/images/sprite_images/block.png");
+		newS3.addState(new Physics(new SpritePhysics(0.0)));
+		newS3.addCharacteristic(new Impassable(newS3));
+		myLevel.addNewSprite(newS3);
+		//newS.addCharacteristic(new Damager(3,newS));
+		newS3.addCharacteristic(new Teleporter(185,300,newS3));
+		
+		Sprite newS2 = new Terrain(new Location(1400, 200), 200, 1000, 0, 0, "blockmoving4", "data/images/sprite_images/block.png");
 		newS2.addState(new Physics(new SpritePhysics(0.0)));
 		newS2.addCharacteristic(new Impassable(newS2));
 		myLevel.addNewSprite(newS2);
@@ -260,7 +270,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 //				// }
 //				// else{
 //				// // s.addCharacteristic(new Impassable(s));
-//				// <<<<<<< HEAD
+//				
 //				// if (s.getName().equals("block5000")) {
 //				// s.addCharacteristic(new Breakable(true, true,true, true, 1,
 //				// s));
