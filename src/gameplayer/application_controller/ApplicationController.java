@@ -113,7 +113,7 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
 			if (chosenGame != null) displayGame(chosenGame);
-			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
 	}
 
@@ -127,6 +127,7 @@ public class ApplicationController extends AbstractController {
 			options.show();
 			options.setOnClosed(k -> {
 				UserOptions ud = new UserOptions(options.getColorChoice(), options.getKeyChoice());
+				myGamePlay.setOptions(ud);
 				save(ud, myGamePlay.getGame().getName() + "options");
 			});
 		}, ButtonDisplay.TEXT));
@@ -139,7 +140,7 @@ public class ApplicationController extends AbstractController {
 			myGamePlay.displayGame();
 		}, ButtonDisplay.TEXT);
 	}
-	
+
 	public void publishToFacebook(String aTitle, String aMessage) {
 		myInformationController.publishToFaceBook(aTitle, aMessage);
 	}

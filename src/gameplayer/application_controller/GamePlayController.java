@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import util.XMLTranslator;
 
 public class GamePlayController extends AbstractController {
+	
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
@@ -72,6 +73,7 @@ public class GamePlayController extends AbstractController {
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame(myGameController.getMyGame());
 	}
+	
 	private void initializeKeySets(UserOptions aOptions) {
 		if (aOptions != null) {
 			myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
@@ -80,6 +82,7 @@ public class GamePlayController extends AbstractController {
 		}
 		//getGUIGenerator().createMediaPlayer("");
 	}
+	
 	public void displayGame() {
 		initializeScene(myUserOptions);
 		setMenu();
@@ -89,6 +92,7 @@ public class GamePlayController extends AbstractController {
 		resetStage(myGamePlayScene);
 		if (myGameController.getMyGame().getAudioFilePath() != null) myMusic = new MediaController(myGameController.getMyGame().getAudioFilePath());
 	}
+	
 	private void initializeScene(UserOptions aOptions) {
 		if (aOptions != null) {
 			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), aOptions.getMyFontColor());
@@ -96,8 +100,8 @@ public class GamePlayController extends AbstractController {
 			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), "black");
 		}
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
-		
 	}
+	
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
@@ -105,6 +109,7 @@ public class GamePlayController extends AbstractController {
 			updateScene();
 		});
 	}
+	
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
@@ -117,12 +122,10 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void checkResult() {
-		if (myGameController.getMyGame().hasLost()){
-			System.out.println("level lost via update game");
-			setResultScene(myButtonLabels.getString("YouLost"));
-		}
+		if (myGameController.getMyGame().hasLost()) setResultScene(myButtonLabels.getString("YouLost"));
 		if (myGameController.getMyGame().hasWon()) setResultScene(myButtonLabels.getString("YouWon"));
 	}
+	
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
@@ -196,9 +199,15 @@ public class GamePlayController extends AbstractController {
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, 
-				myApplicationController, myPlayerInformation, 0);
-		gameControl.displayGame();
+		if (myUserOptions != null) {
+			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, 
+					myApplicationController, myPlayerInformation, 0, myUserOptions);
+			gameControl.displayGame();
+		} else {
+			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, 
+					myApplicationController, myPlayerInformation, 0);
+			gameControl.displayGame();
+		}
 	}
 	
 	private void save() {
@@ -251,7 +260,7 @@ public class GamePlayController extends AbstractController {
 	
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
-		//TODO: update the scene
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
+		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), aOptions.getMyFontColor());
 	}
 }
