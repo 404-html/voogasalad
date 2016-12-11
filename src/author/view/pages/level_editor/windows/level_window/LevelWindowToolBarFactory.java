@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.ILevelWindowInternal;
 import author.view.util.authoring_buttons.ButtonFactory;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
 import util.RelativePathFinder;
@@ -31,7 +32,7 @@ public class LevelWindowToolBarFactory {
 		ToolBarBuilder tbb = new ToolBarBuilder();
 		tbb.addBurst(new Label("Level Window"));
 		tbb.addFiller();
-		tbb.addBurst(new ButtonFactory().createButton("Set Background", e -> {
+		tbb.addBurst(createCheckBox("Randomized"), new ButtonFactory().createButton("Set Background", e -> {
 			newBackgroundImage();
 		}).getButton(), new ButtonFactory().createButton("Extend Width", e -> {
 			this.iLevelWindowInternal.getHorizontalPanes()
@@ -67,6 +68,13 @@ public class LevelWindowToolBarFactory {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+	private CheckBox createCheckBox(String text){
+		CheckBox checkBox = new CheckBox(text);
+		checkBox.selectedProperty().bindBidirectional(this.iLevelWindowInternal.getRandomProperty());
+		return checkBox;
 	}
 
 }

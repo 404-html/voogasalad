@@ -53,7 +53,7 @@ public class LevelWindowPaneFactory {
 
 		this.levelWindowPane.getPane().setOnMouseClicked((event) ->{
 			this.levelWindowPane.getPane().requestFocus();
-			if (this.levelWindowInternal.getSelectedSprite() != null && event.isControlDown()){
+			if (this.levelWindowInternal.getSelectedSprite() != null && event.isShiftDown()){
 				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
 			}
 		});
@@ -61,7 +61,7 @@ public class LevelWindowPaneFactory {
 			this.levelWindowPane.getPane().requestFocus();
 		});
 		this.levelWindowPane.getPane().setOnKeyReleased((event) -> {
-			if (!event.isControlDown()){
+			if (!event.isShiftDown()){
 				this.levelWindowPane.removeGrid();
 			}
 		});
