@@ -15,6 +15,8 @@ import game_data.characteristics.TemporalPowerUpper;
 import game_data.sprites.Player;
 import game_data.states.Health;
 import game_data.states.LevelWon;
+import game_data.states.Physics;
+import game_data.states.Score;
 import game_data.states.State;
 import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
@@ -66,6 +68,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		myKeysReleased = new HashSet<KeyCode>();
 		mySpriteImages = new HashMap<Sprite, ImageView>();
 		myControllableSpriteList = new ArrayList<Sprite>();
+
 		mainPlayerControllable=new Controllable();
 	}
 	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){

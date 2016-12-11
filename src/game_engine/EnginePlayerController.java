@@ -6,12 +6,24 @@ import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Impassable;
+import game_data.characteristics.InvincibilityPowerUpper;
+import game_data.characteristics.SpeedPowerUpper;
+import game_data.characteristics.PacerAlternative;
+import game_data.characteristics.ScoreBasedOnPosition;
+import game_data.characteristics.ScoreBasedOnTime;
+import game_data.characteristics.StickyTop;
+import game_data.characteristics.StickyTopHorizontal;
+import game_data.characteristics.StickyTopVertical;
+import game_data.characteristics.TransparentBottomImpassable;
+import game_data.characteristics.Winnable;
+
 import game_data.sprites.Character;
 import game_data.sprites.Enemy;
 import game_data.sprites.Player;
 import game_data.sprites.Terrain;
 import game_data.states.Health;
 import game_data.states.Physics;
+import game_data.states.Score;
 import game_data.states.State;
 import game_engine.actions.Action;
 
@@ -30,6 +42,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.sun.javafx.scene.traversal.Direction;
 
 /**
  * @author Katrina, Austin, Lucia
@@ -73,6 +87,11 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
 				myLevel.setPlayerSprite((Player)s);
+//				myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
+				myLevel.getMainPlayer().addState(new Health(200));
+
+				myLevel.getMainPlayer().addState(new Score());
+//				myLevel.getMainPlayer().addCharacteristic(new ScoreBasedOnPosition(s, Direction.RIGHT));
 				//myLevel.getMainPlayer().addState(new Physics(new SpritePhysics()));
 				//myLevel.getMainPlayer().addState(new Health(1));
 				//myLevel.getMainPlayer().addState(new LevelWon());
