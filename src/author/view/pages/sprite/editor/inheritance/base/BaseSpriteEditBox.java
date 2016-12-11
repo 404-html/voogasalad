@@ -68,19 +68,41 @@ public class BaseSpriteEditBox {
 	}
 
 	public final int getWidth(){
-		return myWidthField.getInteger();
+		try{
+			return myWidthField.getInteger();
+		}
+		catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 
 	public final int getHeight(){
+	try{
 		return myHeightField.getInteger();
+	}
+	catch (NumberFormatException e) {
+		return 0;
+	}
+		
 	}
 
 	public final double getXVelocity(){
-		return myXVelocityField.getDouble();
+		try{
+			return myXVelocityField.getDouble();
+		}
+		catch (NumberFormatException e) {
+			return 0.0;
+		}
 	}
 
 	public final double getYVelocity(){
-		return myYVelocityField.getDouble();
+		try{
+			return myYVelocityField.getDouble();
+		}
+		catch (NumberFormatException e) {
+			return 0;
+		}
+		
 	}
 
 	protected final void setXVelocity(double aXVelocity){

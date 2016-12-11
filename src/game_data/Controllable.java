@@ -32,7 +32,6 @@ public class Controllable {
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
 
-	@ParameterAnnotation(parameters = "Sprite")
 	public Controllable() {
 		isControllable = false;
 		myKeyPressedMap = new HashMap<>();
@@ -79,7 +78,6 @@ public class Controllable {
 		for (KeyCode myKey : myKeysPressed) {
 			if (myKeyPressedMap.containsKey(myKey)) {
 				if ((myKeyPressedMap.get(myKey) instanceof MoveUpJump)) {
-					// System.out.println("LUCIA");
 					if (isTerrainOnBottom(myCollisionMap)) {
 						myKeyPressedMap.get(myKey).act();
 					}
@@ -107,11 +105,6 @@ public class Controllable {
 				myKeyReleasedMap.get(myKey).stop();
 			}
 		}
-	}
-
-	public Characteristic copy() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Map<KeyCode, Action> getMyKeyPressedMap() {

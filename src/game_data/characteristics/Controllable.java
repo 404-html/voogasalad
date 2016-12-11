@@ -11,8 +11,10 @@ import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 @NameAnnotation(name = "Controllable")
 public class Controllable implements Characteristic {
 
+	Sprite mySprite;
 	@ParameterAnnotation(parameters="Sprite")
 	public Controllable(Sprite aSprite) {
+		mySprite = aSprite;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,8 +26,7 @@ public class Controllable implements Characteristic {
 
 	@Override
 	public Characteristic copy() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Controllable(mySprite);
 	}
 
 }
