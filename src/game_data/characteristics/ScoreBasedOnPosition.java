@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.sun.javafx.scene.traversal.Direction;
 
+import game_data.IScoreBasedPositionSprite;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
@@ -21,7 +22,7 @@ import game_engine.actions.ScoreAdder;
 import javafx.geometry.Side;
 
 @NameAnnotation(name = "Score Based On Position")
-public class ScoreBasedOnPosition implements Characteristic {
+public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPositionSprite {
 
 	private Sprite mySprite;
 	private double initX;
@@ -35,12 +36,12 @@ public class ScoreBasedOnPosition implements Characteristic {
 	private boolean initPositive;
 	private double magnitude;
 
-	@ParameterAnnotation(parameters = { "Sprite", "Scroll Direction" })
-	public ScoreBasedOnPosition(Sprite aSprite, Direction scrollDirection) {
+	@ParameterAnnotation(parameters = { "Sprite"})
+	public ScoreBasedOnPosition(Sprite aSprite) {
 		mySprite = aSprite;
 		this.initX = aSprite.getLocation().getXLocation();
 		this.initY = aSprite.getLocation().getYLocation();
-		this.scrollDirection = scrollDirection;
+//		this.scrollDirection = scrollDirection;
 		pointsAdded = 0;
 		maxDist = 0;
 		// updateMyScore();
@@ -123,9 +124,12 @@ public class ScoreBasedOnPosition implements Characteristic {
 		}
 	}
 
+	public void setScrollDirection(Direction scrollDirection){
+		this.scrollDirection = scrollDirection;
+	}
 	@Override
 	public Characteristic copy() {
-		return new ScoreBasedOnPosition(mySprite, scrollDirection);
+		return new ScoreBasedOnPosition(mySprite);
 	}
 
 }

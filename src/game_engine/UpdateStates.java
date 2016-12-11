@@ -92,11 +92,11 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 //		 generateDefaultKeyPressedMap();
 //		System.out.println("Nubmer of characteristics BEFROE " + myLevel.getMainPlayer().getCharacteristics().size());
-		for (State state : myLevel.getMainPlayer().getStates()) {
-			if (state instanceof Score) {
-					System.out.println("score is: " + ((Score) state).getMyScore());
-			}
-		}
+//		for (State state : myLevel.getMainPlayer().getStates()) {
+//			if (state instanceof Score) {
+//					System.out.println("score is: " + ((Score) state).getMyScore());
+//			}
+//		}
 		
 		
 		activatePowerUps();
