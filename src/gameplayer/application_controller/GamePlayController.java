@@ -48,8 +48,6 @@ public class GamePlayController extends AbstractController {
 		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
 		initializeEngineComponents(0);
-		initializeScene(myUserOptions);
-		updateSprites();
 	}
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) {
@@ -72,6 +70,9 @@ public class GamePlayController extends AbstractController {
 		}
 	}
 
+	/**
+	 * Displays the currently set up game
+	 */
 	public void displayGame() {
 		initializeScene(myUserOptions);
 		setMenu();
@@ -123,10 +124,6 @@ public class GamePlayController extends AbstractController {
 				getStage().getHeight(), getStage().getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		updateSprites();
 	}
-
-	//	private void checkBackground() {
-	//		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
-	//	}
 
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
@@ -214,10 +211,8 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void saveGame() {
-		Game currentGame = myGameController.getMyGame();
 		LevelManager lm = new LevelManager(myGameController.getMyGame().getLevelNumber());
-		getXMLHandler().save(currentGame, currentGame.getName() + "saved");
-		getXMLHandler().save(lm, currentGame + "levels");
+		getXMLHandler().save(lm, myGameController.getMyGame().getName() + "levels");
 	}
 
 	private void setResultScene(String aLabel) {
@@ -256,12 +251,20 @@ public class GamePlayController extends AbstractController {
 		}
 	}
 
+	/**
+	 * 
+	 * @param aOptions is the key input and HUD font color for the user
+	 */
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 	}
 
+	/**
+	 * 
+	 * @param aLevel is the level that the user chose from the options
+	 */
 	public void setLevel(int aLevel) {
 		initializeEngineComponents(aLevel - 1);
 	}
