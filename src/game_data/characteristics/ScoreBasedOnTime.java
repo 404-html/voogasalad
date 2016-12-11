@@ -32,7 +32,6 @@ public class ScoreBasedOnTime implements Characteristic {
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		Action myAction = new ScoreAdder(scorePerSecond/GameResources.TIME_FRAME.getDoubleResource(), mySprite);
-//		System.out.println("HELLO")
 		myAction.act();
 	}
 
