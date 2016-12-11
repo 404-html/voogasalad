@@ -5,6 +5,7 @@ import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.sprites.Item;
 import game_data.sprites.builders.SpriteDefaultBuilder;
+import game_data.states.Health;
 import game_data.states.Physics;
 import game_data.states.State;
 
@@ -22,7 +23,8 @@ public class ItemDefaultBuilder implements SpriteDefaultBuilder {
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(0, 0) 
+			 new Physics(0, 0), 
+			 new Health(1)
 	};
 
 	private static final String NAME = "Item_Name";

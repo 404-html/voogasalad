@@ -64,6 +64,7 @@ public class GamePlayController extends AbstractController {
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
 			PlayerInformationController aPlayerController, int aLevel, UserOptions aOptions) {
 		this(aStage, aFile, aAppController, aPlayerController, aLevel); 
+
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
@@ -120,7 +121,7 @@ public class GamePlayController extends AbstractController {
 		setHealthLabel();
 		setScoreLabel();
 	}
-	
+
 	private void checkResult() {
 		if (myGameController.getMyGame().hasLost()) setResultScene(myButtonLabels.getString("YouLost"));
 		if (myGameController.getMyGame().hasWon()) setResultScene(myButtonLabels.getString("YouWon"));
@@ -133,6 +134,7 @@ public class GamePlayController extends AbstractController {
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
 		//checkBackground();
 		updateSprites();
+
 	}
 	
 	private void checkBackground() {
@@ -143,13 +145,13 @@ public class GamePlayController extends AbstractController {
 		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
 			boolean mapped = false;
 			for (State state : sprite.getStates()) {
-				if (state instanceof Visible && ((Visible) state).isVisible()) {
-					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
+				if (state instanceof Visible) {
+					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), ((Visible) state).isVisible());
 					mapped = true;
 				}
 			}
-			if (!mapped) {
-				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
+			if(!mapped){
+				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), true);
 			}
 		}
 	}
@@ -188,6 +190,7 @@ public class GamePlayController extends AbstractController {
 	private void setHealthLabel() {
 		if (myGameController.getMySpriteHealthList() != null && myGameController.getMySpriteHealthList().size() >= 1) 
 			myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+
 	}
 
 	private void setScoreLabel() {
@@ -211,7 +214,7 @@ public class GamePlayController extends AbstractController {
 			gameControl.displayGame();
 		}
 	}
-	
+
 	private void save() {
 		saveGame();
 		saveHighscore();
@@ -227,7 +230,7 @@ public class GamePlayController extends AbstractController {
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}
-	
+
 	private void setResultScene(String aLabel) {
 		myAnimationLoop.stop();
 		Pane winScene = myGamePlayScene.createResultScene();
@@ -235,7 +238,7 @@ public class GamePlayController extends AbstractController {
 		setResultSceneHandlers(winScene);
 		myMusic.stopMusic();
 	}
-	
+
 	private void setResultSceneHandlers(Pane resultScene) {
 		saveHighscore();
 		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
@@ -254,14 +257,15 @@ public class GamePlayController extends AbstractController {
 							myGameController.getMyGame().getName()));
 		}, ButtonDisplay.TEXT));
 	}
-	
+
 	private void saveHighscore() {
 		if (myScore != null) {
 			myHighscoreManager.setHighscore(myPlayerInformation.getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			save(myHighscoreManager, myGameController.getMyGame().getName() + "-highscores");
 		}
+
 	}
-	
+
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
