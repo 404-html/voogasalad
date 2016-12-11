@@ -75,24 +75,29 @@ public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPosition
 	}
 
 	private boolean validAddition(Direction scrollDirection2) {
-		if(scrollDirection == Direction.RIGHT || scrollDirection == Direction.LEFT ){
-			if((initX < cur && scrollDirection == Direction.RIGHT) || (initX>cur && scrollDirection==Direction.LEFT)){
-				return true;
-			}
-			else {
-				return false;
-			}
-		}		
 		
-		if(scrollDirection == Direction.DOWN || scrollDirection == Direction.UP ){
-			if((initY < cur && scrollDirection == Direction.DOWN) || (initY>cur && scrollDirection==Direction.UP)){
-				return true;
-			}
-			else {
-				return false;
-			}
+		if((initX < cur && scrollDirection == Direction.RIGHT) || (initX>cur && scrollDirection==Direction.LEFT) || (initY < cur && scrollDirection == Direction.DOWN) || (initY>cur && scrollDirection==Direction.UP)){
+			return true;
 		}
 		return false;
+//		if(scrollDirection == Direction.RIGHT || scrollDirection == Direction.LEFT ){
+//			if((initX < cur && scrollDirection == Direction.RIGHT) || (initX>cur && scrollDirection==Direction.LEFT)){
+//				return true;
+//			}
+//			else {
+//				return false;
+//			}
+//		}		
+//		
+//		if(scrollDirection == Direction.DOWN || scrollDirection == Direction.UP ){
+//			if((initY < cur && scrollDirection == Direction.DOWN) || (initY>cur && scrollDirection==Direction.UP)){
+//				return true;
+//			}
+//			else {
+//				return false;
+//			}
+//		}
+//		return false;
 	}
 
 	private void findMagnitude(double initVal) {
