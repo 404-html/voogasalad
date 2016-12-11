@@ -23,7 +23,6 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 
 	private final Characteristic[] CHARACTERISTICS = 
 			new Characteristic[]{
-					new Controllable(player)
 	};
 	
 	private final State[] STATES = 
