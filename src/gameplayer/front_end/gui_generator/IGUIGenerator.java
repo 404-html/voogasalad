@@ -23,7 +23,8 @@ public interface IGUIGenerator {
 	
 	public ImageView createImage(String aFileName, double aWidth);
 		
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
+	public Button createButton(String aMessage, int aXPos, int aYPos, 
+			EventHandler<? super MouseEvent> aHandler, ButtonDisplay aDisplayType);
 	
 	public TextField createTextField(String aPlaceHolder, int aXPos, int aYPos, int aWidth);
 		
@@ -33,6 +34,7 @@ public interface IGUIGenerator {
 
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 	
-	public ComboBox<Pane> createComboBox(String aLabel, List<String> aList, List<String> aListOfFiles, List<String> aListOfDescriptions, Choosable aChoice);
+	public ComboBox<Pane> createComboBox(String aLabel, List<String> aList, List<String> aListOfFiles, 
+			List<String> aListOfDescriptions, Choosable aChoice);
 	
 }
