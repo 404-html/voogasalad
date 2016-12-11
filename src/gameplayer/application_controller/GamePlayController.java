@@ -25,7 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class GamePlayController extends AbstractController {
-	
+
 	private EnginePlayerController myGameController;
 	private UpdateGame myGameUpdater;
 	private GameEngine myGameEngine;
@@ -38,7 +38,7 @@ public class GamePlayController extends AbstractController {
 	private SpriteDisplay mySpriteDisplay;
 	private MediaController myMusic;
 	private Score myScore;
-	
+
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
 			PlayerInformationController aInfoController) {
 		super(aStage);
@@ -51,7 +51,7 @@ public class GamePlayController extends AbstractController {
 		initializeScene(myUserOptions);
 		updateSprites();
 	}
-	
+
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) {
 		this(aStage, aFile, aAppController, aPlayerController); 
 		myUserOptions = aOptions;
@@ -63,7 +63,7 @@ public class GamePlayController extends AbstractController {
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame(myGameController.getMyGame());
 	}
-	
+
 	private void initializeKeySets(UserOptions aOptions) {
 		if (aOptions != null) {
 			myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
@@ -72,7 +72,7 @@ public class GamePlayController extends AbstractController {
 		}
 		//getGUIGenerator().createMediaPlayer("");
 	}
-	
+
 	public void displayGame() {
 		initializeScene(myUserOptions);
 		setMenu();
@@ -82,7 +82,7 @@ public class GamePlayController extends AbstractController {
 		resetStage(myGamePlayScene);
 		if (myGameController.getMyGame().getAudioFilePath() != null) myMusic = new MediaController(myGameController.getMyGame().getAudioFilePath());
 	}
-	
+
 	private void initializeScene(UserOptions aOptions) {
 		mySpriteDisplay = new SpriteDisplay();
 		if (aOptions != null) {
@@ -92,7 +92,7 @@ public class GamePlayController extends AbstractController {
 		}
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
-	
+
 	private void initializeAnimation() {
 		myAnimationLoop = new AnimationLoop();
 		myAnimationLoop.init( elapsedTime -> {
@@ -100,7 +100,7 @@ public class GamePlayController extends AbstractController {
 			updateScene();
 		});
 	}
-	
+
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
@@ -110,25 +110,24 @@ public class GamePlayController extends AbstractController {
 		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
 		setScoreLabel();
+		setLevelLabel();
 	}
-	
+
 	private void checkResult() {
 		if (myGameController.getMyGame().hasLost()) setResultScene(getButtonLabels().getString("YouLost"));
 		if (myGameController.getMyGame().hasWon()) setResultScene(getButtonLabels().getString("YouWon"));
 	}
-	
+
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				getStage().getHeight(), getStage().getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
-		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
-		//checkBackground();
 		updateSprites();
 	}
-	
-//	private void checkBackground() {
-//		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
-//	}
+
+	//	private void checkBackground() {
+	//		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
+	//	}
 
 	private void updateSprites() {
 		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
@@ -144,12 +143,12 @@ public class GamePlayController extends AbstractController {
 			}
 		}
 	}
+	
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
-		setHealthLabel();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
 		String[] namesForGamePlay = {getButtonLabels().getString("Restart"), getButtonLabels().getString("Save"), "highscore"};
@@ -161,7 +160,7 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		});
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
 		String[] names = {getButtonLabels().getString("MainMenu")};
@@ -171,10 +170,12 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayMainMenu(getStage().getWidth(), getStage().getHeight());
 		});
 	}
-	
+
+
 	private void setHealthLabel() {
-		if (myGameController.getMySpriteHealthList() != null && myGameController.getMySpriteHealthList().size() >= 1) 
-			myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+		if (myGameController.getMySpriteHealthList() != null && myGameController.getMySpriteHealthList().size() >= 1) {
+			myGamePlayScene.addNode(getGUIGenerator().createLabel("Health: " + myGameController.getMySpriteHealthList().get(0), 0, 0), 1);
+		}
 	}
 
 	private void setScoreLabel() {
@@ -183,7 +184,11 @@ public class GamePlayController extends AbstractController {
 				myScore = (Score) s; 
 			}
 		}
-		if (myScore != null) myGamePlayScene.addLabel("Score: " + myScore.getMyScore());
+		if (myScore != null) myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 1);
+	}
+	
+	private void setLevelLabel() {
+		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber(), 0, 0), 1);
 	}
 
 	private void handleRestart() {
@@ -203,7 +208,7 @@ public class GamePlayController extends AbstractController {
 		myAnimationLoop.stop();
 		myMusic.stopMusic();
 	}
-	
+
 	private void save() {
 		saveGame();
 		saveHighscore();
@@ -215,7 +220,7 @@ public class GamePlayController extends AbstractController {
 		getXMLHandler().save(currentGame, currentGame.getName() + "saved");
 		getXMLHandler().save(lm, currentGame + "levels");
 	}
-	
+
 	private void setResultScene(String aLabel) {
 		myAnimationLoop.stop();
 		Pane winScene = myGamePlayScene.createResultScene();
@@ -223,7 +228,7 @@ public class GamePlayController extends AbstractController {
 		setResultSceneHandlers(winScene);
 		myMusic.stopMusic();
 	}
-	
+
 	private void setResultSceneHandlers(Pane resultScene) {
 		saveHighscore();
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("MainMenu"), 0,0, e -> {
@@ -239,11 +244,11 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
 					myGameController.getMyGame().getName()), 
 					getButtonLabels().getString("PublishMessage"));
-					MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
-							myGameController.getMyGame().getName());
+			MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
+					myGameController.getMyGame().getName());
 		}, ButtonDisplay.TEXT));
 	}
-	
+
 	private void saveHighscore() {
 		if (myScore != null) {
 			HighscoreManager hm = loadHighscores();
@@ -251,17 +256,17 @@ public class GamePlayController extends AbstractController {
 			getXMLHandler().save(hm, "highscores");
 		}
 	}
-	
+
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 	}
-	
+
 	public void setLevel(int aLevel) {
 		initializeEngineComponents(aLevel - 1);
 	}
-	
+
 	public Game getGame() {
 		return myGameController.getMyGame();
 	}
