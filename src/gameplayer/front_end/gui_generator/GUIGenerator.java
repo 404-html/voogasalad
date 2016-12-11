@@ -8,7 +8,6 @@ import java.util.List;
 import gameplayer.application_controller.Choosable;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
-import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,16 +17,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SelectionModel;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.StringConverter;
 
 public class GUIGenerator implements IGUIGenerator {
@@ -39,7 +34,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public TextField createTextField(String aplaceholder, int x, int y, int width) {
+	public TextField createTextField(String aplaceholder, double x, double y, double width) {
 		TextField newTextField = new TextField(aplaceholder);
 		newTextField.setTranslateX(x);
 		newTextField.setTranslateY(y);
@@ -48,7 +43,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public Label createLabel(String atext, int x, int y) {
+	public Label createLabel(String atext, double x, double y) {
 		Label newLabel = new Label(atext);
 		newLabel.setTranslateX(x);
 		newLabel.setTranslateY(y);
@@ -63,7 +58,7 @@ public class GUIGenerator implements IGUIGenerator {
 		return image;
 	}
 	
-	public Label createComboBoxLabel(String aLabel) {
+	private Label createComboBoxLabel(String aLabel) {
 		Label label = createLabel(aLabel, 0, 0); 
 		label.setId("combo-box-label");
 		label.autosize();
@@ -126,7 +121,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 
 	@Override
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler,
+	public Button createButton(String aMessage, double aXPos, double aYPos, EventHandler<? super MouseEvent> aHandler,
 			ButtonDisplay aDisplayType) {
 		return myButtonBuilder.buildButton(aMessage, aXPos, aYPos, aHandler, aDisplayType);
 	}
@@ -154,8 +149,4 @@ public class GUIGenerator implements IGUIGenerator {
 		return menu;
 	}
 
-//	@Override
-//	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
-//		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
-//	}
 }
