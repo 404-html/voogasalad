@@ -9,7 +9,7 @@ public class KeyCodeTranslator {
 
 	private Map<KeyCode, KeyCode> myMap;
 	
-	public KeyCodeTranslator(String aKeyInput){
+	public KeyCodeTranslator(String aKeyInput) {
 		myMap = new HashMap<KeyCode, KeyCode>();
 		if (aKeyInput.toLowerCase().equals("left")) {
 			myMap.put(KeyCode.A, KeyCode.LEFT);
@@ -25,6 +25,6 @@ public class KeyCodeTranslator {
 	}
 	
 	public KeyCode getCode(KeyCode aKeyCode) {
-		return myMap.containsKey(aKeyCode) || myMap.values().contains(aKeyCode) ? myMap.get(aKeyCode) : aKeyCode;
+		return myMap.containsKey(aKeyCode) ? myMap.get(aKeyCode) : aKeyCode;
 	}
 }

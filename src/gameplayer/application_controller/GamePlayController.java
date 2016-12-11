@@ -1,7 +1,6 @@
 package gameplayer.application_controller;
 import java.io.File;
 import java.text.MessageFormat;
-import java.util.PropertyResourceBundle;
 import game_data.Game;
 import game_data.Sprite;
 import game_data.states.Score;
@@ -15,7 +14,6 @@ import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.back_end.user_information.LevelManager;
 import gameplayer.front_end.application_scene.GamePlayScene;
-import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.gui_generator.media.MediaController;
 import gameplayer.front_end.popup.UserOptions;
@@ -42,19 +40,15 @@ public class GamePlayController extends AbstractController {
 	private SpriteDisplay mySpriteDisplay;
 	private MediaController myMusic;
 	private Score myScore;
-	private PlayerInformationController myPlayerInformation;
 	
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
 			PlayerInformationController aInfoController, int aLevel) {
-		myStage = aStage;
+		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
-		myPlayerInformation = aInfoController;
-		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
-		mySceneBuilder = new SceneFactory();
-		mySpriteDisplay = new SpriteDisplay();
 		myKeyCodeHandler = new KeyCodeHandler();
 		myHighscoreManager = new HighscoreManager();
+		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
 		initializeEngineComponents(aLevel);
 		initializeScene(myUserOptions);
@@ -94,10 +88,11 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void initializeScene(UserOptions aOptions) {
+		mySpriteDisplay = new SpriteDisplay();
 		if (aOptions != null) {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), aOptions.getMyFontColor());
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 		} else {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), "black");
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), "black");
 		}
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
@@ -114,7 +109,7 @@ public class GamePlayController extends AbstractController {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
 		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getXLocation(), 
-				myStage.getWidth(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight(), 3);
+				getStage().getWidth(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getYLocation(), getStage().getHeight(), 3);
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
@@ -122,21 +117,21 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void checkResult() {
-		if (myGameController.getMyGame().hasLost()) setResultScene(myButtonLabels.getString("YouLost"));
-		if (myGameController.getMyGame().hasWon()) setResultScene(myButtonLabels.getString("YouWon"));
+		if (myGameController.getMyGame().hasLost()) setResultScene(getButtonLabels().getString("YouLost"));
+		if (myGameController.getMyGame().hasWon()) setResultScene(getButtonLabels().getString("YouWon"));
 	}
 	
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
-				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
+				getStage().getHeight(), getStage().getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
 		//checkBackground();
 		updateSprites();
 	}
 	
 	private void checkBackground() {
-		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
+		myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
 	}
 
 	private void updateSprites() {
@@ -161,8 +156,8 @@ public class GamePlayController extends AbstractController {
 	
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
-		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "highscore"};
-		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
+		String[] namesForGamePlay = {getButtonLabels().getString("Restart"), getButtonLabels().getString("Red"), getButtonLabels().getString("Save"), "highscore"};
+		myGamePlayScene.addMenu(getButtonLabels().getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
 			myMusic.stopMusic();
 		}, e -> {
@@ -176,11 +171,11 @@ public class GamePlayController extends AbstractController {
 	
 	@SuppressWarnings("unchecked")
 	private void setMainMenu() {
-		String[] names = {myButtonLabels.getString("MainMenu")};
+		String[] names = {getButtonLabels().getString("MainMenu")};
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		myGamePlayScene.addMenu(image, names, e -> {
 			myAnimationLoop.stop();
-			myApplicationController.displayMainMenu(myStage.getWidth(), myStage.getHeight());
+			myApplicationController.displayMainMenu(getStage().getWidth(), getStage().getHeight());
 			myMusic.stopMusic();
 		});
 	}
@@ -202,12 +197,12 @@ public class GamePlayController extends AbstractController {
 	private void handleRestart() {
 		myAnimationLoop.stop();
 		if (myUserOptions != null) {
-			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, 
-					myApplicationController, myPlayerInformation, 0, myUserOptions);
+			GamePlayController gameControl = new GamePlayController(getStage(), myGameFile, 
+					myApplicationController, getPlayerInformationController(), 0, myUserOptions);
 			gameControl.displayGame();
 		} else {
-			GamePlayController gameControl = new GamePlayController(myStage, myGameFile, 
-					myApplicationController, myPlayerInformation, 0);
+			GamePlayController gameControl = new GamePlayController(getStage(), myGameFile, 
+					myApplicationController, getPlayerInformationController(), 0);
 			gameControl.displayGame();
 		}
 	}
@@ -220,12 +215,8 @@ public class GamePlayController extends AbstractController {
 	private void saveGame() {
 		Game currentGame = myGameController.getMyGame();
 		LevelManager lm = new LevelManager(myGameController.getMyGame().getLevelNumber());
-		save(currentGame, currentGame.getName() + "saved");
-		save(lm, currentGame + "levels");
-	}
-
-	public Game getGame() {
-		return myGameController.getMyGame();
+		getXMLHandler().save(currentGame, currentGame.getName() + "saved");
+		getXMLHandler().save(lm, currentGame + "levels");
 	}
 	
 	private void setResultScene(String aLabel) {
@@ -238,36 +229,40 @@ public class GamePlayController extends AbstractController {
 	
 	private void setResultSceneHandlers(Pane resultScene) {
 		saveHighscore();
-		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("MainMenu"), 0,0, e -> {
-			myApplicationController.displayMainMenu(myStage.getWidth(), myStage.getHeight());
+		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("MainMenu"), 0,0, e -> {
+			myApplicationController.displayMainMenu(getStage().getWidth(), getStage().getHeight());
 		}, ButtonDisplay.TEXT));
-		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("PlayAgain"),0,0, e -> {
+		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("PlayAgain"),0,0, e -> {
 			handleRestart();
 		}, ButtonDisplay.TEXT));
-		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("HighScores"), 0,0, e -> {
+		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("HighScores"), 0,0, e -> {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		}, ButtonDisplay.TEXT));
-		resultScene.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Publish"), 0, 0, e -> {
-			myApplicationController.publishToFacebook(MessageFormat.format(myButtonLabels.getString("MessageTitle"), 
+		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Publish"), 0, 0, e -> {
+			myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
 					myGameController.getMyGame().getName()), 
-					myButtonLabels.getString("PublishMessage"));
+					getButtonLabels().getString("PublishMessage"));
 		}, ButtonDisplay.TEXT));
 	}
 	
 	private void saveHighscore() {
 		if (myScore != null) {
-			myHighscoreManager.setHighscore(myPlayerInformation.getUser(), myScore.getMyScore(), myGameController.getMyGame());
-			save(myHighscoreManager, myGameController.getMyGame().getName() + "-highscores");
+			myHighscoreManager.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
+			getXMLHandler().save(myHighscoreManager, myGameController.getMyGame().getName() + "-highscores");
 		}
 	}
 	
 	public void setOptions(UserOptions aOptions) {
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
-		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight(), aOptions.getMyFontColor());
+		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 	}
 	
 	public void setLevel(int aLevel) {
 		initializeEngineComponents(aLevel);
+	}
+	
+	public Game getGame() {
+		return myGameController.getMyGame();
 	}
 }
