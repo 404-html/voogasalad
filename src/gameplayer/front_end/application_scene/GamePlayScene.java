@@ -103,6 +103,5 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myBackgroundDisplay = new BackgroundDisplayFactory().buildBackgroundDisplay(aFilePath, myStack.getWidth(), myStack.getHeight());
 		myStack.setBackground(myBackgroundDisplay);
 	}
-	
 
 }

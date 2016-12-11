@@ -85,6 +85,8 @@ public class Level extends GameObject {
 
 	public void addNewSprite(Sprite aSprite) {
 		mySprites.add(aSprite);
+		if(aSprite instanceof LevelSetter)
+			((LevelSetter) aSprite).setLevel(this);
 //		if(aSprite instanceof Player){
 //			setPlayerSprite((Player) aSprite);
 //			aSprite.addState(new LevelWon());
