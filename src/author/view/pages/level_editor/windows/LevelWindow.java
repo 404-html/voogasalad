@@ -17,10 +17,12 @@ import author.view.pages.level_editor.windows.level_window.LevelWindowToolBarFac
 import author.view.util.undo.IRevertManager;
 import author.view.util.undo.RevertManagerFactory;
 import game_data.Level;
+import game_data.Location;
 import game_data.Sprite;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
@@ -138,9 +140,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	}
 
-	private void addSpriteClickListeners(DraggableSprite draggableSprite) {
-		// EventHandler<? super MouseEvent> currentHandler =
-		// draggableSprite.getDraggableItem().getOnMouseClicked();
+
+	private void addSpriteClickListeners(DraggableSprite draggableSprite){
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			this.levelWindowPane.getPane().requestFocus();
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY) {
@@ -153,6 +154,24 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				event.consume();
 			}
 		});
+		EventHandler<? super MouseEvent> currentHandler = draggableSprite.getDraggableItem().getOnMouseDragged();
+		draggableSprite.getDraggableItem().setOnMouseDragged((event)->{
+			//System.out.println("Dragged");
+			currentHandler.handle(event);
+			if (event.isShiftDown()){
+				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getWidth(), draggableSprite.getSprite().getHeight());
+			}
+			
+		});
+		draggableSprite.getDraggableItem().setOnMouseReleased((event) -> {
+			if (event.isShiftDown()){
+				int newX = this.levelWindowPane.adjustX((int)draggableSprite.getDraggableItem().getLayoutX() + draggableSprite.getSprite().getWidth()/2);
+				int newY = this.levelWindowPane.adjustY((int)draggableSprite.getDraggableItem().getLayoutY() + draggableSprite.getSprite().getHeight()/2);
+				draggableSprite.getSprite().setLocation(new Location(newX, newY));
+				this.levelWindowPane.removeGrid();
+			}
+		});
+		
 
 	}
 
