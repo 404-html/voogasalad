@@ -205,6 +205,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			if(mySprite.getMyRandomMoveHandler() != null) {
 				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
 			}
+			if(mySprite.getMyRandomMoveConjointHandler() != null) {
+				mySprite.getMyRandomMoveConjointHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
+			}
 		}
 	}
 	
@@ -215,9 +218,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 				myLevel.setLevelLost();
 			}
 			if (s instanceof Health) {
-				if (!(((Health) s).isAlive())) {
-					System.out.println("it's auto losing");
-
+				if (!(((Health) s).isAlive())
+						|| myLevel.getMainPlayer().getLocation().getYLocation() > myLevel.getHeight()) {
 					myLevel.setLevelLost();
 				}
 			}

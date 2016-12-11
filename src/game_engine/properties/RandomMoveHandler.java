@@ -18,7 +18,7 @@ public class RandomMoveHandler {
 	
 	public RandomMoveHandler(RandomMoveHandler aRandomMoveHandler) {
 		if(aRandomMoveHandler!=null){
-			myOrientation = aRandomMoveHandler.getMyOrientation();
+			myOrientation = aRandomMoveHandler.getOrientation();
 		}
 		else{
 			myOrientation = null;
@@ -62,7 +62,7 @@ public class RandomMoveHandler {
 		
 	}
 	
-	public Orientation getMyOrientation() {
+	public Orientation getOrientation() {
 		return myOrientation;
 	}
 	
