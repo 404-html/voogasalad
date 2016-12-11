@@ -15,7 +15,6 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
 	private static final String RESOURCE_FILE = "gameplayerlabels.";
 	private static final String BUTTONLABEL = "ButtonLabels";
-
 	private ResourceBundle myButtonLabels; 
 	private String myCurrentKeyChoice;
 	private String myCurrentColorChoice;

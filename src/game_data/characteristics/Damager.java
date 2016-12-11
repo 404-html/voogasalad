@@ -32,7 +32,7 @@ public class Damager implements Characteristic{
 	private int myDamageToGive;
 	private Sprite mySprite;
 	
-	@ParameterAnnotation(parameters = {"Breaks on Top", "Breaks on Bottom", "Breaks on Left", "Breaks on Right", "Amount of Damage", "Sprite"})
+	@ParameterAnnotation(parameters = {"Damages on Top", "Damages on Bottom", "Damages on Left", "Damages on Right", "Amount of Damage", "Sprite"})
 	public Damager(boolean north, boolean south, boolean east, boolean west, int damageToGive, Sprite aSprite){
 		breakableNorth = north;
 		breakableSouth = south;

@@ -19,11 +19,13 @@ public class Break implements Action {
 	public void act() {
 		//remove the bouncing characteristic and make a "solid" thing
 	//	myPlayerSprite.setMyVelocity(-myPlayerSprite.getMyVelocity());		
-	//	myLevel.removeSprite(myBrokenSprite);
-		for(State myState:myBrokenSprite.getStates()){
+		myLevel.removeSprite(myBrokenSprite);
+		System.out.println("what even does instance of health mean");
+/*		for(State myState:myBrokenSprite.getStates()){
 			if (myState instanceof Health){
+				System.out.println("what even does instance of health mean");
 				((Health) myState).kill();
 			}
-		}
+		}*/
 	}
 }

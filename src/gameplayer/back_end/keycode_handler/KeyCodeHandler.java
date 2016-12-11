@@ -56,9 +56,9 @@ public class KeyCodeHandler {
 	public void handleKeyPress(KeyCode aKeyCode){
 		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
 		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
-		if (aKeyCode.equals(KeyCode.LEFT)) {
-		    myMainPlayerImage.setRotate(180);
-		} else if (aKeyCode.equals(KeyCode.RIGHT)) {
+		if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
+			myMainPlayerImage.setRotate(180);
+		} else if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.RIGHT)) {
 			myMainPlayerImage.setRotate(0);
 		}
 	}

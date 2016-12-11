@@ -13,7 +13,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class HeadsUpDisplay {
 
@@ -55,7 +54,7 @@ public class HeadsUpDisplay {
 		return myTopMenu;
 	}
 
-	private Node createBottom(){
+	private Node createBottom() {
 		myBottom = new HBox();
 		myBottom.setAlignment(Pos.CENTER);
 		return myBottom;
