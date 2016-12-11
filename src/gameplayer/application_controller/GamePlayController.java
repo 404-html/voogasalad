@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.PropertyResourceBundle;
 import game_data.Game;
 import game_data.Sprite;
+import game_data.states.Score;
 import game_data.states.State;
 import game_data.states.Visible;
 import game_engine.EnginePlayerController;
@@ -40,32 +41,35 @@ public class GamePlayController extends AbstractController {
 	private UserOptions myUserOptions;
 	private HighscoreManager myHighscoreManager;
 	private SpriteDisplay mySpriteDisplay;
-	private int myLevel;
 	private MediaController myMusic;
-
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel) {
-		myLevel = aLevel;
+	private Score myScore;
+	private PlayerInformationController myPlayerInformation;
+	
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
+			PlayerInformationController aInfoController,int aLevel) {
 		myStage = aStage;
 		myGameFile = aFile;
 		myApplicationController = aAppController;
+		myPlayerInformation = aInfoController;
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		mySceneBuilder = new SceneFactory();
 		mySpriteDisplay = new SpriteDisplay();
 		myKeyCodeHandler = new KeyCodeHandler();
 		initializeKeySets(myUserOptions);
-		initializeEngineComponents();
+		initializeEngineComponents(aLevel);
 		initializeScene(myUserOptions);
 		updateSprites();
 	}
 	
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, int aLevel, UserOptions aOptions) {
-		this(aStage, aFile, aAppController, aLevel); 
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
+			PlayerInformationController aPlayerController, int aLevel, UserOptions aOptions) {
+		this(aStage, aFile, aAppController, aPlayerController, aLevel); 
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 
-	private void initializeEngineComponents() {
-		myGameEngine = new GameEngine(myGameFile, myLevel);
+	private void initializeEngineComponents(int aLevel) {
+		myGameEngine = new GameEngine(myGameFile, aLevel);
 		myGameController = myGameEngine.getMyEnginePlayerController();
 		myGameUpdater = new UpdateGame();
 	}
@@ -115,6 +119,7 @@ public class GamePlayController extends AbstractController {
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
+		setScoreLabel();
 	}
 	
 	private void checkResult() {
@@ -124,11 +129,15 @@ public class GamePlayController extends AbstractController {
 
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
-		System.out.println(myKeyCodeHandler.getKeysPressed());
 		myGameUpdater.update(myGameController.getMyGame(), elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
+		//checkBackground();
 		updateSprites();
+	}
+	
+	private void checkBackground() {
+		myGamePlayScene.setBackground(myGameController.getMyLevel().getBackgroundImageFilePath(), myStage.getWidth(), myStage.getHeight());
 	}
 
 	private void updateSprites() {
@@ -177,16 +186,23 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setHealthLabel() {
-//		myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
+		if (myGameController.getMySpriteHealthList() != null) 
+			myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
 
-	//	private void setScoreLabel() {
-	//		myGamePlayScene.addLabel("Score: " + myGameController.getMyLevel().getMainPlayer().getScore());
-	//	}
+	private void setScoreLabel() {
+		for (State s : myGameController.getMyLevel().getMainPlayer().getStates()) {
+			if (s instanceof Score) {
+				myScore = (Score) s; 
+			}
+		}
+		if (myScore != null) myGamePlayScene.addLabel("Score: " + myScore.getMyScore());
+	}
 
 	private void handleRestart() {
 		myAnimationLoop.stop();
-		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, myApplicationController, myLevel);
+		GamePlayController gameControl = new GamePlayController(myStage, myGameFile, 
+				myApplicationController, myPlayerInformation, 0);
 		gameControl.displayGame();
 	}
 	
@@ -194,11 +210,6 @@ public class GamePlayController extends AbstractController {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
-	}
-	
-	public void setLevel(int aLevel) {
-		//TODO: Update the game engine with the new level
-		myLevel = aLevel;
 	}
 
 	public Game getGame() {
@@ -232,9 +243,10 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void saveHighscore() {
-		//TODO: Finish saving high scores
-//		myHighscoreManager.setHighscore(, myGameController.getScore(), myGameController.getMyGame());
-		save(myHighscoreManager, "highscores");
+		if (myScore != null) {
+			myHighscoreManager.setHighscore(myPlayerInformation.getUser(), myScore.getMyScore(), myGameController.getMyGame());
+			save(myHighscoreManager, "highscores");
+		}
 	}
 	
 	public void setOptions(UserOptions aOptions) {
