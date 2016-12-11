@@ -44,7 +44,7 @@ import game_engine.Side;
  */
 
 public class UpdateStates implements IUpdateStatesAndPowerUps {
-
+	//int count;
 	private Level myLevel;
 	private List<Sprite> mySpriteList;
 	private double myTimeElapsed;
@@ -57,6 +57,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private List<Sprite> myControllableSpriteList;
 
 	public UpdateStates(Level aLevel) {
+		//count=0;
 		myLevel = aLevel;
 		myCurrentPowerUps = new HashMap<Characteristic, Double>();
 		mySpriteList = new ArrayList<Sprite>();
@@ -86,6 +87,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		executeCharacteristics();
 		cleanGame();
 	}
+
 	private void setKeysPressed(Set<KeyCode> aKeysPressed){
 		myKeysPressed=aKeysPressed;
 	}
@@ -211,6 +213,8 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			}
 			if (s instanceof Health) {
 				if (!(((Health) s).isAlive())) {
+					System.out.println("it's auto losing");
+
 					myLevel.setLevelLost();
 				}
 			}
@@ -219,6 +223,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	//
 	private void checkForWin() {
+/*		count++;
+		if(count==100){
+			myLevel.setLevelWon();
+		}*/
 		for (State s : myLevel.getMainPlayer().getStates()) {
 			if (s instanceof LevelWon) {
 				if (((LevelWon) s).isHasWon()) {

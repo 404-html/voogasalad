@@ -75,7 +75,7 @@ public class GamePlayController extends AbstractController {
 		initializeScene(myUserOptions);
 		setMenu();
 		updateSprites();
-		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer()));
+		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.get(myGameController.getMyGame().getCurrentLevel().getMainPlayer()));
 		initializeAnimation();
 		resetStage(myGamePlayScene);
 	}
@@ -97,27 +97,31 @@ public class GamePlayController extends AbstractController {
 	private void updateScene() {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
-		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyLevel().getMainPlayer().getLocation().getXLocation(), 
-				myStage.getWidth(), myGameController.getMyLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight(), 3);
+		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getXLocation(), 
+				myStage.getWidth(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getYLocation(), myStage.getHeight(), 3);
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
 		setHealthLabel();
 	}
 	
 	private void checkResult() {
-		if (myGameController.getMyGame().hasLost()) setResultScene(myButtonLabels.getString("YouLost"));
+		if (myGameController.getMyGame().hasLost()){
+			System.out.println("level lost via update game");
+			setResultScene(myButtonLabels.getString("YouLost"));
+		}
 		if (myGameController.getMyGame().hasWon()) setResultScene(myButtonLabels.getString("YouWon"));
 	}
 	private void resetSprites(double elapsedTime) {
 		myGamePlayScene.clearSprites();
 		System.out.println(myKeyCodeHandler.getKeysPressed());
+		updateSprites();
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				myStage.getHeight(), myStage.getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		//mySpriteDisplay.get(myGameController.getMyLevel().getMainPlayer());
-		updateSprites();
+		
 	}
 	private void updateSprites() {
-		for (Sprite sprite : myGameController.getMyLevel().getMySpriteList()) {
+		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
 			boolean mapped = false;
 			for (State state : sprite.getStates()) {
 				if (state instanceof Visible && ((Visible) state).isVisibile()) {

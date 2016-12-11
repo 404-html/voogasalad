@@ -36,7 +36,7 @@ import java.util.Map;
  *
  */
 public class EnginePlayerController implements IEnginePlayerControllerInterface {
-	private Level myLevel;
+	//private Level myLevel;
 	private int myWidth, myHeight;
 	private String myBackgroundImageFilePath;
 	private List<Sprite> mySpriteList;
@@ -50,7 +50,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 
 	public EnginePlayerController() {
 		myGame = null;
-		myLevel = null;
+		//myLevel = null;
 		mySpriteList = null;
 		myBackgroundImageFilePath = "";
 		myWidth = 0;
@@ -68,7 +68,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		myGame = game;
 		
 		// myLevel=new Level();
-		myLevel = myGame.getCurrentLevel();
+		Level myLevel = myGame.getCurrentLevel();
 		// temporary to see if moving the player works, hardcoded
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
@@ -303,7 +303,8 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
 		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
 		//System.out.println(GameResources.MOVE_RIGHT_SPEED.getDoubleResource());
-		//System.out.println(myLevel.getMainPlayer()==null);
+		//System.out.println(myLevel.getMainPlayer()==null); 
+		Level myLevel = myGame.getCurrentLevel();
 		myKeyPressedMap.put(KeyCode.RIGHT, 
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
 		myKeyPressedMap.put(KeyCode.LEFT, 
@@ -323,8 +324,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	}
 
 	public void updateControllerData() {
-		// need to update level in here
-
+		Level myLevel=myGame.getCurrentLevel();
 		mySpriteList = myLevel.getMySpriteList();
 		myBackgroundImageFilePath = myLevel.getBackgroundImageFilePath();
 		myWidth = myLevel.getWidth();
@@ -363,9 +363,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		}
 	}
 
-	public Level getMyLevel() {
-		return myLevel;
-	}
 
 	public int getWidth() {
 		return myWidth;
@@ -380,7 +377,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	}
 
 	public List<Sprite> getMySpriteList() {
-		return myLevel.getMySpriteList();
+		return myGame.getCurrentLevel().getMySpriteList();
 	}
 
 	public List<Double> getMySpriteXCoordinateList() {

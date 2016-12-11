@@ -41,7 +41,7 @@ public class Game extends GameObject {
 		myScrollType = ScrollType.CENTER;
 		myAudioFilePath = "data/audio/Super-Mario-Song.mp3";
 		hasWon=false;
-		hasLost=true;
+		hasLost=false;
 	}
 	
 	public boolean hasWon() {
