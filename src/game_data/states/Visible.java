@@ -30,5 +30,6 @@ public class Visible implements State{
 	public void updateState(double pain) {
 		// TODO Auto-generated method stub
 	}
+	
 
 }
