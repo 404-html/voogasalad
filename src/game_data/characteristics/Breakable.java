@@ -80,7 +80,6 @@ public class Breakable implements Characteristic{
 	
 	private boolean isBroken() {
 		myDurability--;
-
 		return myDurability<=0;
 	}
 	
