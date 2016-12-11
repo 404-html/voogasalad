@@ -11,7 +11,7 @@ public class KeyCodeTranslator {
 	
 	public KeyCodeTranslator(String aKeyInput) {
 		myMap = new HashMap<KeyCode, KeyCode>();
-		if (aKeyInput.toLowerCase().equals("left")) {
+		if (aKeyInput.toLowerCase().contains("left")) {
 			myMap.put(KeyCode.A, KeyCode.LEFT);
 			myMap.put(KeyCode.W, KeyCode.UP);
 			myMap.put(KeyCode.S, KeyCode.DOWN);

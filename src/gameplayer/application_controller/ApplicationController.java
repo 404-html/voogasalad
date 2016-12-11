@@ -128,7 +128,7 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void getOptions() {
-		UserOptions uo = (UserOptions) getXMLHandler().load(myGamePlay.getGame().getName() + "options");
+		UserOptions uo = (UserOptions) getXMLHandler().load(myGamePlay.getGame().getName() + getPlayerInformationController().getUser() + "options");
 		myGamePlay.setOptions(uo);
 	}
 
@@ -149,7 +149,7 @@ public class ApplicationController extends AbstractController {
 				try {
 					UserOptions ud = new UserOptions(options.getColorChoice(), options.getKeyChoice());
 					myGamePlay.setOptions(ud);
-					getXMLHandler().save(ud, myGamePlay.getGame().getName() + "options");
+					getXMLHandler().save(ud, myGamePlay.getGame().getName() + getPlayerInformationController().getUser() + "options");
 				} catch (Exception x) {
 					showError(x);
 				}
