@@ -163,7 +163,7 @@ public class GamePlayController extends AbstractController {
 
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
-		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save")};
+		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "highscore"};
 		myGamePlayScene.addMenu(myButtonLabels.getString("GamePlay"), namesForGamePlay, e -> {
 			handleRestart();
 			myMusic.stopMusic();
@@ -171,6 +171,8 @@ public class GamePlayController extends AbstractController {
 			myGamePlayScene.changeBackground(Color.RED);
 		}, e -> {
 			save();
+		}, e -> {
+			myApplicationController.displayHighScoreScene();
 		});
 	}
 
@@ -208,6 +210,11 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void save() {
+		saveGame();
+		saveHighscore();
+	}
+
+	private void saveGame() {
 		Game currentGame = myGameController.getMyGame();
 		XMLTranslator mySaver = new XMLTranslator();
 		mySaver.saveToFile(currentGame, "XMLGameFiles/", "MarioOnScreenSaved");
@@ -246,7 +253,7 @@ public class GamePlayController extends AbstractController {
 	private void saveHighscore() {
 		if (myScore != null) {
 			myHighscoreManager.setHighscore(myPlayerInformation.getUser(), myScore.getMyScore(), myGameController.getMyGame());
-			save(myHighscoreManager, "highscores");
+			save(myHighscoreManager, "XMLGameFiles/" + myGameController.getMyGame().getName() + "-highscores");
 		}
 	}
 	
