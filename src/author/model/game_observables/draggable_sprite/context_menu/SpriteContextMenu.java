@@ -5,6 +5,7 @@ import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import game_data.Sprite;
+import game_data.sprites.Player;
 import javafx.scene.control.ContextMenu;
 
 /**
@@ -42,6 +43,11 @@ public class SpriteContextMenu implements ISpriteContextMenu {
 			mySprite.removePresetListener();
 			new SpriteEditWindow(mySprite.getSprite()).openWindow();
 		}).getItem());
+		if(mySprite.getSprite() instanceof Player) {
+			myMenu.getItems().add(new FunctionalMenuItemFactory().create("Make Main Player", e -> {
+				myAuthorController.getModel().getGame().getCurrentLevel().setMainPlayer((Player)mySprite.getSprite());
+			}).getItem());
+		}
 
 	}
 

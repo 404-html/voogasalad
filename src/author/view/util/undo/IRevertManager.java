@@ -11,4 +11,6 @@ public interface IRevertManager {
 
 	public void undo();
 	
+	public void redo();
+	
 }

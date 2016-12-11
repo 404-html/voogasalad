@@ -31,6 +31,7 @@ public class Breakable implements Characteristic{
 	private int myDurability;
 	private Action myAction;
 	private Sprite mySprite;
+	private int timeSinceHit;
 	
 	@ParameterAnnotation(parameters = {"Breaks on Top", "Breaks on Bottom", "Breaks on Left", "Breaks on Right", "Durability", "Sprite"})
 	public Breakable(boolean north, boolean south, boolean east, boolean west, int durability, Sprite aSprite){
@@ -40,6 +41,7 @@ public class Breakable implements Characteristic{
 		breakableWest = west;
 		myDurability = durability;
 		mySprite = aSprite;
+		timeSinceHit = 0;
 	}
 	
 	public void setDurability(int durability){
@@ -53,15 +55,27 @@ public class Breakable implements Characteristic{
 	
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
+		
+		if(inUnbreakablePeriod()) {
+			return;
+		}
+		
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && collidedSprite instanceof Player){
 //				System.out.println("SIDE HIT: "+myCollisionMap.get(collidedSprite));
+				timeSinceHit = 0;
 				if(isBroken()) {
-					myAction = new Break(mySprite, collidedSprite);
+					
+					myAction = new Break(mySprite);
 					myAction.act();
 				}
 			}
 		}
+	}
+	
+	private boolean inUnbreakablePeriod() {
+		timeSinceHit++;
+		return timeSinceHit < 20;
 	}
 	
 	private boolean isBroken() {
@@ -70,15 +84,6 @@ public class Breakable implements Characteristic{
 	}
 	
 	private boolean breaksAtDirection(Side aDirection) {
-//		if(aDirection == Side.TOP) {
-//			return breakableNorth;
-//		} else if(aDirection == Side.BOTTOM) {
-//			return breakableSouth;
-//		} else if(aDirection == Side.RIGHT) {
-//			return breakableEast;
-//		} else if(aDirection == Side.LEFT) {
-//			return breakableWest;
-//		} 
 		if(aDirection instanceof Top) {
 			return breakableNorth;
 		} else if(aDirection instanceof Bottom) {

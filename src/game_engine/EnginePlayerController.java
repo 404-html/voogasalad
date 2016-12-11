@@ -62,16 +62,16 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	public EnginePlayerController(Game game) {
 		myGame = game;
 		Level myLevel = myGame.getCurrentLevel();
-		for(Sprite s: myLevel.getMySpriteList()){
-			if(s instanceof Player){
-				myLevel.setPlayerSprite((Player)s);
-				myLevel.getMainPlayer().addState(new Score());
-				myLevel.getMainPlayer()
-						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
-				myLevel.getMainPlayer().resetTerminalVelocities();
-				myLevel.getMainPlayer().setLevel(myLevel);
-			}
-		}
+//		for(Sprite s: myLevel.getMySpriteList()){
+//			if(s instanceof Player){
+//				myLevel.setMainPlayer((Player)s);
+//				myLevel.getMainPlayer().addState(new Score());
+//				myLevel.getMainPlayer()
+//						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
+//				myLevel.getMainPlayer().resetTerminalVelocities();
+//				myLevel.getMainPlayer().setLevel(myLevel);
+//			}
+//		}
 
 		mySpriteList = myLevel.getMySpriteList();
 		myBackgroundImageFilePath = myLevel.getBackgroundImageFilePath();

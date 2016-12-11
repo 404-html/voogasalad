@@ -23,7 +23,7 @@ public class Level extends GameObject {
 	private boolean didLose, didWin;
 	private int width, height;
 	private String backgroundImageFilePath;
-	private Player myPlayerSprite;
+	private Player myMainPlayer;
 	Set<Sprite> mySprites;
 	private List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
 
@@ -42,17 +42,17 @@ public class Level extends GameObject {
 		setMyControllableSpriteList();
 		for(Sprite s: getMySpriteList()){
 			if(s instanceof Player){
-				setPlayerSprite((Player)s);
+				setMainPlayer((Player)s);
 			}
 		}
 	}
 
 	public Player getMainPlayer() {
-		return myPlayerSprite;
+		return myMainPlayer;
 	}
 
-	public void setPlayerSprite(Player aPlayer) {
-		myPlayerSprite = aPlayer;
+	public void setMainPlayer(Player aPlayer) {
+		myMainPlayer = aPlayer;
 		notifyListeners();
 	}
 
@@ -97,7 +97,7 @@ public class Level extends GameObject {
 			}
 		}
 		if(aSprite instanceof Player){
-			setPlayerSprite((Player)aSprite);
+			setMainPlayer((Player)aSprite);
 		}
 		this.notifyListeners();
 	}

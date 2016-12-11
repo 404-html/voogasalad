@@ -1,76 +1,45 @@
 package game_engine.properties;
 
 import game_data.Sprite;
-import game_engine.properties.RandomMoveHandler.Orientation;
 
-//THIS IS IN PROGRESS
-public class RandomMoveConjointHandler {
+public class RandomMoveConjointHandler extends RandomMoveHandler {
 
-	private Orientation myOrientation;
-	private Sprite mySprite;
 	private Sprite myConnectedSprite;
-	private double myScreenWidth, myScreenHeight, myScreenXPosition, myScreenYPosition;
 	private double myDistanceApart;
 	
 	public RandomMoveConjointHandler(Sprite aConnectedSprite, Orientation aOrientation, double aDistanceApart) {
+		super(aOrientation);
 		myConnectedSprite = aConnectedSprite;
-		myOrientation = aOrientation;
 		myDistanceApart = aDistanceApart;
 	}
 	
-	public RandomMoveConjointHandler(RandomMoveConjointHandler aRandomMoveConjointHandler) {
-		if(aRandomMoveConjointHandler != null) {
-			myConnectedSprite = aRandomMoveConjointHandler.getConnectedSprite();
-			myOrientation = aRandomMoveConjointHandler.getOrientation();
-			myDistanceApart = aRandomMoveConjointHandler.getDistanceApart();
-		}
-	}
-	
-	public void move(Sprite aMySprite, double aMyScreenWidth, double aMyScreenHeight, 
-			double aMyScreenXPosition, double aMyScreenYPosition) {
-		
-		mySprite = aMySprite;
-		myScreenWidth = aMyScreenWidth;
-		myScreenHeight = aMyScreenHeight;
-		myScreenXPosition = aMyScreenXPosition*-1; //switch to different coordinates
-		myScreenYPosition = aMyScreenYPosition*-1; //switch to different coordinates
-		
-		if(objectPassed()) {
-			setSpritesNewLocation();
-		}
-		
-	}
-	
-	private boolean objectPassed() {
-		if(myOrientation.equals(Orientation.VERTICAL)) {
-			return mySprite.getLocation().getYLocation() > myScreenYPosition+myScreenHeight;
-		} else {
-			return mySprite.getLocation().getXLocation()+mySprite.getWidth() < myScreenXPosition;
-		}
-	}
-	
-	private void setSpritesNewLocation() {
+	protected void setSpritesNewLocation() {
 		
 		double newXLoc, newYLoc;
-		if(myOrientation.equals(Orientation.VERTICAL)) {
-			newXLoc = Math.random()*(myScreenWidth-myDistanceApart) - mySprite.getWidth();
-			newYLoc = mySprite.getLocation().getYLocation()-myScreenHeight - mySprite.getHeight();
+		if(getOrientation().equals(Orientation.VERTICAL)) {
+			newXLoc = Math.random()*( getScreenWidth() - getSprite().getWidth() );
+			newYLoc = getSprite().getLocation().getYLocation() - getScreenHeight() - getSprite().getHeight();
 		} else {
-			newXLoc = mySprite.getLocation().getXLocation()+myScreenWidth + mySprite.getWidth();
-			newYLoc = Math.random()*(myScreenHeight-myDistanceApart) - mySprite.getHeight();
+			newXLoc = getSprite().getLocation().getXLocation() + getScreenWidth() + getSprite().getWidth();
+			newYLoc = Math.random()*( getScreenHeight() - getSprite().getHeight() );
 		}
-		mySprite.getLocation().setLocation(newXLoc, newYLoc);
-		if(myOrientation.equals(Orientation.VERTICAL)) {
-			newXLoc += myDistanceApart + mySprite.getWidth();
+		getSprite().getLocation().setLocation(newXLoc, newYLoc);
+		
+		if(getOrientation().equals(Orientation.VERTICAL)) {
+			newXLoc += myDistanceApart + getSprite().getWidth();
 		} else {
-			newYLoc += myDistanceApart + mySprite.getHeight();
+			newYLoc += myDistanceApart + getSprite().getHeight();
 		}
 		myConnectedSprite.getLocation().setLocation(newXLoc,newYLoc);
 		
 	}
 	
-	public Orientation getOrientation() {
-		return myOrientation;
+	public void setConnectedSprite(Sprite aSprite) {
+		myConnectedSprite = aSprite;
+	}
+	
+	public void setDistanceApart(double distance) {
+		myDistanceApart = distance;
 	}
 	
 	public Sprite getConnectedSprite() {

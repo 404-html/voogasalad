@@ -70,6 +70,8 @@ public class ListOfCollidingSprites {
 		 * getYLocation());
 		 */
 		for (Sprite mySprite : spriteList) {
+			
+	
 			/*
 			 * UpdateLocation updateLocation = new UpdateLocation(mySprite,
 			 * myTimeElapsed); double oldX2 =
@@ -94,6 +96,7 @@ public class ListOfCollidingSprites {
 					&& (mySpriteImages.get(mySprite).getBoundsInParent())
 					.intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));
+				
 			}
 			/*
 			 * mySprite.getLocation().setLocation(oldX2, oldY2);
@@ -218,8 +221,8 @@ public class ListOfCollidingSprites {
 		double targetBottomRightX = targetSprite.getLocation().getXLocation() + targetSprite.getWidth();
 		double targetBottomRightY = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
 
-		//if (mySprite instanceof Player) {
 		if (!(mySprite instanceof Terrain)) {
+		//if (! (mySprite instanceof Terrain && targetSprite instanceof Terrain) ) {
 
 			double mySprite_bottom = mySprite.getLocation().getYLocation() + mySprite.getHeight();
 			double targetSprite_bottom = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
