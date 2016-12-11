@@ -47,6 +47,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sun.javafx.scene.traversal.Direction;
+
 /**
  * @author Katrina, Austin, Lucia
  *
@@ -114,7 +116,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				myLevel.getMainPlayer().addState(new Health(200));
 
 				myLevel.getMainPlayer().addState(new Score());
-				myLevel.getMainPlayer().addCharacteristic(new ScoreBasedOnTime(s, 1));
+				myLevel.getMainPlayer().addCharacteristic(new ScoreBasedOnPosition(s, Direction.RIGHT));
 				myLevel.getMainPlayer()
 						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
 		
