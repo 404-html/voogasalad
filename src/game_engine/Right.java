@@ -1,6 +1,7 @@
 package game_engine;
 
 import game_data.Sprite;
+import game_data.states.Physics;
 
 public class Right extends Side{
 
@@ -18,7 +19,7 @@ public class Right extends Side{
 	}
 	
 	@Override
-	public void hitImpassable(Sprite aSprite, SpritePhysics aSpritePhysics){
+	public void hitImpassable(Sprite aSprite, Physics aSpritePhysics){
 		if(aSprite.getXVelocity()<0){
 			aSprite.setXVelocity(0);
 		}
