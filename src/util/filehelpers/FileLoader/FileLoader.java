@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +26,7 @@ public class FileLoader {
 
 	private static final String TITLE = "Load File";
 	private static final String ERR_MSG = "File Failed To Load";
+	private static final StartDirectory DEFAULT_START = StartDirectory.SOURCE_DIRECTORY;
 
 	/**
 	 * Starting Directories for FileLoader 
@@ -55,8 +57,8 @@ public class FileLoader {
 		}
 	}		
 
+	private Stage myStage;
 	private FileChooser myFileChooser;
-	private static final StartDirectory DEFAULT_START = StartDirectory.SOURCE_DIRECTORY;
 	private Collection<FileExtension> myExtensions;
 
 	/**
@@ -133,12 +135,22 @@ public class FileLoader {
 		
 		myFileChooser.getExtensionFilters().add(filter);
 	}
+	
+	public FileLoader(StartDirectory aStart, FileType aFileType, Stage aStage) {
+		this(aStart, aFileType);
+		myStage = aStage;
+	}
 
 	public FileLoader(String aDirectory, FileType aFileType) {
 		this(DEFAULT_START, aFileType);
 		myFileChooser.setInitialDirectory(new File(aDirectory));
 	}
 
+	public FileLoader(String aDirectory, FileType aFileType, Stage aStage) {
+		this(aDirectory, aFileType);
+		myStage = aStage;
+	}
+	
 	/**
 	 * Returns the file chosen after the file chooser is completed 
 	 * 
@@ -146,15 +158,17 @@ public class FileLoader {
 	 * @return the file chosen after choosing file 
 	 */
 	public File loadSingle() throws FileNotFoundException {
-		File loadedFile = myFileChooser.showOpenDialog(new Stage());
+		File loadedFile = myFileChooser.showOpenDialog(makeStage());
 
-		if(loadedFile == null) throw new FileNotFoundException(ERR_MSG);
+		if(loadedFile == null) {
+			throw new FileNotFoundException(ERR_MSG);
+		}
 
 		return loadedFile;
 	}
 	
 	public List<File> loadMultiple() throws FileNotFoundException {
-		List<File> loadedFiles = myFileChooser.showOpenMultipleDialog(new Stage());
+		List<File> loadedFiles = myFileChooser.showOpenMultipleDialog(makeStage());
 		
 		for (File file : loadedFiles) 
 			if (file == null) 
@@ -164,4 +178,9 @@ public class FileLoader {
 		
 	}
 
+	private Stage makeStage() {
+		if(myStage == null) return new Stage();
+		return myStage;
+	}
+	
 }
