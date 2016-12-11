@@ -71,7 +71,7 @@ public abstract class Sprite extends GameObject {
 		myControllable=new Controllable();
 		myRandomMoveHandler = null;
 		myRandomMoveConjointHandler = null;
-		myControllable=new Controllable(this);
+		myControllable = new Controllable();
 	}
 
 	// for copying sprites
