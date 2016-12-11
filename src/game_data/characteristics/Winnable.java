@@ -26,7 +26,7 @@ public class Winnable implements Characteristic{
 
 	@Override
 	public Characteristic copy() {
-		return new Winnable(mySprite.clone());
+		return new Winnable(mySprite);
 	}
 
 	@Override
