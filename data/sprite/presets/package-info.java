@@ -5,4 +5,4 @@
  * @author George Bernard
  *
  */
-package sprite.default_sprites;
+package sprite.presets;

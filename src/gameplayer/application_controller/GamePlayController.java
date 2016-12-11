@@ -123,6 +123,7 @@ public class GamePlayController extends AbstractController {
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				getStage().getHeight(), getStage().getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		updateSprites();
+
 	}
 
 	//	private void checkBackground() {
@@ -133,13 +134,13 @@ public class GamePlayController extends AbstractController {
 		for (Sprite sprite : myGameController.getMyGame().getCurrentLevel().getMySpriteList()) {
 			boolean mapped = false;
 			for (State state : sprite.getStates()) {
-				if (state instanceof Visible && ((Visible) state).isVisible()) {
-					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
+				if (state instanceof Visible) {
+					myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), ((Visible) state).isVisible());
 					mapped = true;
 				}
 			}
-			if (!mapped) {
-				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite));
+			if(!mapped){
+				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), true);
 			}
 		}
 	}
@@ -255,6 +256,7 @@ public class GamePlayController extends AbstractController {
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}
+
 	}
 
 	public void setOptions(UserOptions aOptions) {

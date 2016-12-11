@@ -49,9 +49,7 @@ public abstract class SpriteSettingsEditor {
 		scroll.minViewportWidthProperty().bind(myAccordion.widthProperty());
 		scroll.setContent(myAccordion);
 
-		Pane viewColumn = makeViewColumn(aSprite).getPane();
-
-		Arrays.asList(new Node[] { mySelector.getPane(), scroll, viewColumn }).forEach(n -> {
+		Arrays.asList(new Node[] { mySelector.getPane(), scroll }).forEach(n -> {
 			myPane.getChildren().add(n);
 		});
 
