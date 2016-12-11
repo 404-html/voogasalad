@@ -1,5 +1,8 @@
 package author.view.pages.sprite.editor.settings.characteristics;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import author.view.pages.sprite.editor.settings.SettingsFactory;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import game_data.Sprite;

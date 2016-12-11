@@ -10,8 +10,6 @@ import sun.awt.SunHints.Key;
 public interface IEnginePlayerControllerInterface {
 	public void updateControllerData();
 
-	public Level getMyLevel();
-
 	public int getWidth();
 
 	public int getHeight();

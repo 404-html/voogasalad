@@ -1,9 +1,9 @@
 package game_data.sprites;
 
-import author.images.EmptyImage;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.sprites.builders.SpriteDefaultBuilder;
+import game_data.sprites.builders.defaults.EmptyImage;
 import game_data.sprites.builders.defaults.EnemyDefaultBuilder;
 import game_data.sprites.builders.defaults.ItemDefaultBuilder;
 import game_data.sprites.builders.defaults.PlayerDefaultBuilder;

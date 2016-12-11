@@ -1,13 +1,13 @@
 package game_data.states;
 
+import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
+
 public class Visible implements State{
 
 	private boolean isVisible;
 	
-	public Visible(){
-		this.isVisible = true;
-	}
-	
+	@ParameterAnnotation(parameters={"Is Visible"})
 	public Visible(boolean visible){
 		this.isVisible = visible;
 	}
@@ -16,17 +16,19 @@ public class Visible implements State{
 		isVisible = visible;
 	}
 	
-	public boolean isVincibility(){
+	@ViewableMethodOutput(description="Is Visible", type=boolean.class)
+	public boolean isVisible(){
 		return isVisible;
 	}
 	
 	@Override
 	public State copy() {
-		return new Visible();
+		return new Visible(this.isVisible);
 	}
 
 	@Override
-	public void updateState(int pain) {
+	public void updateState(double pain) {
 		// TODO Auto-generated method stub
-	}	
+	}
+
 }

@@ -172,6 +172,7 @@ public class DragResizeMod {
 			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY());
 		} else {
+			System.out.println("removing");
 			removePresetListener();
 			mySprite.getSprite().setPreset(null);
 			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());

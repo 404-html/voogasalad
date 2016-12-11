@@ -1,9 +1,10 @@
 package game_engine.actions;
 
 import game_data.Sprite;
-import game_data.states.Physics;
-import game_data.states.State;
-import game_engine.SpritePhysics;
+
+/*
+ * Author: alex
+ */
 
 public class Stick implements Action{
 
