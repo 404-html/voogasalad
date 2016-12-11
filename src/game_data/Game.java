@@ -77,7 +77,9 @@ public class Game extends GameObject {
 			System.out.println("Trouble printing XML to file");
 		}
 	}
-
+	public int getLevelNumber(){
+		return myLevels.indexOf(myCurrentLevel);
+	}
 	public void addNewLevel(Level aLevel) {
 		this.myCurrentLevel = aLevel;
 		myLevels.add(aLevel);
