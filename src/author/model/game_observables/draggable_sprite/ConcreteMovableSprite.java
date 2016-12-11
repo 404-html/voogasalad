@@ -76,7 +76,7 @@ public class ConcreteMovableSprite extends DraggableSprite implements ResizableS
 			instanceSprite.setImagePath(spritePreset.getImagePath());
 			instanceSprite.setWidth(spritePreset.getWidth());
 			instanceSprite.setHeight(spritePreset.getHeight());
-			instanceSprite.setLocation(new Location(instanceSprite.getLocation().getXLocation(), instanceSprite.getLocation().getYLocation()));
+			//instanceSprite.setLocation(new Location(instanceSprite.getLocation().getXLocation(), instanceSprite.getLocation().getYLocation()));
 			spritePreset.getCharacteristics()
 					.forEach((characteristic) -> instanceSprite.addCharacteristic(characteristic));
 		};
