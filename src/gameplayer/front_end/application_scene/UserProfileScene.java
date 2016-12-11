@@ -1,18 +1,18 @@
 package gameplayer.front_end.application_scene;
 
+import game_data.Game;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.resources.FrontEndResources;
-import gameplayer.front_end.background_display.BackgroundDisplayFactory;
+import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 
 public class UserProfileScene extends AbstractNavigationPlayerScene {
 	
@@ -24,7 +24,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 	private double myHeight;
 	private Pane myPane;
 
-	public UserProfileScene(String aName, String aUrl, double aWidth, double aHeight) {
+	public UserProfileScene(String aName, String aUrl, double aWidth, double aHeight, HighscoreManager aManager) {
 		super(aWidth, aHeight);
 		myGUIGenerator = new GUIGenerator();
 		myUserName = aName;
@@ -32,11 +32,12 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		myHeight = aHeight;
 		myPane = new Pane();
 		myPane.setId("glass");
+		addScores(aManager);
 		if (aUrl != null) myPictureUrl = aUrl;
 	}
 
 	@Override
-	public Scene init(){
+	public Scene init() {
 		//getRoot().setCenter(addNodes());
 		addTop();
 		getRoot().setCenter(myPane);
@@ -59,4 +60,24 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		//hbox.setLayoutY(myHeight * .1);
 		myPane.getChildren().add(hbox);
 	}
+	
+	private void addScores(HighscoreManager aManager) {
+		HBox box = new HBox();
+		VBox games = new VBox();
+		VBox scores = new VBox();
+		for (int i = 0; i < aManager.getUsers().size(); i++) {
+			if (aManager.getUsers().get(i).equals(myUserName)) {
+				addInfo(aManager.getGames().get(i), aManager.getHighscores().get(i), games, scores);
+			}
+		}
+		box.getChildren().add(games);
+		box.getChildren().add(scores);
+		myPane.getChildren().add(box);
+	}
+	
+	private void addInfo(Game aGame, double aScore, VBox aGames, VBox aScores) {
+		aGames.getChildren().add(new Label(aGame.getName()));
+		aScores.getChildren().add(new Label(String.valueOf(aScore)));
+	}
+	
 }

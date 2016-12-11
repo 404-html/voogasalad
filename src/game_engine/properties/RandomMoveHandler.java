@@ -2,8 +2,7 @@ package game_engine.properties;
 
 import game_data.Sprite;
 
-//this class will be apart of Sprite to handle movement
-public class RandomMoveHandler {
+public abstract class RandomMoveHandler {
 
 	public enum Orientation {
 		HORIZONTAL, VERTICAL;
@@ -14,15 +13,6 @@ public class RandomMoveHandler {
 	
 	public RandomMoveHandler(Orientation aOrientation) {
 		myOrientation = aOrientation;
-	}
-	
-	public RandomMoveHandler(RandomMoveHandler aRandomMoveHandler) {
-		if(aRandomMoveHandler!=null){
-			myOrientation = aRandomMoveHandler.getOrientation();
-		}
-		else{
-			myOrientation = null;
-		}
 	}
 	
 	public void move(Sprite aMySprite, double aMyScreenWidth, double aMyScreenHeight, 
@@ -41,29 +31,37 @@ public class RandomMoveHandler {
 	}
 	
 	private boolean objectPassed() {
-		if(myOrientation.equals(Orientation.VERTICAL)) {
+		if(getOrientation().equals(Orientation.VERTICAL)) {
 			return mySprite.getLocation().getYLocation() > myScreenYPosition+myScreenHeight;
 		} else {
 			return mySprite.getLocation().getXLocation()+mySprite.getWidth() < myScreenXPosition;
 		}
 	}
 	
-	private void setSpritesNewLocation() {
-		
-		double newXLoc, newYLoc;
-		if(myOrientation.equals(Orientation.VERTICAL)) {
-			newXLoc = Math.random()*myScreenWidth - mySprite.getWidth();
-			newYLoc = mySprite.getLocation().getYLocation()-myScreenHeight-mySprite.getHeight();
-		} else {
-			newXLoc = mySprite.getLocation().getXLocation()+myScreenWidth+mySprite.getWidth();
-			newYLoc = Math.random()*myScreenHeight - mySprite.getHeight();
-		}
-		mySprite.getLocation().setLocation(newXLoc, newYLoc);
-		
-	}
+	protected abstract void setSpritesNewLocation();
 	
 	public Orientation getOrientation() {
 		return myOrientation;
+	}
+	
+	public Sprite getSprite() {
+		return mySprite;
+	}
+
+	public double getScreenWidth() {
+		return myScreenWidth;
+	}
+
+	public double getScreenHeight() {
+		return myScreenHeight;
+	}
+
+	public double getScreenXPosition() {
+		return myScreenXPosition;
+	}
+
+	public double getScreenYPosition() {
+		return myScreenYPosition;
 	}
 	
 }
