@@ -48,6 +48,14 @@ public class Controllable {
 		myKeysReleased = new HashSet<>();
 		myKeysPressed = new HashSet<>();
 	}
+	
+	public Controllable(Controllable that){
+		this.isControllable = that.isControllable;
+		this.myKeyPressedMap = that.myKeyPressedMap;
+		this.myKeyReleasedMap = that.myKeyReleasedMap;
+		this.myKeysPressed = that.myKeysPressed;
+		this.myKeysReleased = that.myKeysReleased;
+	}
 
 	public boolean isControllable() {
 		return isControllable;
