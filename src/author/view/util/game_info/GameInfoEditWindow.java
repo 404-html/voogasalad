@@ -1,6 +1,7 @@
 package author.view.util.game_info;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
@@ -41,8 +42,10 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 	private String myAudioFilePath;
 	private ToggleGroup scrollChoices;
 	private RadioButton scrollCenter;
-	private RadioButton scrollVertical;
-	private RadioButton scrollHorizontal;
+	private RadioButton scrollVerticalUP;
+	private RadioButton scrollVerticalDOWN;
+	private RadioButton scrollHorizontalRIGHT;
+	private RadioButton scrollHorizontalLEFT;
 	
 	private static final String STYLESHEET = "data/gui/author-style.css";
 
@@ -117,16 +120,16 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		iconSelect.getChildren().addAll(new Label("Choose icon: "),
 				iconButton);
 
-		iconButton.setOnMouseClicked(e -> {
+		iconButton.setOnMouseClicked(event -> {
 			File aFile;
 			try {
 				aFile = myIconFileLoader.loadSingle();
 				RelativePathFinder pf = new RelativePathFinder();
 				myIconFilePath = pf.getPath(aFile);
 				myIconImageView.setImage(new Image(aFile.toURI().toString()));
-			} catch (Exception e1) {
-				// TODO : Throw Error message if file not found
-				e1.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// Do Nothing, no file loaded
+				return;
 			}
 		});
 
@@ -139,16 +142,16 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		Button songButton = new Button();
 		myAudioFilePath = myGame.getAudioFilePath();
 		songButton.setText(myAudioFilePath.substring(myAudioFilePath.lastIndexOf("/") + 1));
-		songButton.setOnMouseClicked(e -> {
+		songButton.setOnMouseClicked(event -> {
 			File aFile;
 			try {
 				aFile = myAudioFileLoader.loadSingle();
 				RelativePathFinder pf = new RelativePathFinder();
 				myAudioFilePath = pf.getPath(aFile);
 				songButton.setText(myAudioFilePath.substring(myAudioFilePath.lastIndexOf("/") + 1));
-			} catch (Exception e1) {
-				// TODO : Throw Error message if file not found
-				e1.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// Do Nothing, no file loaded
+				return;
 			}
 
 		});
@@ -162,23 +165,34 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 
 		scrollChoices = new ToggleGroup();
 		scrollCenter = new RadioButton("Center");
-		scrollVertical = new RadioButton("Vertical");
-		scrollHorizontal = new RadioButton("Horizontal");
+		scrollVerticalUP = new RadioButton("Vertical (Traveling Up)");
+		scrollVerticalDOWN = new RadioButton("Vertical (Traveling Down)");
+		scrollHorizontalRIGHT = new RadioButton("Horizontal (Traveling Right)");
+		scrollHorizontalLEFT = new RadioButton("Horizontal (Traveling Left)");
 		scrollCenter.setToggleGroup(scrollChoices);
-		scrollVertical.setToggleGroup(scrollChoices);
-		scrollHorizontal.setToggleGroup(scrollChoices);
+		scrollVerticalUP.setToggleGroup(scrollChoices);
+		scrollVerticalDOWN.setToggleGroup(scrollChoices);
+		scrollHorizontalRIGHT.setToggleGroup(scrollChoices);
+		scrollHorizontalLEFT.setToggleGroup(scrollChoices);
 		if (myGame.getScrollType() == ScrollType.CENTER)
 			scrollCenter.setSelected(true);
-		if (myGame.getScrollType() == ScrollType.HORIZONTAL)
-			scrollHorizontal.setSelected(true);
-		if (myGame.getScrollType() == ScrollType.VERTICAL)
-			scrollVertical.setSelected(true);
+		if (myGame.getScrollType() == ScrollType.HORIZONTAL_RIGHT)
+			scrollHorizontalRIGHT.setSelected(true);
+		if (myGame.getScrollType() == ScrollType.VERTICAL_UP)
+			scrollVerticalUP.setSelected(true);
+		if (myGame.getScrollType() == ScrollType.HORIZONTAL_LEFT)
+			scrollHorizontalLEFT.setSelected(true);
+		if (myGame.getScrollType() == ScrollType.VERTICAL_DOWN)
+			scrollVerticalDOWN.setSelected(true);
+
 		
 		
 		scrollTypeBox.getChildren().addAll(new Label("Choose Scroll Type: "), 
 				scrollCenter,
-				scrollVertical,
-				scrollHorizontal);
+				scrollVerticalUP,
+				scrollVerticalDOWN,
+				scrollHorizontalRIGHT,
+				scrollHorizontalLEFT);
 		return scrollTypeBox;	
 	}
 
@@ -195,10 +209,14 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		
 		if (scrollChoices.getSelectedToggle() == scrollCenter)
 			myGame.setScrollType(ScrollType.CENTER);
-		if (scrollChoices.getSelectedToggle() == scrollVertical)
-			myGame.setScrollType(ScrollType.VERTICAL);
-		if (scrollChoices.getSelectedToggle() == scrollHorizontal)
-			myGame.setScrollType(ScrollType.HORIZONTAL);
+		if (scrollChoices.getSelectedToggle() == scrollVerticalUP)
+			myGame.setScrollType(ScrollType.VERTICAL_UP);
+		if (scrollChoices.getSelectedToggle() == scrollVerticalDOWN)
+				myGame.setScrollType(ScrollType.VERTICAL_DOWN);
+		if (scrollChoices.getSelectedToggle() == scrollHorizontalRIGHT)
+			myGame.setScrollType(ScrollType.HORIZONTAL_RIGHT);
+		if (scrollChoices.getSelectedToggle() == scrollHorizontalLEFT)
+			myGame.setScrollType(ScrollType.HORIZONTAL_LEFT);
 		
 		myStage.close();
 	}

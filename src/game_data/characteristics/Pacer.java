@@ -42,6 +42,7 @@ public abstract class Pacer implements Characteristic{
 		originalYPosition = associatedSprite.getLocation().getYLocation();
 	}
 	
+	@ViewableMethodOutput(description="Distance", type=double.class)
 	public double getDistance() {
 		return myDistance;
 	}

@@ -5,11 +5,14 @@ import game_data.characteristics.characteristic_annotations.ViewableMethodOutput
 
 public class Score implements State{
 
-	private int myScore;
+	private double myScore;
 	
 	@ParameterAnnotation(parameters={"Score"})
-	public Score(int score){
+	public Score(double score){
 		myScore = score;
+	}
+	public Score(){
+		myScore = 0;
 	}
 	
 	@Override
@@ -18,12 +21,12 @@ public class Score implements State{
 	}
 	
 	@ViewableMethodOutput(description="Score", type=int.class)
-	public int getMyScore() {
+	public double getMyScore() {
 		return myScore;
 	}
 	
 	@Override
-	public void updateState(int pointsUp) {
+	public void updateState(double pointsUp) {
 		myScore+=pointsUp;
 	}	
 	

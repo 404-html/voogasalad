@@ -22,7 +22,7 @@ public class Game extends GameObject {
 	 * description
 	 * icon
 	 */
-
+	
 	List<Level> myLevels;
 	Set<Sprite> mySpritePresets = new HashSet<>();
 	Level myCurrentLevel;
@@ -30,7 +30,8 @@ public class Game extends GameObject {
 	String myIconPath;
 	ScrollType myScrollType;
 	String myAudioFilePath;
-
+	boolean hasWon;
+	boolean hasLost;
 
 	public Game(String aName) {
 		setName(aName);
@@ -39,6 +40,24 @@ public class Game extends GameObject {
 		myIconPath = "data/images/game_icons/flower-icon.jpg";
 		myScrollType = ScrollType.CENTER;
 		myAudioFilePath = "data/audio/Super-Mario-Song.mp3";
+		hasWon=false;
+		hasLost=false;
+	}
+	
+	public boolean hasWon() {
+		return hasWon;
+	}
+
+	public void setHasWon(boolean hasWon) {
+		this.hasWon = hasWon;
+	}
+
+	public boolean hasLost() {
+		return hasLost;
+	}
+
+	public void setHasLost(boolean hasLost) {
+		this.hasLost = hasLost;
 	}
 
 	/**
@@ -87,10 +106,6 @@ public class Game extends GameObject {
 		if (this.mySpritePresets.contains(aSprite))
 			this.mySpritePresets.remove(aSprite);
 		this.notifyListeners();
-	}
-
-	public List<Level> getMyLevels() {
-		return myLevels;
 	}
 
 	public void setCurrentLevel(int levelNumber) {

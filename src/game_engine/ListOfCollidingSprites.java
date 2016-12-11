@@ -90,7 +90,8 @@ public class ListOfCollidingSprites {
 			// findSideOfCollision(mySprite);
 			frameTime = System.currentTimeMillis();
 			
-			if ((!mySprite.getName().equals(targetSprite.getName())) && (mySpriteImages.get(mySprite).getBoundsInParent())
+			if ((!mySprite.getName().equals(targetSprite.getName())) 
+					&& (mySpriteImages.get(mySprite).getBoundsInParent())
 					.intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));
 			}
@@ -348,13 +349,16 @@ public class ListOfCollidingSprites {
 //		// aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation(),
 //		// aSprite.getLocation().getYLocation()+bottomDistance-SHIFT_CONSTANT);
 //		// }
-//	}
-
-	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance,
-			double topDistance, double bottomDistance){
-		if(min == 0){
-			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()-leftDistance+SHIFT_CONSTANT, 
+//	} 
+	private void shiftPlayer(int min, Sprite aSprite, double leftDistance, double rightDistance, double topDistance,
+			double bottomDistance) {
+		if (min == 0) {
+			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation() - leftDistance + SHIFT_CONSTANT,
 					aSprite.getLocation().getYLocation());
+			System.out.println("sprite x is " + aSprite.getLocation().getXLocation());
+			System.out.println("left distance is " + leftDistance);
+			System.out.println("shiftX distance is " + shiftX);
+			//System.out.println();
 		}
 		if(min == 1){
 			aSprite.getLocation().setLocation(aSprite.getLocation().getXLocation()+rightDistance-SHIFT_CONSTANT, 

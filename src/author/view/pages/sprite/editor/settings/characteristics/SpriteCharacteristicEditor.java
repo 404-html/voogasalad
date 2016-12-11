@@ -4,6 +4,7 @@ import author.view.pages.sprite.editor.settings.SpriteSettingsEditBox;
 import author.view.pages.sprite.editor.settings.SpriteSettingsEditor;
 import author.view.pages.sprite.editor.settings.view.SettingsViewColumn;
 import game_data.Sprite;
+import util.InfoMap;
 
 public class SpriteCharacteristicEditor extends SpriteSettingsEditor {
 	
@@ -27,6 +28,20 @@ public class SpriteCharacteristicEditor extends SpriteSettingsEditor {
 	protected SettingsViewColumn makeViewColumn(Sprite aSprite) {
 		CharacteristicsViewColumn cvc = new CharacteristicsViewColumn(aSprite);
 		return cvc;
+	}
+
+	@Override
+	public void updateSettings() {
+		getSprite().getCharacteristics().forEach( c -> {
+			
+			if(c == null) return;
+			
+			getPropertySelector().getSelectedMap()
+			.get(c.getClass().getSimpleName()).set(true);
+			
+			getEditBoxList().get(c.getClass().getSimpleName())
+			.updateSettings(new InfoMap(c).getInfoMap());
+		});
 	}
 
 	

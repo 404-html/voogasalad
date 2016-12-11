@@ -36,9 +36,7 @@ public class Controllable {
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
 	@ParameterAnnotation(parameters="Sprite")
-	public Controllable(Sprite aSprite){
-		this.mySprite=aSprite;
-		myKeyReleasedMap=new HashMap<KeyCode, Move>();
+	public Controllable(){
 		isControllable=false;
 	}
 	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap) {
@@ -73,6 +71,7 @@ public class Controllable {
 	}
 	private void runKeyCalls(Map<Sprite, Side> myCollisionMap) {
 		for(KeyCode myKey: myKeysPressed){
+			System.out.println(myKey);
 			if(myKeyPressedMap.containsKey(myKey)){
 				if((myKeyPressedMap.get(myKey) instanceof MoveUpJump)){
 //					System.out.println("LUCIA");
@@ -93,7 +92,7 @@ public class Controllable {
 				if(myCollisionMap.get(s) instanceof Top)
 				return true;
 			}
-		}		
+		}
 		return false;
 	}
 	private void runKeyReleased(){

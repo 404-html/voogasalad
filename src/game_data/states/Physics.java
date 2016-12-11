@@ -46,7 +46,7 @@ public class Physics implements State{
 	}
 
 	@Override
-	public void updateState(int number) {
+	public void updateState(double number) {
 		// TODO Auto-generated method stub
 	}
 

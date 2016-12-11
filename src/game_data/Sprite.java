@@ -8,8 +8,8 @@ import java.util.Set;
 import game_data.characteristics.Characteristic;
 import game_data.states.State;
 import game_engine.GameResources;
+import game_engine.properties.RandomMoveConjointHandler;
 import game_engine.properties.RandomMoveHandler;
-import game_engine.actions.Action;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -35,6 +35,7 @@ public abstract class Sprite extends GameObject {
 	private Controllable myControllable;
 	private String id = "";
 	private RandomMoveHandler myRandomMoveHandler;
+	private RandomMoveConjointHandler myRandomMoveConjointHandler;
 	private Map<Characteristic, Double> powerUps;
 	private Set<State> myStates;
 	
@@ -47,8 +48,9 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
-		myControllable=new Controllable(this);
+		myControllable=new Controllable();
 		myRandomMoveHandler = null;
+		myRandomMoveConjointHandler = null;
 	}
 	
 
@@ -66,8 +68,10 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
+		myControllable=new Controllable();
 		myRandomMoveHandler = null;
-		myControllable=new Controllable(this);
+		myRandomMoveConjointHandler = null;
+		myControllable = new Controllable();
 	}
 
 	// for copying sprites
@@ -88,6 +92,7 @@ public abstract class Sprite extends GameObject {
 		myStates = copyStates(aSprite.getStates());
 		//myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
 		myRandomMoveHandler = null;
+		myRandomMoveConjointHandler = null;
 		myControllable=aSprite.getControllable();
 	}
 
@@ -259,9 +264,17 @@ public abstract class Sprite extends GameObject {
 	public RandomMoveHandler getMyRandomMoveHandler() {
 		return myRandomMoveHandler;
 	}
+	
+	public RandomMoveConjointHandler getMyRandomMoveConjointHandler() {
+		return myRandomMoveConjointHandler;
+	}
 
 	public void setMyRandomMoveHandler(RandomMoveHandler myRandomMoveHandler) {
 		this.myRandomMoveHandler = myRandomMoveHandler;
+	}
+	
+	public void setMyRandomMoveConjointHandler(RandomMoveConjointHandler myRandomMoveConjointHandler) {
+		this.myRandomMoveConjointHandler = myRandomMoveConjointHandler;
 	}
 
 	public void setPreset(Sprite aPreset){

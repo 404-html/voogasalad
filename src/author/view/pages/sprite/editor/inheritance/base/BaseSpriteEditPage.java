@@ -135,7 +135,6 @@ public abstract class BaseSpriteEditPage {
 
 	public Sprite editSprite(){
 
-		getSprite().setLocation(new Location(0,0));
 		getSprite().setXVelocity(getXVelocity());
 		getSprite().setYVelocity(getYVelocity());
 		getSprite().setImagePath(getImageFile());

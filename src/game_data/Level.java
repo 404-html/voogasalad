@@ -40,6 +40,11 @@ public class Level extends GameObject {
 		myKeyCommands = new HashMap<KeyCode, KeyCommand>();
 		myControllableSpriteList = new ArrayList<Sprite>();
 		setMyControllableSpriteList();
+		for(Sprite s: getMySpriteList()){
+			if(s instanceof Player){
+				setPlayerSprite((Player)s);
+			}
+		}
 	}
 
 	public Player getMainPlayer() {
@@ -80,6 +85,8 @@ public class Level extends GameObject {
 
 	public void addNewSprite(Sprite aSprite) {
 		mySprites.add(aSprite);
+		if(aSprite instanceof LevelSetter)
+			((LevelSetter) aSprite).setLevel(this);
 //		if(aSprite instanceof Player){
 //			setPlayerSprite((Player) aSprite);
 //			aSprite.addState(new LevelWon());
@@ -88,6 +95,9 @@ public class Level extends GameObject {
 			if(aSprite.getControllable().isControllable()){
 				myControllableSpriteList.add(aSprite);
 			}
+		}
+		if(aSprite instanceof Player){
+			setPlayerSprite((Player)aSprite);
 		}
 		this.notifyListeners();
 	}

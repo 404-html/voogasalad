@@ -9,7 +9,7 @@ import javafx.beans.value.ChangeListener;
  */
 public class NumberFieldBox extends TextFieldBox {
 
-	private static final String NUMBER_REGEX = "\\d+(\\-\\.\\d+)";
+	private static final String NUMBER_REGEX = "[^(?:\\-\\d*\\.)?\\d]";
 	private static final String NOT_NUM_REGEX = "[^" + NUMBER_REGEX + "]";
 	private static final String REPLACE_NOT_NUM_CHAR = "";
 	
@@ -37,7 +37,12 @@ public class NumberFieldBox extends TextFieldBox {
 	 */
 	public int getInteger() throws NumberFormatException{
 		Integer x;
+		try {
 		x = Integer.parseInt(getTextField().getText());	
+		}
+		catch ( NumberFormatException e){
+			throw e;
+		}
 		return x;
 	}
 	
@@ -49,7 +54,13 @@ public class NumberFieldBox extends TextFieldBox {
 	 */
 	public double getDouble() throws NumberFormatException{
 		Double x;
+		try {
 		x = Double.parseDouble(getTextField().getText()); 
+		}
+		catch ( NumberFormatException e){
+			throw e;
+		}
+		
 		return x;
 	}
 	
