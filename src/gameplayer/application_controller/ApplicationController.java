@@ -3,7 +3,6 @@ package gameplayer.application_controller;
 import java.io.File;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
-import game_data.Game;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.LevelManager;
@@ -17,7 +16,6 @@ import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PopUpFactory;
 import gameplayer.front_end.popup.UserOptions;
-import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import javafx.stage.Stage;
@@ -61,11 +59,6 @@ public class ApplicationController extends AbstractController {
 				showError(x);
 			}
 		}, ButtonDisplay.FACEBOOK);
-	}
-
-	private void showError(Exception x) {
-		ErrorAlert ea = new ErrorAlert();
-		ea.show(x);
 	}
 
 	private void displayAuthoring() {
@@ -142,7 +135,11 @@ public class ApplicationController extends AbstractController {
 
 	private void getLevel() {
 		LevelManager lm = (LevelManager) getXMLHandler().load(myGamePlay.getGame().getName() + "level");
-		myGamePlay.setLevel(lm.getLevel());
+		try {
+			myGamePlay.setLevel(lm.getLevel());
+		} catch (Exception e) {
+			showError(e);
+		}
 	}
 
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice, String aChoice) {
@@ -166,16 +163,24 @@ public class ApplicationController extends AbstractController {
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Levels"), 0, 0, e -> {
 			LevelSelectionPopUp levelSelection = (LevelSelectionPopUp) new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
 			levelSelection.setOnClosed(k -> {
-				myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				try {
+					myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				} catch (Exception e1) {
+					showError(e1);
+				}
 			});
 			levelSelection.show();
 		}, ButtonDisplay.TEXT));
 		gameChoice.addNode(hbox);
 		gameChoice.addButton("PLAY", e -> {
-			myGamePlay.displayGame();
+			try {
+				myGamePlay.displayGame();
+			} catch (Exception e1) {
+				showError(e1);
+			}
 		}, ButtonDisplay.TEXT);
 	}
-	
+
 	/**
 	 *
 	 * @param aTitle is the message title
@@ -190,8 +195,7 @@ public class ApplicationController extends AbstractController {
 		try {
 			myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 		} catch (Exception x) {
-			ErrorAlert ea = new ErrorAlert();
-			ea.show(x);
+			showError(x);
 		}
 	}
 }
