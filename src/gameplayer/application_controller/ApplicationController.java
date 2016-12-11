@@ -107,15 +107,15 @@ public class ApplicationController extends AbstractController {
 		myCurrentDisplay = mySceneBuilder.create(SceneIdentifier.GAMECHOICE, myStage.getWidth(), myStage.getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
-		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true);
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true, myButtonLabels.getString("Choose"));
 	}
 
 
-	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice) {
-		gameChoice.addNode(getGUIGenerator().createComboBox(myButtonLabels.getString("Choose"), myStoredGames.getGames(), 
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice, String aLabel) {
+		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
 				myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
 					displayGame(myStoredGames.getGameFilePath(aChoice));
-					if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
+					if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, aChoice);
 					try {
 						getOptions();
 						getLevel();
@@ -127,7 +127,7 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
 			if (chosenGame != null) displayGame(chosenGame);
-			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, myButtonLabels.getString("Choose"));
 			getOptions();
 			getLevel();
 		}, ButtonDisplay.TEXT); 
@@ -143,9 +143,9 @@ public class ApplicationController extends AbstractController {
 		myGamePlay.setLevel(lm.getLevel());
 	}
 
-	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
+	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice, String aChoice) {
 		gameChoice.clear();
-		setGameChoiceButtonHandlers(gameChoice, false);
+		setGameChoiceButtonHandlers(gameChoice, false, aChoice);
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Options"), 0, 0, e -> {

@@ -12,7 +12,8 @@ import javafx.scene.layout.HBox;
 public class FacebookButton extends AbstractButton {
 
 	@Override
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler) {
+	public Button createButton(String aMessage, double aXPos, double aYPos, 
+			EventHandler<? super MouseEvent> aHandler) {
 		Button button = super.createButton(aMessage, aXPos, aYPos, aHandler); 
 		HBox box = new HBox(10);
 		button.setId("facebook-button");

@@ -2,19 +2,21 @@ package gameplayer.front_end.application_scene;
 
 import java.io.File;
 
+import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import util.XMLTranslator;
 
 public class HighScoreScene extends AbstractNavigationPlayerScene {
-	
-	private Pane myPane;
+
 	private String myGamename;
+	private BorderPane myPane;
 	
 	public HighScoreScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
@@ -27,7 +29,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	}
 
 	private void initialize(String aGamename) {
-		myPane = new Pane();
+		myPane = new BorderPane();
 		myPane.setId("glass");
 		myGamename = aGamename;
 	}
@@ -39,22 +41,32 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	@Override
 	public Scene init() {
 		XMLTranslator myTranslator = new XMLTranslator();
-		HighscoreManager myScores = (HighscoreManager) myTranslator.loadFromFile(new File("XMLGameFiles/" + myGamename + "-highscores" + ".xml"));
+		HighscoreManager myScores = (HighscoreManager) myTranslator.loadFromFile(
+				new File("XMLGameFiles/" + myGamename + "-highscores" + ".xml"));
 		getRoot().setCenter(addNodes());
 		addScores(myScores);
 		return myScene;
 	}
 
 	private Pane addNodes() {
-		myPane.getChildren().add(getOptions());
-		myPane.setOpacity(0.5);
-		getOptions().setAlignment(Pos.CENTER);
+		myPane.setTop(addHeading()); 
+		myPane.setCenter(getOptions());
+		getRoot().setCenter(myPane);
 		return myPane;
 	}
 	
+	private Pane addHeading() {
+		VBox v = new VBox();
+		Label label = getGUIGenerator().createLabel(myGamename + " HIGHSCORES", 0, 0);
+		label.setAlignment(Pos.CENTER);
+		v.getChildren().add(label);
+		v.setAlignment(Pos.CENTER);
+		return v;
+	}
+	
 	private void addScores(HighscoreManager aManager) {
-		HBox box = new HBox();
-		VBox users = new VBox();
+		HBox box = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource() * 2);
+		VBox users = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		for (String user: aManager.getUsers()) {
 			users.getChildren().add(new Label(user));
 		}
@@ -64,6 +76,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		}
 		box.getChildren().add(users);
 		box.getChildren().add(scores);
+		box.setAlignment(Pos.TOP_CENTER);
 		getOptions().getChildren().add(box);
 	}
 }
