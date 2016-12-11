@@ -105,7 +105,7 @@ public class ApplicationController extends AbstractController {
 
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice) {
-		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
+		gameChoice.addNode(getGUIGenerator().createComboBox(myButtonLabels.getString("Choose"), myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
 			displayGame(myStoredGames.getGameFilePath(aChoice));
 			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}));

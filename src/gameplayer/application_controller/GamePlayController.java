@@ -186,7 +186,8 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setHealthLabel() {
-		if (myGameController.getMySpriteHealthList() != null) 
+		if (myGameController.getMySpriteHealthList() != null && 
+				myGameController.getMySpriteHealthList().size() >= 1) 
 			myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
 

@@ -57,7 +57,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
+	public ComboBox<Pane> createComboBox(String aLabel, List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
 		box.setPromptText("CHOOSE GAME");
 		List<HBox> options = new ArrayList<HBox>();
@@ -78,7 +78,7 @@ public class GUIGenerator implements IGUIGenerator {
 		}
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
-		box.setPromptText("CHOOSE GAME");
+		box.setPromptText(aLabel);
 		box.setEditable(true);        
 		box.setOnAction(e -> {
 			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
