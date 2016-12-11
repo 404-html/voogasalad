@@ -87,7 +87,7 @@ public class GamePlayController extends AbstractController {
 		initializeScene(myUserOptions);
 		setMenu();
 		updateSprites();
-		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.get(myGameController.getMyGame().getCurrentLevel().getMainPlayer()));
+		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.getMainPlayer());
 		initializeAnimation();
 		resetStage(myGamePlayScene);
 		if (myGameController.getMyGame().getAudioFilePath() != null) myMusic = new MediaController(myGameController.getMyGame().getAudioFilePath());
