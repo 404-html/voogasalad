@@ -94,7 +94,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 					.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
-			// createUndo(aLevel);
+			createUndo(aLevel);
 			aLevel.addListener((level) -> {
 				updatePane(aLevel);
 			});
@@ -108,12 +108,12 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	private void createUndo(Level aLevel) {
 		this.iRevertManager = new RevertManagerFactory().create(aLevel);
-
 		this.levelWindowPane.getPane().setOnKeyPressed((event) -> {
-			System.out.println("Key Pressed");
-			if (event.getCode().equals(KeyCode.Z)) {
-				System.out.println("Z");
+			if (event.getCode().equals(KeyCode.Z) && event.isControlDown()) {
 				this.iRevertManager.undo();
+			}
+			else if (event.getCode().equals(KeyCode.Y) && event.isControlDown()) {
+				this.iRevertManager.redo();
 			}
 		});
 	}
@@ -168,12 +168,15 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		});
 		EventHandler<? super MouseEvent> releasedHandler = draggableSprite.getDraggableItem().getOnMouseReleased();
 		draggableSprite.getDraggableItem().setOnMouseReleased((event) -> {
-			releasedHandler.handle(event);
+			
 			if (event.isShiftDown()){
 				int newX = this.levelWindowPane.adjustX((int)draggableSprite.getDraggableItem().getLayoutX() + draggableSprite.getSprite().getWidth()/2);
 				int newY = this.levelWindowPane.adjustY((int)draggableSprite.getDraggableItem().getLayoutY() + draggableSprite.getSprite().getHeight()/2);
 				draggableSprite.getSprite().setLocation(new Location(newX, newY));
 				this.levelWindowPane.removeGrid();
+			}
+			else{
+				releasedHandler.handle(event);
 			}
 		});
 		

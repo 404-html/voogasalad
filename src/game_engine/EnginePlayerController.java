@@ -64,7 +64,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		Level myLevel = myGame.getCurrentLevel();
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
-				myLevel.setPlayerSprite((Player)s);
+				myLevel.setMainPlayer((Player)s);
 				myLevel.getMainPlayer().addState(new Score());
 				myLevel.getMainPlayer()
 						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
