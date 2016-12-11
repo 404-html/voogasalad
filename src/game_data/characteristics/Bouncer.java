@@ -69,8 +69,7 @@ public class Bouncer implements Characteristic {
 				}
 			}			
 		}
-		//if(bouncing && bouncingSpriteSide.isVertical()){
-		if(bouncing && (bouncingSpriteSide instanceof Top || bouncingSpriteSide instanceof Bottom)){
+		if(bouncing && bouncingSpriteSide.isHorizontal()){
 			resetControls();
 		}	
 		if(timeAfterCollisionCount>TOTAL_TIME_AFTER_COLLISION){
