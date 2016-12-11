@@ -168,7 +168,6 @@ public class DragResizeMod {
 	protected void mouseReleased(MouseEvent event) {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
-		System.out.println("Released");
 		if (state == S.DRAG) {
 			mySprite.getSprite().getLocation().setLocation(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY());
