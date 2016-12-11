@@ -8,11 +8,11 @@ import java.io.FileNotFoundException;
 
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.ILevelWindowInternal;
-import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreen;
 import author.view.util.authoring_buttons.ButtonFactory;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.stage.Stage;
 import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
 import util.filehelpers.FileLoader.FileLoader;
@@ -60,7 +60,7 @@ public class LevelWindowToolBarFactory {
 	private void newBackgroundImage() {
 		File file;
 		try {
-			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE, AuthoringSplashScreen.getPrimaryAuthorStage()).loadSingle();
+			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE, new Stage()).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
 			this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {

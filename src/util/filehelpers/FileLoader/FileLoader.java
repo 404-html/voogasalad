@@ -179,8 +179,7 @@ public class FileLoader {
 	}
 
 	private Stage makeStage() {
-		if(myStage == null) return new Stage();
-		return myStage;
+		return new Stage();
 	}
 	
 }
