@@ -5,4 +5,4 @@
  * @author hannahfuchshuber
  *
  */
-package gameplayer.back_end.Resources;
+package gameplayer.front_end.gui_generator.media;

@@ -2,11 +2,8 @@ package gameplayer.back_end.keycode_handler;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import game_data.Sprite;
 import gameplayer.application_controller.KeyCodeTranslator;
 import javafx.scene.Node;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 public class KeyCodeHandler {
@@ -24,7 +21,7 @@ public class KeyCodeHandler {
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
 	}
 	
-	public KeyCodeHandler(){
+	public KeyCodeHandler() {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
@@ -59,9 +56,9 @@ public class KeyCodeHandler {
 	public void handleKeyPress(KeyCode aKeyCode){
 		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
 		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
-		if (aKeyCode.equals(KeyCode.LEFT)) {
-		    myMainPlayerImage.setRotate(180);
-		} else if (aKeyCode.equals(KeyCode.RIGHT)) {
+		if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
+			myMainPlayerImage.setRotate(180);
+		} else if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.RIGHT)) {
 			myMainPlayerImage.setRotate(0);
 		}
 	}

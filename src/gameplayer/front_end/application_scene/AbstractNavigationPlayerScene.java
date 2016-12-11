@@ -2,7 +2,7 @@ package gameplayer.front_end.application_scene;
 
 import java.io.File;
 
-import gameplayer.back_end.Resources.FrontEndResources;
+import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -47,6 +47,7 @@ public abstract class AbstractNavigationPlayerScene extends AbstractPlayerScene 
 		myScene = new Scene(myRoot, aWidth, aHeight);
 		File file = new File(FrontEndResources.STYLESHEET.getStringResource());
 	    myScene.getStylesheets().add(file.toURI().toString());
+	    getOptions().setMaxWidth(aWidth * .45);
 	}
 	
 	private void addNavigation() {
