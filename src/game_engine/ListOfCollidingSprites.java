@@ -218,8 +218,8 @@ public class ListOfCollidingSprites {
 		double targetBottomRightX = targetSprite.getLocation().getXLocation() + targetSprite.getWidth();
 		double targetBottomRightY = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
 
-		//if (mySprite instanceof Player) {
 		if (!(mySprite instanceof Terrain)) {
+		//if (! (mySprite instanceof Terrain && targetSprite instanceof Terrain) ) {
 
 			double mySprite_bottom = mySprite.getLocation().getYLocation() + mySprite.getHeight();
 			double targetSprite_bottom = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
