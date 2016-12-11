@@ -158,6 +158,7 @@ public class GamePlayController extends AbstractController {
 		setDropDownMenu();
 		setHealthLabel();
 	}
+	
 	@SuppressWarnings("unchecked")
 	private void setDropDownMenu() {
 		String[] namesForGamePlay = {myButtonLabels.getString("Restart"), myButtonLabels.getString("Red"), myButtonLabels.getString("Save"), "highscore"};
@@ -182,9 +183,9 @@ public class GamePlayController extends AbstractController {
 			myMusic.stopMusic();
 		});
 	}
+	
 	private void setHealthLabel() {
-		if (myGameController.getMySpriteHealthList() != null && 
-				myGameController.getMySpriteHealthList().size() >= 1) 
+		if (myGameController.getMySpriteHealthList() != null && myGameController.getMySpriteHealthList().size() >= 1) 
 			myGamePlayScene.addLabel("Health: " + myGameController.getMySpriteHealthList().get(0));
 	}
 
