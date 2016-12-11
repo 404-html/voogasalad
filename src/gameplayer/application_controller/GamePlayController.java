@@ -70,7 +70,6 @@ public class GamePlayController extends AbstractController {
 		} else {
 			myKeyCodeHandler = new KeyCodeHandler("default");
 		}
-		//getGUIGenerator().createMediaPlayer("");
 	}
 
 	public void displayGame() {
@@ -123,7 +122,6 @@ public class GamePlayController extends AbstractController {
 		myGameUpdater.update(elapsedTime, myKeyCodeHandler.getKeysPressed(), myKeyCodeHandler.getKeysReleased(), mySpriteDisplay.getSpriteMap(), 
 				getStage().getHeight(), getStage().getWidth(), myGamePlayScene.getAnimationScreenXPosition(), myGamePlayScene.getAnimationScreenYPosition());
 		updateSprites();
-
 	}
 
 	//	private void checkBackground() {
@@ -256,7 +254,6 @@ public class GamePlayController extends AbstractController {
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}
-
 	}
 
 	public void setOptions(UserOptions aOptions) {
