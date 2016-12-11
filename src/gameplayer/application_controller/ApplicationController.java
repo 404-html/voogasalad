@@ -17,6 +17,7 @@ import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PopUpFactory;
 import gameplayer.front_end.popup.UserOptions;
+import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.IPopUpDisplay;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import javafx.stage.Stage;
@@ -58,8 +59,17 @@ public class ApplicationController extends AbstractController {
 			displayAuthoring();
 		}, ButtonDisplay.TEXT);
 		mainMenu.addButton(myButtonLabels.getString("Login"), e -> {
-			myInformationController.facebookLogin();
+			try { 
+				myInformationController.facebookLogin();
+			} catch (Exception x) {
+				showError(x);
+			}
 		}, ButtonDisplay.FACEBOOK);
+	}
+
+	private void showError(Exception x) {
+		ErrorAlert ea = new ErrorAlert();
+		ea.show(x);
 	}
 
 	private void displayAuthoring() {
@@ -109,12 +119,23 @@ public class ApplicationController extends AbstractController {
 		gameChoice.addNode(getGUIGenerator().createComboBox(myButtonLabels.getString("Choose"), myStoredGames.getGames(), myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
 			displayGame(myStoredGames.getGameFilePath(aChoice));
 			if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			getOptions();
 		}));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
 			if (chosenGame != null) displayGame(chosenGame);
 			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice);
+			try {
+				getOptions();
+			} catch (Exception x) {
+				showError(x);
+			}
 		}, ButtonDisplay.TEXT); 
+	}
+
+	private void getOptions() {
+		UserOptions uo = (UserOptions) load(myGamePlay.getGame().getName() + "options");
+		myGamePlay.setOptions(uo);
 	}
 
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
@@ -126,9 +147,13 @@ public class ApplicationController extends AbstractController {
 			PlayerOptionsPopUp options = (PlayerOptionsPopUp) new PopUpFactory().buildPopUpDisplay();
 			options.show();
 			options.setOnClosed(k -> {
-				UserOptions ud = new UserOptions(options.getColorChoice(), options.getKeyChoice());
-				myGamePlay.setOptions(ud);
-				save(ud, myGamePlay.getGame().getName() + "options");
+				try {
+					UserOptions ud = new UserOptions(options.getColorChoice(), options.getKeyChoice());
+					myGamePlay.setOptions(ud);
+					save(ud, myGamePlay.getGame().getName() + "options");
+				} catch (Exception x) {
+					showError(x);
+				}
 			});
 		}, ButtonDisplay.TEXT));
 		hbox.getChildren().add(getGUIGenerator().createButton(myButtonLabels.getString("Levels"), 0, 0, e -> {
