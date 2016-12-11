@@ -127,6 +127,17 @@
     -fx-font-size: 13px;
 }
 
+.combo-box-popup > .list-view {
+    -fx-pref-width: 100%;
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
+}
+
+#combo-box-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
+}
+
 
 .combo-box-base {
     -fx-background-color: derive(#292929, 10%), derive(#292929, 10%), derive(#292929, 10%), derive(#292929, 10%);

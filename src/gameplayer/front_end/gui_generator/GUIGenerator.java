@@ -3,7 +3,10 @@ package gameplayer.front_end.gui_generator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+
 import gameplayer.application_controller.Choosable;
+import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
 import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
@@ -20,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -56,26 +60,18 @@ public class GUIGenerator implements IGUIGenerator {
 		return image;
 	}
 	
+	public Label createComboBoxLabel(String aLabel) {
+		Label label = createLabel(aLabel, 0, 0); 
+		label.setId("combo-box-label");
+		label.autosize();
+		return label;
+	}
+	
 	@Override
 	public ComboBox<Pane> createComboBox(String aLabel, List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
 		box.setPromptText("CHOOSE GAME");
-		List<HBox> options = new ArrayList<HBox>();
-		for(int i = 0; i < aListOfNames.size(); i++){
-			HBox hbox = new HBox();
-			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
-				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
-			} else {
-				hbox.getChildren().add(new ImageView());
-			}
-			Label name = new Label(aListOfNames.get(i));
-			name.autosize();
-			Label des = new Label(aListOfDescriptions.get(i));
-			hbox.getChildren().add(name);
-			//des.setStyle("-fx-font: 12 arial;");
-			hbox.getChildren().add(des);
-			options.add(hbox);
-		}
+		List<HBox> options = createListOfComboBoxHbox(aListOfNames, aListOfFilePaths, aListOfDescriptions, box);
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
 		box.setPromptText(aLabel);
@@ -86,6 +82,28 @@ public class GUIGenerator implements IGUIGenerator {
 		    box.setPromptText(label);
 		});
 		return box;
+	}
+
+	private List<HBox> createListOfComboBoxHbox(List<String> aListOfNames, List<String> aListOfFilePaths,
+			List<String> aListOfDescriptions, ComboBox<Pane> box) {
+		List<HBox> options = new ArrayList<HBox>();
+		for(int i = 0; i < aListOfNames.size(); i++){
+			HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
+			hbox.setMaxWidth(box.getMaxWidth());
+			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
+				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
+			} else {
+				hbox.getChildren().add(new ImageView());
+			}
+			Label name = createComboBoxLabel(aListOfNames.get(i));
+			Label des = createComboBoxLabel(aListOfDescriptions.get(i));
+			hbox.setHgrow(name, Priority.ALWAYS);
+			hbox.setHgrow(des, Priority.ALWAYS);
+			hbox.getChildren().add(name);
+			hbox.getChildren().add(des);
+			options.add(hbox);
+		}
+		return options;
 	}
 
 	@Override
