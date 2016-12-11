@@ -21,7 +21,7 @@ public class ScoreAdder extends PointsChanger implements Action {
 		for(State i : spriteAffected.getStates()){
 
 			if (i instanceof Score){
-				System.out.println("has score");
+//				System.out.println("has score");
 
 				//System.out.println(pointsToGive);
 				((Score) i).updateState(pointsToGive);
