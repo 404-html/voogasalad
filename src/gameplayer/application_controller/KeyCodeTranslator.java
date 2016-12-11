@@ -25,6 +25,6 @@ public class KeyCodeTranslator {
 	}
 	
 	public KeyCode getCode(KeyCode aKeyCode){
-		return myMap.get(aKeyCode);
+		return myMap.containsKey(aKeyCode) ? myMap.get(aKeyCode) : aKeyCode;
 	}
 }
