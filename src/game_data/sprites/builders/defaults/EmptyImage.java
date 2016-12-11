@@ -1,4 +1,4 @@
-package author.images;
+package game_data.sprites.builders.defaults;
 
 import java.io.File;
 

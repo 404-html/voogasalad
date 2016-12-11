@@ -40,7 +40,7 @@ public class VerticalPacer extends Pacer{
 
 	@Override
 	public Characteristic copy() {
-		return new VerticalPacer(getDistance(), getSprite().clone());
+		return new VerticalPacer(getDistance(), getSprite());
 	}
 	
 	@Override

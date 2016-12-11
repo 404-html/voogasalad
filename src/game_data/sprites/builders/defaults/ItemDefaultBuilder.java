@@ -1,6 +1,5 @@
 package game_data.sprites.builders.defaults;
 
-import author.images.EmptyImage;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
