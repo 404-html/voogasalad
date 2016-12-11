@@ -71,6 +71,7 @@ public class Controllable {
 	}
 	private void runKeyCalls(Map<Sprite, Side> myCollisionMap) {
 		for(KeyCode myKey: myKeysPressed){
+			System.out.println(myKey);
 			if(myKeyPressedMap.containsKey(myKey)){
 				if((myKeyPressedMap.get(myKey) instanceof MoveUpJump)){
 //					System.out.println("LUCIA");
