@@ -37,19 +37,19 @@ public class Bouncer implements Characteristic {
 	private int timeAfterCollisionCount=0;
 	private static final int TOTAL_TIME_AFTER_COLLISION=50;
 	private Map<KeyCode, Action> originalKeyPressedMap;
-	@ParameterAnnotation(parameters = { "Bounce Speed", "Sprite" })
+	@ParameterAnnotation(parameters = { "Horizontal Bounce Speed", "Vertical Bounce Speed", "Sprite" })
 	public Bouncer(double bounceSpeedHorizontal, double bounceSpeedVertical, Sprite mySprite) {
 		myBounceSpeedHorizontal = bounceSpeedHorizontal;
 		myBounceSpeedVertical=bounceSpeedVertical;
 		originalKeyPressedMap=null;
 	}
 
-	@ViewableMethodOutput(description="Bounce Speed Horizontal", type=double.class)
+	@ViewableMethodOutput(description="Horizontal Bounce Speed", type=double.class)
 	public double getBounceSpeedHorizontal() {
 		return myBounceSpeedHorizontal;
 	}
 	
-	@ViewableMethodOutput(description="Bounce Speed Vertical", type=double.class)
+	@ViewableMethodOutput(description="Vertical Bounce Speed", type=double.class)
 	public double getBounceSpeedVertical(){
 		return myBounceSpeedVertical;
 	}
