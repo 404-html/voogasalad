@@ -52,11 +52,11 @@ public class RandomMoveHandler {
 		
 		double newXLoc, newYLoc;
 		if(myOrientation.equals(Orientation.VERTICAL)) {
-			newXLoc = Math.random()*myScreenWidth;
+			newXLoc = Math.random()*myScreenWidth - mySprite.getWidth();
 			newYLoc = mySprite.getLocation().getYLocation()-myScreenHeight-mySprite.getHeight();
 		} else {
 			newXLoc = mySprite.getLocation().getXLocation()+myScreenWidth+mySprite.getWidth();
-			newYLoc = Math.random()*myScreenHeight;
+			newYLoc = Math.random()*myScreenHeight - mySprite.getHeight();
 		}
 		mySprite.getLocation().setLocation(newXLoc, newYLoc);
 		
