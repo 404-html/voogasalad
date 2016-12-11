@@ -19,7 +19,6 @@ import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PopUpFactory;
 import gameplayer.front_end.popup.UserOptions;
 import gameplayer.front_end.popup.ErrorAlert;
-import gameplayer.front_end.popup.IPopUpDisplay;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import javafx.stage.Stage;

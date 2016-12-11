@@ -51,7 +51,9 @@ public class SpriteDisplay {
 			if (myAnimationSpriteImage.size() < 1) {
 				String file = aSprite.getImagePath(); 
 				image = buildSpriteDisplay(aSprite);
-				myAnimationSpriteImage.add(image);
+				for (int i = 0; i < 15; i++) {
+					myAnimationSpriteImage.add(image);
+				}
 				String[] array = file.split("\\.");
 				StringBuilder buildString = new StringBuilder();
 				buildString.append(array[0]);
@@ -62,13 +64,15 @@ public class SpriteDisplay {
 				myCurrentImage = 0;
 				if (fileOfAnimation != null && fileOfAnimation.exists()) {
 					image = new ImageView(fileOfAnimation.toURI().toString());
-					myAnimationSpriteImage.add(image);
+					for (int i = 0; i < 15; i++) {
+						myAnimationSpriteImage.add(image);
+					}
 				} 
-			} else if (myAnimationSpriteImage.size() == 1) {
+			} else if (myAnimationSpriteImage.size() == 15) {
 				image = myAnimationSpriteImage.get(myCurrentImage);
 			} else {
 				image = myAnimationSpriteImage.get(myCurrentImage);
-				if (myCurrentImage == 1) {
+				if (myCurrentImage == 29) {
 					myCurrentImage = 0;
 				} else {
 					myCurrentImage++;

@@ -73,11 +73,10 @@ public class GUIGenerator implements IGUIGenerator {
 	@Override
 	public ComboBox<Pane> createComboBox(String aLabel, List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
-		box.setPromptText("CHOOSE GAME");
+		box.setPromptText(aLabel);
 		List<HBox> options = createListOfComboBoxHbox(aListOfNames, aListOfFilePaths, aListOfDescriptions, box);
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
-		box.setPromptText(aLabel);
 		box.setEditable(true);
 		box.setConverter(new StringConverter<Pane>() {
 
@@ -97,8 +96,8 @@ public class GUIGenerator implements IGUIGenerator {
 		});
 		box.setOnAction(e -> {
 			String label = box.getConverter().toString(box.getSelectionModel().getSelectedItem());
+			box.setPromptText(label);
 		    aChooser.choose(label);
-		    box.setPromptText(label);
 		});
 		return box;
 	}

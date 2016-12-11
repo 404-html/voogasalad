@@ -197,9 +197,9 @@
     -fx-text-fill: #fdbe3b;
 }
 
-.combo-box-base:hover
-{
-    -fx-color: black;
+.combo-box-base:hover {
+    -fx-font-size: 13px;
+    -fx-text-fill: #fdbe3b;
 }
 
 .combo-box .cell{
