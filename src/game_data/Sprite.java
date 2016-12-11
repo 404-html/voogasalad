@@ -9,7 +9,9 @@ import game_data.characteristics.Characteristic;
 import game_data.states.State;
 import game_engine.GameResources;
 import game_engine.properties.RandomMoveConjointHandler;
+import game_engine.properties.RandomMoveDisjointHandler;
 import game_engine.properties.RandomMoveHandler;
+import game_engine.properties.RandomMoveHandler.Orientation;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -48,7 +50,7 @@ public abstract class Sprite extends GameObject {
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
 		myControllable = new Controllable();
-		myRandomMoveHandler = null;
+		myRandomMoveHandler = new RandomMoveDisjointHandler(Orientation.NULL);
 	}
 	
 
@@ -67,7 +69,7 @@ public abstract class Sprite extends GameObject {
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
 		myControllable=new Controllable();
-		myRandomMoveHandler = null;
+		myRandomMoveHandler = new RandomMoveDisjointHandler(Orientation.NULL);
 		myControllable = new Controllable();
 	}
 
@@ -88,7 +90,7 @@ public abstract class Sprite extends GameObject {
 		myCharacteristics = copyCharacteristics(aSprite.getCharacteristics());
 		myStates = copyStates(aSprite.getStates());
 		//myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
-		myRandomMoveHandler = null;
+		myRandomMoveHandler = aSprite.getMyRandomMoveHandler().copy();
 		myControllable=aSprite.getControllable();
 	}
 
