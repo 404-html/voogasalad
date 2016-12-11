@@ -9,7 +9,6 @@ import game_data.characteristics.Characteristic;
 import game_data.states.State;
 import game_engine.GameResources;
 import game_engine.properties.RandomMoveHandler;
-import game_engine.actions.Action;
 
 /**
  * Represents any viewable object in a Level including characters, items,
@@ -47,7 +46,7 @@ public abstract class Sprite extends GameObject {
 		myCollisionHandler = new CollisionHandler();
 		myCharacteristics = new HashSet<Characteristic>();
 		myStates = new HashSet<State>();
-		myControllable=new Controllable(this);
+		myControllable= new Controllable(this);
 		myRandomMoveHandler = null;
 	}
 	

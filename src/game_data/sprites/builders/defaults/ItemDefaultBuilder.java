@@ -7,7 +7,6 @@ import game_data.sprites.Item;
 import game_data.sprites.builders.SpriteDefaultBuilder;
 import game_data.states.Physics;
 import game_data.states.State;
-import game_engine.SpritePhysics;
 
 /**
  * Creates a new default item when a new item is created

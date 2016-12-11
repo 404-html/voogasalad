@@ -8,7 +8,6 @@ import game_data.sprites.Terrain;
 import game_data.sprites.builders.SpriteDefaultBuilder;
 import game_data.states.Physics;
 import game_data.states.State;
-import game_engine.SpritePhysics;
 
 /**
  * Creates new default terrain when new terrain is created

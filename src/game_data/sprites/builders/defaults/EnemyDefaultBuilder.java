@@ -9,7 +9,6 @@ import game_data.states.Health;
 import game_data.states.Physics;
 import game_data.states.State;
 import game_engine.GameResources;
-import game_engine.SpritePhysics;
 
 /**
  * Builds the default enemy when a new enemy is created
@@ -18,20 +17,19 @@ import game_engine.SpritePhysics;
 public class EnemyDefaultBuilder implements SpriteDefaultBuilder {
 
 	private Sprite enemy = new Enemy();
-	
+
 	private final Characteristic[] CHARACTERISTICS = new Characteristic[] {
-		
+
 	};
 
 	private final State[] STATES = new State[] { 
-			 new Physics(GameResources.DEFAULT_VERTICAL_GRAVITY.getDoubleResource(), GameResources.DEFAULT_HORIZONTAL_GRAVITY.getDoubleResource()),
-			 new Health(1)
-
+			new Physics(GameResources.DEFAULT_VERTICAL_GRAVITY.getDoubleResource(), GameResources.DEFAULT_HORIZONTAL_GRAVITY.getDoubleResource()),
+			new Health(1)
 	};
 
 	private static final String NAME = "Enemy_Name";
 
-	
+
 	@Override
 	public Sprite build() {
 		for(Characteristic characteristic : CHARACTERISTICS) {
