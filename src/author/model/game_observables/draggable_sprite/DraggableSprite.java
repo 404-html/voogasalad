@@ -23,6 +23,7 @@ public abstract class DraggableSprite {
 	private ImageView myImageView;
 	private Sprite mySprite;
 	private InvalidationListener invalidationListener;
+	private Boolean isSelected = false;
 
 	// These define the size of the ghost image that follows the mouse when
 	// dragging
@@ -78,17 +79,36 @@ public abstract class DraggableSprite {
 
 	private void setOnMouseHover() {
 		draggableItem.setOnMouseEntered(e -> {
-			String style_inner = "-fx-border-color: red;" + "-fx-border-width: 1;" + "-fx-border-style: dotted;";
-			draggableItem.setStyle(style_inner);
+			styleSelected();
 			draggableItem.setCursor(Cursor.HAND);
 			displayNameOnHover();
 
 		});
 		draggableItem.setOnMouseExited(e -> {
-			String style_inner = "";
-			draggableItem.setStyle(style_inner);
+			if (!this.isSelected)
+				styleDeselected();
 		});
 
+	}
+	
+	public void setSelected(){
+		this.isSelected = true;
+		styleSelected();
+	}
+	
+	public void setDeselected(){
+		this.isSelected = false;
+		styleDeselected();
+	}
+	
+	private void styleSelected(){
+		String style_inner = "-fx-border-color: red;" + "-fx-border-width: 1;" + "-fx-border-style: dotted;";
+		draggableItem.setStyle(style_inner);
+	}
+	
+	private void styleDeselected(){
+		String style_inner = "";
+		draggableItem.setStyle(style_inner);
 	}
 
 	private void displayNameOnHover() {
