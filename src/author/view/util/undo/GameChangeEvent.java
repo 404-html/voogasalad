@@ -14,53 +14,65 @@ import javafx.beans.InvalidationListener;
  */
 public class GameChangeEvent {
 
-	@SuppressWarnings("unused")
 	private InvalidationListener invalidationListener;
 	
 	private Sprite activeSprite;
+	private Sprite activeBackup;
 	private Stack<Sprite> history = new Stack<>();
 	private IRevertManagerInternal iRevertManagerInternal;
+	private Boolean isEditing = false;
 	
 	/**
 	 * 
 	 */
 	public GameChangeEvent(Sprite activeSprite, IRevertManagerInternal iRevertManagerInternal) {
 		this.iRevertManagerInternal = iRevertManagerInternal;
-		System.out.println(activeSprite);
 		this.activeSprite = activeSprite;
-		this.history.push(activeSprite.clone());
+		this.activeBackup = activeSprite.clone();
+		this.iRevertManagerInternal.addEvent(this);
 		initSpriteListener(activeSprite);
 	}
 	
 	public Boolean restore(){
 		
-		if (this.history.size()>1){
-			Sprite restoreSprite = this.history.pop();
-			restoreSprite=this.history.pop();
-			this.activeSprite.setLocation(restoreSprite.getLocation());
-			this.activeSprite.setHeight(restoreSprite.getHeight());
-			this.activeSprite.setWidth(restoreSprite.getWidth());
-			this.activeSprite.setImagePath(restoreSprite.getImagePath());
+		if (!this.history.isEmpty()){
+			this.activeBackup = this.history.pop();
+			this.isEditing = true;
+			this.activeSprite.setLocation(this.activeBackup.getLocation());
+			this.activeSprite.setHeight(this.activeBackup.getHeight());
+			this.activeSprite.setWidth(this.activeBackup.getWidth());
+			this.activeSprite.setImagePath(this.activeBackup.getImagePath());
+			this.isEditing = false;
 			return true;
 		}
 		return false;
 	}
 	
+	public void removeListener(){
+		this.activeSprite.removeListener(this.invalidationListener);
+	}
+	
+	public Sprite getSprite(){
+		return this.activeSprite;
+	}
+	
 	private void createSnapShot(){
 		Sprite clone = this.activeSprite.clone();
-		System.out.println(clone.getLocation().getXLocation());
-		this.history.push(clone);
+		this.history.push(this.activeBackup);
+		this.activeBackup = clone;
 	}
 	
 	private void initSpriteListener(Sprite aSprite){
 		InvalidationListener invalidationListener = ((listener) -> {
-			if (this.history.isEmpty()){
+			System.out.println("isEditing: " + this.isEditing);
+			if (!this.isEditing && this.history.isEmpty()){
 				createSnapShot();
+				this.iRevertManagerInternal.addEvent(this);
 			}
-			else if (!compareSnapShot(aSprite, this.history.peek())){
+			else if (!this.isEditing && !compareSnapShot(aSprite, this.history.peek())){
 				createSnapShot();
+				this.iRevertManagerInternal.addEvent(this);
 			}
-			this.iRevertManagerInternal.addEvent(this);
 		});
 		aSprite.addListener(invalidationListener);
 		this.invalidationListener = invalidationListener;

@@ -140,41 +140,30 @@ public class DragResizeMod {
 
 	public void makeResizable(Node node, OnDragResizeEventListener listener) {
 
-		node.setOnMousePressed(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mousePressed(event);
-			}
+		node.setOnMousePressed((event)->{
+			mousePressed(event);
 		});
-		node.setOnMouseDragged(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mouseDragged(event);
-			}
+		node.setOnMouseDragged((event)->{
+			mouseDragged(event);
 		});
-		node.setOnMouseMoved(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mouseOver(event);
-			}
+		node.setOnMouseMoved((event)->{
+			mouseOver(event);
 		});
-		node.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				mouseReleased(event);
-			}
+		node.setOnMouseReleased((event) -> {
+			mouseReleased(event);
 		});
 	}
-
+	
 	protected void mouseReleased(MouseEvent event) {
 		// node.setCursor(Cursor.DEFAULT);
 		// state = S.DEFAULT;
 		if (state == S.DRAG) {
 			mySprite.getSprite().setLocation((new Location(mySprite.getDraggableItem().getLayoutX(),
 					mySprite.getDraggableItem().getLayoutY())));
-		} else {
+		} 
+		else {
 			removePresetListener();
-			mySprite.getSprite().setPreset(null);
+			//mySprite.getSprite().setPreset(null);
 			mySprite.getSprite().setHeight((int) mySprite.getDraggableItem().getHeight());
 			mySprite.getSprite().setWidth((int) mySprite.getDraggableItem().getWidth());
 		}

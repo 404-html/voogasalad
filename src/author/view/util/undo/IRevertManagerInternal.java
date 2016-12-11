@@ -3,6 +3,8 @@
  */
 package author.view.util.undo;
 
+import game_data.Sprite;
+
 /**
  * @author Cleveland Thompson V (ct168)
  *
@@ -10,4 +12,5 @@ package author.view.util.undo;
 public interface IRevertManagerInternal {
 
 	public void addEvent(GameChangeEvent gameChangeEvent);
+
 }
