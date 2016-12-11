@@ -29,7 +29,7 @@ public class Damager implements Characteristic{
 		mySprite = aSprite;
 	}
 	
-	@ViewableMethodOutput(description="Damage", type=int.class)
+	@ViewableMethodOutput(description="Amount of Damage", type=int.class)
 	public int getDamage(){
 		return myDamageToGive;
 	}
