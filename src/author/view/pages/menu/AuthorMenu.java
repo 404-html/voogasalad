@@ -62,8 +62,7 @@ public class AuthorMenu {
 	}
 
 	private void addGameTitle() {
-		Label gameTitle = new Label(myAuthorController.getModel().getGame().getName());
-		gameTitle.setTextAlignment(TextAlignment.JUSTIFY);
+		Label gameTitle = new GameNameDisplay(myAuthorController.getModel().getGame());
 		myContainer.getChildren().add(gameTitle);
 	}
 

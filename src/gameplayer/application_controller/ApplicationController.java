@@ -12,7 +12,6 @@ import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScre
 import game_data.Game;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.stored_games.StoredGames;
-import gameplayer.back_end.user_information.UserDefaults;
 import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.INavigationDisplay;
 import gameplayer.front_end.application_scene.MainMenuScene;
@@ -26,10 +25,12 @@ import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
+import gameplayer.front_end.popup.UserOptions;
 import gameplayer.front_end.popup.PopUpFactory;
 import gameplayer.front_end.popup.AbstractPopUp;
 import gameplayer.front_end.popup.IPopUpDisplay;
 import javafx.stage.Stage;
+import util.XMLTranslator;
 
 /**
  * Where the player part can interact with the game engine and get the appropriate data to be displayed
@@ -44,8 +45,7 @@ public class ApplicationController extends AbstractController {
 	private StoredGames myStoredGames;
 	private GamePlayController myGamePlay;
 	private IDisplay myCurrentDisplay;
-	private UserDefaults myUserDefaults;
-	
+
 	public ApplicationController (Stage aStage) {
 		myStage = aStage;
 		mySceneBuilder = new SceneFactory();
@@ -53,7 +53,6 @@ public class ApplicationController extends AbstractController {
 		myButtonLabels = PropertyResourceBundle.getBundle(FILE + BUTTONLABEL);
 		myStage.setTitle(myButtonLabels.getString("Title"));
 		myStoredGames = new StoredGames();
-		myUserDefaults = new UserDefaults(this.getClass().toString());
 	}
 
 	public void startScene() throws FileNotFoundException {
@@ -80,7 +79,7 @@ public class ApplicationController extends AbstractController {
 			myInformationController.facebookLogin();
 		}, ButtonDisplay.FACEBOOK);
 	}
-	
+
 	private void displayAuthoring() {
 		//IAuthorControllerExternal authorControllerExternal = new AuthorControllerFactory().create();
 		//Scene scene = authorControllerExternal.getScene();
@@ -130,16 +129,17 @@ public class ApplicationController extends AbstractController {
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(myStoredGames.getGames(), myStoredGames.getIcons(), (aChoice) -> {
-			displayGame(myStoredGames.getGameFilePath(aChoice));
+			resetGame(myStoredGames.getGameFilePath(aChoice));
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}));
 		gameChoice.addButton(myButtonLabels.getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(myStage);
+			resetGame(chosenGame);
 			displayGame(chosenGame);
 			setGameChoiceSecondRoundButtonHandlers(gameChoice);
 		}, ButtonDisplay.TEXT); 
 	}
-	
+
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
@@ -156,17 +156,16 @@ public class ApplicationController extends AbstractController {
 			myGamePlay.displayGame();
 		}, ButtonDisplay.TEXT);
 	}
-	
-	private void displayGame(File chosenGame) {
-		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0, myUserDefaults.getKeyInputColor("default"));
-	}
-	
-	public UserDefaults getUserDefaults(){
-		return myUserDefaults;
+
+	private void resetGame(File chosenGame) {
+		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0);
 	}
 
 	public void publishToFacebook(String aTitle, String aMessage) {
 		myInformationController.publishToFaceBook(aTitle, aMessage);
-		
+	}
+
+	private void displayGame(File chosenGame) {
+		myGamePlay = new GamePlayController(myStage, chosenGame, this, 0);
 	}
 }

@@ -31,8 +31,12 @@ public enum GameResources {
 	TERMINAL_X_VELOCITY(600),
 	TERMINAL_Y_VELOCITY(600), 
 	
+	
+	FLASH_RATE(10),
+	TIME_FRAME(60),
+	
 	//speed boost and bounce speed
-	SPEED_BOOST(300), BOUNCE_SPEED_HORIZONTAL(400), BOUNCE_SPEED_VERTICAL(800);
+	SPEED_BOOST(300), BOUNCE_SPEED_HORIZONTAL(400), BOUNCE_SPEED_VERTICAL(800), RECOVERY_TIME(120);
 
     private double resourceDouble;
     private String resourceString;

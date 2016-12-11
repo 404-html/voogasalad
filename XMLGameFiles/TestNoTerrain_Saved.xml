@@ -111,9 +111,6 @@
       <myKeyCommands/>
     </game__data.Level>
   </myLevels>
-  <spritePresets>
-    <game__data.sprites.Enemy reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy/preset"/>
-    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
-  </spritePresets>
+
   <currentLevel reference="../myLevels/game__data.Level"/>
 </game__data.Game>

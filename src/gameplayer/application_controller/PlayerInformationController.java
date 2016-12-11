@@ -41,7 +41,4 @@ public class PlayerInformationController {
 	public void publishToFaceBook(String aTitle, String aMessage) {
 		myFacebookInformation.publishNews(aTitle, aMessage);
 	}
-	
-
-	
 }

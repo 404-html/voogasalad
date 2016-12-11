@@ -24,6 +24,13 @@ public class KeyCodeHandler {
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
 	}
 	
+	public KeyCodeHandler(){
+		myKeySet = new HashSet<KeyCode>();
+		myKeysPressed = new HashSet<KeyCode>();
+		myKeysReleased = new HashSet<KeyCode>();
+		myKeyCodeTranslator = new KeyCodeTranslator("Default");
+	}
+	
 	public void addMainPlayer(Node node) {
 		myMainPlayerImage = node;
 	}

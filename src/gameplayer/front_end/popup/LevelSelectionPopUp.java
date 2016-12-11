@@ -1,31 +1,23 @@
 package gameplayer.front_end.popup;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.WindowEvent;
 
 public class LevelSelectionPopUp extends AbstractPopUp implements IPopUpDisplay {
-	
+
 	private static final String RESOURCE_FILE = "gameplayerlabels.";
 	private static final String BUTTONLABEL = "ButtonLabels"; 
-
 	private ResourceBundle myButtonLabels;
 	private int myNumberOfLevels;
 	private int mySelectedLevel;
-	
+
 	public LevelSelectionPopUp(int aNumLevels) {
 		super();
 		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
@@ -33,7 +25,7 @@ public class LevelSelectionPopUp extends AbstractPopUp implements IPopUpDisplay 
 		mySelectedLevel = 0;
 		addOptions();
 	}
-	
+
 	public void addOptions() {
 		addOption(createLevelOptions());
 	}
@@ -63,6 +55,4 @@ public class LevelSelectionPopUp extends AbstractPopUp implements IPopUpDisplay 
 		});
 		return levelSelection;
 	}
-	
-
 }
