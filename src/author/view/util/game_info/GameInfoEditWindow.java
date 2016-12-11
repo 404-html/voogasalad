@@ -1,6 +1,7 @@
 package author.view.util.game_info;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
@@ -119,16 +120,16 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		iconSelect.getChildren().addAll(new Label("Choose icon: "),
 				iconButton);
 
-		iconButton.setOnMouseClicked(e -> {
+		iconButton.setOnMouseClicked(event -> {
 			File aFile;
 			try {
 				aFile = myIconFileLoader.loadSingle();
 				RelativePathFinder pf = new RelativePathFinder();
 				myIconFilePath = pf.getPath(aFile);
 				myIconImageView.setImage(new Image(aFile.toURI().toString()));
-			} catch (Exception e1) {
-				// TODO : Throw Error message if file not found
-				e1.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// Do Nothing, no file loaded
+				return;
 			}
 		});
 
@@ -141,16 +142,16 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		Button songButton = new Button();
 		myAudioFilePath = myGame.getAudioFilePath();
 		songButton.setText(myAudioFilePath.substring(myAudioFilePath.lastIndexOf("/") + 1));
-		songButton.setOnMouseClicked(e -> {
+		songButton.setOnMouseClicked(event -> {
 			File aFile;
 			try {
 				aFile = myAudioFileLoader.loadSingle();
 				RelativePathFinder pf = new RelativePathFinder();
 				myAudioFilePath = pf.getPath(aFile);
 				songButton.setText(myAudioFilePath.substring(myAudioFilePath.lastIndexOf("/") + 1));
-			} catch (Exception e1) {
-				// TODO : Throw Error message if file not found
-				e1.printStackTrace();
+			} catch (FileNotFoundException e) {
+				// Do Nothing, no file loaded
+				return;
 			}
 
 		});

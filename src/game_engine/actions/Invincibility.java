@@ -21,6 +21,7 @@ public class Invincibility implements Action {
 	public void act() {
 		boolean hasState = false;
 		for(State state:myPlayerSprite.getStates()){
+//			System.out.println("vincibility changes");
 			if(state instanceof Vincibility){
 				((Vincibility) state).setVincibility(false);
 				hasState = true;
