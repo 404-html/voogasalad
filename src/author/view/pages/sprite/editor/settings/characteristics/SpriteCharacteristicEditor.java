@@ -33,6 +33,9 @@ public class SpriteCharacteristicEditor extends SpriteSettingsEditor {
 	@Override
 	public void updateSettings() {
 		getSprite().getCharacteristics().forEach( c -> {
+			
+			if(c == null) return;
+			
 			getPropertySelector().getSelectedMap()
 			.get(c.getClass().getSimpleName()).set(true);
 			
