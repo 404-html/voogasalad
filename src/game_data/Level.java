@@ -87,14 +87,8 @@ public class Level extends GameObject {
 		mySprites.add(aSprite);
 		if(aSprite instanceof LevelSetter)
 			((LevelSetter) aSprite).setLevel(this);
-//		if(aSprite instanceof Player){
-//			setPlayerSprite((Player) aSprite);
-//			aSprite.addState(new LevelWon());
-//		}
-		if(aSprite.getControllable() != null) {
-			if(aSprite.getControllable().isControllable()){
+		if(aSprite.getControllable() != null && aSprite.getControllable().isControllable()) {
 				myControllableSpriteList.add(aSprite);
-			}
 		}
 		if(aSprite instanceof Player){
 			setMainPlayer((Player)aSprite);
@@ -128,14 +122,14 @@ public class Level extends GameObject {
 	}
 
 	public void setMyControllableSpriteList() {
-		List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
-		// List<Sprite> mySpriteList = getMySpriteList();
+		List<Sprite> controllableSpriteList = new ArrayList<Sprite>();
+
 		for (Sprite s : mySprites) {
 			if (s.getControllable() != null && s.getControllable().isControllable()) {
-				myControllableSpriteList.add(s);
+				controllableSpriteList.add(s);
 			}
 		}
-		this.myControllableSpriteList = myControllableSpriteList;
+		this.myControllableSpriteList = controllableSpriteList;
 	}
 
 	public List<Sprite> getMyControllableSpriteList() {

@@ -21,4 +21,9 @@ public class WinLevel implements Action {
 		}
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new WinLevel(aSprite);
+	}
+	
 }

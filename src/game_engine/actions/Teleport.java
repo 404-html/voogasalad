@@ -18,4 +18,9 @@ public class Teleport implements Action {
 		mySprite.getLocation().setLocation(myXLocation, myYLocation);
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Teleport(aSprite, myXLocation, myXLocation);
+	}
+	
 }

@@ -25,4 +25,8 @@ public class MoveLeft extends Move {
 			mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
 		}
 	}
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveLeft(aSprite, this.getVelocity());
+	}
 }
