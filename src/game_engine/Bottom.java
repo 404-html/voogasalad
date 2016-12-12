@@ -45,8 +45,8 @@ public class Bottom extends Side{
 			if(aSprite.getYVelocity()==0){
 				aSprite.setYVelocity(-100);
 			}
-			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation(), movableSprite.getLocation().getYLocation()+(aSprite.getYVelocity()/40));
-			aSprite.setYVelocity(aSprite.getYVelocity()/5);	}
+			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation(), movableSprite.getLocation().getYLocation()+(aSprite.getYVelocity()/60));
+			aSprite.setYVelocity(0);	}
 		
 	}
 

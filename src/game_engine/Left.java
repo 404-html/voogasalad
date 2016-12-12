@@ -45,8 +45,8 @@ public class Left extends Side{
 			if(aSprite.getXVelocity()==0){
 				aSprite.setXVelocity(50);
 			}
-			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation()+(aSprite.getXVelocity()/40), movableSprite.getLocation().getYLocation());
-			aSprite.setXVelocity(aSprite.getXVelocity()/3);	}
+			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation()+(aSprite.getXVelocity()/60), movableSprite.getLocation().getYLocation());
+			aSprite.setXVelocity(0);	}
 		
 	}}
 
