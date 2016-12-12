@@ -52,6 +52,7 @@ import javafx.scene.layout.Pane;
  */
 public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWindowInternal {
 
+	//TODO: Refactor
 	private ScrollPane levelScroller;
 	private ILevelWindowPane levelWindowPane;
 	private static final String STYLESHEET = "data/gui/scrollViewport.css";
@@ -70,7 +71,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		createScroller();
 		super.getWindow().getStylesheets().add(getStyleSheet());
 		super.getWindow().getStyleClass().add("lol");
-		
+		initSelectedSpritesListener();
 	}
 
 	private void createScroller() {
@@ -108,22 +109,22 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			createUndo(aLevel);
-			initSelectedSpritesListener(aLevel);
 			aLevel.addListener((level) -> {
 				updatePane(aLevel);
 			});
 			updatePaneSize(this.levelWindowPane.getPane(), aLevel);
 		}
-
+		
+		this.selectedSprites.clear();
 		this.levelWindowPane = this.levelPanes.get(aLevel);
 		this.levelScroller.setContent(this.levelWindowPane.getPane());
 		setBackgroundImage(aLevel.getBackgroundImageFilePath());
 		updatePane(aLevel);
 	}
 	
-	private void initSelectedSpritesListener(Level aLevel){
+	private void initSelectedSpritesListener(){
 		selectedSprites.addListener((observable, oldval, newval) -> {
-			getMovableSprites(aLevel).forEach((draggablesprite) -> draggablesprite.setDeselected());
+			getMovableSprites(getController().getModel().getGame().getCurrentLevel()).forEach((draggablesprite) -> draggablesprite.setDeselected());
 			this.selectedSprites.get().forEach((draggablesprite) -> draggablesprite.setSelected());
 		});
 	}
@@ -172,7 +173,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 						this.selectedSprite.getSprite().getHeight());
 				event.consume();
 			} else if (event.isControlDown()) {
-				if (!this.selectedSprites.contains(draggableSprite)) {
+				if (!this.selectedSprites.get().contains(draggableSprite)) {
 					this.selectedSprites.add(draggableSprite);
 				} else {
 					this.selectedSprites.remove(draggableSprite);

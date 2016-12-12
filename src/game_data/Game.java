@@ -95,11 +95,13 @@ public class Game extends GameObject {
 
 	public void setCurrentLevel(Level aLevel) {
 		this.myCurrentLevel = aLevel;
-		for(Characteristic c: myCurrentLevel.getMainPlayer().getCharacteristics()){
-			if(c instanceof ScoreBasedOnPosition){
-				((ScoreBasedOnPosition) c).setScrollDirection(myScrollType);
+		if (this.myCurrentLevel.getMainPlayer()!=null)
+			for(Characteristic c: myCurrentLevel.getMainPlayer().getCharacteristics()){
+				if(c instanceof ScoreBasedOnPosition){
+					((ScoreBasedOnPosition) c).setScrollDirection(myScrollType);
+				}
 			}
-		}
+		
 		this.notifyListeners();
 	}
 
