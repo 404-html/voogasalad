@@ -3,6 +3,7 @@
  */
 package author.view.util.edit_window;
 
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.Game;
 
 /**
@@ -10,6 +11,10 @@ import game_data.Game;
  *
  */
 class GameEditBox extends GameObjectEditBox<Game>{
+
+	GameEditBox(ILanguageHolder aLanguageHolder) {
+		super(aLanguageHolder);
+	}
 
 	/* (non-Javadoc)
 	 * @see author.view.util.edit_window.GameObjectEditBox#getResult()

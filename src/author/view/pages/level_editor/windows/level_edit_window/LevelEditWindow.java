@@ -5,6 +5,7 @@ package author.view.pages.level_editor.windows.level_edit_window;
 
 import java.io.File;
 
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.Level;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -16,18 +17,17 @@ import javafx.stage.Stage;
  */
 class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExternal{
 	private Stage stage;
-	private static final String TITLE = "New Level";
 	private LevelEditPage levelEditPage;
-	private static final String STYLESHEET = "data/gui/author-style.css";
-
+	private ILanguageHolder myLanguageHolder;
 	
-	LevelEditWindow(){
-		this.levelEditPage = new LevelEditPage((ILevelEditWindowInternal) this);
+	LevelEditWindow(ILanguageHolder aLanguageHolder){
+		myLanguageHolder = aLanguageHolder;
+		this.levelEditPage = new LevelEditPage((ILevelEditWindowInternal) this, myLanguageHolder);
 		initializeWindow();
 	}
 	
-	LevelEditWindow(Level aLevel){
-		this.levelEditPage = new LevelEditPage(aLevel, (ILevelEditWindowInternal) this);
+	LevelEditWindow(Level aLevel, ILanguageHolder aLanguageHolder){
+		this.levelEditPage = new LevelEditPage(aLevel, (ILevelEditWindowInternal) this, aLanguageHolder);
 		initializeWindow();
 	}
 	
@@ -38,7 +38,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	
 	private void initializeWindow(){
 		this.stage = new Stage();
-		this.stage.setTitle(TITLE);
+		this.stage.setTitle(myLanguageHolder.getDisplayText("NewLevel"));
 		this.stage.setScene(new Scene(this.levelEditPage.getPane()));
 		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);
@@ -52,7 +52,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 	}
 	
 	private String getStyleSheet(){
-		File css = new File(STYLESHEET);
+		File css = new File(myLanguageHolder.getPathString("AuthorCSSStyle"));
 		return css.toURI().toString();
 	}
 	

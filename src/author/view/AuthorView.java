@@ -7,7 +7,9 @@ import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.pages.level_editor.LevelEditorFactory;
 import author.view.pages.menu.AuthorMenu;
 import author.view.pages.sprite.page.SpritesPage;
+import author.view.util.language_selection.ILanguageUser;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -24,9 +26,8 @@ import util.facades.TabPaneFacade;
  * @author George Bernard, Cleveland Thompson, Addison Howenstine, Jordan
  *         Frazier
  */
-public class AuthorView {
+public class AuthorView implements ILanguageUser{
 
-	private static final String STYLESHEET = "data/gui/author-style.css";
 	private Scene myScene;
 	private Pane myPane = new VBox();
 	private TabPaneFacade myTabPaneFacade;
@@ -41,10 +42,12 @@ public class AuthorView {
 	public static final int HEIGHT = 800;
 
 	public AuthorView(IAuthorController authorController) {
-		this.myAuthorController = authorController;
+		myAuthorController = authorController;
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
+		displayInformation();
+		authorController.addListener(this);
 	}
 
 	private void initializeView() {
@@ -91,12 +94,19 @@ public class AuthorView {
 
 		myTabPaneFacade.addTab(mySpritesPage.toString(), mySpritesPage.getRegion());
 		myTabPaneFacade.addTab(myLevelEditor.toString(), myLevelEditor.getPane());
+		nameTabs();
 
 		return myTabPaneFacade.getTabPane();
 	}
+	
+	private void nameTabs() {
+		myTabPaneFacade.getTabPane().getTabs().forEach(t -> {
+			t.setText(myAuthorController.getDisplayText(t.getContent().getId()));
+		});
+	}
 
 	private String getStyleSheet() {
-		File css = new File(STYLESHEET);
+		File css = new File(myAuthorController.getPathString("AuthorCSSStyle"));
 		return css.toURI().toString();
 	}
 
@@ -111,6 +121,11 @@ public class AuthorView {
 
 	public Scene getScene() {
 		return myScene;
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		nameTabs();
 	}
 
 }

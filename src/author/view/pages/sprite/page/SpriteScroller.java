@@ -9,8 +9,10 @@ import java.util.Set;
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreen;
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.language_selection.ILanguageUser;
 import game_data.Sprite;
 import game_data.sprites.SpriteFactory;
+import javafx.beans.Observable;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -23,7 +25,9 @@ import util.filehelpers.FileLoader.FileExtension;
 import util.filehelpers.FileLoader.FileLoader;
 import util.filehelpers.FileLoader.FileLoader.StartDirectory;
 import util.filehelpers.FileLoader.FileType;
-public class SpriteScroller {
+
+
+public class SpriteScroller implements ILanguageUser{
 
 	private ScrollPane myScroller;
 	private FlowPane myFlowPane;
@@ -34,13 +38,14 @@ public class SpriteScroller {
 
 	public SpriteScroller(SpriteFactory aSpriteFactory, IAuthorController aController) {
 		myController = aController;
+		myController.addListener(this);
 		myScroller = new ScrollPane();
 		mySpriteFactory = aSpriteFactory;
 		myFlowPane = new FlowPane();
 		myContainer = new VBox();
 		mySprites = new HashSet<>();
-
-		myContainer.getChildren().addAll(buildToolbar(aSpriteFactory.toString()), myFlowPane);
+		buildToolBar();
+		myContainer.setId(aSpriteFactory.name());
 		//		setupContainer();
 		setupFlowPane();
 		//		setupScrollPane();
@@ -48,6 +53,11 @@ public class SpriteScroller {
 
 	public Node getNode() {
 		return myContainer;
+	}
+	
+	private void buildToolBar() {
+		myContainer.getChildren().clear();
+		myContainer.getChildren().addAll(buildToolbar(myController.getDisplayText(mySpriteFactory.toString())), myFlowPane);
 	}
 
 	public void giveSprite(Sprite aSprite) {
@@ -91,10 +101,10 @@ public class SpriteScroller {
 		ToolBarBuilder toolBarBuilder = new ToolBarBuilder();
 		toolBarBuilder.addFiller();
 		//		toolBarBuilder.addBurst(new Label(aScrollType));
-		toolBarBuilder.addBurst(new ButtonFactory().createButton("New " + aScrollType, e -> {
+		toolBarBuilder.addBurst(new ButtonFactory().createButton(myController.getDisplayText("New") + " " + aScrollType, e -> {
 			buildNewSprite();
 		}).getButton());
-		toolBarBuilder.addBurst(new ButtonFactory().createButton("Load Saved " + aScrollType, e -> {
+		toolBarBuilder.addBurst(new ButtonFactory().createButton(myController.getDisplayText("LoadSaved") + " " + aScrollType, e -> {
 			try {
 				loadSprite(
 						new FileLoader(
@@ -120,6 +130,11 @@ public class SpriteScroller {
 		XMLTranslator myLoader = new XMLTranslator();
 		Sprite ns = (Sprite) myLoader.loadFromFile(aFile);
 		myController.getModel().getGame().addPreset(ns);
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		buildToolBar();
 	}
 
 }

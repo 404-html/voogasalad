@@ -16,6 +16,7 @@ import author.view.pages.level_editor.windows.level_window.ILevelWindowPane;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowToolBarFactory;
+import author.view.util.language_selection.ILanguageUser;
 import author.view.util.undo.IRevertManager;
 import author.view.util.undo.RevertManagerFactory;
 import game_data.Level;
@@ -27,6 +28,7 @@ import game_engine.properties.RandomMoveDisjointHandler;
 import game_engine.properties.RandomMoveHandler;
 import game_engine.properties.RandomMoveHandler.Orientation;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SetProperty;
@@ -53,14 +55,12 @@ import javafx.scene.layout.Pane;
  * @see EntityWindow
  * @see ../LevelEditor
  */
-public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWindowInternal {
+public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWindowInternal, ILanguageUser {
 
 	//TODO: Refactor
 	private ScrollPane levelScroller;
 	private ILevelWindowPane levelWindowPane;
-	private static final String STYLESHEET = "data/gui/scrollViewport.css";
-   	private static final String WHITE_IMAGE = "data/images/level_images/white_image.jpeg";
-
+	private static final String WHITE_IMAGE = "data/images/level_images/white_image.jpeg";
 
 	private IntegerProperty horizontalPanes = new SimpleIntegerProperty(1);
 	private IntegerProperty verticalPanes = new SimpleIntegerProperty(1);
@@ -71,6 +71,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	public LevelWindow(IAuthorController authorController) {
 		super(authorController);
+		getController().addListener(this);
 		createScroller();
 		super.getWindow().getStylesheets().add(getStyleSheet());
 		super.getWindow().getStyleClass().add("lol");
@@ -86,8 +87,9 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	@Override
 	protected void createToolBar() {
+		super.getWindow().getChildren().clear();
 		super.getWindow().getChildren()
-				.add(new LevelWindowToolBarFactory().createToolBar((ILevelWindowInternal) this, this.getController()));
+		.add(new LevelWindowToolBarFactory().createToolBar((ILevelWindowInternal) this, this.getController()));
 	}
 
 	@Override
@@ -103,12 +105,12 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		if (!this.levelPanes.containsKey(aLevel)) {
 
 			this.levelWindowPane = new LevelWindowPaneFactory((ILevelWindowInternal) this, this.getController())
-					.create();
+			.create();
 			this.levelPanes.put(aLevel, this.levelWindowPane);
 			this.levelScroller.setContent(this.levelWindowPane.getPane());
 
 			this.levelScroller.boundsInLocalProperty()
-					.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
+			.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			createUndo(aLevel);
@@ -117,14 +119,14 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			});
 			updatePaneSize(this.levelWindowPane.getPane(), aLevel);
 		}
-		
+
 		this.selectedSprites.clear();
 		this.levelWindowPane = this.levelPanes.get(aLevel);
 		this.levelScroller.setContent(this.levelWindowPane.getPane());
 		setBackgroundImage(aLevel.getBackgroundImageFilePath());
 		updatePane(aLevel);
 	}
-	
+
 	private void initSelectedSpritesListener(){
 		selectedSprites.addListener((observable, oldval, newval) -> {
 			getMovableSprites(getController().getModel().getGame().getCurrentLevel()).forEach((draggablesprite) -> draggablesprite.setDeselected());
@@ -229,12 +231,12 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	private void openContextMenu(DraggableSprite sprite, MouseEvent event) {
 		SpriteContextMenu contextMenu = new SpriteContextMenu(sprite, this.getController());
-		
-		
+
+
 		if (this.getRandomProperty().get()) contextMenu.getMenu().getItems().add(createCheckMenuItem(sprite));
 		contextMenu.getMenu().show(sprite.getImageView(), event.getScreenX(), event.getScreenY());
 	}
-	
+
 	private CheckMenuItem createCheckMenuItem(DraggableSprite aSprite){
 		CheckMenuItem checkMenuItem = new CheckMenuItem(this.selectedSprites.size() > 1 ? "Conjoin and Randomize" : "Randomize");
 		checkMenuItem.setSelected(!aSprite.getSprite().getMyRandomMoveHandler().getOrientation().equals(Orientation.NULL));
@@ -250,7 +252,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				RandomMoveHandler randomMoveHandler = checkMenuItem.isSelected() ? this.selectedSprites.size() == 2 ? new RandomMoveConjointHandler(draggableSprite.getSprite(), orientation, aSprite.getSprite().getLocation().calculateDistance(draggableSprite.getSprite().getLocation())) : new RandomMoveDisjointHandler(orientation) : new RandomMoveDisjointHandler(Orientation.NULL);
 				aSprite.getSprite().setMyRandomMoveHandler(randomMoveHandler);
 			}
-			
+
 		});
 		return checkMenuItem;
 	}
@@ -293,7 +295,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private String getStyleSheet() {
-		File css = new File(STYLESHEET);
+		File css = new File(super.getController().getPathString("AuthorCSSStyle"));
 		return css.toURI().toString();
 	}
 
@@ -311,6 +313,11 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	@Override
 	public DraggableSprite getSelectedSprite() {
 		return this.selectedSprite;
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		createToolBar();
 	}
 
 	@Override
