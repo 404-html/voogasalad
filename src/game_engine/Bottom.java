@@ -39,4 +39,15 @@ public class Bottom extends Side{
 		return false;
 	}
 
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		if(aSprite.getYVelocity()<=0 ){
+			if(aSprite.getYVelocity()==0){
+				aSprite.setYVelocity(-100);
+			}
+			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation(), movableSprite.getLocation().getYLocation()+(aSprite.getYVelocity()/60));
+			aSprite.setYVelocity(0);	}
+		
+	}
+
 }

@@ -2,6 +2,7 @@ package game_engine;
 
 import game_data.Sprite;
 import game_data.states.Physics;
+import game_data.states.State;
 
 public class Top extends Side{
 
@@ -37,4 +38,21 @@ public class Top extends Side{
 		return false;
 	}
 
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		
+		if(aSprite.getYVelocity()>=0 ){
+			
+			for(State i : aSprite.getStates()){
+				if(i instanceof Physics){
+					
+					aSprite.setYAcceleration(-((Physics)i).getVerticalGravity());
+					aSprite.setYVelocity(0);
+					movableSprite.setYAcceleration(((Physics)i).getVerticalGravity());
+					
+				}
+			}
+
+		}
+	}
 }
