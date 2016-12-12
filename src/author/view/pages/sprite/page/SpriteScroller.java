@@ -119,7 +119,7 @@ public class SpriteScroller implements ILanguageUser{
 	}
 
 	private void buildNewSprite() {
-		Sprite ns = mySpriteFactory.build();
+		Sprite ns = mySpriteFactory.buildDefault();
 		giveSprite(ns);
 		myController.getModel().getGame().addPreset(ns);
 	}

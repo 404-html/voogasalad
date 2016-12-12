@@ -64,6 +64,7 @@ public class LevelWindowToolBarFactory {
 			RelativePathFinder pf = new RelativePathFinder();
 			if(this.authorController.getModel().getGame().getCurrentLevel()!= null)
 				this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
+				this.authorController.getModel().getGame().setCurrentLevel(this.authorController.getModel().getGame().getCurrentLevel());
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
 			e.printStackTrace();

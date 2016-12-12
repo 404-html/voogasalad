@@ -32,8 +32,8 @@ public class LosableByTime extends Losable implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new LosableByTime(myTime, mySprite.clone());
+	public Characteristic copy(Sprite aSprite) {
+		return new LosableByTime(myTime, aSprite);
 	}
 
 	@Override

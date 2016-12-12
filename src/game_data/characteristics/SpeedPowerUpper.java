@@ -52,8 +52,8 @@ public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristi
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, this.getSprite());
+	public Characteristic copy(Sprite aSprite) {
+		return new SpeedPowerUpper(mySpeedBoost, myTimeInEffect, aSprite);
 	}
 
 	@Override

@@ -42,8 +42,8 @@ public class ScoreBasedOnTime implements Characteristic {
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new ScoreBasedOnTime(mySprite, scorePerSecond);
+	public Characteristic copy(Sprite aSprite) {
+		return new ScoreBasedOnTime(aSprite, scorePerSecond);
 	}
 
 }

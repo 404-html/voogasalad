@@ -2,14 +2,17 @@ package game_engine;
 
 import game_data.Controllable;
 import game_data.Level;
+import game_data.LevelSetter;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.TemporalPowerUpper;
 import game_data.sprites.Player;
+import game_data.sprites.Projectile;
 import game_data.states.Health;
 import game_data.states.LevelWon;
 import game_data.states.State;
 import game_engine.actions.Action;
+import game_engine.actions.Launch;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
@@ -65,11 +68,11 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		myKeysReleased = new HashSet<KeyCode>();
 		mySpriteImages = new HashMap<Sprite, ImageView>();
 		myControllableSpriteList = new ArrayList<Sprite>();
-
 		mainPlayerControllable=new Controllable();
 	}
 	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
-        myScreenWidth = aScreenWidth;
+		//System.out.println(mySpriteList.size());
+		myScreenWidth = aScreenWidth;
         myScreenHeight = aScreenHeight;
         myScreenXPosition = aScreenXPosition;
         myScreenYPosition = aScreenYPosition;
@@ -82,6 +85,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		mySpriteList = myLevel.getMySpriteList();
 		myControllableSpriteList = myLevel.getMyControllableSpriteList();
 		mainPlayerControllable = myLevel.getMainPlayer().getControllable();	
+		setLevel();
 		activatePowerUps();
 		checkPowerUps();
 		executeControls();
@@ -95,9 +99,22 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 //				}
 //			}	
 	}
-
+	private void setLevel(){
+		for(Sprite sprite: mySpriteList){
+			for(KeyCode key: sprite.getControllable().getMyKeyPressedMap().keySet()){
+				Action value = sprite.getControllable().getMyKeyPressedMap().get(key);
+				if(value instanceof LevelSetter){
+					((LevelSetter) value).setLevel(myLevel);
+					
+				}
+			}
+		}
+	}
 	private void setKeysPressed(Set<KeyCode> aKeysPressed){
 		myKeysPressed=aKeysPressed;
+		for(KeyCode key: myKeysPressed){
+			System.out.println(key);
+		}
 	}
 	private void setKeysReleased(Set<KeyCode> aKeysReleased){
 		myKeysReleased=aKeysReleased;
@@ -165,8 +182,12 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		for (Sprite mySprite : mySpriteList) {
 			for (State state : mySprite.getStates()) {
 				if (state instanceof Health) {
+/*					if(mySprite instanceof Projectile){
+						System.out.println("removing the shit");
+					}*/
 					if (!((Health) state).isAlive()) {
 						// System.out.println("DEAD SPRITE");
+
 						removeSprites.add(mySprite);
 					}
 				}
@@ -208,7 +229,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private void moveRandomSprites() {
 		for(Sprite mySprite : mySpriteList) {
-			if(mySprite.getMyRandomMoveHandler().getOrientation() != Orientation.NULL) {
+			if( mySprite.getMyRandomMoveHandler() != null && mySprite.getMyRandomMoveHandler().getOrientation() != Orientation.NULL) {
 				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
 			}
 		}

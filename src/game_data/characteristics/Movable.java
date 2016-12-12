@@ -30,8 +30,8 @@ public class Movable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Movable(mySprite.clone());
+	public Characteristic copy(Sprite aSprite) {
+		return new Movable(aSprite);
 	}
 
 }

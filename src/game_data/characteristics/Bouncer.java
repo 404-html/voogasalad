@@ -101,8 +101,8 @@ public class Bouncer implements Characteristic {
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Bouncer(myBounceSpeedHorizontal, myBounceSpeedVertical, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Bouncer(myBounceSpeedHorizontal, myBounceSpeedVertical, aSprite);
 	}
 
 }

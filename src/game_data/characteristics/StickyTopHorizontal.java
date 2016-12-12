@@ -17,8 +17,8 @@ public class StickyTopHorizontal extends StickyTop {
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new StickyTopHorizontal(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new StickyTopHorizontal(aSprite);
 	}
 
 }
