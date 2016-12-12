@@ -4,14 +4,11 @@ import java.io.File;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.FacebookClient.AccessToken;
 import com.restfb.Parameter;
 import com.restfb.json.JsonObject;
 import com.restfb.types.FacebookType;
-import com.restfb.types.Page;
 import com.restfb.types.User;
 
 public class FacebookInformation {
@@ -29,7 +26,7 @@ public class FacebookInformation {
 	}
 	
 	public void authenticatePlayer() {
-		String domain = "https://git.cs.duke.edu/";
+		String domain = "https://google.com";
 		String appID = "204787326597008";
 		String authenticateURL = "https://graph.facebook.com/oauth/authorize?type=user_agent&client_id=" + appID + 
 				"&redirect_uri=" + domain + "&scope=user_about_me, user_photos, ads_management, " +

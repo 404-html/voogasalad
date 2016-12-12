@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -20,7 +21,7 @@ public class HeadsUpDisplay {
 	private BorderPane myRoot;
 	private String myFontColor;
 	private HBox myBottom;
-	
+
 	public HeadsUpDisplay(double aWidth, double aHeight, String aFontColor) {
 		myGUIGenerator = new GUIGenerator();
 		myRoot = new BorderPane();
@@ -35,10 +36,17 @@ public class HeadsUpDisplay {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
 
+	public void addLabel(String aText) {
+		if(myBottom.getChildren().size() > 0){
+			myBottom.getChildren().remove(0);
+		}
+		Label label = myGUIGenerator.createLabel(aText, 0, 0);
+		label.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
+		myBottom.getChildren().add(label);
+	}
+
 	private Node createTop() {
 		myTopMenu = new MenuBar();
-		//myTop.getChildren().add(myTopMenu);
-		//myTopMenu.setAlignment(Pos.CENTER);
 		return myTopMenu;
 	}
 
@@ -60,13 +68,25 @@ public class HeadsUpDisplay {
 		aNode.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
 		myBottom.getChildren().add(aNode);
 	}
-	
+
 	public void addNode(Node aNode, int aPos) {
-		if (myBottom.getChildren().size() > 2) {
-			myBottom.getChildren().remove(aPos);
+		aNode.setId("animation-label");
+		aNode.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
+		if (myBottom.getChildren().size() == 0) {
 			addNode(aNode);
 		} else {
-			addNode(aNode);
+			boolean added = false;
+			for (int i = 0; i < myBottom.getChildren().size(); i++) {
+				if ((int) myBottom.getChildren().get(i).getUserData() == aPos) {
+					myBottom.getChildren().remove(i);
+					myBottom.getChildren().add(i, aNode);
+					added = true;
+					break;
+				}
+			}
+			if (!added) {
+				addNode(aNode);
+			}
 		}
 	}
 }

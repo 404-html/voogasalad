@@ -12,6 +12,7 @@ import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
+import game_data.sprites.Projectile;
 import game_engine.Bottom;
 import game_engine.Left;
 import game_engine.Right;
@@ -55,21 +56,25 @@ public class Breakable implements Characteristic{
 	
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap){
-		
+		//System.out.println("durability" + myDurability);
 		if(inUnbreakablePeriod()) {
 			return;
 		}
 		
-		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && collidedSprite instanceof Player){
+		for(Sprite collidedSprite:myCollisionMap.keySet() ){
+			if(breaksAtDirection(myCollisionMap.get(collidedSprite))&& validPairing(collidedSprite) ){
 				timeSinceHit = 0;
 				if(isBroken()) {
-					
+					System.out.println("is breaking");
 					myAction = new Break(mySprite);
 					myAction.act();
 				}
 			}
 		}
+		
+	}
+	private boolean validPairing(Sprite collidedSprite){
+		return (mySprite instanceof Projectile || collidedSprite instanceof Player);
 	}
 	
 	private boolean inUnbreakablePeriod() {
@@ -96,8 +101,8 @@ public class Breakable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Breakable(breakableNorth, breakableSouth, breakableEast, breakableWest, myDurability, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Breakable(breakableNorth, breakableSouth, breakableEast, breakableWest, myDurability, aSprite);
 	}
 
 	@ViewableMethodOutput(description="Breaks on Top", type=boolean.class)

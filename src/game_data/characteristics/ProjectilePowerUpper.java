@@ -23,8 +23,8 @@ public class ProjectilePowerUpper extends PowerUpper implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new ProjectilePowerUpper(this.getSprite().clone());
+	public Characteristic copy(Sprite aSprite) {
+		return new ProjectilePowerUpper(aSprite);
 	}
 
 	@Override

@@ -1,10 +1,12 @@
 package author.view.pages.sprite.page;
 
 import java.io.File;
+
 import util.XMLTranslator;
 import util.facades.TabPaneFacade;
 import util.filehelpers.FolderListor;
 import author.controller.IAuthorController;
+import author.view.util.language_selection.ILanguageUser;
 import game_data.Sprite;
 import game_data.sprites.Enemy;
 import game_data.sprites.Item;
@@ -20,7 +22,7 @@ import javafx.scene.layout.Region;
  * @author Addison Howenstine
  *
  */
-public class SpritesPage implements InvalidationListener {
+public class SpritesPage implements InvalidationListener, ILanguageUser {
 
 	private TabPaneFacade myPane;
 	private SpriteScroller myPlayerScroller;
@@ -33,6 +35,7 @@ public class SpritesPage implements InvalidationListener {
 
 	public SpritesPage(IAuthorController aController){
 		myController = aController;
+		myController.addListener(this);
 		myController.getModel().getGame().addListener(this);
 
 		createSpriteTabs();
@@ -54,11 +57,19 @@ public class SpritesPage implements InvalidationListener {
 		myPane.addTab(SpriteFactory.TERRAIN.name(), myTerrainScroller.getNode());
 		myPane.addTab(SpriteFactory.ITEM.name(), myItemScroller.getNode());
 		myPane.addTab(SpriteFactory.PROJECTILE.name(), myProjectileScroller.getNode());
+		setTabNames();
+	}
+
+	private void setTabNames() {
+		myPane.getTabPane().getTabs().forEach(t -> {
+			t.setText(myController.getDisplayText(t.getContent().getId()).toUpperCase());
+		});
 	}
 
 	@Override
 	public void invalidated(Observable arg0) {
 		myController.getModel().getGame().getPresets().forEach(s -> {routeSprite(s);});
+		setTabNames();
 	}
 
 	private void routeSprite(Sprite aSprite) {
@@ -72,12 +83,13 @@ public class SpritesPage implements InvalidationListener {
 	}
 
 	public Region getRegion(){
+		myPane.getTabPane().setId("SpriteEditor");
 		return myPane.getTabPane();
 	}
 
 	@Override
 	public String toString(){
-		return "Sprite Editor";
+		return myController.getDisplayText("SpriteEditor");
 	}
 
 }
