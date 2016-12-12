@@ -6,6 +6,7 @@ import game_data.LevelSetter;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.TemporalPowerUpper;
+import game_data.sprites.Item;
 import game_data.sprites.Player;
 import game_data.sprites.Projectile;
 import game_data.states.Health;

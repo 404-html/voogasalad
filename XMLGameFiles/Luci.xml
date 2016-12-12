@@ -1,10 +1,29 @@
 <game__data.Game>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+  <name>testingmovable</name>
+=======
   <name>Luci</name>
+>>>>>>> staging:XMLGameFiles/Luci.xml
   <myLevels>
     <game__data.Level>
       <name>l1</name>
       <didLose>false</didLose>
       <didWin>false</didWin>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+      <width>1107</width>
+      <height>739</height>
+      <myMainPlayer>
+        <name>Player_Name</name>
+        <myLocation>
+          <myXLocation>300.0</myXLocation>
+          <myYLocation>300.0</myYLocation>
+        </myLocation>
+        <myWidth>52</myWidth>
+        <myHeight>52</myHeight>
+        <myImagePath>data/images/sprite_images/super-mario.png</myImagePath>
+        <myXVelocity>10.0</myXVelocity>
+        <myYVelocity>10.0</myYVelocity>
+=======
       <width>2342</width>
       <height>730</height>
       <backgroundImageFilePath>data/images/sprite_images/goomba.png</backgroundImageFilePath>
@@ -19,16 +38,23 @@
         <myImagePath>data/images/sprite_images/super-mario_animation.png</myImagePath>
         <myXVelocity>0.0</myXVelocity>
         <myYVelocity>0.0</myYVelocity>
+>>>>>>> staging:XMLGameFiles/Luci.xml
         <myXAcceleration>0.0</myXAcceleration>
         <myYAcceleration>0.0</myYAcceleration>
         <terminalXVel>600.0</terminalXVel>
         <terminalYVel>600.0</terminalYVel>
         <myCollisionHandler/>
         <myCharacteristics>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <game__data.characteristics.Controllable>
+            <mySprite class="game_data.sprites.Player" reference="../../.."/>
+          </game__data.characteristics.Controllable>
+=======
           <game__data.characteristics.WinByScore>
             <mySprite class="game_data.sprites.Player" reference="../../.."/>
             <scoreToWin>1000.0</scoreToWin>
           </game__data.characteristics.WinByScore>
+>>>>>>> staging:XMLGameFiles/Luci.xml
         </myCharacteristics>
         <myControllable>
           <mySprite class="game_data.sprites.Player" reference="../.."/>
@@ -42,7 +68,11 @@
                   <myXLocation>0.0</myXLocation>
                   <myYLocation>0.0</myYLocation>
                 </myNewLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+                <myVelocity>300.0</myVelocity>
+=======
                 <myVelocity>400.0</myVelocity>
+>>>>>>> staging:XMLGameFiles/Luci.xml
               </game__engine.actions.MoveLeft>
             </entry>
             <entry>
@@ -66,6 +96,9 @@
                   <myXLocation>0.0</myXLocation>
                   <myYLocation>0.0</myYLocation>
                 </myNewLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+                <myVelocity>300.0</myVelocity>
+=======
                 <myVelocity>400.0</myVelocity>
               </game__engine.actions.MoveRight>
             </entry>
@@ -903,6 +936,7 @@
                   <myYLocation>0.0</myYLocation>
                 </myNewLocation>
                 <myVelocity>0.0</myVelocity>
+>>>>>>> staging:XMLGameFiles/Luci.xml
               </game__engine.actions.MoveRight>
             </entry>
           </myKeyPressedMap>
@@ -927,15 +961,66 @@
           <game__data.states.LevelWon>
             <hasWon>false</hasWon>
           </game__data.states.LevelWon>
+          <game__data.states.Score>
+            <myScore>0.0</myScore>
+          </game__data.states.Score>
         </myStates>
       </myMainPlayer>
       <mySprites>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>700.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain">
+            <name>Terrain_Name</name>
+            <myLocation>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>data/images/sprite_images/block.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <terminalXVel>600.0</terminalXVel>
+            <terminalYVel>600.0</terminalYVel>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Impassable>
+                <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                <movesThroughBottom>false</movesThroughBottom>
+              </game__data.characteristics.Impassable>
+            </myCharacteristics>
+            <myControllable>
+              <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+              <myKeyPressedMap class="tree-map"/>
+              <myKeyReleasedMap/>
+              <myKeysPressed/>
+              <myKeysReleased/>
+              <isControllable>true</isControllable>
+            </myControllable>
+            <id>ConcreteDraggableSprite1481490777357</id>
+            <myStates>
+              <game__data.states.Physics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </game__data.states.Physics>
+              <game__data.states.Health>
+                <myHealth>1</myHealth>
+                <isAlive>true</isAlive>
+              </game__data.states.Health>
+            </myStates>
+          </preset>
+=======
             <myXLocation>500.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -945,6 +1030,23 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../preset/myControllable"/>
+          <id></id>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable reference="../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
@@ -956,10 +1058,23 @@
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
+>>>>>>> staging:XMLGameFiles/Luci.xml
             <game__data.states.Physics>
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Player reference="../../myMainPlayer"/>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>500.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+=======
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
@@ -972,6 +1087,7 @@
             <myXLocation>600.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -981,6 +1097,17 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable reference="../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
@@ -990,6 +1117,7 @@
             </game__data.characteristics.Impassable>
           </myCharacteristics>
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -1000,23 +1128,47 @@
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Item>
           <name>Item_Name</name>
           <myLocation>
             <myXLocation>400.0</myXLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+=======
             <myYLocation>300.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/goomba_animation.png</myImagePath>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
           <myXAcceleration>0.0</myXAcceleration>
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Item[2]/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.InvincibilityPowerUpper>
@@ -1066,6 +1218,7 @@
             </game__data.characteristics.InvincibilityPowerUpper>
           </myCharacteristics>
           <myControllable reference="../myCharacteristics/game__data.characteristics.InvincibilityPowerUpper/mySprite/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
             <game__data.states.Physics>
@@ -1081,9 +1234,16 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>300.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+=======
             <myXLocation>1000.0</myXLocation>
             <myYLocation>400.0</myYLocation>
           </myLocation>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -1093,16 +1253,32 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable>
               <mySprite class="game_data.sprites.Terrain" reference="../../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
             <game__data.states.Physics>
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
@@ -1116,18 +1292,39 @@
         <game__data.sprites.Item>
           <name>Item_Name</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>600.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+=======
             <myXLocation>1000.0</myXLocation>
             <myYLocation>300.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/koopa.png</myImagePath>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
           <myXAcceleration>0.0</myXAcceleration>
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Item[3]/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.HealthPowerUpper>
@@ -1177,8 +1374,13 @@
             </game__data.characteristics.HealthPowerUpper>
           </myCharacteristics>
           <myControllable reference="../myCharacteristics/game__data.characteristics.HealthPowerUpper/mySprite/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
             <game__data.states.Physics>
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
@@ -1192,9 +1394,16 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+=======
             <myXLocation>800.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -1204,15 +1413,28 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myCharacteristics>
             <game__data.characteristics.Impassable reference="../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+=======
               <mySprite class="game_data.sprites.Terrain" reference="../../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
             <game__data.states.Physics>
@@ -1227,20 +1449,45 @@
         </game__data.sprites.Terrain>
         <game__data.sprites.Player reference="../../myMainPlayer"/>
         <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
+          <name>movable</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>748.5</myXLocation>
+            <myYLocation>245.5</myYLocation>
+          </myLocation>
+          <myWidth>52</myWidth>
+          <myHeight>52</myHeight>
+          <myImagePath>data/images/sprite_images/mystery-box.png</myImagePath>
+=======
             <myXLocation>700.0</myXLocation>
             <myYLocation>500.0</myYLocation>
           </myLocation>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
           <myXAcceleration>0.0</myXAcceleration>
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Movable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.Movable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable reference="../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
@@ -1250,6 +1497,7 @@
             </game__data.characteristics.Impassable>
           </myCharacteristics>
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -1265,9 +1513,15 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+=======
             <myXLocation>900.0</myXLocation>
             <myYLocation>500.0</myYLocation>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -1277,6 +1531,17 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable>
@@ -1286,6 +1551,7 @@
             <game__data.characteristics.Impassable reference="../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -1296,14 +1562,25 @@
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+            <myXLocation>1000.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+=======
             <myXLocation>400.0</myXLocation>
             <myYLocation>400.0</myYLocation>
           </myLocation>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -1313,15 +1590,26 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+=======
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable>
               <mySprite class="game_data.sprites.Terrain" reference="../../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
             <game__data.characteristics.Impassable reference="../../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+=======
           <myControllable reference="../../../../game__data.Level/mySprites/game__data.sprites.Terrain/preset/myControllable"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -1332,10 +1620,25 @@
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Terrain>
       </mySprites>
       <myControllableSpriteList>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[4]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[3]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[5]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[8]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[6]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[9]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[7]"/>
+=======
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[7]"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
@@ -1346,11 +1649,16 @@
         <game__data.sprites.Item reference="../../mySprites/game__data.sprites.Item[2]"/>
         <game__data.sprites.Item reference="../../mySprites/game__data.sprites.Item"/>
         <game__data.sprites.Player reference="../../myMainPlayer"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
       </myControllableSpriteList>
       <myKeyCommands/>
     </game__data.Level>
   </myLevels>
   <mySpritePresets>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+    <game__data.sprites.Terrain>
+      <name>movable</name>
+=======
     <game__data.sprites.Item>
       <name>Item_Name</name>
       <myLocation>
@@ -1406,19 +1714,40 @@
     <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
     <game__data.sprites.Item>
       <name>Item_Name</name>
+>>>>>>> staging:XMLGameFiles/Luci.xml
       <myLocation>
         <myXLocation>0.0</myXLocation>
         <myYLocation>0.0</myYLocation>
       </myLocation>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+      <myWidth>50</myWidth>
+      <myHeight>50</myHeight>
+      <myImagePath>data/images/sprite_images/mystery-box.png</myImagePath>
+=======
       <myWidth>100</myWidth>
       <myHeight>100</myHeight>
       <myImagePath>data/images/sprite_images/flower.png</myImagePath>
+>>>>>>> staging:XMLGameFiles/Luci.xml
       <myXVelocity>0.0</myXVelocity>
       <myYVelocity>0.0</myYVelocity>
       <myXAcceleration>0.0</myXAcceleration>
       <myYAcceleration>0.0</myYAcceleration>
       <terminalXVel>600.0</terminalXVel>
       <terminalYVel>600.0</terminalYVel>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[7]/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Impassable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+          <movesThroughBottom>false</movesThroughBottom>
+        </game__data.characteristics.Impassable>
+        <game__data.characteristics.Movable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.Movable>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+=======
       <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Item[6]/myCollisionHandler"/>
       <myCharacteristics>
         <game__data.characteristics.Breakable>
@@ -1439,26 +1768,122 @@
       </myCharacteristics>
       <myControllable>
         <mySprite class="game_data.sprites.Item" reference="../.."/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
         <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481491561460</id>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Terrain>
+    <game__data.sprites.Player>
+      <name>Player_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>50</myWidth>
+      <myHeight>50</myHeight>
+      <myImagePath>data/images/sprite_images/super-mario.png</myImagePath>
+      <myXVelocity>10.0</myXVelocity>
+      <myYVelocity>10.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>600.0</terminalXVel>
+      <terminalYVel>600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/myMainPlayer/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Controllable>
+          <mySprite class="game_data.sprites.Player" reference="../../.."/>
+        </game__data.characteristics.Controllable>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Player" reference="../.."/>
+        <myKeyPressedMap class="tree-map">
+          <entry>
+            <javafx.scene.input.KeyCode>LEFT</javafx.scene.input.KeyCode>
+            <game__engine.actions.MoveLeft>
+              <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+              <myOldLocation reference="../../../../../myLocation"/>
+              <myNewLocation>
+                <myXLocation>0.0</myXLocation>
+                <myYLocation>0.0</myYLocation>
+              </myNewLocation>
+              <myVelocity>300.0</myVelocity>
+            </game__engine.actions.MoveLeft>
+          </entry>
+          <entry>
+            <javafx.scene.input.KeyCode>UP</javafx.scene.input.KeyCode>
+            <game__engine.actions.MoveUpJump>
+              <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+              <myOldLocation reference="../../../../../myLocation"/>
+              <myNewLocation>
+                <myXLocation>0.0</myXLocation>
+                <myYLocation>0.0</myYLocation>
+              </myNewLocation>
+              <myVelocity>400.0</myVelocity>
+            </game__engine.actions.MoveUpJump>
+          </entry>
+          <entry>
+            <javafx.scene.input.KeyCode>RIGHT</javafx.scene.input.KeyCode>
+            <game__engine.actions.MoveRight>
+              <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+              <myOldLocation reference="../../../../../myLocation"/>
+              <myNewLocation>
+                <myXLocation>0.0</myXLocation>
+                <myYLocation>0.0</myYLocation>
+              </myNewLocation>
+              <myVelocity>300.0</myVelocity>
+            </game__engine.actions.MoveRight>
+          </entry>
+        </myKeyPressedMap>
         <myKeyReleasedMap/>
         <myKeysPressed/>
         <myKeysReleased/>
         <isControllable>true</isControllable>
       </myControllable>
+      <id>ConcreteDraggableSprite1481490807094</id>
+=======
+        <isControllable>true</isControllable>
+      </myControllable>
       <id>ConcreteDraggableSprite1481501683869</id>
+>>>>>>> staging:XMLGameFiles/Luci.xml
       <myStates>
         <game__data.states.Health>
           <myHealth>1</myHealth>
           <isAlive>true</isAlive>
         </game__data.states.Health>
+        <game__data.states.Score>
+          <myScore>0.0</myScore>
+        </game__data.states.Score>
         <game__data.states.Physics>
           <verticalGravity>0.0</verticalGravity>
           <horizontalGravity>0.0</horizontalGravity>
         </game__data.states.Physics>
+        <game__data.states.LevelWon>
+          <hasWon>false</hasWon>
+        </game__data.states.LevelWon>
       </myStates>
+<<<<<<< HEAD:XMLGameFiles/null.xml
+    </game__data.sprites.Player>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+=======
     </game__data.sprites.Item>
     <game__data.sprites.Player reference="../../myLevels/game__data.Level[2]/myMainPlayer/myControllable/mySprite"/>
     <game__data.sprites.Item reference="../../myLevels/game__data.Level[2]/mySprites/game__data.sprites.Item[2]/myCharacteristics/game__data.characteristics.HealthPowerUpper/mySprite"/>
+>>>>>>> staging:XMLGameFiles/Luci.xml
   </mySpritePresets>
   <myCurrentLevel reference="../myLevels/game__data.Level"/>
   <myDescription>New VOOGASalad Game</myDescription>

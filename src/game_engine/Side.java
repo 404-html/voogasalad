@@ -10,6 +10,8 @@ public abstract class Side {
 	public abstract void hitImpassable(Sprite aSprite, Physics aSpritePhysics);
 	public abstract boolean isVertical();
 	public abstract boolean isHorizontal();
+	public abstract void Movable (Sprite aSprite, Sprite movableSprite);
+	
 	
 }
 

@@ -8,6 +8,7 @@ import java.util.Set;
 import game_data.characteristics.Characteristic;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.sprites.Item;
 import game_data.sprites.Terrain;
 import game_engine.Side;
 import game_engine.Top;
@@ -121,9 +122,12 @@ public class Controllable {
 
 	private boolean isTerrainOnBottom(Map<Sprite, Side> myCollisionMap) {
 		for (Sprite s : myCollisionMap.keySet()) {
-			if (s instanceof Terrain) {
+			if (s instanceof Terrain || s instanceof Item) {
 				// if (myCollisionMap.get(s).equals(Side.BOTTOM));
-				if (myCollisionMap.get(s) instanceof Top)
+				
+				
+//				if (myCollisionMap.get(s) instanceof Top){
+//					System.out.println("TOP");
 					return true;
 			}
 		}
