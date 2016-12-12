@@ -260,9 +260,9 @@ public class ListOfCollidingSprites {
 						mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 						mySprite.setLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
 					}
-					if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
-						return findSideOfCollision(mySprite);
-					}
+					//if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
+					//	return findSideOfCollision(mySprite);
+					//}
 					//return Side.LEFT;
 					return new Left();
 				//}
@@ -275,9 +275,9 @@ public class ListOfCollidingSprites {
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 					mySprite.setLocation(new Location(myTopLeftX + right_collision, myTopLeftY));
 				}
-					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
-						return findSideOfCollision(mySprite);
-					}
+					//if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
+					//	return findSideOfCollision(mySprite);
+					//}
 					//return Side.RIGHT;
 					return new Right();
 				//}

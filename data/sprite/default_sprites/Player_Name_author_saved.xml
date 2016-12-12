@@ -24,23 +24,20 @@
     <isControllable>true</isControllable>
   </myControllable>
   <id></id>
-  <myStates>
+  <myStates/>
     <game__data.states.Health>
       <myHealth>1</myHealth>
       <isAlive>true</isAlive>
     </game__data.states.Health>
-    <game__data.states.Physics>
-      <verticalGravity>800.0</verticalGravity>
-      <horizontalGravity>0.0</horizontalGravity>
-    </game__data.states.Physics>
-    <game__data.states.Score>
-      <myScore>0.0</myScore>
-    </game__data.states.Score>
     <game__data.states.LevelWon>
       <hasWon>false</hasWon>
     </game__data.states.LevelWon>
     <game__data.states.Score>
       <myScore>0.0</myScore>
     </game__data.states.Score>
+    <game__data.states.Physics>
+      <verticalGravity>800.0</verticalGravity>
+      <horizontalGravity>0.0</horizontalGravity>
+    </game__data.states.Physics>
   </myStates>
 </game__data.sprites.Player>
