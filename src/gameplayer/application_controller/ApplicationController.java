@@ -122,8 +122,12 @@ public class ApplicationController extends AbstractController {
 			File chosenGame = new FileChoiceController().show(getStage());
 			if (chosenGame != null) resetGame(chosenGame);
 			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
-			getOptions();
-			getLevel();
+			try {
+				getOptions();
+				getLevel();
+			} catch (Exception x) {
+				//do nothing
+			}
 		}, ButtonDisplay.TEXT); 
 	}
 
