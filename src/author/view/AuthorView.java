@@ -46,7 +46,6 @@ public class AuthorView implements ILanguageUser{
 		myScene = new Scene(myPane, WIDTH, HEIGHT, Color.WHITE);
 		myScene.getStylesheets().add(getStyleSheet());
 		initializeView();
-		displayInformation();
 		authorController.addListener(this);
 	}
 
