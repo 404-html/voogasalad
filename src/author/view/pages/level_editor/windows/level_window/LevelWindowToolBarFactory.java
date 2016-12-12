@@ -62,9 +62,13 @@ public class LevelWindowToolBarFactory {
 		try {
 			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE, new Stage()).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
-			this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
+			if(this.authorController.getModel().getGame().getCurrentLevel()!= null)
+				this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			// TODO: Show different error screen
 			e.printStackTrace();
 		}
 
