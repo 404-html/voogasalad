@@ -55,7 +55,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private ScrollPane levelScroller;
 	private ILevelWindowPane levelWindowPane;
 	private static final String STYLESHEET = "data/gui/scrollViewport.css";
-   	private static final String BLACK_IMAGE = "data/images/level_images/images.jpeg";
+   	private static final String WHITE_IMAGE = "data/images/level_images/white_image.jpeg";
 
 
 	private IntegerProperty horizontalPanes = new SimpleIntegerProperty(1);
@@ -247,8 +247,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	private void setBackgroundImage(String filePath) {
 		if (filePath == null) {
-			createBackgroundImage(BLACK_IMAGE);
-			getController().getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(BLACK_IMAGE);
+			getController().getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(WHITE_IMAGE);
+			createBackgroundImage(WHITE_IMAGE);
 		} else {
 			createBackgroundImage(filePath);
 		}
