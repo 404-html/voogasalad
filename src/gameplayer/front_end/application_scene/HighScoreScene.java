@@ -1,6 +1,7 @@
 package gameplayer.front_end.application_scene;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
@@ -16,7 +17,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 
 	private String myGamename;
 	private BorderPane myPane;
-	
+
 	public HighScoreScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
 		initialize("");
@@ -53,7 +54,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		getRoot().setCenter(myPane);
 		return myPane;
 	}
-	
+
 	private Pane addHeading() {
 		VBox v = new VBox();
 		Label label = getGUIGenerator().createLabel(myGamename + " HIGHSCORES", 0, 0);
@@ -62,7 +63,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		v.setAlignment(Pos.CENTER);
 		return v;
 	}
-	
+
 	private void addScores(HighscoreManager aManager) {
 		HBox box = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource() * 2);
 		VBox users = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
@@ -77,9 +78,10 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		box.setAlignment(Pos.TOP_CENTER);
 		getOptions().getChildren().add(box);
 	}
-	
+
 	private void addScore(String aUser, double aScore, VBox aUsers, VBox aScores) {
-		aScores.getChildren().add(new Label(String.valueOf(aScore)));
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		aScores.getChildren().add(new Label(String.valueOf(Double.valueOf(twoDForm.format(aScore)))));
 		aUsers.getChildren().add(new Label(aUser));
 	}
 }
