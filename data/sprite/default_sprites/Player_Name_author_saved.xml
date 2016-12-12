@@ -6,11 +6,7 @@
   </myLocation>
   <myWidth>100</myWidth>
   <myHeight>100</myHeight>
-<<<<<<< HEAD
-  <myImagePath>data/images/sprite_images/coin.png</myImagePath>
-=======
   <myImagePath>data/images/sprite_images/Empty.png</myImagePath>
->>>>>>> a669f91638f1efc95f3797d1c08451192ed89bbc
   <myXVelocity>0.0</myXVelocity>
   <myYVelocity>0.0</myYVelocity>
   <myXAcceleration>0.0</myXAcceleration>
