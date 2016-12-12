@@ -42,7 +42,7 @@ public class Breakable implements Characteristic{
 		breakableWest = west;
 		myDurability = durability;
 		mySprite = aSprite;
-		timeSinceHit = 0;
+		timeSinceHit = 20;
 	}
 	
 	public void setDurability(int durability){
@@ -61,8 +61,8 @@ public class Breakable implements Characteristic{
 			return;
 		}
 		
-		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && validPairing(collidedSprite)){
+		for(Sprite collidedSprite:myCollisionMap.keySet() ){
+			if(breaksAtDirection(myCollisionMap.get(collidedSprite))&& validPairing(collidedSprite) ){
 //				System.out.println("SIDE HIT: "+myCollisionMap.get(collidedSprite));
 				System.out.println("fuckking fuck");
 				timeSinceHit = 0;

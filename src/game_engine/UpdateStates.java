@@ -115,6 +115,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 	private void setKeysPressed(Set<KeyCode> aKeysPressed){
 		myKeysPressed=aKeysPressed;
+		for(KeyCode key: myKeysPressed){
+			System.out.println(key);
+		}
 	}
 	private void setKeysReleased(Set<KeyCode> aKeysReleased){
 		myKeysReleased=aKeysReleased;
@@ -181,9 +184,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void cleanGame() {
 		ArrayList<Sprite> removeSprites = new ArrayList<Sprite>();
 		for (Sprite mySprite : mySpriteList) {
-			if(mySprite instanceof Projectile){
-				System.out.println(mySprite.getLocation().getXLocation());
-			}
 			for (State state : mySprite.getStates()) {
 				if (state instanceof Health) {
 /*					if(mySprite instanceof Projectile){

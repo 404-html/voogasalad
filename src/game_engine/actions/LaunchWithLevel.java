@@ -27,9 +27,6 @@ public class LaunchWithLevel implements Launch{
 	public void act() {
 		boolean right=true;
 		myProjectile=myProjectile.clone();
-		double myXVelocity=0;
-		double myYVelocity=0;
-		double velocityAngle=0;
 		if(myLauncher.getXVelocity()<0){
 			right=false;
 		}
@@ -38,26 +35,14 @@ public class LaunchWithLevel implements Launch{
 		System.out.println(myLauncher.getLocation().getXLocation());
 		System.out.println(myLauncher.getLocation().getYLocation());*/
 		if(right){
-			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()+100, myLauncher.getLocation().getYLocation()+myLauncher.getHeight()/2);
+			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()+20, myLauncher.getLocation().getYLocation()+myLauncher.getHeight()/2);
+			myProjectile.setXVelocity(myVelocity);
 		}
 		else{
-			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()-100, myLauncher.getLocation().getYLocation() + myLauncher.getHeight()/2);
+			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()-20, myLauncher.getLocation().getYLocation() + myLauncher.getHeight()/2);
+			myProjectile.setXVelocity(-myVelocity);
 		}
-		if(myLauncher.getXVelocity()==0 && myLauncher.getYVelocity()==0){
-			myXVelocity=myVelocity;
-			myYVelocity=0;
-		}
-		else if(myLauncher.getXVelocity()==0){
-			myXVelocity=0;
-			myYVelocity=myLauncher.getYVelocity();
-		}
-		else{
-			velocityAngle = Math.atan(myLauncher.getYVelocity()/myLauncher.getXVelocity());	
-			myXVelocity=Math.signum(myLauncher.getXVelocity())*myVelocity*Math.cos(velocityAngle);
-			myYVelocity = Math.signum(myLauncher.getYVelocity())*myVelocity*Math.sin(velocityAngle);
-		}
-		myProjectile.setXVelocity(myXVelocity);
-		myProjectile.setYVelocity(myYVelocity);
+		myProjectile.setYVelocity(0);
 		myLevel.addNewSprite(myProjectile);		
 	}
 
