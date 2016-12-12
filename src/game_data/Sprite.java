@@ -89,7 +89,7 @@ public abstract class Sprite extends GameObject {
 		myStates = copyStates(aSprite.getStates());
 		//myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
 		myRandomMoveHandler = null;
-		myControllable=new Controllable(aSprite.getControllable());
+		myControllable = new Controllable(aSprite.getControllable(), this);
 	}
 
 	/**

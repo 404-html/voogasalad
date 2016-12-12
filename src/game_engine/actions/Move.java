@@ -35,4 +35,7 @@ public abstract class Move implements Action {
 		return myVelocity;
 	}
 	
+	@Override
+	public abstract Action copyWithNewSprite(Sprite aSprite);
+	
 }

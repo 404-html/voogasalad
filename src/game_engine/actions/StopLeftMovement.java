@@ -33,4 +33,10 @@ public class StopLeftMovement extends StopMovement {
 		//mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new StopLeftMovement(aSprite, super.myVelocity);
+	}
+	
+	
 }
