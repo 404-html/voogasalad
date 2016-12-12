@@ -42,4 +42,9 @@ public class Location {
 		return Math.sqrt((xDiff * xDiff) + (yDiff * yDiff));
 	}
 
+	@Override
+	public String toString(){
+		return myXLocation + " x "  + myYLocation;
+	}
+	
 }
