@@ -65,6 +65,11 @@ public class LaunchWithLevel implements Launch{
 	public double getVelocity() {
 		return myVelocity;
 	}
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new LaunchWithLevel(aSprite, myProjectile, myVelocity, myLevel);
+	}
 
 
 

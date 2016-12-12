@@ -31,6 +31,10 @@ public class LaunchSkeleton implements Launch{
 		return myVelocity;
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new LaunchSkeleton(aSprite, myProjectile, myVelocity);
+	}
 
 
 }

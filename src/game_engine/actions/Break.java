@@ -29,4 +29,9 @@ public class Break implements Action {
 		}
 		
 	}
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Break(aSprite);
+	}
 }

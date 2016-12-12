@@ -47,7 +47,7 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 
 			if (collidedSprite instanceof Player){
-				myAction = new Damage(-getHealthToGain(), collidedSprite);
+				myAction = new AddHealth(-getHealthToGain(), collidedSprite);
 				myAction.act();
 			}		
 		}

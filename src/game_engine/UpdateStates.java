@@ -95,10 +95,10 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		
+//		System.out.println( " X VEL :" + myLevel.getMainPlayer().getXVelocity());
 //		for (State state : myLevel.getMainPlayer().getStates()) {
-//			if (state instanceof Visible) {
-//					System.out.println("Visible : "+ ((Visible) state).isVisible());
+//			if (state instanceof Health) {
+//					System.out.println("Health : "+ ((Health)state).getHealth());
 //				}
 //			}	
 	}
@@ -157,11 +157,11 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void checkPowerUps() {
 		ArrayList<Characteristic> toRemove = new ArrayList<Characteristic>();
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
-			// System.out.println("POWER UP SPEED " +
+//			 System.out.println("POWER UP TIM?E " + myCurrentPowerUps.get(powerUp));
 			// myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
-				// System.out.println("HELLOOOOOO");
+//				 System.out.println("HELLOOOOOO");
 				toRemove.add(powerUp);
 			}
 		}
@@ -217,6 +217,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 //			if(mySprite instanceof Player){
 //				System.out.println("Colliding with : " + myCollisionMap.size());
 //			}
+			
 			Controllable control;
 			if (mySprite instanceof Player)
 				control = mainPlayerControllable;
@@ -284,6 +285,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 
 	public void generateDefaultKeyPressedMap() {
+		System.out.println("LUCIA");
 		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
