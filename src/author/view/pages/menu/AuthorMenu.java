@@ -7,7 +7,9 @@ import author.controller.IAuthorController;
 import author.view.pages.level_editor.ILevelEditorExternal;
 import author.view.util.game_info.GameInfoEditWindowFactory;
 import author.view.util.game_info.iGameInfoEditWindow;
+import author.view.util.language_selection.ILanguageUser;
 import game_data.Level;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -22,7 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.TextAlignment;
 
-public class AuthorMenu {
+public class AuthorMenu implements ILanguageUser{
 
 	private HBox myContainer;
 	private MenuBar myMenu;
@@ -31,25 +33,27 @@ public class AuthorMenu {
 
 	public AuthorMenu(IAuthorController authorController, ILevelEditorExternal levelEditor) {
 		myAuthorController = authorController;
+		myAuthorController.addListener(this);
 		myLevelEditor = levelEditor;
 		myContainer = new HBox();
 		buildMenu();
-		addFiller();
-		addGameTitle();
 	}
 
 	private void buildMenu() {
 		myMenu = new MenuBar();
-		Menu menuFile = new Menu("File");
-		Menu menuEdit = new Menu("Edit");
-		Menu menuHelp = new Menu("Help");
+		Menu menuFile = new Menu(myAuthorController.getDisplayText("File"));
+		Menu menuEdit = new Menu(myAuthorController.getDisplayText("Edit"));
+		Menu menuHelp = new Menu(myAuthorController.getDisplayText("Help"));
 		myMenu.getMenus().addAll(menuFile, menuEdit, menuHelp);
 
 		addFileMenuItem(menuFile);
 		addEditMenuItem(menuEdit);
 		addHelpMenuItem(menuHelp);
 
+		myContainer.getChildren().clear();
 		myContainer.getChildren().add(myMenu);
+		addFiller();
+		addGameTitle();
 	}
 
 	public void addFiller(){
@@ -72,29 +76,29 @@ public class AuthorMenu {
 	}
 
 	private void addHelpMenuItem(Menu menuLoad) {
-		menuLoad.getItems().add(new MenuFactory().createItem("Help", e -> {
+		menuLoad.getItems().add(new MenuFactory().createItem(myAuthorController.getDisplayText("Help"), e -> {
 			openHelpDialog();
 		}).getItem());
 	}
 
 
 	private void addFileMenuItem(Menu menuFile) {
-		menuFile.getItems().add(new MenuFactory().createItem("New Game", e -> {
+		menuFile.getItems().add(new MenuFactory().createItem(myAuthorController.getDisplayText("NewGame"), e -> {
 			this.myAuthorController.getModel().newGameWindow();
 		}).getItem());
 		
-		menuFile.getItems().add(new MenuFactory().createItem("New Level", e -> {
+		menuFile.getItems().add(new MenuFactory().createItem(myAuthorController.getDisplayText("NewLevel"), e -> {
 			Level createdLevel = this.myLevelEditor.createLevel();
 			if (createdLevel != null) {
 				this.myAuthorController.getModel().getGame().addNewLevel(createdLevel);
 			}
 		}).getItem());
 		
-		menuFile.getItems().add(new MenuFactory().createItem(("Save Game"), e -> {
+		menuFile.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("SaveGame")), e -> {
 			openSaveDialog();
 		}).getItem());
 		
-		menuFile.getItems().add(new MenuFactory().createItem("Load Game", e -> {
+		menuFile.getItems().add(new MenuFactory().createItem(myAuthorController.getDisplayText("LoadGame"), e -> {
 			File aFile = loadFileChooser();
 			if (aFile != null)
 				myAuthorController.getModel().loadGame(aFile);
@@ -102,18 +106,23 @@ public class AuthorMenu {
 	}
 	
 	private void addEditMenuItem(Menu menuEdit) {
-		menuEdit.getItems().add(new MenuFactory().createItem(("Edit Game"), e -> {
+		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("EditGame")), e -> {
 			iGameInfoEditWindow infoEditor = new GameInfoEditWindowFactory().create(myAuthorController.getModel().getGame());
 			infoEditor.display();
+		}).getItem());
+		
+		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("ChangeLanguage")), e -> {
+			myAuthorController.setLanguage("Profanity");
+			// TODO make this not profanity
 		}).getItem());
 	}
 
 
 	private void openSaveDialog() {
 		TextInputDialog input = new TextInputDialog(myAuthorController.getModel().getGame().getName());
-		input.setTitle("Save Dialog");
-		input.setHeaderText("Input Game Name");
-		input.setContentText("Name: ");
+		input.setTitle(myAuthorController.getDisplayText("SaveDialog"));
+		input.setHeaderText(myAuthorController.getDisplayText("InputGameName"));
+		input.setContentText(myAuthorController.getDisplayText("Name"));
 		input.setOnCloseRequest(e -> {
 			myAuthorController.getModel().saveGame(input.getResult());
 		});
@@ -123,7 +132,7 @@ public class AuthorMenu {
 	private File loadFileChooser() {
 		File file;
 		try {
-			file = file = new FileLoader("XMLGameFiles/", FileType.DATA).loadSingle();
+			file = new FileLoader(myAuthorController.getPathString("XMLGameFiles"), FileType.DATA).loadSingle();
 			return file;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -142,5 +151,10 @@ public class AuthorMenu {
 
 	public HBox getContainer() {
 		return myContainer;
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		buildMenu();
 	}
 }

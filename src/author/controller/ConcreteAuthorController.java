@@ -79,11 +79,15 @@ public class ConcreteAuthorController implements IAuthorController {
 
 	@Override
 	public void addListener(InvalidationListener aListener) {
+		if (this.invalidationListeners == null)
+			this.invalidationListeners = new HashSet<>();
 		this.invalidationListeners.add(aListener);
 	}
 
 	@Override
 	public void removeListener(InvalidationListener aListener) {
+		if (this.invalidationListeners == null)
+			this.invalidationListeners = new HashSet<>();
 		if (this.invalidationListeners.contains(aListener))
 			this.invalidationListeners.remove(aListener);
 	}
