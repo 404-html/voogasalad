@@ -53,6 +53,7 @@ public class LevelWindowPaneFactory {
 
 		this.levelWindowPane.getPane().setOnMouseClicked((event) ->{
 			this.levelWindowInternal.getWindow().requestFocus();
+			this.levelWindowInternal.getSelectedSprites().clear();
 			if (this.levelWindowInternal.getSelectedSprite() != null && event.isShiftDown()){
 				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
 			}

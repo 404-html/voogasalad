@@ -28,8 +28,11 @@ import game_engine.properties.RandomMoveHandler.Orientation;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SetProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleSetProperty;
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
@@ -57,7 +60,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private IntegerProperty verticalPanes = new SimpleIntegerProperty(1);
 	private Map<Level, ILevelWindowPane> levelPanes = new HashMap<>();
 	private Map<Level, IRevertManager> revertManagers = new HashMap<>();
-	private Set<DraggableSprite> selectedSprites = new HashSet<>();
+	private SetProperty<DraggableSprite> selectedSprites = new SimpleSetProperty<>(FXCollections.observableSet());
 	private DraggableSprite selectedSprite;
 
 	public LevelWindow(IAuthorController authorController) {
@@ -65,6 +68,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		createScroller();
 		super.getWindow().getStylesheets().add(getStyleSheet());
 		super.getWindow().getStyleClass().add("lol");
+		
 	}
 
 	private void createScroller() {
@@ -102,6 +106,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			this.horizontalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			this.verticalPanes.addListener((listener) -> updateLevelSize(this.levelWindowPane.getPane(), aLevel));
 			createUndo(aLevel);
+			initSelectedSpritesListener(aLevel);
 			aLevel.addListener((level) -> {
 				updatePane(aLevel);
 			});
@@ -111,6 +116,13 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		this.levelWindowPane = this.levelPanes.get(aLevel);
 		this.levelScroller.setContent(this.levelWindowPane.getPane());
 		updatePane(aLevel);
+	}
+	
+	private void initSelectedSpritesListener(Level aLevel){
+		selectedSprites.addListener((observable, oldval, newval) -> {
+			getMovableSprites(aLevel).forEach((draggablesprite) -> draggablesprite.setDeselected());
+			this.selectedSprites.get().forEach((draggablesprite) -> draggablesprite.setSelected());
+		});
 	}
 
 	private void createUndo(Level aLevel) {
@@ -162,11 +174,10 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 			} else if (event.isControlDown()) {
 				if (!this.selectedSprites.contains(draggableSprite)) {
 					this.selectedSprites.add(draggableSprite);
-					draggableSprite.setSelected();
 				} else {
 					this.selectedSprites.remove(draggableSprite);
-					draggableSprite.setDeselected();
 				}
+				event.consume();
 			}
 
 		});
@@ -268,14 +279,15 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		return this.verticalPanes;
 	}
 
-	@Override
-	public Set<DraggableSprite> getSelectedSprites() {
-		return this.selectedSprites;
-	}
 
 	@Override
 	public DraggableSprite getSelectedSprite() {
 		return this.selectedSprite;
+	}
+
+	@Override
+	public SetProperty<DraggableSprite> getSelectedSprites() {
+		return this.selectedSprites;
 	}
 
 }

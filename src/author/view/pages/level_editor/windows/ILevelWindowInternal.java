@@ -3,11 +3,10 @@
  */
 package author.view.pages.level_editor.windows;
 
-import java.util.Set;
-
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SetProperty;
 
 /**
  * @author Cleveland Thompson V (ct168)
@@ -19,7 +18,7 @@ public interface ILevelWindowInternal extends ILevelEditorWindowInternal{
 	
 	public IntegerProperty getVerticalPanes();
 	
-	public Set<DraggableSprite> getSelectedSprites();
+	public SetProperty<DraggableSprite> getSelectedSprites();
 	
 	public DraggableSprite getSelectedSprite();
 	
