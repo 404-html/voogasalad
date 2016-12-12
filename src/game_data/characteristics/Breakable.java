@@ -41,7 +41,7 @@ public class Breakable implements Characteristic{
 		breakableWest = west;
 		myDurability = durability;
 		mySprite = aSprite;
-		timeSinceHit = 0;
+		timeSinceHit = 20;
 	}
 	
 	public void setDurability(int durability){
