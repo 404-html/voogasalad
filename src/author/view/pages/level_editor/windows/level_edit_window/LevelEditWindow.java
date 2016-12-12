@@ -8,6 +8,7 @@ import java.io.File;
 import author.view.util.language_selection.ILanguageHolder;
 import game_data.Level;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -41,6 +42,7 @@ class LevelEditWindow implements ILevelEditWindowInternal, ILevelEditWindowExter
 		this.stage.setScene(new Scene(this.levelEditPage.getPane()));
 		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);
+		this.stage.initModality(Modality.APPLICATION_MODAL);
 		this.stage.showAndWait();
 	}
 

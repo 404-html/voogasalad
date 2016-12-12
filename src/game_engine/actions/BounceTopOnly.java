@@ -60,5 +60,9 @@ public class BounceTopOnly implements Action {
 				.getLocation().getYLocation()+(myBouncer.getHeight()*.5) && myPlayerSprite.getYVelocity()>=0;
 	}
 	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new BounceTopOnly(myBounceSpeed, aSprite, mySide, myBouncer);
+	}
 	
 }

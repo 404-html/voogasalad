@@ -12,9 +12,9 @@ import author.view.util.authoring_buttons.ButtonFactory;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.stage.Stage;
 import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
-import util.filehelpers.FileLoader.FileExtension;
 import util.filehelpers.FileLoader.FileLoader;
 import util.filehelpers.FileLoader.FileType;
 
@@ -60,11 +60,15 @@ public class LevelWindowToolBarFactory {
 	private void newBackgroundImage() {
 		File file;
 		try {
-			file = new FileLoader(authorController.getPathString("LevelImages"), FileType.RASTER_IMAGE).loadSingle();
+			file = new FileLoader(authorController.getPathString("LevelImages"), FileType.RASTER_IMAGE, new Stage()).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
-			this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
+			if(this.authorController.getModel().getGame().getCurrentLevel()!= null)
+				this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			// TODO: Show different error screen
 			e.printStackTrace();
 		}
 

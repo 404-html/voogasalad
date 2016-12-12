@@ -56,6 +56,7 @@ public class AuthorView implements ILanguageUser{
 		myPane.getChildren().addAll(buildMenu(), buildTabPane());
 	}
 
+	@Deprecated
 	private void displayInformation() {
 		Platform.runLater(new Runnable() {
 			@Override

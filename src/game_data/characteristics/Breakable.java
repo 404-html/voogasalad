@@ -33,7 +33,7 @@ public class Breakable implements Characteristic{
 	private Sprite mySprite;
 	private int timeSinceHit;
 	
-	@ParameterAnnotation(parameters = {"Breaks on Top", "Breaks on Bottom", "Breaks on Left", "Breaks on Right", "Durability", "Sprite"})
+	@ParameterAnnotation(parameters = {"Breaks on Top", "Breaks on Bottom", "Breaks on Right", "Breaks on Left", "Durability", "Sprite"})
 	public Breakable(boolean north, boolean south, boolean east, boolean west, int durability, Sprite aSprite){
 		breakableNorth = north;
 		breakableSouth = south;
@@ -41,7 +41,7 @@ public class Breakable implements Characteristic{
 		breakableWest = west;
 		myDurability = durability;
 		mySprite = aSprite;
-		timeSinceHit = 0;
+		timeSinceHit = 20;
 	}
 	
 	public void setDurability(int durability){
@@ -62,7 +62,6 @@ public class Breakable implements Characteristic{
 		
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && collidedSprite instanceof Player){
-//				System.out.println("SIDE HIT: "+myCollisionMap.get(collidedSprite));
 				timeSinceHit = 0;
 				if(isBroken()) {
 					

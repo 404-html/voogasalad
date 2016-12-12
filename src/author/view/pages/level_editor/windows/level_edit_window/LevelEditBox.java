@@ -7,11 +7,7 @@ package author.view.pages.level_editor.windows.level_edit_window;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import util.RelativePathFinder;
-import util.filehelpers.FileLoader.FileExtension;
-import util.filehelpers.FileLoader.FileLoader;
-import util.filehelpers.FileLoader.FileLoader.StartDirectory;
-import util.filehelpers.FileLoader.FileType;
+import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreen;
 import author.view.util.authoring_buttons.ButtonFactory;
 import author.view.util.language_selection.ILanguageHolder;
 import game_data.Level;
@@ -23,6 +19,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import util.RelativePathFinder;
+import util.filehelpers.FileLoader.FileLoader;
+import util.filehelpers.FileLoader.FileType;
 
 /**
  * @author Cleveland Thompson V (ct168)
@@ -86,7 +85,7 @@ class LevelEditBox {
 	private void updateBackgroundString(){
 		File file;
 		try {
-		file = new FileLoader(myLanguageHolder.getPathString("LevelImages"), FileType.RASTER_IMAGE).loadSingle();
+		file = new FileLoader(myLanguageHolder.getPathString("LevelImages"), FileType.RASTER_IMAGE, AuthoringSplashScreen.getPrimaryAuthorStage()).loadSingle();
 		if (file !=null){
 			RelativePathFinder pf = new RelativePathFinder();
 			this.backgroundPath = pf.getPath(file);

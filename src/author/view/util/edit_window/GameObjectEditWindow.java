@@ -8,6 +8,7 @@ import java.io.File;
 import author.view.util.language_selection.ILanguageHolder;
 import game_data.GameObject;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -36,6 +37,7 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 	private void initializeWindow(){
 		this.stage = new Stage();
 		this.stage.setTitle(myLanguageHolder.getDisplayText("NewGame"));
+		this.stage.initModality(Modality.APPLICATION_MODAL);
 		this.stage.setScene(new Scene(this.gameObjectEditPage.getPane()));
 		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);

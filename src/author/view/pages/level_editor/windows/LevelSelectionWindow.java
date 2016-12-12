@@ -123,6 +123,7 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow implements I
 	}
 
 	private void updateCurrentLevel(Level aNewCurrentLevel) {
+		assert getController().getModel().getGame() != null : "Game not instantiated";
 		getController().getModel().getGame().setCurrentLevel(aNewCurrentLevel);
 	}
 
