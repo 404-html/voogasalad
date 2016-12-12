@@ -17,7 +17,6 @@ import gameplayer.back_end.user_information.LevelManager;
 import gameplayer.front_end.application_scene.GamePlayScene;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.gui_generator.media.MediaController;
-import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.UserOptions;
 import gameplayer.back_end.keycode_handler.MovementHandlerFactory;
 import gameplayer.back_end.keycode_handler.XYMovementHandler;
@@ -78,7 +77,6 @@ public class GamePlayController extends AbstractController {
 			myKeyCodeHandler = new KeyCodeHandler("default");
 		}
 	}
-
 	/**
 	 * Displays the currently set up game
 	 */
@@ -165,8 +163,7 @@ public class GamePlayController extends AbstractController {
 			try {
 				handleRestart();
 			} catch (Exception e1) {
-				ErrorAlert ea = new ErrorAlert();
-				ea.show(e1);
+				showError(e1);
 			}
 		}, e -> {
 			save();
@@ -280,7 +277,6 @@ public class GamePlayController extends AbstractController {
 			getXMLHandler().save(hm, "highscores");
 		}
 	}
-
 	/**
 	 * @param aOptions is the key input and HUD font color for the user
 	 */
@@ -289,7 +285,6 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 	}
-
 	/**
 	 * @param aLevel is the level that the user chose from the options
 	 * @throws Exception 

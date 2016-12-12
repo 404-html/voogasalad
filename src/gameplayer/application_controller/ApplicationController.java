@@ -124,7 +124,7 @@ public class ApplicationController extends AbstractController {
 					getLevel();
 					setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
 				} catch (Exception x) {
-					if (!x.getMessage().isEmpty()) {
+					if (x.getMessage() != null && !x.getMessage().isEmpty()) {
 						showError(x);
 					}
 				}
