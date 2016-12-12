@@ -39,5 +39,10 @@ public class Stick implements Action{
 		return myCollidedSprite.getLocation().getYLocation()+myCollidedSprite.getHeight()<mySprite
 				.getLocation().getYLocation()+(mySprite.getHeight()*.5) && myCollidedSprite.getYVelocity()>=0;
 	}
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Stick(myCollidedSprite, aSprite, horizontal);
+	}
 
 }

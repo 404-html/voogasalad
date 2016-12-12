@@ -11,10 +11,16 @@ import game_engine.UpdateStates;
 
 
 public class Damage extends PointsChanger implements Action {
-
+	private int myDamage;
 	
 	public Damage(int damage, Sprite damageTaker){
 		super(damage, damageTaker);
+		myDamage = damage;
+	}
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Damage(myDamage, aSprite);
 	}
 	
 	@Override

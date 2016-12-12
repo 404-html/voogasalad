@@ -23,5 +23,10 @@ public class MoveDown extends Move {
 	public void stop(){
 		return;
 	}
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveDown(aSprite, this.getVelocity());
+	}
+
 
 }
