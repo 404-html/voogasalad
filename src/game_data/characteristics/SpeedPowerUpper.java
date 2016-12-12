@@ -95,12 +95,8 @@ public class SpeedPowerUpper extends TemporalPowerUpper implements Characteristi
 				((MoveRight) newMap.get(key)).setMyVelocity(mySpeedBoost +((MoveRight) newMap.get(key)).getVelocity());
 				//((MoveRight) newMap.get(key)).setVelocity();
 			}
-//			
-//			if(newMap.get(key) instanceof MoveLeft){
-//				((MoveLeft) newMap.get(key)).setMyVelocity(-mySpeedBoost + ((MoveLeft) newMap.get(key)).getVelocity());
-//			}
-			playerSprite.getControllable().setMyKeyPressedMap(newMap);
 		}
+		playerSprite.getControllable().setMyKeyPressedMap(newMap);
 //		myInterface.setKeyPressedMapWithBoosts();
 	}
 

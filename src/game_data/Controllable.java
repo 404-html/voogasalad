@@ -47,6 +47,7 @@ public class Controllable {
 		this.mySprite = aSprite;
 		isControllable = true;
 		this.myKeyPressedMap = myKeyPressedMap;
+		defaultKeyPressedMap = myKeyPressedMap;
 		myKeyReleasedMap = new HashMap<>();
 		myKeysReleased = new HashSet<>();
 		myKeysPressed = new HashSet<>();
@@ -65,8 +66,6 @@ public class Controllable {
 				myKeyReleasedMap.put(key, (MoveLeft) myKeyPressedMap.get(key));
 			}
 		}
-		
-		defaultKeyPressedMap = myKeyPressedMap;
 	}
 
 	public void sendCurrentKeys(Set<KeyCode> myKeysPressed, Set<KeyCode> myKeysReleased) {

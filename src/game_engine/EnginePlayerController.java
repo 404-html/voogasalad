@@ -66,12 +66,12 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
-				myLevel.setMainPlayer((Player)s);
-				myLevel.getMainPlayer().addState(new Score());
-				myLevel.getMainPlayer()
-						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
-				myLevel.getMainPlayer().resetTerminalVelocities();
-				myLevel.getMainPlayer().setLevel(myLevel);
+//				myLevel.setMainPlayer((Player)s);
+//				myLevel.getMainPlayer().addState(new Score());
+//				myLevel.getMainPlayer()
+//						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
+//				myLevel.getMainPlayer().resetTerminalVelocities();
+//				myLevel.getMainPlayer().setLevel(myLevel);
 			}
 		}
 

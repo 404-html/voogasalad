@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.ScoreBasedOnPosition;
 import util.XMLTranslator;
 
 /**
@@ -92,6 +95,11 @@ public class Game extends GameObject {
 
 	public void setCurrentLevel(Level aLevel) {
 		this.myCurrentLevel = aLevel;
+		for(Characteristic c: myCurrentLevel.getMainPlayer().getCharacteristics()){
+			if(c instanceof ScoreBasedOnPosition){
+				((ScoreBasedOnPosition) c).setScrollDirection(myScrollType);
+			}
+		}
 		this.notifyListeners();
 	}
 
@@ -112,6 +120,11 @@ public class Game extends GameObject {
 
 	public void setCurrentLevel(int levelNumber) {
 		myCurrentLevel = myLevels.get(levelNumber);
+		for(Characteristic c: myCurrentLevel.getMainPlayer().getCharacteristics()){
+			if(c instanceof ScoreBasedOnPosition){
+				((ScoreBasedOnPosition) c).setScrollDirection(myScrollType);
+			}
+		}
 		this.notifyListeners();
 	}
 
