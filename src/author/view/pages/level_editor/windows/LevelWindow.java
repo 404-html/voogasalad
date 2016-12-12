@@ -61,6 +61,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private ScrollPane levelScroller;
 	private ILevelWindowPane levelWindowPane;
 	private static final String WHITE_IMAGE = "data/images/level_images/white_image.jpeg";
+	private static final String STYLESHEET = "data/gui/scrollViewport.css";
 
 	private IntegerProperty horizontalPanes = new SimpleIntegerProperty(1);
 	private IntegerProperty verticalPanes = new SimpleIntegerProperty(1);
@@ -295,7 +296,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private String getStyleSheet() {
-		File css = new File(super.getController().getPathString("AuthorCSSStyle"));
+		File css = new File(STYLESHEET);
 		return css.toURI().toString();
 	}
 
