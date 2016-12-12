@@ -75,6 +75,13 @@
         </myControllable>
         <id></id>
         <myStates>
+          <game__data.states.LevelWon>
+            <hasWon>false</hasWon>
+          </game__data.states.LevelWon>
+          <game__data.states.Physics>
+            <verticalGravity>800.0</verticalGravity>
+            <horizontalGravity>0.0</horizontalGravity>
+          </game__data.states.Physics>
           <game__data.states.Score>
             <myScore>0.0</myScore>
           </game__data.states.Score>
@@ -82,138 +89,17 @@
             <myHealth>1</myHealth>
             <isAlive>true</isAlive>
           </game__data.states.Health>
-          <game__data.states.Physics>
-            <verticalGravity>800.0</verticalGravity>
-            <horizontalGravity>0.0</horizontalGravity>
-          </game__data.states.Physics>
-          <game__data.states.LevelWon>
-            <hasWon>false</hasWon>
-          </game__data.states.LevelWon>
         </myStates>
       </myMainPlayer>
       <mySprites>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>300.0</myXLocation>
-            <myYLocation>400.0</myYLocation>
-          </myLocation>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myImagePath>data/images/sprite_images/block.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>600.0</terminalXVel>
-          <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler/>
-          <myCharacteristics>
-            <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain">
-                <name>Terrain_Name</name>
-                <myLocation>
-                  <myXLocation>0.0</myXLocation>
-                  <myYLocation>0.0</myYLocation>
-                </myLocation>
-                <myWidth>100</myWidth>
-                <myHeight>100</myHeight>
-                <myImagePath>data/images/sprite_images/block.png</myImagePath>
-                <myXVelocity>0.0</myXVelocity>
-                <myYVelocity>0.0</myYVelocity>
-                <myXAcceleration>0.0</myXAcceleration>
-                <myYAcceleration>0.0</myYAcceleration>
-                <terminalXVel>600.0</terminalXVel>
-                <terminalYVel>600.0</terminalYVel>
-                <myCollisionHandler reference="../../../../myCollisionHandler"/>
-                <myCharacteristics>
-                  <game__data.characteristics.Impassable>
-                    <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-                    <movesThroughBottom>false</movesThroughBottom>
-                  </game__data.characteristics.Impassable>
-                </myCharacteristics>
-                <myControllable>
-                  <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-                  <myKeyPressedMap class="tree-map"/>
-                  <myKeyReleasedMap/>
-                  <myKeysPressed/>
-                  <myKeysReleased/>
-                  <isControllable>true</isControllable>
-                </myControllable>
-                <id>ConcreteDraggableSprite1481500704857</id>
-                <myStates>
-                  <game__data.states.Physics>
-                    <verticalGravity>0.0</verticalGravity>
-                    <horizontalGravity>0.0</horizontalGravity>
-                  </game__data.states.Physics>
-                  <game__data.states.Health>
-                    <myHealth>1</myHealth>
-                    <isAlive>true</isAlive>
-                  </game__data.states.Health>
-                </myStates>
-              </mySprite>
-              <movesThroughBottom>false</movesThroughBottom>
-            </game__data.characteristics.Impassable>
-            <game__data.characteristics.Impassable reference="../game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
-          </myCharacteristics>
-          <myControllable reference="../myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
-          <id></id>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>704.0</myXLocation>
-            <myYLocation>505.5</myYLocation>
-          </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myImagePath>data/images/sprite_images/block.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>600.0</terminalXVel>
-          <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
-            <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-              <movesThroughBottom>false</movesThroughBottom>
-            </game__data.characteristics.Impassable>
-          </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
-          <id></id>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
         <game__data.sprites.Item>
           <name>Item_Name</name>
           <myLocation>
             <myXLocation>750.0</myXLocation>
             <myYLocation>350.0</myYLocation>
           </myLocation>
-          <myWidth>50</myWidth>
-          <myHeight>50</myHeight>
+          <myWidth>52</myWidth>
+          <myHeight>52</myHeight>
           <myImagePath>data/images/sprite_images/mystery-box.png</myImagePath>
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
@@ -254,10 +140,51 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>900.0</myXLocation>
-            <myYLocation>400.0</myYLocation>
+            <myXLocation>910.5</myXLocation>
+            <myYLocation>502.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain">
+            <name>Terrain_Name</name>
+            <myLocation>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>data/images/sprite_images/block.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <terminalXVel>600.0</terminalXVel>
+            <terminalYVel>600.0</terminalYVel>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Impassable>
+                <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                <movesThroughBottom>false</movesThroughBottom>
+              </game__data.characteristics.Impassable>
+            </myCharacteristics>
+            <myControllable>
+              <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+              <myKeyPressedMap class="tree-map"/>
+              <myKeyReleasedMap/>
+              <myKeysPressed/>
+              <myKeysReleased/>
+              <isControllable>true</isControllable>
+            </myControllable>
+            <id>ConcreteDraggableSprite1481500704857</id>
+            <myStates>
+              <game__data.states.Health>
+                <myHealth>1</myHealth>
+                <isAlive>true</isAlive>
+              </game__data.states.Health>
+              <game__data.states.Physics>
+                <verticalGravity>0.0</verticalGravity>
+                <horizontalGravity>0.0</horizontalGravity>
+              </game__data.states.Physics>
+            </myStates>
+          </preset>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -267,99 +194,25 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../preset/myControllable"/>
           <id></id>
           <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
             </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>1012.0</myXLocation>
-            <myYLocation>500.5</myYLocation>
-          </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myImagePath>data/images/sprite_images/block.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>600.0</terminalXVel>
-          <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
-            <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-              <movesThroughBottom>false</movesThroughBottom>
-            </game__data.characteristics.Impassable>
-          </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
-          <id></id>
-          <myStates>
             <game__data.states.Physics>
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>809.0</myXLocation>
-            <myYLocation>502.5</myYLocation>
-          </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myImagePath>data/images/sprite_images/block.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>600.0</terminalXVel>
-          <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
-            <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-              <movesThroughBottom>false</movesThroughBottom>
-            </game__data.characteristics.Impassable>
-          </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
-          <id></id>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Terrain>
@@ -368,7 +221,7 @@
             <myXLocation>800.0</myXLocation>
             <myYLocation>100.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -378,15 +231,15 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Physics>
@@ -402,10 +255,10 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>700.0</myXLocation>
-            <myYLocation>100.0</myYLocation>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -415,15 +268,15 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Physics>
@@ -442,7 +295,7 @@
             <myXLocation>600.0</myXLocation>
             <myYLocation>400.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -452,34 +305,34 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
             </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>910.5</myXLocation>
-            <myYLocation>502.0</myYLocation>
+            <myXLocation>809.0</myXLocation>
+            <myYLocation>502.5</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -489,15 +342,15 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -513,47 +366,10 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>900.0</myXLocation>
-            <myYLocation>200.0</myYLocation>
-          </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-          <myWidth>100</myWidth>
-          <myHeight>100</myHeight>
-          <myImagePath>data/images/sprite_images/block.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>600.0</terminalXVel>
-          <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
-            <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-              <movesThroughBottom>false</movesThroughBottom>
-            </game__data.characteristics.Impassable>
-          </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
-          <id></id>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>500.0</myXLocation>
+            <myXLocation>400.0</myXLocation>
             <myYLocation>400.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -563,15 +379,15 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -590,7 +406,7 @@
             <myXLocation>900.0</myXLocation>
             <myYLocation>100.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -600,15 +416,126 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+          <id></id>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>500.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+          <id></id>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>200.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+          <id></id>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>1012.0</myXLocation>
+            <myYLocation>500.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Physics>
@@ -621,14 +548,16 @@
             </game__data.states.Health>
           </myStates>
         </game__data.sprites.Terrain>
+        <game__data.sprites.Player reference="../../myMainPlayer"/>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>673.5</myXLocation>
-            <myYLocation>270.5</myYLocation>
+            <myXLocation>700.0</myXLocation>
+            <myYLocation>100.0</myYLocation>
           </myLocation>
-          <myWidth>56</myWidth>
-          <myHeight>56</myHeight>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
@@ -636,24 +565,15 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
-            <game__data.characteristics.Movable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.Movable>
           </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Physics>
@@ -672,7 +592,7 @@
             <myXLocation>900.0</myXLocation>
             <myYLocation>300.0</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -682,35 +602,34 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
             </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
-        <game__data.sprites.Player reference="../../myMainPlayer"/>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>400.0</myXLocation>
-            <myYLocation>400.0</myYLocation>
+            <myXLocation>704.0</myXLocation>
+            <myYLocation>505.5</myYLocation>
           </myLocation>
-          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+          <preset class="game_data.sprites.Terrain" reference="../../game__data.sprites.Terrain/preset"/>
           <myWidth>100</myWidth>
           <myHeight>100</myHeight>
           <myImagePath>data/images/sprite_images/block.png</myImagePath>
@@ -720,15 +639,15 @@
           <myYAcceleration>0.0</myYAcceleration>
           <terminalXVel>600.0</terminalXVel>
           <terminalYVel>600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myCharacteristics/game__data.characteristics.Impassable"/>
             <game__data.characteristics.Impassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
               <movesThroughBottom>false</movesThroughBottom>
             </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
           </myCharacteristics>
-          <myControllable reference="../../game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite/myControllable"/>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
           <id></id>
           <myStates>
             <game__data.states.Health>
@@ -739,32 +658,113 @@
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>300.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Impassable reference="../../../game__data.sprites.Terrain/preset/myCharacteristics/game__data.characteristics.Impassable"/>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+          <id></id>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Terrain>
       </mySprites>
       <myControllableSpriteList>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[15]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[11]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[8]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[5]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[9]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[4]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[7]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[6]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[12]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[10]"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[14]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[6]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[8]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[4]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[13]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[5]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[10]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[11]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[7]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[9]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[12]"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[3]"/>
         <game__data.sprites.Item reference="../../mySprites/game__data.sprites.Item"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[13]"/>
         <game__data.sprites.Player reference="../../myMainPlayer"/>
       </myControllableSpriteList>
       <myKeyCommands/>
     </game__data.Level>
   </myLevels>
   <mySpritePresets>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+    <game__data.sprites.Item>
+      <name>Item_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>50</myWidth>
+      <myHeight>50</myHeight>
+      <myImagePath>data/images/sprite_images/mystery-box.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>600.0</terminalXVel>
+      <terminalYVel>600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Item/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Impassable>
+          <mySprite class="game_data.sprites.Item" reference="../../.."/>
+          <movesThroughBottom>false</movesThroughBottom>
+        </game__data.characteristics.Impassable>
+        <game__data.characteristics.Movable>
+          <mySprite class="game_data.sprites.Item" reference="../../.."/>
+        </game__data.characteristics.Movable>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Item" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481497916084</id>
+      <myStates>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+      </myStates>
+    </game__data.sprites.Item>
     <game__data.sprites.Player>
       <name>Player_Name</name>
       <myLocation>
@@ -836,65 +836,19 @@
         <game__data.states.Score>
           <myScore>0.0</myScore>
         </game__data.states.Score>
-        <game__data.states.Health>
-          <myHealth>1</myHealth>
-          <isAlive>true</isAlive>
-        </game__data.states.Health>
+        <game__data.states.LevelWon>
+          <hasWon>false</hasWon>
+        </game__data.states.LevelWon>
         <game__data.states.Physics>
           <verticalGravity>800.0</verticalGravity>
           <horizontalGravity>0.0</horizontalGravity>
         </game__data.states.Physics>
-        <game__data.states.LevelWon>
-          <hasWon>false</hasWon>
-        </game__data.states.LevelWon>
-      </myStates>
-    </game__data.sprites.Player>
-    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
-    <game__data.sprites.Item>
-      <name>Item_Name</name>
-      <myLocation>
-        <myXLocation>0.0</myXLocation>
-        <myYLocation>0.0</myYLocation>
-      </myLocation>
-      <myWidth>50</myWidth>
-      <myHeight>50</myHeight>
-      <myImagePath>data/images/sprite_images/mystery-box.png</myImagePath>
-      <myXVelocity>0.0</myXVelocity>
-      <myYVelocity>0.0</myYVelocity>
-      <myXAcceleration>0.0</myXAcceleration>
-      <myYAcceleration>0.0</myYAcceleration>
-      <terminalXVel>600.0</terminalXVel>
-      <terminalYVel>600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Item/myCollisionHandler"/>
-      <myCharacteristics>
-        <game__data.characteristics.Movable>
-          <mySprite class="game_data.sprites.Item" reference="../../.."/>
-        </game__data.characteristics.Movable>
-        <game__data.characteristics.Impassable>
-          <mySprite class="game_data.sprites.Item" reference="../../.."/>
-          <movesThroughBottom>false</movesThroughBottom>
-        </game__data.characteristics.Impassable>
-      </myCharacteristics>
-      <myControllable>
-        <mySprite class="game_data.sprites.Item" reference="../.."/>
-        <myKeyPressedMap class="tree-map"/>
-        <myKeyReleasedMap/>
-        <myKeysPressed/>
-        <myKeysReleased/>
-        <isControllable>true</isControllable>
-      </myControllable>
-      <id>ConcreteDraggableSprite1481497916084</id>
-      <myStates>
         <game__data.states.Health>
           <myHealth>1</myHealth>
           <isAlive>true</isAlive>
         </game__data.states.Health>
-        <game__data.states.Physics>
-          <verticalGravity>0.0</verticalGravity>
-          <horizontalGravity>0.0</horizontalGravity>
-        </game__data.states.Physics>
       </myStates>
-    </game__data.sprites.Item>
+    </game__data.sprites.Player>
   </mySpritePresets>
   <myCurrentLevel reference="../myLevels/game__data.Level"/>
   <myDescription>New VOOGASalad Game</myDescription>

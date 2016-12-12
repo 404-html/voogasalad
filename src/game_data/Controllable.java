@@ -93,7 +93,10 @@ public class Controllable {
 		for (Sprite s : myCollisionMap.keySet()) {
 			if (s instanceof Terrain || s instanceof Item) {
 				// if (myCollisionMap.get(s).equals(Side.BOTTOM));
-				if (myCollisionMap.get(s) instanceof Top)
+				
+				
+//				if (myCollisionMap.get(s) instanceof Top){
+//					System.out.println("TOP");
 					return true;
 			}
 		}

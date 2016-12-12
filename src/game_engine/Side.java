@@ -12,5 +12,6 @@ public abstract class Side {
 	public abstract boolean isHorizontal();
 	public abstract void Movable (Sprite aSprite, Sprite movableSprite);
 	
+	
 }
 

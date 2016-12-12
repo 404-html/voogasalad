@@ -8,6 +8,7 @@ public class MovableTriggered implements Action{
 	private Sprite myPlayerSprite;
 	private Sprite myMovableSprite;
 	private Side myMovableCollisionSide;
+	
 
 
 	public MovableTriggered(Sprite MovableSprite, Sprite PlayerSprite, Side CollisionSide){
@@ -16,13 +17,11 @@ public class MovableTriggered implements Action{
 		myMovableCollisionSide = CollisionSide;
 		
 		
+		
 	}
 	@Override
 	public void act() {
-		// TODO Auto-generated method stub
-	
 		myMovableCollisionSide.Movable(myPlayerSprite, myMovableSprite);
-		
 		
 		}
 		
