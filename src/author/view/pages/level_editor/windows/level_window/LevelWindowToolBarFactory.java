@@ -36,18 +36,18 @@ public class LevelWindowToolBarFactory {
 			newBackgroundImage();
 		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ExtendWidth"), e -> {
 			this.iLevelWindowInternal.getHorizontalPanes()
-					.set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
+			.set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
 		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ExtendHeight"), e -> {
 			this.iLevelWindowInternal.getVerticalPanes().set(this.iLevelWindowInternal.getVerticalPanes().get() + 1);
 		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ShrinkWidth"), e -> {
 			if (this.iLevelWindowInternal.getHorizontalPanes().get() > 1) {
 				this.iLevelWindowInternal.getHorizontalPanes()
-						.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
+				.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
 			}
 		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ShrinkHeight"), e -> {
 			if (this.iLevelWindowInternal.getVerticalPanes().get() > 1) {
 				this.iLevelWindowInternal.getVerticalPanes()
-						.set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
+				.set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
 			}
 		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ResetSize"), e -> {
 			this.iLevelWindowInternal.getHorizontalPanes().set(1);
@@ -62,9 +62,10 @@ public class LevelWindowToolBarFactory {
 		try {
 			file = new FileLoader(authorController.getPathString("LevelImages"), FileType.RASTER_IMAGE, new Stage()).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
-			if(this.authorController.getModel().getGame().getCurrentLevel()!= null)
+			if(this.authorController.getModel().getGame().getCurrentLevel()!= null){
 				this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 				this.authorController.getModel().getGame().setCurrentLevel(this.authorController.getModel().getGame().getCurrentLevel());
+			}
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
 			e.printStackTrace();
@@ -74,8 +75,8 @@ public class LevelWindowToolBarFactory {
 		}
 
 	}
-	
-	
+
+
 	private CheckBox createCheckBox(String text){
 		CheckBox checkBox = new CheckBox(text);
 		checkBox.selectedProperty().bindBidirectional(this.iLevelWindowInternal.getRandomProperty());
