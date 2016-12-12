@@ -91,10 +91,11 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
+		
 //		System.out.println( " X VEL :" + myLevel.getMainPlayer().getXVelocity());
 //		for (State state : myLevel.getMainPlayer().getStates()) {
-//			if (state instanceof Health) {
-//					System.out.println("Health : "+ ((Health)state).getHealth());
+//			if (state instanceof Score) {
+//					System.out.println("Score : "+ ((Score)state).getMyScore());
 //				}
 //			}	
 	}
@@ -136,9 +137,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 //		}
 //	}
 
-	public void setKeyPressedMapWithBoosts() {
-		myLevel.getMainPlayer().getControllable().setMyKeyPressedMap(generateBoostedKeyPressedMap());
-	}
+//	public void setKeyPressedMapWithBoosts() {
+//		myLevel.getMainPlayer().getControllable().setMyKeyPressedMap(generateBoostedKeyPressedMap());
+//	}
 
 	private void checkPowerUps() {
 		ArrayList<Characteristic> toRemove = new ArrayList<Characteristic>();
@@ -147,7 +148,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			// myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
-//				 System.out.println("HELLOOOOOO");
 				toRemove.add(powerUp);
 			}
 		}
@@ -264,7 +264,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 
 	public void generateDefaultKeyPressedMap() {
-		System.out.println("LUCIA");
+		
 		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));

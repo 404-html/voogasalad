@@ -69,7 +69,7 @@ class RevertManager implements IRevertManager, IRevertManagerInternal{
 	@Override
 	public void addHistory(GameChangeEvent aGameChangeEvent) {
 		this.eventHistory.push(aGameChangeEvent);
-		System.out.println("Size: " + eventHistory.size());
+//		System.out.println("Size: " + eventHistory.size());
 		this.eventHistory.forEach((myGameChangeEvent) -> {
 			System.out.println(myGameChangeEvent);
 		});
