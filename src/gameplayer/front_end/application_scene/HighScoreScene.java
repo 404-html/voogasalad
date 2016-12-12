@@ -4,7 +4,10 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
@@ -22,6 +25,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	private BorderPane myPane;
 	private List<Double> myScores;
 	private HighscoreManager myHighscoreManager;
+	private Set<String> myAddedUsers;
 	
 	public HighScoreScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
@@ -38,6 +42,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		myScores = new ArrayList<Double>();
 		myPane.setId("glass");
 		myGamename = aGamename;
+		myAddedUsers = new HashSet<String>();
 	}
 
 	public void setGame(String aGamename) {
@@ -97,8 +102,10 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		Collections.sort(myScores, Collections.reverseOrder());
 		for (Double score : myScores) {
 			String user = getUserWithScore(score);
-			aUsers.getChildren().add(new Label(user));
-			aScores.getChildren().add(new Label(String.valueOf(score)));
+			if (!user.isEmpty()) {
+				aUsers.getChildren().add(new Label(user));
+				aScores.getChildren().add(new Label(String.valueOf(score)));
+			}
 			if (i == 10) {
 				break;
 			}
@@ -109,7 +116,10 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	private String getUserWithScore(double aScore) {
 		for (int i = 0; i < myHighscoreManager.getHighscores().size(); i++) {
 			if (myHighscoreManager.getHighscores().get(i) == aScore) {
-				return myHighscoreManager.getUsers().get(i);
+				if (!myAddedUsers.contains(myHighscoreManager.getUsers().get(i))) {
+					myAddedUsers.add(myHighscoreManager.getUsers().get(i));
+					return myHighscoreManager.getUsers().get(i);
+				}
 			}
 		}
 		return "";
