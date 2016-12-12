@@ -11,6 +11,7 @@ import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
+import gameplayer.back_end.exceptions.GameNotFunctionalException;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.back_end.user_information.LevelManager;
@@ -63,8 +64,6 @@ public class GamePlayController extends AbstractController {
 			myGameEngine = new GameEngine(myGameFile, aLevel);
 			myGameController = myGameEngine.getMyEnginePlayerController();
 			myGameUpdater = new UpdateGame(myGameController.getMyGame());
-			determineScore();
-			determineHealth();
 		} catch (Exception e) {
 			showError(e);
 		}
@@ -86,7 +85,7 @@ public class GamePlayController extends AbstractController {
 		try {
 			updateSprites();
 		} catch (Exception e) {
-			throw e;
+			throw new GameNotFunctionalException();
 		}
 		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.getMainPlayer());
 		initializeAnimation();
@@ -183,6 +182,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setHealthLabel() {
+		determineHealth();
 		if (myHealth != null) { myGamePlayScene.addNode(getGUIGenerator().createLabel("Health: " + myHealth.getHealth(), 0, 0), 1);}
 	}
 
@@ -195,6 +195,7 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setScoreLabel() {
+		determineScore();
 		if (myScore != null) {
 			myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 2);
 		}

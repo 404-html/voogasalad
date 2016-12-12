@@ -3,6 +3,7 @@ package gameplayer.application_controller;
 import java.io.File;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
+import gameplayer.back_end.exceptions.GameNotFunctionalException;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.LevelManager;
@@ -126,6 +127,8 @@ public class ApplicationController extends AbstractController {
 				} catch (Exception x) {
 					if (x.getMessage() != null && !x.getMessage().isEmpty()) {
 						showError(x);
+					} else {
+						
 					}
 				}
 			}
@@ -180,7 +183,7 @@ public class ApplicationController extends AbstractController {
 			try {
 				myGamePlay.displayGame();
 			} catch (Exception e1) {
-				showError(e1);
+				showError(new GameNotFunctionalException("Your game had trouble loading, please try again"));
 			}
 		}, ButtonDisplay.TEXT);
 	}
