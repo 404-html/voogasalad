@@ -24,6 +24,7 @@ import util.filehelpers.FileLoader.FileType;
 public class LevelWindowToolBarFactory {
 	private ILevelWindowInternal iLevelWindowInternal;
 	private IAuthorController authorController;
+
 	public ToolBar createToolBar(ILevelWindowInternal iLevelWindowInternal, IAuthorController authorController) {
 		this.iLevelWindowInternal = iLevelWindowInternal;
 		this.authorController = authorController;
@@ -32,17 +33,25 @@ public class LevelWindowToolBarFactory {
 		tbb.addFiller();
 		tbb.addBurst(new ButtonFactory().createButton("Set Background", e -> {
 			newBackgroundImage();
-		}).getButton(), new ButtonFactory().createButton("Set Theme", e -> {
-			// TODO: Set Theme Here
-		}).getButton(), new ButtonFactory().createButton("Extend Right", e -> {
-			this.iLevelWindowInternal.getHorizontalPanes().set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
-		}).getButton(), new ButtonFactory().createButton("Extend Down", e -> {
+		}).getButton(), new ButtonFactory().createButton("Extend Width", e -> {
+			this.iLevelWindowInternal.getHorizontalPanes()
+					.set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
+		}).getButton(), new ButtonFactory().createButton("Extend Height", e -> {
 			this.iLevelWindowInternal.getVerticalPanes().set(this.iLevelWindowInternal.getVerticalPanes().get() + 1);
+		}).getButton(), new ButtonFactory().createButton("Shrink Width", e -> {
+			if (this.iLevelWindowInternal.getHorizontalPanes().get() > 1) {
+				this.iLevelWindowInternal.getHorizontalPanes()
+						.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
+			}
+		}).getButton(), new ButtonFactory().createButton("Shrink Height", e -> {
+			if (this.iLevelWindowInternal.getVerticalPanes().get() > 1) {
+				this.iLevelWindowInternal.getVerticalPanes()
+						.set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
+			}
 		}).getButton(), new ButtonFactory().createButton("Reset Size", e -> {
 			this.iLevelWindowInternal.getHorizontalPanes().set(1);
 			this.iLevelWindowInternal.getVerticalPanes().set(1);
 		}).getButton());
-
 
 		return tbb.getToolBar();
 	}
@@ -52,13 +61,11 @@ public class LevelWindowToolBarFactory {
 		try {
 			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
-			this.authorController.getModel().getGame().getCurrentLevel()
-				.setBackgroundImageFilePath(pf.getPath(file));
+			this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
 			e.printStackTrace();
 		}
-
 
 	}
 

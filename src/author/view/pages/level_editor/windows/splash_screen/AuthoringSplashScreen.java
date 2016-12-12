@@ -101,9 +101,16 @@ public class AuthoringSplashScreen implements IAuthoringSplashScreen {
 			authorControllerExternal = new AuthorControllerFactory().create(aFile);
 			openGame();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			displayNoGameLoadedError();
 		}
+	}
+	
+	private void displayNoGameLoadedError() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("VoogaSalad Game");
+		alert.setHeaderText("File Not Found");
+		alert.setContentText("Please load a valid XML file for the Game");
+		alert.showAndWait();
 	}
 	
 	private void displayEmptyGameNameError() {

@@ -18,8 +18,6 @@ public class Pace implements Action {
 	@Override
 	public void act() {
 		
-		System.out.println(myShouldChangeDirection + "    " + mySprite.getXVelocity());
-
 		if(myShouldChangeDirection){
 			mySprite.setXVelocity(-1*(mySprite.getXVelocity()));
 			mySprite.setYVelocity(-1*(mySprite.getYVelocity()));

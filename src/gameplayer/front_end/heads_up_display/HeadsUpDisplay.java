@@ -64,4 +64,19 @@ public class HeadsUpDisplay {
 		myRoot.setBackground(Background.EMPTY);
 		return myRoot;
 	}
+
+	public void addNode(Node aNode) {
+		aNode.setId("animation-label");
+		aNode.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
+		myBottom.getChildren().add(aNode);
+	}
+	
+	public void addNode(Node aNode, int aPos) {
+		if (myBottom.getChildren().size() > 2) {
+			myBottom.getChildren().remove(aPos);
+			addNode(aNode);
+		} else {
+			addNode(aNode);
+		}
+	}
 }

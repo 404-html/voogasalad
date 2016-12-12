@@ -18,6 +18,7 @@ import game_data.states.LevelWon;
 import game_data.states.Physics;
 import game_data.states.Score;
 import game_data.states.State;
+import game_data.states.Visible;
 import game_engine.actions.Action;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
@@ -81,6 +82,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		setKeysReleased(aKeysReleased);
 		mySpriteImages=aSpriteImages;
 		myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
+//		System.out.println("number o fpower UP" + myCurrentPowerUps.size());
 		mySpriteList = myLevel.getMySpriteList();
 		myControllableSpriteList = myLevel.getMyControllableSpriteList();
 		mainPlayerControllable = myLevel.getMainPlayer().getControllable();	
@@ -89,6 +91,12 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
+		
+//		for (State state : myLevel.getMainPlayer().getStates()) {
+//			if (state instanceof Visible) {
+//					System.out.println("Visible : "+ ((Visible) state).isVisible());
+//				}
+//			}	
 	}
 
 	private void setKeysPressed(Set<KeyCode> aKeysPressed){
@@ -103,14 +111,14 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void activatePowerUps() {
 		for (Characteristic powerUp : myCurrentPowerUps.keySet()) {
 //			System.out.println("Number of power ups " + myCurrentPowerUps.size());
-			if (powerUp instanceof TemporalPowerUpper) {
+//			if (powerUp instanceof TemporalPowerUpper) {
 				((TemporalPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this,
 						myCurrentPowerUps.get(powerUp));
 //				System.out.println("Time left " + myCurrentPowerUps.get(powerUp));
-			}
-			if(powerUp instanceof InvincibilityPowerUpper){
-				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
-			}
+//			}
+//			if(powerUp instanceof InvincibilityPowerUpper){
+//				((InvincibilityPowerUpper) powerUp).activatePowerUp(myLevel.getMainPlayer(), this, myCurrentPowerUps.get(powerUp));
+//			}
 
 		}
 	}
@@ -125,9 +133,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 //			// System.out.println("Knows type");
 //
 //			((TemporalPowerUpper) powerUp).activatePowerUp(spriteToActOn, null, timeRemaining);
-//
 //		}
-//
 //	}
 
 	public void setKeyPressedMapWithBoosts() {
@@ -187,6 +193,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			ListOfCollidingSprites collidingSprites = new ListOfCollidingSprites(mySprite, mySpriteList,
 					mySpriteImages);
 			Map<Sprite, Side> myCollisionMap = collidingSprites.getCollisionSpriteMap();
+//			if(mySprite instanceof Player){
+//				System.out.println("Colliding with : " + myCollisionMap.size());
+//			}
 			Controllable control;
 			if (mySprite instanceof Player)
 				control = mainPlayerControllable;
@@ -204,9 +213,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		for(Sprite mySprite : mySpriteList) {
 			if(mySprite.getMyRandomMoveHandler() != null) {
 				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
-			}
-			if(mySprite.getMyRandomMoveConjointHandler() != null) {
-				mySprite.getMyRandomMoveConjointHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
 			}
 		}
 	}
