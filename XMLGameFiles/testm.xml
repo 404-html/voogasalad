@@ -1,0 +1,188 @@
+<game__data.Game>
+  <name>testm</name>
+  <myLevels>
+    <game__data.Level>
+      <name>l1</name>
+      <didLose>false</didLose>
+      <didWin>false</didWin>
+      <width>2214</width>
+      <height>726</height>
+      <mySprites>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myXLocation>309.0</myXLocation>
+            <myYLocation>399.5</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Terrain">
+            <name>Block</name>
+            <myLocation>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>data/images/sprite_images/block.png</myImagePath>
+            <myXVelocity>0.0</myXVelocity>
+            <myYVelocity>0.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <terminalXVel>600.0</terminalXVel>
+            <terminalYVel>600.0</terminalYVel>
+            <myCollisionHandler/>
+            <myCharacteristics>
+              <game__data.characteristics.Impassable>
+                <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                <movesThroughBottom>false</movesThroughBottom>
+              </game__data.characteristics.Impassable>
+            </myCharacteristics>
+            <myControllable>
+              <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+              <isControllable>false</isControllable>
+            </myControllable>
+            <id>ConcreteDraggableSprite1481489880648</id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <myControllable reference="../preset/myControllable"/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Block</name>
+          <myLocation>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <myWidth>104</myWidth>
+          <myHeight>104</myHeight>
+          <myImagePath>data/images/sprite_images/block.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/preset/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../../../game__data.sprites.Terrain/preset"/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <myControllable reference="../../game__data.sprites.Terrain/preset/myControllable"/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Player>
+          <name>Mario</name>
+          <myLocation>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>300.0</myYLocation>
+          </myLocation>
+          <preset class="game_data.sprites.Player">
+            <name>Mario</name>
+            <myLocation>
+              <myXLocation>0.0</myXLocation>
+              <myYLocation>0.0</myYLocation>
+            </myLocation>
+            <myWidth>100</myWidth>
+            <myHeight>100</myHeight>
+            <myImagePath>data/images/sprite_images/super-mario.png</myImagePath>
+            <myXVelocity>40.0</myXVelocity>
+            <myYVelocity>20.0</myYVelocity>
+            <myXAcceleration>0.0</myXAcceleration>
+            <myYAcceleration>0.0</myYAcceleration>
+            <terminalXVel>600.0</terminalXVel>
+            <terminalYVel>600.0</terminalYVel>
+            <myCollisionHandler/>
+            <myCharacteristics/>
+            <myControllable>
+              <mySprite class="game_data.sprites.Player" reference="../.."/>
+              <myKeyPressedMap class="tree-map"/>
+              <myKeyReleasedMap/>
+              <isControllable>true</isControllable>
+            </myControllable>
+            <id>ConcreteDraggableSprite1481489870993</id>
+            <myStates/>
+          </preset>
+          <myWidth>100</myWidth>
+          <myHeight>100</myHeight>
+          <myImagePath>data/images/sprite_images/super-mario.png</myImagePath>
+          <myXVelocity>40.0</myXVelocity>
+          <myYVelocity>20.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>600.0</terminalXVel>
+          <terminalYVel>600.0</terminalYVel>
+          <myCollisionHandler reference="../preset/myCollisionHandler"/>
+          <myCharacteristics/>
+          <myControllable reference="../preset/myControllable"/>
+          <id></id>
+          <myStates/>
+        </game__data.sprites.Player>
+      </mySprites>
+      <myControllableSpriteList>
+        <game__data.sprites.Player reference="../../mySprites/game__data.sprites.Player"/>
+      </myControllableSpriteList>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <mySpritePresets>
+    <game__data.sprites.Player reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Player/preset"/>
+    <game__data.sprites.Terrain>
+      <name>Terrain_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/Empty.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>600.0</terminalXVel>
+      <terminalYVel>600.0</terminalYVel>
+      <myCollisionHandler/>
+      <myCharacteristics/>
+      <myControllable>
+        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id></id>
+      <myStates>
+        <game__data.states.Physics>
+          <myPhysics>
+            <verticalGravity>0.0</verticalGravity>
+            <horizontalGravity>0.0</horizontalGravity>
+          </myPhysics>
+        </game__data.states.Physics>
+      </myStates>
+    </game__data.sprites.Terrain>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/preset"/>
+  </mySpritePresets>
+  <myCurrentLevel reference="../myLevels/game__data.Level"/>
+  <myDescription>New VOOGASalad Game</myDescription>
+  <myIconPath>data/images/game_icons/flower-icon.jpg</myIconPath>
+  <myScrollType>CENTER</myScrollType>
+  <myAudioFilePath>data/audio/Super-Mario-Song.mp3</myAudioFilePath>
+</game__data.Game>

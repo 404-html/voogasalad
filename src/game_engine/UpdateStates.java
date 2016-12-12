@@ -12,6 +12,7 @@ import game_data.characteristics.Characteristic;
 import game_data.characteristics.InvincibilityPowerUpper;
 import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.TemporalPowerUpper;
+import game_data.sprites.Item;
 import game_data.sprites.Player;
 import game_data.states.Health;
 import game_data.states.LevelWon;

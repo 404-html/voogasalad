@@ -37,4 +37,11 @@ public class Top extends Side{
 		return false;
 	}
 
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		if(movableSprite.getYVelocity()<=0 && aSprite.getYVelocity()>0){
+			movableSprite.setYVelocity(aSprite.getYVelocity());}
+		
+	}
+
 }

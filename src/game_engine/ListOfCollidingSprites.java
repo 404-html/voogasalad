@@ -239,9 +239,9 @@ public class ListOfCollidingSprites {
 				if((targetSprite instanceof Terrain && !isTransparent()) || (isTransparent() && pastPlatform(mySprite))){
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 				}
-				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
-					return findSideOfCollision(mySprite);
-				}
+//				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
+//					return findSideOfCollision(mySprite);
+//				}
 				return new Top();
 				//return Side.TOP;
 			} else if (bottom_collision < top_collision && bottom_collision < left_collision
@@ -250,9 +250,9 @@ public class ListOfCollidingSprites {
 				if(targetSprite instanceof Terrain && !isTransparent()){
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
 				}
-				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
-					return findSideOfCollision(mySprite);
-				}
+//				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
+//					return findSideOfCollision(mySprite);
+//				}
 				//return Side.BOTTOM;
 				return new Bottom();
 			} else if (left_collision < right_collision && left_collision < top_collision
@@ -263,9 +263,9 @@ public class ListOfCollidingSprites {
 						mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 						mySprite.setLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
 					}
-					if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
-						return findSideOfCollision(mySprite);
-					}
+//					if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
+//						return findSideOfCollision(mySprite);
+//					}
 					//return Side.LEFT;
 					return new Left();
 				//}
@@ -278,9 +278,9 @@ public class ListOfCollidingSprites {
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 					mySprite.setLocation(new Location(myTopLeftX + right_collision, myTopLeftY));
 				}
-					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
-						return findSideOfCollision(mySprite);
-					}
+//					if (frameTime + (.001 * 1000 / 120) > System.currentTimeMillis()) {
+//						return findSideOfCollision(mySprite);
+//					}
 					//return Side.RIGHT;
 					return new Right();
 				//}

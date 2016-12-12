@@ -27,6 +27,8 @@ public class Right extends Side{
 			aSprite.setXAcceleration(-aSpritePhysics.getHorizontalGravity());
 		}
 	}
+	
+	
 
 	@Override
 	public boolean isVertical() {
@@ -36,6 +38,12 @@ public class Right extends Side{
 	@Override
 	public boolean isHorizontal() {
 		return true;
+	}
+
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		if(movableSprite.getXVelocity()>=0 && aSprite.getXVelocity()<0){
+		movableSprite.setXVelocity(aSprite.getXVelocity());}
 	}
 
 

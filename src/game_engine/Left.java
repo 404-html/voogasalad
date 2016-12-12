@@ -38,4 +38,12 @@ public class Left extends Side{
 		return true;
 	}
 
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		
+		if(movableSprite.getXVelocity()<=0 && aSprite.getXVelocity()>0){	
+		movableSprite.setXVelocity(aSprite.getXVelocity());}
+		
+	}
+
 }

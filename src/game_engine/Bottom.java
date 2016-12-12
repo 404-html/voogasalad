@@ -39,4 +39,12 @@ public class Bottom extends Side{
 		return false;
 	}
 
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		if(movableSprite.getYVelocity()>=0 && aSprite.getYVelocity()<0){
+		System.out.println("Bottom");
+		movableSprite.setYVelocity(aSprite.getYVelocity());}
+		
+	}
+
 }
