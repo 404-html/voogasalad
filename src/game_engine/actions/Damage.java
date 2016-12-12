@@ -23,7 +23,7 @@ public class Damage extends PointsChanger implements Action {
 		boolean hasHealth = false;
 		State health = null;
 		boolean isInvincible = false; 
-		
+//		System.out.println("HeLLOOOO");
 		for(State i : spriteAffected.getStates()){
 			if (i instanceof Health){
 				hasHealth = true;
@@ -42,7 +42,7 @@ public class Damage extends PointsChanger implements Action {
 			spriteAffected.addCharacteristic(invincibility);
 			invincibility.getInterface().addToPowerUpMap(spriteAffected, GameResources.RECOVERY_TIME.getDoubleResource());
 //			UpdateStates.activateSingularPowerUp(invincibility, spriteAffected, GameResources.RECOVERY_TIME.getDoubleResource());
-			System.out.println("Healh " + ((Health) health).getMyHealth());
+//			System.out.println("Healh " + ((Health) health).getMyHealth());
 			if(((Health) health).getMyHealth()<=0){
 				((Health) health).kill();
 			}

@@ -34,7 +34,7 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 	@ParameterAnnotation(parameters = { "Time In Effect", "Sprite" })
 	public InvincibilityPowerUpper(double timeInEffect, Sprite aSprite) {
 		super(aSprite);
-		myTimeInEffect = timeInEffect*GameResources.TIME_FRAME.getDoubleResource();
+		myTimeInEffect = timeInEffect;
 	}
 	
 	@ViewableMethodOutput(description="Time In Effect", type=double.class)
@@ -113,5 +113,5 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 			}
 			return hasChanged;
 	}
-	
+
 }
