@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -33,6 +34,15 @@ public class HeadsUpDisplay {
 
 	public void addMenu(ImageView aImage, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
+	}
+
+	public void addLabel(String aText){
+		if(myBottom.getChildren().size() > 0){
+			myBottom.getChildren().remove(0);
+		}
+		Label label = myGUIGenerator.createLabel(aText, 0, 0);
+		label.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
+		myBottom.getChildren().add(label);
 	}
 
 	private Node createTop() {
