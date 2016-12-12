@@ -302,7 +302,9 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public Map<Characteristic, Double> getPowerUps() {
-		if(powerUps == null) return new HashMap<Characteristic, Double>();
+		if(powerUps == null){
+			powerUps = new HashMap<Characteristic, Double>();
+		}
 		return powerUps;
 	}
 

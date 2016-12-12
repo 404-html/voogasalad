@@ -33,12 +33,14 @@ public class SpeedBoost implements Action {
 		// myPlayerSprite.getSpritePhysics().setVerticalGravity(.5);
 
 		myPlayerSprite.setTerminalXVel(GameResources.TERMINAL_X_VELOCITY.getDoubleResource()+speedBoost);		
-		myPlayerSprite.setTerminalYVel(GameResources.TERMINAL_X_VELOCITY.getDoubleResource()+speedBoost);
+		myPlayerSprite.setTerminalYVel(GameResources.TERMINAL_Y_VELOCITY.getDoubleResource()+speedBoost);
 
 //		System.out.println("SIZE int" +myLevel.getMyPowerUps().size() );
 //		System.out.println("SIZE end" +myLevel.getMyPowerUps().size() );
 		prevSpeed = myPlayerSprite.getXVelocity();
-		myPlayerSprite.setXVelocity(myPlayerSprite.getXVelocity()*speedBoost);
+		myPlayerSprite.setXVelocity(myPlayerSprite.getXVelocity()+speedBoost);
+		myPlayerSprite.setYVelocity(myPlayerSprite.getYVelocity()+speedBoost);
+
 	}
 	
 	@Override
