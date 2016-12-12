@@ -113,5 +113,5 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 			}
 			return hasChanged;
 	}
-	
+
 }

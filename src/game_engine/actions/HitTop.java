@@ -69,6 +69,11 @@ public class HitTop implements Action {
 //				}
 //			}
 //		}
+
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new HitTop(aSprite, mySide, myNonPlayerSprite);
+	}
 	
 	
 //	private boolean pastPlatform(){
