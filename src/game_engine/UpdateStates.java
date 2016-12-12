@@ -1,33 +1,27 @@
 package game_engine;
+import game_data.Controllable;
+import game_data.Level;
+import game_data.Sprite;
+import game_data.characteristics.Characteristic;
+import game_data.characteristics.TemporalPowerUpper;
+import game_data.sprites.Player;
+import game_data.states.Health;
+import game_data.states.LevelWon;
+import game_data.states.State;
+import game_engine.actions.Action;
+import game_engine.actions.MoveLeft;
+import game_engine.actions.MoveRight;
+import game_engine.actions.MoveUpJump;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import game_data.Controllable;
-import game_data.Level;
-import game_data.Sprite;
-import game_data.characteristics.Characteristic;
-import game_data.characteristics.InvincibilityPowerUpper;
-import game_data.characteristics.SpeedPowerUpper;
-import game_data.characteristics.TemporalPowerUpper;
-import game_data.sprites.Player;
-import game_data.states.Health;
-import game_data.states.LevelWon;
-import game_data.states.Physics;
-import game_data.states.Score;
-import game_data.states.State;
-import game_data.states.Visible;
-import game_engine.actions.Action;
-import game_engine.actions.MoveLeft;
-import game_engine.actions.MoveRight;
-import game_engine.actions.MoveUpJump;
-import game_engine.actions.StopLeftMovement;
-import game_engine.actions.StopRightMovement;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import game_engine.Side;
 
 /**
  * TODO make sure that player doesnt run into walls or thigns NOTE: doing the
