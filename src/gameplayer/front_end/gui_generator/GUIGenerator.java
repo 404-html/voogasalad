@@ -3,8 +3,6 @@ package gameplayer.front_end.gui_generator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import gameplayer.application_controller.Choosable;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
@@ -98,6 +96,7 @@ public class GUIGenerator implements IGUIGenerator {
 		return box;
 	}
 
+	@SuppressWarnings("static-access")
 	private List<HBox> createListOfComboBoxHbox(List<String> aListOfNames, List<String> aListOfFilePaths,
 			List<String> aListOfDescriptions, ComboBox<Pane> box) {
 		List<HBox> options = new ArrayList<HBox>();

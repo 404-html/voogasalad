@@ -4,14 +4,11 @@ import java.io.File;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
-import com.restfb.FacebookClient.AccessToken;
 import com.restfb.Parameter;
 import com.restfb.json.JsonObject;
 import com.restfb.types.FacebookType;
-import com.restfb.types.Page;
 import com.restfb.types.User;
 
 public class FacebookInformation {
