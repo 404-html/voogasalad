@@ -248,6 +248,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private void setBackgroundImage(String filePath) {
 		if (filePath == null) {
 			createBackgroundImage(BLACK_IMAGE);
+			getController().getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(BLACK_IMAGE);
 		} else {
 			createBackgroundImage(filePath);
 		}
