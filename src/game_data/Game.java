@@ -25,7 +25,7 @@ public class Game extends GameObject {
 	 * description
 	 * icon
 	 */
-	
+
 	List<Level> myLevels;
 	Set<Sprite> mySpritePresets = new HashSet<>();
 	Level myCurrentLevel;
@@ -46,7 +46,7 @@ public class Game extends GameObject {
 		hasWon=false;
 		hasLost=false;
 	}
-	
+
 	public boolean hasWon() {
 		return hasWon;
 	}
@@ -120,9 +120,11 @@ public class Game extends GameObject {
 
 	public void setCurrentLevel(int levelNumber) {
 		myCurrentLevel = myLevels.get(levelNumber);
-		for(Characteristic c: myCurrentLevel.getMainPlayer().getCharacteristics()){
-			if(c instanceof ScoreBasedOnPosition){
-				((ScoreBasedOnPosition) c).setScrollDirection(myScrollType);
+		if(myCurrentLevel.getMainPlayer() != null){
+			for(Characteristic c: myCurrentLevel.getMainPlayer().getCharacteristics()){
+				if(c instanceof ScoreBasedOnPosition){
+					((ScoreBasedOnPosition) c).setScrollDirection(myScrollType);
+				}
 			}
 		}
 		this.notifyListeners();
@@ -167,11 +169,11 @@ public class Game extends GameObject {
 	public void setScrollType(ScrollType aScrollType) {
 		this.myScrollType = aScrollType;
 	}
-	
+
 	public String getAudioFilePath() {
 		return this.myAudioFilePath;
 	}
-	
+
 	public void setAudioFilePath(String aAudioFilePath) {
 		this.myAudioFilePath = aAudioFilePath;
 	}
