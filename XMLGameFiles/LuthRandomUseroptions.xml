@@ -1,4 +1,4 @@
 <gameplayer.front__end.popup.UserOptions>
-  <myFontColor>black</myFontColor>
-  <myKeyInput>Left</myKeyInput>
+  <myFontColor>Red</myFontColor>
+  <myKeyInput>Left (WASD)</myKeyInput>
 </gameplayer.front__end.popup.UserOptions>

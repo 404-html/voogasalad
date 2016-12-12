@@ -4,6 +4,7 @@
 package author.view.pages.level_editor.windows.level_edit_window;
 
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.Level;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -22,26 +23,27 @@ class LevelEditPage {
 	private LevelEditBox levelEditBox;
 	private ToolBarBuilder toolBarBuilder;
 	private Level level;
+	private ILanguageHolder myLanguageHolder;
 	
-	
-	LevelEditPage(ILevelEditWindowInternal iLevelEditInternal) {
+	LevelEditPage(ILevelEditWindowInternal iLevelEditInternal, ILanguageHolder aLanguageHolder) {
+		myLanguageHolder = aLanguageHolder;
 		this.iLevelEditInternal = iLevelEditInternal;
-		this.levelEditBox = new LevelEditBox();
+		this.levelEditBox = new LevelEditBox(aLanguageHolder);
 		initToolBarBuilder();
 		initPane();
 	}
 	
-	LevelEditPage(Level aLevel, ILevelEditWindowInternal iLevelEditInternal){
+	LevelEditPage(Level aLevel, ILevelEditWindowInternal iLevelEditInternal, ILanguageHolder aLanguageHolder){
 		this.iLevelEditInternal = iLevelEditInternal;
-		this.levelEditBox = new LevelEditBox(aLevel);
+		this.levelEditBox = new LevelEditBox(aLevel, aLanguageHolder);
 		initToolBarBuilder();
 		initPane();
 	}
 	
 	private void initToolBarBuilder(){
 		this.toolBarBuilder = new ToolBarBuilder();
-		this.toolBarBuilder.addBurst(new ButtonFactory().createButton("Save and Close", e -> saveAndClose(this.levelEditBox.getLevel())).getButton());
-		this.toolBarBuilder.addBurst(new ButtonFactory().createButton("Cancel", e -> cancel()).getButton());
+		this.toolBarBuilder.addBurst(new ButtonFactory().createButton("SaveAndClose", e -> saveAndClose(this.levelEditBox.getLevel()), myLanguageHolder).getButton());
+		this.toolBarBuilder.addBurst(new ButtonFactory().createButton("Cancel", e -> cancel(), myLanguageHolder).getButton());
 	}
 	
 	private void initPane(){

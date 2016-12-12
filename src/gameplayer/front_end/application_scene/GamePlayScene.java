@@ -23,7 +23,6 @@ public class GamePlayScene extends AbstractPlayerScene {
 	private HeadsUpDisplay myHeadsUpDisplay;
 	private Background myBackgroundDisplay;
 	private ResultScene myResultScene;
-	private String myBackgroundFilePath;
 	
 	public GamePlayScene(String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
 		myStack = new StackPane();
@@ -47,7 +46,6 @@ public class GamePlayScene extends AbstractPlayerScene {
 	public double getAnimationScreenXPosition() {
 		return myGamePlay.getAnimationScreenXPosition();
 	}
-	
 	
 	public double getAnimationScreenYPosition() {
 		return myGamePlay.getAnimationScreenYPosition();
@@ -110,6 +108,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 	}
 	
 	public void addNode(Node aNode, int aPos) {
+		aNode.setUserData(aPos);
 		myHeadsUpDisplay.addNode(aNode, aPos);
 	}
 }

@@ -4,6 +4,7 @@
 package author.view.util.edit_window;
 
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.GameObject;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -20,21 +21,23 @@ abstract class GameObjectEditPage <T extends GameObject>{
 	private GameObjectEditBox<T> gameObjectEditBox;
 	private ToolBarBuilder toolBarBuilder;
 	private T gameObject;
+	private ILanguageHolder myLanguageHolder;
 	
 	
-	GameObjectEditPage(IGameObjectEditWindowInternal iGameObjectEditWindowInternal) {
+	GameObjectEditPage(IGameObjectEditWindowInternal iGameObjectEditWindowInternal, ILanguageHolder aLanguageHolder) {
+		myLanguageHolder = aLanguageHolder;
 		this.iGameObjectEditWindowInternal = iGameObjectEditWindowInternal;
-		this.gameObjectEditBox = getGameObjectBox();
+		this.gameObjectEditBox = getGameObjectBox(myLanguageHolder);
 		initToolBarBuilder();
 		initPane();
 	}
 	
-	protected abstract GameObjectEditBox<T> getGameObjectBox();
+	protected abstract GameObjectEditBox<T> getGameObjectBox(ILanguageHolder aLanguageHolder);
 	
 	private void initToolBarBuilder(){
 		this.toolBarBuilder = new ToolBarBuilder();
-		this.toolBarBuilder.addBurst(new ButtonFactory().createButton("Save and Close", e -> saveAndClose(this.gameObjectEditBox.getResult())).getButton());
-		this.toolBarBuilder.addBurst(new ButtonFactory().createButton("Cancel", e -> cancel()).getButton());
+		this.toolBarBuilder.addBurst(new ButtonFactory().createButton(myLanguageHolder.getDisplayText("SaveAndClose"), e -> saveAndClose(this.gameObjectEditBox.getResult())).getButton());
+		this.toolBarBuilder.addBurst(new ButtonFactory().createButton(myLanguageHolder.getDisplayText("Cancel"), e -> cancel()).getButton());
 	}
 	
 	private void initPane(){

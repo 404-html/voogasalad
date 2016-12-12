@@ -3,6 +3,7 @@
  */
 package author.view.util.edit_window;
 
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.Game;
 
 /**
@@ -18,8 +19,8 @@ public class GameEditWindowFactory {
 		// Do Nothing
 	}
 	
-	public IGameObjectEditWindowExternal<Game> create(){
-		return new GameEditWindow();
+	public IGameObjectEditWindowExternal<Game> create(ILanguageHolder aLanguageHolder){
+		return new GameEditWindow(aLanguageHolder);
 	}
 
 }

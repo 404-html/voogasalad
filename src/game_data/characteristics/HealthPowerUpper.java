@@ -1,5 +1,4 @@
 package game_data.characteristics;
-import game_engine.IUpdateStatesAndPowerUps;
 import game_engine.Side;
 import game_engine.actions.*;
 
@@ -9,9 +8,6 @@ import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
-import game_data.sprites.Player;
-import game_engine.actions.Damage;
-import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.sprites.Player;
 import game_engine.actions.Damage;
 //import javafx.geometry.Side;
@@ -38,8 +34,8 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new HealthPowerUpper(myHealthToGain, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new HealthPowerUpper(myHealthToGain, aSprite);
 	}
 
 	@Override
@@ -47,7 +43,7 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 
 			if (collidedSprite instanceof Player){
-				myAction = new Damage(-getHealthToGain(), collidedSprite);
+				myAction = new AddHealth(-getHealthToGain(), collidedSprite);
 				myAction.act();
 			}		
 		}

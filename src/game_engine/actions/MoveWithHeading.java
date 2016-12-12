@@ -25,4 +25,9 @@ public class MoveWithHeading extends Move {
 		return;
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveWithHeading(aSprite, getVelocity());
+	}
+	
 }

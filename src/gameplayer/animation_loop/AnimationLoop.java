@@ -1,13 +1,14 @@
 package gameplayer.animation_loop;
 
+import game_engine.GameResources;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
 public class AnimationLoop {
 
-	private static final int FRAMES_PER_SECOND = 60;
-    private static final int MILLISECOND_DELAY = 1000/FRAMES_PER_SECOND;
+	private static final double FRAMES_PER_SECOND = GameResources.TIME_FRAME.getDoubleResource();
+    private static final int MILLISECOND_DELAY = (int) (1000 / FRAMES_PER_SECOND);
     private final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 	private Timeline myAnimation;
 	

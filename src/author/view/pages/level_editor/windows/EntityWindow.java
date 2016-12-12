@@ -3,6 +3,7 @@ package author.view.pages.level_editor.windows;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteDraggableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
+import author.view.util.language_selection.LanguageUserLabel;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -35,7 +36,7 @@ public class EntityWindow extends AbstractLevelEditorWindow {
 	@Override
 	protected void createToolBar() {
 		ToolBarBuilder tbb = new ToolBarBuilder();
-		tbb.addBurst(new Label("Entity Selector"));
+		tbb.addBurst(new LanguageUserLabel("EntitySelector", super.getController()));
 		super.getWindow().getChildren().add(tbb.getToolBar());
 	}
 

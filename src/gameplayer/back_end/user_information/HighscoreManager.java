@@ -18,9 +18,9 @@ public class HighscoreManager {
 	}
 	
 	public void setHighscore(String aUsername, double aScore, Game aGame) {
-		myUsers.add(aUsername);
-		myScores.add(aScore);
-		myGames.add(aGame);
+		myUsers.add(0, aUsername);
+		myScores.add(0, aScore);
+		myGames.add(0, aGame);
 	}
 	
 	public List<Double> getHighscores() {

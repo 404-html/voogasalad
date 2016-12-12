@@ -24,6 +24,11 @@ public class MovableTriggered implements Action{
 		myMovableCollisionSide.Movable(myPlayerSprite, myMovableSprite);
 		
 		}
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 	}
 

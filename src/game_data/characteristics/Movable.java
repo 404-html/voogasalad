@@ -75,6 +75,7 @@ public class Movable implements Characteristic{
 					playerCollisionSide = myCollisionMap.get(playerSprite);}
 				}
 
+
 			//System.out.println(impassTop);
 			//System.out.println(impassBottom);
 			if(playerSprite != null){
@@ -104,10 +105,9 @@ public class Movable implements Characteristic{
 		}
 		
 			
-
-		@Override
-		public Characteristic copy() {
-			return new Movable(mySprite);
-		}
+	@Override
+	public Characteristic copy(Sprite aSprite) {
+		return new Movable(aSprite);
+	}
 
 	}

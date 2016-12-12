@@ -31,7 +31,7 @@ public class TerrainDefaultBuilder implements SpriteDefaultBuilder {
 	private static final String NAME = "Terrain_Name";
 
 	@Override
-	public Sprite build() {
+	public Sprite buildDefault() {
 //		Sprite player = new Terrain();
 		for(Characteristic characteristic : CHARACTERISTICS) {
 			terrain.addCharacteristic(characteristic);

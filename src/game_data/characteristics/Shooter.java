@@ -32,8 +32,8 @@ public class Shooter implements Characteristic {
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Shooter(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Shooter(aSprite);
 	}
 
 }

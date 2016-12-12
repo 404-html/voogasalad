@@ -3,6 +3,7 @@ package gameplayer.application_controller;
 import java.io.File;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
+import gameplayer.back_end.exceptions.GameNotFunctionalException;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.LevelManager;
@@ -16,7 +17,6 @@ import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PopUpFactory;
 import gameplayer.front_end.popup.UserOptions;
-import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import javafx.stage.Stage;
@@ -62,11 +62,6 @@ public class ApplicationController extends AbstractController {
 		}, ButtonDisplay.FACEBOOK);
 	}
 
-	private void showError(Exception x) {
-		ErrorAlert ea = new ErrorAlert();
-		ea.show(x);
-	}
-
 	private void displayAuthoring() {
 		IAuthoringSplashScreen aSplashScreen = (new AuthoringSplashScreenFactory()).create();
 		aSplashScreen.initializeWindow();
@@ -81,15 +76,27 @@ public class ApplicationController extends AbstractController {
 		}, e -> {
 			displayUserScene();
 		}, e-> {
-			myCurrentDisplay.setBackground(getButtonLabels().getString("Shirt" + (int) Math.floor(Math.random() * 7)), getStage().getWidth(), getStage().getHeight());
+			myCurrentDisplay.setBackground(getButtonLabels().getString("Shirt" + (int) Math.floor(Math.random() * 6)), getStage().getWidth(), getStage().getHeight());
 		});
 	}
 
+	/**
+	 * 
+	 * @param aGamename is used to determine which set of highscores to get
+	 */
 	public void displayHighScoreScene(String aGamename) {
 		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getWidth(), getStage().getHeight(), aGamename);
 		createNavigationButtons((INavigationDisplay) highScore);
 		resetStage(highScore);
 		//setHighScoreHandlers((INavigationDisplay) highScore);
+	}
+
+	private void displayGameChoiceRoundTwo(String aGamename) {
+		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
+		resetStage(myCurrentDisplay);
+		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, aGamename);
+		setGameChoiceSecondRoundButtonHandlers((INavigationDisplay) myCurrentDisplay);
 	}
 
 	private void displayUserScene() {
@@ -102,29 +109,41 @@ public class ApplicationController extends AbstractController {
 		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
-		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true, getButtonLabels().getString("Choose"));
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, getButtonLabels().getString("Choose"));
 	}
 
-	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice, String aLabel) {
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, String aLabel) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
 				myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
-					resetGame(myStoredGames.getGameFilePath(aChoice));
-					if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, aChoice);
 					try {
-						getOptions();
-						getLevel();
+						resetGame(myStoredGames.getGameFilePath(aChoice));
+						displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
 					} catch (Exception x) {
-						//do nothing
+						showError(x);
 					}
-
+					getUserPreferences();
 				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
-			if (chosenGame != null) resetGame(chosenGame);
-			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
+			if (chosenGame != null) {
+				try {
+					resetGame(chosenGame);
+					displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
+				} catch (Exception x) {
+					showError(x);
+				}
+				getUserPreferences();
+			}
+		}, ButtonDisplay.TEXT); 
+	}
+	
+	private void getUserPreferences() {
+		try {
 			getOptions();
 			getLevel();
-		}, ButtonDisplay.TEXT); 
+		} catch (Exception x) {
+			//do nothing
+		}
 	}
 
 	private void getOptions() {
@@ -132,14 +151,12 @@ public class ApplicationController extends AbstractController {
 		myGamePlay.setOptions(uo);
 	}
 
-	private void getLevel() {
+	private void getLevel() throws Exception {
 		LevelManager lm = (LevelManager) getXMLHandler().load(myGamePlay.getGame().getName() + "level");
 		myGamePlay.setLevel(lm.getLevel());
 	}
 
-	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice, String aChoice) {
-		gameChoice.clear();
-		setGameChoiceButtonHandlers(gameChoice, false, aChoice);
+	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Options"), 0, 0, e -> {
@@ -158,21 +175,35 @@ public class ApplicationController extends AbstractController {
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Levels"), 0, 0, e -> {
 			LevelSelectionPopUp levelSelection = (LevelSelectionPopUp) new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
 			levelSelection.setOnClosed(k -> {
-				myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				try {
+					myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				} catch (Exception e1) {
+					showError(e1);
+				}
 			});
 			levelSelection.show();
 		}, ButtonDisplay.TEXT));
 		gameChoice.addNode(hbox);
 		gameChoice.addButton("PLAY", e -> {
-			myGamePlay.displayGame();
+			try {
+				myGamePlay.displayGame();
+			} catch (Exception e1) {
+				showError(new GameNotFunctionalException("Your game had trouble loading, please try again"));
+			}
 		}, ButtonDisplay.TEXT);
 	}
+
+	/**
+	 *
+	 * @param aTitle is the message title
+	 * @param aMessage is the message for the post
+	 */
 
 	public void publishToFacebook(String aTitle, String aMessage) {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
 	}
 
-	private void resetGame(File chosenGame) {
+	private void resetGame(File chosenGame) throws Exception {
 		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 	}
 }

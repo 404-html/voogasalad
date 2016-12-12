@@ -11,7 +11,7 @@ public class UserOptions {
 		setMyKeyInput(aKeyInput);
 	}
 	
-	public UserOptions(){
+	public UserOptions() {
 		setMyKeyInput("Default");
 	}
 
