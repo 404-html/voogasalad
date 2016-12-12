@@ -119,7 +119,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	private void createUndo(Level aLevel) {
 		this.revertManagers.put(aLevel, new RevertManagerFactory().create(aLevel));
-		this.levelWindowPane.getPane().setOnKeyPressed((event) -> {
+		this.getWindow().setOnKeyPressed((event) -> {
 			if (event.getCode().equals(KeyCode.Z) && event.isControlDown()) {
 				this.revertManagers.get(this.getController().getModel().getGame().getCurrentLevel()).undo();
 			}
@@ -157,7 +157,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		//EventHandler<? super MouseEvent> clickedHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			//clickedHandler.handle(event);
-			this.levelWindowPane.getPane().requestFocus();
+			this.getWindow().requestFocus();
 			if (((MouseEvent) event).getButton() == MouseButton.SECONDARY) {
 				openContextMenu(draggableSprite, event);
 				event.consume();
