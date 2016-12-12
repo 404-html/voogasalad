@@ -82,7 +82,7 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 
 	@Override
 	public String toString() {
-		return "Level Editor";
+		return authorController.getDisplayText("LevelEditor");
 	}
 
 }
