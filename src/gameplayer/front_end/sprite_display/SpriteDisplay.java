@@ -45,43 +45,64 @@ public class SpriteDisplay {
 	}
 	
 	private ImageView checkAnimation(Sprite aSprite) {
-		File fileOfAnimation = null;
 		ImageView image = null;
 		if (aSprite instanceof Player) {
 			if (myAnimationSpriteImage.size() < 1) {
-				String file = aSprite.getImagePath(); 
-				image = buildSpriteDisplay(aSprite);
-				for (int i = 0; i < 15; i++) {
-					myAnimationSpriteImage.add(image);
-				}
-				String[] array = file.split("\\.");
-				StringBuilder buildString = new StringBuilder();
-				buildString.append(array[0]);
-				buildString.append("_animation.");
-				buildString.append(array[1]);
-				String filePathOfAnimation = buildString.toString();
-				fileOfAnimation = new File(filePathOfAnimation);
-				myCurrentImage = 0;
-				if (fileOfAnimation != null && fileOfAnimation.exists()) {
-					image = new ImageView(fileOfAnimation.toURI().toString());
-					for (int i = 0; i < 15; i++) {
-						myAnimationSpriteImage.add(image);
-					}
-				} 
-			} else if (myAnimationSpriteImage.size() == 15) {
-				image = myAnimationSpriteImage.get(myCurrentImage);
+				createAnimationSpriteImageList(image, aSprite);
 			} else {
 				image = myAnimationSpriteImage.get(myCurrentImage);
-				if (myCurrentImage == 29) {
+				if (myCurrentImage == myAnimationSpriteImage.size() - 1) {
 					myCurrentImage = 0;
 				} else {
 					myCurrentImage++;
 				}
+				mySpriteViews.put(aSprite, image);
+				setImageProperties(aSprite, image);
 			}
-			mySpriteViews.put(aSprite, image);
-			setImageProperties(aSprite, image);
 		}
 		return image;
+	}
+
+	private void createAnimationSpriteImageList(ImageView image, Sprite aSprite) {
+		File fileOfAnimation = null;
+		List<ImageView> numberOfImages = new ArrayList<ImageView>();
+		String file = aSprite.getImagePath(); 
+		image = buildSpriteDisplay(aSprite);
+		numberOfImages.add(image);
+		myCurrentImage = 0;
+		boolean exist = true;
+		int count = 1;
+		while (exist) {
+			String[] array = file.split("\\.");
+			StringBuilder buildString = new StringBuilder();
+			buildString.append(array[0]);
+			buildString.append("_animation");
+			buildString.append(count);
+			buildString.append(".");
+			buildString.append(array[1]);
+			String filePathOfAnimation = buildString.toString();
+			System.out.println(filePathOfAnimation);
+			fileOfAnimation = new File(filePathOfAnimation);
+			if (fileOfAnimation.exists()) {
+				System.out.println(fileOfAnimation.exists());
+				System.out.println("fileOfAnimation");
+				image = new ImageView(fileOfAnimation.toURI().toString());
+				numberOfImages.add(image);
+				count++;
+			} if (fileOfAnimation == null || !fileOfAnimation.exists()) {
+				exist = false;
+			}
+		}
+		int sizeOfImages = calculateTheFrameRateChange(numberOfImages.size()); 
+		for (int j = 0; j < numberOfImages.size(); j++) {
+			for (int i = 0; i < sizeOfImages; i++) {
+				myAnimationSpriteImage.add(numberOfImages.get(j));
+			}
+		}
+	}
+	
+	private int calculateTheFrameRateChange(int numberOfAnimations) {
+		return Math.round(50 / numberOfAnimations);
 	}
 	
 	public Node get(Sprite aSprite) {
