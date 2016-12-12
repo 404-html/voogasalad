@@ -1,5 +1,7 @@
 package gameplayer.front_end.application_scene;
 
+import gameplayer.back_end.user_information.HighscoreManager;
+
 public class SceneFactory {
 
 	public IDisplay create(SceneIdentifier aIdentifier, double aWidth, double aHeight) {
@@ -13,8 +15,8 @@ public class SceneFactory {
 		return null;
 	}
 	
-	public IDisplay create(String aName, String aUrl, double aWidth, double aHeight) {
-		return new UserProfileScene(aName, aUrl, aWidth, aHeight);
+	public IDisplay create(String aName, String aUrl, double aWidth, double aHeight, HighscoreManager aManager) {
+		return new UserProfileScene(aName, aUrl, aWidth, aHeight, aManager);
 	}
 	
 	public IDisplay create(SceneIdentifier aIdentifier, double aWidth, double aHeight, String aGamename){

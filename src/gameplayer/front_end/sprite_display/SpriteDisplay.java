@@ -100,4 +100,8 @@ public class SpriteDisplay {
 		return mySpriteViews;
 	}
 
+	public List<ImageView> getMainPlayer() {
+		return myAnimationSpriteImage;
+	}
+
 }
