@@ -144,6 +144,8 @@ public class GamePlayController extends AbstractController {
 				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), true);
 			}
 		}
+		if (myKeyCodeHandler.checkNoKeysPressed()) mySpriteDisplay.stopAnimation();
+		else mySpriteDisplay.playAnimation();
 	}
 
 	private void setMenu() {
