@@ -9,6 +9,7 @@ import gameplayer.front_end.application_scene.IDisplay;
 import gameplayer.front_end.application_scene.SceneFactory;
 import gameplayer.front_end.gui_generator.GUIGenerator;
 import gameplayer.front_end.gui_generator.IGUIGenerator;
+import gameplayer.front_end.popup.ErrorAlert;
 import javafx.stage.Stage;
 
 public abstract class AbstractController {
@@ -73,5 +74,11 @@ public abstract class AbstractController {
 			hm = new HighscoreManager();
 		}
 		return hm;
+	}
+	
+
+	protected void showError(Exception x) {
+		ErrorAlert ea = new ErrorAlert();
+		ea.show(x);
 	}
 }

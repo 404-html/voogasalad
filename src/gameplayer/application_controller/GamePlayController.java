@@ -3,6 +3,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import game_data.Game;
 import game_data.Sprite;
+import game_data.states.Health;
 import game_data.states.Score;
 import game_data.states.State;
 import game_data.states.Visible;
@@ -38,6 +39,7 @@ public class GamePlayController extends AbstractController {
 	private SpriteDisplay mySpriteDisplay;
 	private MediaController myMusic;
 	private Score myScore;
+	private Health myHealth;
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
 			PlayerInformationController aInfoController) {
@@ -50,16 +52,22 @@ public class GamePlayController extends AbstractController {
 		initializeEngineComponents(0);
 	}
 
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) throws Exception {
 		this(aStage, aFile, aAppController, aPlayerController); 
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 
 	private void initializeEngineComponents(int aLevel) {
-		myGameEngine = new GameEngine(myGameFile, aLevel);
-		myGameController = myGameEngine.getMyEnginePlayerController();
-		myGameUpdater = new UpdateGame(myGameController.getMyGame());
+		try {
+			myGameEngine = new GameEngine(myGameFile, aLevel);
+			myGameController = myGameEngine.getMyEnginePlayerController();
+			myGameUpdater = new UpdateGame(myGameController.getMyGame());
+			determineScore();
+			determineHealth();
+		} catch (Exception e) {
+			showError(e);
+		}
 	}
 
 	private void initializeKeySets(UserOptions aOptions) {
@@ -69,14 +77,17 @@ public class GamePlayController extends AbstractController {
 			myKeyCodeHandler = new KeyCodeHandler("default");
 		}
 	}
-
 	/**
 	 * Displays the currently set up game
 	 */
-	public void displayGame() {
+	public void displayGame() throws Exception {
 		initializeScene(myUserOptions);
-		setMenu(); 
-		updateSprites();
+		setMenu();
+		try {
+			updateSprites();
+		} catch (Exception e) {
+			throw e;
+		}
 		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.getMainPlayer());
 		initializeAnimation();
 		resetStage(myGamePlayScene);
@@ -149,7 +160,11 @@ public class GamePlayController extends AbstractController {
 	private void setDropDownMenu() {
 		String[] namesForGamePlay = {getButtonLabels().getString("Restart"), getButtonLabels().getString("Save"), "highscore"};
 		myGamePlayScene.addMenu(getButtonLabels().getString("GamePlay"), namesForGamePlay, e -> {
-			handleRestart();
+			try {
+				handleRestart();
+			} catch (Exception e1) {
+				showError(e1);
+			}
 		}, e -> {
 			save();
 		}, e -> {
@@ -167,27 +182,35 @@ public class GamePlayController extends AbstractController {
 		});
 	}
 
-
 	private void setHealthLabel() {
-		if (myGameController.getMySpriteHealthList() != null && myGameController.getMySpriteHealthList().size() >= 1) {
-			myGamePlayScene.addNode(getGUIGenerator().createLabel("Health: " + myGameController.getMySpriteHealthList().get(0), 0, 0), 1);
+		if (myHealth != null) { myGamePlayScene.addNode(getGUIGenerator().createLabel("Health: " + myHealth.getHealth(), 0, 0), 1);}
+	}
+
+	private void determineHealth() {
+		for (State s : myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates()) {
+			if (s instanceof Health) {
+				myHealth = (Health) s; 
+			}
 		}
 	}
 
 	private void setScoreLabel() {
+		if (myScore != null) myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 1);
+	}
+
+	private void determineScore() {
 		for (State s : myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates()) {
 			if (s instanceof Score) {
 				myScore = (Score) s; 
 			}
 		}
-		if (myScore != null) myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 1);
 	}
 	
 	private void setLevelLabel() {
 		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber(), 0, 0), 1);
 	}
 
-	private void handleRestart() {
+	private void handleRestart() throws Exception {
 		stopLoops();
 		if (myUserOptions != null) {
 			GamePlayController gameControl = new GamePlayController(getStage(), myGameFile, 
@@ -229,7 +252,11 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayMainMenu(getStage().getWidth(), getStage().getHeight());
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("PlayAgain"),0,0, e -> {
-			handleRestart();
+			try {
+				handleRestart();
+			} catch (Exception e1) {
+				showError(e1);
+			}
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("HighScores"), 0,0, e -> {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
@@ -250,9 +277,7 @@ public class GamePlayController extends AbstractController {
 			getXMLHandler().save(hm, "highscores");
 		}
 	}
-
 	/**
-	 * 
 	 * @param aOptions is the key input and HUD font color for the user
 	 */
 	public void setOptions(UserOptions aOptions) {
@@ -260,12 +285,11 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 		myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 	}
-
 	/**
-	 * 
 	 * @param aLevel is the level that the user chose from the options
+	 * @throws Exception 
 	 */
-	public void setLevel(int aLevel) {
+	public void setLevel(int aLevel) throws Exception {
 		initializeEngineComponents(aLevel - 1);
 	}
 

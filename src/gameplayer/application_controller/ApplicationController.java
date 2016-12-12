@@ -16,7 +16,6 @@ import gameplayer.front_end.application_scene.SceneIdentifier;
 import gameplayer.front_end.gui_generator.IGUIGenerator.ButtonDisplay;
 import gameplayer.front_end.popup.PopUpFactory;
 import gameplayer.front_end.popup.UserOptions;
-import gameplayer.front_end.popup.ErrorAlert;
 import gameplayer.front_end.popup.LevelSelectionPopUp;
 import gameplayer.front_end.popup.PlayerOptionsPopUp;
 import javafx.stage.Stage;
@@ -62,11 +61,6 @@ public class ApplicationController extends AbstractController {
 		}, ButtonDisplay.FACEBOOK);
 	}
 
-	private void showError(Exception x) {
-		ErrorAlert ea = new ErrorAlert();
-		ea.show(x);
-	}
-
 	private void displayAuthoring() {
 		IAuthoringSplashScreen aSplashScreen = (new AuthoringSplashScreenFactory()).create();
 		aSplashScreen.initializeWindow();
@@ -85,6 +79,10 @@ public class ApplicationController extends AbstractController {
 		});
 	}
 
+	/**
+	 * 
+	 * @param aGamename is used to determine which set of highscores to get
+	 */
 	public void displayHighScoreScene(String aGamename) {
 		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getWidth(), getStage().getHeight(), aGamename);
 		createNavigationButtons((INavigationDisplay) highScore);
@@ -116,17 +114,20 @@ public class ApplicationController extends AbstractController {
 					} catch (Exception x) {
 						//do nothing
 					}
-
 				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
-			if (chosenGame != null) resetGame(chosenGame);
-			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
-			try {
-				getOptions();
-				getLevel();
-			} catch (Exception x) {
-				//do nothing
+			if (chosenGame != null && showSecondGameChoice) {
+				try {
+					resetGame(chosenGame);
+					getOptions();
+					getLevel();
+					setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
+				} catch (Exception x) {
+					if (x.getMessage() != null && !x.getMessage().isEmpty()) {
+						showError(x);
+					}
+				}
 			}
 		}, ButtonDisplay.TEXT); 
 	}
@@ -138,7 +139,11 @@ public class ApplicationController extends AbstractController {
 
 	private void getLevel() {
 		LevelManager lm = (LevelManager) getXMLHandler().load(myGamePlay.getGame().getName() + "level");
-		myGamePlay.setLevel(lm.getLevel());
+		try {
+			myGamePlay.setLevel(lm.getLevel());
+		} catch (Exception e) {
+			showError(e);
+		}
 	}
 
 	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice, String aChoice) {
@@ -162,15 +167,29 @@ public class ApplicationController extends AbstractController {
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Levels"), 0, 0, e -> {
 			LevelSelectionPopUp levelSelection = (LevelSelectionPopUp) new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
 			levelSelection.setOnClosed(k -> {
-				myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				try {
+					myGamePlay.setLevel(levelSelection.getSelectedLevel());
+				} catch (Exception e1) {
+					showError(e1);
+				}
 			});
 			levelSelection.show();
 		}, ButtonDisplay.TEXT));
 		gameChoice.addNode(hbox);
 		gameChoice.addButton("PLAY", e -> {
-			myGamePlay.displayGame();
+			try {
+				myGamePlay.displayGame();
+			} catch (Exception e1) {
+				showError(e1);
+			}
 		}, ButtonDisplay.TEXT);
 	}
+
+	/**
+	 *
+	 * @param aTitle is the message title
+	 * @param aMessage is the message for the post
+	 */
 
 	public void publishToFacebook(String aTitle, String aMessage) {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
