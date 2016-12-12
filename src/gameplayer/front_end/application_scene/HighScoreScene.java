@@ -2,6 +2,9 @@ package gameplayer.front_end.application_scene;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
@@ -17,7 +20,9 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 
 	private String myGamename;
 	private BorderPane myPane;
-
+	private List<Double> myScores;
+	private HighscoreManager myHighscoreManager;
+	
 	public HighScoreScene(double aWidth, double aHeight) {
 		super(aWidth, aHeight);
 		initialize("");
@@ -30,6 +35,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 
 	private void initialize(String aGamename) {
 		myPane = new BorderPane();
+		myScores = new ArrayList<Double>();
 		myPane.setId("glass");
 		myGamename = aGamename;
 	}
@@ -41,10 +47,10 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	@Override
 	public Scene init() {
 		XMLTranslator myTranslator = new XMLTranslator();
-		HighscoreManager myScores = (HighscoreManager) myTranslator.loadFromFile(
+		myHighscoreManager = (HighscoreManager) myTranslator.loadFromFile(
 				new File("XMLGameFiles/" + "highscores" + ".xml"));
 		getRoot().setCenter(addNodes());
-		addScores(myScores);
+		addScores(myHighscoreManager);
 		return myScene;
 	}
 
@@ -67,12 +73,13 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	private void addScores(HighscoreManager aManager) {
 		HBox box = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource() * 2);
 		VBox users = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
-		VBox scores = new VBox();
+		VBox scores = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		for (int i = 0; i < aManager.getGames().size(); i++) {
 			if (aManager.getGames().get(i).getName().equals(myGamename)) {
 				addScore(aManager.getUsers().get(i), aManager.getHighscores().get(i), users, scores);
 			}
 		}
+		getSortedList(users, scores);
 		box.getChildren().add(users);
 		box.getChildren().add(scores);
 		box.setAlignment(Pos.TOP_CENTER);
@@ -81,7 +88,30 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 
 	private void addScore(String aUser, double aScore, VBox aUsers, VBox aScores) {
 		DecimalFormat twoDForm = new DecimalFormat("#.##");
-		aScores.getChildren().add(new Label(String.valueOf(Double.valueOf(twoDForm.format(aScore)))));
-		aUsers.getChildren().add(new Label(aUser));
+		Double d = Double.valueOf(twoDForm.format(aScore));
+		myScores.add(d);
+	}
+	
+	private void getSortedList(VBox aUsers, VBox aScores) {
+		int i = 0;
+		Collections.sort(myScores, Collections.reverseOrder());
+		for (Double score : myScores) {
+			String user = getUserWithScore(score);
+			aUsers.getChildren().add(new Label(user));
+			aScores.getChildren().add(new Label(String.valueOf(score)));
+			if (i == 10) {
+				break;
+			}
+			i++;
+		}
+	}
+	
+	private String getUserWithScore(double aScore) {
+		for (int i = 0; i < myHighscoreManager.getHighscores().size(); i++) {
+			if (myHighscoreManager.getHighscores().get(i) == aScore) {
+				return myHighscoreManager.getUsers().get(i);
+			}
+		}
+		return "";
 	}
 }
