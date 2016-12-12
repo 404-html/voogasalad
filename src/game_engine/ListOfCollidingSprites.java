@@ -14,7 +14,7 @@ import java.util.Map;
 import javafx.scene.image.ImageView;
 
 /**
- * @author Austin Gartside, Lucia, ALEX!!!!!!!!
+ * @author Austin Gartside, Lucia, ALEX!!!!!112!1!!
  *
  */
 public class ListOfCollidingSprites {
@@ -102,7 +102,6 @@ public class ListOfCollidingSprites {
 	private boolean pastPlatform(Sprite myPlayerSprite) {
 		return myPlayerSprite.getLocation().getYLocation() + myPlayerSprite.getHeight() < targetSprite
 				.getLocation().getYLocation()+.2*targetSprite.getHeight() && myPlayerSprite.getYVelocity() >= 0;
-	
 	}
 
 	private boolean isTransparent() {
