@@ -25,8 +25,8 @@ public class Controllable implements Characteristic {
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Controllable(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Controllable(aSprite);
 	}
 
 }

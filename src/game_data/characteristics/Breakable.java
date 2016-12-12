@@ -103,8 +103,8 @@ public class Breakable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Breakable(breakableNorth, breakableSouth, breakableEast, breakableWest, myDurability, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Breakable(breakableNorth, breakableSouth, breakableEast, breakableWest, myDurability, aSprite);
 	}
 
 	@ViewableMethodOutput(description="Breaks on Top", type=boolean.class)

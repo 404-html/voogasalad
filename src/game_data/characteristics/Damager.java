@@ -49,8 +49,8 @@ public class Damager implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Damager(breakableNorth, breakableSouth, breakableEast, breakableWest, myDamageToGive, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Damager(breakableNorth, breakableSouth, breakableEast, breakableWest, myDamageToGive, aSprite);
 	}
 
 	@Override

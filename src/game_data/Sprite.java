@@ -102,7 +102,7 @@ public abstract class Sprite extends GameObject {
 			return null;
 		Set<Characteristic> characteristicCopies = new HashSet<Characteristic>();
 		for (Characteristic c : aCharacteristicSet) {
-			characteristicCopies.add(c.copy());
+			characteristicCopies.add(c.copy(this));
 		}
 		return characteristicCopies;
 	}

@@ -136,8 +136,8 @@ public class ScoreBasedOnPosition implements Characteristic {
 		this.scrollDirection = myScrollType;
 	}
 	@Override
-	public Characteristic copy() {
-		return new ScoreBasedOnPosition(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new ScoreBasedOnPosition(aSprite);
 	}
 
 }

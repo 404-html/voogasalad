@@ -41,8 +41,8 @@ public class Teleporter implements Characteristic {
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Teleporter(myXLocation, myYLocation, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Teleporter(myXLocation, myYLocation, aSprite);
 	}
 
 }

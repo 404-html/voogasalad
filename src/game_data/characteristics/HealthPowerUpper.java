@@ -38,8 +38,8 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new HealthPowerUpper(myHealthToGain, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new HealthPowerUpper(myHealthToGain, aSprite);
 	}
 
 	@Override

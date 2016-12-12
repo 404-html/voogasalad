@@ -37,8 +37,8 @@ public class ScorePowerUpper extends PowerUpper implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new ScorePowerUpper(myScoreToGain, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new ScorePowerUpper(myScoreToGain, aSprite);
 	}
 
 	@Override
