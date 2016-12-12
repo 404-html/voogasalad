@@ -46,6 +46,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private ScrollPane levelScroller;
 	private ILevelWindowPane levelWindowPane;
 	private static final String STYLESHEET = "data/gui/scrollViewport.css";
+   	private static final String BLACK_IMAGE = "data/images/level_images/images.jpeg";
+
 
 	private IntegerProperty horizontalPanes = new SimpleIntegerProperty(1);
 	private IntegerProperty verticalPanes = new SimpleIntegerProperty(1);
@@ -104,6 +106,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 		this.levelWindowPane = this.levelPanes.get(aLevel);
 		this.levelScroller.setContent(this.levelWindowPane.getPane());
+		setBackgroundImage(aLevel.getBackgroundImageFilePath());
 		updatePane(aLevel);
 	}
 
@@ -119,9 +122,6 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private void updatePane(Level aLevel) {
-		if (aLevel.getBackgroundImageFilePath() != null)
-			setBackgroundImage(aLevel.getBackgroundImageFilePath());
-
 		addSprites(this.getNewSprites(this.getMovableSprites(aLevel), aLevel.getMySpriteList()), aLevel);
 		removeSprites(this.getRemovedSprites(this.getMovableSprites(aLevel), aLevel.getMySpriteList()), aLevel);
 	}
@@ -215,9 +215,19 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private void setBackgroundImage(String filePath) {
+		if (filePath == null) {
+			createBackgroundImage(BLACK_IMAGE);
+		} else {
+			createBackgroundImage(filePath);
+		}
+	}
+
+	private void createBackgroundImage(String filePath) {
 		String imagePath = new File(filePath).toURI().toString();
-		getWindow().setStyle("-fx-background-image: url('" + imagePath + "');"
-				+ "    -fx-background-repeat: no-repeat;"+ "-fx-background-size: 100%;" + "-fx-background-position: center center;");
+		getWindow().setStyle("-fx-background-image: url('" + imagePath
+				+ "');  -fx-background-repeat: no-repeat; -fx-background-size: cover;-fx-background-position: center center;");
+
+		getWindow().applyCss();
 	}
 
 	private void updateLevelSize(Pane aLevelPane, Level aLevel) {
