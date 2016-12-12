@@ -16,6 +16,14 @@
     -fx-background-color: rgba(41, 41, 41, 0.7); 
 }
 
+.menu:hover {
+    -fx-background-color:black;
+}
+
+.menu:focused {
+    -fx-background-color:black;
+}
+
 .menu:focused .label {
     -fx-background-color: derive(#292929, 10%);
 }
@@ -46,11 +54,14 @@
 }
 
 .menu:selected {
-    -fx-background-color: derive(#292929, 10%);
+    -fx-background-color: black;
 }
 
-.menu:focused {
-    -fx-background-color: derive(#292929, 10%);
+#options-label { 
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #fdbe3b;
+
 }
 
 .menu-item:focused {
@@ -60,6 +71,10 @@
 .menu:showing .label { 
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 13px;
+}
+
+.menu:showing {
+    -fx-background-color: black;
 }
 
 .context-menu {

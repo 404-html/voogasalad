@@ -32,11 +32,11 @@ public class ConcreteAuthorController implements IAuthorController {
 	 * @see author.controller.IAuthorControllerExternal#getScene()
 	 */
 	public ConcreteAuthorController() {
+		this.invalidationListeners = new HashSet<>();
 		setLanguageResourceBundle("English");
 		myPathResourceBundle = ResourceBundle.getBundle("author.resources/Paths");
 		this.authorModel = new AuthorModelFactory().create((IAuthorController) this);
 		this.authorView = new AuthorView((IAuthorController) this);
-		this.invalidationListeners = new HashSet<>();
 	}
 
 	@Override
@@ -73,17 +73,21 @@ public class ConcreteAuthorController implements IAuthorController {
 		try {
 			myLanguageResourceBundle = ResourceBundle.getBundle("author.resources/" + aLanguage);
 		} catch (final MissingResourceException e) {
-			System.out.println("couldn't find language " + aLanguage);
+			myLanguageResourceBundle = ResourceBundle.getBundle("author.resource/English");
 		}
 	}
 
 	@Override
 	public void addListener(InvalidationListener aListener) {
+		if (this.invalidationListeners == null)
+			this.invalidationListeners = new HashSet<>();
 		this.invalidationListeners.add(aListener);
 	}
 
 	@Override
 	public void removeListener(InvalidationListener aListener) {
+		if (this.invalidationListeners == null)
+			this.invalidationListeners = new HashSet<>();
 		if (this.invalidationListeners.contains(aListener))
 			this.invalidationListeners.remove(aListener);
 	}
@@ -99,9 +103,13 @@ public class ConcreteAuthorController implements IAuthorController {
 		try {
 			return myLanguageResourceBundle.getString(aKey);
 		} catch (final MissingResourceException e) {
-			System.out.println("KEY " + aKey + " not found!");
-			return "KEY NOT FOUND";
+			try { 
+				return(ResourceBundle.getBundle("author.resource/English").getString(aKey));
+			} catch (final MissingResourceException e2) {
+				return "KEY NOT FOUND";
+			}
 		}
+
 	}
 
 	@Override

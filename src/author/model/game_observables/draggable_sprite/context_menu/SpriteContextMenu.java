@@ -3,9 +3,11 @@ package author.model.game_observables.draggable_sprite.context_menu;
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.sprite.SpriteEditWindow;
+import author.view.util.language_selection.ILanguageUser;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.sprites.Player;
+import javafx.beans.Observable;
 import javafx.scene.control.ContextMenu;
 
 /**
@@ -16,7 +18,7 @@ import javafx.scene.control.ContextMenu;
  * @author Jordan Frazier
  *
  */
-public class SpriteContextMenu implements ISpriteContextMenu {
+public class SpriteContextMenu implements ISpriteContextMenu, ILanguageUser {
 
 	private DraggableSprite mySprite;
 	private ContextMenu myMenu;
@@ -30,21 +32,21 @@ public class SpriteContextMenu implements ISpriteContextMenu {
 
 	private void createContextMenu() {
 		myMenu = new ContextMenu();
-		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Delete", e -> {
+		myMenu.getItems().add(new FunctionalMenuItemFactory().create(myAuthorController.getDisplayText("Delete"), e -> {
 			myAuthorController.getModel().getGame().getCurrentLevel().removeSprite(mySprite.getSprite());
 		}).getItem());
-		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Copy", e -> {
+		myMenu.getItems().add(new FunctionalMenuItemFactory().create(myAuthorController.getDisplayText("Copy"), e -> {
 			Sprite clone = mySprite.getSprite().clone();
 			clone.setLocation(
 					new Location(clone.getLocation().getXLocation() + 15, clone.getLocation().getYLocation() + 15));
 			myAuthorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
 		}).getItem());
-		myMenu.getItems().add(new FunctionalMenuItemFactory().create("Edit", e -> {
+		myMenu.getItems().add(new FunctionalMenuItemFactory().create(myAuthorController.getDisplayText("Edit"), e -> {
 			mySprite.removePresetListener();
 			new SpriteEditWindow(mySprite.getSprite()).openWindow();
 		}).getItem());
 		if(mySprite.getSprite() instanceof Player) {
-			myMenu.getItems().add(new FunctionalMenuItemFactory().create("Make Main Player", e -> {
+			myMenu.getItems().add(new FunctionalMenuItemFactory().create(myAuthorController.getDisplayText("MakeMainPlayer"), e -> {
 				myAuthorController.getModel().getGame().getCurrentLevel().setMainPlayer((Player)mySprite.getSprite());
 			}).getItem());
 		}
@@ -54,6 +56,12 @@ public class SpriteContextMenu implements ISpriteContextMenu {
 	@Override
 	public ContextMenu getMenu() {
 		return myMenu;
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		myMenu.getItems().clear();
+		createContextMenu();
 	}
 
 }

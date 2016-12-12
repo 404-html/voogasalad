@@ -26,7 +26,9 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
 	private Pane createKeyInputOption() {
 		HBox keyOption = new HBox(20);
-		keyOption.getChildren().add(new Label(getString("KeyInput")));
+		Label label = new Label(getString("KeyInput"));
+		label.setId("options-label");
+		keyOption.getChildren().add(label);
 		final ToggleGroup keyboardGroup = new ToggleGroup();
 		RadioButton defaultKey = createRadioButton(getString("Default"), keyboardGroup);
 		RadioButton leftKeys = createRadioButton(getString("Left"), keyboardGroup);
@@ -42,7 +44,9 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
 	private Pane createFontOption() {
 		HBox fontOption = new HBox(20);
-		fontOption.getChildren().add(new Label(getString("HUD")));
+		Label label = new Label(getString("HUD"));
+		label.setId("options-label");
+		fontOption.getChildren().add(label);
 		final ToggleGroup fontGroup = new ToggleGroup();
 		RadioButton red = createRadioButton(getString("Red"), fontGroup);
 		RadioButton green = createRadioButton(getString("Green"), fontGroup);

@@ -17,6 +17,7 @@ public class SpriteDisplay {
 	private Map<Sprite, ImageView> mySpriteViews;
 	private List<ImageView> myAnimationSpriteImage;
 	private int myCurrentImage; 
+	private boolean myStopAnimation = false;
 	
 	public SpriteDisplay() {
 		mySpriteViews = new HashMap<Sprite, ImageView>();
@@ -50,14 +51,16 @@ public class SpriteDisplay {
 			if (myAnimationSpriteImage.size() < 1) {
 				createAnimationSpriteImageList(image, aSprite);
 			} else {
-				image = myAnimationSpriteImage.get(myCurrentImage);
-				if (myCurrentImage == myAnimationSpriteImage.size() - 1) {
-					myCurrentImage = 0;
-				} else {
-					myCurrentImage++;
+				if (!myStopAnimation) {
+					image = myAnimationSpriteImage.get(myCurrentImage);
+					if (myCurrentImage == myAnimationSpriteImage.size() - 1) {
+						myCurrentImage = 0;
+					} else {
+						myCurrentImage++;
+					}
+					mySpriteViews.put(aSprite, image);
+					setImageProperties(aSprite, image);
 				}
-				mySpriteViews.put(aSprite, image);
-				setImageProperties(aSprite, image);
 			}
 		}
 		return image;
@@ -84,8 +87,6 @@ public class SpriteDisplay {
 			System.out.println(filePathOfAnimation);
 			fileOfAnimation = new File(filePathOfAnimation);
 			if (fileOfAnimation.exists()) {
-				System.out.println(fileOfAnimation.exists());
-				System.out.println("fileOfAnimation");
 				image = new ImageView(fileOfAnimation.toURI().toString());
 				numberOfImages.add(image);
 				count++;
@@ -123,6 +124,14 @@ public class SpriteDisplay {
 
 	public List<ImageView> getMainPlayer() {
 		return myAnimationSpriteImage;
+	}
+
+	public void stopAnimation() {
+		myStopAnimation = true;
+	}
+	
+	public void playAnimation() {
+		myStopAnimation = false;
 	}
 
 }
