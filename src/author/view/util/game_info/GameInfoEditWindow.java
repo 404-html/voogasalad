@@ -3,6 +3,7 @@ package author.view.util.game_info;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import author.view.util.language_selection.ILanguageHolder;
 import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
 import util.filehelpers.FileLoader.FileLoader;
@@ -47,29 +48,29 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 	private RadioButton scrollHorizontalRIGHT;
 	private RadioButton scrollHorizontalLEFT;
 	private RadioButton noScroll;
+	private ILanguageHolder myLanguageHolder;
 	
-	private static final String STYLESHEET = "data/gui/author-style.css";
 
-
-	public GameInfoEditWindow(Game aGame){
+	public GameInfoEditWindow(Game aGame, ILanguageHolder aLanguageHolder){
 		myGame = aGame;
+		myLanguageHolder = aLanguageHolder;
 		myPane = new VBox();
 		myToolBarBuilder = new ToolBarBuilder();
-		Button saveButton = new Button("Save & Close");
+		Button saveButton = new Button(myLanguageHolder.getDisplayText("SaveAndClose"));
 		saveButton.setOnMouseClicked(e -> {
 			saveGameInfo();
 		});
-		myToolBarBuilder.addBurst(new Label("Game Info"));
+		myToolBarBuilder.addBurst(new Label(myLanguageHolder.getDisplayText("GameInfo")));
 		myToolBarBuilder.addBurst(saveButton);
 		myPane.getChildren().add(myToolBarBuilder.getToolBar());
 
 		myIconFileLoader = new FileLoader(
-				"data/images/game_icons/",
+				myLanguageHolder.getPathString("GameIcons"),
 				FileType.RASTER_IMAGE
 				);
 
 		myAudioFileLoader = new FileLoader(
-				"data/audio/",
+				myLanguageHolder.getPathString("GameAudio"),
 				FileType.AUDIO
 				);
 
@@ -92,7 +93,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		Pane nameBox = new VBox();
 
 		myNameField = new TextField(myGame.getName());
-		nameBox.getChildren().addAll(new Label("Name: "), myNameField);
+		nameBox.getChildren().addAll(new Label(myLanguageHolder.getDisplayText("Name")), myNameField);
 		return nameBox;	
 	}
 
@@ -103,7 +104,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		myDescriptionField.setPrefHeight(150);
 		myDescriptionField.autosize();
 		myDescriptionField.setWrapText(true);
-		descriptionBox.getChildren().addAll(new Label("Description: "), myDescriptionField);
+		descriptionBox.getChildren().addAll(new Label(myLanguageHolder.getDisplayText("Description")), myDescriptionField);
 		return descriptionBox;	
 	}
 
@@ -118,7 +119,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		myIconImageView.setFitHeight(50);
 
 
-		iconSelect.getChildren().addAll(new Label("Choose icon: "),
+		iconSelect.getChildren().addAll(new Label(myLanguageHolder.getDisplayText("ChooseIcon")),
 				iconButton);
 
 		iconButton.setOnMouseClicked(event -> {
@@ -157,7 +158,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 
 		});
 
-		themeSongBox.getChildren().addAll(new Label("Choose Theme Music: "), songButton);
+		themeSongBox.getChildren().addAll(new Label(myLanguageHolder.getDisplayText("ChooseThemeMusic")), songButton);
 		return themeSongBox;	
 	}
 
@@ -165,12 +166,12 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		Pane scrollTypeBox = new VBox();
 
 		scrollChoices = new ToggleGroup();
-		scrollCenter = new RadioButton("Center");
-		scrollVerticalUP = new RadioButton("Vertical (Traveling Up)");
-		scrollVerticalDOWN = new RadioButton("Vertical (Traveling Down)");
-		scrollHorizontalRIGHT = new RadioButton("Horizontal (Traveling Right)");
-		scrollHorizontalLEFT = new RadioButton("Horizontal (Traveling Left)");
-		noScroll = new RadioButton("No Scroll");
+		scrollCenter = new RadioButton(myLanguageHolder.getDisplayText("Center"));
+		scrollVerticalUP = new RadioButton(myLanguageHolder.getDisplayText("VerticalUp"));
+		scrollVerticalDOWN = new RadioButton(myLanguageHolder.getDisplayText("VerticalDown"));
+		scrollHorizontalRIGHT = new RadioButton(myLanguageHolder.getDisplayText("HorizontalRight"));
+		scrollHorizontalLEFT = new RadioButton(myLanguageHolder.getDisplayText("HorizontalLeft"));
+		noScroll = new RadioButton(myLanguageHolder.getDisplayText("NoScroll"));
 		scrollCenter.setToggleGroup(scrollChoices);
 		scrollVerticalUP.setToggleGroup(scrollChoices);
 		scrollVerticalDOWN.setToggleGroup(scrollChoices);
@@ -192,7 +193,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 
 		
 		
-		scrollTypeBox.getChildren().addAll(new Label("Choose Scroll Type: "), 
+		scrollTypeBox.getChildren().addAll(new Label(myLanguageHolder.getDisplayText("ChooseScrollType")), 
 				scrollCenter,
 				scrollVerticalUP,
 				scrollVerticalDOWN,
@@ -230,7 +231,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 	}
 	
 	private String getStyleSheet(){
-		File css = new File(STYLESHEET);
+		File css = new File(myLanguageHolder.getPathString("AuthorCSSStyle"));
 		return css.toURI().toString();
 	}
 

@@ -73,7 +73,7 @@ public class ConcreteAuthorController implements IAuthorController {
 		try {
 			myLanguageResourceBundle = ResourceBundle.getBundle("author.resources/" + aLanguage);
 		} catch (final MissingResourceException e) {
-			System.out.println("couldn't find language " + aLanguage);
+			myLanguageResourceBundle = ResourceBundle.getBundle("author.resource/English");
 		}
 	}
 
@@ -103,9 +103,13 @@ public class ConcreteAuthorController implements IAuthorController {
 		try {
 			return myLanguageResourceBundle.getString(aKey);
 		} catch (final MissingResourceException e) {
-			System.out.println("KEY " + aKey + " not found!");
-			return "KEY NOT FOUND";
+			try { 
+				return(ResourceBundle.getBundle("author.resource/English").getString(aKey));
+			} catch (final MissingResourceException e2) {
+				return "KEY NOT FOUND";
+			}
 		}
+
 	}
 
 	@Override

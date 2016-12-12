@@ -107,13 +107,16 @@ public class AuthorMenu implements ILanguageUser{
 	
 	private void addEditMenuItem(Menu menuEdit) {
 		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("EditGame")), e -> {
-			iGameInfoEditWindow infoEditor = new GameInfoEditWindowFactory().create(myAuthorController.getModel().getGame());
+			iGameInfoEditWindow infoEditor = new GameInfoEditWindowFactory().create(myAuthorController.getModel().getGame(), myAuthorController);
 			infoEditor.display();
 		}).getItem());
 		
-		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("ChangeLanguage")), e -> {
-			myAuthorController.setLanguage("Profanity");
-			// TODO make this not profanity
+		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("AuthorInEnglish")), e -> {
+			myAuthorController.setLanguage("English");
+		}).getItem());
+		
+		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("AuthorInSpanish")), e -> {
+			myAuthorController.setLanguage("Spanish");
 		}).getItem());
 	}
 
