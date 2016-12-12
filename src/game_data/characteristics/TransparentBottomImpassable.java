@@ -32,8 +32,8 @@ public class TransparentBottomImpassable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new TransparentBottomImpassable(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new TransparentBottomImpassable(aSprite);
 	}
 
 }

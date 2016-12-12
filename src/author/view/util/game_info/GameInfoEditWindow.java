@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class GameInfoEditWindow implements iGameInfoEditWindow {
@@ -46,6 +47,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 	private RadioButton scrollVerticalDOWN;
 	private RadioButton scrollHorizontalRIGHT;
 	private RadioButton scrollHorizontalLEFT;
+	private RadioButton noScroll;
 	
 	private static final String STYLESHEET = "data/gui/author-style.css";
 
@@ -75,6 +77,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		initializeInfoFields();
 		myStage = new Stage();
 		myStage.setScene(new Scene(myPane));
+		myStage.initModality(Modality.APPLICATION_MODAL);
 		myStage.getScene().getStylesheets().add(getStyleSheet());
 
 	}
@@ -169,11 +172,13 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		scrollVerticalDOWN = new RadioButton("Vertical (Traveling Down)");
 		scrollHorizontalRIGHT = new RadioButton("Horizontal (Traveling Right)");
 		scrollHorizontalLEFT = new RadioButton("Horizontal (Traveling Left)");
+		noScroll = new RadioButton("No Scroll");
 		scrollCenter.setToggleGroup(scrollChoices);
 		scrollVerticalUP.setToggleGroup(scrollChoices);
 		scrollVerticalDOWN.setToggleGroup(scrollChoices);
 		scrollHorizontalRIGHT.setToggleGroup(scrollChoices);
 		scrollHorizontalLEFT.setToggleGroup(scrollChoices);
+		noScroll.setToggleGroup(scrollChoices);
 		if (myGame.getScrollType() == ScrollType.CENTER)
 			scrollCenter.setSelected(true);
 		if (myGame.getScrollType() == ScrollType.HORIZONTAL_RIGHT)
@@ -184,6 +189,8 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 			scrollHorizontalLEFT.setSelected(true);
 		if (myGame.getScrollType() == ScrollType.VERTICAL_DOWN)
 			scrollVerticalDOWN.setSelected(true);
+		if (myGame.getScrollType() == ScrollType.NO_SCROLL)
+			noScroll.setSelected(true);
 
 		
 		
@@ -192,7 +199,8 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 				scrollVerticalUP,
 				scrollVerticalDOWN,
 				scrollHorizontalRIGHT,
-				scrollHorizontalLEFT);
+				scrollHorizontalLEFT,
+				noScroll);
 		return scrollTypeBox;	
 	}
 
@@ -217,6 +225,8 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 			myGame.setScrollType(ScrollType.HORIZONTAL_RIGHT);
 		if (scrollChoices.getSelectedToggle() == scrollHorizontalLEFT)
 			myGame.setScrollType(ScrollType.HORIZONTAL_LEFT);
+		if (scrollChoices.getSelectedToggle() == noScroll)
+			myGame.setScrollType(ScrollType.NO_SCROLL);
 		
 		myStage.close();
 	}

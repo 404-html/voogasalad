@@ -31,23 +31,23 @@ interface SpriteBuilder {
 public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
 	PLAYER((loc, width, height, xvel, yvel, name, path) -> {
 		return new Player(loc, width, height, xvel, yvel, name, path);
-	}, () -> new PlayerDefaultBuilder().build()),
+	}, () -> new PlayerDefaultBuilder().buildDefault()),
 
 	ENEMY((loc, width, height, xvel, yvel, name, path) -> { 
 		return new Enemy(loc, width, height, xvel, yvel, name, path);
-	}, () -> new EnemyDefaultBuilder().build()),	
+	}, () -> new EnemyDefaultBuilder().buildDefault()),	
 
 	TERRAIN((loc, width, height, xvel, yvel, name, path) -> {
 		return new Terrain(loc, width, height, xvel, yvel, name, path);
-	}, () -> new TerrainDefaultBuilder().build()),
+	}, () -> new TerrainDefaultBuilder().buildDefault()),
 
 	ITEM((loc, width, height, xvel, yvel, name, path) -> {
 		return new Terrain(loc, width, height, xvel, yvel, name, path);
-	}, () -> new ItemDefaultBuilder().build()),
+	}, () -> new ItemDefaultBuilder().buildDefault()),
 
 	PROJECTILE(
-			(loc, width, height, xvel, yvel, name, path) -> { return new Terrain(loc, width, height, xvel, yvel, name, path);} , 
-			() -> new ProjectileDefaultBuilder().build() );
+			(loc, width, height, xvel, yvel, name, path) -> { return new Projectile(loc, width, height, xvel, yvel, name, path);} , 
+			() -> new ProjectileDefaultBuilder().buildDefault() );
 
 	private SpriteBuilder myBuilder;
 	private SpriteDefaultBuilder myDefaultBuilder;
@@ -67,8 +67,8 @@ public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
 	}
 
 	@Override
-	public Sprite build() {
-		return myDefaultBuilder.build();
+	public Sprite buildDefault() {
+		return myDefaultBuilder.buildDefault();
 	}
 
 }

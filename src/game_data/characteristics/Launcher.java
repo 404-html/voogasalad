@@ -51,8 +51,8 @@ public class Launcher implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Launcher(mySprite, myTimeInterval);
+	public Characteristic copy(Sprite aSprite) {
+		return new Launcher(aSprite, myTimeInterval);
 	}
 	
 

@@ -6,6 +6,7 @@ package author.view.pages.level_editor.windows.level_window;
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.ILevelEditorWindowInternal;
 import author.view.pages.level_editor.windows.ILevelWindowInternal;
+import game_data.LevelSetter;
 import game_data.Sprite;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -52,16 +53,17 @@ public class LevelWindowPaneFactory {
 	private void acceptCopiedSprites(){
 
 		this.levelWindowPane.getPane().setOnMouseClicked((event) ->{
-			this.levelWindowPane.getPane().requestFocus();
-			if (this.levelWindowInternal.getSelectedSprite() != null && event.isControlDown()){
+			this.levelWindowInternal.getWindow().requestFocus();
+			this.levelWindowInternal.getSelectedSprites().clear();
+			if (this.levelWindowInternal.getSelectedSprite() != null && event.isShiftDown()){
 				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
 			}
 		});
 		this.levelWindowPane.getPane().setOnMouseEntered((event)->{
-			this.levelWindowPane.getPane().requestFocus();
+			this.levelWindowInternal.getWindow().requestFocus();
 		});
-		this.levelWindowPane.getPane().setOnKeyReleased((event) -> {
-			if (!event.isControlDown()){
+		this.levelWindowInternal.getWindow().setOnKeyReleased((event) -> {
+			if (!event.isShiftDown()){
 				this.levelWindowPane.removeGrid();
 			}
 		});
@@ -95,6 +97,10 @@ public class LevelWindowPaneFactory {
 	
 	private void addSprite(Sprite aSprite, int xPos, int yPos){
 		Sprite clone = aSprite.clone();
+		if(clone instanceof LevelSetter) 
+			((LevelSetter) clone).setLevel(
+					this.authorController.getModel().getGame().getCurrentLevel());
+			
 		clone.getLocation().setLocation(levelWindowPane.adjustX(xPos), levelWindowPane.adjustY(yPos));
 		this.authorController.getModel().getGame().getCurrentLevel().addNewSprite(clone);
 	}

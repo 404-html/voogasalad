@@ -22,7 +22,12 @@ public class MoveLeft extends Move {
 	}
 	public void stop(){
 		if(mySprite.getXVelocity()<0){
-			mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
+			mySprite.setXVelocity(0);
+//			mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
 		}
+	}
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveLeft(aSprite, this.getVelocity());
 	}
 }

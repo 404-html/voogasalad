@@ -7,5 +7,5 @@ import javafx.scene.input.KeyCode;
 
 public interface IUpdateStatesAndPowerUps {
 	void generateDefaultKeyPressedMap();
-	void setKeyPressedMapWithBoosts();
+//	void setKeyPressedMapWithBoosts();
 }

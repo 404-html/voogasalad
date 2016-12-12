@@ -6,7 +6,7 @@ import game_data.sprites.builders.SpriteDefaultBuilder;
 public abstract class AbstractDefaultBuilder implements SpriteDefaultBuilder {
 		
 	@Override
-	public Sprite build() {
+	public Sprite buildDefault() {
 		return null;
 
 	}

@@ -97,8 +97,8 @@ public class Pacer implements Characteristic {
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new Pacer(myDistanceNeeded, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Pacer(myDistanceNeeded, aSprite);
 	}
 	
 }

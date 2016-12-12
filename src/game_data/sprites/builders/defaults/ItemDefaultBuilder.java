@@ -30,7 +30,7 @@ public class ItemDefaultBuilder implements SpriteDefaultBuilder {
 	private static final String NAME = "Item_Name";
 
 	@Override
-	public Sprite build() {
+	public Sprite buildDefault() {
 //		Sprite player = new Terrain();
 		for(Characteristic characteristic : CHARACTERISTICS) {
 			item.addCharacteristic(characteristic);

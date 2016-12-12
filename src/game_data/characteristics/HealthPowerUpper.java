@@ -34,8 +34,8 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new HealthPowerUpper(myHealthToGain, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new HealthPowerUpper(myHealthToGain, aSprite);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class HealthPowerUpper extends PowerUpper implements Characteristic{
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
 
 			if (collidedSprite instanceof Player){
-				myAction = new Damage(-getHealthToGain(), collidedSprite);
+				myAction = new AddHealth(-getHealthToGain(), collidedSprite);
 				myAction.act();
 			}		
 		}

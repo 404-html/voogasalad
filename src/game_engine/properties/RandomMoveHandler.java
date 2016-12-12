@@ -5,7 +5,7 @@ import game_data.Sprite;
 public abstract class RandomMoveHandler {
 
 	public enum Orientation {
-		HORIZONTAL, VERTICAL;
+		HORIZONTAL, VERTICAL, NULL;
 	}
 	private Orientation myOrientation;
 	private Sprite mySprite;
@@ -39,6 +39,7 @@ public abstract class RandomMoveHandler {
 	}
 	
 	protected abstract void setSpritesNewLocation();
+	public abstract RandomMoveHandler copy();
 	
 	public Orientation getOrientation() {
 		return myOrientation;

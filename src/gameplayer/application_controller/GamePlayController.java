@@ -1,5 +1,6 @@
 package gameplayer.application_controller;
 import java.io.File;
+import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import game_data.Game;
 import game_data.Sprite;
@@ -194,7 +195,9 @@ public class GamePlayController extends AbstractController {
 	private void setScoreLabel() {
 		determineScore();
 		if (myScore != null) {
-			myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 2);
+			DecimalFormat twoDForm = new DecimalFormat("#.##");
+			Double d = Double.valueOf(twoDForm.format(myScore.getMyScore()));
+			myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + d.doubleValue(), 0, 0), 2);
 		}
 	}
 
@@ -273,6 +276,7 @@ public class GamePlayController extends AbstractController {
 	private void saveHighscore() {
 		if (myScore != null) {
 			HighscoreManager hm = loadHighscores();
+			System.out.println(getPlayerInformationController().getUser());
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}

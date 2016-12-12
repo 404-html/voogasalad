@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -20,7 +19,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 	private String myUserName;
 	private String myPictureUrl = "gui/blank_profile_page.jpeg";
 	private double myWidth;
-	private Pane myPane;
+	private StackPane myPane;
 
 	public UserProfileScene(String aName, String aUrl, double aWidth, double aHeight, HighscoreManager aManager) {
 		super(aWidth, aHeight);
@@ -70,7 +69,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		}
 		box.getChildren().add(games);
 		box.getChildren().add(scores);
-		box.setAlignment(Pos.BASELINE_CENTER);
+		box.setAlignment(Pos.BASELINE_RIGHT);
 		myPane.getChildren().add(box);
 	}
 	
