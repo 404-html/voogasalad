@@ -92,7 +92,7 @@ public class ListOfCollidingSprites {
 			// findSideOfCollision(mySprite);
 			frameTime = System.currentTimeMillis();
 			
-			if ((!mySprite.getName().equals(targetSprite.getName())) 
+			if ((mySprite!=targetSprite) 
 					&& (mySpriteImages.get(mySprite).getBoundsInParent())
 					.intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));

@@ -50,6 +50,7 @@ public class KeyCodeHandler {
 	}
 	
 	public void clearReleased() {
+		myKeysPressed.clear();
 		myKeysReleased.clear();
 	}
 	

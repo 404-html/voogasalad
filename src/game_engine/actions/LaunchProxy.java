@@ -6,16 +6,21 @@ import game_data.Sprite;
 
 public class LaunchProxy implements LevelSetter, Launch {
 	private Launch myLaunch;
-	public LaunchProxy(Sprite myLauncher, Sprite myProjectile, double myXVelocity, double myYVelocity) {
-		myLaunch=new LaunchSkeleton(myLauncher, myProjectile, myXVelocity, myYVelocity);
+	private double myVelocity;
+	
+	public LaunchProxy(Sprite myLauncher, Sprite myProjectile, double myVelocity) {
+		myLaunch=new LaunchSkeleton(myLauncher, myProjectile, myVelocity);
+		this.myVelocity=myVelocity;
 	}
 
 	@Override
 	public void act() {
+		System.out.println("lanching");
 		myLaunch.act();
-
 	}
-
+	public double getVelocity(){
+		return myVelocity;
+	}
 	@Override
 	public void setLevel(Level aLevel) {
 		if(myLaunch instanceof LaunchSkeleton){

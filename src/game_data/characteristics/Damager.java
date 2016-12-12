@@ -7,6 +7,7 @@ import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
 import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
+import game_data.sprites.Projectile;
 import game_engine.Bottom;
 import game_engine.Left;
 import game_engine.Right;
@@ -56,12 +57,15 @@ public class Damager implements Characteristic{
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		
 		for(Sprite collidedSprite:myCollisionMap.keySet()){
-			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && collidedSprite instanceof Player){
+			if(breaksAtDirection(myCollisionMap.get(collidedSprite)) && validPairing(mySprite, collidedSprite)){
 			Action myAction = new Damage(myDamageToGive, collidedSprite);
 			myAction.act();
 			}
 		}
 		
+	}
+	private boolean validPairing(Sprite myDamager, Sprite collidedSprite){
+		return (myDamager instanceof Projectile || collidedSprite instanceof Player);
 	}
 	
 	private boolean breaksAtDirection(Side aDirection) {

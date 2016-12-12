@@ -105,7 +105,7 @@ public class SpriteScroller {
 	}
 
 	private void buildNewSprite() {
-		Sprite ns = mySpriteFactory.build();
+		Sprite ns = mySpriteFactory.buildDefault();
 		giveSprite(ns);
 		myController.getModel().getGame().addPreset(ns);
 	}
