@@ -47,8 +47,6 @@ public class HeadsUpDisplay {
 
 	private Node createTop() {
 		myTopMenu = new MenuBar();
-		//myTop.getChildren().add(myTopMenu);
-		//myTopMenu.setAlignment(Pos.CENTER);
 		return myTopMenu;
 	}
 

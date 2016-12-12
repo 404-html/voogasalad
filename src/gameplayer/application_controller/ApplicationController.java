@@ -91,6 +91,14 @@ public class ApplicationController extends AbstractController {
 		//setHighScoreHandlers((INavigationDisplay) highScore);
 	}
 
+	private void displayGameChoiceRoundTwo(String aGamename) {
+		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
+		resetStage(myCurrentDisplay);
+		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, aGamename);
+		setGameChoiceSecondRoundButtonHandlers((INavigationDisplay) myCurrentDisplay);
+	}
+
 	private void displayUserScene() {
 		myCurrentDisplay = getSceneFactory().create(getPlayerInformationController().getUser(), getPlayerInformationController().getPictureUrl(), getStage().getWidth(), getStage().getHeight(), loadHighscores());
 		resetStage(myCurrentDisplay);
@@ -101,38 +109,41 @@ public class ApplicationController extends AbstractController {
 		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
-		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, true, getButtonLabels().getString("Choose"));
+		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, getButtonLabels().getString("Choose"));
 	}
 
-	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, boolean showSecondGameChoice, String aLabel) {
+	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, String aLabel) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
 				myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
-					resetGame(myStoredGames.getGameFilePath(aChoice));
-					if (showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, aChoice);
 					try {
-						getOptions();
-						getLevel();
+						resetGame(myStoredGames.getGameFilePath(aChoice));
+						displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
 					} catch (Exception x) {
-						//do nothing
+						showError(x);
 					}
+					getUserPreferences();
 				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
-			if (chosenGame != null && showSecondGameChoice) {
+			if (chosenGame != null) {
 				try {
 					resetGame(chosenGame);
-					getOptions();
-					getLevel();
-					setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
+					displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
 				} catch (Exception x) {
-					if (x.getMessage() != null && !x.getMessage().isEmpty()) {
-						showError(x);
-					} else {
-						
-					}
+					showError(x);
 				}
+				getUserPreferences();
 			}
 		}, ButtonDisplay.TEXT); 
+	}
+	
+	private void getUserPreferences() {
+		try {
+			getOptions();
+			getLevel();
+		} catch (Exception x) {
+			//do nothing
+		}
 	}
 
 	private void getOptions() {
@@ -140,18 +151,12 @@ public class ApplicationController extends AbstractController {
 		myGamePlay.setOptions(uo);
 	}
 
-	private void getLevel() {
+	private void getLevel() throws Exception {
 		LevelManager lm = (LevelManager) getXMLHandler().load(myGamePlay.getGame().getName() + "level");
-		try {
-			myGamePlay.setLevel(lm.getLevel());
-		} catch (Exception e) {
-			showError(e);
-		}
+		myGamePlay.setLevel(lm.getLevel());
 	}
 
-	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice, String aChoice) {
-		gameChoice.clear();
-		setGameChoiceButtonHandlers(gameChoice, false, aChoice);
+	private void setGameChoiceSecondRoundButtonHandlers(INavigationDisplay gameChoice) {
 		HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Options"), 0, 0, e -> {
@@ -198,7 +203,7 @@ public class ApplicationController extends AbstractController {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
 	}
 
-	private void resetGame(File chosenGame) {
+	private void resetGame(File chosenGame) throws Exception {
 		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 	}
 }

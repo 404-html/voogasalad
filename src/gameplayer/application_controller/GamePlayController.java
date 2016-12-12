@@ -42,8 +42,7 @@ public class GamePlayController extends AbstractController {
 	private Score myScore;
 	private Health myHealth;
 
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
-			PlayerInformationController aInfoController) {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aInfoController) throws Exception {
 		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
@@ -59,14 +58,11 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 
-	private void initializeEngineComponents(int aLevel) {
-		try {
-			myGameEngine = new GameEngine(myGameFile, aLevel);
-			myGameController = myGameEngine.getMyEnginePlayerController();
-			myGameUpdater = new UpdateGame(myGameController.getMyGame());
-		} catch (Exception e) {
-			showError(e);
-		}
+	String initializeEngineComponents(int aLevel) throws Exception {
+		myGameEngine = new GameEngine(myGameFile, aLevel);
+		myGameController = myGameEngine.getMyEnginePlayerController();
+		myGameUpdater = new UpdateGame(myGameController.getMyGame());
+		return myGameController.getMyGame().getName();
 	}
 
 	private void initializeKeySets(UserOptions aOptions) {
@@ -98,9 +94,9 @@ public class GamePlayController extends AbstractController {
 		if (aOptions != null) {
 			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
 		} else {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), "black");
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), "#fdbe3b");
 		}
-		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e), e -> myKeyCodeHandler.handleKeyRelease(e));
+		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e, myGameController.getMyGame().getCurrentLevel().getMainPlayer().getControllable().getMyKeyPressedMap()), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
 
 	private void initializeAnimation() {
@@ -149,7 +145,7 @@ public class GamePlayController extends AbstractController {
 			}
 		}
 	}
-	
+
 	private void setMenu() {
 		setMainMenu();
 		setDropDownMenu();
@@ -208,7 +204,7 @@ public class GamePlayController extends AbstractController {
 			}
 		}
 	}
-	
+
 	private void setLevelLabel() {
 		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber() + 1, 0, 0), 0);
 	}
