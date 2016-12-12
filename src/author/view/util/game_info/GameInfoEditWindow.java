@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class GameInfoEditWindow implements iGameInfoEditWindow {
@@ -75,6 +76,7 @@ public class GameInfoEditWindow implements iGameInfoEditWindow {
 		initializeInfoFields();
 		myStage = new Stage();
 		myStage.setScene(new Scene(myPane));
+		myStage.initModality(Modality.APPLICATION_MODAL);
 		myStage.getScene().getStylesheets().add(getStyleSheet());
 
 	}

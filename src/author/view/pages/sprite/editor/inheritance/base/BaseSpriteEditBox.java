@@ -3,6 +3,7 @@ package author.view.pages.sprite.editor.inheritance.base;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -39,7 +40,8 @@ public class BaseSpriteEditBox {
 
 		myFileLoader = new FileLoader(
 				"data/images/sprite_images/",
-				FileType.RASTER_IMAGE
+				FileType.RASTER_IMAGE,
+				SpriteEditWindow.getSpriteEditStage()
 				);
 
 		myPane.getChildren().addAll(

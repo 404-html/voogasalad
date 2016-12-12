@@ -60,10 +60,6 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private Set<DraggableSprite> selectedSprites = new HashSet<>();
 	private DraggableSprite selectedSprite;
 
-	
-	
-	
-
 	public LevelWindow(IAuthorController authorController) {
 		super(authorController);
 		createScroller();
@@ -122,8 +118,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		this.getWindow().setOnKeyPressed((event) -> {
 			if (event.getCode().equals(KeyCode.Z) && event.isControlDown()) {
 				this.revertManagers.get(this.getController().getModel().getGame().getCurrentLevel()).undo();
-			}
-			else if (event.getCode().equals(KeyCode.Y) && event.isControlDown()) {
+			} else if (event.getCode().equals(KeyCode.Y) && event.isControlDown()) {
 				this.revertManagers.get(this.getController().getModel().getGame().getCurrentLevel()).redo();
 			}
 		});
@@ -137,8 +132,6 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		removeSprites(this.getRemovedSprites(this.getMovableSprites(aLevel), aLevel.getMySpriteList()), aLevel);
 	}
 
-	
-	
 	// Helper Methods
 
 	private void addSprites(Set<Sprite> addedSprites, Level aLevel) {
@@ -152,9 +145,9 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	}
 
-
-	private void addSpriteClickListeners(DraggableSprite draggableSprite){
-		//EventHandler<? super MouseEvent> clickedHandler = draggableSprite.getDraggableItem().getOnMouseClicked();
+	private void addSpriteClickListeners(DraggableSprite draggableSprite) {
+		// EventHandler<? super MouseEvent> clickedHandler =
+		// draggableSprite.getDraggableItem().getOnMouseClicked();
 		draggableSprite.getDraggableItem().setOnMouseClicked((event) -> {
 			//clickedHandler.handle(event);
 			this.getWindow().requestFocus();
@@ -166,39 +159,40 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				this.levelWindowPane.updateGrid(this.selectedSprite.getSprite().getWidth(),
 						this.selectedSprite.getSprite().getHeight());
 				event.consume();
-			} else if (event.isControlDown()){
-				if (!this.selectedSprites.contains(draggableSprite)){
+			} else if (event.isControlDown()) {
+				if (!this.selectedSprites.contains(draggableSprite)) {
 					this.selectedSprites.add(draggableSprite);
 					draggableSprite.setSelected();
-				} else{
+				} else {
 					this.selectedSprites.remove(draggableSprite);
 					draggableSprite.setDeselected();
 				}
 			}
-			
+
 		});
 		EventHandler<? super MouseEvent> draggedHandler = draggableSprite.getDraggableItem().getOnMouseDragged();
-		draggableSprite.getDraggableItem().setOnMouseDragged((event)->{
+		draggableSprite.getDraggableItem().setOnMouseDragged((event) -> {
 			draggedHandler.handle(event);
-			if (event.isShiftDown()){
-				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getWidth(), draggableSprite.getSprite().getHeight());
+			if (event.isShiftDown()) {
+				this.levelWindowPane.updateGrid(draggableSprite.getSprite().getWidth(),
+						draggableSprite.getSprite().getHeight());
 			}
-			
+
 		});
 		EventHandler<? super MouseEvent> releasedHandler = draggableSprite.getDraggableItem().getOnMouseReleased();
 		draggableSprite.getDraggableItem().setOnMouseReleased((event) -> {
-			
-			if (event.isShiftDown()){
-				int newX = this.levelWindowPane.adjustX((int)draggableSprite.getDraggableItem().getLayoutX() + draggableSprite.getSprite().getWidth()/2);
-				int newY = this.levelWindowPane.adjustY((int)draggableSprite.getDraggableItem().getLayoutY() + draggableSprite.getSprite().getHeight()/2);
+
+			if (event.isShiftDown()) {
+				int newX = this.levelWindowPane.adjustX((int) draggableSprite.getDraggableItem().getLayoutX()
+						+ draggableSprite.getSprite().getWidth() / 2);
+				int newY = this.levelWindowPane.adjustY((int) draggableSprite.getDraggableItem().getLayoutY()
+						+ draggableSprite.getSprite().getHeight() / 2);
 				draggableSprite.getSprite().setLocation(new Location(newX, newY));
 				this.levelWindowPane.removeGrid();
-			}
-			else{
+			} else {
 				releasedHandler.handle(event);
 			}
 		});
-		
 
 	}
 
@@ -242,7 +236,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	private void setBackgroundImage(String filePath) {
 		String imagePath = new File(filePath).toURI().toString();
-		getWindow().setStyle("-fx-background-image: url('" + imagePath + "');");
+		getWindow().setStyle("-fx-background-image: url('" + imagePath + "');"
+				+ "    -fx-background-repeat: no-repeat;"+ "-fx-background-size: 100%;" + "-fx-background-position: center center;");
 	}
 
 	private void updateLevelSize(Pane aLevelPane, Level aLevel) {
