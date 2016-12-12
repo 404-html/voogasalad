@@ -106,6 +106,7 @@ public class ConcreteAuthorController implements IAuthorController {
 			try { 
 				return(ResourceBundle.getBundle("author.resource/English").getString(aKey));
 			} catch (final MissingResourceException e2) {
+				System.out.println(aKey);
 				return "KEY NOT FOUND";
 			}
 		}

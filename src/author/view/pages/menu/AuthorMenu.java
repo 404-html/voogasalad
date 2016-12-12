@@ -111,13 +111,13 @@ public class AuthorMenu implements ILanguageUser{
 			infoEditor.display();
 		}).getItem());
 		
-		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("AuthorInEnglish")), e -> {
-			myAuthorController.setLanguage("English");
-		}).getItem());
-		
-		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("AuthorInSpanish")), e -> {
-			myAuthorController.setLanguage("Spanish");
-		}).getItem());
+//		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("AuthorInEnglish")), e -> {
+//			myAuthorController.setLanguage("English");
+//		}).getItem());
+//		
+//		menuEdit.getItems().add(new MenuFactory().createItem((myAuthorController.getDisplayText("AuthorInSpanish")), e -> {
+//			myAuthorController.setLanguage("Spanish");
+//		}).getItem());
 	}
 
 

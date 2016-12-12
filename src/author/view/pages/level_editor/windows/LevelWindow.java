@@ -75,7 +75,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 		getController().addListener(this);
 		createScroller();
 		super.getWindow().getStylesheets().add(getStyleSheet());
-		super.getWindow().getStyleClass().add("lol");
+		//super.getWindow().getStyleClass().add("lol");
 		initSelectedSpritesListener();
 	}
 
@@ -275,6 +275,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	}
 
 	private void createBackgroundImage(String filePath) {
+		System.out.println("BACKGROUND:" + filePath);
 		String imagePath = new File(filePath).toURI().toString();
 		getWindow().setStyle("-fx-background-image: url('" + imagePath
 				+ "');  -fx-background-repeat: no-repeat; -fx-background-size: cover;-fx-background-position: center center;");
