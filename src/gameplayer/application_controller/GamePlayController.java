@@ -163,6 +163,7 @@ public class GamePlayController extends AbstractController {
 		}, e -> {
 			save();
 		}, e -> {
+			stopLoops();
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		});
 	}
