@@ -25,4 +25,9 @@ public class Pace implements Action {
 		
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Pace(aSprite, myShouldChangeDirection);
+	}
+	
 }

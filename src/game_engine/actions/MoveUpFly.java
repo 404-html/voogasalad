@@ -22,5 +22,10 @@ public class MoveUpFly extends Move {
 	public void stop(){
 		return;
 	}
-
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveUpFly(aSprite, getVelocity());
+	}
+	
 }

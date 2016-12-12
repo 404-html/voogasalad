@@ -7,6 +7,7 @@ import gameplayer.front_end.background_display.BackgroundDisplayFactory;
 import gameplayer.front_end.heads_up_display.HeadsUpDisplay;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -17,13 +18,11 @@ import javafx.scene.paint.Color;
 public class GamePlayScene extends AbstractPlayerScene {
 	
 	private static final String STYLESHEET = "data/gui/style.css";
-
 	private StackPane myStack;
 	private AnimationPane myGamePlay;
 	private HeadsUpDisplay myHeadsUpDisplay;
 	private Background myBackgroundDisplay;
 	private ResultScene myResultScene;
-	private String myBackgroundFilePath;
 	
 	public GamePlayScene(String aBackgroundImageFilePath, double aWidth, double aHeight, String aFontColor) {
 		myStack = new StackPane();
@@ -47,7 +46,6 @@ public class GamePlayScene extends AbstractPlayerScene {
 	public double getAnimationScreenXPosition() {
 		return myGamePlay.getAnimationScreenXPosition();
 	}
-	
 	
 	public double getAnimationScreenYPosition() {
 		return myGamePlay.getAnimationScreenYPosition();
@@ -83,9 +81,9 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myHeadsUpDisplay.addMenu(aImage, names, eventHandler);
 	}
 	
-	public void addLabel(String aText){
-		myHeadsUpDisplay.addLabel(aText);
-	}
+	//public void addLabel(String aText){
+		//myHeadsUpDisplay.addLabel(aText);
+	//}
 
 	public void setKeyHandlers(KeyPressable aPressHandler, KeyPressable aReleaseHandler) {
 		myScene.setOnKeyPressed(e -> aPressHandler.handleKeyInput(e.getCode()));
@@ -104,4 +102,12 @@ public class GamePlayScene extends AbstractPlayerScene {
 		myStack.setBackground(myBackgroundDisplay);
 	}
 
+	@Override
+	public void addNode(Node aNode) {
+		myHeadsUpDisplay.addNode(aNode);
+	}
+	
+	public void addNode(Node aNode, int aPos) {
+		myHeadsUpDisplay.addNode(aNode, aPos);
+	}
 }

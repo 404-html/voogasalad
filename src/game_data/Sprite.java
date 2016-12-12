@@ -89,7 +89,7 @@ public abstract class Sprite extends GameObject {
 		myStates = copyStates(aSprite.getStates());
 		//myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
 		myRandomMoveHandler = null;
-		myControllable=aSprite.getControllable();
+		myControllable = new Controllable(aSprite.getControllable(), this);
 	}
 
 	/**
@@ -302,7 +302,9 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public Map<Characteristic, Double> getPowerUps() {
-		if(powerUps == null) return new HashMap<Characteristic, Double>();
+		if(powerUps == null){
+			powerUps = new HashMap<Characteristic, Double>();
+		}
 		return powerUps;
 	}
 

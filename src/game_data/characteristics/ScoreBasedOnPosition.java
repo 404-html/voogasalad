@@ -10,6 +10,7 @@ import java.util.Map;
 import com.sun.javafx.scene.traversal.Direction;
 
 import game_data.IScoreBasedPositionSprite;
+import game_data.ScrollType;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
@@ -22,7 +23,7 @@ import game_engine.actions.ScoreAdder;
 import game_engine.Side;
 
 @NameAnnotation(name = "Score Based On Position")
-public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPositionSprite {
+public class ScoreBasedOnPosition implements Characteristic {
 
 	private Sprite mySprite;
 	private double initX;
@@ -30,7 +31,7 @@ public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPosition
 	private double pointsAdded;
 	private double myScore;
 	private double maxDist;
-	private Direction scrollDirection;
+	private ScrollType scrollDirection;
 	private double cur;
 	private boolean curPositive;
 	private boolean initPositive;
@@ -49,9 +50,11 @@ public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPosition
 
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
-
+		if(scrollDirection == null || scrollDirection == ScrollType.CENTER )
+			return;
 		// updateMyScore();
-		if (scrollDirection == Direction.RIGHT || scrollDirection == Direction.LEFT) {
+//		System.out.println("executes");
+		if (scrollDirection == ScrollType.HORIZONTAL_RIGHT || scrollDirection == ScrollType.HORIZONTAL_LEFT) {
 			getHorizontalCoordinates();
 			findMagnitude(initX);
 		} else {
@@ -74,9 +77,9 @@ public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPosition
 //		System.out.println("score is : " + myScore);
 	}
 
-	private boolean validAddition(Direction scrollDirection2) {
+	private boolean validAddition(ScrollType scrollDirection2) {
 		
-		if((initX < cur && scrollDirection == Direction.RIGHT) || (initX>cur && scrollDirection==Direction.LEFT) || (initY < cur && scrollDirection == Direction.DOWN) || (initY>cur && scrollDirection==Direction.UP)){
+		if((initX < cur && scrollDirection == ScrollType.HORIZONTAL_RIGHT) || (initX>cur && scrollDirection==ScrollType.HORIZONTAL_LEFT) || (initY < cur && scrollDirection == ScrollType.VERTICAL_DOWN) || (initY>cur && scrollDirection==ScrollType.VERTICAL_UP)){
 			return true;
 		}
 		return false;
@@ -129,8 +132,8 @@ public class ScoreBasedOnPosition implements Characteristic, IScoreBasedPosition
 		}
 	}
 
-	public void setScrollDirection(Direction scrollDirection){
-		this.scrollDirection = scrollDirection;
+	public void setScrollDirection(ScrollType myScrollType){
+		this.scrollDirection = myScrollType;
 	}
 	@Override
 	public Characteristic copy() {

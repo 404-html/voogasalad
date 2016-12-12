@@ -39,6 +39,11 @@ public class LaunchWithLevel implements Launch{
 		myLevel.addNewSprite(myProjectile);
 		
 	}
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new LaunchWithLevel(aSprite, myProjectile, myXVelocity, myYVelocity, myLevel);
+	}
 
 
 

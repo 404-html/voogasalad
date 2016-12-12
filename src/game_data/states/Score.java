@@ -7,17 +7,14 @@ public class Score implements State{
 
 	private double myScore;
 	
-	@ParameterAnnotation(parameters={"Score"})
-	public Score(double score){
-		myScore = score;
-	}
+	@ParameterAnnotation(parameters={})
 	public Score(){
 		myScore = 0;
 	}
 	
 	@Override
 	public State copy() {
-		return new Score(myScore);
+		return new Score();
 	}
 	
 	@ViewableMethodOutput(description="Score", type=int.class)
