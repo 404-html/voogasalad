@@ -36,8 +36,8 @@ public class Impassable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Impassable(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Impassable(aSprite);
 	}
 
 }

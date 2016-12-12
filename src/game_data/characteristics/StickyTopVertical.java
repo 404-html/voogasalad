@@ -17,8 +17,8 @@ public class StickyTopVertical extends StickyTop {
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new StickyTopVertical(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new StickyTopVertical(aSprite);
 	}
 
 }

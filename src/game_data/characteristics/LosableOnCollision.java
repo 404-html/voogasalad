@@ -20,8 +20,8 @@ public class LosableOnCollision extends Losable implements Characteristic{
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new LosableOnCollision(mySprite.clone());
+	public Characteristic copy(Sprite aSprite) {
+		return new LosableOnCollision(aSprite);
 	}
 
 	@Override

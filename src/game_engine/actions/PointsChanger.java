@@ -15,6 +15,9 @@ public abstract class PointsChanger implements Action {
 	}
 	
 	@Override
+	public abstract Action copyWithNewSprite(Sprite aSprite);
+	
+	@Override
 	public abstract void act();
 
 }

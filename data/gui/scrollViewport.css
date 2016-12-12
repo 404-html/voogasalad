@@ -1,9 +1,11 @@
 .lol {
- 	-fx-background-size: cover;   
+ 	/*-fx-background-size: cover;   
     -fx-background-repeat: no-repeat;
     -fx-background-width: 100.0%;
     -fx-background-height: 100.0%;
-    -fx-background-position: center center;}
+    -fx-background-position: center center;}*/
+    
+    }
 
 .scroll-pane > .viewport {
    	-fx-background-color:transparent;

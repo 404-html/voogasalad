@@ -29,9 +29,12 @@ public class ScoreAdder extends PointsChanger implements Action {
 //					((Health) i).kill();
 //				}
 			}
-		}
-
-		
+		}	
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new ScoreAdder((int) this.pointsToGive, aSprite);
+	}
+	
 }

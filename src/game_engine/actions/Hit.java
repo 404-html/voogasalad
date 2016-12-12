@@ -26,6 +26,11 @@ public class Hit implements Action {
 	}
 
 	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Hit(aSprite, mySide, myNonPlayerSprite);
+	}
+	
+	@Override
 	public void act() {
 		
 		Physics myPhysics = null;

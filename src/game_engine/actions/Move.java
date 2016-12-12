@@ -30,9 +30,16 @@ public abstract class Move implements Action {
 	
 	//public abstract Location changeCoordinates();
 	public abstract void setVelocity();
+
+	public void setMyVelocity(double newVel){
+		myVelocity = newVel;
+	}
 	
 	public double getVelocity(){
 		return myVelocity;
 	}
+	
+	@Override
+	public abstract Action copyWithNewSprite(Sprite aSprite);
 	
 }

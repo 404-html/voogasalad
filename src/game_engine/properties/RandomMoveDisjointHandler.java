@@ -21,4 +21,8 @@ public class RandomMoveDisjointHandler extends RandomMoveHandler {
 		
 	}
 	
+	public RandomMoveHandler copy() {
+		return new RandomMoveDisjointHandler(getOrientation());
+	}
+	
 }

@@ -13,4 +13,7 @@ public abstract class StopMovement implements Action {
 	@Override
 	public abstract void act();
 
+	@Override
+	public abstract Action copyWithNewSprite(Sprite aSprite);
+	
 }

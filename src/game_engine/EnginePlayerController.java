@@ -62,16 +62,18 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 	public EnginePlayerController(Game game) {
 		myGame = game;
 		Level myLevel = myGame.getCurrentLevel();
-//		for(Sprite s: myLevel.getMySpriteList()){
-//			if(s instanceof Player){
+		
+		
+		for(Sprite s: myLevel.getMySpriteList()){
+			if(s instanceof Player){
 //				myLevel.setMainPlayer((Player)s);
 //				myLevel.getMainPlayer().addState(new Score());
 //				myLevel.getMainPlayer()
 //						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
 //				myLevel.getMainPlayer().resetTerminalVelocities();
 //				myLevel.getMainPlayer().setLevel(myLevel);
-//			}
-//		}
+			}
+		}
 
 		mySpriteList = myLevel.getMySpriteList();
 		myBackgroundImageFilePath = myLevel.getBackgroundImageFilePath();
@@ -99,7 +101,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "data/images/sprite_images/block.png");
 		myProjectile.addState(new Physics(0.0, 0.0));
 		myProjectile.addCharacteristic(new Impassable(myProjectile));
-		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
+		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0));
 		return myKeyPressedMap;
 	}
 

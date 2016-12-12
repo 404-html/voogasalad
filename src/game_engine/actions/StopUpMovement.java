@@ -14,4 +14,9 @@ public class StopUpMovement extends StopMovement {
 		//mySprite.setYVelocity(mySprite.getYVelocity()+myVelocity);
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return copyWithNewSprite(aSprite);
+	}
+
 }

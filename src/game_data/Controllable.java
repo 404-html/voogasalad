@@ -23,7 +23,6 @@ import javafx.scene.input.KeyCode;
  * @author Katrina
  *
  */
-@NameAnnotation(name = "Controllable")
 public class Controllable {
 	private Sprite mySprite;
 	private Map<KeyCode, Action> myKeyPressedMap;
@@ -31,6 +30,8 @@ public class Controllable {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private boolean isControllable;
+//	private Map<KeyCode, Action> defaultKeyPressedMap;
+
 
 	public Controllable() {
 		isControllable = false;
@@ -38,21 +39,51 @@ public class Controllable {
 		myKeyReleasedMap = new HashMap<>();
 		myKeysReleased = new HashSet<>();
 		myKeysPressed = new HashSet<>();
+//		defaultKeyPressedMap = new HashMap<KeyCode,Action>();
 	}
 
 	public Controllable(Sprite aSprite, Map<KeyCode, Action> myKeyPressedMap) {
 		this.mySprite = aSprite;
 		isControllable = true;
-		this.myKeyPressedMap = myKeyPressedMap;
+//		defaultKeyPressedMap = new HashMap<KeyCode,Action>();
 		myKeyReleasedMap = new HashMap<>();
 		myKeysReleased = new HashSet<>();
 		myKeysPressed = new HashSet<>();
+		this.myKeyPressedMap = myKeyPressedMap;
+//		defaultKeyPressedMap = null;
+	}
+	
+	private Map<KeyCode, Action> makeCopy(Map<KeyCode, Action> aKeyPressedMap) {
+		Map<KeyCode, Action> ans = new HashMap<KeyCode, Action>();
+		for(KeyCode k : aKeyPressedMap.keySet()) {
+			ans.put(k, aKeyPressedMap.get(k));
+		}
+		return ans;
+	}
+	
+	public Controllable(Controllable that, Sprite aSprite){
+		mySprite = aSprite;
+		this.isControllable = that.isControllable;
+		this.myKeyPressedMap = copyKeyPressedMap(that.myKeyPressedMap, aSprite);
+		this.myKeyReleasedMap = that.myKeyReleasedMap;
+		this.myKeysPressed = that.myKeysPressed;
+		this.myKeysReleased = that.myKeysReleased;
 	}
 
 	public boolean isControllable() {
 		return isControllable;
 	}
 
+	private Map<KeyCode, Action> copyKeyPressedMap(Map<KeyCode, Action> aOriginalMap, Sprite aSprite){
+		Map<KeyCode, Action> map = new HashMap<>();
+		
+		aOriginalMap.entrySet().forEach( e -> {
+			map.put(e.getKey(), e.getValue().copyWithNewSprite(aSprite));
+		});
+		
+		return map;
+	}
+	
 	private void generateMyKeyReleasedMap() {
 		for (KeyCode key : myKeyPressedMap.keySet()) {
 			if (myKeyPressedMap.get(key) instanceof MoveRight) {
@@ -111,8 +142,21 @@ public class Controllable {
 		return myKeyPressedMap;
 	}
 
-	public void setMyKeyPressedMap(Map<KeyCode, Action> myKeyPressedMap) {
+	public void setMyKeyPressedMap(Map<KeyCode, Action> myKeyPressedMap) {	
 		this.myKeyPressedMap = myKeyPressedMap;
 	}
+
+//	public void resetMyKeyPressedMap() {
+////		System.out.println("size of map before" + myKeyPressedMap.size());		
+////		
+//////		myKeyPressedMap = new HashMap<KeyCode, Action>(defaultKeyPressedMap);
+////		HashMap<KeyCode, Action> ans;
+////		for(KeyCode k : defaultKeyPressedMap.keySet()) {
+//////			ans.put(new KeyCode(k), new )
+////		}
+////		System.out.println("size of map reset" + myKeyPressedMap.size());
+//		myKeyPressedMap = null;
+//
+//	}
 
 }
