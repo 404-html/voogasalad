@@ -117,13 +117,17 @@ public class ApplicationController extends AbstractController {
 				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
-			if (chosenGame != null) resetGame(chosenGame);
-			if (chosenGame != null && showSecondGameChoice) setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
-			try {
-				getOptions();
-				getLevel();
-			} catch (Exception x) {
-				//do nothing
+			if (chosenGame != null && showSecondGameChoice) {
+				try {
+					resetGame(chosenGame);
+					getOptions();
+					getLevel();
+					setGameChoiceSecondRoundButtonHandlers(gameChoice, getButtonLabels().getString("Choose"));
+				} catch (Exception x) {
+					if (!x.getMessage().isEmpty()) {
+						showError(x);
+					}
+				}
 			}
 		}, ButtonDisplay.TEXT); 
 	}
@@ -192,10 +196,6 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void resetGame(File chosenGame) {
-		try {
-			myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
-		} catch (Exception x) {
-			showError(x);
-		}
+		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 	}
 }

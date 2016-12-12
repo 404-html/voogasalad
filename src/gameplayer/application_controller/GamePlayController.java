@@ -3,6 +3,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import game_data.Game;
 import game_data.Sprite;
+import game_data.states.Health;
 import game_data.states.Score;
 import game_data.states.State;
 import game_data.states.Visible;
@@ -10,7 +11,6 @@ import game_engine.EnginePlayerController;
 import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
-import gameplayer.back_end.exceptions.GameNotFoundException;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.back_end.user_information.LevelManager;
@@ -40,20 +40,17 @@ public class GamePlayController extends AbstractController {
 	private SpriteDisplay mySpriteDisplay;
 	private MediaController myMusic;
 	private Score myScore;
+	private Health myHealth;
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, 
-			PlayerInformationController aInfoController) throws Exception {
+			PlayerInformationController aInfoController) {
 		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
 		myKeyCodeHandler = new KeyCodeHandler();
 		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
-		try {
-			initializeEngineComponents(0);
-		} catch (Exception e) {
-			throw e;
-		}
+		initializeEngineComponents(0);
 	}
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) throws Exception {
@@ -62,13 +59,15 @@ public class GamePlayController extends AbstractController {
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 
-	private void initializeEngineComponents(int aLevel) throws Exception {
+	private void initializeEngineComponents(int aLevel) {
 		try {
 			myGameEngine = new GameEngine(myGameFile, aLevel);
 			myGameController = myGameEngine.getMyEnginePlayerController();
 			myGameUpdater = new UpdateGame(myGameController.getMyGame());
+			determineScore();
+			determineHealth();
 		} catch (Exception e) {
-			throw new GameNotFoundException();
+			showError(e);
 		}
 	}
 
@@ -187,18 +186,27 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setHealthLabel() {
-		if (myGameController.getMySpriteHealthList() != null && myGameController.getMySpriteHealthList().size() >= 1) {
-			myGamePlayScene.addNode(getGUIGenerator().createLabel("Health: " + myGameController.getMySpriteHealthList().get(0), 0, 0), 1);
+		if (myHealth != null) { myGamePlayScene.addNode(getGUIGenerator().createLabel("Health: " + myHealth.getHealth(), 0, 0), 1);}
+	}
+
+	private void determineHealth() {
+		for (State s : myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates()) {
+			if (s instanceof Health) {
+				myHealth = (Health) s; 
+			}
 		}
 	}
 
 	private void setScoreLabel() {
+		if (myScore != null) myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 1);
+	}
+
+	private void determineScore() {
 		for (State s : myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates()) {
 			if (s instanceof Score) {
 				myScore = (Score) s; 
 			}
 		}
-		if (myScore != null) myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 1);
 	}
 	
 	private void setLevelLabel() {
@@ -250,8 +258,7 @@ public class GamePlayController extends AbstractController {
 			try {
 				handleRestart();
 			} catch (Exception e1) {
-				ErrorAlert ea = new ErrorAlert();
-				ea.show(e1);
+				showError(e1);
 			}
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("HighScores"), 0,0, e -> {
