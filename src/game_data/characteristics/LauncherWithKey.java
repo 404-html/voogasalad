@@ -29,7 +29,7 @@ public class LauncherWithKey implements Characteristic{
 		
 
 	@Override
-	public Characteristic copy() {
+	public Characteristic copy(Sprite aSprite) {
 		// TODO Auto-generated method stub
 		return null;
 	}

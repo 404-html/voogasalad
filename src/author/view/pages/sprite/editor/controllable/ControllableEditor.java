@@ -8,7 +8,10 @@ import org.apache.commons.exec.ExecuteException;
 
 import game_data.Controllable;
 import game_data.Sprite;
+import game_data.sprites.SpriteFactory;
 import game_engine.actions.Action;
+import game_engine.actions.Launch;
+import game_engine.actions.LaunchProxy;
 import game_engine.actions.Move;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
@@ -36,18 +39,19 @@ public class ControllableEditor implements InvalidationListener {
 		MOVE_RIGHT(MoveRight.class, "Move Right", (s, d) -> new MoveRight(s, d)),
 		MOVE_LEFT(MoveLeft.class, "Move Left", (s, d) -> new MoveLeft(s, d)),
 		MOVE_UP_JUMP(MoveUpJump.class, "Jump Up", (s, d) -> new MoveUpJump(s, d)),
-		MOVE_UP_FLY(MoveUpFly.class, "Fly Up",  (s, d) -> new MoveUpFly(s, d));
+		MOVE_UP_FLY(MoveUpFly.class, "Fly Up",  (s, d) -> new MoveUpFly(s, d)),
+		LAUNCH(LaunchProxy.class, "Launch", (s, d) -> new LaunchProxy(s, SpriteFactory.PROJECTILE.buildDefault(), d));
 
 		@FunctionalInterface
-		private interface MoveMaker {
-			public Move make(Sprite aSprite, Double aVelocity);
+		private interface ActionMaker {
+			public Action make(Sprite aSprite, Double aVelocity);
 		}
 
-		private MoveMaker myMoveMaker;
-		private Class<? extends Move> myMoveClass;
+		private ActionMaker myMoveMaker;
+		private Class<? extends Action> myMoveClass;
 		private String myDescription;
 
-		private MoveFactory (Class<? extends Move> aMoveClass, String aDescription, MoveMaker maker) {
+		private MoveFactory (Class<? extends Action> aMoveClass, String aDescription, ActionMaker maker) {
 			myDescription = aDescription;
 			myMoveClass = aMoveClass;
 			myMoveMaker = maker;
@@ -60,7 +64,7 @@ public class ControllableEditor implements InvalidationListener {
 			throw new ExecuteException("No Move Found", 0);
 		}
 
-		public Move make(Sprite aSprite, Double aVelocity) {
+		public Action make(Sprite aSprite, Double aVelocity) {
 			return this.myMoveMaker.make(aSprite, aVelocity);
 		}
 
@@ -139,7 +143,11 @@ public class ControllableEditor implements InvalidationListener {
 
 			myMoveToFieldMap.get(move).get().getKey().setCode(e.getKey());
 			myMoveToFieldMap.get(move).setEnabled(true);
-			myMoveToFieldMap.get(move).get().getValue().setValue(((Move) e.getValue()).getVelocity());
+			if(e.getValue() instanceof Move){
+				myMoveToFieldMap.get(move).get().getValue().setValue(((Move) e.getValue()).getVelocity());
+			}
+			else if(e.getValue() instanceof Launch)
+				myMoveToFieldMap.get(move).get().getValue().setValue(((Launch) e.getValue()).getVelocity());
 		});		
 
 		buildPane();

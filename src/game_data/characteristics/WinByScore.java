@@ -30,11 +30,6 @@ public class WinByScore implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new WinByScore(mySprite, scoreToWin);
-	}
-
-	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		//TODO: make and execute win action
 			if(mySprite instanceof Player ){
@@ -52,6 +47,11 @@ public class WinByScore implements Characteristic{
 			
 			}
 		
+	}
+
+	@Override
+	public Characteristic copy(Sprite aSprite) {
+		return new WinByScore(aSprite, scoreToWin);
 	}
 
 

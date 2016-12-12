@@ -12,7 +12,7 @@
         <name>Goomba</name>
         <myLocation>
           <myXLocation>200.0</myXLocation>
-          <myYLocation>400.0</myYLocation>
+          <myYLocation>300.0</myYLocation>
         </myLocation>
         <preset class="game_data.sprites.Player">
           <name>Goomba</name>
@@ -78,6 +78,13 @@
           </myControllable>
           <id>ConcreteDraggableSprite1481510984915</id>
           <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Score>
+              <myScore>0.0</myScore>
+            </game__data.states.Score>
             <game__data.states.Physics>
               <verticalGravity>800.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
@@ -85,13 +92,6 @@
             <game__data.states.LevelWon>
               <hasWon>false</hasWon>
             </game__data.states.LevelWon>
-            <game__data.states.Score>
-              <myScore>0.0</myScore>
-            </game__data.states.Score>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
           </myStates>
         </preset>
         <myWidth>100</myWidth>
@@ -109,22 +109,25 @@
           <mySprite class="game_data.sprites.Player" reference="../.."/>
           <myKeyPressedMap>
             <entry>
-              <javafx.scene.input.KeyCode>W</javafx.scene.input.KeyCode>
-              <game__engine.actions.MoveUpFly>
+              <javafx.scene.input.KeyCode>D</javafx.scene.input.KeyCode>
+              <game__engine.actions.MoveRight>
                 <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
-                <myOldLocation reference="../../../../../myLocation"/>
+                <myOldLocation>
+                  <myXLocation>200.0</myXLocation>
+                  <myYLocation>400.0</myYLocation>
+                </myOldLocation>
                 <myNewLocation>
                   <myXLocation>0.0</myXLocation>
                   <myYLocation>0.0</myYLocation>
                 </myNewLocation>
                 <myVelocity>100.0</myVelocity>
-              </game__engine.actions.MoveUpFly>
+              </game__engine.actions.MoveRight>
             </entry>
             <entry>
               <javafx.scene.input.KeyCode>A</javafx.scene.input.KeyCode>
               <game__engine.actions.MoveLeft>
                 <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
-                <myOldLocation reference="../../../../../myLocation"/>
+                <myOldLocation reference="../../../entry/game__engine.actions.MoveRight/myOldLocation"/>
                 <myNewLocation>
                   <myXLocation>0.0</myXLocation>
                   <myYLocation>0.0</myYLocation>
@@ -133,16 +136,16 @@
               </game__engine.actions.MoveLeft>
             </entry>
             <entry>
-              <javafx.scene.input.KeyCode>D</javafx.scene.input.KeyCode>
-              <game__engine.actions.MoveRight>
+              <javafx.scene.input.KeyCode>W</javafx.scene.input.KeyCode>
+              <game__engine.actions.MoveUpFly>
                 <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
-                <myOldLocation reference="../../../../../myLocation"/>
+                <myOldLocation reference="../../../entry/game__engine.actions.MoveRight/myOldLocation"/>
                 <myNewLocation>
                   <myXLocation>0.0</myXLocation>
                   <myYLocation>0.0</myYLocation>
                 </myNewLocation>
                 <myVelocity>100.0</myVelocity>
-              </game__engine.actions.MoveRight>
+              </game__engine.actions.MoveUpFly>
             </entry>
           </myKeyPressedMap>
           <myKeyReleasedMap reference="../../preset/myControllable/myKeyReleasedMap"/>
@@ -155,17 +158,17 @@
           <game__data.states.LevelWon>
             <hasWon>false</hasWon>
           </game__data.states.LevelWon>
-          <game__data.states.Health>
-            <myHealth>1</myHealth>
-            <isAlive>true</isAlive>
-          </game__data.states.Health>
-          <game__data.states.Score>
-            <myScore>0.0</myScore>
-          </game__data.states.Score>
           <game__data.states.Physics>
             <verticalGravity>800.0</verticalGravity>
             <horizontalGravity>0.0</horizontalGravity>
           </game__data.states.Physics>
+          <game__data.states.Score>
+            <myScore>0.0</myScore>
+          </game__data.states.Score>
+          <game__data.states.Health>
+            <myHealth>1</myHealth>
+            <isAlive>true</isAlive>
+          </game__data.states.Health>
         </myStates>
       </myMainPlayer>
       <mySprites>
@@ -220,14 +223,14 @@
                 </myControllable>
                 <id>ConcreteDraggableSprite1481510984110</id>
                 <myStates>
-                  <game__data.states.Health>
-                    <myHealth>1</myHealth>
-                    <isAlive>true</isAlive>
-                  </game__data.states.Health>
                   <game__data.states.Physics>
                     <verticalGravity>0.0</verticalGravity>
                     <horizontalGravity>0.0</horizontalGravity>
                   </game__data.states.Physics>
+                  <game__data.states.Health>
+                    <myHealth>1</myHealth>
+                    <isAlive>true</isAlive>
+                  </game__data.states.Health>
                 </myStates>
               </mySprite>
               <movesThroughBottom>false</movesThroughBottom>
@@ -242,14 +245,14 @@
           </myControllable>
           <id></id>
           <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
             </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
       </mySprites>
@@ -261,8 +264,8 @@
     </game__data.Level>
   </myLevels>
   <mySpritePresets>
-    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
     <game__data.sprites.Player reference="../../myLevels/game__data.Level/myMainPlayer/preset"/>
+    <game__data.sprites.Terrain reference="../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/myCharacteristics/game__data.characteristics.Impassable/mySprite"/>
   </mySpritePresets>
   <myCurrentLevel reference="../myLevels/game__data.Level"/>
   <myDescription>New VOOGASalad Game</myDescription>

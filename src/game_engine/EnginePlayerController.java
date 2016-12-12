@@ -101,7 +101,7 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "data/images/sprite_images/block.png");
 		myProjectile.addState(new Physics(0.0, 0.0));
 		myProjectile.addCharacteristic(new Impassable(myProjectile));
-		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0, 0));
+		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0));
 		return myKeyPressedMap;
 	}
 

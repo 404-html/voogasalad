@@ -25,8 +25,8 @@ public class Winnable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Winnable(mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Winnable(aSprite);
 	}
 
 	@Override

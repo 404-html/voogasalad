@@ -32,8 +32,8 @@ public class Rotatable implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new Rotatable(mySpeed, mySprite);
+	public Characteristic copy(Sprite aSprite) {
+		return new Rotatable(mySpeed, aSprite);
 	}
 
 	@Override

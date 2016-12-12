@@ -32,8 +32,8 @@ public class CollisionScoreUpdater implements Characteristic{
 	}
 
 	@Override
-	public Characteristic copy() {
-		return new CollisionScoreUpdater(mySprite.clone());
+	public Characteristic copy(Sprite aSprite) {
+		return new CollisionScoreUpdater(aSprite);
 	}
 	
 
