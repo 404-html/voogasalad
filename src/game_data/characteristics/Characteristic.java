@@ -23,6 +23,6 @@ public interface Characteristic {
 	 */
 	//public boolean toAct();
 	public void execute(Map<Sprite, Side> myCollisionMap);
-	public Characteristic copy();
+	public Characteristic copy(Sprite aSprite);
 
 }

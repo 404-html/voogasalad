@@ -43,8 +43,8 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 	}
 	
 	@Override
-	public Characteristic copy() {
-		return new InvincibilityPowerUpper(myTimeInEffect, this.getSprite());
+	public Characteristic copy(Sprite aSprite) {
+		return new InvincibilityPowerUpper(myTimeInEffect, aSprite);
 	}
 
 	@Override
@@ -113,5 +113,5 @@ public class InvincibilityPowerUpper extends TemporalPowerUpper implements Chara
 			}
 			return hasChanged;
 	}
-	
+
 }

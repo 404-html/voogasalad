@@ -37,7 +37,7 @@ public class PlayerDefaultBuilder implements SpriteDefaultBuilder {
 	private static final String NAME = "Player_Name";
 
 	@Override
-	public Sprite build() {
+	public Sprite buildDefault() {
 		for(Characteristic characteristic : CHARACTERISTICS) {
 			player.addCharacteristic(characteristic);
 		}

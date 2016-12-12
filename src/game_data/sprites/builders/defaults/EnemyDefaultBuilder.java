@@ -31,7 +31,7 @@ public class EnemyDefaultBuilder implements SpriteDefaultBuilder {
 
 
 	@Override
-	public Sprite build() {
+	public Sprite buildDefault() {
 		for(Characteristic characteristic : CHARACTERISTICS) {
 			enemy.addCharacteristic(characteristic);
 		}

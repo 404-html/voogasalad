@@ -31,23 +31,9 @@ public abstract class AuthorModel implements IAuthorModel{
 		this.authorController = aAuthorController;
 	}
 
-	@Deprecated
-	public Level addLevel(int aWidth, int aHeight, String aBackgroundImageFilePath){
-		this.activeLevel = new Level("Level 1", aWidth, aHeight, aBackgroundImageFilePath);
-		this.activeGame.addNewLevel(this.activeLevel);
-		return this.activeLevel;
-	}
-
-	@Deprecated
-	public Sprite addSprite(Sprite aSpritePreset){
-		Sprite createdSprite = aSpritePreset.clone();
-		this.activeLevel.addNewSprite(createdSprite);
-		return createdSprite;
-	}
-
 	@Override
 	public void newGameWindow(){
-		IGameObjectEditWindowExternal<Game> gameObjectEditWindowExternal = new GameEditWindowFactory().create();
+		IGameObjectEditWindowExternal<Game> gameObjectEditWindowExternal = new GameEditWindowFactory().create(authorController);
 		Game newGame = gameObjectEditWindowExternal.getResult();
 		if(newGame != null){
 			createNewGame(newGame.getName());
@@ -57,7 +43,7 @@ public abstract class AuthorModel implements IAuthorModel{
 	@Override
 	public Game getGame(){
 		if (activeGame == null)
-			this.activeGame = new Game("Unnamed_Game");
+			this.activeGame = new Game(authorController.getDisplayText("DefaultGameName"));
 		return this.activeGame;
 	}
 
@@ -79,20 +65,22 @@ public abstract class AuthorModel implements IAuthorModel{
 	@Override
 	public void saveGame(String aFileName){
 		XMLTranslator gameSaver = new XMLTranslator();
-		gameSaver.saveToFile(activeGame, "XMLGameFiles/", aFileName);
+		gameSaver.saveToFile(activeGame, authorController.getPathString("XMLGameFiles"), aFileName);
 	}
-	
+
 	public void loadDefaultSprites() {
-		FolderListor fl = new FolderListor("data/sprite/presets/");
-		for(String fileName : fl.getFilesWithExtension(".xml")) {
-			if(fileName.contains(".DS_Store"))
-				continue; // TODO: fix this temporary hack to avoid attempting to load this hidden mac generated file
-			File aFile = new File(fileName);
-			XMLTranslator myLoader = new XMLTranslator();
-			Sprite aSprite = (Sprite) myLoader.loadFromFile(aFile);
-			this.authorController.getModel().getGame().addPreset(aSprite);
+		try {
+			FolderListor fl = new FolderListor(authorController.getPathString("DefaultSprites"));
+			for(String fileName : fl.getFilesWithExtension(".xml")) {
+				if(fileName.contains(".DS_Store"))
+					continue; // TODO: fix this temporary hack to avoid attempting to load this hidden mac generated file
+				File aFile = new File(fileName + ".xml");
+				XMLTranslator myLoader = new XMLTranslator();
+				Sprite aSprite = (Sprite) myLoader.loadFromFile(aFile);
+				this.authorController.getModel().getGame().addPreset(aSprite);
+			}
+		}
+		catch (Exception exception){
 		}
 	}
-
-
 }
