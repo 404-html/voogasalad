@@ -32,11 +32,11 @@ public class ConcreteAuthorController implements IAuthorController {
 	 * @see author.controller.IAuthorControllerExternal#getScene()
 	 */
 	public ConcreteAuthorController() {
+		this.invalidationListeners = new HashSet<>();
 		setLanguageResourceBundle("English");
 		myPathResourceBundle = ResourceBundle.getBundle("author.resources/Paths");
 		this.authorModel = new AuthorModelFactory().create((IAuthorController) this);
 		this.authorView = new AuthorView((IAuthorController) this);
-		this.invalidationListeners = new HashSet<>();
 	}
 
 	@Override

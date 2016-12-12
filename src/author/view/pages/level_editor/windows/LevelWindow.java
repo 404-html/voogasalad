@@ -16,12 +16,14 @@ import author.view.pages.level_editor.windows.level_window.ILevelWindowPane;
 import author.view.pages.level_editor.windows.level_window.LevelWindowPaneFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowScrollerFactory;
 import author.view.pages.level_editor.windows.level_window.LevelWindowToolBarFactory;
+import author.view.util.language_selection.ILanguageUser;
 import author.view.util.undo.IRevertManager;
 import author.view.util.undo.RevertManagerFactory;
 import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -41,7 +43,7 @@ import javafx.scene.layout.Pane;
  * @see EntityWindow
  * @see ../LevelEditor
  */
-public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWindowInternal {
+public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWindowInternal, ILanguageUser {
 
 	private ScrollPane levelScroller;
 	private ILevelWindowPane levelWindowPane;
@@ -54,12 +56,9 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	private Set<DraggableSprite> selectedSprites = new HashSet<>();
 	private DraggableSprite selectedSprite;
 
-	
-	
-	
-
 	public LevelWindow(IAuthorController authorController) {
 		super(authorController);
+		getController().addListener(this);
 		createScroller();
 		super.getWindow().getStylesheets().add(getStyleSheet());
 		super.getWindow().getStyleClass().add("lol");
@@ -74,6 +73,7 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 
 	@Override
 	protected void createToolBar() {
+		super.getWindow().getChildren().clear();
 		super.getWindow().getChildren()
 				.add(new LevelWindowToolBarFactory().createToolBar((ILevelWindowInternal) this, this.getController()));
 	}
@@ -260,6 +260,11 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 	@Override
 	public DraggableSprite getSelectedSprite() {
 		return this.selectedSprite;
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		createToolBar();
 	}
 
 }

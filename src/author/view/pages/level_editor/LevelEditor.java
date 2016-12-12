@@ -55,6 +55,7 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 	}
 
 	public Pane getPane() {
+		myPane.setId("LevelEditor");
 		return myPane;
 	}
 

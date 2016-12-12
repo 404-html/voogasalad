@@ -30,26 +30,26 @@ public class LevelWindowToolBarFactory {
 		this.iLevelWindowInternal = iLevelWindowInternal;
 		this.authorController = authorController;
 		ToolBarBuilder tbb = new ToolBarBuilder();
-		tbb.addBurst(new Label("Level Window"));
+		tbb.addBurst(new Label(authorController.getDisplayText("LevelWindow")));
 		tbb.addFiller();
-		tbb.addBurst(createCheckBox("Randomized"), new ButtonFactory().createButton("Set Background", e -> {
+		tbb.addBurst(createCheckBox(authorController.getDisplayText("Randomized")), new ButtonFactory().createButton(authorController.getDisplayText("SetBackground"), e -> {
 			newBackgroundImage();
-		}).getButton(), new ButtonFactory().createButton("Extend Width", e -> {
+		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ExtendWidth"), e -> {
 			this.iLevelWindowInternal.getHorizontalPanes()
 					.set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
-		}).getButton(), new ButtonFactory().createButton("Extend Height", e -> {
+		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ExtendHeight"), e -> {
 			this.iLevelWindowInternal.getVerticalPanes().set(this.iLevelWindowInternal.getVerticalPanes().get() + 1);
-		}).getButton(), new ButtonFactory().createButton("Shrink Width", e -> {
+		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ShrinkWidth"), e -> {
 			if (this.iLevelWindowInternal.getHorizontalPanes().get() > 1) {
 				this.iLevelWindowInternal.getHorizontalPanes()
 						.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
 			}
-		}).getButton(), new ButtonFactory().createButton("Shrink Height", e -> {
+		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ShrinkHeight"), e -> {
 			if (this.iLevelWindowInternal.getVerticalPanes().get() > 1) {
 				this.iLevelWindowInternal.getVerticalPanes()
 						.set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
 			}
-		}).getButton(), new ButtonFactory().createButton("Reset Size", e -> {
+		}).getButton(), new ButtonFactory().createButton(authorController.getDisplayText("ResetSize"), e -> {
 			this.iLevelWindowInternal.getHorizontalPanes().set(1);
 			this.iLevelWindowInternal.getVerticalPanes().set(1);
 		}).getButton());
@@ -60,7 +60,7 @@ public class LevelWindowToolBarFactory {
 	private void newBackgroundImage() {
 		File file;
 		try {
-			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
+			file = new FileLoader(authorController.getPathString("LevelImages"), FileType.RASTER_IMAGE).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
 			this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {

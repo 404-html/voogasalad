@@ -8,7 +8,10 @@ import java.util.Map;
 import author.controller.IAuthorController;
 import author.view.util.authoring_buttons.FunctionalLabel;
 import author.view.util.authoring_buttons.LabelFactory;
+import author.view.util.language_selection.ILanguageUser;
+import author.view.util.language_selection.LanguageUserLabel;
 import game_data.Level;
+import javafx.beans.Observable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
@@ -26,7 +29,7 @@ import util.facades.ToolBarBuilder;
  * @author Jordan Frazier
  * @see ../LevelEditor
  */
-public class LevelSelectionWindow extends AbstractLevelEditorWindow {
+public class LevelSelectionWindow extends AbstractLevelEditorWindow implements ILanguageUser{
 
 	private ScrollPane levelScroller;
 	private VBox container;
@@ -35,13 +38,13 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow {
 
 	public LevelSelectionWindow(IAuthorController authorController) {
 		super(authorController);
+		super.getController().addListener(this);
 	}
 
 	@Override
 	protected void createToolBar() {
 		ToolBarBuilder tbb = new ToolBarBuilder();
-		tbb.addBurst(new Label("Level Selection"));
-
+		tbb.addBurst(new LanguageUserLabel("LevelSelection", getController()));
 		container = new VBox();
 		levelScroller = new ScrollPane();
 		levelScroller.setFitToHeight(true);
@@ -127,5 +130,10 @@ public class LevelSelectionWindow extends AbstractLevelEditorWindow {
 		FunctionalLabel label = labelMap.get(name);
 		label.getLabel().setTextFill(Color.RED);
 		label.getLabel().setStyle("-fx-border-color: green;" + "-fx-border-width: 0.5;" + "-fx-border-style: solid;");
+	}
+
+	@Override
+	public void invalidated(Observable arg0) {
+		
 	}
 }
