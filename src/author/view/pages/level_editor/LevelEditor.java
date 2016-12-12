@@ -76,7 +76,7 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 	}
 	
 	public Level createLevel(){
-		ILevelEditWindowExternal levelEditWindow = new LevelEditWindowFactory().create();
+		ILevelEditWindowExternal levelEditWindow = new LevelEditWindowFactory().create(authorController);
 		Level createdLevel = levelEditWindow.getLevel();
 		return createdLevel;
 	}

@@ -13,6 +13,7 @@ import util.filehelpers.FileLoader.FileLoader;
 import util.filehelpers.FileLoader.FileLoader.StartDirectory;
 import util.filehelpers.FileLoader.FileType;
 import author.view.util.authoring_buttons.ButtonFactory;
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.Level;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -36,15 +37,17 @@ class LevelEditBox {
 	
 	private static final int DEFAULT_LEVEL_WIDTH = 700;
 	private static final int DEFAULT_LEVEL_HEIGHT = 550;
+	private ILanguageHolder myLanguageHolder;
 	
 	private VBox container;
-	LevelEditBox() {
+	LevelEditBox(ILanguageHolder aLanguageHolder) {
+		myLanguageHolder = aLanguageHolder;
 		this.container = initializeVBox();
 		this.level = new Level(null, 0, 0, null);
 	}
 	
-	LevelEditBox(Level aLevel){
-		this();
+	LevelEditBox(Level aLevel, ILanguageHolder aLanguageHolder){
+		this(aLanguageHolder);
 		this.level = aLevel;
 		this.backgroundPath = aLevel.getBackgroundImageFilePath();
 		this.nameField.setText(aLevel.getName());
@@ -75,15 +78,15 @@ class LevelEditBox {
 		editBox.setPadding(new Insets(3));
 		editBox.setAlignment(Pos.CENTER);
 		
-		editBox.getChildren().add(createHBox(new Label("Name: "), nameField));
-		editBox.getChildren().add(new ButtonFactory().createButton("Choose Background", e -> updateBackgroundString()).getButton());
+		editBox.getChildren().add(createHBox(new Label(myLanguageHolder.getDisplayText("Name")), nameField));
+		editBox.getChildren().add(new ButtonFactory().createButton(myLanguageHolder.getDisplayText("ChooseBackground"), e -> updateBackgroundString()).getButton());
 		return editBox;
 	}
 	
 	private void updateBackgroundString(){
 		File file;
 		try {
-		file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
+		file = new FileLoader(myLanguageHolder.getPathString("LevelImages"), FileType.RASTER_IMAGE).loadSingle();
 		if (file !=null){
 			RelativePathFinder pf = new RelativePathFinder();
 			this.backgroundPath = pf.getPath(file);

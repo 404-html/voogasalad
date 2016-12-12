@@ -5,6 +5,7 @@ package author.view.util.edit_window;
 
 import java.io.File;
 
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.GameObject;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,17 +17,16 @@ import javafx.stage.Stage;
 abstract class GameObjectEditWindow<T extends GameObject> implements IGameObjectEditWindowInternal, IGameObjectEditWindowExternal<T>{
 
 	private Stage stage;
-	private static final String TITLE = "New Game";
 	private GameObjectEditPage<T> gameObjectEditPage;
-	private static final String STYLESHEET = "data/GUI/author-style.css";
-
+	ILanguageHolder myLanguageHolder;
 	
-	GameObjectEditWindow(){
-		this.gameObjectEditPage = getGameObjectLevelPage();
+	GameObjectEditWindow(ILanguageHolder aLanguageHolder){
+		myLanguageHolder = aLanguageHolder;
+		this.gameObjectEditPage = getGameObjectLevelPage(myLanguageHolder);
 		initializeWindow();
 	}
 	
-	protected abstract GameObjectEditPage<T> getGameObjectLevelPage();
+	protected abstract GameObjectEditPage<T> getGameObjectLevelPage(ILanguageHolder aLanguageHolder);
 	
 	@Override
 	public T getResult(){
@@ -35,7 +35,7 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 	
 	private void initializeWindow(){
 		this.stage = new Stage();
-		this.stage.setTitle(TITLE);
+		this.stage.setTitle(myLanguageHolder.getDisplayText("NewGame"));
 		this.stage.setScene(new Scene(this.gameObjectEditPage.getPane()));
 		this.stage.getScene().getStylesheets().add(getStyleSheet());
 		this.stage.setResizable(false);
@@ -48,7 +48,7 @@ abstract class GameObjectEditWindow<T extends GameObject> implements IGameObject
 	}
 	
 	private String getStyleSheet(){
-		File css = new File(STYLESHEET);
+		File css = new File(myLanguageHolder.getPathString("AuthorCSSStyle"));
 		return css.toURI().toString();
 	}
 
