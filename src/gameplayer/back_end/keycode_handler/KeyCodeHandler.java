@@ -3,7 +3,13 @@ package gameplayer.back_end.keycode_handler;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+
+import game_engine.actions.Action;
+import game_engine.actions.MoveLeft;
+import game_engine.actions.MoveRight;
 import gameplayer.application_controller.KeyCodeTranslator;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -54,16 +60,29 @@ public class KeyCodeHandler {
 
 	public void clearReleased() {
 		myKeysReleased.clear();
+		myKeysPressed.clear();
 	}
 
-	public void handleKeyPress(KeyCode aKeyCode) {
+	public void handleKeyPress(KeyCode aKeyCode, Map<KeyCode, Action> aVelocity) {
 		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
 		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
-		if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
+		
+		KeyCode leftKey = null;
+		KeyCode rightKey = null;
+		
+		for(Entry<KeyCode, Action> e : aVelocity.entrySet()) {
+			if(leftKey == null && e.getValue() instanceof MoveLeft)
+				leftKey = e.getKey();
+			if(rightKey == null && e.getValue() instanceof MoveRight)
+				rightKey = e.getKey();
+			
+		}
+		
+		if (aKeyCode == leftKey || myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
 			for (int i = 0; i < myMainPlayerImage.size(); i++) {
 				myMainPlayerImage.get(i).setRotate(180);
 			}
-		} else if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.RIGHT)) {
+		} else if (aKeyCode == rightKey || myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.RIGHT)) {
 			for (int i = 0; i < myMainPlayerImage.size(); i++) {
 				myMainPlayerImage.get(i).setRotate(0);
 			}
