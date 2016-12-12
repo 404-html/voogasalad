@@ -3,9 +3,11 @@ package gameplayer.front_end.gui_generator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+
 import gameplayer.application_controller.Choosable;
+import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.front_end.gui_generator.button_generator.ButtonFactory;
-import gameplayer.front_end.gui_generator.combobox_generator.ComboBoxFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.Priority;
+import javafx.util.StringConverter;
 
 public class GUIGenerator implements IGUIGenerator {
 	
@@ -32,7 +34,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public TextField createTextField(String aplaceholder, int x, int y, int width) {
+	public TextField createTextField(String aplaceholder, double x, double y, double width) {
 		TextField newTextField = new TextField(aplaceholder);
 		newTextField.setTranslateX(x);
 		newTextField.setTranslateY(y);
@@ -41,7 +43,7 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public Label createLabel(String atext, int x, int y) {
+	public Label createLabel(String atext, double x, double y) {
 		Label newLabel = new Label(atext);
 		newLabel.setTranslateX(x);
 		newLabel.setTranslateY(y);
@@ -56,43 +58,70 @@ public class GUIGenerator implements IGUIGenerator {
 		return image;
 	}
 	
-	public MediaPlayer createMediaPlayer(String aFilePath) {
-		Media media = new Media(new File(aFilePath).toURI().toString());
-		MediaPlayer soundPlayer = new MediaPlayer(media); 
-		soundPlayer.setAutoPlay(true);
-		return soundPlayer;
+	private Label createComboBoxLabel(String aLabel) {
+		Label label = createLabel(aLabel, 0, 0); 
+		label.setId("combo-box-label");
+		label.autosize();
+		return label;
 	}
 	
 	@Override
-	public ComboBox<Pane> createComboBox(List<String> aListOfNames, List<String> aListOfFilePaths, Choosable aChooser) {
+	public ComboBox<Pane> createComboBox(String aLabel, List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
-		box.setPromptText("CHOOSE GAME");
-		List<HBox> options = new ArrayList<HBox>();
-		for(int i = 0; i < aListOfNames.size(); i++){
-			HBox hbox = new HBox();
-			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
-				System.out.println("here");
-				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
-			} else {
-				hbox.getChildren().add(new ImageView());
-			}
-			hbox.getChildren().add(new Label(aListOfNames.get(i)));
-			options.add(hbox);
-		}
+		box.setPromptText(aLabel);
+		List<HBox> options = createListOfComboBoxHbox(aListOfNames, aListOfFilePaths, aListOfDescriptions, box);
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
-		box.setPromptText("CHOOSE GAME");
-		box.setEditable(true);        
+		//box.setMinWidth(box.getWidth());
+		//box.setEditable(true);
+		box.setConverter(new StringConverter<Pane>() {
+
+		    @Override
+		    public Pane fromString(String string) {
+		        return box.getSelectionModel().getSelectedItem();
+		    }
+
+			@Override
+			public String toString (Pane object) {
+				if (object == null) return null;
+				if (object.getChildren().size() >= 1) {
+					return ((Label) object.getChildren().get(1)).getText();
+				}
+				return null;
+			}
+		});
 		box.setOnAction(e -> {
-			String label = ((Label) box.getSelectionModel().getSelectedItem().getChildren().get(1)).getText();
+			String label = box.getConverter().toString(box.getSelectionModel().getSelectedItem());
+			box.setPromptText(label);
 		    aChooser.choose(label);
-		    box.setPromptText(label);
 		});
 		return box;
 	}
 
+	private List<HBox> createListOfComboBoxHbox(List<String> aListOfNames, List<String> aListOfFilePaths,
+			List<String> aListOfDescriptions, ComboBox<Pane> box) {
+		List<HBox> options = new ArrayList<HBox>();
+		for(int i = 0; i < aListOfNames.size(); i++){
+			HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
+			hbox.setMaxWidth(box.getMaxWidth());
+			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
+				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
+			} else {
+				hbox.getChildren().add(new ImageView());
+			}
+			Label name = createComboBoxLabel(aListOfNames.get(i));
+			Label des = createComboBoxLabel(aListOfDescriptions.get(i));
+			hbox.setHgrow(name, Priority.ALWAYS);
+			hbox.setHgrow(des, Priority.ALWAYS);
+			hbox.getChildren().add(name);
+			hbox.getChildren().add(des);
+			options.add(hbox);
+		}
+		return options;
+	}
+
 	@Override
-	public Button createButton(String aMessage, int aXPos, int aYPos, EventHandler<? super MouseEvent> aHandler,
+	public Button createButton(String aMessage, double aXPos, double aYPos, EventHandler<? super MouseEvent> aHandler,
 			ButtonDisplay aDisplayType) {
 		return myButtonBuilder.buildButton(aMessage, aXPos, aYPos, aHandler, aDisplayType);
 	}
@@ -120,8 +149,4 @@ public class GUIGenerator implements IGUIGenerator {
 		return menu;
 	}
 
-//	@Override
-//	public ComboBox<Pane> createComboBox(List<Pane> aDisplayOfGames) {
-//		return myComboBoxBuilder.createComboBox(aDisplayOfGames);
-//	}
 }

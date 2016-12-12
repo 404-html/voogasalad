@@ -1,11 +1,10 @@
 package gameplayer.back_end.keycode_handler;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
-import game_data.Sprite;
 import gameplayer.application_controller.KeyCodeTranslator;
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
@@ -15,24 +14,25 @@ public class KeyCodeHandler {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private KeyCodeTranslator myKeyCodeTranslator;
-	private Node myMainPlayerImage;
+	private List<ImageView> myMainPlayerImage;
 	
 	public KeyCodeHandler(String aInput) {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
+		myMainPlayerImage = new ArrayList<ImageView>();
 		myKeyCodeTranslator = new KeyCodeTranslator(aInput);
 	}
 	
-	public KeyCodeHandler(){
+	public KeyCodeHandler() {
 		myKeySet = new HashSet<KeyCode>();
 		myKeysPressed = new HashSet<KeyCode>();
 		myKeysReleased = new HashSet<KeyCode>();
 		myKeyCodeTranslator = new KeyCodeTranslator("Default");
 	}
 	
-	public void addMainPlayer(Node node) {
-		myMainPlayerImage = node;
+	public void addMainPlayer(List<ImageView> aImageList) {
+		myMainPlayerImage = aImageList;
 	}
 	
 	public Set<KeyCode> getKeySet() {
@@ -59,10 +59,14 @@ public class KeyCodeHandler {
 	public void handleKeyPress(KeyCode aKeyCode){
 		myKeysPressed.add(myKeyCodeTranslator.getCode(aKeyCode));
 		myKeySet.add(myKeyCodeTranslator.getCode(aKeyCode));
-		if (aKeyCode.equals(KeyCode.LEFT)) {
-		    myMainPlayerImage.setRotate(180);
-		} else if (aKeyCode.equals(KeyCode.RIGHT)) {
-			myMainPlayerImage.setRotate(0);
+		if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
+			for (int i = 0; i < myMainPlayerImage.size(); i++) {
+				myMainPlayerImage.get(i).setRotate(180);
+			}
+		} else if (myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.RIGHT)) {
+			for (int i = 0; i < myMainPlayerImage.size(); i++) {
+				myMainPlayerImage.get(i).setRotate(0);
+			}
 		}
 	}
 	

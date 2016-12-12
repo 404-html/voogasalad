@@ -1,4 +1,4 @@
-package gameplayer.back_end.Resources;
+package gameplayer.back_end.resources;
 
 public enum FrontEndResources {
 	

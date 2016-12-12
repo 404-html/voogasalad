@@ -28,6 +28,10 @@ public class LaunchSkeleton implements Launch{
 		return new LaunchWithLevel(myLauncher, myProjectile, myXVelocity, myYVelocity, aLevel);
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new LaunchSkeleton(aSprite, myProjectile, myXVelocity, myYVelocity);
+	}
 
 
 }

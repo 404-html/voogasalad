@@ -83,14 +83,19 @@ public abstract class AuthorModel implements IAuthorModel{
 	}
 	
 	public void loadDefaultSprites() {
-		FolderListor fl = new FolderListor("data/sprite/default_sprites/");
-		for(String fileName : fl.getFilesWithExtension(".xml")) {
-			if(fileName.contains(".DS_Store"))
-				continue; // TODO: fix this temporary hack to avoid attempting to load this hidden mac generated file
-			File aFile = new File(fileName);
-			XMLTranslator myLoader = new XMLTranslator();
-			Sprite aSprite = (Sprite) myLoader.loadFromFile(aFile);
-			this.authorController.getModel().getGame().addPreset(aSprite);
+		try {
+			FolderListor fl = new FolderListor("data/sprite/default_sprites/");
+			for(String fileName : fl.getFilesWithExtension(".xml")) {
+				if(fileName.contains(".DS_Store"))
+					continue; // TODO: fix this temporary hack to avoid attempting to load this hidden mac generated file
+				File aFile = new File(fileName + ".xml");
+				XMLTranslator myLoader = new XMLTranslator();
+				Sprite aSprite = (Sprite) myLoader.loadFromFile(aFile);
+				this.authorController.getModel().getGame().addPreset(aSprite);
+			}
+		}
+		catch (Exception exception){
+			
 		}
 	}
 

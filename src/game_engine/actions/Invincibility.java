@@ -16,11 +16,16 @@ public class Invincibility implements Action {
 		myPlayerSprite = playerSprite;
 	}
 	
-
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new Invincibility(aSprite);
+	}
+	
 	@Override
 	public void act() {
 		boolean hasState = false;
 		for(State state:myPlayerSprite.getStates()){
+//			System.out.println("vincibility changes");
 			if(state instanceof Vincibility){
 				((Vincibility) state).setVincibility(false);
 				hasState = true;

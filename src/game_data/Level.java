@@ -23,7 +23,7 @@ public class Level extends GameObject {
 	private boolean didLose, didWin;
 	private int width, height;
 	private String backgroundImageFilePath;
-	private Player myPlayerSprite;
+	private Player myMainPlayer;
 	Set<Sprite> mySprites;
 	private List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
 
@@ -42,17 +42,17 @@ public class Level extends GameObject {
 		setMyControllableSpriteList();
 		for(Sprite s: getMySpriteList()){
 			if(s instanceof Player){
-				setPlayerSprite((Player)s);
+				setMainPlayer((Player)s);
 			}
 		}
 	}
 
 	public Player getMainPlayer() {
-		return myPlayerSprite;
+		return myMainPlayer;
 	}
 
-	public void setPlayerSprite(Player aPlayer) {
-		myPlayerSprite = aPlayer;
+	public void setMainPlayer(Player aPlayer) {
+		myMainPlayer = aPlayer;
 		notifyListeners();
 	}
 
@@ -87,17 +87,11 @@ public class Level extends GameObject {
 		mySprites.add(aSprite);
 		if(aSprite instanceof LevelSetter)
 			((LevelSetter) aSprite).setLevel(this);
-//		if(aSprite instanceof Player){
-//			setPlayerSprite((Player) aSprite);
-//			aSprite.addState(new LevelWon());
-//		}
-		if(aSprite.getControllable() != null) {
-			if(aSprite.getControllable().isControllable()){
+		if(aSprite.getControllable() != null && aSprite.getControllable().isControllable()) {
 				myControllableSpriteList.add(aSprite);
-			}
 		}
 		if(aSprite instanceof Player){
-			setPlayerSprite((Player)aSprite);
+			setMainPlayer((Player)aSprite);
 		}
 		this.notifyListeners();
 	}
@@ -128,14 +122,14 @@ public class Level extends GameObject {
 	}
 
 	public void setMyControllableSpriteList() {
-		List<Sprite> myControllableSpriteList = new ArrayList<Sprite>();
-		// List<Sprite> mySpriteList = getMySpriteList();
+		List<Sprite> controllableSpriteList = new ArrayList<Sprite>();
+
 		for (Sprite s : mySprites) {
 			if (s.getControllable() != null && s.getControllable().isControllable()) {
-				myControllableSpriteList.add(s);
+				controllableSpriteList.add(s);
 			}
 		}
-		this.myControllableSpriteList = myControllableSpriteList;
+		this.myControllableSpriteList = controllableSpriteList;
 	}
 
 	public List<Sprite> getMyControllableSpriteList() {

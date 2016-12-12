@@ -70,6 +70,8 @@ public class ListOfCollidingSprites {
 		 * getYLocation());
 		 */
 		for (Sprite mySprite : spriteList) {
+			
+	
 			/*
 			 * UpdateLocation updateLocation = new UpdateLocation(mySprite,
 			 * myTimeElapsed); double oldX2 =
@@ -94,6 +96,7 @@ public class ListOfCollidingSprites {
 					&& (mySpriteImages.get(mySprite).getBoundsInParent())
 					.intersects(mySpriteImages.get(targetSprite).getBoundsInParent())) {
 				collisionSprites.put(mySprite, findSideOfCollision(mySprite));
+				
 			}
 			/*
 			 * mySprite.getLocation().setLocation(oldX2, oldY2);
@@ -218,8 +221,8 @@ public class ListOfCollidingSprites {
 		double targetBottomRightX = targetSprite.getLocation().getXLocation() + targetSprite.getWidth();
 		double targetBottomRightY = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
 
-		//if (mySprite instanceof Player) {
-		if (mySprite instanceof Player) {
+		if (!(mySprite instanceof Terrain)) {
+		//if (! (mySprite instanceof Terrain && targetSprite instanceof Terrain) ) {
 
 			double mySprite_bottom = mySprite.getLocation().getYLocation() + mySprite.getHeight();
 			double targetSprite_bottom = targetSprite.getLocation().getYLocation() + targetSprite.getHeight();
@@ -236,9 +239,6 @@ public class ListOfCollidingSprites {
 				if((targetSprite instanceof Terrain && !isTransparent()) || (isTransparent() && pastPlatform(mySprite))){
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 				}
-				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
-					return findSideOfCollision(mySprite);
-				}
 				return new Top();
 				//return Side.TOP;
 			} else if (bottom_collision < top_collision && bottom_collision < left_collision
@@ -247,9 +247,9 @@ public class ListOfCollidingSprites {
 				if(targetSprite instanceof Terrain && !isTransparent()){
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
 				}
-				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
-					return findSideOfCollision(mySprite);
-				}
+//				if (frameTime + (.001 * 1000 / 60) > System.currentTimeMillis()) {
+//					return findSideOfCollision(mySprite);
+//				}
 				//return Side.BOTTOM;
 				return new Bottom();
 			} else if (left_collision < right_collision && left_collision < top_collision

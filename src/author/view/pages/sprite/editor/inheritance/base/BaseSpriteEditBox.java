@@ -3,6 +3,7 @@ package author.view.pages.sprite.editor.inheritance.base;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import author.view.pages.sprite.SpriteEditWindow;
 import game_data.Location;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -39,7 +40,8 @@ public class BaseSpriteEditBox {
 
 		myFileLoader = new FileLoader(
 				"data/images/sprite_images/",
-				FileType.RASTER_IMAGE
+				FileType.RASTER_IMAGE,
+				SpriteEditWindow.getSpriteEditStage()
 				);
 
 		myPane.getChildren().addAll(
@@ -68,19 +70,41 @@ public class BaseSpriteEditBox {
 	}
 
 	public final int getWidth(){
-		return myWidthField.getInteger();
+		try{
+			return myWidthField.getInteger();
+		}
+		catch (NumberFormatException e) {
+			return 0;
+		}
 	}
 
 	public final int getHeight(){
+	try{
 		return myHeightField.getInteger();
+	}
+	catch (NumberFormatException e) {
+		return 0;
+	}
+		
 	}
 
 	public final double getXVelocity(){
-		return myXVelocityField.getDouble();
+		try{
+			return myXVelocityField.getDouble();
+		}
+		catch (NumberFormatException e) {
+			return 0.0;
+		}
 	}
 
 	public final double getYVelocity(){
-		return myYVelocityField.getDouble();
+		try{
+			return myYVelocityField.getDouble();
+		}
+		catch (NumberFormatException e) {
+			return 0;
+		}
+		
 	}
 
 	protected final void setXVelocity(double aXVelocity){

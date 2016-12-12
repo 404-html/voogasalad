@@ -15,7 +15,7 @@ import game_engine.properties.RandomMoveHandler;
  * Represents any viewable object in a Level including characters, items,
  * terrains, projectiles, etc.
  * 
- * @author Addison, Austin, Cleveland Thompson
+ * @author Addison, Austin, Cleveland Thompson, ALEX
  */
 public abstract class Sprite extends GameObject {
 
@@ -35,7 +35,6 @@ public abstract class Sprite extends GameObject {
 	private Controllable myControllable;
 	private String id = "";
 	private RandomMoveHandler myRandomMoveHandler;
-	private RandomMoveConjointHandler myRandomMoveConjointHandler;
 	private Map<Characteristic, Double> powerUps;
 	private Set<State> myStates;
 	
@@ -50,7 +49,6 @@ public abstract class Sprite extends GameObject {
 		myStates = new HashSet<State>();
 		myControllable=new Controllable();
 		myRandomMoveHandler = null;
-		myRandomMoveConjointHandler = null;
 	}
 	
 
@@ -70,7 +68,6 @@ public abstract class Sprite extends GameObject {
 		myStates = new HashSet<State>();
 		myControllable=new Controllable();
 		myRandomMoveHandler = null;
-		myRandomMoveConjointHandler = null;
 		myControllable = new Controllable();
 	}
 
@@ -92,8 +89,7 @@ public abstract class Sprite extends GameObject {
 		myStates = copyStates(aSprite.getStates());
 		//myRandomMoveHandler = new RandomMoveHandler(myRandomMoveHandler);
 		myRandomMoveHandler = null;
-		myRandomMoveConjointHandler = null;
-		myControllable=aSprite.getControllable();
+		myControllable = new Controllable(aSprite.getControllable(), this);
 	}
 
 	/**
@@ -163,8 +159,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setLocation(Location myLocation) {
-		this.myLocation = myLocation;
-		notifyListeners();
+		if (this.myLocation==null || !this.myLocation.equals(myLocation)){
+			this.myLocation = myLocation;
+			notifyListeners();
+		}
 	}
 
 	public double getXVelocity() {
@@ -177,23 +175,28 @@ public abstract class Sprite extends GameObject {
 
 	public void setXVelocity(double myVelocity) {
 		//		System.out.println("TERMINAL X " + terminalXVel);
-		if (Math.abs(myVelocity) > terminalXVel) {
-			this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
+		if (this.myXVelocity!=myVelocity){
+			if (Math.abs(myVelocity) > terminalXVel) {
+				this.myXVelocity = (myVelocity/Math.abs(myVelocity))*terminalXVel;
+			}
+			else{
+				this.myXVelocity = myVelocity;
+			}
+			notifyListeners();
 		}
-		else{
-			this.myXVelocity = myVelocity;
-		}
-		notifyListeners();
+		
 	}
 
 	public void setYVelocity(double myVelocity) {
-		if (Math.abs(myVelocity) > terminalYVel) {
-			this.myYVelocity = (myVelocity/Math.abs(myVelocity))*terminalYVel;
+		if (this.myYVelocity!=myVelocity){
+			if (Math.abs(myVelocity) > terminalYVel) {
+				this.myYVelocity = (myVelocity/Math.abs(myVelocity))*terminalYVel;
+			}
+			else{
+				this.myYVelocity = myVelocity;
+			}
+			notifyListeners();
 		}
-		else{
-			this.myYVelocity = myVelocity;
-		}
-		notifyListeners();
 	}
 
 	public double getXAcceleration() {
@@ -217,8 +220,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setImagePath(String myImagePath) {
-		this.myImagePath = myImagePath;
-		notifyListeners();
+		if (this.myImagePath==null || !this.myImagePath.equals(myImagePath)){
+			this.myImagePath = myImagePath;
+			notifyListeners();
+		}
 	}
 
 	public CollisionHandler getCollisionHandler() {
@@ -244,8 +249,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setWidth(int myWidth) {
-		this.myWidth = myWidth;
-		notifyListeners();
+		if (this.myWidth!=myWidth){
+			this.myWidth = myWidth;
+			notifyListeners();
+		}
 	}
 
 	public int getHeight() {
@@ -253,8 +260,10 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public void setHeight(int myHeight) {
-		this.myHeight = myHeight;
-		notifyListeners();
+		if (this.myHeight!=myHeight){
+			this.myHeight = myHeight;
+			notifyListeners();
+		}
 	}
 
 	public Sprite getPreset() {
@@ -264,17 +273,9 @@ public abstract class Sprite extends GameObject {
 	public RandomMoveHandler getMyRandomMoveHandler() {
 		return myRandomMoveHandler;
 	}
-	
-	public RandomMoveConjointHandler getMyRandomMoveConjointHandler() {
-		return myRandomMoveConjointHandler;
-	}
 
 	public void setMyRandomMoveHandler(RandomMoveHandler myRandomMoveHandler) {
 		this.myRandomMoveHandler = myRandomMoveHandler;
-	}
-	
-	public void setMyRandomMoveConjointHandler(RandomMoveConjointHandler myRandomMoveConjointHandler) {
-		this.myRandomMoveConjointHandler = myRandomMoveConjointHandler;
 	}
 
 	public void setPreset(Sprite aPreset){
@@ -301,7 +302,9 @@ public abstract class Sprite extends GameObject {
 	}
 
 	public Map<Characteristic, Double> getPowerUps() {
-		if(powerUps == null) return new HashMap<Characteristic, Double>();
+		if(powerUps == null){
+			powerUps = new HashMap<Characteristic, Double>();
+		}
 		return powerUps;
 	}
 

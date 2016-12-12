@@ -1,7 +1,5 @@
 package gameplayer.front_end.popup;
 
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
@@ -13,16 +11,11 @@ import javafx.scene.layout.Pane;
 
 public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
-	private static final String RESOURCE_FILE = "gameplayerlabels.";
-	private static final String BUTTONLABEL = "ButtonLabels";
-
-	private ResourceBundle myButtonLabels; 
 	private String myCurrentKeyChoice;
 	private String myCurrentColorChoice;
 
 	public PlayerOptionsPopUp() {
 		super();
-		myButtonLabels = PropertyResourceBundle.getBundle(RESOURCE_FILE + BUTTONLABEL);
 		addOptions();
 	}
 
@@ -33,16 +26,10 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
 	private Pane createKeyInputOption() {
 		HBox keyOption = new HBox(20);
-		keyOption.getChildren().add(new Label(myButtonLabels.getString("KeyInput")));
+		keyOption.getChildren().add(new Label(getString("KeyInput")));
 		final ToggleGroup keyboardGroup = new ToggleGroup();
-		RadioButton defaultKey = new RadioButton(myButtonLabels.getString("Default"));
-		defaultKey.setToggleGroup(keyboardGroup);
-		defaultKey.setSelected(true);
-		defaultKey.setUserData("Default");
-		RadioButton leftKeys = new RadioButton(myButtonLabels.getString("Left"));
-		leftKeys.setToggleGroup(keyboardGroup);
-		leftKeys.setSelected(false);
-		leftKeys.setUserData("Left");
+		RadioButton defaultKey = createRadioButton(getString("Default"), keyboardGroup);
+		RadioButton leftKeys = createRadioButton(getString("Left"), keyboardGroup);
 		keyboardGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -55,18 +42,11 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
 	private Pane createFontOption() {
 		HBox fontOption = new HBox(20);
-		fontOption.getChildren().add(new Label(myButtonLabels.getString("HUD")));
+		fontOption.getChildren().add(new Label(getString("HUD")));
 		final ToggleGroup fontGroup = new ToggleGroup();
-		RadioButton red = new RadioButton(myButtonLabels.getString("Red"));
-		red.setToggleGroup(fontGroup);
-		red.setSelected(true);
-		red.setUserData("Red");
-		RadioButton green = new RadioButton(myButtonLabels.getString("Green"));
-		green.setToggleGroup(fontGroup);
-		green.setUserData("Green");
-		RadioButton blue = new RadioButton(myButtonLabels.getString("Blue"));
-		blue.setToggleGroup(fontGroup);
-		blue.setUserData("Blue");
+		RadioButton red = createRadioButton(getString("Red"), fontGroup);
+		RadioButton green = createRadioButton(getString("Green"), fontGroup);
+		RadioButton blue = createRadioButton(getString("Blue"), fontGroup);
 		fontGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {

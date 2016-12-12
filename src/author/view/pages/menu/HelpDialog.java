@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -36,6 +37,7 @@ class HelpDialog {
 	private void buildWindow() {
 		stage = new Stage();
 		Scene scene = new Scene(pane, 800, 600);
+		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(scene);
 	}
 

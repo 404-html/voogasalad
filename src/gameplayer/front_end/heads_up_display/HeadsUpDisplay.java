@@ -6,18 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 public class HeadsUpDisplay {
 
-	private HBox myTop;
 	private MenuBar myTopMenu;
 	private IGUIGenerator myGUIGenerator;
 	private BorderPane myRoot;
@@ -37,16 +34,6 @@ public class HeadsUpDisplay {
 	public void addMenu(ImageView aImage, String[] aText, @SuppressWarnings("unchecked") EventHandler<ActionEvent> ... aHandler) {
 		myTopMenu.getMenus().add(myGUIGenerator.createMenu(aImage, aText, aHandler));
 	}
-	
-
-	public void addLabel(String aText){
-		if(myBottom.getChildren().size() > 0){
-			myBottom.getChildren().remove(0);
-		}
-		Label label = myGUIGenerator.createLabel(aText, 0, 0);
-		label.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
-		myBottom.getChildren().add(label);
-	}
 
 	private Node createTop() {
 		myTopMenu = new MenuBar();
@@ -55,7 +42,7 @@ public class HeadsUpDisplay {
 		return myTopMenu;
 	}
 
-	private Node createBottom(){
+	private Node createBottom() {
 		myBottom = new HBox();
 		myBottom.setAlignment(Pos.CENTER);
 		return myBottom;
@@ -66,5 +53,20 @@ public class HeadsUpDisplay {
 		myRoot.setTop(createTop());
 		myRoot.setBackground(Background.EMPTY);
 		return myRoot;
+	}
+
+	public void addNode(Node aNode) {
+		aNode.setId("animation-label");
+		aNode.setStyle("-fx-text-fill: " + myFontColor.toLowerCase());
+		myBottom.getChildren().add(aNode);
+	}
+	
+	public void addNode(Node aNode, int aPos) {
+		if (myBottom.getChildren().size() > 2) {
+			myBottom.getChildren().remove(aPos);
+			addNode(aNode);
+		} else {
+			addNode(aNode);
+		}
 	}
 }

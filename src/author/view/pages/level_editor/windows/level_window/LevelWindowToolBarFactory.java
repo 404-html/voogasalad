@@ -9,11 +9,12 @@ import java.io.FileNotFoundException;
 import author.controller.IAuthorController;
 import author.view.pages.level_editor.windows.ILevelWindowInternal;
 import author.view.util.authoring_buttons.ButtonFactory;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToolBar;
+import javafx.stage.Stage;
 import util.RelativePathFinder;
 import util.facades.ToolBarBuilder;
-import util.filehelpers.FileLoader.FileExtension;
 import util.filehelpers.FileLoader.FileLoader;
 import util.filehelpers.FileLoader.FileType;
 
@@ -24,23 +25,34 @@ import util.filehelpers.FileLoader.FileType;
 public class LevelWindowToolBarFactory {
 	private ILevelWindowInternal iLevelWindowInternal;
 	private IAuthorController authorController;
+
 	public ToolBar createToolBar(ILevelWindowInternal iLevelWindowInternal, IAuthorController authorController) {
 		this.iLevelWindowInternal = iLevelWindowInternal;
 		this.authorController = authorController;
 		ToolBarBuilder tbb = new ToolBarBuilder();
 		tbb.addBurst(new Label("Level Window"));
 		tbb.addFiller();
-		tbb.addBurst(new ButtonFactory().createButton("Set Background", e -> {
+		tbb.addBurst(createCheckBox("Randomized"), new ButtonFactory().createButton("Set Background", e -> {
 			newBackgroundImage();
-		}).getButton(), new ButtonFactory().createButton("Extend Right", e -> {
-			this.iLevelWindowInternal.getHorizontalPanes().set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
-		}).getButton(), new ButtonFactory().createButton("Extend Down", e -> {
+		}).getButton(), new ButtonFactory().createButton("Extend Width", e -> {
+			this.iLevelWindowInternal.getHorizontalPanes()
+					.set(this.iLevelWindowInternal.getHorizontalPanes().get() + 1);
+		}).getButton(), new ButtonFactory().createButton("Extend Height", e -> {
 			this.iLevelWindowInternal.getVerticalPanes().set(this.iLevelWindowInternal.getVerticalPanes().get() + 1);
+		}).getButton(), new ButtonFactory().createButton("Shrink Width", e -> {
+			if (this.iLevelWindowInternal.getHorizontalPanes().get() > 1) {
+				this.iLevelWindowInternal.getHorizontalPanes()
+						.set(this.iLevelWindowInternal.getHorizontalPanes().get() - 1);
+			}
+		}).getButton(), new ButtonFactory().createButton("Shrink Height", e -> {
+			if (this.iLevelWindowInternal.getVerticalPanes().get() > 1) {
+				this.iLevelWindowInternal.getVerticalPanes()
+						.set(this.iLevelWindowInternal.getVerticalPanes().get() - 1);
+			}
 		}).getButton(), new ButtonFactory().createButton("Reset Size", e -> {
 			this.iLevelWindowInternal.getHorizontalPanes().set(1);
 			this.iLevelWindowInternal.getVerticalPanes().set(1);
 		}).getButton());
-
 
 		return tbb.getToolBar();
 	}
@@ -48,16 +60,25 @@ public class LevelWindowToolBarFactory {
 	private void newBackgroundImage() {
 		File file;
 		try {
-			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE).loadSingle();
+			file = new FileLoader("data/images/level_images/", FileType.RASTER_IMAGE, new Stage()).loadSingle();
 			RelativePathFinder pf = new RelativePathFinder();
-			this.authorController.getModel().getGame().getCurrentLevel()
-				.setBackgroundImageFilePath(pf.getPath(file));
+			if(this.authorController.getModel().getGame().getCurrentLevel()!= null)
+				this.authorController.getModel().getGame().getCurrentLevel().setBackgroundImageFilePath(pf.getPath(file));
 		} catch (FileNotFoundException e) {
 			// TODO: Show error screen if file not found
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			// TODO: Show different error screen
+			e.printStackTrace();
 		}
 
-
+	}
+	
+	
+	private CheckBox createCheckBox(String text){
+		CheckBox checkBox = new CheckBox(text);
+		checkBox.selectedProperty().bindBidirectional(this.iLevelWindowInternal.getRandomProperty());
+		return checkBox;
 	}
 
 }

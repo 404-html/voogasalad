@@ -4,6 +4,7 @@
 package author.view.util.undo;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -18,50 +19,78 @@ import game_data.Sprite;
  */
 class RevertManager implements IRevertManager, IRevertManagerInternal{
 	private Map<Sprite, GameChangeEvent> existingSprites = new HashMap<>();
-	private Stack<GameChangeEvent> eventList = new Stack<>();
+	private Stack<GameChangeEvent> eventHistory = new Stack<>();
+	private Stack<GameChangeEvent> eventFuture = new Stack<>();
+	
+	private Level level;
 	/**
 	 * 
 	 */
 	RevertManager(Level level) {
+		this.level = level;
 		initLevelListener(level);
 	}
 	
 	@Override
 	public void undo(){
-		if (!this.eventList.isEmpty()){
-			System.out.println("Undo");
-			GameChangeEvent gameChangeEvent = eventList.pop();
-			gameChangeEvent.restore();
+		if (!this.eventHistory.isEmpty()){
+			GameChangeEvent gameChangeEvent = eventHistory.pop();
+			eventFuture.push(gameChangeEvent);
+			if (!gameChangeEvent.undo()){
+				removeEvent(gameChangeEvent.getSprite());
+			}
+		}
+	}
+	
+	@Override
+	public void redo(){
+		if (!this.eventFuture.isEmpty()){
+			GameChangeEvent gameChangeEvent = eventFuture.pop();
+			eventHistory.push(gameChangeEvent);
+			gameChangeEvent.redo();
 		}
 	}
 	
 	private void initLevelListener(Level aLevel){
 		aLevel.addListener((level) -> {
 			Set<Sprite> newSprites = getNewSprites(this.existingSprites.keySet(), aLevel.getMySpriteList());
-			//Set<Sprite> removedSprites = getRemovedSprites(this.existingSprites.keySet(), aLevel.getMySpriteList());
+			Set<Sprite> removedSprites = getRemovedSprites(this.existingSprites.keySet(), aLevel.getMySpriteList());
 			addSprites(newSprites);
+			removeSprites(removedSprites);
 		});
 	}
 	
 	private void addSprites(Collection<Sprite> aSprites){
-		
 		aSprites.forEach((sprite) -> {
-			System.out.println("Add Sprite");
 			this.existingSprites.put(sprite, new GameChangeEvent(sprite, (IRevertManagerInternal) this));			
 		});
 	}
 	
 	@Override
-	public void addEvent(GameChangeEvent gameChangeEvent) {
-		this.eventList.push(gameChangeEvent);
+	public void addHistory(GameChangeEvent aGameChangeEvent) {
+		this.eventHistory.push(aGameChangeEvent);
+	}
+	
+	@Override
+	public void addFuture(GameChangeEvent aGameChangeEvent){
+		this.eventFuture.push(aGameChangeEvent);
+	}
+	
+	private void removeEvent(Sprite aSprite) {
+		if (this.existingSprites.containsKey(aSprite)){
+			this.existingSprites.get(aSprite).removeListener();
+			this.eventHistory.removeAll(Collections.singleton(this.existingSprites.get(aSprite)));
+			this.eventFuture.removeAll(Collections.singleton(this.existingSprites.get(aSprite)));
+			this.level.removeSprite(aSprite);
+			this.existingSprites.remove(aSprite);
+		}
 	}
 	
 	
 	
 	
-	@SuppressWarnings("unused")
 	private void removeSprites(Collection<Sprite> aSprites){
-		
+		aSprites.forEach((sprite) -> removeEvent(sprite));
 	}
 	
 	private Set<Sprite> getNewSprites(Collection<Sprite> aOldSprites, Collection<Sprite> aNewSprites){
@@ -70,7 +99,6 @@ class RevertManager implements IRevertManager, IRevertManagerInternal{
 		return sprites;
 	}
 	
-	@SuppressWarnings("unused")
 	private Set<Sprite> getRemovedSprites(Collection<Sprite> aOldSprites, Collection<Sprite> aNewSprites){
 		Set<Sprite> sprites = new HashSet<>(aOldSprites);
 		sprites.removeAll(aNewSprites);
