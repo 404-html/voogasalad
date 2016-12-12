@@ -1,4 +1,5 @@
 package game_engine;
+
 import game_data.Controllable;
 import game_data.Level;
 import game_data.Sprite;
@@ -15,6 +16,7 @@ import game_engine.actions.MoveUpJump;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import game_engine.properties.RandomMoveHandler.Orientation;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -206,7 +208,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private void moveRandomSprites() {
 		for(Sprite mySprite : mySpriteList) {
-			if(mySprite.getMyRandomMoveHandler() != null) {
+			if(mySprite.getMyRandomMoveHandler().getOrientation() != Orientation.NULL) {
 				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
 			}
 		}

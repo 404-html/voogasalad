@@ -34,6 +34,10 @@ public class RandomMoveConjointHandler extends RandomMoveHandler {
 		
 	}
 	
+	public RandomMoveHandler copy() {
+		return new RandomMoveConjointHandler(myConnectedSprite, getOrientation(), myDistanceApart);
+	}
+	
 	public void setConnectedSprite(Sprite aSprite) {
 		myConnectedSprite = aSprite;
 	}

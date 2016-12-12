@@ -1,16 +1,23 @@
 package author.view.pages.level_editor.windows;
 
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import author.controller.IAuthorController;
 import author.model.game_observables.draggable_sprite.ConcreteMovableSprite;
 import author.model.game_observables.draggable_sprite.DraggableSprite;
 import author.view.pages.level_editor.windows.level_edit_window.ILevelEditorWindowExternal;
+import game_data.Level;
 import game_data.Sprite;
+import game_engine.actions.Move;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -24,8 +31,10 @@ import javafx.scene.layout.VBox;
 public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExternal, ILevelEditorWindowInternal{
 
 	private Pane myWindow;
-	private Set<DraggableSprite> movableSprites = new HashSet<>();
+	private Map<Level, Set<DraggableSprite>> draggableSprites = new HashMap<>();
 	private IAuthorController authorController;
+	
+	private BooleanProperty isRandom = new SimpleBooleanProperty(false);
 	
 	public AbstractLevelEditorWindow(IAuthorController authorController){
 		this.authorController = authorController;
@@ -41,12 +50,31 @@ public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExt
 		return myWindow;
 	}
 	
-	protected void addMovableSprite(DraggableSprite movableSprite){
-		this.movableSprites.add(movableSprite);
+	protected void addMovableSprite(Level aLevel, DraggableSprite movableSprite){
+		if (!this.draggableSprites.containsKey(aLevel)){
+			Set<DraggableSprite> draggableSprites = new HashSet<>();
+			draggableSprites.add(movableSprite);
+		}
+		else{
+			this.draggableSprites.get(aLevel).add(movableSprite);
+		}
 	}
 	
-	protected Set<DraggableSprite> getMovableSprites(){
-		return this.movableSprites;
+	
+	protected void removeMovableSprites(Level aLevel, Collection<DraggableSprite> movableSprites){
+		if (this.draggableSprites.containsKey(aLevel)){
+			this.draggableSprites.get(aLevel).removeAll(movableSprites);
+		}
+	}
+	
+	protected Set<DraggableSprite> getMovableSprites(Level aLevel){
+		if (this.draggableSprites.containsKey(aLevel)){
+			return this.draggableSprites.get(aLevel);
+		}else{
+			Set<DraggableSprite> draggableSprites = new HashSet<>();
+			this.draggableSprites.put(aLevel, draggableSprites);
+			return draggableSprites;
+		}
 	}
 	
 	protected Pane createWindow() {
@@ -80,5 +108,9 @@ public abstract class AbstractLevelEditorWindow implements ILevelEditorWindowExt
 		Set<Sprite> levelSprites = new HashSet<>(aLevelSprites);
 		sprites.removeAll(levelSprites);
 		return sprites;
+	}
+	
+	public BooleanProperty getRandomProperty() {
+		return this.isRandom;
 	}
 }

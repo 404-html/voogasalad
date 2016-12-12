@@ -1,5 +1,7 @@
 package game_engine.actions;
 
+import game_data.Sprite;
+
 public class ProjectilePowerup implements Action{
 
 	public ProjectilePowerup(){
@@ -11,4 +13,9 @@ public class ProjectilePowerup implements Action{
 		
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new ProjectilePowerup();
+	}
+	
 }

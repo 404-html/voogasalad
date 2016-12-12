@@ -21,13 +21,13 @@ import javafx.scene.image.ImageView;
 public class MoveRight extends Move {
 	private List<Sprite>mySpriteList;
 	private Map<Sprite, ImageView>mySpriteImages;
-	
-	
+
+
 	public MoveRight(Sprite aSprite, double aVelocity) {
 		super(aSprite, aVelocity);
 	}
-	
-/*	@Override
+
+	/*	@Override
 	public Location changeCoordinates(){
 		//myNewLocation.setLocation(myOldLocation.getXLocation()+myVelocity, myOldLocation.getYLocation());
 		//myNewLocation.setMyHeading(0);
@@ -35,10 +35,10 @@ public class MoveRight extends Move {
 	}*/
 	public void setVelocity(){
 		//mySprite.setXVelocity(myVelocity);
-//		System.out.println(myVelocity);
+		//System.out.println(myVelocity);
 		mySprite.setXVelocity(myVelocity);
 	}
-/*private boolean checkSpriteSolidity() {
+	/*private boolean checkSpriteSolidity() {
 	boolean solid = false;
 	for(State myState:mySprite.getStates()){
 		if(myState instanceof Solid){ solid = true;
@@ -53,5 +53,11 @@ public class MoveRight extends Move {
 //			mySprite.setXVelocity(mySprite.getXVelocity()-myVelocity);
 		}
 	}
+
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveRight(aSprite, getVelocity());
+	}
+
 
 }

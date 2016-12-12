@@ -12,9 +12,11 @@ import game_engine.UpdateStates;
 
 public class AddHealth extends PointsChanger implements Action {
 
+	int myDamage;
 	
 	public AddHealth(int damage, Sprite damageTaker){
 		super(damage, damageTaker);
+		myDamage = damage;
 	}
 	
 	@Override
@@ -30,6 +32,11 @@ public class AddHealth extends PointsChanger implements Action {
 		}
 	
 		
+	}
+
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new AddHealth(myDamage, aSprite);
 	}
 
 }

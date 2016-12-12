@@ -50,4 +50,9 @@ public class MoveUpJump extends Move {
 		return;
 	}
 
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new MoveUpJump(aSprite, getVelocity());
+	}
+	
 }

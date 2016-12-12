@@ -23,7 +23,6 @@ import javafx.scene.input.KeyCode;
  * @author Katrina
  *
  */
-@NameAnnotation(name = "Controllable")
 public class Controllable {
 	private Sprite mySprite;
 	private Map<KeyCode, Action> myKeyPressedMap;
@@ -61,11 +60,30 @@ public class Controllable {
 		}
 		return ans;
 	}
+	
+	public Controllable(Controllable that, Sprite aSprite){
+		mySprite = aSprite;
+		this.isControllable = that.isControllable;
+		this.myKeyPressedMap = copyKeyPressedMap(that.myKeyPressedMap, aSprite);
+		this.myKeyReleasedMap = that.myKeyReleasedMap;
+		this.myKeysPressed = that.myKeysPressed;
+		this.myKeysReleased = that.myKeysReleased;
+	}
 
 	public boolean isControllable() {
 		return isControllable;
 	}
 
+	private Map<KeyCode, Action> copyKeyPressedMap(Map<KeyCode, Action> aOriginalMap, Sprite aSprite){
+		Map<KeyCode, Action> map = new HashMap<>();
+		
+		aOriginalMap.entrySet().forEach( e -> {
+			map.put(e.getKey(), e.getValue().copyWithNewSprite(aSprite));
+		});
+		
+		return map;
+	}
+	
 	private void generateMyKeyReleasedMap() {
 		for (KeyCode key : myKeyPressedMap.keySet()) {
 			if (myKeyPressedMap.get(key) instanceof MoveRight) {

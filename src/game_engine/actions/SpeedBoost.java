@@ -42,5 +42,10 @@ public class SpeedBoost implements Action {
 		myPlayerSprite.setYVelocity(myPlayerSprite.getYVelocity()+speedBoost);
 
 	}
+	
+	@Override
+	public Action copyWithNewSprite(Sprite aSprite) {
+		return new SpeedBoost(aSprite, this.speedBoost);
+	}
 
 }
