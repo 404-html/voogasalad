@@ -42,11 +42,11 @@ public enum SpriteFactory implements SpriteBuilder, SpriteDefaultBuilder {
 	}, () -> new TerrainDefaultBuilder().build()),
 
 	ITEM((loc, width, height, xvel, yvel, name, path) -> {
-		return new Terrain(loc, width, height, xvel, yvel, name, path);
+		return new Item(loc, width, height, xvel, yvel, name, path);
 	}, () -> new ItemDefaultBuilder().build()),
 
 	PROJECTILE(
-			(loc, width, height, xvel, yvel, name, path) -> { return new Terrain(loc, width, height, xvel, yvel, name, path);} , 
+			(loc, width, height, xvel, yvel, name, path) -> { return new Projectile(loc, width, height, xvel, yvel, name, path);} , 
 			() -> new ProjectileDefaultBuilder().build() );
 
 	private SpriteBuilder myBuilder;
