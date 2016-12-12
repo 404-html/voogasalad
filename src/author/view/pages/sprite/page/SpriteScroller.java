@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import author.controller.IAuthorController;
+import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreen;
 import author.view.util.authoring_buttons.ButtonFactory;
 import game_data.Sprite;
 import game_data.sprites.SpriteFactory;
@@ -20,7 +21,8 @@ import util.XMLTranslator;
 import util.facades.ToolBarBuilder;
 import util.filehelpers.FileLoader.FileExtension;
 import util.filehelpers.FileLoader.FileLoader;
-
+import util.filehelpers.FileLoader.FileLoader.StartDirectory;
+import util.filehelpers.FileLoader.FileType;
 public class SpriteScroller {
 
 	private ScrollPane myScroller;
@@ -94,7 +96,9 @@ public class SpriteScroller {
 		}).getButton());
 		toolBarBuilder.addBurst(new ButtonFactory().createButton("Load Saved " + aScrollType, e -> {
 			try {
-				loadSprite(new FileLoader(FileExtension.XML).loadSingle());
+				loadSprite(
+						new FileLoader(
+								StartDirectory.SOURCE_DIRECTORY, FileType.DATA, AuthoringSplashScreen.getPrimaryAuthorStage()).loadSingle());
 			} catch (Exception e1) {
 				// TODO Throw File Not Found Pop Up;
 				e1.printStackTrace();

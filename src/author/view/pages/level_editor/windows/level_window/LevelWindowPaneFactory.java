@@ -53,16 +53,17 @@ public class LevelWindowPaneFactory {
 	private void acceptCopiedSprites(){
 
 		this.levelWindowPane.getPane().setOnMouseClicked((event) ->{
-			this.levelWindowPane.getPane().requestFocus();
-			if (this.levelWindowInternal.getSelectedSprite() != null && event.isControlDown()){
+			this.levelWindowInternal.getWindow().requestFocus();
+			this.levelWindowInternal.getSelectedSprites().clear();
+			if (this.levelWindowInternal.getSelectedSprite() != null && event.isShiftDown()){
 				addSprite(this.levelWindowInternal.getSelectedSprite().getSprite(), event.getX(), event.getY());
 			}
 		});
 		this.levelWindowPane.getPane().setOnMouseEntered((event)->{
-			this.levelWindowPane.getPane().requestFocus();
+			this.levelWindowInternal.getWindow().requestFocus();
 		});
-		this.levelWindowPane.getPane().setOnKeyReleased((event) -> {
-			if (!event.isControlDown()){
+		this.levelWindowInternal.getWindow().setOnKeyReleased((event) -> {
+			if (!event.isShiftDown()){
 				this.levelWindowPane.removeGrid();
 			}
 		});

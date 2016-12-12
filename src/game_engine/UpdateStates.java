@@ -1,36 +1,32 @@
 package game_engine;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 import game_data.Controllable;
 import game_data.Level;
 import game_data.LevelSetter;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
-import game_data.characteristics.InvincibilityPowerUpper;
-import game_data.characteristics.SpeedPowerUpper;
 import game_data.characteristics.TemporalPowerUpper;
 import game_data.sprites.Player;
 import game_data.sprites.Projectile;
 import game_data.states.Health;
 import game_data.states.LevelWon;
-import game_data.states.Physics;
-import game_data.states.Score;
 import game_data.states.State;
-import game_data.states.Visible;
 import game_engine.actions.Action;
 import game_engine.actions.Launch;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
 import game_engine.actions.MoveUpJump;
-import game_engine.actions.StopLeftMovement;
-import game_engine.actions.StopRightMovement;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import game_engine.properties.RandomMoveHandler.Orientation;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import game_engine.Side;
 
 /**
  * TODO make sure that player doesnt run into walls or thigns NOTE: doing the
@@ -95,10 +91,11 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
+		
 //		System.out.println( " X VEL :" + myLevel.getMainPlayer().getXVelocity());
 //		for (State state : myLevel.getMainPlayer().getStates()) {
-//			if (state instanceof Health) {
-//					System.out.println("Health : "+ ((Health)state).getHealth());
+//			if (state instanceof Score) {
+//					System.out.println("Score : "+ ((Score)state).getMyScore());
 //				}
 //			}	
 	}
@@ -153,9 +150,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 //		}
 //	}
 
-	public void setKeyPressedMapWithBoosts() {
-		myLevel.getMainPlayer().getControllable().setMyKeyPressedMap(generateBoostedKeyPressedMap());
-	}
+//	public void setKeyPressedMapWithBoosts() {
+//		myLevel.getMainPlayer().getControllable().setMyKeyPressedMap(generateBoostedKeyPressedMap());
+//	}
 
 	private void checkPowerUps() {
 		ArrayList<Characteristic> toRemove = new ArrayList<Characteristic>();
@@ -164,7 +161,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 			// myCurrentPowerUps.get(powerUp));
 			myCurrentPowerUps.put(powerUp, myCurrentPowerUps.get(powerUp) - 1);
 			if (myCurrentPowerUps.get(powerUp) <= 0) {
-//				 System.out.println("HELLOOOOOO");
 				toRemove.add(powerUp);
 			}
 		}
@@ -233,7 +229,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 
 	private void moveRandomSprites() {
 		for(Sprite mySprite : mySpriteList) {
-			if(mySprite.getMyRandomMoveHandler() != null) {
+			if( mySprite.getMyRandomMoveHandler() != null && mySprite.getMyRandomMoveHandler().getOrientation() != Orientation.NULL) {
 				mySprite.getMyRandomMoveHandler().move(mySprite,myScreenWidth,myScreenHeight,myScreenXPosition,myScreenYPosition);
 			}
 		}
@@ -285,7 +281,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 
 	public void generateDefaultKeyPressedMap() {
-		System.out.println("LUCIA");
+		
 		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
 		myKeyPressedMap.put(KeyCode.RIGHT,
 				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));

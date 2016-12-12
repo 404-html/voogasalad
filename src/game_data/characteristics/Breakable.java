@@ -34,7 +34,7 @@ public class Breakable implements Characteristic{
 	private Sprite mySprite;
 	private int timeSinceHit;
 	
-	@ParameterAnnotation(parameters = {"Breaks on Top", "Breaks on Bottom", "Breaks on Left", "Breaks on Right", "Durability", "Sprite"})
+	@ParameterAnnotation(parameters = {"Breaks on Top", "Breaks on Bottom", "Breaks on Right", "Breaks on Left", "Durability", "Sprite"})
 	public Breakable(boolean north, boolean south, boolean east, boolean west, int durability, Sprite aSprite){
 		breakableNorth = north;
 		breakableSouth = south;
@@ -63,8 +63,6 @@ public class Breakable implements Characteristic{
 		
 		for(Sprite collidedSprite:myCollisionMap.keySet() ){
 			if(breaksAtDirection(myCollisionMap.get(collidedSprite))&& validPairing(collidedSprite) ){
-//				System.out.println("SIDE HIT: "+myCollisionMap.get(collidedSprite));
-				System.out.println("fuckking fuck");
 				timeSinceHit = 0;
 				if(isBroken()) {
 					System.out.println("is breaking");

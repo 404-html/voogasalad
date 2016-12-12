@@ -22,7 +22,8 @@ public class MoveLeft extends Move {
 	}
 	public void stop(){
 		if(mySprite.getXVelocity()<0){
-			mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
+			mySprite.setXVelocity(0);
+//			mySprite.setXVelocity(mySprite.getXVelocity()+myVelocity);
 		}
 	}
 	@Override
