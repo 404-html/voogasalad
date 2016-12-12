@@ -108,6 +108,7 @@ public class GamePlayScene extends AbstractPlayerScene {
 	}
 	
 	public void addNode(Node aNode, int aPos) {
+		aNode.setUserData(aPos);
 		myHeadsUpDisplay.addNode(aNode, aPos);
 	}
 }

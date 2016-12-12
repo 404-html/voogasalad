@@ -119,9 +119,9 @@ public class GamePlayController extends AbstractController {
 				getStage().getWidth(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getYLocation(), getStage().getHeight(), 3);
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
+		setLevelLabel();
 		setHealthLabel();
 		setScoreLabel();
-		setLevelLabel();
 	}
 
 	private void checkResult() {
@@ -195,7 +195,9 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setScoreLabel() {
-		if (myScore != null) myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 1);
+		if (myScore != null) {
+			myGamePlayScene.addNode(getGUIGenerator().createLabel("Score: " + myScore.getMyScore(), 0, 0), 2);
+		}
 	}
 
 	private void determineScore() {
@@ -207,7 +209,7 @@ public class GamePlayController extends AbstractController {
 	}
 	
 	private void setLevelLabel() {
-		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber(), 0, 0), 1);
+		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber() + 1, 0, 0), 0);
 	}
 
 	private void handleRestart() throws Exception {
