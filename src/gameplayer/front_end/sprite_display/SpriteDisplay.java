@@ -84,7 +84,6 @@ public class SpriteDisplay {
 			buildString.append(".");
 			buildString.append(array[1]);
 			String filePathOfAnimation = buildString.toString();
-			System.out.println(filePathOfAnimation);
 			fileOfAnimation = new File(filePathOfAnimation);
 			if (fileOfAnimation.exists()) {
 				image = new ImageView(fileOfAnimation.toURI().toString());
