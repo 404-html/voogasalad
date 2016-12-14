@@ -81,22 +81,22 @@ public class Damager implements Characteristic{
 		return false;
 	}
 	
-	@ViewableMethodOutput(description="Breaks on Top", type=boolean.class)
+	@ViewableMethodOutput(description="Damages on Top", type=boolean.class)
 	public boolean breaksOnTop(){
 		return breaksAtDirection(new Top());
 	}
 	
-	@ViewableMethodOutput(description="Breaks on Left", type=boolean.class)
+	@ViewableMethodOutput(description="Damages on Left", type=boolean.class)
 	public boolean breaksOnLeft(){
 		return breaksAtDirection(new Left());
 	}
 	
-	@ViewableMethodOutput(description="Breaks on Bottom", type=boolean.class)
+	@ViewableMethodOutput(description="Damages on Bottom", type=boolean.class)
 	public boolean breaksOnBottom(){
 		return breaksAtDirection(new Bottom());
 	}
 	
-	@ViewableMethodOutput(description="Breaks on Right", type=boolean.class)
+	@ViewableMethodOutput(description="Damages on Right", type=boolean.class)
 	public boolean breaksOnRight(){
 		return breaksAtDirection(new Right());
 	}
