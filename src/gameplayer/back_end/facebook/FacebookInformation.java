@@ -7,9 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
+import com.restfb.exception.FacebookException;
 import com.restfb.json.JsonObject;
 import com.restfb.types.FacebookType;
 import com.restfb.types.User;
+
+import gameplayer.back_end.exceptions.VoogaFacebookException;
 
 public class FacebookInformation {
 	
@@ -68,7 +71,7 @@ public class FacebookInformation {
 		return;
 	}
 	
-	public void publishNews(String aTitle, String aMessage) {
+	public void publishNews(String aTitle, String aMessage) throws VoogaFacebookException {
 		// Publishing a simple message.
 		// FacebookType represents any Facebook Graph Object that has an ID property.
 		//String pageAccessToken = "EAAC6QMPbN5ABANZB0ihZBhoQBiFJjVg6EZCrZBLuJdtMZBs3HQIOgq2GnySXnrxTaN984EiulwXMsuFkkfhTf6FSvpdJPtimQtvsPlNZCgsJsAxJ2iEPfqk4dwJSIpyfDBFfs6B8Xxkgv60RpRHQPtLd8RZA8uvZAf2ZA1w96u33GtAZDZD";
@@ -79,12 +82,19 @@ public class FacebookInformation {
 		//FacebookClient fb = new DefaultFacebookClient(pageAccessToken);
 		
 	    //Page page = myFBClient.fetchObject("me/feed", Page.class);
-	    //myFBClient.publish("me/feed", FacebookType.class, Parameter.with("message", aMessage));
-		
+
+//	    myFBClient.publish("me/feed", FacebookType.class, Parameter.with("message", aMessage));
+
 		if (myFBClient != null) {
-			FacebookType publishMessageResponse =
-				myFBClient.publish("/me/feed", FacebookType.class,
-				  Parameter.with(aTitle, aMessage));
+			try {
+				FacebookType publishMessageResponse =
+						myFBClient.publish("/me/feed", FacebookType.class,
+						  Parameter.with(aTitle, aMessage));
+			} catch (FacebookException e) {
+				throw new VoogaFacebookException(e.getMessage());
+			}
+		} else {
+			throw new VoogaFacebookException("You are not logged in. Please log in to post");
 		}
 	}
 	 

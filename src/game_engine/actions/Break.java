@@ -16,19 +16,16 @@ public class Break implements Action {
 
 	@Override
 	public void act() {
-		System.out.println("getting into brake");
 		for(State myState:myBrokenSprite.getStates()){
 			if (myState instanceof Health){
-				if(myBrokenSprite instanceof Projectile){
-					System.out.println(myBrokenSprite.getLocation().getXLocation());
-					
-				}
 				((Health) myState).kill();
-				System.out.println(((Health)myState).isAlive());
+
 			}
 		}
 		
 	}
+	
+	
 	
 	@Override
 	public Action copyWithNewSprite(Sprite aSprite) {

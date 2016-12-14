@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -72,6 +73,7 @@ public class GUIGenerator implements IGUIGenerator {
 		List<HBox> options = createListOfComboBoxHbox(aListOfNames, aListOfFilePaths, aListOfDescriptions, box);
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
+		box.setVisibleRowCount(1);
 		box.setMinWidth(box.getMaxWidth());
 		//box.setEditable(true);
 		box.setConverter(new StringConverter<Pane>() {
@@ -95,7 +97,6 @@ public class GUIGenerator implements IGUIGenerator {
 			box.setPromptText(label);
 		    aChooser.choose(label);
 		});
-		box.setVisibleRowCount(5);
 		return box;
 	}
 

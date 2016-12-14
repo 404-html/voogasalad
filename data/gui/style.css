@@ -169,6 +169,7 @@
     -fx-max-width: 100%;
     -fx-font-size: 13px;
     -fx-text-fill: #fdbe3b;
+    -fx-max-height: 200px;
 }
 
 #combo-box-label {

@@ -1,31 +1,17 @@
 package game_engine;
 
-import game_data.Controllable;
 import game_data.Game;
 import game_data.Level;
 import game_data.Location;
 import game_data.Sprite;
 
-import game_data.characteristics.Impassable;
 
 import game_data.sprites.Character;
 import game_data.sprites.Player;
-import game_data.sprites.Terrain;
 import game_data.states.Health;
-import game_data.states.Physics;
-import game_data.states.Score;
 import game_data.states.State;
-import game_engine.actions.Action;
-
-import game_engine.actions.LaunchProxy;
-import game_engine.actions.MoveLeft;
-import game_engine.actions.MoveRight;
-import game_engine.actions.MoveUpJump;
-import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Katrina, Austin, Lucia, ALEX! =D
@@ -66,12 +52,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		
 		for(Sprite s: myLevel.getMySpriteList()){
 			if(s instanceof Player){
-//				myLevel.setMainPlayer((Player)s);
-//				myLevel.getMainPlayer().addState(new Score());
-//				myLevel.getMainPlayer()
-//						.setControllable(new Controllable(myLevel.getMainPlayer(), generateDefaultKeyPressedMap()));
-//				myLevel.getMainPlayer().resetTerminalVelocities();
-//				myLevel.getMainPlayer().setLevel(myLevel);
 			}
 		}
 
@@ -87,22 +67,6 @@ public class EnginePlayerController implements IEnginePlayerControllerInterface 
 		mySpriteIsAliveList = new ArrayList<>();
 		myLevel.setMyControllableSpriteList();
 		updateSpriteData();
-	}
-	private Map<KeyCode, Action> generateDefaultKeyPressedMap() {
-		Map<KeyCode, Action> myKeyPressedMap = new HashMap<KeyCode, Action>();
-		Level myLevel = myGame.getCurrentLevel();
-		myKeyPressedMap.put(KeyCode.RIGHT, 
-				new MoveRight(myLevel.getMainPlayer(), GameResources.MOVE_RIGHT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.LEFT, 
-				new MoveLeft(myLevel.getMainPlayer(), GameResources.MOVE_LEFT_SPEED.getDoubleResource()));
-		myKeyPressedMap.put(KeyCode.UP, 
-				new MoveUpJump(myLevel.getMainPlayer(), GameResources.JUMP_SPEED.getDoubleResource()));
-		Terrain myProjectile = new Terrain(new Location(myLevel.getMainPlayer().getLocation().getXLocation(),
-				myLevel.getMainPlayer().getLocation().getYLocation()+100), 25, 25, 0, 0, "block", "data/images/sprite_images/block.png");
-		myProjectile.addState(new Physics(0.0, 0.0));
-		myProjectile.addCharacteristic(new Impassable(myProjectile));
-		myKeyPressedMap.put(KeyCode.SPACE, new LaunchProxy(myLevel.getMainPlayer(), myProjectile, 0));
-		return myKeyPressedMap;
 	}
 
 	public void updateControllerData() {
