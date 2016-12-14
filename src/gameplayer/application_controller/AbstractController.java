@@ -33,7 +33,7 @@ public abstract class AbstractController {
 	}
 	
 	protected void resetStage(IDisplay aScene) {
-		myStage.close();
+		//myStage.close();
 		myStage.setScene(aScene.init());
 		myStage.show();
 	}

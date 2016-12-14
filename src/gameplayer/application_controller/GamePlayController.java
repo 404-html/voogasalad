@@ -279,12 +279,7 @@ public class GamePlayController extends AbstractController {
 
 	private void saveHighscore() {
 		if (myScore != null) {
-			HighscoreManager hm;
-			try {
-				hm = loadHighscores();
-			} catch (Exception e) {
-				hm = new HighscoreManager();
-			}
+			HighscoreManager hm = loadHighscores();
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}

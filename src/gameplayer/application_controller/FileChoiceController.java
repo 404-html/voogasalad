@@ -11,6 +11,7 @@ public class FileChoiceController {
 	
 	public FileChoiceController(){
 		myFileChooser = new FileChooser();
+		myFileChooser.setInitialDirectory(new File("./XMLGameFiles"));
 		myFileChooser.setTitle("Choose New Game");
         myFileChooser.getExtensionFilters().add(new ExtensionFilter("Game Files", "*.xml"));
 	}

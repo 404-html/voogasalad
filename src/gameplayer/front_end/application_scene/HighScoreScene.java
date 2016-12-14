@@ -75,7 +75,7 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	}
 
 	private void addScores(HighscoreManager aManager) {
-		HBox box = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource() * 2);
+		HBox box = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource() * 3);
 		VBox users = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		VBox scores = new VBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 		for (int i = 0; i < aManager.getGames().size(); i++) {
@@ -84,6 +84,12 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 			}
 		}
 		getSortedList(users, scores);
+		users.setFillWidth(true);
+		scores.setFillWidth(true);
+		scores.setMaxWidth(200);
+		users.setMaxWidth(2000);
+		box.setMaxWidth(5000);
+		box.setMinWidth(1000);
 		box.getChildren().add(users);
 		box.getChildren().add(scores);
 		box.setAlignment(Pos.TOP_CENTER);
@@ -91,32 +97,35 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 	}
 
 	private void addScore(String aUser, double aScore, VBox aUsers, VBox aScores) {
-		DecimalFormat twoDForm = new DecimalFormat("#.##");
-		Double d = Double.valueOf(twoDForm.format(aScore));
-		myScores.add(d);
+		myScores.add(aScore);
 	}
 	
 	private void getSortedList(VBox aUsers, VBox aScores) {
 		int i = 0;
 		Collections.sort(myScores, Collections.reverseOrder());
 		for (Double score : myScores) {
-			String user = getUserWithScore(score);
+			String user = getUserWithScore(score, i);
 			if (!user.isEmpty()) {
 				aUsers.getChildren().add(getGUIGenerator().createLabel(user, 0, 0));
-				aScores.getChildren().add(getGUIGenerator().createLabel(String.valueOf(score), 0, 0));
+				DecimalFormat twoDForm = new DecimalFormat("#.##");
+				Double d = Double.valueOf(twoDForm.format(score));
+				aScores.getChildren().add(getGUIGenerator().createLabel(String.valueOf(d), 0, 0));
 			}
-			if (i == 10) {
+			if (i == 8) {
 				break;
 			}
 			i++;
 		}
 	}
 	
-	private String getUserWithScore(double aScore) {
+	private String getUserWithScore(double aScore, int aDex) {
 		for (int i = 0; i < myHighscoreManager.getHighscores().size(); i++) {
 			if (myHighscoreManager.getHighscores().get(i) == aScore) {
 				if (!myAddedUsers.contains(myHighscoreManager.getUsers().get(i))) {
 					myAddedUsers.add(myHighscoreManager.getUsers().get(i));
+					return myHighscoreManager.getUsers().get(i);
+				}
+				if (aDex < 8) {
 					return myHighscoreManager.getUsers().get(i);
 				}
 			}
