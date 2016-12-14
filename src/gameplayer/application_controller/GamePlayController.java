@@ -13,7 +13,6 @@ import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.exceptions.GameNotFunctionalException;
-import gameplayer.back_end.exceptions.VoogaFacebookException;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.back_end.user_information.LevelManager;
@@ -278,7 +277,7 @@ public class GamePlayController extends AbstractController {
 				MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
 						myGameController.getMyGame().getName());
 			} catch (Exception x) {
-				showError(new VoogaFacebookException("There was trouble posting to Facebook, please make sure you are logged in and have the correct authorizations"));
+				showError(x);
 			}
 		}, ButtonDisplay.TEXT));
 	}

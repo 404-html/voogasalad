@@ -1,5 +1,6 @@
 package gameplayer.application_controller;
 
+import gameplayer.back_end.exceptions.VoogaFacebookException;
 import gameplayer.back_end.facebook.FacebookInformation;
 import gameplayer.back_end.user_information.UserInformation;
 
@@ -36,7 +37,7 @@ public class PlayerInformationController {
 		return myUserInformation.getPictureUrl();
 	}
 
-	public void publishToFaceBook(String aTitle, String aMessage) {
+	public void publishToFaceBook(String aTitle, String aMessage) throws VoogaFacebookException {
 		myFacebookInformation.publishNews(aTitle, aMessage);
 	}
 }
