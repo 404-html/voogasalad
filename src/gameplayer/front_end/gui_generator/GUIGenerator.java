@@ -97,7 +97,6 @@ public class GUIGenerator implements IGUIGenerator {
 		return box;
 	}
 	
-	@SuppressWarnings("static-access")
 	private List<HBox> createListOfComboBoxHbox(List<String> aListOfNames, List<String> aListOfFilePaths,
 			List<String> aListOfDescriptions, ComboBox<Pane> box) {
 		List<HBox> options = new ArrayList<HBox>();
