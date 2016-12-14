@@ -7,7 +7,6 @@ import game_data.LevelSetter;
 import game_data.Location;
 import game_data.Sprite;
 import game_engine.actions.Action;
-import game_engine.actions.LaunchProxy;
 
 public class Player extends Character implements LevelSetter {
 	public Player(Location aLocation, int aWidth, int aHeight, double xVelocity, double yVelocity, String aName, String aImagePath) {
@@ -30,8 +29,8 @@ public class Player extends Character implements LevelSetter {
 	public void setLevel(Level aLevel) {
 		Collection<Action> playerActions = this.getControllable().getMyKeyPressedMap().values();
 		for(Action action: playerActions){
-			if(action instanceof LaunchProxy){
-				((LaunchProxy) action).setLevel(aLevel);
+			if(action instanceof LevelSetter){
+				((LevelSetter) action).setLevel(aLevel);
 			}
 		}		
 	}
