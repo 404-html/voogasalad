@@ -58,7 +58,9 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private Map<Characteristic, Double> myCurrentPowerUps;
 	private Controllable mainPlayerControllable;
 	private List<Sprite> myControllableSpriteList;
-
+	private Set<KeyCode> myPreviousKeysPressed;
+	private KeyCode launchCode;
+	private boolean spaceWasPressed;
 	public UpdateStates(Level aLevel) {
 		//count=0;
 		myLevel = aLevel;
@@ -70,15 +72,23 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		mySpriteImages = new HashMap<Sprite, ImageView>();
 		myControllableSpriteList = new ArrayList<Sprite>();
 		mainPlayerControllable=new Controllable();
+		myPreviousKeysPressed=new HashSet<KeyCode>();
+		launchCode=null;
+		setLaunchCode();
+		spaceWasPressed=false;
 	}
 	public void update(double aTimeElapsed, Set<KeyCode> aKeysPressed, Set<KeyCode> aKeysReleased, Map<Sprite, ImageView> aSpriteImages, double aScreenHeight, double aScreenWidth, double aScreenXPosition, double aScreenYPosition){
 		//System.out.println(mySpriteList.size());
+		//myPreviousKeysPressed=myKeysPressed;
 		myScreenWidth = aScreenWidth;
         myScreenHeight = aScreenHeight;
         myScreenXPosition = aScreenXPosition;
         myScreenYPosition = aScreenYPosition;
 		myTimeElapsed=aTimeElapsed;
-		setKeysPressed(aKeysPressed);
+		//setKeysPressed(aKeysPressed);
+		removeLaunchKeyHeldDown(aKeysPressed);
+		myPreviousKeysPressed=aKeysPressed;
+		//System.out.println(myPreviousKeysPressed.size());
 		setKeysReleased(aKeysReleased);
 		mySpriteImages=aSpriteImages;
 		myCurrentPowerUps = myLevel.getMainPlayer().getPowerUps();
@@ -92,13 +102,43 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		executeControls();
 		executeCharacteristics();
 		cleanGame();
-		
+		setSpaceWasPressed(aKeysPressed);
 //		System.out.println( " X VEL :" + myLevel.getMainPlayer().getXVelocity());
 //		for (State state : myLevel.getMainPlayer().getStates()) {
 //			if (state instanceof Score) {
 //					System.out.println("Score : "+ ((Score)state).getMyScore());
 //				}
 //			}	
+	}
+	private void setLaunchCode(){
+		Map<KeyCode, Action> actionMap = myLevel.getMainPlayer().getControllable().getMyKeyPressedMap();
+		for(KeyCode key: actionMap.keySet()){
+			if(actionMap.get(key) instanceof Launch){
+				launchCode=key;
+			}
+		}
+	}
+	private void setSpaceWasPressed(Set<KeyCode> aKeysPressed){
+		spaceWasPressed=false;
+		for (KeyCode key: aKeysPressed){
+			if(key==launchCode){
+				spaceWasPressed=true;
+			}
+		}
+	}
+	private void removeLaunchKeyHeldDown(Set<KeyCode> currentKeysPressed){
+		myKeysPressed=new HashSet<KeyCode>();
+		if(launchCode==null){
+			return;
+		}
+		//HashSet<KeyCode> newKeysPressed = new HashSet<KeyCode>();
+		for (KeyCode key: currentKeysPressed){
+			if(!(key==launchCode && spaceWasPressed)){
+				myKeysPressed.add(key);
+			}
+		}
+		//System.out.println(newKeysPressed.size());
+		//return newKeysPressed;		
 	}
 	private void setLevel(){
 		for(Sprite sprite: mySpriteList){

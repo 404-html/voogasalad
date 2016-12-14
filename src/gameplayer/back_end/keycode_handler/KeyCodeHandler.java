@@ -59,9 +59,7 @@ public class KeyCodeHandler {
 	}
 
 	public void clearReleased() {
-		myKeysPressed.clear();
 		myKeysReleased.clear();
-		myKeysPressed.clear();
 	}
 
 	public void handleKeyPress(KeyCode aKeyCode, Map<KeyCode, Action> aKeyMap) {
