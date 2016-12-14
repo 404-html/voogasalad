@@ -31,10 +31,16 @@ public class UpdateLocation {
 		mySprite.setYAcceleration(0);
 	}
 	public double calculateNewXVelocity(){
-		return mySprite.getXVelocity() + (mySpritePhysics.getHorizontalGravity() + mySprite.getXAcceleration())*myTimeElapsed;
+		if(mySpritePhysics != null)
+			return mySprite.getXVelocity() + (mySpritePhysics.getHorizontalGravity() + mySprite.getXAcceleration())*myTimeElapsed;
+		else
+			return mySprite.getXVelocity();
 	}
 	public double calculateNewYVelocity(){
-		return mySprite.getYVelocity() + (mySpritePhysics.getVerticalGravity() + mySprite.getYAcceleration())*myTimeElapsed;	
+		if(mySpritePhysics != null)
+			return mySprite.getYVelocity() + (mySpritePhysics.getVerticalGravity() + mySprite.getYAcceleration())*myTimeElapsed;	
+		else 
+			return mySprite.getYVelocity();
 	}
 	public Location calculateNewLocation(){
 		Location myCurrentLocation = mySprite.getLocation();
