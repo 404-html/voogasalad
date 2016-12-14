@@ -13,6 +13,7 @@ import game_engine.GameEngine;
 import game_engine.UpdateGame;
 import gameplayer.animation_loop.AnimationLoop;
 import gameplayer.back_end.exceptions.GameNotFunctionalException;
+import gameplayer.back_end.exceptions.VoogaFacebookException;
 import gameplayer.back_end.keycode_handler.KeyCodeHandler;
 import gameplayer.back_end.user_information.HighscoreManager;
 import gameplayer.back_end.user_information.LevelManager;
@@ -270,11 +271,15 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Publish"), 0, 0, e -> {
-			myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
-					myGameController.getMyGame().getName()), 
-					getButtonLabels().getString("PublishMessage"));
-			MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
-					myGameController.getMyGame().getName());
+			try {
+				myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
+						myGameController.getMyGame().getName()), 
+						getButtonLabels().getString("PublishMessage"));
+				MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
+						myGameController.getMyGame().getName());
+			} catch (Exception x) {
+				showError(new VoogaFacebookException("There was trouble posting to Facebook, please make sure you are logged in and have the correct authorizations"));
+			}
 		}, ButtonDisplay.TEXT));
 	}
 

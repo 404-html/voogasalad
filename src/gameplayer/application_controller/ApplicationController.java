@@ -199,7 +199,7 @@ public class ApplicationController extends AbstractController {
 	 * @param aMessage is the message for the post
 	 */
 
-	public void publishToFacebook(String aTitle, String aMessage) {
+	public void publishToFacebook(String aTitle, String aMessage) throws Exception {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
 	}
 
