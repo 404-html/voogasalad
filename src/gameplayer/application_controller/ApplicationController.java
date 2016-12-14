@@ -73,7 +73,7 @@ public class ApplicationController extends AbstractController {
 		String[] names = {getButtonLabels().getString("MainMenu"), getButtonLabels().getString("Profile"), getButtonLabels().getString("HawaiianShirt")};
 		ImageView image = getGUIGenerator().createImage("data/gui/clip_art_hawaiian_flower.png",30);
 		aMenu.addNavigationMenu(image, names, e -> {
-			displayMainMenu(getStage().getWidth(), getStage().getHeight());
+			displayMainMenu(getStage().getScene().getWidth(), getStage().getScene().getHeight());
 		}, e -> {
 			displayUserScene();
 		}, e-> {
@@ -86,14 +86,14 @@ public class ApplicationController extends AbstractController {
 	 * @param aGamename is used to determine which set of highscores to get
 	 */
 	public void displayHighScoreScene(String aGamename) {
-		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getWidth(), getStage().getHeight(), aGamename);
+		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getScene().getWidth(), getStage().getScene().getHeight(), aGamename);
 		createNavigationButtons((INavigationDisplay) highScore);
 		resetStage(highScore);
 		//setHighScoreHandlers((INavigationDisplay) highScore);
 	}
 
 	private void displayGameChoiceRoundTwo(String aGamename) {
-		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
+		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getScene().getWidth(), getStage().getScene().getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
 		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, aGamename);
@@ -101,13 +101,13 @@ public class ApplicationController extends AbstractController {
 	}
 
 	private void displayUserScene() {
-		myCurrentDisplay = getSceneFactory().create(getPlayerInformationController().getUser(), getPlayerInformationController().getPictureUrl(), getStage().getWidth(), getStage().getHeight(), loadHighscores());
+		myCurrentDisplay = getSceneFactory().create(getPlayerInformationController().getUser(), getPlayerInformationController().getPictureUrl(), getStage().getScene().getWidth(), getStage().getScene().getHeight(), loadHighscores());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
 	}
 
 	private void displayGameChoice() {
-		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getWidth(), getStage().getHeight());
+		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.GAMECHOICE, getStage().getScene().getWidth(), getStage().getScene().getHeight());
 		resetStage(myCurrentDisplay);
 		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
 		setGameChoiceButtonHandlers((INavigationDisplay) myCurrentDisplay, getButtonLabels().getString("Choose"));
@@ -115,12 +115,13 @@ public class ApplicationController extends AbstractController {
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, String aLabel) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
-				myStoredGames.getIcons(), myStoredGames.getDescriptions(), getStage().getWidth(), (aChoice) -> {
+				myStoredGames.getIcons(), myStoredGames.getDescriptions(), getStage().getScene().getWidth(), (aChoice) -> {
 					try {
 						resetGame(myStoredGames.getGameFilePath(aChoice));
 						displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
 					} catch (Exception x) {
 						showError(x);
+						displayGameChoice();
 					}
 					getUserPreferences();
 				}));
@@ -162,7 +163,6 @@ public class ApplicationController extends AbstractController {
 		hbox.setAlignment(Pos.CENTER);
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Options"), 0, 0, e -> {
 			PlayerOptionsPopUp options = (PlayerOptionsPopUp) new PopUpFactory().buildPopUpDisplay();
-			options.show();
 			options.setOnClosed(k -> {
 				try {
 					UserOptions ud = new UserOptions(options.getColorChoice(), options.getKeyChoice());
@@ -172,6 +172,7 @@ public class ApplicationController extends AbstractController {
 					showError(x);
 				}
 			});
+			options.show();
 		}, ButtonDisplay.TEXT));
 		hbox.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Levels"), 0, 0, e -> {
 			LevelSelectionPopUp levelSelection = (LevelSelectionPopUp) new PopUpFactory().buildPopUpDisplay(myGamePlay.getGame().getLevels().size());
