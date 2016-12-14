@@ -8,11 +8,11 @@ import game_data.Sprite;
  * @author Katrina
  *
  */
-public class LaunchSkeleton implements Launch{
+public class LaunchSkeletonVertical implements Launch{
 	private Sprite myLauncher;
 	private Sprite myProjectile;
 	private double myVelocity;
-	public LaunchSkeleton(Sprite myLauncher, Sprite myProjectile, double myVelocity){
+	public LaunchSkeletonVertical(Sprite myLauncher, Sprite myProjectile, double myVelocity){
 		this.myLauncher=myLauncher;
 		this.myProjectile=myProjectile.clone();
 		this.myVelocity=myVelocity;
@@ -22,8 +22,8 @@ public class LaunchSkeleton implements Launch{
 	public void act() {
 		return;
 	}
-	public LaunchWithLevel createLaunchWithLevel(Level aLevel){
-		return new LaunchWithLevel(myLauncher, myProjectile, myVelocity, aLevel);
+	public LaunchWithLevelVertical createLaunchWithLevel(Level aLevel){
+		return new LaunchWithLevelVertical(myLauncher, myProjectile, myVelocity, aLevel);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class LaunchSkeleton implements Launch{
 
 	@Override
 	public Action copyWithNewSprite(Sprite aSprite) {
-		return new LaunchSkeleton(aSprite, myProjectile, myVelocity);
+		return new LaunchSkeletonVertical(aSprite, myProjectile, myVelocity);
 	}
 
 
