@@ -11,7 +11,8 @@ import game_data.Sprite;
 import game_data.sprites.SpriteFactory;
 import game_engine.actions.Action;
 import game_engine.actions.Launch;
-import game_engine.actions.LaunchProxy;
+import game_engine.actions.LaunchProxyHorizontal;
+import game_engine.actions.LaunchProxyVertical;
 import game_engine.actions.Move;
 import game_engine.actions.MoveLeft;
 import game_engine.actions.MoveRight;
@@ -40,7 +41,9 @@ public class ControllableEditor implements InvalidationListener {
 		MOVE_LEFT(MoveLeft.class, "Move Left", (s, d) -> new MoveLeft(s, d)),
 		MOVE_UP_JUMP(MoveUpJump.class, "Jump Up", (s, d) -> new MoveUpJump(s, d)),
 		MOVE_UP_FLY(MoveUpFly.class, "Fly Up",  (s, d) -> new MoveUpFly(s, d)),
-		LAUNCH(LaunchProxy.class, "Launch", (s, d) -> new LaunchProxy(s, SpriteFactory.PROJECTILE.buildDefault(), d));
+		LAUNCH_HORIZONTAL(LaunchProxyHorizontal.class, "Launch Horizontal", (s, d) -> new LaunchProxyHorizontal(s, SpriteFactory.PROJECTILE.buildDefault(), d)),
+		LAUNCH_VERTICAL(LaunchProxyVertical.class, "Launch Vertical", (s, d) -> new LaunchProxyVertical(s, SpriteFactory.PROJECTILE.buildDefault(), d));
+		;
 
 		@FunctionalInterface
 		private interface ActionMaker {
