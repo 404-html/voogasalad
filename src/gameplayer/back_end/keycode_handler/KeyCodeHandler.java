@@ -20,7 +20,7 @@ public class KeyCodeHandler {
 	private Set<KeyCode> myKeysPressed;
 	private Set<KeyCode> myKeysReleased;
 	private KeyCodeTranslator myKeyCodeTranslator;
-	private List<ImageView> myMainPlayerImage;
+	private List<ImageView> myMainPlayerImage; 
 
 	public KeyCodeHandler(String aInput) {
 		myKeySet = new HashSet<KeyCode>();
@@ -77,7 +77,7 @@ public class KeyCodeHandler {
 			if(rightKey == null && e.getValue() instanceof MoveRight)
 				rightKey = e.getKey();
 		}
-				
+		
 		if (aKeyCode == leftKey || myKeyCodeTranslator.getCode(aKeyCode).equals(KeyCode.LEFT)) {
 			for (int i = 0; i < myMainPlayerImage.size(); i++) {
 				myMainPlayerImage.get(i).setRotate(180);
