@@ -32,7 +32,7 @@ public interface IGUIGenerator {
 	public Menu createMenu(ImageView aImage, String[] aString, EventHandler<ActionEvent>[] aHandler);
 	
 	public ComboBox<Pane> createComboBox(String aLabel, List<String> aList, List<String> aListOfFiles, 
-			List<String> aListOfDescriptions, double aWidth, Choosable aChoice);
+			List<String> aListOfDescriptions, Choosable aChoice);
 
 	public Label createLabel(String aText, double aXPos, double aYPos);
 	

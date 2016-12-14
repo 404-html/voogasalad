@@ -55,7 +55,9 @@ public class AnimationPane {
 	
 	public void addImageToView(ImageView aImage, boolean aVisible) {
 		aImage.setVisible(aVisible);
-		myGamePlayCanvas.getChildren().add(aImage);
+		if (!myGamePlayCanvas.getChildren().contains(aImage)) {
+			myGamePlayCanvas.getChildren().add(aImage);
+		}
 	}
 }
 
