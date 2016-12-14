@@ -250,7 +250,8 @@ public class LevelWindow extends AbstractLevelEditorWindow implements ILevelWind
 				exclusionSet.remove(aSprite);
 				Orientation orientation = scrollType.equals(ScrollType.HORIZONTAL_LEFT) | scrollType.equals(ScrollType.HORIZONTAL_RIGHT) ? Orientation.HORIZONTAL : Orientation.VERTICAL;
 				DraggableSprite draggableSprite = exclusionSet.iterator().hasNext() ? exclusionSet.iterator().next() : null;
-				RandomMoveHandler randomMoveHandler = checkMenuItem.isSelected() ? this.selectedSprites.size() == 2 ? new RandomMoveConjointHandler(draggableSprite.getSprite(), orientation, aSprite.getSprite().getLocation().calculateDistance(draggableSprite.getSprite().getLocation())) : new RandomMoveDisjointHandler(orientation) : new RandomMoveDisjointHandler(Orientation.NULL);
+				double offset = orientation.equals(Orientation.HORIZONTAL) ? aSprite.getSprite().getHeight() : aSprite.getSprite().getWidth();
+				RandomMoveHandler randomMoveHandler = checkMenuItem.isSelected() ? this.selectedSprites.size() == 2 ? new RandomMoveConjointHandler(draggableSprite.getSprite(), orientation, aSprite.getSprite().getLocation().calculateDistance(draggableSprite.getSprite().getLocation())- offset) : new RandomMoveDisjointHandler(orientation) : new RandomMoveDisjointHandler(Orientation.NULL);
 				aSprite.getSprite().setMyRandomMoveHandler(randomMoveHandler);
 			}
 

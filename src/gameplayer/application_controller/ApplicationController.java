@@ -114,7 +114,7 @@ public class ApplicationController extends AbstractController {
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, String aLabel) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
-				myStoredGames.getIcons(), myStoredGames.getDescriptions(), (aChoice) -> {
+				myStoredGames.getIcons(), myStoredGames.getDescriptions(), getStage().getWidth(), (aChoice) -> {
 					try {
 						resetGame(myStoredGames.getGameFilePath(aChoice));
 						displayGameChoiceRoundTwo(myGamePlay.getGame().getName());

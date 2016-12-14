@@ -166,9 +166,10 @@
 }
 
 .combo-box-popup > .list-view {
-    -fx-pref-width: 100%;
+    -fx-max-width: 100%;
     -fx-font-size: 13px;
     -fx-text-fill: #fdbe3b;
+    -fx-max-height: 200px;
 }
 
 #combo-box-label {
@@ -216,6 +217,7 @@
     -fx-font-size: 13px;
     -fx-text-fill: #fdbe3b;
 }
+
 
 
 .combo-box-popup .list-view .list-cell:filled:hover 

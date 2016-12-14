@@ -29,11 +29,8 @@ public class UpdateGame {
 	public void changeLevel(){
 		if(myUpdateLevel.getLevel().wonLevel()){
 			int currentLevelIndex = myGame.getLevels().indexOf(myGame.getCurrentLevel());
-			System.out.println(currentLevelIndex);
-			System.out.println(myGame.getLevels().size());
 
 			if(currentLevelIndex+1<myGame.getLevels().size()){
-				System.out.println("switching levels");
 				myGame.setCurrentLevel(currentLevelIndex+1);
 				myUpdateLevel = new UpdateStates(myGame.getCurrentLevel());
 			}

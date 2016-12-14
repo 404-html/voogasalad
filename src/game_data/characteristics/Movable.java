@@ -5,6 +5,7 @@ import java.util.Map;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.sprites.Item;
 //import javafx.geometry.Side;
 import game_data.sprites.Player;
 import game_engine.Bottom;
@@ -39,15 +40,15 @@ public class Movable implements Characteristic{
 			Side playerCollisionSide = null;
 			
 			for(Sprite collidedSprite:myCollisionMap.keySet()){
-				/*if(!(collidedSprite instanceof Player)){
-					System.out.println("notplayer");
+				if((collidedSprite instanceof Item)){
 					for(Characteristic i : collidedSprite.getCharacteristics()){
-						if( i instanceof Impassable){
-							System.out.println("impassable");
+						if( i instanceof Movable){
+							
 							Side temp = myCollisionMap.get(collidedSprite);
 							System.out.println(temp.toString());
+							
 							if(temp.isHorizontal()){
-								System.out.println("horizontal");
+								
 								if(temp instanceof Left){
 									impassLeft = true;
 								} 
@@ -56,7 +57,7 @@ public class Movable implements Characteristic{
 								}
 							}
 							else{
-								System.out.println("vertical");
+								
 								if(temp instanceof Top){
 									impassTop = true;
 								}
@@ -69,30 +70,30 @@ public class Movable implements Characteristic{
 							
 						}
 					}
-				}*/
+				}
 				if(collidedSprite instanceof Player){
 					playerSprite = collidedSprite;
 					playerCollisionSide = myCollisionMap.get(playerSprite);}
 				}
 
 
-			//System.out.println(impassTop);
-			//System.out.println(impassBottom);
+			
 			if(playerSprite != null){
-				if(playerCollisionSide instanceof Left && !impassLeft){
+				if(playerCollisionSide instanceof Left && !impassRight){
 					Action myAction = new MovableTriggered(mySprite, playerSprite, playerCollisionSide);
 					myAction.act();
 				}
-				else if(playerCollisionSide instanceof Right && !impassRight){
+				else if(playerCollisionSide instanceof Right && !impassLeft){
 					Action myAction = new MovableTriggered(mySprite, playerSprite, playerCollisionSide);
 					myAction.act();
 				}
-				else if (playerCollisionSide instanceof Top && !impassTop){
-					//System.out.println("top");
+				else if (playerCollisionSide instanceof Top && !impassBottom){
+					
 					Action myAction = new MovableTriggered(mySprite, playerSprite, playerCollisionSide);
 					myAction.act();
 				}
-				else if (playerCollisionSide instanceof Bottom && !impassBottom){
+				else if (playerCollisionSide instanceof Bottom && !impassTop){
+					
 					Action myAction = new MovableTriggered(mySprite, playerSprite, playerCollisionSide);
 					myAction.act();
 				} 

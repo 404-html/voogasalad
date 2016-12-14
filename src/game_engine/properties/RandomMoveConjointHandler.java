@@ -17,11 +17,11 @@ public class RandomMoveConjointHandler extends RandomMoveHandler {
 		
 		double newXLoc, newYLoc;
 		if(getOrientation().equals(Orientation.VERTICAL)) {
-			newXLoc = Math.random()*( getScreenWidth() - getSprite().getWidth() );
+			newXLoc = Math.random()*(getScreenWidth() - myDistanceApart) - getSprite().getWidth();
 			newYLoc = getSprite().getLocation().getYLocation() - getScreenHeight() - getSprite().getHeight();
 		} else {
 			newXLoc = getSprite().getLocation().getXLocation() + getScreenWidth() + getSprite().getWidth();
-			newYLoc = Math.random()*( getScreenHeight() - getSprite().getHeight() );
+			newYLoc = Math.random()*(getScreenHeight() - myDistanceApart) - getSprite().getHeight();
 		}
 		getSprite().getLocation().setLocation(newXLoc, newYLoc);
 		

@@ -24,7 +24,7 @@ public class Bottom extends Side{
 		if(aSprite.getYVelocity()<0){
 			aSprite.setYVelocity(0);
 		}
-		if(aSpritePhysics.getVerticalGravity()<0){
+		if(aSpritePhysics != null && aSpritePhysics.getVerticalGravity()<0){
 			aSprite.setYAcceleration(-aSpritePhysics.getVerticalGravity());
 		}
 	}
