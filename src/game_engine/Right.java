@@ -44,7 +44,7 @@ public class Right extends Side{
 	public void Movable(Sprite aSprite, Sprite movableSprite) {
 		if(aSprite.getXVelocity()<=0){
 			if(aSprite.getXVelocity()==0){
-				aSprite.setXVelocity(-50);
+				aSprite.setXVelocity(-100);
 			}
 			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation()+(aSprite.getXVelocity()/60), movableSprite.getLocation().getYLocation());
 			aSprite.setXVelocity(0);
