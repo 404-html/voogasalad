@@ -1,0 +1,57 @@
+<game__data.sprites.Terrain>
+  <name>Terrain_Name</name>
+  <myLocation>
+    <myXLocation>800.0</myXLocation>
+    <myYLocation>800.0</myYLocation>
+  </myLocation>
+  <myWidth>75</myWidth>
+  <myHeight>75</myHeight>
+  <myImagePath>data/images/sprite_images/Lava.png</myImagePath>
+  <myXVelocity>0.0</myXVelocity>
+  <myYVelocity>0.0</myYVelocity>
+  <myXAcceleration>0.0</myXAcceleration>
+  <myYAcceleration>0.0</myYAcceleration>
+  <terminalXVel>1600.0</terminalXVel>
+  <terminalYVel>1600.0</terminalYVel>
+  <myCollisionHandler/>
+  <myCharacteristics>
+    <game__data.characteristics.Damager>
+      <breakableNorth>true</breakableNorth>
+      <breakableSouth>false</breakableSouth>
+      <breakableEast>false</breakableEast>
+      <breakableWest>false</breakableWest>
+      <myDamageToGive>1</myDamageToGive>
+      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+    </game__data.characteristics.Damager>
+    <game__data.characteristics.Impassable>
+      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+      <movesThroughBottom>false</movesThroughBottom>
+    </game__data.characteristics.Impassable>
+  </myCharacteristics>
+  <myControllable>
+    <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+    <myKeyPressedMap class="tree-map"/>
+    <myKeyReleasedMap/>
+    <myKeysPressed/>
+    <myKeysReleased/>
+    <isControllable>true</isControllable>
+  </myControllable>
+  <id></id>
+  <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+    <myOrientation>NULL</myOrientation>
+    <myScreenWidth>0.0</myScreenWidth>
+    <myScreenHeight>0.0</myScreenHeight>
+    <myScreenXPosition>0.0</myScreenXPosition>
+    <myScreenYPosition>0.0</myScreenYPosition>
+  </myRandomMoveHandler>
+  <myStates>
+    <game__data.states.Physics>
+      <verticalGravity>0.0</verticalGravity>
+      <horizontalGravity>0.0</horizontalGravity>
+    </game__data.states.Physics>
+    <game__data.states.Health>
+      <myHealth>1</myHealth>
+      <isAlive>true</isAlive>
+    </game__data.states.Health>
+  </myStates>
+</game__data.sprites.Terrain>

@@ -42,11 +42,13 @@ public class GamePlayController extends AbstractController {
 	private MediaController myMusic;
 	private Score myScore;
 	private Health myHealth;
+	private int myLevel;
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aInfoController) throws Exception {
 		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
+		myLevel = 0;
 		myKeyCodeHandler = new KeyCodeHandler();
 		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
@@ -93,9 +95,9 @@ public class GamePlayController extends AbstractController {
 	private void initializeScene(UserOptions aOptions) {
 		mySpriteDisplay = new SpriteDisplay();
 		if (aOptions != null) {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getScene().getWidth(), getStage().getScene().getHeight(), aOptions.getMyFontColor());
 		} else {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), "#fdbe3b");
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getScene().getWidth(), getStage().getScene().getHeight(), "#fdbe3b");
 		}
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e, myGameController.getMyGame().getCurrentLevel().getMainPlayer().getControllable().getMyKeyPressedMap()), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
@@ -116,6 +118,10 @@ public class GamePlayController extends AbstractController {
 				myGameController.getMyGame().getScrollType(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates());
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
+		if (myGameController.getMyGame().getLevelNumber() != myLevel) {
+			myLevel = myGameController.getMyGame().getLevelNumber();
+			myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
+		}
 		setLevelLabel();
 		setHealthLabel();
 		setScoreLabel();
@@ -273,7 +279,7 @@ public class GamePlayController extends AbstractController {
 			try {
 				myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
 						myGameController.getMyGame().getName()), 
-						getButtonLabels().getString("PublishMessage"));
+						MessageFormat.format(getButtonLabels().getString("PublishMessage"), myGameController.getMyGame().getName()));
 				MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
 						myGameController.getMyGame().getName());
 			} catch (Exception x) {
