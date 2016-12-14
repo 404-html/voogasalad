@@ -112,7 +112,8 @@ public class GamePlayController extends AbstractController {
 		//the below line makes sure the keys released aren't stored in the set after they're released
 		myKeyCodeHandler.clearReleased();
 		XYMovementHandler movementHandler = new MovementHandlerFactory().buildMovementHandler(myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getXLocation(), 
-				getStage().getWidth(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getYLocation(), getStage().getHeight(), 3);
+				getStage().getWidth(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getLocation().getYLocation(), getStage().getHeight(), 
+				myGameController.getMyGame().getScrollType(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates());
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
 		setLevelLabel();
@@ -145,6 +146,8 @@ public class GamePlayController extends AbstractController {
 				myGamePlayScene.addImageToView(mySpriteDisplay.getUpdatedSpriteMap(sprite), true);
 			}
 		}
+		if (myKeyCodeHandler.checkNoKeysPressed()) mySpriteDisplay.stopAnimation();
+		else mySpriteDisplay.playAnimation();
 	}
 
 	private void setMenu() {
@@ -210,7 +213,8 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setLevelLabel() {
-		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber() + 1, 0, 0), 0);
+		int level = myGameController.getMyGame().getLevelNumber() + 1;
+		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + level, 0, 0), 0);
 	}
 
 	private void handleRestart() throws Exception {
@@ -276,7 +280,6 @@ public class GamePlayController extends AbstractController {
 	private void saveHighscore() {
 		if (myScore != null) {
 			HighscoreManager hm = loadHighscores();
-			System.out.println(getPlayerInformationController().getUser());
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}

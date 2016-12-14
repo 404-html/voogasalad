@@ -68,6 +68,7 @@ public class ListOfCollidingSprites {
 				if((targetSprite instanceof Terrain && !isTransparent()) || (isTransparent() && pastPlatform(mySprite))){
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 				}
+
 				return new Top();
 				
 			} else if (bottom_collision < top_collision && bottom_collision < left_collision
@@ -76,6 +77,7 @@ public class ListOfCollidingSprites {
 				if(targetSprite instanceof Terrain && !isTransparent()){
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY + bottom_collision));
 				}
+
 				return new Bottom();
 				
 			} else if (left_collision < right_collision && left_collision < top_collision
@@ -84,6 +86,7 @@ public class ListOfCollidingSprites {
 						mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 						mySprite.setLocation(new Location(myTopLeftX - left_collision, myTopLeftY));
 					}
+
 					return new Left();
 
 			} else if (right_collision < left_collision && right_collision < top_collision
@@ -92,6 +95,7 @@ public class ListOfCollidingSprites {
 					mySprite.setLocation(new Location(myTopLeftX, myTopLeftY - top_collision));
 					mySprite.setLocation(new Location(myTopLeftX + right_collision, myTopLeftY));
 				}
+
 					return new Right();
 
 			}

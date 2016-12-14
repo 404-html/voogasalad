@@ -6,6 +6,7 @@ import game_engine.Side;
 import game_data.Sprite;
 import game_data.characteristics.characteristic_annotations.NameAnnotation;
 import game_data.characteristics.characteristic_annotations.ParameterAnnotation;
+import game_data.characteristics.characteristic_annotations.ViewableMethodOutput;
 import game_data.sprites.Player;
 import game_data.states.LevelWon;
 import game_data.states.Score;
@@ -29,6 +30,11 @@ public class WinByScore implements Characteristic{
 		this.scoreToWin = scoreToWin;
 	}
 
+	@ViewableMethodOutput(description="Score needed", type = double.class)
+	public double getScoreToWin(){
+		return this.scoreToWin;
+	}
+	
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		//TODO: make and execute win action

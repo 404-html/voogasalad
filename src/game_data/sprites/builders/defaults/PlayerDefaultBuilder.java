@@ -3,7 +3,6 @@ package game_data.sprites.builders.defaults;
 import game_data.Location;
 import game_data.Sprite;
 import game_data.characteristics.Characteristic;
-import game_data.characteristics.Controllable;
 import game_data.sprites.Player;
 import game_data.sprites.builders.SpriteDefaultBuilder;
 import game_data.states.Health;

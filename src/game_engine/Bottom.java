@@ -24,7 +24,7 @@ public class Bottom extends Side{
 		if(aSprite.getYVelocity()<0){
 			aSprite.setYVelocity(0);
 		}
-		if(aSpritePhysics.getVerticalGravity()<0){
+		if(aSpritePhysics != null && aSpritePhysics.getVerticalGravity()<0){
 			aSprite.setYAcceleration(-aSpritePhysics.getVerticalGravity());
 		}
 	}
@@ -37,6 +37,17 @@ public class Bottom extends Side{
 	@Override
 	public boolean isHorizontal() {
 		return false;
+	}
+
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		if(aSprite.getYVelocity()<=0 ){
+			if(aSprite.getYVelocity()==0){
+				aSprite.setYVelocity(-100);
+			}
+			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation(), movableSprite.getLocation().getYLocation()+(aSprite.getYVelocity()/60));
+			aSprite.setYVelocity(0);	}
+		
 	}
 
 }

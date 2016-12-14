@@ -38,6 +38,12 @@ public class TopOrBottom extends Side{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

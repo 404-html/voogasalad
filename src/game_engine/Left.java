@@ -23,7 +23,7 @@ public class Left extends Side{
 		if(aSprite.getXVelocity()>0){
 			aSprite.setXVelocity(0);
 		}
-		if(aSpritePhysics.getHorizontalGravity()>0){
+		if(aSpritePhysics!= null && aSpritePhysics.getHorizontalGravity()>0){
 			aSprite.setXAcceleration(-aSpritePhysics.getHorizontalGravity());
 		}
 	}
@@ -38,4 +38,17 @@ public class Left extends Side{
 		return true;
 	}
 
-}
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		
+		if(aSprite.getXVelocity()>=0 ){	
+			if(aSprite.getXVelocity()==0){
+				aSprite.setXVelocity(100);
+			}
+			
+			movableSprite.getLocation().setLocation(movableSprite.getLocation().getXLocation()+(aSprite.getXVelocity()/60), movableSprite.getLocation().getYLocation());
+			aSprite.setXVelocity(0);	}
+		
+	}}
+
+

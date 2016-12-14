@@ -39,4 +39,10 @@ public class LeftOrRight extends Side{
 		return false;
 	}
 
+	@Override
+	public void Movable(Sprite aSprite, Sprite movableSprite) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

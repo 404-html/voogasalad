@@ -3,6 +3,7 @@
  */
 package author.view.util.edit_window;
 
+import author.view.util.language_selection.ILanguageHolder;
 import game_data.GameObject;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
@@ -20,9 +21,12 @@ import javafx.scene.layout.VBox;
 abstract class GameObjectEditBox <T extends GameObject>{
 	private String imagePath;
 	private TextField nameField = new TextField();
-	
+	ILanguageHolder myLanguageHolder;
 	private VBox container;
-	GameObjectEditBox() {
+	
+	
+	GameObjectEditBox(ILanguageHolder aLanguageHolder) {
+		myLanguageHolder = aLanguageHolder;
 		this.container = initializeVBox();
 	}
 	
@@ -45,7 +49,7 @@ abstract class GameObjectEditBox <T extends GameObject>{
 		editBox.setPadding(new Insets(3));
 		editBox.setAlignment(Pos.CENTER);
 		
-		editBox.getChildren().add(createHBox(new Label("Name: "), nameField));
+		editBox.getChildren().add(createHBox(new Label(myLanguageHolder.getDisplayText("Name")), nameField));
 		return editBox;
 	}
 	

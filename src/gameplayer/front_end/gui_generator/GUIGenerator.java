@@ -64,13 +64,15 @@ public class GUIGenerator implements IGUIGenerator {
 	}
 	
 	@Override
-	public ComboBox<Pane> createComboBox(String aLabel, List<String> aListOfNames, List<String> aListOfFilePaths, List<String> aListOfDescriptions, Choosable aChooser) {
+	public ComboBox<Pane> createComboBox(String aLabel, List<String> aListOfNames, List<String> aListOfFilePaths, 
+			List<String> aListOfDescriptions, double aWidth, Choosable aChooser) {
 		ComboBox<Pane> box = new ComboBox<Pane>();
 		box.setPromptText(aLabel);
+		box.setMaxWidth(aWidth * .45);
 		List<HBox> options = createListOfComboBoxHbox(aListOfNames, aListOfFilePaths, aListOfDescriptions, box);
 		ObservableList<Pane> items = FXCollections.observableArrayList(options);
 		box.setItems(items);
-		//box.setMinWidth(box.getWidth());
+		box.setMinWidth(box.getMaxWidth());
 		//box.setEditable(true);
 		box.setConverter(new StringConverter<Pane>() {
 
@@ -93,6 +95,7 @@ public class GUIGenerator implements IGUIGenerator {
 			box.setPromptText(label);
 		    aChooser.choose(label);
 		});
+		box.setVisibleRowCount(5);
 		return box;
 	}
 
@@ -104,14 +107,19 @@ public class GUIGenerator implements IGUIGenerator {
 			HBox hbox = new HBox(FrontEndResources.BOX_INSETS.getDoubleResource());
 			hbox.setMaxWidth(box.getMaxWidth());
 			if(aListOfFilePaths != null && i < aListOfFilePaths.size()){
-				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), 40));
+				hbox.getChildren().add(createImage(aListOfFilePaths.get(i), (box.getMaxWidth() * .1)));
 			} else {
 				hbox.getChildren().add(new ImageView());
 			}
 			Label name = createComboBoxLabel(aListOfNames.get(i));
+			System.out.println(box.getMaxWidth());
+			name.setMaxWidth(box.getMaxWidth() * .25);
+			name.setWrapText(true);
 			Label des = createComboBoxLabel(aListOfDescriptions.get(i));
-			hbox.setHgrow(name, Priority.ALWAYS);
-			hbox.setHgrow(des, Priority.ALWAYS);
+			des.setMaxWidth(box.getMaxWidth() * .65);
+			des.setWrapText(true);
+			//hbox.setHgrow(name, Priority.ALWAYS);
+			//hbox.setHgrow(des, Priority.ALWAYS);
 			hbox.getChildren().add(name);
 			hbox.getChildren().add(des);
 			options.add(hbox);

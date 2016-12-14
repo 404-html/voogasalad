@@ -55,6 +55,7 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 	}
 
 	public Pane getPane() {
+		myPane.setId("LevelEditor");
 		return myPane;
 	}
 
@@ -75,14 +76,14 @@ class LevelEditor implements ILevelEditorExternal, ILevelEditorInternal{
 	}
 	
 	public Level createLevel(){
-		ILevelEditWindowExternal levelEditWindow = new LevelEditWindowFactory().create();
+		ILevelEditWindowExternal levelEditWindow = new LevelEditWindowFactory().create(authorController);
 		Level createdLevel = levelEditWindow.getLevel();
 		return createdLevel;
 	}
 
 	@Override
 	public String toString() {
-		return "Level Editor";
+		return authorController.getDisplayText("LevelEditor");
 	}
 
 }
