@@ -42,7 +42,11 @@ public class ApplicationController extends AbstractController {
 	}
 
 	public void displayMainMenu(double aWidth, double aHeight) {
-		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.MAINMENU, aWidth, aHeight);
+		if (getStage().getScene() != null) {
+			myCurrentDisplay = getSceneFactory().create(SceneIdentifier.MAINMENU, getStage().getScene().getWidth(), getStage().getScene().getHeight());
+		} else {
+			myCurrentDisplay = getSceneFactory().create(SceneIdentifier.MAINMENU, aWidth, aHeight);
+		}
 		resetStage(myCurrentDisplay);
 		setMainMenuButtonHandlers((MainMenuScene) myCurrentDisplay);
 	}
@@ -198,7 +202,7 @@ public class ApplicationController extends AbstractController {
 	private void resetGame(File chosenGame) throws GameNotFunctionalException {
 		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 	}
-	
+
 	/**
 	 * @param aTitle is the message title
 	 * @param aMessage is the message for the post

@@ -1,12 +1,12 @@
-<game__data.sprites.Terrain>
-  <name>Terrain_Name</name>
+<game__data.sprites.Item>
+  <name>ChristmasTree</name>
   <myLocation>
-    <myXLocation>800.0</myXLocation>
-    <myYLocation>800.0</myYLocation>
+    <myXLocation>0.0</myXLocation>
+    <myYLocation>0.0</myYLocation>
   </myLocation>
-  <myWidth>75</myWidth>
-  <myHeight>75</myHeight>
-  <myImagePath>data/images/sprite_images/Lava.png</myImagePath>
+  <myWidth>70</myWidth>
+  <myHeight>100</myHeight>
+  <myImagePath>data/images/sprite_images/ChristmasTree.png</myImagePath>
   <myXVelocity>0.0</myXVelocity>
   <myYVelocity>0.0</myYVelocity>
   <myXAcceleration>0.0</myXAcceleration>
@@ -15,28 +15,19 @@
   <terminalYVel>1600.0</terminalYVel>
   <myCollisionHandler/>
   <myCharacteristics>
-    <game__data.characteristics.Damager>
-      <breakableNorth>true</breakableNorth>
-      <breakableSouth>false</breakableSouth>
-      <breakableEast>false</breakableEast>
-      <breakableWest>false</breakableWest>
-      <myDamageToGive>1</myDamageToGive>
-      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-    </game__data.characteristics.Damager>
-    <game__data.characteristics.Impassable>
-      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-      <movesThroughBottom>false</movesThroughBottom>
-    </game__data.characteristics.Impassable>
+    <game__data.characteristics.Winnable>
+      <mySprite class="game_data.sprites.Item" reference="../../.."/>
+    </game__data.characteristics.Winnable>
   </myCharacteristics>
   <myControllable>
-    <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+    <mySprite class="game_data.sprites.Item" reference="../.."/>
     <myKeyPressedMap class="tree-map"/>
     <myKeyReleasedMap/>
     <myKeysPressed/>
     <myKeysReleased/>
     <isControllable>true</isControllable>
   </myControllable>
-  <id></id>
+  <id>ConcreteDraggableSprite1481754810307</id>
   <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
     <myOrientation>NULL</myOrientation>
     <myScreenWidth>0.0</myScreenWidth>
@@ -54,4 +45,4 @@
       <isAlive>true</isAlive>
     </game__data.states.Health>
   </myStates>
-</game__data.sprites.Terrain>
+</game__data.sprites.Item>

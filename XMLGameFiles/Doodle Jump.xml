@@ -25,15 +25,23 @@
         <terminalYVel>1600.0</terminalYVel>
         <myCollisionHandler/>
         <myCharacteristics>
+          <game__data.characteristics.ScoreBasedOnPosition>
+            <mySprite class="game_data.sprites.Player" reference="../../.."/>
+            <initX>502.0</initX>
+            <initY>301.0</initY>
+            <pointsAdded>0.0</pointsAdded>
+            <myScore>0.0</myScore>
+            <maxDist>0.0</maxDist>
+            <cur>0.0</cur>
+            <curPositive>false</curPositive>
+            <initPositive>false</initPositive>
+            <magnitude>0.0</magnitude>
+          </game__data.characteristics.ScoreBasedOnPosition>
           <game__data.characteristics.Launcher>
             <mySprite class="game_data.sprites.Player" reference="../../.."/>
             <myTimeInterval>500</myTimeInterval>
             <myCurrentTime>0</myCurrentTime>
           </game__data.characteristics.Launcher>
-          <game__data.characteristics.ScoreBasedOnTime>
-            <mySprite class="game_data.sprites.Player" reference="../../.."/>
-            <scorePerSecond>0.03</scorePerSecond>
-          </game__data.characteristics.ScoreBasedOnTime>
         </myCharacteristics>
         <myControllable>
           <mySprite class="game_data.sprites.Player" reference="../.."/>
@@ -100,14 +108,14 @@
                         <myScreenYPosition>0.0</myScreenYPosition>
                       </myRandomMoveHandler>
                       <myStates>
-                        <game__data.states.Physics>
-                          <verticalGravity>0.0</verticalGravity>
-                          <horizontalGravity>0.0</horizontalGravity>
-                        </game__data.states.Physics>
                         <game__data.states.Health>
                           <myHealth>1</myHealth>
                           <isAlive>true</isAlive>
                         </game__data.states.Health>
+                        <game__data.states.Physics>
+                          <verticalGravity>0.0</verticalGravity>
+                          <horizontalGravity>0.0</horizontalGravity>
+                        </game__data.states.Physics>
                       </myStates>
                     </preset>
                     <myWidth>10</myWidth>
@@ -149,14 +157,14 @@
                       <myScreenYPosition>0.0</myScreenYPosition>
                     </myRandomMoveHandler>
                     <myStates>
-                      <game__data.states.Health>
-                        <myHealth>1</myHealth>
-                        <isAlive>true</isAlive>
-                      </game__data.states.Health>
                       <game__data.states.Physics>
                         <verticalGravity>0.0</verticalGravity>
                         <horizontalGravity>0.0</horizontalGravity>
                       </game__data.states.Physics>
+                      <game__data.states.Health>
+                        <myHealth>1</myHealth>
+                        <isAlive>true</isAlive>
+                      </game__data.states.Health>
                     </myStates>
                   </myProjectile>
                   <myVelocity>500.0</myVelocity>
@@ -203,17 +211,6 @@
           <myScreenYPosition>0.0</myScreenYPosition>
         </myRandomMoveHandler>
         <myStates>
-          <game__data.states.Health>
-            <myHealth>1</myHealth>
-            <isAlive>true</isAlive>
-          </game__data.states.Health>
-          <game__data.states.Physics>
-            <verticalGravity>800.0</verticalGravity>
-            <horizontalGravity>0.0</horizontalGravity>
-          </game__data.states.Physics>
-          <game__data.states.Score>
-            <myScore>0.0</myScore>
-          </game__data.states.Score>
           <game__data.states.ScreenRatio>
             <topRatio>0.63</topRatio>
             <bottomRatio>0.5</bottomRatio>
@@ -221,77 +218,20 @@
           <game__data.states.LevelWon>
             <hasWon>false</hasWon>
           </game__data.states.LevelWon>
+          <game__data.states.Physics>
+            <verticalGravity>800.0</verticalGravity>
+            <horizontalGravity>0.0</horizontalGravity>
+          </game__data.states.Physics>
+          <game__data.states.Health>
+            <myHealth>1</myHealth>
+            <isAlive>true</isAlive>
+          </game__data.states.Health>
+          <game__data.states.Score>
+            <myScore>0.0</myScore>
+          </game__data.states.Score>
         </myStates>
       </myMainPlayer>
       <mySprites>
-        <game__data.sprites.Enemy>
-          <name>Enemy_Name</name>
-          <myLocation>
-            <myXLocation>900.0</myXLocation>
-            <myYLocation>700.0</myYLocation>
-          </myLocation>
-          <myWidth>75</myWidth>
-          <myHeight>75</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_monster2.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler/>
-          <myCharacteristics>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeedHorizontal>0.0</myBounceSpeedHorizontal>
-              <myBounceSpeedVertical>800.0</myBounceSpeedVertical>
-              <bouncing>false</bouncing>
-              <timeAfterCollisionCount>0</timeAfterCollisionCount>
-            </game__data.characteristics.Bouncer>
-            <game__data.characteristics.Breakable>
-              <breakableNorth>true</breakableNorth>
-              <breakableSouth>false</breakableSouth>
-              <breakableEast>false</breakableEast>
-              <breakableWest>false</breakableWest>
-              <myDurability>0</myDurability>
-              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-              <timeSinceHit>20</timeSinceHit>
-            </game__data.characteristics.Breakable>
-            <game__data.characteristics.Damager>
-              <breakableNorth>false</breakableNorth>
-              <breakableSouth>true</breakableSouth>
-              <breakableEast>true</breakableEast>
-              <breakableWest>true</breakableWest>
-              <myDamageToGive>1</myDamageToGive>
-              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-            </game__data.characteristics.Damager>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Enemy>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
@@ -334,21 +274,21 @@
             <myScreenYPosition>0.0</myScreenYPosition>
           </myRandomMoveHandler>
           <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
             </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>600.0</myXLocation>
-            <myYLocation>760.0</myYLocation>
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>920.0</myYLocation>
           </myLocation>
           <myWidth>77</myWidth>
           <myHeight>17</myHeight>
@@ -361,13 +301,13 @@
           <terminalYVel>1600.0</terminalYVel>
           <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
           <myCharacteristics>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
             <game__data.characteristics.BouncerTop>
               <myBounceSpeed>700.0</myBounceSpeed>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -399,8 +339,128 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>100.0</myXLocation>
-            <myYLocation>1040.0</myYLocation>
+            <myXLocation>503.0</myXLocation>
+            <myYLocation>568.0</myYLocation>
+          </myLocation>
+          <myWidth>79</myWidth>
+          <myHeight>19</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy>
+          <name>Enemy_Name</name>
+          <myLocation>
+            <myXLocation>66.0</myXLocation>
+            <myYLocation>197.0</myYLocation>
+          </myLocation>
+          <myWidth>75</myWidth>
+          <myHeight>75</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_monster1.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Damager>
+              <breakableNorth>false</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+            <game__data.characteristics.Bouncer>
+              <myBounceSpeedHorizontal>0.0</myBounceSpeedHorizontal>
+              <myBounceSpeedVertical>800.0</myBounceSpeedVertical>
+              <bouncing>false</bouncing>
+              <timeAfterCollisionCount>0</timeAfterCollisionCount>
+            </game__data.characteristics.Bouncer>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>false</breakableSouth>
+              <breakableEast>false</breakableEast>
+              <breakableWest>false</breakableWest>
+              <myDurability>0</myDurability>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>800.0</myYLocation>
           </myLocation>
           <myWidth>77</myWidth>
           <myHeight>17</myHeight>
@@ -436,6 +496,231 @@
             <myScreenHeight>0.0</myScreenHeight>
             <myScreenXPosition>0.0</myScreenXPosition>
             <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy>
+          <name>Enemy_Name</name>
+          <myLocation>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>700.0</myYLocation>
+          </myLocation>
+          <myWidth>75</myWidth>
+          <myHeight>75</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_monster2.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>false</breakableSouth>
+              <breakableEast>false</breakableEast>
+              <breakableWest>false</breakableWest>
+              <myDurability>0</myDurability>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+            <game__data.characteristics.Bouncer>
+              <myBounceSpeedHorizontal>0.0</myBounceSpeedHorizontal>
+              <myBounceSpeedVertical>800.0</myBounceSpeedVertical>
+              <bouncing>false</bouncing>
+              <timeAfterCollisionCount>0</timeAfterCollisionCount>
+            </game__data.characteristics.Bouncer>
+            <game__data.characteristics.Damager>
+              <breakableNorth>false</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>360.0</myYLocation>
+          </myLocation>
+          <myWidth>77</myWidth>
+          <myHeight>17</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>280.0</myYLocation>
+          </myLocation>
+          <myWidth>77</myWidth>
+          <myHeight>17</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveConjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+            <myConnectedSprite class="game_data.sprites.Terrain">
+              <name>hat</name>
+              <myLocation>
+                <myXLocation>857.0</myXLocation>
+                <myYLocation>256.0</myYLocation>
+              </myLocation>
+              <myWidth>36</myWidth>
+              <myHeight>37</myHeight>
+              <myImagePath>data/images/sprite_images/doodlejump_spring.png</myImagePath>
+              <myXVelocity>0.0</myXVelocity>
+              <myYVelocity>0.0</myYVelocity>
+              <myXAcceleration>0.0</myXAcceleration>
+              <myYAcceleration>0.0</myYAcceleration>
+              <terminalXVel>1600.0</terminalXVel>
+              <terminalYVel>1600.0</terminalYVel>
+              <myCollisionHandler/>
+              <myCharacteristics>
+                <game__data.characteristics.BouncerTop>
+                  <myBounceSpeed>2000.0</myBounceSpeed>
+                  <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                </game__data.characteristics.BouncerTop>
+                <game__data.characteristics.TransparentBottomImpassable>
+                  <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+                </game__data.characteristics.TransparentBottomImpassable>
+              </myCharacteristics>
+              <myControllable>
+                <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+                <myKeyPressedMap class="tree-map"/>
+                <myKeyReleasedMap/>
+                <myKeysPressed/>
+                <myKeysReleased/>
+                <isControllable>true</isControllable>
+              </myControllable>
+              <id></id>
+              <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+                <myOrientation>NULL</myOrientation>
+                <myScreenWidth>0.0</myScreenWidth>
+                <myScreenHeight>0.0</myScreenHeight>
+                <myScreenXPosition>0.0</myScreenXPosition>
+                <myScreenYPosition>0.0</myScreenYPosition>
+              </myRandomMoveHandler>
+              <myStates>
+                <game__data.states.Physics>
+                  <verticalGravity>0.0</verticalGravity>
+                  <horizontalGravity>0.0</horizontalGravity>
+                </game__data.states.Physics>
+                <game__data.states.Health>
+                  <myHealth>1</myHealth>
+                  <isAlive>true</isAlive>
+                </game__data.states.Health>
+              </myStates>
+            </myConnectedSprite>
+            <myDistanceApart>61.84658438426491</myDistanceApart>
           </myRandomMoveHandler>
           <myStates>
             <game__data.states.Physics>
@@ -558,438 +843,6 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>900.0</myXLocation>
-            <myYLocation>360.0</myYLocation>
-          </myLocation>
-          <myWidth>77</myWidth>
-          <myHeight>17</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>750.0</myXLocation>
-            <myYLocation>1050.0</myYLocation>
-          </myLocation>
-          <myWidth>79</myWidth>
-          <myHeight>40</myHeight>
-          <myImagePath>data/images/sprite_images/doodlejump_trampoline.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler/>
-          <myCharacteristics>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>3000.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>75.0</myXLocation>
-            <myYLocation>880.0</myYLocation>
-          </myLocation>
-          <myWidth>84</myWidth>
-          <myHeight>38</myHeight>
-          <myImagePath>data/images/sprite_images/doodlejump_platformspring.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler/>
-          <myCharacteristics>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>1000.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>900.0</myXLocation>
-            <myYLocation>1220.0</myYLocation>
-          </myLocation>
-          <myWidth>77</myWidth>
-          <myHeight>17</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Enemy>
-          <name>Enemy_Name</name>
-          <myLocation>
-            <myXLocation>66.0</myXLocation>
-            <myYLocation>197.0</myYLocation>
-          </myLocation>
-          <myWidth>75</myWidth>
-          <myHeight>75</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_monster1.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler/>
-          <myCharacteristics>
-            <game__data.characteristics.Breakable>
-              <breakableNorth>true</breakableNorth>
-              <breakableSouth>false</breakableSouth>
-              <breakableEast>false</breakableEast>
-              <breakableWest>false</breakableWest>
-              <myDurability>0</myDurability>
-              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-              <timeSinceHit>20</timeSinceHit>
-            </game__data.characteristics.Breakable>
-            <game__data.characteristics.Damager>
-              <breakableNorth>false</breakableNorth>
-              <breakableSouth>true</breakableSouth>
-              <breakableEast>true</breakableEast>
-              <breakableWest>true</breakableWest>
-              <myDamageToGive>1</myDamageToGive>
-              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-            </game__data.characteristics.Damager>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeedHorizontal>0.0</myBounceSpeedHorizontal>
-              <myBounceSpeedVertical>800.0</myBounceSpeedVertical>
-              <bouncing>false</bouncing>
-              <timeAfterCollisionCount>0</timeAfterCollisionCount>
-            </game__data.characteristics.Bouncer>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Enemy>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>200.0</myXLocation>
-            <myYLocation>800.0</myYLocation>
-          </myLocation>
-          <myWidth>77</myWidth>
-          <myHeight>17</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>200.0</myXLocation>
-            <myYLocation>360.0</myYLocation>
-          </myLocation>
-          <myWidth>77</myWidth>
-          <myHeight>17</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>800.0</myXLocation>
-            <myYLocation>920.0</myYLocation>
-          </myLocation>
-          <myWidth>77</myWidth>
-          <myHeight>17</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
             <myXLocation>100.0</myXLocation>
             <myYLocation>1200.0</myYLocation>
           </myLocation>
@@ -1029,6 +882,58 @@
             <myScreenYPosition>0.0</myScreenYPosition>
           </myRandomMoveHandler>
           <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>75.0</myXLocation>
+            <myYLocation>880.0</myYLocation>
+          </myLocation>
+          <myWidth>84</myWidth>
+          <myHeight>38</myHeight>
+          <myImagePath>data/images/sprite_images/doodlejump_platformspring.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>1000.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
             <game__data.states.Physics>
               <verticalGravity>0.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
@@ -1042,11 +947,167 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>300.0</myXLocation>
-            <myYLocation>400.0</myYLocation>
+            <myXLocation>750.0</myXLocation>
+            <myYLocation>1050.0</myYLocation>
+          </myLocation>
+          <myWidth>79</myWidth>
+          <myHeight>40</myHeight>
+          <myImagePath>data/images/sprite_images/doodlejump_trampoline.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>3000.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>600.0</myXLocation>
+            <myYLocation>760.0</myYLocation>
+          </myLocation>
+          <myWidth>77</myWidth>
+          <myHeight>17</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>200.0</myXLocation>
+            <myYLocation>220.0</myYLocation>
           </myLocation>
           <myWidth>79</myWidth>
           <myHeight>19</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>1220.0</myYLocation>
+          </myLocation>
+          <myWidth>77</myWidth>
+          <myHeight>17</myHeight>
           <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
@@ -1111,10 +1172,6 @@
             <game__data.characteristics.TransparentBottomImpassable>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
             <game__data.characteristics.Pacer>
               <myDistanceNeeded>300.0</myDistanceNeeded>
               <myDistanceTraveled>0.0</myDistanceTraveled>
@@ -1123,6 +1180,10 @@
               <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
               <previousDirection>false</previousDirection>
             </game__data.characteristics.Pacer>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -1154,8 +1215,8 @@
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>503.0</myXLocation>
-            <myYLocation>568.0</myYLocation>
+            <myXLocation>800.0</myXLocation>
+            <myYLocation>100.0</myYLocation>
           </myLocation>
           <myWidth>79</myWidth>
           <myHeight>19</myHeight>
@@ -1185,8 +1246,175 @@
             <isControllable>true</isControllable>
           </myControllable>
           <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveConjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+            <myConnectedSprite class="game_data.sprites.Terrain" reference="../../../game__data.sprites.Terrain[6]"/>
+            <myDistanceApart>180.0</myDistanceApart>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Player reference="../../myMainPlayer"/>
+        <game__data.sprites.Terrain>
+          <name>moving platform</name>
+          <myLocation>
+            <myXLocation>1000.0</myXLocation>
+            <myYLocation>1040.0</myYLocation>
+          </myLocation>
+          <myWidth>79</myWidth>
+          <myHeight>19</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_movingplatform.png</myImagePath>
+          <myXVelocity>100.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain[14]/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.Pacer>
+              <myDistanceNeeded>300.0</myDistanceNeeded>
+              <myDistanceTraveled>0.0</myDistanceTraveled>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <previousNonZeroXVelocity>100.0</previousNonZeroXVelocity>
+              <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+              <previousDirection>false</previousDirection>
+            </game__data.characteristics.Pacer>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
           <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>NULL</myOrientation>
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>360.0</myYLocation>
+          </myLocation>
+          <myWidth>77</myWidth>
+          <myHeight>17</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>900.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>77</myWidth>
+          <myHeight>17</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
             <myScreenWidth>0.0</myScreenWidth>
             <myScreenHeight>0.0</myScreenHeight>
             <myScreenXPosition>0.0</myScreenXPosition>
@@ -1255,12 +1483,63 @@
             </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Terrain>
-        <game__data.sprites.Player reference="../../myMainPlayer"/>
         <game__data.sprites.Terrain>
           <name>Terrain_Name</name>
           <myLocation>
-            <myXLocation>900.0</myXLocation>
-            <myYLocation>500.0</myYLocation>
+            <myXLocation>300.0</myXLocation>
+            <myYLocation>400.0</myYLocation>
+          </myLocation>
+          <myWidth>79</myWidth>
+          <myHeight>19</myHeight>
+          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.TransparentBottomImpassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.TransparentBottomImpassable>
+            <game__data.characteristics.BouncerTop>
+              <myBounceSpeed>700.0</myBounceSpeed>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+            </game__data.characteristics.BouncerTop>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>VERTICAL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>100.0</myXLocation>
+            <myYLocation>1040.0</myYLocation>
           </myLocation>
           <myWidth>77</myWidth>
           <myHeight>17</myHeight>
@@ -1273,58 +1552,6 @@
           <terminalYVel>1600.0</terminalYVel>
           <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>800.0</myXLocation>
-            <myYLocation>100.0</myYLocation>
-          </myLocation>
-          <myWidth>79</myWidth>
-          <myHeight>19</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
             <game__data.characteristics.TransparentBottomImpassable>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.TransparentBottomImpassable>
@@ -1332,225 +1559,6 @@
               <myBounceSpeed>700.0</myBounceSpeed>
               <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
             </game__data.characteristics.BouncerTop>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveConjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-            <myConnectedSprite class="game_data.sprites.Terrain">
-              <name>Terrain_Name</name>
-              <myLocation>
-                <myXLocation>800.0</myXLocation>
-                <myYLocation>280.0</myYLocation>
-              </myLocation>
-              <myWidth>77</myWidth>
-              <myHeight>17</myHeight>
-              <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-              <myXVelocity>0.0</myXVelocity>
-              <myYVelocity>0.0</myYVelocity>
-              <myXAcceleration>0.0</myXAcceleration>
-              <myYAcceleration>0.0</myYAcceleration>
-              <terminalXVel>1600.0</terminalXVel>
-              <terminalYVel>1600.0</terminalYVel>
-              <myCollisionHandler reference="../../../../game__data.sprites.Terrain/myCollisionHandler"/>
-              <myCharacteristics>
-                <game__data.characteristics.TransparentBottomImpassable>
-                  <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-                </game__data.characteristics.TransparentBottomImpassable>
-                <game__data.characteristics.BouncerTop>
-                  <myBounceSpeed>700.0</myBounceSpeed>
-                  <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-                </game__data.characteristics.BouncerTop>
-              </myCharacteristics>
-              <myControllable>
-                <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-                <myKeyPressedMap class="tree-map"/>
-                <myKeyReleasedMap/>
-                <myKeysPressed/>
-                <myKeysReleased/>
-                <isControllable>true</isControllable>
-              </myControllable>
-              <id></id>
-              <myRandomMoveHandler class="game_engine.properties.RandomMoveConjointHandler">
-                <myOrientation>VERTICAL</myOrientation>
-                <myScreenWidth>0.0</myScreenWidth>
-                <myScreenHeight>0.0</myScreenHeight>
-                <myScreenXPosition>0.0</myScreenXPosition>
-                <myScreenYPosition>0.0</myScreenYPosition>
-                <myConnectedSprite class="game_data.sprites.Terrain">
-                  <name>hat</name>
-                  <myLocation>
-                    <myXLocation>857.0</myXLocation>
-                    <myYLocation>256.0</myYLocation>
-                  </myLocation>
-                  <myWidth>36</myWidth>
-                  <myHeight>37</myHeight>
-                  <myImagePath>data/images/sprite_images/doodlejump_spring.png</myImagePath>
-                  <myXVelocity>0.0</myXVelocity>
-                  <myYVelocity>0.0</myYVelocity>
-                  <myXAcceleration>0.0</myXAcceleration>
-                  <myYAcceleration>0.0</myYAcceleration>
-                  <terminalXVel>1600.0</terminalXVel>
-                  <terminalYVel>1600.0</terminalYVel>
-                  <myCollisionHandler/>
-                  <myCharacteristics>
-                    <game__data.characteristics.BouncerTop>
-                      <myBounceSpeed>2000.0</myBounceSpeed>
-                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-                    </game__data.characteristics.BouncerTop>
-                    <game__data.characteristics.TransparentBottomImpassable>
-                      <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-                    </game__data.characteristics.TransparentBottomImpassable>
-                  </myCharacteristics>
-                  <myControllable>
-                    <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-                    <myKeyPressedMap class="tree-map"/>
-                    <myKeyReleasedMap/>
-                    <myKeysPressed/>
-                    <myKeysReleased/>
-                    <isControllable>true</isControllable>
-                  </myControllable>
-                  <id></id>
-                  <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-                    <myOrientation>NULL</myOrientation>
-                    <myScreenWidth>0.0</myScreenWidth>
-                    <myScreenHeight>0.0</myScreenHeight>
-                    <myScreenXPosition>0.0</myScreenXPosition>
-                    <myScreenYPosition>0.0</myScreenYPosition>
-                  </myRandomMoveHandler>
-                  <myStates>
-                    <game__data.states.Health>
-                      <myHealth>1</myHealth>
-                      <isAlive>true</isAlive>
-                    </game__data.states.Health>
-                    <game__data.states.Physics>
-                      <verticalGravity>0.0</verticalGravity>
-                      <horizontalGravity>0.0</horizontalGravity>
-                    </game__data.states.Physics>
-                  </myStates>
-                </myConnectedSprite>
-                <myDistanceApart>61.84658438426491</myDistanceApart>
-              </myRandomMoveHandler>
-              <myStates>
-                <game__data.states.Health>
-                  <myHealth>1</myHealth>
-                  <isAlive>true</isAlive>
-                </game__data.states.Health>
-                <game__data.states.Physics>
-                  <verticalGravity>0.0</verticalGravity>
-                  <horizontalGravity>0.0</horizontalGravity>
-                </game__data.states.Physics>
-              </myStates>
-            </myConnectedSprite>
-            <myDistanceApart>180.0</myDistanceApart>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain>
-          <name>Terrain_Name</name>
-          <myLocation>
-            <myXLocation>200.0</myXLocation>
-            <myYLocation>220.0</myYLocation>
-          </myLocation>
-          <myWidth>79</myWidth>
-          <myHeight>19</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-          <myXVelocity>0.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-          </myCharacteristics>
-          <myControllable>
-            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-            <myKeyPressedMap class="tree-map"/>
-            <myKeyReleasedMap/>
-            <myKeysPressed/>
-            <myKeysReleased/>
-            <isControllable>true</isControllable>
-          </myControllable>
-          <id></id>
-          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-            <myOrientation>VERTICAL</myOrientation>
-            <myScreenWidth>0.0</myScreenWidth>
-            <myScreenHeight>0.0</myScreenHeight>
-            <myScreenXPosition>0.0</myScreenXPosition>
-            <myScreenYPosition>0.0</myScreenYPosition>
-          </myRandomMoveHandler>
-          <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
-            <game__data.states.Health>
-              <myHealth>1</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
-          </myStates>
-        </game__data.sprites.Terrain>
-        <game__data.sprites.Terrain reference="../game__data.sprites.Terrain[18]/myRandomMoveHandler/myConnectedSprite"/>
-        <game__data.sprites.Terrain>
-          <name>moving platform</name>
-          <myLocation>
-            <myXLocation>1000.0</myXLocation>
-            <myYLocation>1040.0</myYLocation>
-          </myLocation>
-          <myWidth>79</myWidth>
-          <myHeight>19</myHeight>
-          <myImagePath>data/images/sprite_images/doodle_jump_movingplatform.png</myImagePath>
-          <myXVelocity>100.0</myXVelocity>
-          <myYVelocity>0.0</myYVelocity>
-          <myXAcceleration>0.0</myXAcceleration>
-          <myYAcceleration>0.0</myYAcceleration>
-          <terminalXVel>1600.0</terminalXVel>
-          <terminalYVel>1600.0</terminalYVel>
-          <myCollisionHandler reference="../../game__data.sprites.Terrain[14]/myCollisionHandler"/>
-          <myCharacteristics>
-            <game__data.characteristics.BouncerTop>
-              <myBounceSpeed>700.0</myBounceSpeed>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.BouncerTop>
-            <game__data.characteristics.TransparentBottomImpassable>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-            </game__data.characteristics.TransparentBottomImpassable>
-            <game__data.characteristics.Pacer>
-              <myDistanceNeeded>300.0</myDistanceNeeded>
-              <myDistanceTraveled>0.0</myDistanceTraveled>
-              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-              <previousNonZeroXVelocity>100.0</previousNonZeroXVelocity>
-              <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
-              <previousDirection>false</previousDirection>
-            </game__data.characteristics.Pacer>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -1582,86 +1590,34 @@
       </mySprites>
       <myControllableSpriteList>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[14]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[10]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[18]/myRandomMoveHandler/myConnectedSprite"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[19]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[15]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[17]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[18]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[9]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[11]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[3]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[4]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[21]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[12]"/>
-        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy[2]"/>
-        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy"/>
-        <game__data.sprites.Player reference="../../myMainPlayer"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[8]"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[5]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[13]"/>
-        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[16]"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[6]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[12]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[3]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[18]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[15]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[4]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[11]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[21]"/>
         <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[7]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[16]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[8]"/>
+        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy"/>
+        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy[2]"/>
+        <game__data.sprites.Player reference="../../myMainPlayer"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[13]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[17]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[20]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[19]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[10]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[9]"/>
       </myControllableSpriteList>
       <myKeyCommands/>
     </game__data.Level>
   </myLevels>
   <mySpritePresets>
-    <game__data.sprites.Terrain>
-      <name>hat</name>
-      <myLocation>
-        <myXLocation>0.0</myXLocation>
-        <myYLocation>0.0</myYLocation>
-      </myLocation>
-      <myWidth>100</myWidth>
-      <myHeight>100</myHeight>
-      <myImagePath>data/images/sprite_images/doodlejump_spring.png</myImagePath>
-      <myXVelocity>0.0</myXVelocity>
-      <myYVelocity>0.0</myYVelocity>
-      <myXAcceleration>0.0</myXAcceleration>
-      <myYAcceleration>0.0</myYAcceleration>
-      <terminalXVel>1600.0</terminalXVel>
-      <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[18]/myRandomMoveHandler/myConnectedSprite/myRandomMoveHandler/myConnectedSprite/myCollisionHandler"/>
-      <myCharacteristics>
-        <game__data.characteristics.BouncerTop>
-          <myBounceSpeed>800.0</myBounceSpeed>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.BouncerTop>
-        <game__data.characteristics.TransparentBottomImpassable>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.TransparentBottomImpassable>
-      </myCharacteristics>
-      <myControllable>
-        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-        <myKeyPressedMap class="tree-map"/>
-        <myKeyReleasedMap/>
-        <myKeysPressed/>
-        <myKeysReleased/>
-        <isControllable>true</isControllable>
-      </myControllable>
-      <id>ConcreteDraggableSprite1481593928608</id>
-      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-        <myOrientation>NULL</myOrientation>
-        <myScreenWidth>0.0</myScreenWidth>
-        <myScreenHeight>0.0</myScreenHeight>
-        <myScreenXPosition>0.0</myScreenXPosition>
-        <myScreenYPosition>0.0</myScreenYPosition>
-      </myRandomMoveHandler>
-      <myStates>
-        <game__data.states.Health>
-          <myHealth>1</myHealth>
-          <isAlive>true</isAlive>
-        </game__data.states.Health>
-        <game__data.states.Physics>
-          <verticalGravity>0.0</verticalGravity>
-          <horizontalGravity>0.0</horizontalGravity>
-        </game__data.states.Physics>
-      </myStates>
-    </game__data.sprites.Terrain>
     <game__data.sprites.Terrain>
       <name>Terrain_Name</name>
       <myLocation>
@@ -1669,23 +1625,23 @@
         <myYLocation>0.0</myYLocation>
       </myLocation>
       <myWidth>75</myWidth>
-      <myHeight>50</myHeight>
-      <myImagePath>data/images/sprite_images/doodlejump_trampoline.png</myImagePath>
+      <myHeight>40</myHeight>
+      <myImagePath>data/images/sprite_images/doodlejump_platformspring.png</myImagePath>
       <myXVelocity>0.0</myXVelocity>
       <myYVelocity>0.0</myYVelocity>
       <myXAcceleration>0.0</myXAcceleration>
       <myYAcceleration>0.0</myYAcceleration>
       <terminalXVel>1600.0</terminalXVel>
       <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[6]/myCollisionHandler"/>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[9]/myCollisionHandler"/>
       <myCharacteristics>
-        <game__data.characteristics.BouncerTop>
-          <myBounceSpeed>3000.0</myBounceSpeed>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.BouncerTop>
         <game__data.characteristics.TransparentBottomImpassable>
           <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
         </game__data.characteristics.TransparentBottomImpassable>
+        <game__data.characteristics.BouncerTop>
+          <myBounceSpeed>2000.0</myBounceSpeed>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.BouncerTop>
       </myCharacteristics>
       <myControllable>
         <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -1695,180 +1651,7 @@
         <myKeysReleased/>
         <isControllable>true</isControllable>
       </myControllable>
-      <id>ConcreteDraggableSprite1481664784707</id>
-      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-        <myOrientation>NULL</myOrientation>
-        <myScreenWidth>0.0</myScreenWidth>
-        <myScreenHeight>0.0</myScreenHeight>
-        <myScreenXPosition>0.0</myScreenXPosition>
-        <myScreenYPosition>0.0</myScreenYPosition>
-      </myRandomMoveHandler>
-      <myStates>
-        <game__data.states.Physics>
-          <verticalGravity>0.0</verticalGravity>
-          <horizontalGravity>0.0</horizontalGravity>
-        </game__data.states.Physics>
-        <game__data.states.Health>
-          <myHealth>1</myHealth>
-          <isAlive>true</isAlive>
-        </game__data.states.Health>
-      </myStates>
-    </game__data.sprites.Terrain>
-    <game__data.sprites.Projectile>
-      <name>Projectile_Name</name>
-      <myLocation>
-        <myXLocation>0.0</myXLocation>
-        <myYLocation>0.0</myYLocation>
-      </myLocation>
-      <myWidth>10</myWidth>
-      <myHeight>10</myHeight>
-      <myImagePath>data/images/sprite_images/Bullet_Bill_SMW_SNES_Sprite_Right.png</myImagePath>
-      <myXVelocity>0.0</myXVelocity>
-      <myYVelocity>0.0</myYVelocity>
-      <myXAcceleration>0.0</myXAcceleration>
-      <myYAcceleration>0.0</myYAcceleration>
-      <terminalXVel>1600.0</terminalXVel>
-      <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler/>
-      <myCharacteristics>
-        <game__data.characteristics.Breakable>
-          <breakableNorth>true</breakableNorth>
-          <breakableSouth>true</breakableSouth>
-          <breakableEast>true</breakableEast>
-          <breakableWest>true</breakableWest>
-          <myDurability>1</myDurability>
-          <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
-          <timeSinceHit>20</timeSinceHit>
-        </game__data.characteristics.Breakable>
-        <game__data.characteristics.Damager>
-          <breakableNorth>true</breakableNorth>
-          <breakableSouth>true</breakableSouth>
-          <breakableEast>true</breakableEast>
-          <breakableWest>true</breakableWest>
-          <myDamageToGive>1</myDamageToGive>
-          <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
-        </game__data.characteristics.Damager>
-      </myCharacteristics>
-      <myControllable>
-        <myKeyPressedMap/>
-        <myKeyReleasedMap/>
-        <myKeysPressed/>
-        <myKeysReleased/>
-        <isControllable>false</isControllable>
-      </myControllable>
-      <id></id>
-      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-        <myOrientation>NULL</myOrientation>
-        <myScreenWidth>0.0</myScreenWidth>
-        <myScreenHeight>0.0</myScreenHeight>
-        <myScreenXPosition>0.0</myScreenXPosition>
-        <myScreenYPosition>0.0</myScreenYPosition>
-      </myRandomMoveHandler>
-      <myStates>
-        <game__data.states.Physics>
-          <verticalGravity>0.0</verticalGravity>
-          <horizontalGravity>0.0</horizontalGravity>
-        </game__data.states.Physics>
-        <game__data.states.Health>
-          <myHealth>1</myHealth>
-          <isAlive>true</isAlive>
-        </game__data.states.Health>
-      </myStates>
-    </game__data.sprites.Projectile>
-    <game__data.sprites.Terrain>
-      <name>Terrain_Name</name>
-      <myLocation>
-        <myXLocation>0.0</myXLocation>
-        <myYLocation>0.0</myYLocation>
-      </myLocation>
-      <myWidth>100</myWidth>
-      <myHeight>20</myHeight>
-      <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
-      <myXVelocity>0.0</myXVelocity>
-      <myYVelocity>0.0</myYVelocity>
-      <myXAcceleration>0.0</myXAcceleration>
-      <myYAcceleration>0.0</myYAcceleration>
-      <terminalXVel>1600.0</terminalXVel>
-      <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/myCollisionHandler"/>
-      <myCharacteristics>
-        <game__data.characteristics.BouncerTop>
-          <myBounceSpeed>600.0</myBounceSpeed>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.BouncerTop>
-        <game__data.characteristics.TransparentBottomImpassable>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.TransparentBottomImpassable>
-      </myCharacteristics>
-      <myControllable>
-        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-        <myKeyPressedMap class="tree-map"/>
-        <myKeyReleasedMap/>
-        <myKeysPressed/>
-        <myKeysReleased/>
-        <isControllable>true</isControllable>
-      </myControllable>
-      <id>ConcreteDraggableSprite1481595950704</id>
-      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-        <myOrientation>NULL</myOrientation>
-        <myScreenWidth>0.0</myScreenWidth>
-        <myScreenHeight>0.0</myScreenHeight>
-        <myScreenXPosition>0.0</myScreenXPosition>
-        <myScreenYPosition>0.0</myScreenYPosition>
-      </myRandomMoveHandler>
-      <myStates>
-        <game__data.states.Physics>
-          <verticalGravity>0.0</verticalGravity>
-          <horizontalGravity>0.0</horizontalGravity>
-        </game__data.states.Physics>
-        <game__data.states.Health>
-          <myHealth>1</myHealth>
-          <isAlive>true</isAlive>
-        </game__data.states.Health>
-      </myStates>
-    </game__data.sprites.Terrain>
-    <game__data.sprites.Terrain>
-      <name>moving platform</name>
-      <myLocation>
-        <myXLocation>0.0</myXLocation>
-        <myYLocation>0.0</myYLocation>
-      </myLocation>
-      <myWidth>100</myWidth>
-      <myHeight>20</myHeight>
-      <myImagePath>data/images/sprite_images/doodle_jump_movingplatform.png</myImagePath>
-      <myXVelocity>100.0</myXVelocity>
-      <myYVelocity>0.0</myYVelocity>
-      <myXAcceleration>0.0</myXAcceleration>
-      <myYAcceleration>0.0</myYAcceleration>
-      <terminalXVel>1600.0</terminalXVel>
-      <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[14]/myCollisionHandler"/>
-      <myCharacteristics>
-        <game__data.characteristics.TransparentBottomImpassable>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.TransparentBottomImpassable>
-        <game__data.characteristics.BouncerTop>
-          <myBounceSpeed>600.0</myBounceSpeed>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.BouncerTop>
-        <game__data.characteristics.Pacer>
-          <myDistanceNeeded>300.0</myDistanceNeeded>
-          <myDistanceTraveled>0.0</myDistanceTraveled>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-          <previousNonZeroXVelocity>100.0</previousNonZeroXVelocity>
-          <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
-          <previousDirection>false</previousDirection>
-        </game__data.characteristics.Pacer>
-      </myCharacteristics>
-      <myControllable>
-        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
-        <myKeyPressedMap class="tree-map"/>
-        <myKeyReleasedMap/>
-        <myKeysPressed/>
-        <myKeysReleased/>
-        <isControllable>true</isControllable>
-      </myControllable>
-      <id>ConcreteDraggableSprite1481593886674</id>
+      <id>ConcreteDraggableSprite1481664818855</id>
       <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
         <myOrientation>NULL</myOrientation>
         <myScreenWidth>0.0</myScreenWidth>
@@ -1904,15 +1687,15 @@
       <terminalYVel>1600.0</terminalYVel>
       <myCollisionHandler reference="../../../myLevels/game__data.Level/myMainPlayer/myCollisionHandler"/>
       <myCharacteristics>
+        <game__data.characteristics.ScoreBasedOnTime>
+          <mySprite class="game_data.sprites.Player" reference="../../.."/>
+          <scorePerSecond>0.03</scorePerSecond>
+        </game__data.characteristics.ScoreBasedOnTime>
         <game__data.characteristics.Launcher>
           <mySprite class="game_data.sprites.Player" reference="../../.."/>
           <myTimeInterval>500</myTimeInterval>
           <myCurrentTime>0</myCurrentTime>
         </game__data.characteristics.Launcher>
-        <game__data.characteristics.ScoreBasedOnTime>
-          <mySprite class="game_data.sprites.Player" reference="../../.."/>
-          <scorePerSecond>0.03</scorePerSecond>
-        </game__data.characteristics.ScoreBasedOnTime>
       </myCharacteristics>
       <myControllable>
         <mySprite class="game_data.sprites.Player" reference="../.."/>
@@ -1951,6 +1734,14 @@
                       <terminalYVel>1600.0</terminalYVel>
                       <myCollisionHandler/>
                       <myCharacteristics>
+                        <game__data.characteristics.Damager>
+                          <breakableNorth>true</breakableNorth>
+                          <breakableSouth>true</breakableSouth>
+                          <breakableEast>true</breakableEast>
+                          <breakableWest>true</breakableWest>
+                          <myDamageToGive>1</myDamageToGive>
+                          <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
+                        </game__data.characteristics.Damager>
                         <game__data.characteristics.Breakable>
                           <breakableNorth>true</breakableNorth>
                           <breakableSouth>true</breakableSouth>
@@ -1960,14 +1751,6 @@
                           <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
                           <timeSinceHit>20</timeSinceHit>
                         </game__data.characteristics.Breakable>
-                        <game__data.characteristics.Damager>
-                          <breakableNorth>true</breakableNorth>
-                          <breakableSouth>true</breakableSouth>
-                          <breakableEast>true</breakableEast>
-                          <breakableWest>true</breakableWest>
-                          <myDamageToGive>1</myDamageToGive>
-                          <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
-                        </game__data.characteristics.Damager>
                       </myCharacteristics>
                       <myControllable>
                         <myKeyPressedMap/>
@@ -1985,14 +1768,14 @@
                         <myScreenYPosition>0.0</myScreenYPosition>
                       </myRandomMoveHandler>
                       <myStates>
-                        <game__data.states.Health>
-                          <myHealth>1</myHealth>
-                          <isAlive>true</isAlive>
-                        </game__data.states.Health>
                         <game__data.states.Physics>
                           <verticalGravity>0.0</verticalGravity>
                           <horizontalGravity>0.0</horizontalGravity>
                         </game__data.states.Physics>
+                        <game__data.states.Health>
+                          <myHealth>1</myHealth>
+                          <isAlive>true</isAlive>
+                        </game__data.states.Health>
                       </myStates>
                     </preset>
                     <myWidth>10</myWidth>
@@ -2061,14 +1844,6 @@
                   <terminalYVel>1600.0</terminalYVel>
                   <myCollisionHandler reference="../preset/preset/myCollisionHandler"/>
                   <myCharacteristics>
-                    <game__data.characteristics.Damager>
-                      <breakableNorth>true</breakableNorth>
-                      <breakableSouth>true</breakableSouth>
-                      <breakableEast>true</breakableEast>
-                      <breakableWest>true</breakableWest>
-                      <myDamageToGive>1</myDamageToGive>
-                      <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
-                    </game__data.characteristics.Damager>
                     <game__data.characteristics.Breakable>
                       <breakableNorth>true</breakableNorth>
                       <breakableSouth>true</breakableSouth>
@@ -2078,6 +1853,14 @@
                       <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
                       <timeSinceHit>20</timeSinceHit>
                     </game__data.characteristics.Breakable>
+                    <game__data.characteristics.Damager>
+                      <breakableNorth>true</breakableNorth>
+                      <breakableSouth>true</breakableSouth>
+                      <breakableEast>true</breakableEast>
+                      <breakableWest>true</breakableWest>
+                      <myDamageToGive>1</myDamageToGive>
+                      <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
+                    </game__data.characteristics.Damager>
                   </myCharacteristics>
                   <myControllable reference="../preset/myControllable"/>
                   <id></id>
@@ -2144,22 +1927,266 @@
         <myScreenYPosition>0.0</myScreenYPosition>
       </myRandomMoveHandler>
       <myStates>
+        <game__data.states.Score>
+          <myScore>0.0</myScore>
+        </game__data.states.Score>
+        <game__data.states.LevelWon>
+          <hasWon>false</hasWon>
+        </game__data.states.LevelWon>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
         <game__data.states.Physics>
           <verticalGravity>800.0</verticalGravity>
           <horizontalGravity>0.0</horizontalGravity>
         </game__data.states.Physics>
-        <game__data.states.LevelWon>
-          <hasWon>false</hasWon>
-        </game__data.states.LevelWon>
-        <game__data.states.Score>
-          <myScore>0.0</myScore>
-        </game__data.states.Score>
+      </myStates>
+    </game__data.sprites.Player>
+    <game__data.sprites.Terrain>
+      <name>Terrain_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>20</myHeight>
+      <myImagePath>data/images/sprite_images/doodle_jump_platform.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.TransparentBottomImpassable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.TransparentBottomImpassable>
+        <game__data.characteristics.BouncerTop>
+          <myBounceSpeed>600.0</myBounceSpeed>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.BouncerTop>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481595950704</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
         <game__data.states.Health>
           <myHealth>1</myHealth>
           <isAlive>true</isAlive>
         </game__data.states.Health>
       </myStates>
-    </game__data.sprites.Player>
+    </game__data.sprites.Terrain>
+    <game__data.sprites.Enemy>
+      <name>Enemy_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/doodle_jump_monster2.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy[2]/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Breakable>
+          <breakableNorth>true</breakableNorth>
+          <breakableSouth>false</breakableSouth>
+          <breakableEast>false</breakableEast>
+          <breakableWest>false</breakableWest>
+          <myDurability>0</myDurability>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <timeSinceHit>20</timeSinceHit>
+        </game__data.characteristics.Breakable>
+        <game__data.characteristics.Damager>
+          <breakableNorth>false</breakableNorth>
+          <breakableSouth>true</breakableSouth>
+          <breakableEast>true</breakableEast>
+          <breakableWest>true</breakableWest>
+          <myDamageToGive>1</myDamageToGive>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+        </game__data.characteristics.Damager>
+        <game__data.characteristics.Impassable>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <movesThroughBottom>false</movesThroughBottom>
+        </game__data.characteristics.Impassable>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481593899210</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>800.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Enemy>
+    <game__data.sprites.Terrain>
+      <name>moving platform</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>20</myHeight>
+      <myImagePath>data/images/sprite_images/doodle_jump_movingplatform.png</myImagePath>
+      <myXVelocity>100.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[14]/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.TransparentBottomImpassable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.TransparentBottomImpassable>
+        <game__data.characteristics.BouncerTop>
+          <myBounceSpeed>600.0</myBounceSpeed>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.BouncerTop>
+        <game__data.characteristics.Pacer>
+          <myDistanceNeeded>300.0</myDistanceNeeded>
+          <myDistanceTraveled>0.0</myDistanceTraveled>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+          <previousNonZeroXVelocity>100.0</previousNonZeroXVelocity>
+          <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+          <previousDirection>false</previousDirection>
+        </game__data.characteristics.Pacer>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481593886674</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Terrain>
+    <game__data.sprites.Enemy>
+      <name>Enemy_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/doodle_jump_monster1.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Impassable>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <movesThroughBottom>false</movesThroughBottom>
+        </game__data.characteristics.Impassable>
+        <game__data.characteristics.Breakable>
+          <breakableNorth>true</breakableNorth>
+          <breakableSouth>false</breakableSouth>
+          <breakableEast>false</breakableEast>
+          <breakableWest>false</breakableWest>
+          <myDurability>0</myDurability>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <timeSinceHit>20</timeSinceHit>
+        </game__data.characteristics.Breakable>
+        <game__data.characteristics.Damager>
+          <breakableNorth>false</breakableNorth>
+          <breakableSouth>true</breakableSouth>
+          <breakableEast>true</breakableEast>
+          <breakableWest>true</breakableWest>
+          <myDamageToGive>1</myDamageToGive>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+        </game__data.characteristics.Damager>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481593895423</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>800.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Enemy>
     <game__data.sprites.Terrain>
       <name>Terrain_Name</name>
       <myLocation>
@@ -2217,72 +2244,6 @@
         </game__data.states.Health>
       </myStates>
     </game__data.sprites.Terrain>
-    <game__data.sprites.Enemy>
-      <name>Enemy_Name</name>
-      <myLocation>
-        <myXLocation>0.0</myXLocation>
-        <myYLocation>0.0</myYLocation>
-      </myLocation>
-      <myWidth>100</myWidth>
-      <myHeight>100</myHeight>
-      <myImagePath>data/images/sprite_images/doodle_jump_monster2.png</myImagePath>
-      <myXVelocity>0.0</myXVelocity>
-      <myYVelocity>0.0</myYVelocity>
-      <myXAcceleration>0.0</myXAcceleration>
-      <myYAcceleration>0.0</myYAcceleration>
-      <terminalXVel>1600.0</terminalXVel>
-      <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy/myCollisionHandler"/>
-      <myCharacteristics>
-        <game__data.characteristics.Damager>
-          <breakableNorth>false</breakableNorth>
-          <breakableSouth>true</breakableSouth>
-          <breakableEast>true</breakableEast>
-          <breakableWest>true</breakableWest>
-          <myDamageToGive>1</myDamageToGive>
-          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-        </game__data.characteristics.Damager>
-        <game__data.characteristics.Impassable>
-          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-          <movesThroughBottom>false</movesThroughBottom>
-        </game__data.characteristics.Impassable>
-        <game__data.characteristics.Breakable>
-          <breakableNorth>true</breakableNorth>
-          <breakableSouth>false</breakableSouth>
-          <breakableEast>false</breakableEast>
-          <breakableWest>false</breakableWest>
-          <myDurability>0</myDurability>
-          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-          <timeSinceHit>20</timeSinceHit>
-        </game__data.characteristics.Breakable>
-      </myCharacteristics>
-      <myControllable>
-        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
-        <myKeyPressedMap class="tree-map"/>
-        <myKeyReleasedMap/>
-        <myKeysPressed/>
-        <myKeysReleased/>
-        <isControllable>true</isControllable>
-      </myControllable>
-      <id>ConcreteDraggableSprite1481593899210</id>
-      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
-        <myOrientation>NULL</myOrientation>
-        <myScreenWidth>0.0</myScreenWidth>
-        <myScreenHeight>0.0</myScreenHeight>
-        <myScreenXPosition>0.0</myScreenXPosition>
-        <myScreenYPosition>0.0</myScreenYPosition>
-      </myRandomMoveHandler>
-      <myStates>
-        <game__data.states.Physics>
-          <verticalGravity>800.0</verticalGravity>
-          <horizontalGravity>0.0</horizontalGravity>
-        </game__data.states.Physics>
-        <game__data.states.Health>
-          <myHealth>1</myHealth>
-          <isAlive>true</isAlive>
-        </game__data.states.Health>
-      </myStates>
-    </game__data.sprites.Enemy>
     <game__data.sprites.Terrain>
       <name>Terrain_Name</name>
       <myLocation>
@@ -2290,21 +2251,21 @@
         <myYLocation>0.0</myYLocation>
       </myLocation>
       <myWidth>75</myWidth>
-      <myHeight>40</myHeight>
-      <myImagePath>data/images/sprite_images/doodlejump_platformspring.png</myImagePath>
+      <myHeight>50</myHeight>
+      <myImagePath>data/images/sprite_images/doodlejump_trampoline.png</myImagePath>
       <myXVelocity>0.0</myXVelocity>
       <myYVelocity>0.0</myYVelocity>
       <myXAcceleration>0.0</myXAcceleration>
       <myYAcceleration>0.0</myYAcceleration>
       <terminalXVel>1600.0</terminalXVel>
       <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[7]/myCollisionHandler"/>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[10]/myCollisionHandler"/>
       <myCharacteristics>
         <game__data.characteristics.TransparentBottomImpassable>
           <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
         </game__data.characteristics.TransparentBottomImpassable>
         <game__data.characteristics.BouncerTop>
-          <myBounceSpeed>2000.0</myBounceSpeed>
+          <myBounceSpeed>3000.0</myBounceSpeed>
           <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
         </game__data.characteristics.BouncerTop>
       </myCharacteristics>
@@ -2316,7 +2277,7 @@
         <myKeysReleased/>
         <isControllable>true</isControllable>
       </myControllable>
-      <id>ConcreteDraggableSprite1481664818855</id>
+      <id>ConcreteDraggableSprite1481664784707</id>
       <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
         <myOrientation>NULL</myOrientation>
         <myScreenWidth>0.0</myScreenWidth>
@@ -2350,15 +2311,15 @@
       <myYAcceleration>0.0</myYAcceleration>
       <terminalXVel>1600.0</terminalXVel>
       <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[4]/myRandomMoveHandler/myConnectedSprite/myCollisionHandler"/>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[7]/myRandomMoveHandler/myConnectedSprite/myCollisionHandler"/>
       <myCharacteristics>
+        <game__data.characteristics.TransparentBottomImpassable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.TransparentBottomImpassable>
         <game__data.characteristics.BouncerTop>
           <myBounceSpeed>2000.0</myBounceSpeed>
           <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
         </game__data.characteristics.BouncerTop>
-        <game__data.characteristics.TransparentBottomImpassable>
-          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
-        </game__data.characteristics.TransparentBottomImpassable>
       </myCharacteristics>
       <myControllable>
         <mySprite class="game_data.sprites.Terrain" reference="../.."/>
@@ -2377,6 +2338,58 @@
         <myScreenYPosition>0.0</myScreenYPosition>
       </myRandomMoveHandler>
       <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Terrain>
+    <game__data.sprites.Terrain>
+      <name>hat</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/doodlejump_spring.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain[6]/myRandomMoveHandler/myConnectedSprite/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.BouncerTop>
+          <myBounceSpeed>800.0</myBounceSpeed>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.BouncerTop>
+        <game__data.characteristics.TransparentBottomImpassable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+        </game__data.characteristics.TransparentBottomImpassable>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481593928608</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
         <game__data.states.Health>
           <myHealth>1</myHealth>
           <isAlive>true</isAlive>
@@ -2387,54 +2400,49 @@
         </game__data.states.Physics>
       </myStates>
     </game__data.sprites.Terrain>
-    <game__data.sprites.Enemy>
-      <name>Enemy_Name</name>
+    <game__data.sprites.Projectile>
+      <name>Projectile_Name</name>
       <myLocation>
         <myXLocation>0.0</myXLocation>
         <myYLocation>0.0</myYLocation>
       </myLocation>
-      <myWidth>100</myWidth>
-      <myHeight>100</myHeight>
-      <myImagePath>data/images/sprite_images/doodle_jump_monster1.png</myImagePath>
+      <myWidth>10</myWidth>
+      <myHeight>10</myHeight>
+      <myImagePath>data/images/sprite_images/Bullet_Bill_SMW_SNES_Sprite_Right.png</myImagePath>
       <myXVelocity>0.0</myXVelocity>
       <myYVelocity>0.0</myYVelocity>
       <myXAcceleration>0.0</myXAcceleration>
       <myYAcceleration>0.0</myYAcceleration>
       <terminalXVel>1600.0</terminalXVel>
       <terminalYVel>1600.0</terminalYVel>
-      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy[2]/myCollisionHandler"/>
+      <myCollisionHandler/>
       <myCharacteristics>
-        <game__data.characteristics.Impassable>
-          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-          <movesThroughBottom>false</movesThroughBottom>
-        </game__data.characteristics.Impassable>
+        <game__data.characteristics.Breakable>
+          <breakableNorth>true</breakableNorth>
+          <breakableSouth>true</breakableSouth>
+          <breakableEast>true</breakableEast>
+          <breakableWest>true</breakableWest>
+          <myDurability>1</myDurability>
+          <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
+          <timeSinceHit>20</timeSinceHit>
+        </game__data.characteristics.Breakable>
         <game__data.characteristics.Damager>
-          <breakableNorth>false</breakableNorth>
+          <breakableNorth>true</breakableNorth>
           <breakableSouth>true</breakableSouth>
           <breakableEast>true</breakableEast>
           <breakableWest>true</breakableWest>
           <myDamageToGive>1</myDamageToGive>
-          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <mySprite class="game_data.sprites.Projectile" reference="../../.."/>
         </game__data.characteristics.Damager>
-        <game__data.characteristics.Breakable>
-          <breakableNorth>true</breakableNorth>
-          <breakableSouth>false</breakableSouth>
-          <breakableEast>false</breakableEast>
-          <breakableWest>false</breakableWest>
-          <myDurability>0</myDurability>
-          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
-          <timeSinceHit>20</timeSinceHit>
-        </game__data.characteristics.Breakable>
       </myCharacteristics>
       <myControllable>
-        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
-        <myKeyPressedMap class="tree-map"/>
+        <myKeyPressedMap/>
         <myKeyReleasedMap/>
         <myKeysPressed/>
         <myKeysReleased/>
-        <isControllable>true</isControllable>
+        <isControllable>false</isControllable>
       </myControllable>
-      <id>ConcreteDraggableSprite1481593895423</id>
+      <id></id>
       <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
         <myOrientation>NULL</myOrientation>
         <myScreenWidth>0.0</myScreenWidth>
@@ -2444,7 +2452,7 @@
       </myRandomMoveHandler>
       <myStates>
         <game__data.states.Physics>
-          <verticalGravity>800.0</verticalGravity>
+          <verticalGravity>0.0</verticalGravity>
           <horizontalGravity>0.0</horizontalGravity>
         </game__data.states.Physics>
         <game__data.states.Health>
@@ -2452,7 +2460,7 @@
           <isAlive>true</isAlive>
         </game__data.states.Health>
       </myStates>
-    </game__data.sprites.Enemy>
+    </game__data.sprites.Projectile>
   </mySpritePresets>
   <myCurrentLevel reference="../myLevels/game__data.Level"/>
   <myDescription>Example of vertical scrolling, random generation and infinite level!</myDescription>
