@@ -75,7 +75,6 @@ public abstract class AbstractController {
 		}
 		return hm;
 	}
-	
 
 	protected void showError(Exception x) {
 		ErrorAlert ea = new ErrorAlert();

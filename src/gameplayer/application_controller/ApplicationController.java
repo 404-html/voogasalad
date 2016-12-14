@@ -77,19 +77,17 @@ public class ApplicationController extends AbstractController {
 		}, e -> {
 			displayUserScene();
 		}, e-> {
-			myCurrentDisplay.setBackground(getButtonLabels().getString("Shirt" + (int) Math.floor(Math.random() * 6)), getStage().getWidth(), getStage().getHeight());
+			myCurrentDisplay.setBackground(getButtonLabels().getString("Shirt" + (int) Math.floor(Math.random() * 6)), getStage().getScene().getWidth(), getStage().getScene().getHeight());
 		});
 	}
 
 	/**
-	 * 
 	 * @param aGamename is used to determine which set of highscores to get
 	 */
 	public void displayHighScoreScene(String aGamename) {
-		IDisplay highScore = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getScene().getWidth(), getStage().getScene().getHeight(), aGamename);
-		createNavigationButtons((INavigationDisplay) highScore);
-		resetStage(highScore);
-		//setHighScoreHandlers((INavigationDisplay) highScore);
+		myCurrentDisplay = getSceneFactory().create(SceneIdentifier.HIGHSCORE, getStage().getScene().getWidth(), getStage().getScene().getHeight(), aGamename);
+		createNavigationButtons((INavigationDisplay) myCurrentDisplay);
+		resetStage(myCurrentDisplay);
 	}
 
 	private void displayGameChoiceRoundTwo(String aGamename) {
@@ -115,28 +113,30 @@ public class ApplicationController extends AbstractController {
 
 	private void setGameChoiceButtonHandlers(INavigationDisplay gameChoice, String aLabel) {
 		gameChoice.addNode(getGUIGenerator().createComboBox(aLabel, myStoredGames.getGames(), 
-				myStoredGames.getIcons(), myStoredGames.getDescriptions(), getStage().getScene().getWidth(), (aChoice) -> {
-					try {
-						resetGame(myStoredGames.getGameFilePath(aChoice));
-						displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
-					} catch (Exception x) {
-						showError(x);
-						displayGameChoice();
-					}
-					getUserPreferences();
+				myStoredGames.getIcons(), myStoredGames.getDescriptions(), getStage().getScene().getWidth(), (chosenGame) -> {
+					handleNewGameFile(myStoredGames.getGameFilePath(chosenGame));
 				}));
 		gameChoice.addButton(getButtonLabels().getString("Load"), e -> {
 			File chosenGame = new FileChoiceController().show(getStage());
 			if (chosenGame != null) {
-				try {
-					resetGame(chosenGame);
-					displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
-				} catch (Exception x) {
-					showError(x);
-				}
-				getUserPreferences();
+				handleNewGameFile(chosenGame);
 			}
 		}, ButtonDisplay.TEXT); 
+	}
+
+	private void handleNewGameFile(File chosenGame) {
+		startEngine(chosenGame);
+		getUserPreferences();
+	}
+
+	private void startEngine(File chosenGame) {
+		try {
+			resetGame(chosenGame);
+			displayGameChoiceRoundTwo(myGamePlay.getGame().getName());
+		} catch (Exception x) {
+			showError(x);
+			displayGameChoice();
+		}
 	}
 
 	private void getUserPreferences() {
@@ -144,7 +144,7 @@ public class ApplicationController extends AbstractController {
 			getOptions();
 			getLevel();
 		} catch (Exception x) {
-			//do nothing
+			//do nothing, the user hasn't set preferences or chosen a level
 		}
 	}
 
@@ -190,22 +190,21 @@ public class ApplicationController extends AbstractController {
 			try {
 				myGamePlay.displayGame();
 			} catch (Exception e1) {
-				showError(new GameNotFunctionalException("Your game had trouble loading, please try again"));
+				showError(e1);
 			}
 		}, ButtonDisplay.TEXT);
 	}
 
+	private void resetGame(File chosenGame) throws GameNotFunctionalException {
+		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
+	}
+	
 	/**
-	 *
 	 * @param aTitle is the message title
 	 * @param aMessage is the message for the post
 	 */
 
 	public void publishToFacebook(String aTitle, String aMessage) throws VoogaFacebookException {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
-	}
-
-	private void resetGame(File chosenGame) throws Exception {
-		myGamePlay = new GamePlayController(getStage(), chosenGame, this, getPlayerInformationController());
 	}
 }

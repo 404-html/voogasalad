@@ -44,7 +44,7 @@ public class GamePlayController extends AbstractController {
 	private Health myHealth;
 	private int myLevel;
 
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aInfoController) throws Exception {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aInfoController) throws GameNotFunctionalException {
 		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
@@ -55,16 +55,20 @@ public class GamePlayController extends AbstractController {
 		initializeEngineComponents(0);
 	}
 
-	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) throws Exception {
+	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aPlayerController, UserOptions aOptions) throws GameNotFunctionalException {
 		this(aStage, aFile, aAppController, aPlayerController); 
 		myUserOptions = aOptions;
 		myKeyCodeHandler = new KeyCodeHandler(aOptions.getMyKeyInput());
 	}
 
-	String initializeEngineComponents(int aLevel) throws Exception {
-		myGameEngine = new GameEngine(myGameFile, aLevel);
-		myGameController = myGameEngine.getMyEnginePlayerController();
-		myGameUpdater = new UpdateGame(myGameController.getMyGame());
+	protected String initializeEngineComponents(int aLevel) throws GameNotFunctionalException {
+		try {
+			myGameEngine = new GameEngine(myGameFile, aLevel);
+			myGameController = myGameEngine.getMyEnginePlayerController();
+			myGameUpdater = new UpdateGame(myGameController.getMyGame());
+		} catch (Exception e) {
+			throw new GameNotFunctionalException(e.getMessage() + getButtonLabels().getString("GameNotFunctionalException"));
+		}
 		return myGameController.getMyGame().getName();
 	}
 
@@ -78,13 +82,13 @@ public class GamePlayController extends AbstractController {
 	/**
 	 * Displays the currently set up game
 	 */
-	public void displayGame() throws Exception {
+	public void displayGame() throws GameNotFunctionalException {
 		initializeScene(myUserOptions);
 		setMenu();
 		try {
 			updateSprites();
 		} catch (Exception e) {
-			throw new GameNotFunctionalException();
+			throw new GameNotFunctionalException(getButtonLabels().getString("GameNotFunctionalException"));
 		}
 		myKeyCodeHandler.addMainPlayer(mySpriteDisplay.getMainPlayer());
 		initializeAnimation();

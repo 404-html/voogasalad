@@ -13,9 +13,10 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 
 	private String myCurrentKeyChoice;
 	private String myCurrentColorChoice;
-
+	
 	public PlayerOptionsPopUp() {
 		super();
+
 		addOptions();
 	}
 
@@ -64,10 +65,10 @@ public class PlayerOptionsPopUp extends AbstractPopUp implements IPopUpDisplay {
 	}
 
 	public String getKeyChoice() {
-		return myCurrentKeyChoice == null ? "black": myCurrentKeyChoice;
+		return myCurrentKeyChoice == null ? "default": myCurrentKeyChoice;
 	}
 
 	public String getColorChoice() {
-		return myCurrentColorChoice == null ? "black": myCurrentColorChoice;
+		return myCurrentColorChoice == null ? "#fdbe3b": myCurrentColorChoice;
 	}
 }
