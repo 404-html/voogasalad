@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
 import javafx.geometry.Pos;
@@ -103,8 +102,8 @@ public class HighScoreScene extends AbstractNavigationPlayerScene {
 		for (Double score : myScores) {
 			String user = getUserWithScore(score);
 			if (!user.isEmpty()) {
-				aUsers.getChildren().add(new Label(user));
-				aScores.getChildren().add(new Label(String.valueOf(score)));
+				aUsers.getChildren().add(getGUIGenerator().createLabel(user, 0, 0));
+				aScores.getChildren().add(getGUIGenerator().createLabel(String.valueOf(score), 0, 0));
 			}
 			if (i == 10) {
 				break;

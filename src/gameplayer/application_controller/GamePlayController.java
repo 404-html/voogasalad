@@ -213,7 +213,8 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setLevelLabel() {
-		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber() + 1, 0, 0), 0);
+		int level = myGameController.getMyGame().getLevelNumber() + 1;
+		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + level, 0, 0), 0);
 	}
 
 	private void handleRestart() throws Exception {
@@ -278,8 +279,12 @@ public class GamePlayController extends AbstractController {
 
 	private void saveHighscore() {
 		if (myScore != null) {
-			HighscoreManager hm = loadHighscores();
-			System.out.println(getPlayerInformationController().getUser());
+			HighscoreManager hm;
+			try {
+				hm = loadHighscores();
+			} catch (Exception e) {
+				hm = new HighscoreManager();
+			}
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}
