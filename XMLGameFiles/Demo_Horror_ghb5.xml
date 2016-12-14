@@ -63,8 +63,8 @@
             </entry>
             <entry>
               <javafx.scene.input.KeyCode>E</javafx.scene.input.KeyCode>
-              <game__engine.actions.LaunchProxy>
-                <myLaunch class="game_engine.actions.LaunchSkeleton">
+              <game__engine.actions.LaunchProxyHorizontal>
+                <myLaunch class="game_engine.actions.LaunchSkeletonHorizontal">
                   <myLauncher class="game_data.sprites.Player" reference="../../../../../.."/>
                   <myProjectile class="game_data.sprites.Projectile">
                     <name>Projectile_Name</name>
@@ -185,7 +185,7 @@
                   <myVelocity>500.0</myVelocity>
                 </myLaunch>
                 <myVelocity>500.0</myVelocity>
-              </game__engine.actions.LaunchProxy>
+              </game__engine.actions.LaunchProxyHorizontal>
             </entry>
             <entry>
               <javafx.scene.input.KeyCode>W</javafx.scene.input.KeyCode>
@@ -1213,8 +1213,8 @@
           </entry>
           <entry>
             <javafx.scene.input.KeyCode>E</javafx.scene.input.KeyCode>
-            <game__engine.actions.LaunchProxy>
-              <myLaunch class="game_engine.actions.LaunchWithLevel">
+            <game__engine.actions.LaunchProxyHorizontal>
+              <myLaunch class="game_engine.actions.LaunchWithLevelHorizontal">
                 <myLauncher class="game_data.sprites.Player" reference="../../../../../.."/>
                 <myProjectile class="game_data.sprites.Projectile">
                   <name>Projectile_Name</name>
@@ -1397,7 +1397,7 @@
                 <myLevel reference="../../../../../../../../myLevels/game__data.Level"/>
               </myLaunch>
               <myVelocity>500.0</myVelocity>
-            </game__engine.actions.LaunchProxy>
+            </game__engine.actions.LaunchProxyHorizontal>
           </entry>
           <entry>
             <javafx.scene.input.KeyCode>W</javafx.scene.input.KeyCode>
