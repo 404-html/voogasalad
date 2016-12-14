@@ -139,15 +139,17 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	private void setKeysWithoutLaunchKeyHeldDown(Set<KeyCode> currentKeysPressed){
 		myKeysPressed=new HashSet<KeyCode>();
 		if(launchCodeHorizontal==null && launchCodeVertical==null){
-			return;
-		}		
-		for (KeyCode key: currentKeysPressed){
-			if(!(key==launchCodeHorizontal && horizontalLaunchWasPressed)){
-				if(!(key==launchCodeVertical && verticalLaunchWasPressed)){
-					myKeysPressed.add(key);
+			myKeysPressed=currentKeysPressed;
+		}	
+		else{
+			for (KeyCode key: currentKeysPressed){
+				if(!(key==launchCodeHorizontal && horizontalLaunchWasPressed)){
+					if(!(key==launchCodeVertical && verticalLaunchWasPressed)){
+						myKeysPressed.add(key);
+					}
 				}
 			}
-		}	
+		}
 	}
 	private void setLevel(){
 		for(Sprite sprite: mySpriteList){

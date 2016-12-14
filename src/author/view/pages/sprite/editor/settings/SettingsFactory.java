@@ -58,7 +58,6 @@ public abstract class SettingsFactory<T> {
 			myConstructor = myClass.getConstructors()[0];
 
 			Class<?>[] parameterTypes = myConstructor.getParameterTypes();
-			//System.out.println(myConstructor);
 			ParameterAnnotation annotations = (ParameterAnnotation) myConstructor.getAnnotations()[0];
 			
 			for(int i = 0; i < annotations.parameters().length && i < parameterTypes.length; i++){
@@ -88,7 +87,6 @@ public abstract class SettingsFactory<T> {
 		String[] keys = new String[myParameterTextToTypeMap.size()];
 		myParameterTextToTypeMap.keySet().toArray(keys);
 		
-		//System.out.println(aTextToValueMap + " | " + myParameterTextToTypeMap);
 		
 		for(int i = 0; i < parameters.length  && i < keys.length ; i++){
 			 parameters[i] = aTextToValueMap.get(keys[i]);
@@ -98,8 +96,6 @@ public abstract class SettingsFactory<T> {
 			return (T) myConstructor.newInstance(parameters);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			//System.out.println("For now this does nothing [Characteristic Factory]");
-			//System.out.print(Arrays.asList(parameters));
 			e.printStackTrace();
 			return null;
 		}
