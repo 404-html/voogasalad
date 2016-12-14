@@ -82,8 +82,9 @@ public class FacebookInformation {
 		//FacebookClient fb = new DefaultFacebookClient(pageAccessToken);
 		
 	    //Page page = myFBClient.fetchObject("me/feed", Page.class);
+
 //	    myFBClient.publish("me/feed", FacebookType.class, Parameter.with("message", aMessage));
-		
+
 		if (myFBClient != null) {
 			try {
 				FacebookType publishMessageResponse =

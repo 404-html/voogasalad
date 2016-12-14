@@ -23,7 +23,7 @@ public class Right extends Side{
 		if(aSprite.getXVelocity()<0){
 			aSprite.setXVelocity(0);
 		}
-		if(aSpritePhysics.getHorizontalGravity()<0){
+		if(aSpritePhysics != null && aSpritePhysics.getHorizontalGravity()<0){
 			aSprite.setXAcceleration(-aSpritePhysics.getHorizontalGravity());
 		}
 	}
