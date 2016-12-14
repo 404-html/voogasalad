@@ -42,11 +42,13 @@ public class GamePlayController extends AbstractController {
 	private MediaController myMusic;
 	private Score myScore;
 	private Health myHealth;
+	private int myLevel;
 
 	public GamePlayController(Stage aStage, File aFile, ApplicationController aAppController, PlayerInformationController aInfoController) throws Exception {
 		super(aStage);
 		myGameFile = aFile;
 		myApplicationController = aAppController;
+		myLevel = 0;
 		myKeyCodeHandler = new KeyCodeHandler();
 		setPlayerInformationController(aInfoController);
 		initializeKeySets(myUserOptions);
@@ -116,6 +118,10 @@ public class GamePlayController extends AbstractController {
 				myGameController.getMyGame().getScrollType(), myGameController.getMyGame().getCurrentLevel().getMainPlayer().getStates());
 		checkResult();
 		myGamePlayScene.moveScreen(movementHandler);
+		if (myGameController.getMyGame().getLevelNumber() != myLevel) {
+			myLevel = myGameController.getMyGame().getLevelNumber();
+			myGamePlayScene.setBackground(myGameController.getMyGame().getCurrentLevel().getBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight());
+		}
 		setLevelLabel();
 		setHealthLabel();
 		setScoreLabel();
@@ -270,11 +276,15 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Publish"), 0, 0, e -> {
-			myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
-					myGameController.getMyGame().getName()), 
-					getButtonLabels().getString("PublishMessage"));
-			MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
-					myGameController.getMyGame().getName());
+			try {
+				myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
+						myGameController.getMyGame().getName()), 
+						MessageFormat.format(getButtonLabels().getString("PublishMessage"), myGameController.getMyGame().getName()));
+				MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
+						myGameController.getMyGame().getName());
+			} catch (Exception x) {
+				showError(x);
+			}
 		}, ButtonDisplay.TEXT));
 	}
 
