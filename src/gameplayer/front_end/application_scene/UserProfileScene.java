@@ -1,5 +1,7 @@
 package gameplayer.front_end.application_scene;
 
+import java.text.DecimalFormat;
+
 import game_data.Game;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.user_information.HighscoreManager;
@@ -52,10 +54,7 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		//userName.setId("heading");
 		hbox.getChildren().add(userName);
 		hbox.setAlignment(Pos.TOP_LEFT);
-		//hbox.setLayoutX(myWidth * .1);
-		//hbox.setLayoutY(myHeight * .1);
 		myPane.getChildren().add(hbox);
-//		getRoot().setTop(hbox);
 	}
 	
 	private void addScores(HighscoreManager aManager) {
@@ -69,12 +68,14 @@ public class UserProfileScene extends AbstractNavigationPlayerScene {
 		}
 		box.getChildren().add(games);
 		box.getChildren().add(scores);
-		box.setAlignment(Pos.BASELINE_RIGHT);
+		box.setAlignment(Pos.CENTER_RIGHT);
 		myPane.getChildren().add(box);
 	}
 	
 	private void addInfo(Game aGame, double aScore, VBox aGames, VBox aScores) {
-		aGames.getChildren().add(new Label(aGame.getName()));
-		aScores.getChildren().add(new Label(String.valueOf(aScore)));
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+		Double d = Double.valueOf(twoDForm.format(aScore));
+		aGames.getChildren().add(getGUIGenerator().createLabel(aGame.getName(), 0, 0));
+		aScores.getChildren().add(getGUIGenerator().createLabel(String.valueOf(d), 0, 0));
 	}
 }
