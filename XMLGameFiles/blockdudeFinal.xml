@@ -8930,8 +8930,8 @@
             <myXLocation>4433.0</myXLocation>
             <myYLocation>1629.0</myYLocation>
           </myLocation>
-          <myWidth>34</myWidth>
-          <myHeight>34</myHeight>
+          <myWidth>36</myWidth>
+          <myHeight>36</myHeight>
           <myImagePath>data/images/sprite_images/coin.png</myImagePath>
           <myXVelocity>0.0</myXVelocity>
           <myYVelocity>0.0</myYVelocity>
@@ -8941,10 +8941,6 @@
           <terminalYVel>1600.0</terminalYVel>
           <myCollisionHandler reference="../../../../game__data.Level/mySprites/game__data.sprites.Item[6]/preset/myCollisionHandler"/>
           <myCharacteristics>
-            <game__data.characteristics.ScorePowerUpper>
-              <mySprite class="game_data.sprites.Item" reference="../../.."/>
-              <myScoreToGain>10</myScoreToGain>
-            </game__data.characteristics.ScorePowerUpper>
             <game__data.characteristics.Breakable>
               <breakableNorth>true</breakableNorth>
               <breakableSouth>true</breakableSouth>
@@ -8954,6 +8950,10 @@
               <mySprite class="game_data.sprites.Item" reference="../../.."/>
               <timeSinceHit>20</timeSinceHit>
             </game__data.characteristics.Breakable>
+            <game__data.characteristics.ScorePowerUpper>
+              <mySprite class="game_data.sprites.Item" reference="../../.."/>
+              <myScoreToGain>1</myScoreToGain>
+            </game__data.characteristics.ScorePowerUpper>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Item" reference="../.."/>
@@ -8972,14 +8972,14 @@
             <myScreenYPosition>0.0</myScreenYPosition>
           </myRandomMoveHandler>
           <myStates>
-            <game__data.states.Physics>
-              <verticalGravity>0.0</verticalGravity>
-              <horizontalGravity>0.0</horizontalGravity>
-            </game__data.states.Physics>
             <game__data.states.Health>
               <myHealth>1</myHealth>
               <isAlive>true</isAlive>
             </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
           </myStates>
         </game__data.sprites.Item>
         <game__data.sprites.Terrain>
@@ -11345,6 +11345,12 @@
           <terminalYVel>1600.0</terminalYVel>
           <myCollisionHandler reference="../../game__data.sprites.Enemy/myCollisionHandler"/>
           <myCharacteristics>
+            <game__data.characteristics.Bouncer>
+              <myBounceSpeedHorizontal>100.0</myBounceSpeedHorizontal>
+              <myBounceSpeedVertical>300.0</myBounceSpeedVertical>
+              <bouncing>false</bouncing>
+              <timeAfterCollisionCount>0</timeAfterCollisionCount>
+            </game__data.characteristics.Bouncer>
             <game__data.characteristics.Breakable>
               <breakableNorth>true</breakableNorth>
               <breakableSouth>false</breakableSouth>
@@ -11362,12 +11368,6 @@
               <myDamageToGive>10</myDamageToGive>
               <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
             </game__data.characteristics.Damager>
-            <game__data.characteristics.Bouncer>
-              <myBounceSpeedHorizontal>0.0</myBounceSpeedHorizontal>
-              <myBounceSpeedVertical>300.0</myBounceSpeedVertical>
-              <bouncing>false</bouncing>
-              <timeAfterCollisionCount>0</timeAfterCollisionCount>
-            </game__data.characteristics.Bouncer>
           </myCharacteristics>
           <myControllable>
             <mySprite class="game_data.sprites.Enemy" reference="../.."/>
@@ -11386,14 +11386,14 @@
             <myScreenYPosition>0.0</myScreenYPosition>
           </myRandomMoveHandler>
           <myStates>
-            <game__data.states.Health>
-              <myHealth>2</myHealth>
-              <isAlive>true</isAlive>
-            </game__data.states.Health>
             <game__data.states.Physics>
               <verticalGravity>800.0</verticalGravity>
               <horizontalGravity>0.0</horizontalGravity>
             </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>2</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
           </myStates>
         </game__data.sprites.Enemy>
         <game__data.sprites.Enemy>
