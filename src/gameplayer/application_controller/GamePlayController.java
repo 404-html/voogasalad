@@ -168,6 +168,7 @@ public class GamePlayController extends AbstractController {
 			save();
 		}, e -> {
 			stopLoops();
+			saveHighscore();
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		});
 	}
@@ -213,7 +214,8 @@ public class GamePlayController extends AbstractController {
 	}
 
 	private void setLevelLabel() {
-		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + myGameController.getMyGame().getLevelNumber() + 1, 0, 0), 0);
+		int level = myGameController.getMyGame().getLevelNumber() + 1;
+		myGamePlayScene.addNode(getGUIGenerator().createLabel("Level: " + level, 0, 0), 0);
 	}
 
 	private void handleRestart() throws Exception {
@@ -279,7 +281,6 @@ public class GamePlayController extends AbstractController {
 	private void saveHighscore() {
 		if (myScore != null) {
 			HighscoreManager hm = loadHighscores();
-			System.out.println(getPlayerInformationController().getUser());
 			hm.setHighscore(getPlayerInformationController().getUser(), myScore.getMyScore(), myGameController.getMyGame());
 			getXMLHandler().save(hm, "highscores");
 		}
