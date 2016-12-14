@@ -64,7 +64,7 @@ public class Breakable implements Characteristic{
 		for(Sprite collidedSprite:myCollisionMap.keySet() ){
 			if(breaksAtDirection(myCollisionMap.get(collidedSprite))&& validPairing(collidedSprite) ){
 				timeSinceHit = 0;
-				if(isBroken()) {
+				if(isBroken()){	
 					myAction = new Break(mySprite);
 					myAction.act();
 				}
@@ -72,6 +72,8 @@ public class Breakable implements Characteristic{
 		}
 		
 	}
+	
+	
 	private boolean validPairing(Sprite collidedSprite){
 		return (mySprite instanceof Projectile || collidedSprite instanceof Player);
 	}
@@ -127,4 +129,6 @@ public class Breakable implements Characteristic{
 		//return breaksAtDirection(Side.RIGHT);
 		return breaksAtDirection(new Right());
 	}
+	
+	
 }

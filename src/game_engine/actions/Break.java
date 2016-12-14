@@ -19,10 +19,13 @@ public class Break implements Action {
 		for(State myState:myBrokenSprite.getStates()){
 			if (myState instanceof Health){
 				((Health) myState).kill();
+
 			}
 		}
 		
 	}
+	
+	
 	
 	@Override
 	public Action copyWithNewSprite(Sprite aSprite) {

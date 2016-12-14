@@ -103,7 +103,7 @@ public class SpriteDisplay {
 	}
 	
 	private int calculateTheFrameRateChange(int numberOfAnimations) {
-		return Math.round(50 / numberOfAnimations);
+		return Math.round(25 / numberOfAnimations);
 	}
 	
 	public Node get(Sprite aSprite) {
