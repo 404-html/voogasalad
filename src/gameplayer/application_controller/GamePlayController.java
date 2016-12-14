@@ -279,7 +279,7 @@ public class GamePlayController extends AbstractController {
 			try {
 				myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
 						myGameController.getMyGame().getName()), 
-						getButtonLabels().getString("PublishMessage"));
+						MessageFormat.format(getButtonLabels().getString("PublishMessage"), myGameController.getMyGame().getName()));
 				MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
 						myGameController.getMyGame().getName());
 			} catch (Exception x) {
