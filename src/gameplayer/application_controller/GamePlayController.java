@@ -95,9 +95,9 @@ public class GamePlayController extends AbstractController {
 	private void initializeScene(UserOptions aOptions) {
 		mySpriteDisplay = new SpriteDisplay();
 		if (aOptions != null) {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), aOptions.getMyFontColor());
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getScene().getWidth(), getStage().getScene().getHeight(), aOptions.getMyFontColor());
 		} else {
-			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getWidth(), getStage().getHeight(), "#fdbe3b");
+			myGamePlayScene = new GamePlayScene(myGameController.getMyBackgroundImageFilePath(), getStage().getScene().getWidth(), getStage().getScene().getHeight(), "#fdbe3b");
 		}
 		myGamePlayScene.setKeyHandlers(e -> myKeyCodeHandler.handleKeyPress(e, myGameController.getMyGame().getCurrentLevel().getMainPlayer().getControllable().getMyKeyPressedMap()), e -> myKeyCodeHandler.handleKeyRelease(e));
 	}
