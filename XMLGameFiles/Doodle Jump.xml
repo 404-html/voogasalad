@@ -40,8 +40,8 @@
           <myKeyPressedMap class="tree-map">
             <entry>
               <javafx.scene.input.KeyCode>SPACE</javafx.scene.input.KeyCode>
-              <game__engine.actions.LaunchProxy>
-                <myLaunch class="game_engine.actions.LaunchSkeleton">
+              <game__engine.actions.LaunchProxyVertical>
+                <myLaunch class="game_engine.actions.LaunchSkeletonVertical">
                   <myLauncher class="game_data.sprites.Player" reference="../../../../../.."/>
                   <myProjectile class="game_data.sprites.Projectile">
                     <name>Projectile_Name</name>
@@ -162,7 +162,7 @@
                   <myVelocity>500.0</myVelocity>
                 </myLaunch>
                 <myVelocity>500.0</myVelocity>
-              </game__engine.actions.LaunchProxy>
+              </game__engine.actions.LaunchProxyVertical>
             </entry>
             <entry>
               <javafx.scene.input.KeyCode>LEFT</javafx.scene.input.KeyCode>
@@ -1919,8 +1919,8 @@
         <myKeyPressedMap class="tree-map">
           <entry>
             <javafx.scene.input.KeyCode>SPACE</javafx.scene.input.KeyCode>
-            <game__engine.actions.LaunchProxy>
-              <myLaunch class="game_engine.actions.LaunchWithLevel">
+            <game__engine.actions.LaunchProxyVertical>
+              <myLaunch class="game_engine.actions.LaunchWithLevelVertical">
                 <myLauncher class="game_data.sprites.Player" reference="../../../../../.."/>
                 <myProjectile class="game_data.sprites.Projectile">
                   <name>Projectile_Name</name>
@@ -2103,7 +2103,7 @@
                 <myLevel reference="../../../../../../../../myLevels/game__data.Level"/>
               </myLaunch>
               <myVelocity>0.0</myVelocity>
-            </game__engine.actions.LaunchProxy>
+            </game__engine.actions.LaunchProxyVertical>
           </entry>
           <entry>
             <javafx.scene.input.KeyCode>LEFT</javafx.scene.input.KeyCode>

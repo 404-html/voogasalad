@@ -113,7 +113,6 @@ public class GUIGenerator implements IGUIGenerator {
 				hbox.getChildren().add(new ImageView());
 			}
 			Label name = createComboBoxLabel(aListOfNames.get(i));
-			System.out.println(box.getMaxWidth());
 			name.setMaxWidth(box.getMaxWidth() * .25);
 			name.setWrapText(true);
 			Label des = createComboBoxLabel(aListOfDescriptions.get(i));
