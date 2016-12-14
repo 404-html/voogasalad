@@ -15,7 +15,6 @@ public class LaunchProxy implements LevelSetter, Launch {
 
 	@Override
 	public void act() {
-		System.out.println("lanching");
 		myLaunch.act();
 	}
 	public double getVelocity(){

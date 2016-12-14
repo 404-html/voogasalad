@@ -65,7 +65,6 @@ public class Breakable implements Characteristic{
 			if(breaksAtDirection(myCollisionMap.get(collidedSprite))&& validPairing(collidedSprite) ){
 				timeSinceHit = 0;
 				if(isBroken()) {
-					System.out.println("is breaking");
 					myAction = new Break(mySprite);
 					myAction.act();
 				}

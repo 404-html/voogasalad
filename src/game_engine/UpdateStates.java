@@ -113,9 +113,6 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 	}
 	private void setKeysPressed(Set<KeyCode> aKeysPressed){
 		myKeysPressed=aKeysPressed;
-		for(KeyCode key: myKeysPressed){
-			System.out.println(key);
-		}
 	}
 	private void setKeysReleased(Set<KeyCode> aKeysReleased){
 		myKeysReleased=aKeysReleased;
@@ -183,12 +180,7 @@ public class UpdateStates implements IUpdateStatesAndPowerUps {
 		for (Sprite mySprite : mySpriteList) {
 			for (State state : mySprite.getStates()) {
 				if (state instanceof Health) {
-/*					if(mySprite instanceof Projectile){
-						System.out.println("removing the shit");
-					}*/
 					if (!((Health) state).isAlive()) {
-						// System.out.println("DEAD SPRITE");
-
 						removeSprites.add(mySprite);
 					}
 				}

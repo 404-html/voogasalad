@@ -40,7 +40,6 @@ public class Movable implements Characteristic{
 			
 			for(Sprite collidedSprite:myCollisionMap.keySet()){
 				/*if(!(collidedSprite instanceof Player)){
-					System.out.println("notplayer");
 					for(Characteristic i : collidedSprite.getCharacteristics()){
 						if( i instanceof Impassable){
 							System.out.println("impassable");
