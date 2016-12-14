@@ -4,6 +4,7 @@ import java.io.File;
 import author.view.pages.level_editor.windows.splash_screen.AuthoringSplashScreenFactory;
 import author.view.pages.level_editor.windows.splash_screen.IAuthoringSplashScreen;
 import gameplayer.back_end.exceptions.GameNotFunctionalException;
+import gameplayer.back_end.exceptions.VoogaFacebookException;
 import gameplayer.back_end.resources.FrontEndResources;
 import gameplayer.back_end.stored_games.StoredGames;
 import gameplayer.back_end.user_information.LevelManager;
@@ -136,7 +137,7 @@ public class ApplicationController extends AbstractController {
 			}
 		}, ButtonDisplay.TEXT); 
 	}
-	
+
 	private void getUserPreferences() {
 		try {
 			getOptions();
@@ -199,7 +200,7 @@ public class ApplicationController extends AbstractController {
 	 * @param aMessage is the message for the post
 	 */
 
-	public void publishToFacebook(String aTitle, String aMessage) {
+	public void publishToFacebook(String aTitle, String aMessage) throws VoogaFacebookException {
 		getPlayerInformationController().publishToFaceBook(aTitle, aMessage);
 	}
 

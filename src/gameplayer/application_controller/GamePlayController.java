@@ -270,11 +270,15 @@ public class GamePlayController extends AbstractController {
 			myApplicationController.displayHighScoreScene(myGameController.getMyGame().getName());
 		}, ButtonDisplay.TEXT));
 		resultScene.getChildren().add(getGUIGenerator().createButton(getButtonLabels().getString("Publish"), 0, 0, e -> {
-			myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
-					myGameController.getMyGame().getName()), 
-					getButtonLabels().getString("PublishMessage"));
-			MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
-					myGameController.getMyGame().getName());
+			try {
+				myApplicationController.publishToFacebook(MessageFormat.format(getButtonLabels().getString("MessageTitle"), 
+						myGameController.getMyGame().getName()), 
+						getButtonLabels().getString("PublishMessage"));
+				MessageFormat.format(getButtonLabels().getString("PublishMessage"), 
+						myGameController.getMyGame().getName());
+			} catch (Exception x) {
+				showError(x);
+			}
 		}, ButtonDisplay.TEXT));
 	}
 

@@ -1,17 +1,17 @@
 package gameplayer.back_end.exceptions;
 
-public class FacebookException extends Exception {
+public class VoogaFacebookException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public FacebookException(){
+	public VoogaFacebookException(){
 		super();
 	}
 
-	public FacebookException(String aMessage) {
+	public VoogaFacebookException(String aMessage) {
 		super(aMessage);
 	}
 }
