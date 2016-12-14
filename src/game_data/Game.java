@@ -69,15 +69,18 @@ public class Game extends GameObject {
 	 * @param filePath
 	 * @param fileName
 	 * @author Addison
+	 * @throws IOException 
 	 */
-	public void saveGameAs(String filePath, String fileName) {
+	public void saveGameAs(String filePath, String fileName) throws IOException {
 		java.io.FileWriter fw;
 		try {
 			fw = new java.io.FileWriter(filePath + fileName + ".xml");
 			fw.write(((new XMLTranslator()).serialize(this)));
 			fw.close();
 		} catch (IOException e) {
-			System.out.println("Trouble printing XML to file");
+			System.out.println(e.getMessage());
+			throw new IOException();
+//			System.out.println("Trouble printing XML to file");
 		}
 	}
 	public int getLevelNumber(){

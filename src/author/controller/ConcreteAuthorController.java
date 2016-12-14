@@ -106,7 +106,6 @@ public class ConcreteAuthorController implements IAuthorController {
 			try { 
 				return(ResourceBundle.getBundle("author.resource/English").getString(aKey));
 			} catch (final MissingResourceException e2) {
-				System.out.println(aKey);
 				return "KEY NOT FOUND";
 			}
 		}
@@ -118,7 +117,6 @@ public class ConcreteAuthorController implements IAuthorController {
 		try {
 			return myPathResourceBundle.getString(aKey);
 		} catch (final MissingResourceException e) {
-			System.out.println("PATH NAME " + aKey + " not found!");
 			return "";
 		}
 	}

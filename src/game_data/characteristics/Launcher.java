@@ -42,7 +42,8 @@ public class Launcher implements Characteristic{
 	@Override
 	public void execute(Map<Sprite, Side> myCollisionMap) {
 		myCurrentTime++;
-		myCurrentTime %= myTimeInterval;
+		if(myTimeInterval != 0)
+			myCurrentTime %= myTimeInterval;
 		if(myCurrentTime == 0){
 			//TODO need to make action
 			//Action myAction = new Launch(mySprite, collidedSprite);

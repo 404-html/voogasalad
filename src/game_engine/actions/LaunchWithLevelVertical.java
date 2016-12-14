@@ -8,12 +8,12 @@ import game_data.Sprite;
  * @author Katrina
  *
  */
-public class LaunchWithLevel implements Launch{
+public class LaunchWithLevelVertical implements Launch{
 	private Sprite myLauncher;
 	private Sprite myProjectile;
 	private double myVelocity;
 	private Level myLevel;
-	public LaunchWithLevel(Sprite myLauncher, Sprite myProjectile, double myVelocity, Level myLevel){
+	public LaunchWithLevelVertical(Sprite myLauncher, Sprite myProjectile, double myVelocity, Level myLevel){
 		this.myLauncher=myLauncher;
 		myProjectile.setXAcceleration(0);
 		myProjectile.setYAcceleration(0);
@@ -25,24 +25,24 @@ public class LaunchWithLevel implements Launch{
 
 	@Override
 	public void act() {
-		boolean right=true;
+		boolean up=true;
 		myProjectile=myProjectile.clone();
-		if(myLauncher.getXVelocity()<0){
-			right=false;
+		if(myLauncher.getYVelocity()>0){
+			up=false;
 		}
 		
 /*		System.out.println(myLauncher.getName());
 		System.out.println(myLauncher.getLocation().getXLocation());
 		System.out.println(myLauncher.getLocation().getYLocation());*/
-		if(right){
-			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()+20, myLauncher.getLocation().getYLocation()+myLauncher.getHeight()/2);
-			myProjectile.setXVelocity(myVelocity);
+		if(up){
+			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()/2, myLauncher.getLocation().getYLocation()-20);
+			myProjectile.setYVelocity(-myVelocity);
 		}
 		else{
-			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()-20, myLauncher.getLocation().getYLocation() + myLauncher.getHeight()/2);
-			myProjectile.setXVelocity(-myVelocity);
+			myProjectile.getLocation().setLocation(myLauncher.getLocation().getXLocation()+myLauncher.getWidth()/2, myLauncher.getLocation().getYLocation() + myLauncher.getHeight()+20);
+			myProjectile.setYVelocity(myVelocity);
 		}
-		myProjectile.setYVelocity(0);
+		myProjectile.setXVelocity(0);
 		myLevel.addNewSprite(myProjectile);		
 	}
 
@@ -53,7 +53,7 @@ public class LaunchWithLevel implements Launch{
 	
 	@Override
 	public Action copyWithNewSprite(Sprite aSprite) {
-		return new LaunchWithLevel(aSprite, myProjectile, myVelocity, myLevel);
+		return new LaunchWithLevelVertical(aSprite, myProjectile, myVelocity, myLevel);
 	}
 
 
