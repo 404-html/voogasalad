@@ -1,0 +1,1070 @@
+<game__data.Game>
+  <name>Frogger</name>
+  <myLevels>
+    <game__data.Level>
+      <name>1</name>
+      <didLose>false</didLose>
+      <didWin>false</didWin>
+      <width>1002</width>
+      <height>629</height>
+      <backgroundImageFilePath>data/images/level_images/roadbackground.png</backgroundImageFilePath>
+      <myMainPlayer>
+        <name>Player_Name</name>
+        <myLocation>
+          <myXLocation>446.0</myXLocation>
+          <myYLocation>533.0</myYLocation>
+        </myLocation>
+        <myWidth>70</myWidth>
+        <myHeight>58</myHeight>
+        <myImagePath>data/images/sprite_images/frogger_icon.png</myImagePath>
+        <myXVelocity>0.0</myXVelocity>
+        <myYVelocity>0.0</myYVelocity>
+        <myXAcceleration>0.0</myXAcceleration>
+        <myYAcceleration>0.0</myYAcceleration>
+        <terminalXVel>1600.0</terminalXVel>
+        <terminalYVel>1600.0</terminalYVel>
+        <myCollisionHandler/>
+        <myCharacteristics>
+          <game__data.characteristics.WinByScore>
+            <mySprite class="game_data.sprites.Player" reference="../../.."/>
+            <scoreToWin>1.0</scoreToWin>
+          </game__data.characteristics.WinByScore>
+        </myCharacteristics>
+        <myControllable>
+          <mySprite class="game_data.sprites.Player" reference="../.."/>
+          <myKeyPressedMap class="tree-map">
+            <entry>
+              <javafx.scene.input.KeyCode>LEFT</javafx.scene.input.KeyCode>
+              <game__engine.actions.MoveLeft>
+                <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+                <myOldLocation reference="../../../../../myLocation"/>
+                <myNewLocation>
+                  <myXLocation>0.0</myXLocation>
+                  <myYLocation>0.0</myYLocation>
+                </myNewLocation>
+                <myVelocity>200.0</myVelocity>
+              </game__engine.actions.MoveLeft>
+            </entry>
+            <entry>
+              <javafx.scene.input.KeyCode>UP</javafx.scene.input.KeyCode>
+              <game__engine.actions.MoveUpFly>
+                <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+                <myOldLocation reference="../../../../../myLocation"/>
+                <myNewLocation>
+                  <myXLocation>0.0</myXLocation>
+                  <myYLocation>0.0</myYLocation>
+                </myNewLocation>
+                <myVelocity>200.0</myVelocity>
+              </game__engine.actions.MoveUpFly>
+            </entry>
+            <entry>
+              <javafx.scene.input.KeyCode>RIGHT</javafx.scene.input.KeyCode>
+              <game__engine.actions.MoveRight>
+                <mySprite class="game_data.sprites.Player" reference="../../../../.."/>
+                <myOldLocation reference="../../../../../myLocation"/>
+                <myNewLocation>
+                  <myXLocation>0.0</myXLocation>
+                  <myYLocation>0.0</myYLocation>
+                </myNewLocation>
+                <myVelocity>200.0</myVelocity>
+              </game__engine.actions.MoveRight>
+            </entry>
+          </myKeyPressedMap>
+          <myKeyReleasedMap/>
+          <myKeysPressed/>
+          <myKeysReleased/>
+          <isControllable>true</isControllable>
+        </myControllable>
+        <id></id>
+        <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+          <myOrientation>NULL</myOrientation>
+          <myScreenWidth>0.0</myScreenWidth>
+          <myScreenHeight>0.0</myScreenHeight>
+          <myScreenXPosition>0.0</myScreenXPosition>
+          <myScreenYPosition>0.0</myScreenYPosition>
+        </myRandomMoveHandler>
+        <myStates>
+          <game__data.states.Physics>
+            <verticalGravity>0.0</verticalGravity>
+            <horizontalGravity>0.0</horizontalGravity>
+          </game__data.states.Physics>
+          <game__data.states.LevelWon>
+            <hasWon>false</hasWon>
+          </game__data.states.LevelWon>
+          <game__data.states.Score>
+            <myScore>0.0</myScore>
+          </game__data.states.Score>
+          <game__data.states.Health>
+            <myHealth>1</myHealth>
+            <isAlive>true</isAlive>
+          </game__data.states.Health>
+        </myStates>
+      </myMainPlayer>
+      <mySprites>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>-382.0</myXLocation>
+            <myYLocation>66.0</myYLocation>
+          </myLocation>
+          <myWidth>2010</myWidth>
+          <myHeight>16</myHeight>
+          <myImagePath>data/images/sprite_images/EmptyPic.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDurability>1</myDurability>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy>
+          <name>Enemy_Name</name>
+          <myLocation>
+            <myXLocation>889.0</myXLocation>
+            <myYLocation>315.0</myYLocation>
+          </myLocation>
+          <myWidth>108</myWidth>
+          <myHeight>76</myHeight>
+          <myImagePath>data/images/sprite_images/orangecar.png</myImagePath>
+          <myXVelocity>-290.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Pacer>
+              <myDistanceNeeded>800.0</myDistanceNeeded>
+              <myDistanceTraveled>0.0</myDistanceTraveled>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+              <previousNonZeroXVelocity>-290.0</previousNonZeroXVelocity>
+              <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+              <previousDirection>false</previousDirection>
+            </game__data.characteristics.Pacer>
+            <game__data.characteristics.Damager>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>-174.0</myXLocation>
+            <myYLocation>500.0</myYLocation>
+          </myLocation>
+          <myWidth>2004</myWidth>
+          <myHeight>12</myHeight>
+          <myImagePath>data/images/sprite_images/EmptyPic.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDurability>1</myDurability>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy>
+          <name>red</name>
+          <myLocation>
+            <myXLocation>28.0</myXLocation>
+            <myYLocation>424.0</myYLocation>
+          </myLocation>
+          <myWidth>112</myWidth>
+          <myHeight>72</myHeight>
+          <myImagePath>data/images/sprite_images/redcarpng.png</myImagePath>
+          <myXVelocity>310.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Pacer>
+              <myDistanceNeeded>800.0</myDistanceNeeded>
+              <myDistanceTraveled>0.0</myDistanceTraveled>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+              <previousNonZeroXVelocity>310.0</previousNonZeroXVelocity>
+              <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+              <previousDirection>false</previousDirection>
+            </game__data.characteristics.Pacer>
+            <game__data.characteristics.Damager>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>-277.0</myXLocation>
+            <myYLocation>181.0</myYLocation>
+          </myLocation>
+          <myWidth>2006</myWidth>
+          <myHeight>12</myHeight>
+          <myImagePath>data/images/sprite_images/EmptyPic.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDurability>1</myDurability>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>-321.0</myXLocation>
+            <myYLocation>297.0</myYLocation>
+          </myLocation>
+          <myWidth>2008</myWidth>
+          <myHeight>12</myHeight>
+          <myImagePath>data/images/sprite_images/EmptyPic.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDurability>1</myDurability>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Enemy>
+          <name>green</name>
+          <myLocation>
+            <myXLocation>11.0</myXLocation>
+            <myYLocation>207.0</myYLocation>
+          </myLocation>
+          <myWidth>104</myWidth>
+          <myHeight>75</myHeight>
+          <myImagePath>data/images/sprite_images/greencar.png</myImagePath>
+          <myXVelocity>450.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Pacer>
+              <myDistanceNeeded>800.0</myDistanceNeeded>
+              <myDistanceTraveled>0.0</myDistanceTraveled>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+              <previousNonZeroXVelocity>450.0</previousNonZeroXVelocity>
+              <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+              <previousDirection>false</previousDirection>
+            </game__data.characteristics.Pacer>
+            <game__data.characteristics.Damager>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Player reference="../../myMainPlayer"/>
+        <game__data.sprites.Enemy>
+          <name>pur</name>
+          <myLocation>
+            <myXLocation>877.0</myXLocation>
+            <myYLocation>90.0</myYLocation>
+          </myLocation>
+          <myWidth>108</myWidth>
+          <myHeight>84</myHeight>
+          <myImagePath>data/images/sprite_images/purplecar.png</myImagePath>
+          <myXVelocity>-350.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.Pacer>
+              <myDistanceNeeded>800.0</myDistanceNeeded>
+              <myDistanceTraveled>0.0</myDistanceTraveled>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+              <previousNonZeroXVelocity>-350.0</previousNonZeroXVelocity>
+              <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+              <previousDirection>false</previousDirection>
+            </game__data.characteristics.Pacer>
+            <game__data.characteristics.Damager>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDamageToGive>1</myDamageToGive>
+              <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+            </game__data.characteristics.Damager>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Enemy>
+        <game__data.sprites.Terrain>
+          <name>Terrain_Name</name>
+          <myLocation>
+            <myXLocation>-250.0</myXLocation>
+            <myYLocation>399.0</myYLocation>
+          </myLocation>
+          <myWidth>2006</myWidth>
+          <myHeight>12</myHeight>
+          <myImagePath>data/images/sprite_images/EmptyPic.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler reference="../../game__data.sprites.Terrain/myCollisionHandler"/>
+          <myCharacteristics>
+            <game__data.characteristics.Impassable>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <movesThroughBottom>false</movesThroughBottom>
+            </game__data.characteristics.Impassable>
+            <game__data.characteristics.Breakable>
+              <breakableNorth>true</breakableNorth>
+              <breakableSouth>true</breakableSouth>
+              <breakableEast>true</breakableEast>
+              <breakableWest>true</breakableWest>
+              <myDurability>1</myDurability>
+              <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+              <timeSinceHit>20</timeSinceHit>
+            </game__data.characteristics.Breakable>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Terrain>
+        <game__data.sprites.Item>
+          <name>Item_Name</name>
+          <myLocation>
+            <myXLocation>-111.0</myXLocation>
+            <myYLocation>-14.0</myYLocation>
+          </myLocation>
+          <myWidth>1285</myWidth>
+          <myHeight>63</myHeight>
+          <myImagePath>data/images/sprite_images/EmptyPic.png</myImagePath>
+          <myXVelocity>0.0</myXVelocity>
+          <myYVelocity>0.0</myYVelocity>
+          <myXAcceleration>0.0</myXAcceleration>
+          <myYAcceleration>0.0</myYAcceleration>
+          <terminalXVel>1600.0</terminalXVel>
+          <terminalYVel>1600.0</terminalYVel>
+          <myCollisionHandler/>
+          <myCharacteristics>
+            <game__data.characteristics.ScorePowerUpper>
+              <mySprite class="game_data.sprites.Item" reference="../../.."/>
+              <myScoreToGain>10</myScoreToGain>
+            </game__data.characteristics.ScorePowerUpper>
+          </myCharacteristics>
+          <myControllable>
+            <mySprite class="game_data.sprites.Item" reference="../.."/>
+            <myKeyPressedMap class="tree-map"/>
+            <myKeyReleasedMap/>
+            <myKeysPressed/>
+            <myKeysReleased/>
+            <isControllable>true</isControllable>
+          </myControllable>
+          <id></id>
+          <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+            <myOrientation>NULL</myOrientation>
+            <myScreenWidth>0.0</myScreenWidth>
+            <myScreenHeight>0.0</myScreenHeight>
+            <myScreenXPosition>0.0</myScreenXPosition>
+            <myScreenYPosition>0.0</myScreenYPosition>
+          </myRandomMoveHandler>
+          <myStates>
+            <game__data.states.Health>
+              <myHealth>1</myHealth>
+              <isAlive>true</isAlive>
+            </game__data.states.Health>
+            <game__data.states.Physics>
+              <verticalGravity>0.0</verticalGravity>
+              <horizontalGravity>0.0</horizontalGravity>
+            </game__data.states.Physics>
+          </myStates>
+        </game__data.sprites.Item>
+      </mySprites>
+      <myControllableSpriteList>
+        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy[2]"/>
+        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy"/>
+        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy[4]"/>
+        <game__data.sprites.Enemy reference="../../mySprites/game__data.sprites.Enemy[3]"/>
+        <game__data.sprites.Player reference="../../myMainPlayer"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[2]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[5]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[4]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain[3]"/>
+        <game__data.sprites.Terrain reference="../../mySprites/game__data.sprites.Terrain"/>
+        <game__data.sprites.Item reference="../../mySprites/game__data.sprites.Item"/>
+      </myControllableSpriteList>
+      <myKeyCommands/>
+    </game__data.Level>
+  </myLevels>
+  <mySpritePresets>
+    <game__data.sprites.Enemy>
+      <name>Enemy_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/orangecar.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Pacer>
+          <myDistanceNeeded>800.0</myDistanceNeeded>
+          <myDistanceTraveled>0.0</myDistanceTraveled>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <previousNonZeroXVelocity>0.0</previousNonZeroXVelocity>
+          <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+          <previousDirection>false</previousDirection>
+        </game__data.characteristics.Pacer>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694292380</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+      </myStates>
+    </game__data.sprites.Enemy>
+    <game__data.sprites.Player>
+      <name>Player_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/duke.gif</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/myMainPlayer/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.WinByScore>
+          <mySprite class="game_data.sprites.Player" reference="../../.."/>
+          <scoreToWin>1.0</scoreToWin>
+        </game__data.characteristics.WinByScore>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Player" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694300690</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.LevelWon>
+          <hasWon>false</hasWon>
+        </game__data.states.LevelWon>
+        <game__data.states.Score>
+          <myScore>0.0</myScore>
+        </game__data.states.Score>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Player>
+    <game__data.sprites.Terrain>
+      <name>Terrain_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/Empty.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Terrain/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Impassable>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+          <movesThroughBottom>false</movesThroughBottom>
+        </game__data.characteristics.Impassable>
+        <game__data.characteristics.Breakable>
+          <breakableNorth>true</breakableNorth>
+          <breakableSouth>true</breakableSouth>
+          <breakableEast>true</breakableEast>
+          <breakableWest>true</breakableWest>
+          <myDurability>1</myDurability>
+          <mySprite class="game_data.sprites.Terrain" reference="../../.."/>
+          <timeSinceHit>20</timeSinceHit>
+        </game__data.characteristics.Breakable>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Terrain" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694679568</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+      </myStates>
+    </game__data.sprites.Terrain>
+    <game__data.sprites.Item>
+      <name>Item_Name</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/AlexGoal.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Item/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.ScorePowerUpper>
+          <mySprite class="game_data.sprites.Item" reference="../../.."/>
+          <myScoreToGain>10</myScoreToGain>
+        </game__data.characteristics.ScorePowerUpper>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Item" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694858425</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Item>
+    <game__data.sprites.Enemy>
+      <name>red</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/redcarpng.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy[2]/myCollisionHandler"/>
+      <myCharacteristics/>
+      <myControllable>
+        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694289502</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Enemy>
+    <game__data.sprites.Enemy>
+      <name>green</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/greencar.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy[3]/myCollisionHandler"/>
+      <myCharacteristics/>
+      <myControllable>
+        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694296554</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+      </myStates>
+    </game__data.sprites.Enemy>
+    <game__data.sprites.Enemy>
+      <name>pur</name>
+      <myLocation>
+        <myXLocation>0.0</myXLocation>
+        <myYLocation>0.0</myYLocation>
+      </myLocation>
+      <myWidth>100</myWidth>
+      <myHeight>100</myHeight>
+      <myImagePath>data/images/sprite_images/purplecar.png</myImagePath>
+      <myXVelocity>0.0</myXVelocity>
+      <myYVelocity>0.0</myYVelocity>
+      <myXAcceleration>0.0</myXAcceleration>
+      <myYAcceleration>0.0</myYAcceleration>
+      <terminalXVel>1600.0</terminalXVel>
+      <terminalYVel>1600.0</terminalYVel>
+      <myCollisionHandler reference="../../../myLevels/game__data.Level/mySprites/game__data.sprites.Enemy[4]/myCollisionHandler"/>
+      <myCharacteristics>
+        <game__data.characteristics.Pacer>
+          <myDistanceNeeded>800.0</myDistanceNeeded>
+          <myDistanceTraveled>0.0</myDistanceTraveled>
+          <mySprite class="game_data.sprites.Enemy" reference="../../.."/>
+          <previousNonZeroXVelocity>0.0</previousNonZeroXVelocity>
+          <previousNonZeroYVelocity>0.0</previousNonZeroYVelocity>
+          <previousDirection>false</previousDirection>
+        </game__data.characteristics.Pacer>
+      </myCharacteristics>
+      <myControllable>
+        <mySprite class="game_data.sprites.Enemy" reference="../.."/>
+        <myKeyPressedMap class="tree-map"/>
+        <myKeyReleasedMap/>
+        <myKeysPressed/>
+        <myKeysReleased/>
+        <isControllable>true</isControllable>
+      </myControllable>
+      <id>ConcreteDraggableSprite1481694293918</id>
+      <myRandomMoveHandler class="game_engine.properties.RandomMoveDisjointHandler">
+        <myOrientation>NULL</myOrientation>
+        <myScreenWidth>0.0</myScreenWidth>
+        <myScreenHeight>0.0</myScreenHeight>
+        <myScreenXPosition>0.0</myScreenXPosition>
+        <myScreenYPosition>0.0</myScreenYPosition>
+      </myRandomMoveHandler>
+      <myStates>
+        <game__data.states.Health>
+          <myHealth>1</myHealth>
+          <isAlive>true</isAlive>
+        </game__data.states.Health>
+        <game__data.states.Physics>
+          <verticalGravity>0.0</verticalGravity>
+          <horizontalGravity>0.0</horizontalGravity>
+        </game__data.states.Physics>
+      </myStates>
+    </game__data.sprites.Enemy>
+  </mySpritePresets>
+  <myCurrentLevel reference="../myLevels/game__data.Level"/>
+  <myDescription>This is an example of a NON scrolling game. We are so flexible. - Teddy</myDescription>
+  <myIconPath>data/images/sprite_images/frogger_icon.png</myIconPath>
+  <myScrollType>NO_SCROLL</myScrollType>
+  <myAudioFilePath>data/audio/Super-Mario-Song.mp3</myAudioFilePath>
+  <hasWon>false</hasWon>
+  <hasLost>false</hasLost>
+</game__data.Game>

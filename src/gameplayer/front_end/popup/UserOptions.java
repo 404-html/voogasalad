@@ -20,7 +20,7 @@ public class UserOptions {
 	}
 
 	public void setMyKeyInput(String aKeyInput) {
-		myKeyInput = aKeyInput;
+		myKeyInput = aKeyInput == null ? "default": aKeyInput;
 	}
 
 	public String getMyFontColor() {
@@ -28,6 +28,6 @@ public class UserOptions {
 	}
 
 	public void setMyFontColor(String aFontColor) {
-		myFontColor = aFontColor;
+		myFontColor = aFontColor == null ? "#fdbe3b" : aFontColor;
 	}
 }

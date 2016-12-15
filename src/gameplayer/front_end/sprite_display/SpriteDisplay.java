@@ -27,7 +27,6 @@ public class SpriteDisplay {
 	private ImageView buildSpriteDisplay(Sprite aSprite) {
 		ImageView image = new ImageView(new File(aSprite.getImagePath()).toURI().toString());
 		return image;
-		
 	}
 	
 	public ImageView getUpdatedSpriteMap(Sprite aSprite) {
@@ -84,7 +83,6 @@ public class SpriteDisplay {
 			buildString.append(".");
 			buildString.append(array[1]);
 			String filePathOfAnimation = buildString.toString();
-			System.out.println(filePathOfAnimation);
 			fileOfAnimation = new File(filePathOfAnimation);
 			if (fileOfAnimation.exists()) {
 				image = new ImageView(fileOfAnimation.toURI().toString());
@@ -133,5 +131,4 @@ public class SpriteDisplay {
 	public void playAnimation() {
 		myStopAnimation = false;
 	}
-
 }
